@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwfn3lux5l4lx"]
+
+[ext_resource type="Texture2D" uid="uid://drhl13dnaooi4" path="res://UI/Buttons/fermer_base.png" id="1_xx5gy"]
+[ext_resource type="Texture2D" uid="uid://8pstpcxxiuai" path="res://UI/Buttons/fermer_clicked.png" id="2_8r43y"]
+[ext_resource type="Texture2D" uid="uid://bgl1gtta8o3n5" path="res://UI/Buttons/fermer_hovered.png" id="3_v2wf3"]
+
+[node name="TextureButton" type="TextureButton"]
+offset_right = 130.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_xx5gy")
+texture_pressed = ExtResource("2_8r43y")
+texture_hover = ExtResource("3_v2wf3")

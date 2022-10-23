@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca5t7o7iwoqx1"]
+
+[ext_resource type="Texture2D" uid="uid://dnuj5ptej3hwv" path="res://UI/Buttons/equipements_unselected.png" id="1_txl2p"]
+[ext_resource type="Texture2D" uid="uid://cmkcn34fin3fc" path="res://UI/Buttons/equipements_selected.png" id="2_omsok"]
+
+[node name="TextureButton" type="TextureButton"]
+offset_right = 125.0
+offset_bottom = 20.0
+toggle_mode = true
+texture_normal = ExtResource("1_txl2p")
+texture_pressed = ExtResource("2_omsok")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://drgospxokfdgn"]
+
+[ext_resource type="Texture2D" uid="uid://b6jyvfdcxhyoe" path="res://UI/Buttons/create_character.png" id="1_abn8o"]
+
+[node name="TextureButton" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_abn8o")
+texture_pressed = ExtResource("1_abn8o")
+texture_hover = ExtResource("1_abn8o")
