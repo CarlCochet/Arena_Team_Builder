@@ -16,20 +16,20 @@ offset_right = 1600.0
 offset_bottom = 342.0
 color = Color(0.356863, 0.309804, 0.207843, 1)
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="Equipe" type="GridContainer" parent="."]
 offset_top = 72.0
 offset_right = 824.0
 offset_bottom = 211.0
 scale = Vector2(1.942, 1.942)
 columns = 6
 
-[node name="AffichagePersonnage" parent="GridContainer" instance=ExtResource("1_443q0")]
+[node name="AffichagePersonnage" parent="Equipe" instance=ExtResource("1_443q0")]
 offset_top = 0.0
 offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AffichagePersonnage2" parent="GridContainer" instance=ExtResource("1_443q0")]
+[node name="AffichagePersonnage2" parent="Equipe" instance=ExtResource("1_443q0")]
 offset_left = 138.0
 offset_top = 0.0
 offset_right = 272.0
@@ -37,7 +37,7 @@ offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AffichagePersonnage3" parent="GridContainer" instance=ExtResource("1_443q0")]
+[node name="AffichagePersonnage3" parent="Equipe" instance=ExtResource("1_443q0")]
 offset_left = 276.0
 offset_top = 0.0
 offset_right = 410.0
@@ -45,7 +45,7 @@ offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AffichagePersonnage4" parent="GridContainer" instance=ExtResource("1_443q0")]
+[node name="AffichagePersonnage4" parent="Equipe" instance=ExtResource("1_443q0")]
 offset_left = 414.0
 offset_top = 0.0
 offset_right = 548.0
@@ -53,7 +53,7 @@ offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AffichagePersonnage5" parent="GridContainer" instance=ExtResource("1_443q0")]
+[node name="AffichagePersonnage5" parent="Equipe" instance=ExtResource("1_443q0")]
 offset_left = 552.0
 offset_top = 0.0
 offset_right = 686.0
@@ -61,7 +61,7 @@ offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AffichagePersonnage6" parent="GridContainer" instance=ExtResource("1_443q0")]
+[node name="AffichagePersonnage6" parent="Equipe" instance=ExtResource("1_443q0")]
 offset_left = 690.0
 offset_top = 0.0
 offset_right = 824.0

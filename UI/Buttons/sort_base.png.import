@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj00tojaj188p"
-path="res://.godot/imported/supprimer_base.png-ed8f073141ccfe3e573a6d548b11f7b8.ctex"
+uid="uid://dyyyq4lee4opy"
+path="res://.godot/imported/sort_base.png-de4aeb92f9b1ca3e3ee35efdb855af03.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Displays/supprimer_base.png"
-dest_files=["res://.godot/imported/supprimer_base.png-ed8f073141ccfe3e573a6d548b11f7b8.ctex"]
+source_file="res://UI/Buttons/sort_base.png"
+dest_files=["res://.godot/imported/sort_base.png-de4aeb92f9b1ca3e3ee35efdb855af03.ctex"]
 
 [params]
 

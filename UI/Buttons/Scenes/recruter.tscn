@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b6jyvfdcxhyoe" path="res://UI/Buttons/create_character.png" id="1_abn8o"]
 
-[node name="TextureButton" type="TextureButton"]
+[node name="Recruter" type="TextureButton"]
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("1_abn8o")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bntvfyl8ucfvp"
-path="res://.godot/imported/supprimer_clicked.png-a77d0b31a91d68a6415132140604ce10.ctex"
+uid="uid://bsx000i85450y"
+path="res://.godot/imported/retour_hovered.png-cdf17de2aeabb178f6930268d614f1b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Displays/supprimer_clicked.png"
-dest_files=["res://.godot/imported/supprimer_clicked.png-a77d0b31a91d68a6415132140604ce10.ctex"]
+source_file="res://UI/Buttons/retour_hovered.png"
+dest_files=["res://.godot/imported/retour_hovered.png-cdf17de2aeabb178f6930268d614f1b1.ctex"]
 
 [params]
 

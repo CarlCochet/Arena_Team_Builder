@@ -4,19 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://c30n742saitdp" path="res://UI/Displays/spell_small.png" id="2_cin8d"]
 [ext_resource type="Texture2D" uid="uid://iqucq85kucvm" path="res://UI/Displays/item_small.png" id="3_5plpj"]
 
-[node name="TextureRect" type="TextureRect"]
+[node name="AffichagePersonnage" type="TextureRect"]
 offset_top = 37.0
 offset_right = 134.0
 offset_bottom = 176.0
 texture = ExtResource("1_slo84")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 offset_top = -37.0
 offset_right = 134.0
 offset_bottom = 2.0
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridSorts" type="GridContainer" parent="."]
 offset_left = 11.0
 offset_top = -37.0
 offset_right = 175.0
@@ -24,42 +24,42 @@ offset_bottom = -11.0
 scale = Vector2(0.7, 0.7)
 columns = 6
 
-[node name="TextureRect" type="TextureRect" parent="GridContainer"]
+[node name="Sort1" type="TextureRect" parent="GridSorts"]
 offset_right = 24.0
 offset_bottom = 24.0
 texture = ExtResource("2_cin8d")
 
-[node name="TextureRect2" type="TextureRect" parent="GridContainer"]
+[node name="Sort2" type="TextureRect" parent="GridSorts"]
 offset_left = 28.0
 offset_right = 52.0
 offset_bottom = 24.0
 texture = ExtResource("2_cin8d")
 
-[node name="TextureRect3" type="TextureRect" parent="GridContainer"]
+[node name="Sort3" type="TextureRect" parent="GridSorts"]
 offset_left = 56.0
 offset_right = 80.0
 offset_bottom = 24.0
 texture = ExtResource("2_cin8d")
 
-[node name="TextureRect4" type="TextureRect" parent="GridContainer"]
+[node name="Sort4" type="TextureRect" parent="GridSorts"]
 offset_left = 84.0
 offset_right = 108.0
 offset_bottom = 24.0
 texture = ExtResource("2_cin8d")
 
-[node name="TextureRect5" type="TextureRect" parent="GridContainer"]
+[node name="Sort5" type="TextureRect" parent="GridSorts"]
 offset_left = 112.0
 offset_right = 136.0
 offset_bottom = 24.0
 texture = ExtResource("2_cin8d")
 
-[node name="TextureRect6" type="TextureRect" parent="GridContainer"]
+[node name="Sort6" type="TextureRect" parent="GridSorts"]
 offset_left = 140.0
 offset_right = 164.0
 offset_bottom = 24.0
 texture = ExtResource("2_cin8d")
 
-[node name="GridContainer2" type="GridContainer" parent="."]
+[node name="GridEquipements" type="GridContainer" parent="."]
 offset_left = 21.0
 offset_top = -18.0
 offset_right = 157.0
@@ -67,30 +67,30 @@ offset_bottom = 7.0
 scale = Vector2(0.7, 0.7)
 columns = 5
 
-[node name="TextureRect" type="TextureRect" parent="GridContainer2"]
+[node name="Arme" type="TextureRect" parent="GridEquipements"]
 offset_right = 24.0
 offset_bottom = 24.0
 texture = ExtResource("3_5plpj")
 
-[node name="TextureRect2" type="TextureRect" parent="GridContainer2"]
+[node name="Familier" type="TextureRect" parent="GridEquipements"]
 offset_left = 28.0
 offset_right = 52.0
 offset_bottom = 24.0
 texture = ExtResource("3_5plpj")
 
-[node name="TextureRect3" type="TextureRect" parent="GridContainer2"]
+[node name="Coiffe" type="TextureRect" parent="GridEquipements"]
 offset_left = 56.0
 offset_right = 80.0
 offset_bottom = 24.0
 texture = ExtResource("3_5plpj")
 
-[node name="TextureRect4" type="TextureRect" parent="GridContainer2"]
+[node name="Cape" type="TextureRect" parent="GridEquipements"]
 offset_left = 84.0
 offset_right = 108.0
 offset_bottom = 24.0
 texture = ExtResource("3_5plpj")
 
-[node name="TextureRect5" type="TextureRect" parent="GridContainer2"]
+[node name="Dofus" type="TextureRect" parent="GridEquipements"]
 offset_left = 112.0
 offset_right = 136.0
 offset_bottom = 24.0
