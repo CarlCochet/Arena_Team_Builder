@@ -159,11 +159,11 @@ texture_normal = ExtResource("23_804c8")
 texture_pressed = ExtResource("24_vj35l")
 
 [node name="GridContainer2" type="GridContainer" parent="."]
-offset_left = 539.0
-offset_top = 823.0
-offset_right = 803.0
-offset_bottom = 863.0
-scale = Vector2(2, 2)
+offset_left = 607.0
+offset_top = 845.0
+offset_right = 871.0
+offset_bottom = 885.0
+scale = Vector2(1.5, 1.5)
 columns = 2
 
 [node name="Fermer" type="TextureButton" parent="GridContainer2"]

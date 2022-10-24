@@ -1,6 +1,9 @@
 extends Control
 
 
+var equipe: Equipe
+
+
 func _on_fermer_pressed():
 	get_tree().change_scene_to_file("res://UI/gestion_equipes.tscn")
 

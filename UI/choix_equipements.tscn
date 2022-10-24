@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://vxplbalqtqdq"]
+[gd_scene load_steps=17 format=3 uid="uid://vxplbalqtqdq"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_equipements.gd" id="1_541q8"]
 [ext_resource type="Texture2D" uid="uid://b02mrbqksygw4" path="res://Classes/Cra/cra.png" id="1_rmd4o"]
@@ -16,28 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://0n3t44ymntgy" path="res://UI/Displays/cape.png" id="13_0nfer"]
 [ext_resource type="Texture2D" uid="uid://waunvw4s276c" path="res://UI/Displays/dofus.png" id="14_raq4t"]
 [ext_resource type="Texture2D" uid="uid://d01gd7feyawpv" path="res://Equipements/Armes/arc_ange.png" id="15_7m0r2"]
-[ext_resource type="Texture2D" uid="uid://bc4wgrwixo8cm" path="res://Equipements/Armes/arc_hidsad.png" id="16_xyylp"]
-[ext_resource type="Texture2D" uid="uid://b54db6y2653wp" path="res://Equipements/Armes/arc_scie_clone.png" id="17_gd6ba"]
-[ext_resource type="Texture2D" uid="uid://ne3ac1s0lxke" path="res://Equipements/Armes/bashers.png" id="18_iykw7"]
-[ext_resource type="Texture2D" uid="uid://de4lgsu8rwsa" path="res://Equipements/Armes/celestine.png" id="19_ibqe1"]
-[ext_resource type="Texture2D" uid="uid://bujkgwre8tkv7" path="res://Equipements/Armes/cerberus.png" id="20_kir3y"]
-[ext_resource type="Texture2D" uid="uid://btnje0xqb27uj" path="res://Equipements/Armes/comete.png" id="21_31s2h"]
-[ext_resource type="Texture2D" uid="uid://x0754vmublaj" path="res://Equipements/Armes/falistos.png" id="22_7vl0t"]
-[ext_resource type="Texture2D" uid="uid://dfak2epe8cxh5" path="res://Equipements/Armes/fossoyeuse_infidele.png" id="23_v7wkc"]
-[ext_resource type="Texture2D" uid="uid://dndhx5f400nmw" path="res://Equipements/Armes/fourbeuses.png" id="24_8bpjw"]
-[ext_resource type="Texture2D" uid="uid://c3r02kuem3gfs" path="res://Equipements/Armes/hishantes.png" id="25_24p2i"]
-[ext_resource type="Texture2D" uid="uid://dsvdieurxa1bo" path="res://Equipements/Armes/kassgoul.png" id="26_o356q"]
-[ext_resource type="Texture2D" uid="uid://bp6dqx5i7tgi6" path="res://Equipements/Armes/kwaklame.png" id="27_olg18"]
-[ext_resource type="Texture2D" uid="uid://bb86twenard3a" path="res://Equipements/Armes/la_corde.png" id="28_nyqnx"]
-[ext_resource type="Texture2D" uid="uid://bvu6kw1xsgrxv" path="res://Equipements/Armes/lune_rouge.png" id="29_to4am"]
-[ext_resource type="Texture2D" uid="uid://cwosqk2lrpurc" path="res://Equipements/Armes/lyoda_da.png" id="30_ndmgj"]
-[ext_resource type="Texture2D" uid="uid://c6w6k6g8ja4h2" path="res://Equipements/Armes/meneuse.png" id="31_otkks"]
-[ext_resource type="Texture2D" uid="uid://b8k466x1ybynv" path="res://Equipements/Armes/nitruhant.png" id="32_838fc"]
-[ext_resource type="Texture2D" uid="uid://b0uc6ur0vf0e2" path="res://Equipements/Armes/pataflone.png" id="33_qy620"]
-[ext_resource type="Texture2D" uid="uid://bexspteyvbnjh" path="res://Equipements/Armes/pelle_melle.png" id="34_44335"]
-[ext_resource type="Texture2D" uid="uid://bh8x4wncqvud2" path="res://Equipements/Armes/rafeuses.png" id="35_imue2"]
-[ext_resource type="Texture2D" uid="uid://cqxprok6lclx1" path="res://Equipements/Armes/razielle.png" id="36_1768g"]
-[ext_resource type="Texture2D" uid="uid://62jfp4sn45w5" path="res://Equipements/Armes/solote.png" id="37_i6ed7"]
 
 [node name="ChoixEquipements" type="Control"]
 layout_mode = 3
@@ -143,187 +121,193 @@ offset_right = 350.0
 offset_bottom = 54.0
 texture_normal = ExtResource("14_raq4t")
 
-[node name="Cartes" type="GridContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_left = 272.0
-offset_top = 147.0
-offset_right = 2452.0
-offset_bottom = 1271.0
-scale = Vector2(0.6, 0.6)
-columns = 8
+offset_left = 380.0
+offset_top = 150.0
+offset_right = 1741.0
+offset_bottom = 898.0
+scale = Vector2(0.8, 0.8)
 
-[node name="TextureButton" type="TextureButton" parent="Cartes"]
+[node name="Cartes" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+offset_right = 1361.0
+offset_bottom = 1876.0
+columns = 5
+
+[node name="TextureButton" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_right = 269.0
 offset_bottom = 372.0
 texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton2" type="TextureButton" parent="Cartes"]
+[node name="TextureButton2" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 273.0
 offset_right = 542.0
 offset_bottom = 372.0
-texture_normal = ExtResource("16_xyylp")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton3" type="TextureButton" parent="Cartes"]
+[node name="TextureButton3" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 546.0
 offset_right = 815.0
 offset_bottom = 372.0
-texture_normal = ExtResource("17_gd6ba")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton4" type="TextureButton" parent="Cartes"]
+[node name="TextureButton4" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 819.0
 offset_right = 1088.0
 offset_bottom = 372.0
-texture_normal = ExtResource("18_iykw7")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton5" type="TextureButton" parent="Cartes"]
+[node name="TextureButton5" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 1092.0
 offset_right = 1361.0
 offset_bottom = 372.0
-texture_normal = ExtResource("19_ibqe1")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton6" type="TextureButton" parent="Cartes"]
-layout_mode = 2
-offset_left = 1365.0
-offset_right = 1634.0
-offset_bottom = 372.0
-texture_normal = ExtResource("20_kir3y")
-
-[node name="TextureButton7" type="TextureButton" parent="Cartes"]
-layout_mode = 2
-offset_left = 1638.0
-offset_right = 1907.0
-offset_bottom = 372.0
-texture_normal = ExtResource("21_31s2h")
-
-[node name="TextureButton8" type="TextureButton" parent="Cartes"]
-layout_mode = 2
-offset_left = 1911.0
-offset_right = 2180.0
-offset_bottom = 372.0
-texture_normal = ExtResource("22_7vl0t")
-
-[node name="TextureButton9" type="TextureButton" parent="Cartes"]
+[node name="TextureButton6" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_top = 376.0
 offset_right = 269.0
 offset_bottom = 748.0
-texture_normal = ExtResource("23_v7wkc")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton10" type="TextureButton" parent="Cartes"]
+[node name="TextureButton7" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 273.0
 offset_top = 376.0
 offset_right = 542.0
 offset_bottom = 748.0
-texture_normal = ExtResource("24_8bpjw")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton11" type="TextureButton" parent="Cartes"]
+[node name="TextureButton8" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 546.0
 offset_top = 376.0
 offset_right = 815.0
 offset_bottom = 748.0
-texture_normal = ExtResource("25_24p2i")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton12" type="TextureButton" parent="Cartes"]
+[node name="TextureButton9" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 819.0
 offset_top = 376.0
 offset_right = 1088.0
 offset_bottom = 748.0
-texture_normal = ExtResource("26_o356q")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton13" type="TextureButton" parent="Cartes"]
+[node name="TextureButton10" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 1092.0
 offset_top = 376.0
 offset_right = 1361.0
 offset_bottom = 748.0
-texture_normal = ExtResource("27_olg18")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton14" type="TextureButton" parent="Cartes"]
-layout_mode = 2
-offset_left = 1365.0
-offset_top = 376.0
-offset_right = 1634.0
-offset_bottom = 748.0
-texture_normal = ExtResource("28_nyqnx")
-
-[node name="TextureButton15" type="TextureButton" parent="Cartes"]
-layout_mode = 2
-offset_left = 1638.0
-offset_top = 376.0
-offset_right = 1907.0
-offset_bottom = 748.0
-texture_normal = ExtResource("29_to4am")
-
-[node name="TextureButton16" type="TextureButton" parent="Cartes"]
-layout_mode = 2
-offset_left = 1911.0
-offset_top = 376.0
-offset_right = 2180.0
-offset_bottom = 748.0
-texture_normal = ExtResource("30_ndmgj")
-
-[node name="TextureButton17" type="TextureButton" parent="Cartes"]
+[node name="TextureButton11" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_top = 752.0
 offset_right = 269.0
 offset_bottom = 1124.0
-texture_normal = ExtResource("31_otkks")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton18" type="TextureButton" parent="Cartes"]
+[node name="TextureButton12" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 273.0
 offset_top = 752.0
 offset_right = 542.0
 offset_bottom = 1124.0
-texture_normal = ExtResource("32_838fc")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton19" type="TextureButton" parent="Cartes"]
+[node name="TextureButton13" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 546.0
 offset_top = 752.0
 offset_right = 815.0
 offset_bottom = 1124.0
-texture_normal = ExtResource("33_qy620")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton20" type="TextureButton" parent="Cartes"]
+[node name="TextureButton14" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 819.0
 offset_top = 752.0
 offset_right = 1088.0
 offset_bottom = 1124.0
-texture_normal = ExtResource("34_44335")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton21" type="TextureButton" parent="Cartes"]
+[node name="TextureButton15" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
 offset_left = 1092.0
 offset_top = 752.0
 offset_right = 1361.0
 offset_bottom = 1124.0
-texture_normal = ExtResource("35_imue2")
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton22" type="TextureButton" parent="Cartes"]
+[node name="TextureButton16" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
-offset_left = 1365.0
-offset_top = 752.0
-offset_right = 1634.0
-offset_bottom = 1124.0
-texture_normal = ExtResource("36_1768g")
+offset_top = 1128.0
+offset_right = 269.0
+offset_bottom = 1500.0
+texture_normal = ExtResource("15_7m0r2")
 
-[node name="TextureButton23" type="TextureButton" parent="Cartes"]
+[node name="TextureButton17" type="TextureButton" parent="ScrollContainer/Cartes"]
 layout_mode = 2
-offset_left = 1638.0
-offset_top = 752.0
-offset_right = 1907.0
-offset_bottom = 1124.0
-texture_normal = ExtResource("37_i6ed7")
+offset_left = 273.0
+offset_top = 1128.0
+offset_right = 542.0
+offset_bottom = 1500.0
+texture_normal = ExtResource("15_7m0r2")
+
+[node name="TextureButton18" type="TextureButton" parent="ScrollContainer/Cartes"]
+layout_mode = 2
+offset_left = 546.0
+offset_top = 1128.0
+offset_right = 815.0
+offset_bottom = 1500.0
+texture_normal = ExtResource("15_7m0r2")
+
+[node name="TextureButton19" type="TextureButton" parent="ScrollContainer/Cartes"]
+layout_mode = 2
+offset_left = 819.0
+offset_top = 1128.0
+offset_right = 1088.0
+offset_bottom = 1500.0
+texture_normal = ExtResource("15_7m0r2")
+
+[node name="TextureButton20" type="TextureButton" parent="ScrollContainer/Cartes"]
+layout_mode = 2
+offset_left = 1092.0
+offset_top = 1128.0
+offset_right = 1361.0
+offset_bottom = 1500.0
+texture_normal = ExtResource("15_7m0r2")
+
+[node name="TextureButton21" type="TextureButton" parent="ScrollContainer/Cartes"]
+layout_mode = 2
+offset_top = 1504.0
+offset_right = 269.0
+offset_bottom = 1876.0
+texture_normal = ExtResource("15_7m0r2")
+
+[node name="TextureButton22" type="TextureButton" parent="ScrollContainer/Cartes"]
+layout_mode = 2
+offset_left = 273.0
+offset_top = 1504.0
+offset_right = 542.0
+offset_bottom = 1876.0
+texture_normal = ExtResource("15_7m0r2")
+
+[node name="TextureButton23" type="TextureButton" parent="ScrollContainer/Cartes"]
+layout_mode = 2
+offset_left = 546.0
+offset_top = 1504.0
+offset_right = 815.0
+offset_bottom = 1876.0
+texture_normal = ExtResource("15_7m0r2")
 
 [connection signal="pressed" from="GridContainer/Sorts" to="." method="_on_sorts_pressed"]
 [connection signal="pressed" from="GridContainer/Retour" to="." method="_on_retour_pressed"]

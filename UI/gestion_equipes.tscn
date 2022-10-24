@@ -23,6 +23,7 @@ grow_vertical = 2
 script = ExtResource("1_4qtop")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
@@ -30,10 +31,12 @@ offset_bottom = 965.0
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="AffichageEquipe" parent="." instance=ExtResource("1_pq5c6")]
+layout_mode = 1
 offset_top = 24.0
 offset_bottom = 24.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 31.0
 offset_top = 379.0
 offset_right = 1217.0
@@ -42,55 +45,66 @@ scale = Vector2(1.3, 1.3)
 columns = 10
 
 [node name="PrevisuEquipe" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_right = 115.0
 offset_bottom = 334.0
 
 [node name="PrevisuEquipe2" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_left = 119.0
 offset_right = 234.0
 offset_bottom = 334.0
 
 [node name="PrevisuEquipe3" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_left = 238.0
 offset_right = 353.0
 offset_bottom = 334.0
 
 [node name="PrevisuEquipe4" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_left = 357.0
 offset_right = 472.0
 offset_bottom = 334.0
 
 [node name="PrevisuEquipe5" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_left = 476.0
 offset_right = 591.0
 offset_bottom = 334.0
 
 [node name="PrevisuEquipe6" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_left = 595.0
 offset_right = 710.0
 offset_bottom = 334.0
 
 [node name="PrevisuEquipe7" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_left = 714.0
 offset_right = 829.0
 offset_bottom = 334.0
 
 [node name="PrevisuEquipe8" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_left = 833.0
 offset_right = 948.0
 offset_bottom = 334.0
 
 [node name="PrevisuEquipe9" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_left = 952.0
 offset_right = 1067.0
 offset_bottom = 334.0
 
 [node name="PrevisuEquipe10" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+layout_mode = 2
 offset_left = 1071.0
 offset_right = 1186.0
 offset_bottom = 334.0
 
 [node name="GridContainer2" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 503.0
 offset_top = 845.0
 offset_right = 901.0
@@ -99,6 +113,7 @@ scale = Vector2(1.5, 1.5)
 columns = 3
 
 [node name="Supprimer" type="TextureButton" parent="GridContainer2"]
+layout_mode = 2
 offset_right = 130.0
 offset_bottom = 32.0
 texture_normal = ExtResource("3_b6ngn")
@@ -106,6 +121,7 @@ texture_pressed = ExtResource("4_44dll")
 texture_hover = ExtResource("5_u65qg")
 
 [node name="Editer" type="TextureButton" parent="GridContainer2"]
+layout_mode = 2
 offset_left = 134.0
 offset_right = 264.0
 offset_bottom = 32.0
@@ -114,6 +130,7 @@ texture_pressed = ExtResource("7_xv1xv")
 texture_hover = ExtResource("8_6clad")
 
 [node name="Creer" type="TextureButton" parent="GridContainer2"]
+layout_mode = 2
 offset_left = 268.0
 offset_right = 398.0
 offset_bottom = 32.0
