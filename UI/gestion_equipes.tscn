@@ -1,7 +1,177 @@
-[gd_scene format=3 uid="uid://cd2prrudoobgb"]
+[gd_scene load_steps=14 format=3 uid="uid://cd2prrudoobgb"]
+
+[ext_resource type="PackedScene" uid="uid://rcby27lpo007" path="res://UI/Displays/Scenes/affichage_equipe.tscn" id="1_pq5c6"]
+[ext_resource type="Texture2D" uid="uid://f4yec7dnhwbf" path="res://UI/Displays/team_background.png" id="3_yfq25"]
+[ext_resource type="Texture2D" uid="uid://b1kdoxs2nggij" path="res://UI/Displays/team_selected.png" id="4_2awn4"]
+[ext_resource type="Texture2D" uid="uid://dspbp2pn73ali" path="res://UI/Displays/team_hovered.png" id="5_11b1u"]
+[ext_resource type="Texture2D" uid="uid://cj00tojaj188p" path="res://UI/Displays/supprimer_base.png" id="5_chqmb"]
+[ext_resource type="Texture2D" uid="uid://bntvfyl8ucfvp" path="res://UI/Displays/supprimer_clicked.png" id="6_dgxyd"]
+[ext_resource type="Texture2D" uid="uid://5xqkcvgvqcp3" path="res://UI/Displays/supprimer_hovered.png" id="7_eiank"]
+[ext_resource type="Texture2D" uid="uid://ynsewpoi05mt" path="res://UI/Displays/editer_base.png" id="8_oplha"]
+[ext_resource type="Texture2D" uid="uid://dsyqby7qkyxpw" path="res://UI/Displays/editer_clicked.png" id="9_sc0t8"]
+[ext_resource type="Texture2D" uid="uid://chv4saw0kppm8" path="res://UI/Displays/editer_hovered.png" id="10_hfjrh"]
+[ext_resource type="Texture2D" uid="uid://b4h88cs2et6xr" path="res://UI/Displays/creer_base.png" id="11_68adv"]
+[ext_resource type="Texture2D" uid="uid://dxkee3lfb7ta6" path="res://UI/Displays/creer_clicked.png" id="12_j7ado"]
+[ext_resource type="Texture2D" uid="uid://cqi7smwgtmaar" path="res://UI/Displays/creer_hovered.png" id="13_n0ue0"]
 
 [node name="GestionEquipes" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -73.0
+offset_right = 1683.0
+offset_bottom = 965.0
+color = Color(0.529412, 0.478431, 0.317647, 1)
+
+[node name="AffichageEquipe" parent="." instance=ExtResource("1_pq5c6")]
+layout_mode = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 379.0
+offset_right = 1217.0
+offset_bottom = 713.0
+scale = Vector2(1.3, 1.3)
+columns = 10
+
+[node name="TextureButton" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_right = 115.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="TextureButton2" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_left = 119.0
+offset_right = 234.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="TextureButton3" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_left = 238.0
+offset_right = 353.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="TextureButton4" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_left = 357.0
+offset_right = 472.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="TextureButton5" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_left = 476.0
+offset_right = 591.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="TextureButton6" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_left = 595.0
+offset_right = 710.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="TextureButton7" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_left = 714.0
+offset_right = 829.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="TextureButton8" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_left = 833.0
+offset_right = 948.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="TextureButton9" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_left = 952.0
+offset_right = 1067.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="TextureButton10" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_left = 1071.0
+offset_right = 1186.0
+offset_bottom = 334.0
+toggle_mode = true
+texture_normal = ExtResource("3_yfq25")
+texture_pressed = ExtResource("4_2awn4")
+texture_hover = ExtResource("5_11b1u")
+
+[node name="GridContainer2" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 845.0
+offset_right = 901.0
+offset_bottom = 885.0
+scale = Vector2(1.5, 1.5)
+columns = 3
+
+[node name="TextureButton" type="TextureButton" parent="GridContainer2"]
+layout_mode = 2
+offset_right = 130.0
+offset_bottom = 32.0
+texture_normal = ExtResource("5_chqmb")
+texture_pressed = ExtResource("6_dgxyd")
+texture_hover = ExtResource("7_eiank")
+
+[node name="TextureButton3" type="TextureButton" parent="GridContainer2"]
+layout_mode = 2
+offset_left = 134.0
+offset_right = 264.0
+offset_bottom = 32.0
+texture_normal = ExtResource("8_oplha")
+texture_pressed = ExtResource("9_sc0t8")
+texture_hover = ExtResource("10_hfjrh")
+
+[node name="TextureButton2" type="TextureButton" parent="GridContainer2"]
+layout_mode = 2
+offset_left = 268.0
+offset_right = 398.0
+offset_bottom = 32.0
+texture_normal = ExtResource("11_68adv")
+texture_pressed = ExtResource("12_j7ado")
+texture_hover = ExtResource("13_n0ue0")
