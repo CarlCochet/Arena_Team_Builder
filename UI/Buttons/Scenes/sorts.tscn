@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c062b4ja7k8w"]
+
+[ext_resource type="Texture2D" uid="uid://di3vomysnafma" path="res://UI/Buttons/sorts_unselected.png" id="1_uilnf"]
+[ext_resource type="Texture2D" uid="uid://tcdby2iutgwg" path="res://UI/Buttons/sorts_selected.png" id="2_1mqyo"]
+
+[node name="TextureButton" type="TextureButton"]
+offset_right = 125.0
+offset_bottom = 20.0
+toggle_mode = true
+texture_normal = ExtResource("1_uilnf")
+texture_pressed = ExtResource("2_1mqyo")

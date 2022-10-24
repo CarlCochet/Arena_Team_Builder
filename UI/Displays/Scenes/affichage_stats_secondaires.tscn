@@ -1,0 +1,194 @@
+[gd_scene load_steps=3 format=3 uid="uid://5i2iaiitef1b"]
+
+[ext_resource type="Texture2D" uid="uid://bkjgp2jeowdv7" path="res://UI/Displays/secondary_stats_display.png" id="1_31cb2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7lm2r"]
+font_size = 11
+font_color = Color(0, 0, 0, 1)
+
+[node name="AffichageStatsPrimaires" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_31cb2")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 39.0
+offset_right = 244.0
+offset_bottom = 449.0
+theme_override_constants/v_separation = 39
+
+[node name="Dommages" type="GridContainer" parent="GridContainer"]
+layout_mode = 2
+offset_right = 29.0
+offset_bottom = 94.0
+size_flags_horizontal = 3
+theme_override_constants/v_separation = 6
+
+[node name="Air" type="Label" parent="GridContainer/Dommages"]
+layout_mode = 2
+offset_right = 29.0
+offset_bottom = 19.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Terre" type="Label" parent="GridContainer/Dommages"]
+layout_mode = 2
+offset_top = 25.0
+offset_right = 29.0
+offset_bottom = 44.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Feu" type="Label" parent="GridContainer/Dommages"]
+layout_mode = 2
+offset_top = 50.0
+offset_right = 29.0
+offset_bottom = 69.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Eau" type="Label" parent="GridContainer/Dommages"]
+layout_mode = 2
+offset_top = 75.0
+offset_right = 29.0
+offset_bottom = 94.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Resistances" type="GridContainer" parent="GridContainer"]
+layout_mode = 2
+offset_top = 133.0
+offset_right = 29.0
+offset_bottom = 227.0
+size_flags_horizontal = 3
+theme_override_constants/v_separation = 6
+
+[node name="Air" type="Label" parent="GridContainer/Resistances"]
+layout_mode = 2
+offset_right = 29.0
+offset_bottom = 19.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Terre" type="Label" parent="GridContainer/Resistances"]
+layout_mode = 2
+offset_top = 25.0
+offset_right = 29.0
+offset_bottom = 44.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Feu" type="Label" parent="GridContainer/Resistances"]
+layout_mode = 2
+offset_top = 50.0
+offset_right = 29.0
+offset_bottom = 69.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Eau" type="Label" parent="GridContainer/Resistances"]
+layout_mode = 2
+offset_top = 75.0
+offset_right = 29.0
+offset_bottom = 94.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Capacites" type="GridContainer" parent="GridContainer"]
+layout_mode = 2
+offset_top = 266.0
+offset_right = 29.0
+offset_bottom = 410.0
+size_flags_horizontal = 3
+theme_override_constants/v_separation = 6
+
+[node name="Portee" type="Label" parent="GridContainer/Capacites"]
+layout_mode = 2
+offset_right = 29.0
+offset_bottom = 19.0
+size_flags_horizontal = 3
+text = "+0"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Esquive" type="Label" parent="GridContainer/Capacites"]
+layout_mode = 2
+offset_top = 25.0
+offset_right = 29.0
+offset_bottom = 44.0
+size_flags_horizontal = 3
+text = "100%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Blocage" type="Label" parent="GridContainer/Capacites"]
+layout_mode = 2
+offset_top = 50.0
+offset_right = 29.0
+offset_bottom = 69.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Soins" type="Label" parent="GridContainer/Capacites"]
+layout_mode = 2
+offset_top = 75.0
+offset_right = 29.0
+offset_bottom = 94.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CC" type="Label" parent="GridContainer/Capacites"]
+layout_mode = 2
+offset_top = 100.0
+offset_right = 29.0
+offset_bottom = 119.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RenvoieDmg" type="Label" parent="GridContainer/Capacites"]
+layout_mode = 2
+offset_top = 125.0
+offset_right = 29.0
+offset_bottom = 144.0
+size_flags_horizontal = 3
+text = "0%"
+label_settings = SubResource("LabelSettings_7lm2r")
+horizontal_alignment = 1
+vertical_alignment = 1

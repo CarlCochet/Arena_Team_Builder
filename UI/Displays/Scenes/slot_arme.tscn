@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://sovyphtdkwdt"]
+
+[ext_resource type="Texture2D" uid="uid://rvet1iae41uh" path="res://UI/Displays/arme.png" id="1_leci8"]
+
+[node name="TextureRect" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_leci8")

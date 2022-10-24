@@ -1,0 +1,441 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0yf3t1yf1ccp"]
+
+[ext_resource type="Texture2D" uid="uid://bgjqojdln2mr1" path="res://UI/Displays/character_display.png" id="1_b4ht8"]
+[ext_resource type="PackedScene" uid="uid://drgospxokfdgn" path="res://UI/Buttons/Scenes/recruter.tscn" id="2_idwrw"]
+[ext_resource type="Texture2D" uid="uid://iqucq85kucvm" path="res://UI/Displays/item_small.png" id="3_v8uu4"]
+[ext_resource type="PackedScene" uid="uid://bwfn3lux5l4lx" path="res://UI/Buttons/Scenes/fermer.tscn" id="4_fi4k2"]
+[ext_resource type="PackedScene" uid="uid://dlo7istbb8o4m" path="res://UI/Buttons/Scenes/tester.tscn" id="5_v146c"]
+[ext_resource type="PackedScene" uid="uid://drtgbjheuymi7" path="res://UI/Displays/Scenes/affichage_stats_primaires.tscn" id="6_3nuld"]
+[ext_resource type="PackedScene" uid="uid://5i2iaiitef1b" path="res://UI/Displays/Scenes/affichage_stats_secondaires.tscn" id="7_eyprt"]
+[ext_resource type="PackedScene" uid="uid://bw1qw1u2hkek8" path="res://UI/Displays/Scenes/affichage_budget.tscn" id="8_5fbff"]
+
+[node name="CreationEquipe" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -73.0
+offset_right = 1683.0
+offset_bottom = 965.0
+color = Color(0.529412, 0.478431, 0.317647, 1)
+
+[node name="TextureBase" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 37.0
+offset_right = 1600.0
+offset_bottom = 363.0
+texture = ExtResource("1_b4ht8")
+
+[node name="GridHire" type="GridContainer" parent="."]
+layout_mode = 0
+offset_top = 337.0
+offset_right = 788.0
+offset_bottom = 385.0
+scale = Vector2(2.03, 2.03)
+columns = 6
+
+[node name="TextureButton" parent="GridHire" instance=ExtResource("2_idwrw")]
+layout_mode = 2
+offset_right = 128.0
+offset_bottom = 48.0
+
+[node name="TextureButton2" parent="GridHire" instance=ExtResource("2_idwrw")]
+layout_mode = 2
+offset_left = 132.0
+offset_right = 260.0
+offset_bottom = 48.0
+
+[node name="TextureButton3" parent="GridHire" instance=ExtResource("2_idwrw")]
+layout_mode = 2
+offset_left = 264.0
+offset_right = 392.0
+offset_bottom = 48.0
+
+[node name="TextureButton4" parent="GridHire" instance=ExtResource("2_idwrw")]
+layout_mode = 2
+offset_left = 396.0
+offset_right = 524.0
+offset_bottom = 48.0
+
+[node name="TextureButton5" parent="GridHire" instance=ExtResource("2_idwrw")]
+layout_mode = 2
+offset_left = 528.0
+offset_right = 656.0
+offset_bottom = 48.0
+
+[node name="TextureButton6" parent="GridHire" instance=ExtResource("2_idwrw")]
+layout_mode = 2
+offset_left = 660.0
+offset_right = 788.0
+offset_bottom = 48.0
+
+[node name="GridGear" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 450.0
+offset_right = 991.0
+offset_bottom = 481.0
+scale = Vector2(1.6, 1.6)
+theme_override_constants/h_separation = 30
+columns = 6
+
+[node name="GridContainer" type="GridContainer" parent="GridGear"]
+layout_mode = 2
+offset_right = 136.0
+offset_bottom = 24.0
+columns = 5
+
+[node name="TextureRect" type="TextureRect" parent="GridGear/GridContainer"]
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect2" type="TextureRect" parent="GridGear/GridContainer"]
+layout_mode = 2
+offset_left = 28.0
+offset_right = 52.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect3" type="TextureRect" parent="GridGear/GridContainer"]
+layout_mode = 2
+offset_left = 56.0
+offset_right = 80.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect4" type="TextureRect" parent="GridGear/GridContainer"]
+layout_mode = 2
+offset_left = 84.0
+offset_right = 108.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect5" type="TextureRect" parent="GridGear/GridContainer"]
+layout_mode = 2
+offset_left = 112.0
+offset_right = 136.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="GridContainer2" type="GridContainer" parent="GridGear"]
+layout_mode = 2
+offset_left = 166.0
+offset_right = 302.0
+offset_bottom = 24.0
+columns = 5
+
+[node name="TextureRect" type="TextureRect" parent="GridGear/GridContainer2"]
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect2" type="TextureRect" parent="GridGear/GridContainer2"]
+layout_mode = 2
+offset_left = 28.0
+offset_right = 52.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect3" type="TextureRect" parent="GridGear/GridContainer2"]
+layout_mode = 2
+offset_left = 56.0
+offset_right = 80.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect4" type="TextureRect" parent="GridGear/GridContainer2"]
+layout_mode = 2
+offset_left = 84.0
+offset_right = 108.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect5" type="TextureRect" parent="GridGear/GridContainer2"]
+layout_mode = 2
+offset_left = 112.0
+offset_right = 136.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="GridContainer3" type="GridContainer" parent="GridGear"]
+layout_mode = 2
+offset_left = 332.0
+offset_right = 468.0
+offset_bottom = 24.0
+columns = 5
+
+[node name="TextureRect" type="TextureRect" parent="GridGear/GridContainer3"]
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect2" type="TextureRect" parent="GridGear/GridContainer3"]
+layout_mode = 2
+offset_left = 28.0
+offset_right = 52.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect3" type="TextureRect" parent="GridGear/GridContainer3"]
+layout_mode = 2
+offset_left = 56.0
+offset_right = 80.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect4" type="TextureRect" parent="GridGear/GridContainer3"]
+layout_mode = 2
+offset_left = 84.0
+offset_right = 108.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect5" type="TextureRect" parent="GridGear/GridContainer3"]
+layout_mode = 2
+offset_left = 112.0
+offset_right = 136.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="GridContainer4" type="GridContainer" parent="GridGear"]
+layout_mode = 2
+offset_left = 498.0
+offset_right = 634.0
+offset_bottom = 24.0
+columns = 5
+
+[node name="TextureRect" type="TextureRect" parent="GridGear/GridContainer4"]
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect2" type="TextureRect" parent="GridGear/GridContainer4"]
+layout_mode = 2
+offset_left = 28.0
+offset_right = 52.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect3" type="TextureRect" parent="GridGear/GridContainer4"]
+layout_mode = 2
+offset_left = 56.0
+offset_right = 80.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect4" type="TextureRect" parent="GridGear/GridContainer4"]
+layout_mode = 2
+offset_left = 84.0
+offset_right = 108.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect5" type="TextureRect" parent="GridGear/GridContainer4"]
+layout_mode = 2
+offset_left = 112.0
+offset_right = 136.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="GridContainer5" type="GridContainer" parent="GridGear"]
+layout_mode = 2
+offset_left = 664.0
+offset_right = 800.0
+offset_bottom = 24.0
+columns = 5
+
+[node name="TextureRect" type="TextureRect" parent="GridGear/GridContainer5"]
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect2" type="TextureRect" parent="GridGear/GridContainer5"]
+layout_mode = 2
+offset_left = 28.0
+offset_right = 52.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect3" type="TextureRect" parent="GridGear/GridContainer5"]
+layout_mode = 2
+offset_left = 56.0
+offset_right = 80.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect4" type="TextureRect" parent="GridGear/GridContainer5"]
+layout_mode = 2
+offset_left = 84.0
+offset_right = 108.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect5" type="TextureRect" parent="GridGear/GridContainer5"]
+layout_mode = 2
+offset_left = 112.0
+offset_right = 136.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="GridContainer6" type="GridContainer" parent="GridGear"]
+layout_mode = 2
+offset_left = 830.0
+offset_right = 966.0
+offset_bottom = 24.0
+columns = 5
+
+[node name="TextureRect" type="TextureRect" parent="GridGear/GridContainer6"]
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect2" type="TextureRect" parent="GridGear/GridContainer6"]
+layout_mode = 2
+offset_left = 28.0
+offset_right = 52.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect3" type="TextureRect" parent="GridGear/GridContainer6"]
+layout_mode = 2
+offset_left = 56.0
+offset_right = 80.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect4" type="TextureRect" parent="GridGear/GridContainer6"]
+layout_mode = 2
+offset_left = 84.0
+offset_right = 108.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="TextureRect5" type="TextureRect" parent="GridGear/GridContainer6"]
+layout_mode = 2
+offset_left = 112.0
+offset_right = 136.0
+offset_bottom = 24.0
+texture = ExtResource("3_v8uu4")
+
+[node name="CloseButton" parent="." instance=ExtResource("4_fi4k2")]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 850.0
+offset_right = 700.0
+offset_bottom = 882.0
+scale = Vector2(1.5, 1.5)
+
+[node name="TestButton" parent="." instance=ExtResource("5_v146c")]
+layout_mode = 0
+offset_left = 820.0
+offset_top = 850.0
+offset_right = 985.0
+offset_bottom = 881.0
+scale = Vector2(1.5, 1.5)
+
+[node name="GridPrimaryStats" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 215.0
+offset_right = 1593.0
+offset_bottom = 326.008
+theme_override_constants/h_separation = 17
+columns = 6
+
+[node name="AffichageStatsPrimaires" parent="GridPrimaryStats" instance=ExtResource("6_3nuld")]
+layout_mode = 2
+offset_right = 250.0
+offset_bottom = 111.0
+
+[node name="AffichageStatsPrimaires2" parent="GridPrimaryStats" instance=ExtResource("6_3nuld")]
+layout_mode = 2
+offset_left = 267.0
+offset_right = 517.0
+offset_bottom = 111.0
+
+[node name="AffichageStatsPrimaires3" parent="GridPrimaryStats" instance=ExtResource("6_3nuld")]
+layout_mode = 2
+offset_left = 534.0
+offset_right = 784.0
+offset_bottom = 111.0
+
+[node name="AffichageStatsPrimaires4" parent="GridPrimaryStats" instance=ExtResource("6_3nuld")]
+layout_mode = 2
+offset_left = 801.0
+offset_right = 1051.0
+offset_bottom = 111.0
+
+[node name="AffichageStatsPrimaires5" parent="GridPrimaryStats" instance=ExtResource("6_3nuld")]
+layout_mode = 2
+offset_left = 1068.0
+offset_right = 1318.0
+offset_bottom = 111.0
+
+[node name="AffichageStatsPrimaires6" parent="GridPrimaryStats" instance=ExtResource("6_3nuld")]
+layout_mode = 2
+offset_left = 1335.0
+offset_right = 1585.0
+offset_bottom = 111.0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 500.0
+offset_right = 1628.0
+offset_bottom = 953.0
+scale = Vector2(0.75, 0.75)
+theme_override_constants/h_separation = 107
+columns = 6
+
+[node name="AffichageStatsPrimaires" parent="GridContainer" instance=ExtResource("7_eyprt")]
+layout_mode = 2
+offset_right = 248.0
+offset_bottom = 453.0
+
+[node name="AffichageStatsPrimaires2" parent="GridContainer" instance=ExtResource("7_eyprt")]
+layout_mode = 2
+offset_left = 355.0
+offset_right = 603.0
+offset_bottom = 453.0
+
+[node name="AffichageStatsPrimaires3" parent="GridContainer" instance=ExtResource("7_eyprt")]
+layout_mode = 2
+offset_left = 710.0
+offset_right = 958.0
+offset_bottom = 453.0
+
+[node name="AffichageStatsPrimaires4" parent="GridContainer" instance=ExtResource("7_eyprt")]
+layout_mode = 2
+offset_left = 1065.0
+offset_right = 1313.0
+offset_bottom = 453.0
+
+[node name="AffichageStatsPrimaires5" parent="GridContainer" instance=ExtResource("7_eyprt")]
+layout_mode = 2
+offset_left = 1420.0
+offset_right = 1668.0
+offset_bottom = 453.0
+
+[node name="AffichageStatsPrimaires6" parent="GridContainer" instance=ExtResource("7_eyprt")]
+layout_mode = 2
+offset_left = 1775.0
+offset_right = 2023.0
+offset_bottom = 453.0
+
+[node name="AffichageBudget" parent="." instance=ExtResource("8_5fbff")]
+layout_mode = 0
+offset_left = 1403.0
+offset_right = 1600.0

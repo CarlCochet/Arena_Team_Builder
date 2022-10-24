@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://drtgbjheuymi7"]
+
+[ext_resource type="Texture2D" uid="uid://dm81qurxgqma6" path="res://UI/Displays/main_stat_display.png" id="1_80jvc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ruyl4"]
+font_size = 13
+font_color = Color(0, 0, 0, 1)
+
+[node name="AffichageStatsPrimaires" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_80jvc")
+
+[node name="MPText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 17.0
+offset_right = 33.0
+offset_bottom = 43.0
+text = "3"
+label_settings = SubResource("LabelSettings_ruyl4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPText" type="Label" parent="."]
+layout_mode = 1
+offset_left = 53.0
+offset_top = 17.0
+offset_right = 76.0
+offset_bottom = 43.0
+text = "60"
+label_settings = SubResource("LabelSettings_ruyl4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IniText" type="Label" parent="."]
+layout_mode = 1
+offset_left = 174.0
+offset_top = 17.0
+offset_right = 197.0
+offset_bottom = 43.0
+text = "0"
+label_settings = SubResource("LabelSettings_ruyl4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="APText" type="Label" parent="."]
+layout_mode = 1
+offset_left = 218.0
+offset_top = 17.0
+offset_right = 241.0
+offset_bottom = 43.0
+text = "6"
+label_settings = SubResource("LabelSettings_ruyl4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CostText" type="Label" parent="."]
+layout_mode = 1
+offset_left = 110.0
+offset_top = 72.0
+offset_right = 140.0
+offset_bottom = 98.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_ruyl4")
+horizontal_alignment = 1
+vertical_alignment = 1
