@@ -2,16 +2,8 @@ extends Node
 class_name Equipe
 
 
-var personnages: Array
-var budget: int
-
-
-func _ready():
-	pass
-
-
-func _process(delta):
-	pass
+var personnages: Array = []
+var budget: int = 0
 
 
 func calcul_budget():

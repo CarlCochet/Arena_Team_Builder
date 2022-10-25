@@ -7,6 +7,40 @@
 [node name="PrevisuEquipe" type="TextureButton"]
 offset_right = 40.0
 offset_bottom = 40.0
+toggle_mode = true
 texture_normal = ExtResource("1_k7rlf")
 texture_pressed = ExtResource("2_v3jbj")
 texture_hover = ExtResource("3_ypwyv")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 400.0
+scale = Vector2(0.801, 0.801)
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer"]
+
+[node name="TextureRect2" type="TextureRect" parent="GridContainer"]
+offset_left = 4.0
+offset_right = 4.0
+
+[node name="TextureRect3" type="TextureRect" parent="GridContainer"]
+offset_top = 4.0
+offset_bottom = 4.0
+
+[node name="TextureRect4" type="TextureRect" parent="GridContainer"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 4.0
+offset_bottom = 4.0
+
+[node name="TextureRect5" type="TextureRect" parent="GridContainer"]
+offset_top = 8.0
+offset_bottom = 8.0
+
+[node name="TextureRect6" type="TextureRect" parent="GridContainer"]
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 4.0
+offset_bottom = 8.0

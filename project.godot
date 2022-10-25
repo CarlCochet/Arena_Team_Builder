@@ -12,7 +12,7 @@ _global_script_classes=[{
 "base": "Node",
 "class": &"Equipe",
 "language": &"GDScript",
-"path": "res://Jeu/team.gd"
+"path": "res://Jeu/equipe.gd"
 }, {
 "base": "Node",
 "class": &"Equipement",
@@ -48,6 +48,10 @@ config/name="Arena_Team_Builder"
 run/main_scene="res://UI/gestion_equipes.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalData="*res://Jeu/global_data.gd"
 
 [display]
 

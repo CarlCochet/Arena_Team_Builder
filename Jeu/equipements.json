@@ -1,10 +1,10 @@
 {
-	"Arme": {
+	"ARME": {
 		"arc_ange": {
 			"pa": 5,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 250,
@@ -25,8 +25,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -34,8 +34,8 @@
 		"arc_hidsad": {
 			"pa": 5,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -56,8 +56,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -65,8 +65,8 @@
 		"arc_scie_clone": {
 			"pa": 5,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 4,
 			"stats": {
 				"kamas": 200,
@@ -87,8 +87,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -96,8 +96,8 @@
 		"bashers": {
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -118,8 +118,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -127,8 +127,8 @@
 		"celestine": {
 			"pa": 4,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -149,8 +149,8 @@
 				"blocage": 0,
 				"soins": 20,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -158,8 +158,8 @@
 		"cerberus": {
 			"pa": 6,
 			"po": [1, 1],
-			"zone_type": 5,
-			"zone_size": 1,
+			"type_zone": 5,
+			"taille_zone": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -180,8 +180,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -189,8 +189,8 @@
 		"comete": {
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -211,8 +211,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -220,8 +220,8 @@
 		"falistos": {
 			"pa": 6,
 			"po": [1, 1],
-			"zone_type": 5,
-			"zone_size": 1,
+			"type_zone": 5,
+			"taille_zone": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -242,8 +242,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -251,8 +251,8 @@
 		"fossoyeuse_infidele": {
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 1,
-			"zone_size": 2,
+			"type_zone": 1,
+			"taille_zone": 2,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -273,8 +273,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -282,8 +282,8 @@
 		"fourbeuses": {
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -304,8 +304,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -313,8 +313,8 @@
 		"hishantes": {
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -335,8 +335,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -344,8 +344,8 @@
 		"kassgoul": {
 			"pa": 6,
 			"po": [1, 1],
-			"zone_type": 5,
-			"zone_size": 1,
+			"type_zone": 5,
+			"taille_zone": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -366,8 +366,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -375,8 +375,8 @@
 		"kwaklame": {
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -397,8 +397,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -406,8 +406,8 @@
 		"la_corde": {
 			"pa": 5,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -428,8 +428,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -437,8 +437,8 @@
 		"lune_rouge": {
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 1,
-			"zone_size": 2,
+			"type_zone": 1,
+			"taille_zone": 2,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -459,8 +459,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -468,8 +468,8 @@
 		"lyoda_da": {
 			"pa": 3,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -490,8 +490,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -499,8 +499,8 @@
 		"meneuse": {
 			"pa": 4,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 250,
@@ -521,8 +521,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -530,8 +530,8 @@
 		"nitruhant": {
 			"pa": 6,
 			"po": [1, 1],
-			"zone_type": 5,
-			"zone_size": 1,
+			"type_zone": 5,
+			"taille_zone": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -552,8 +552,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -561,8 +561,8 @@
 		"pataflone": {
 			"pa": 4,
 			"po": [3, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -583,8 +583,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -592,8 +592,8 @@
 		"pelle_melle": {
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 1,
-			"zone_size": 2,
+			"type_zone": 1,
+			"taille_zone": 2,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -614,8 +614,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -623,8 +623,8 @@
 		"rafeuses": {
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -645,8 +645,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -654,8 +654,8 @@
 		"razielle": {
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -676,8 +676,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
@@ -685,8 +685,8 @@
 		"solote": {
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 1,
-			"zone_size": 2,
+			"type_zone": 1,
+			"taille_zone": 2,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -707,14 +707,14 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
-			}
+				"renvoi_dommage": 0
+			},
 			"effets": {
 				
 			}
-		},
+		}
 	},
-	"Familiers": {
+	"FAMILIER": {
 		"abra": {
 			"stats": {
 				"kamas": 50,
@@ -735,7 +735,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"atouin": {
@@ -758,7 +758,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"bwak_dair": {
@@ -781,7 +781,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"bwak_de_feu": {
@@ -804,7 +804,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"bwak_de_terre": {
@@ -827,7 +827,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"bwak_deau": {
@@ -850,7 +850,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"chacha": {
@@ -873,7 +873,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"chienchien": {
@@ -896,7 +896,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"corbaka": {
@@ -919,7 +919,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"fotome": {
@@ -942,7 +942,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"kwoko": {
@@ -965,7 +965,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"moon": {
@@ -988,7 +988,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"rehokul": {
@@ -1011,7 +1011,7 @@
 				"blocage": 40,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"tiduc": {
@@ -1034,7 +1034,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"wabbit": {
@@ -1057,11 +1057,11 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
-		},
+		}
 	},
-	"Coiffe": {
+	"COIFFE": {
 		"caracoiffe": {
 			"stats": {
 				"kamas": 150,
@@ -1082,7 +1082,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"champcoiffe": {
@@ -1105,7 +1105,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 10,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"champo": {
@@ -1128,7 +1128,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"cheveuleuse": {
@@ -1151,7 +1151,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"clint": {
@@ -1174,7 +1174,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"coiffe_du_bouftou": {
@@ -1197,7 +1197,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"coiffe_du_ploukosse": {
@@ -1220,7 +1220,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"coiffe_du_prespic": {
@@ -1243,7 +1243,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 20,
+				"renvoi_dommage": 20
 			}
 		},
 		"corbacoiffe": {
@@ -1266,7 +1266,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"couronne_de_nidhane": {
@@ -1289,7 +1289,7 @@
 				"blocage": 20,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"dantgoule": {
@@ -1312,7 +1312,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"dora": {
@@ -1335,7 +1335,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"dragocoiffe": {
@@ -1358,7 +1358,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"kritter": {
@@ -1381,7 +1381,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 5,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"le_casqueleur": {
@@ -1404,7 +1404,7 @@
 				"blocage": 40,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"moskitogalurette": {
@@ -1427,11 +1427,11 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
-		},
+		}
 	},
-	"Cape": {
+	"CAPE": {
 		"abracapa": {
 			"stats": {
 				"kamas": 50,
@@ -1452,7 +1452,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"cape_bouffante": {
@@ -1475,7 +1475,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"cape_champ_champ": {
@@ -1498,7 +1498,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 20,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"cape_du_coq_hu": {
@@ -1521,7 +1521,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"cape_du_prespic": {
@@ -1544,7 +1544,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 35,
+				"renvoi_dommage": 35
 			}
 		},
 		"cape_du_tofu_fou": {
@@ -1567,7 +1567,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"cape_du_wa_wabbit": {
@@ -1590,7 +1590,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"cape_orale": {
@@ -1613,7 +1613,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"cape_plumelaches": {
@@ -1636,7 +1636,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"cape_tainflam": {
@@ -1659,7 +1659,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"craquelocape": {
@@ -1682,7 +1682,7 @@
 				"blocage": 20,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"dofusteuse": {
@@ -1705,7 +1705,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"la_guenille": {
@@ -1728,7 +1728,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"sac_du_petit_moskito": {
@@ -1751,7 +1751,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"vegacape": {
@@ -1774,11 +1774,11 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 20,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
-		},
-	}
-	"Dofus": {
+		}
+	},
+	"DOFUS": {
 		"cawotte": {
 			"stats": {
 				"kamas": 350,
@@ -1799,7 +1799,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"emeraude": {
@@ -1822,7 +1822,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"glace": {
@@ -1845,7 +1845,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"abra": {
@@ -1868,7 +1868,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"pourpre": {
@@ -1891,7 +1891,7 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 0,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
 		},
 		"turquoise": {
@@ -1914,8 +1914,8 @@
 				"blocage": 0,
 				"soins": 0,
 				"cc": 30,
-				"renvoi_dommage": 0,
+				"renvoi_dommage": 0
 			}
-		},
+		}
 	}
 }

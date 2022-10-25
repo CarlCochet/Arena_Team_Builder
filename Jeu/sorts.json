@@ -4,14 +4,14 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 6],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -19,14 +19,14 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [5, 8],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -34,14 +34,14 @@
 			"kamas": 250,
 			"pa": 3,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 1,
+			"type_ldv": 1,
 			"cooldown": 1,
 			"cooldown_global": 1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -49,14 +49,14 @@
 			"kamas": 350,
 			"pa": 6,
 			"po": [2, 5],
-			"zone_type": 1,
-			"zone_size": 4,
+			"type_zone": 1,
+			"taille_zone": 4,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 1,
+			"type_ldv": 1,
 			"cooldown": 1,
 			"cooldown_global": 1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -64,14 +64,14 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -79,14 +79,14 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -94,14 +94,14 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 1],
-			"zone_type": 0,
-			"zone_size": 1,
+			"type_zone": 0,
+			"taille_zone": 1,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -109,14 +109,14 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [1, 7],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -124,14 +124,14 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [2, 6],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 3,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -139,31 +139,31 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 4,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Eca": {
 		"bond_du_felin": {
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -171,14 +171,14 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -186,14 +186,14 @@
 			"kamas": 150,
 			"pa": 6,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 1,
+			"type_zone": 0,
+			"taille_zone": 1,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -201,14 +201,14 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 7],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -216,14 +216,14 @@
 			"kamas": 200,
 			"pa": 5,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -231,14 +231,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -246,14 +246,14 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -261,14 +261,14 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 3,
 			"cooldown_global": 3,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -276,14 +276,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 3,
 			"cooldown_global": 3,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -291,31 +291,31 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [0, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 3,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Eni": {
 		"altruisme": {
 			"kamas": 100,
 			"pa": 4,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -323,14 +323,14 @@
 			"kamas": 100,
 			"pa": 3,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -338,14 +338,14 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [0, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -353,14 +353,14 @@
 			"kamas": 250,
 			"pa": 3,
 			"po": [0, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -368,14 +368,14 @@
 			"kamas": 100,
 			"pa": 3,
 			"po": [1, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -383,14 +383,14 @@
 			"kamas": 250,
 			"pa": 4,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -398,14 +398,14 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -413,14 +413,14 @@
 			"kamas": 200,
 			"pa": 5,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 1,
+			"type_zone": 0,
+			"taille_zone": 1,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -428,14 +428,14 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -443,31 +443,31 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [0, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 3,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Enu": {
 		"acceleration": {
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 3,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -475,14 +475,14 @@
 			"kamas": 150,
 			"pa": 5,
 			"po": [1, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 4,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -490,14 +490,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -505,14 +505,14 @@
 			"kamas": 200,
 			"pa": 5,
 			"po": [1, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -520,14 +520,14 @@
 			"kamas": 250,
 			"pa": 2,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -535,14 +535,14 @@
 			"kamas": 150,
 			"pa": 1,
 			"po": [1, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -550,14 +550,14 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 6,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -565,14 +565,14 @@
 			"kamas": 250,
 			"pa": 5,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -580,14 +580,14 @@
 			"kamas": 300,
 			"pa": 6,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -595,31 +595,31 @@
 			"kamas": 200,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 7,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Feca": {
 		"armure_avalanche": {
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -627,14 +627,14 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -642,14 +642,14 @@
 			"kamas": 250,
 			"pa": 4,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 0,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -657,14 +657,14 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [0, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 3,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -672,14 +672,14 @@
 			"kamas": 350,
 			"pa": 3,
 			"po": [5, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -687,14 +687,14 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -702,14 +702,14 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [0, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 3,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 8,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -717,14 +717,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -732,14 +732,14 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 0,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 6,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -747,31 +747,31 @@
 			"kamas": 100,
 			"pa": 3,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 6,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Iop": {
 		"amplification": {
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 3,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -779,14 +779,14 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -794,14 +794,14 @@
 			"kamas": 350,
 			"pa": 8,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -809,14 +809,14 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -824,14 +824,14 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 1,
+			"type_zone": 0,
+			"taille_zone": 1,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -839,14 +839,14 @@
 			"kamas": 250,
 			"pa": 5,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -854,14 +854,14 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -869,14 +869,14 @@
 			"kamas": 150,
 			"pa": 1,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -884,14 +884,14 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -899,31 +899,31 @@
 			"kamas": 250,
 			"pa": 1,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Osa": {
 		"benediction_animale": {
 			"kamas": 250,
 			"pa": 3,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -931,14 +931,14 @@
 			"kamas": 250,
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -946,14 +946,14 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 6,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -961,14 +961,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -976,14 +976,14 @@
 			"kamas": 300,
 			"pa": 6,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 4,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -991,14 +991,14 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 4,
+			"type_zone": 0,
+			"taille_zone": 4,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1006,14 +1006,14 @@
 			"kamas": 50,
 			"pa": 3,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 5,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1021,14 +1021,14 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 6,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1036,14 +1036,14 @@
 			"kamas": 200,
 			"pa": 5,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1051,31 +1051,31 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Panda": {
 		"chamrak": {
 			"kamas": 200,
 			"pa": 2,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 1,
+			"type_ldv": 1,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1083,14 +1083,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 6],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1098,14 +1098,14 @@
 			"kamas": 350,
 			"pa": 4,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1113,14 +1113,14 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1128,14 +1128,14 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1143,14 +1143,14 @@
 			"kamas": 300,
 			"pa": 5,
 			"po": [2, 5],
-			"zone_type": 0,
-			"zone_size": 1,
+			"type_zone": 0,
+			"taille_zone": 1,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1158,14 +1158,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1173,14 +1173,14 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 1,
-			"zone_size": 2,
+			"type_zone": 1,
+			"taille_zone": 2,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 1,
+			"type_ldv": 1,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1188,14 +1188,14 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1203,31 +1203,31 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 4,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Sacrieur": {
 		"Assaut": {
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1235,14 +1235,14 @@
 			"kamas": 100,
 			"pa": 7,
 			"po": [1, 7],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1250,14 +1250,14 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1265,14 +1265,14 @@
 			"kamas": 200,
 			"pa": 2,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1280,14 +1280,14 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1295,14 +1295,14 @@
 			"kamas": 100,
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1310,14 +1310,14 @@
 			"kamas": 300,
 			"pa": 6,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1325,14 +1325,14 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1340,14 +1340,14 @@
 			"kamas": 150,
 			"pa": 6,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1355,31 +1355,31 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Sadida": {
 		"arbre": {
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 2,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1387,14 +1387,14 @@
 			"kamas": 250,
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1402,14 +1402,14 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1417,14 +1417,14 @@
 			"kamas": 300,
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 3,
 			"cooldown_global": 1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1432,14 +1432,14 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1447,14 +1447,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1462,14 +1462,14 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1477,14 +1477,14 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 7,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1492,14 +1492,14 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1507,31 +1507,31 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 36],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 6,
 			"ldv": 0,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Sram": {
 		"attaque_mortelle": {
 			"kamas": 350,
 			"pa": 6,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1539,14 +1539,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 2],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 8,
 			"cooldown_global": 8,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1554,14 +1554,14 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1569,14 +1569,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 7],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1584,14 +1584,14 @@
 			"kamas": 200,
 			"pa": 6,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 5,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1599,14 +1599,14 @@
 			"kamas": 250,
 			"pa": 2,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 7,
 			"cooldown_global": 4,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1614,14 +1614,14 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 3,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 7,
 			"cooldown_global": 7,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1629,14 +1629,14 @@
 			"kamas": 150,
 			"pa": 1,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1644,14 +1644,14 @@
 			"kamas": 400,
 			"pa": 7,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 3,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1659,31 +1659,31 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
-		},
+		}
 	},
 	"Xelor": {
 		"aiguille": {
 			"kamas": 200,
 			"pa": 3,
 			"po": [2, 6],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1691,14 +1691,14 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 1],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 5,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1706,14 +1706,14 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 2],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1721,14 +1721,14 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 3,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1736,14 +1736,14 @@
 			"kamas": 100,
 			"pa": 4,
 			"po": [1, 5],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 0,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1751,14 +1751,14 @@
 			"kamas": 300,
 			"pa": 6,
 			"po": [2, 7],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1766,14 +1766,14 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [0, 0],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 1,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1781,14 +1781,14 @@
 			"kamas": 300,
 			"pa": 6,
 			"po": [1, 4],
-			"zone_type": 0,
-			"zone_size": 2,
+			"type_zone": 0,
+			"taille_zone": 2,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1796,14 +1796,14 @@
 			"kamas": 200,
 			"pa": 1,
 			"po": [1, 6],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
 		},
@@ -1811,16 +1811,16 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 3],
-			"zone_type": 0,
-			"zone_size": 0,
+			"type_zone": 0,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
-			"ldv_type": 0,
+			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-			"effects": {
+			"effets": {
 				
 			}
-		},
-	},
+		}
+	}
 }

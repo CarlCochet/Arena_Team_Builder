@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://box1ypk4dtvni"]
+[gd_scene load_steps=12 format=3 uid="uid://box1ypk4dtvni"]
 
 [ext_resource type="Script" path="res://UI/Scripts/gestion_equipes.gd" id="1_4qtop"]
 [ext_resource type="PackedScene" uid="uid://rcby27lpo007" path="res://UI/Displays/Scenes/affichage_equipe.tscn" id="1_pq5c6"]
-[ext_resource type="PackedScene" uid="uid://c81ufkbrjs34p" path="res://UI/Displays/Scenes/previsu_equipe.tscn" id="2_kxqwp"]
 [ext_resource type="Texture2D" uid="uid://cj00tojaj188p" path="res://UI/Buttons/supprimer_base.png" id="3_b6ngn"]
 [ext_resource type="Texture2D" uid="uid://bntvfyl8ucfvp" path="res://UI/Buttons/supprimer_clicked.png" id="4_44dll"]
 [ext_resource type="Texture2D" uid="uid://5xqkcvgvqcp3" path="res://UI/Buttons/supprimer_hovered.png" id="5_u65qg"]
@@ -35,75 +34,19 @@ layout_mode = 1
 offset_top = 24.0
 offset_bottom = 24.0
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 379.0
-offset_right = 1217.0
-offset_bottom = 713.0
+offset_left = 30.0
+offset_top = 370.0
+offset_right = 1216.0
+offset_bottom = 720.0
 scale = Vector2(1.3, 1.3)
-columns = 10
 
-[node name="PrevisuEquipe" parent="GridContainer" instance=ExtResource("2_kxqwp")]
+[node name="Equipes" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
-offset_right = 115.0
-offset_bottom = 334.0
+columns = 99
 
-[node name="PrevisuEquipe2" parent="GridContainer" instance=ExtResource("2_kxqwp")]
-layout_mode = 2
-offset_left = 119.0
-offset_right = 234.0
-offset_bottom = 334.0
-
-[node name="PrevisuEquipe3" parent="GridContainer" instance=ExtResource("2_kxqwp")]
-layout_mode = 2
-offset_left = 238.0
-offset_right = 353.0
-offset_bottom = 334.0
-
-[node name="PrevisuEquipe4" parent="GridContainer" instance=ExtResource("2_kxqwp")]
-layout_mode = 2
-offset_left = 357.0
-offset_right = 472.0
-offset_bottom = 334.0
-
-[node name="PrevisuEquipe5" parent="GridContainer" instance=ExtResource("2_kxqwp")]
-layout_mode = 2
-offset_left = 476.0
-offset_right = 591.0
-offset_bottom = 334.0
-
-[node name="PrevisuEquipe6" parent="GridContainer" instance=ExtResource("2_kxqwp")]
-layout_mode = 2
-offset_left = 595.0
-offset_right = 710.0
-offset_bottom = 334.0
-
-[node name="PrevisuEquipe7" parent="GridContainer" instance=ExtResource("2_kxqwp")]
-layout_mode = 2
-offset_left = 714.0
-offset_right = 829.0
-offset_bottom = 334.0
-
-[node name="PrevisuEquipe8" parent="GridContainer" instance=ExtResource("2_kxqwp")]
-layout_mode = 2
-offset_left = 833.0
-offset_right = 948.0
-offset_bottom = 334.0
-
-[node name="PrevisuEquipe9" parent="GridContainer" instance=ExtResource("2_kxqwp")]
-layout_mode = 2
-offset_left = 952.0
-offset_right = 1067.0
-offset_bottom = 334.0
-
-[node name="PrevisuEquipe10" parent="GridContainer" instance=ExtResource("2_kxqwp")]
-layout_mode = 2
-offset_left = 1071.0
-offset_right = 1186.0
-offset_bottom = 334.0
-
-[node name="GridContainer2" type="GridContainer" parent="."]
+[node name="Boutons" type="GridContainer" parent="."]
 layout_mode = 0
 offset_left = 503.0
 offset_top = 845.0
@@ -112,15 +55,16 @@ offset_bottom = 885.0
 scale = Vector2(1.5, 1.5)
 columns = 3
 
-[node name="Supprimer" type="TextureButton" parent="GridContainer2"]
+[node name="Supprimer" type="TextureButton" parent="Boutons"]
 layout_mode = 2
 offset_right = 130.0
 offset_bottom = 32.0
+toggle_mode = true
 texture_normal = ExtResource("3_b6ngn")
 texture_pressed = ExtResource("4_44dll")
 texture_hover = ExtResource("5_u65qg")
 
-[node name="Editer" type="TextureButton" parent="GridContainer2"]
+[node name="Editer" type="TextureButton" parent="Boutons"]
 layout_mode = 2
 offset_left = 134.0
 offset_right = 264.0
@@ -129,7 +73,7 @@ texture_normal = ExtResource("6_oeuip")
 texture_pressed = ExtResource("7_xv1xv")
 texture_hover = ExtResource("8_6clad")
 
-[node name="Creer" type="TextureButton" parent="GridContainer2"]
+[node name="Creer" type="TextureButton" parent="Boutons"]
 layout_mode = 2
 offset_left = 268.0
 offset_right = 398.0
@@ -138,6 +82,6 @@ texture_normal = ExtResource("9_0ucjf")
 texture_pressed = ExtResource("10_0whlk")
 texture_hover = ExtResource("11_bu8cj")
 
-[connection signal="pressed" from="GridContainer2/Supprimer" to="." method="_on_supprimer_pressed"]
-[connection signal="pressed" from="GridContainer2/Editer" to="." method="_on_editer_pressed"]
-[connection signal="pressed" from="GridContainer2/Creer" to="." method="_on_creer_pressed"]
+[connection signal="pressed" from="Boutons/Supprimer" to="." method="_on_supprimer_pressed"]
+[connection signal="pressed" from="Boutons/Editer" to="." method="_on_editer_pressed"]
+[connection signal="pressed" from="Boutons/Creer" to="." method="_on_creer_pressed"]
