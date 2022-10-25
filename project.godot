@@ -28,12 +28,18 @@ _global_script_classes=[{
 "class": &"Sort",
 "language": &"GDScript",
 "path": "res://Jeu/sort.gd"
+}, {
+"base": "Node",
+"class": &"Stats",
+"language": &"GDScript",
+"path": "res://Jeu/stats.gd"
 }]
 _global_script_class_icons={
 "Equipe": "",
 "Equipement": "",
 "Personnage": "",
-"Sort": ""
+"Sort": "",
+"Stats": ""
 }
 
 [application]

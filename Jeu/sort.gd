@@ -2,14 +2,17 @@ extends Node
 class_name Sort
 
 
-var cout: int = 0
+enum ZoneType {Cercle, Ligne, Baton, Carre, Croix, Marteau}
+enum Cible {Libre, Moi, Vide, Allies, Ennemis, Invocations, InvocationsAlliees, InvocationsEnnemies}
+enum LDVType {Cercle, Ligne, Diagonal}
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+var nom: String
+var kamas: int = 0
+var pa: int
+var po: int
+var zone: int
+var ldv: int
+var cooldown: int
+var cooldown_global: int
+var effets: Array

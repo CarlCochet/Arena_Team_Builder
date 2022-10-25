@@ -2,24 +2,23 @@ extends Node
 class_name Personnage
 
 
-var cout: int = 600
+var stats: Stats
 var equipements: Array
 var sorts: Array
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	stats = Stats.new()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 
-func calcul_cout():
-	cout = 600
+func calcul_stats():
+	stats.kamas = 600
+	stats.esquive = 100
 	for equipement in equipements:
-		cout += equipement.cout
+		stats.kamas += equipement.kamas
 	for sort in sorts:
-		cout += sort.cout
+		stats.kamas += sort.kamas

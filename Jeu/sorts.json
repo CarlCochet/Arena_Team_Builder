@@ -1,0 +1,1826 @@
+{
+	"Cra": {
+		"fleche_absorbante": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [1, 6],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 1,
+			"cooldown_global": 1,
+			"effects": {
+				
+			}
+		},
+		"fleche_chercheuse": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [5, 8],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"fleche_de_recul": {
+			"kamas": 250,
+			"pa": 3,
+			"po": [2, 5],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 1,
+			"cooldown": 1,
+			"cooldown_global": 1,
+			"effects": {
+				
+			}
+		},
+		"fleche_enflamme": {
+			"kamas": 350,
+			"pa": 6,
+			"po": [2, 5],
+			"zone_type": 1,
+			"zone_size": 4,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 1,
+			"cooldown": 1,
+			"cooldown_global": 1,
+			"effects": {
+				
+			}
+		},
+		"fleche_glacee": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [1, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"fleche_magique": {
+			"kamas": 150,
+			"pa": 3,
+			"po": [2, 5],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"oeil_de_lynx": {
+			"kamas": 100,
+			"pa": 1,
+			"po": [0, 1],
+			"zone_type": 0,
+			"zone_size": 1,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 1,
+			"cooldown_global": 1,
+			"effects": {
+				
+			}
+		},
+		"oeil_de_taupe": {
+			"kamas": 100,
+			"pa": 1,
+			"po": [1, 7],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"tir_tranquilisant": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [2, 6],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 3,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"tourmente_visuelle": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 4,
+			"cooldown_global": 4,
+			"effects": {
+				
+			}
+		},
+	},
+	"Eca": {
+		"bond_du_felin": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"esprit_felin": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"fascination": {
+			"kamas": 150,
+			"pa": 6,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 1,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 2,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"guigne": {
+			"kamas": 150,
+			"pa": 3,
+			"po": [1, 7],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 1,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"loterie": {
+			"kamas": 200,
+			"pa": 5,
+			"po": [2, 5],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"perception": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"pile_ou_face": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [2, 5],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"roulette": {
+			"kamas": 100,
+			"pa": 1,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 3,
+			"cooldown_global": 3,
+			"effects": {
+				
+			}
+		},
+		"tout_ou_rien": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 3,
+			"cooldown_global": 3,
+			"effects": {
+				
+			}
+		},
+		"trefle": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [0, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 3,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": -1,
+			"cooldown_global": -1,
+			"effects": {
+				
+			}
+		},
+	},
+	"Eni": {
+		"altruisme": {
+			"kamas": 100,
+			"pa": 4,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"mot_curatif": {
+			"kamas": 100,
+			"pa": 3,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"mot_de_jouvence": {
+			"kamas": 150,
+			"pa": 3,
+			"po": [0, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 1,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"mot_de_regeneration": {
+			"kamas": 250,
+			"pa": 3,
+			"po": [0, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"mot_de_sacrifice": {
+			"kamas": 100,
+			"pa": 3,
+			"po": [1, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"mot_de_torture": {
+			"kamas": 250,
+			"pa": 4,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": -1,
+			"cooldown_global": -1,
+			"effects": {
+				
+			}
+		},
+		"mot_deffacement": {
+			"kamas": 100,
+			"pa": 1,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 6,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"mot_revitalisant": {
+			"kamas": 200,
+			"pa": 5,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 1,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"mot_soignant": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [1, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"mot_stimulant": {
+			"kamas": 150,
+			"pa": 3,
+			"po": [0, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 3,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": -1,
+			"cooldown_global": -1,
+			"effects": {
+				
+			}
+		},
+	},
+	"Enu": {
+		"acceleration": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 3,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 2,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"corruption": {
+			"kamas": 150,
+			"pa": 5,
+			"po": [1, 5],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 4,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 1,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"force_de_lage": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 2,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"fossilisation": {
+			"kamas": 200,
+			"pa": 5,
+			"po": [1, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 1,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"lancer_de_piece": {
+			"kamas": 250,
+			"pa": 2,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"maladresse": {
+			"kamas": 150,
+			"pa": 1,
+			"po": [1, 5],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"maladresse_de_masse": {
+			"kamas": 150,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 6,
+			"cooldown_global": 6,
+			"effects": {
+				
+			}
+		},
+		"pelle_fantomatique": {
+			"kamas": 250,
+			"pa": 5,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"pelle_massacrante": {
+			"kamas": 300,
+			"pa": 6,
+			"po": [1, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"taniere_des_roches": {
+			"kamas": 200,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 7,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+	},
+	"Feca": {
+		"armure_avalanche": {
+			"kamas": 100,
+			"pa": 1,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 5,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"armure_orageuse": {
+			"kamas": 100,
+			"pa": 1,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 5,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"attaque_nuageuse": {
+			"kamas": 250,
+			"pa": 4,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 0,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"bouclier_feca": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [0, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 3,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 5,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"bulle": {
+			"kamas": 350,
+			"pa": 3,
+			"po": [5, 5],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"faiblesse": {
+			"kamas": 100,
+			"pa": 1,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"immunite": {
+			"kamas": 150,
+			"pa": 2,
+			"po": [0, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 3,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 8,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"rebond": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 4,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"teleportation": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [1, 5],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 0,
+			"ldv_type": 0,
+			"cooldown": 6,
+			"cooldown_global": 6,
+			"effects": {
+				
+			}
+		},
+		"treve": {
+			"kamas": 100,
+			"pa": 3,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 6,
+			"cooldown_global": 6,
+			"effects": {
+				
+			}
+		},
+	},
+	"Iop": {
+		"amplification": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 3,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"bond": {
+			"kamas": 150,
+			"pa": 2,
+			"po": [1, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"colere_de_iop": {
+			"kamas": 350,
+			"pa": 8,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"couper": {
+			"kamas": 150,
+			"pa": 3,
+			"po": [1, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 1,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"epee_celeste": {
+			"kamas": 200,
+			"pa": 4,
+			"po": [1, 3],
+			"zone_type": 0,
+			"zone_size": 1,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"epee_du_destin": {
+			"kamas": 250,
+			"pa": 5,
+			"po": [1, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"guide_de_bravoure": {
+			"kamas": 100,
+			"pa": 1,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"mutilation": {
+			"kamas": 150,
+			"pa": 1,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"pression": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"vitalite": {
+			"kamas": 250,
+			"pa": 1,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": -1,
+			"cooldown_global": -1,
+			"effects": {
+				
+			}
+		},
+	},
+	"Osa": {
+		"benediction_animale": {
+			"kamas": 250,
+			"pa": 3,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": -1,
+			"cooldown_global": -1,
+			"effects": {
+				
+			}
+		},
+		"bouftou": {
+			"kamas": 250,
+			"pa": 4,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 2,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"carapace": {
+			"kamas": 150,
+			"pa": 2,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 6,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 4,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"corbeau": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [1, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"craqueleur": {
+			"kamas": 300,
+			"pa": 6,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 4,
+			"cooldown_global": 4,
+			"effects": {
+				
+			}
+		},
+		"cri_de_lours": {
+			"kamas": 150,
+			"pa": 3,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 4,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 2,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"fouet": {
+			"kamas": 50,
+			"pa": 3,
+			"po": [1, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 5,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"piqure_motivante": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [1, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 6,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"prespic": {
+			"kamas": 200,
+			"pa": 5,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"tofu": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+	},
+	"Panda": {
+		"chamrak": {
+			"kamas": 200,
+			"pa": 2,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 1,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"coup_de_bambou": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [1, 6],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 1,
+			"effects": {
+				
+			}
+		},
+		"flasque_explosive": {
+			"kamas": 350,
+			"pa": 4,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"karcham": {
+			"kamas": 200,
+			"pa": 4,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"karzam": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"pandatak": {
+			"kamas": 300,
+			"pa": 5,
+			"po": [2, 5],
+			"zone_type": 0,
+			"zone_size": 1,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"picole": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": -1,
+			"cooldown_global": -1,
+			"effects": {
+				
+			}
+		},
+		"souffle_alcoolise": {
+			"kamas": 150,
+			"pa": 3,
+			"po": [1, 1],
+			"zone_type": 1,
+			"zone_size": 2,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 1,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"stabilisation": {
+			"kamas": 100,
+			"pa": 1,
+			"po": [0, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 5,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"stabilisation_de_groupe": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 6,
+			"cooldown_global": 4,
+			"effects": {
+				
+			}
+		},
+	},
+	"Sacrieur": {
+		"Assaut": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [1, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"attirance": {
+			"kamas": 100,
+			"pa": 7,
+			"po": [1, 7],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"demence": {
+			"kamas": 200,
+			"pa": 4,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"folie_sanguinaire": {
+			"kamas": 200,
+			"pa": 2,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"furie": {
+			"kamas": 150,
+			"pa": 2,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"pied_du_sacrieur": {
+			"kamas": 100,
+			"pa": 3,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"punition": {
+			"kamas": 300,
+			"pa": 6,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"sacrifice": {
+			"kamas": 150,
+			"pa": 3,
+			"po": [1, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 4,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"transfert_de_vie": {
+			"kamas": 150,
+			"pa": 6,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 2,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"transposition": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+	},
+	"Sadida": {
+		"arbre": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [1, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 2,
+			"cooldown_global": 2,
+			"effects": {
+				
+			}
+		},
+		"la_bloqueuse": {
+			"kamas": 250,
+			"pa": 4,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 2,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"la_folle": {
+			"kamas": 200,
+			"pa": 4,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"la_sacrifiee": {
+			"kamas": 300,
+			"pa": 4,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 3,
+			"cooldown_global": 1,
+			"effects": {
+				
+			}
+		},
+		"poison": {
+			"kamas": 150,
+			"pa": 2,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"puissance_sylvestre": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 6,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"ronce": {
+			"kamas": 200,
+			"pa": 4,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"sacrifice_poupesque": {
+			"kamas": 150,
+			"pa": 3,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 7,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"savoir_poupesque": {
+			"kamas": 200,
+			"pa": 4,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": -1,
+			"cooldown_global": -1,
+			"effects": {
+				
+			}
+		},
+		"tremblement": {
+			"kamas": 150,
+			"pa": 2,
+			"po": [1, 36],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 6,
+			"ldv": 0,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+	},
+	"Sram": {
+		"attaque_mortelle": {
+			"kamas": 350,
+			"pa": 6,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"brume": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 2],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 8,
+			"cooldown_global": 8,
+			"effects": {
+				
+			}
+		},
+		"coup_sournois": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"diversion": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 7],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"double": {
+			"kamas": 200,
+			"pa": 6,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 5,
+			"cooldown_global": 5,
+			"effects": {
+				
+			}
+		},
+		"invisibilite": {
+			"kamas": 250,
+			"pa": 2,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 7,
+			"cooldown_global": 4,
+			"effects": {
+				
+			}
+		},
+		"invisibilite_dautrui": {
+			"kamas": 150,
+			"pa": 2,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 3,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 7,
+			"cooldown_global": 7,
+			"effects": {
+				
+			}
+		},
+		"peur": {
+			"kamas": 150,
+			"pa": 1,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"piege_mortel": {
+			"kamas": 400,
+			"pa": 7,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 6,
+			"cooldown_global": 3,
+			"effects": {
+				
+			}
+		},
+		"vol_de_vie": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+	},
+	"Xelor": {
+		"aiguille": {
+			"kamas": 200,
+			"pa": 3,
+			"po": [2, 6],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"cadran_de_xelor": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [1, 1],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 5,
+			"cooldown_global": 5,
+			"effects": {
+				
+			}
+		},
+		"contre": {
+			"kamas": 100,
+			"pa": 2,
+			"po": [0, 2],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 4,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"devouement": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [1, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 3,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"fuite_du_temps": {
+			"kamas": 100,
+			"pa": 4,
+			"po": [1, 5],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 2,
+			"ldv": 0,
+			"ldv_type": 0,
+			"cooldown": 6,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"horloge": {
+			"kamas": 300,
+			"pa": 6,
+			"po": [2, 7],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"momification": {
+			"kamas": 150,
+			"pa": 4,
+			"po": [0, 0],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 1,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": -1,
+			"cooldown_global": -1,
+			"effects": {
+				
+			}
+		},
+		"poussiere_temporelle": {
+			"kamas": 300,
+			"pa": 6,
+			"po": [1, 4],
+			"zone_type": 0,
+			"zone_size": 2,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"ralentissement": {
+			"kamas": 200,
+			"pa": 1,
+			"po": [1, 6],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+		"vol_du_temps": {
+			"kamas": 200,
+			"pa": 4,
+			"po": [1, 3],
+			"zone_type": 0,
+			"zone_size": 0,
+			"cible": 0,
+			"ldv": 1,
+			"ldv_type": 0,
+			"cooldown": 0,
+			"cooldown_global": 0,
+			"effects": {
+				
+			}
+		},
+	},
+}

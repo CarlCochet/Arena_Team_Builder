@@ -1,16 +1,16 @@
 extends Node
 class_name Equipement
 
+enum Categories {VIDE, ARME, FAMILIER, COIFFE, CAPE, DOFUS}
 
-var cout: int = 0
-var categorie: int = 0
+var kamas: int = 0
+var categorie: Categories = Categories.VIDE
+var stats: Stats
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	stats = Stats.new()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
