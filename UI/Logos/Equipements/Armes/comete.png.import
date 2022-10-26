@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l45dn0lhfcyp"
-path="res://.godot/imported/attaque_mortel.png-e171acbc9b2e7d672b1533c84f535109.ctex"
+uid="uid://da1mxglkur428"
+path="res://.godot/imported/comete.png-e7c448aebdb79c73e1e426bfe79bc2a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Logos/Spells/Sram/attaque_mortel.png"
-dest_files=["res://.godot/imported/attaque_mortel.png-e171acbc9b2e7d672b1533c84f535109.ctex"]
+source_file="res://UI/Logos/Equipements/Armes/comete.png"
+dest_files=["res://.godot/imported/comete.png-e7c448aebdb79c73e1e426bfe79bc2a4.ctex"]
 
 [params]
 

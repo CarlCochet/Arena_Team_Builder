@@ -1216,7 +1216,7 @@
 		}
 	},
 	"Sacrieur": {
-		"Assaut": {
+		"assaut": {
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 2],

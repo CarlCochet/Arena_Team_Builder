@@ -4,14 +4,20 @@ class_name Personnage
 
 var classe: String
 var stats: Stats
-var equipements: Array
+var equipements: Dictionary
 var sorts: Array
 
 
 func _init():
 	classe = GlobalData.classes[randi() % GlobalData.classes.size()]
 	stats = Stats.new()
-	equipements = []
+	equipements = {
+		"Armes": "",
+		"Familiers": "",
+		"Coiffes": "",
+		"Capes": "",
+		"Dofus": ""
+	}
 	sorts = []
 	calcul_stats()
 
@@ -19,8 +25,9 @@ func _init():
 func calcul_stats():
 	if classe:
 		stats = Stats.new().add(GlobalData.stats_classes[classe])
-		for equipement in equipements:
-			stats.add(GlobalData.equipements[equipement])
+		for equipement in equipements.values():
+			if equipement:
+				stats.add(GlobalData.equipements[equipement].stats)
 		for sort in sorts:
 			stats.kamas += GlobalData.sorts[sort].kamas
 	else:
@@ -33,7 +40,13 @@ func ajoute_sort(nom_sort):
 
 
 func from_json(personnage_json):
-	equipements = []
+	equipements = {
+		"Armes": "",
+		"Familiers": "",
+		"Coiffes": "",
+		"Capes": "",
+		"Dofus": ""
+	}
 	sorts = []
 	classe = personnage_json["classe"]
 	stats = Stats.new().from_json(personnage_json["stats"])

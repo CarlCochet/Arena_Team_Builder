@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfq45y8ne7205"
-path="res://.godot/imported/tourmente_visuel.png-e1c5bfce768ea0d90c10e0bebe65309c.ctex"
+uid="uid://0j7l412npafw"
+path="res://.godot/imported/coiffe_du_prespic.png-e70e9422cc0b9a0d8627a592e86bcf55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Classes/Cra/Sorts/tourmente_visuel.png"
-dest_files=["res://.godot/imported/tourmente_visuel.png-e1c5bfce768ea0d90c10e0bebe65309c.ctex"]
+source_file="res://UI/Logos/Equipements/Coiffes/coiffe_du_prespic.png"
+dest_files=["res://.godot/imported/coiffe_du_prespic.png-e70e9422cc0b9a0d8627a592e86bcf55.ctex"]
 
 [params]
 

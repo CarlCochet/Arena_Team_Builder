@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://emfh1lmokemh"
-path="res://.godot/imported/tourmente_visuel.png-b3da7ad83c60720dc34af786d986b86c.ctex"
+uid="uid://bydo841l2ihjd"
+path="res://.godot/imported/cawotte.png-c980cc79ce262dafeca965ddb19ce79e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Logos/Spells/Cra/tourmente_visuel.png"
-dest_files=["res://.godot/imported/tourmente_visuel.png-b3da7ad83c60720dc34af786d986b86c.ctex"]
+source_file="res://UI/Logos/Equipements/Dofus/cawotte.png"
+dest_files=["res://.godot/imported/cawotte.png-c980cc79ce262dafeca965ddb19ce79e.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blf2cpdixxp0i"
-path="res://.godot/imported/attaque_mortel.png-92ab7a4f930c4855f8ece4fe01db8eb1.ctex"
+uid="uid://bx8aw6iiykxv3"
+path="res://.godot/imported/treve.png-0f82d50338d23c1deccced9ae62e3f05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Classes/Sram/Sorts/attaque_mortel.png"
-dest_files=["res://.godot/imported/attaque_mortel.png-92ab7a4f930c4855f8ece4fe01db8eb1.ctex"]
+source_file="res://UI/Logos/Spells/Feca/treve.png"
+dest_files=["res://.godot/imported/treve.png-0f82d50338d23c1deccced9ae62e3f05.ctex"]
 
 [params]
 

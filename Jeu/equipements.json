@@ -1848,11 +1848,11 @@
 				"renvoi_dommage": 0
 			}
 		},
-		"abra": {
+		"vulbis": {
 			"stats": {
-				"kamas": 50,
+				"kamas": 500,
 				"pa": 0,
-				"pm": 0,
+				"pm": 2,
 				"hp": 0,
 				"initiative": 0,
 				"dommages_air": 0,

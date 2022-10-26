@@ -57,7 +57,7 @@ func charger_stats_classes():
 
 
 func charger_equipes():
-	var file_access = FileAccess.open("user://equipes.json", FileAccess.READ)
+	var file_access = FileAccess.open("user://save.json", FileAccess.READ)
 	if not file_access:
 		equipes = []
 		for i in range(10):
@@ -76,7 +76,7 @@ func sauver_equipes():
 	for equipe in GlobalData.equipes:
 		equipes_json.append(equipe.to_json())
 	var json_string = JSON.stringify(equipes_json)
-	var file_access = FileAccess.open("user://equipes.json", FileAccess.WRITE)
+	var file_access = FileAccess.open("user://save.json", FileAccess.WRITE)
 	file_access.store_string(json_string)
 
 
