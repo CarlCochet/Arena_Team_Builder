@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://vxplbalqtqdq"]
+[gd_scene load_steps=18 format=3 uid="uid://vxplbalqtqdq"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_equipements.gd" id="1_541q8"]
 [ext_resource type="Texture2D" uid="uid://b02mrbqksygw4" path="res://Classes/Cra/cra.png" id="1_rmd4o"]
+[ext_resource type="PackedScene" uid="uid://bw1qw1u2hkek8" path="res://UI/Displays/Scenes/affichage_budget.tscn" id="2_0eq0q"]
 [ext_resource type="PackedScene" uid="uid://drtgbjheuymi7" path="res://UI/Displays/Scenes/affichage_stats_primaires.tscn" id="2_ntw62"]
 [ext_resource type="PackedScene" uid="uid://5i2iaiitef1b" path="res://UI/Displays/Scenes/affichage_stats_secondaires.tscn" id="3_b8gg0"]
 [ext_resource type="Texture2D" uid="uid://dyyyq4lee4opy" path="res://UI/Buttons/sort_base.png" id="5_yxd6q"]
@@ -51,10 +52,11 @@ offset_right = 248.0
 offset_bottom = 630.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 61.0
+offset_left = 30.0
 offset_top = 693.0
-offset_right = 191.0
+offset_right = 160.0
 offset_bottom = 797.0
+scale = Vector2(1.5, 1.5)
 
 [node name="Sorts" type="TextureButton" parent="GridContainer"]
 offset_right = 130.0
@@ -73,9 +75,9 @@ texture_hover = ExtResource("9_7hgve")
 
 [node name="Slots" type="GridContainer" parent="."]
 offset_left = 750.0
-offset_top = 30.0
+offset_top = 50.0
 offset_right = 1100.0
-offset_bottom = 85.0
+offset_bottom = 105.0
 theme_override_constants/h_separation = 20
 columns = 5
 
@@ -111,7 +113,7 @@ texture_normal = ExtResource("14_raq4t")
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_left = 380.0
 offset_top = 150.0
-offset_right = 1741.0
+offset_right = 1749.0
 offset_bottom = 898.0
 scale = Vector2(0.8, 0.8)
 
@@ -270,6 +272,10 @@ offset_top = 1504.0
 offset_right = 815.0
 offset_bottom = 1876.0
 texture_normal = ExtResource("15_7m0r2")
+
+[node name="AffichageBudget" parent="." instance=ExtResource("2_0eq0q")]
+offset_left = 826.0
+offset_right = 1023.0
 
 [connection signal="pressed" from="GridContainer/Sorts" to="." method="_on_sorts_pressed"]
 [connection signal="pressed" from="GridContainer/Retour" to="." method="_on_retour_pressed"]

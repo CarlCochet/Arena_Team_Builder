@@ -22,7 +22,6 @@ grow_vertical = 2
 script = ExtResource("1_4qtop")
 
 [node name="Background" type="ColorRect" parent="."]
-layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
@@ -30,12 +29,10 @@ offset_bottom = 965.0
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="AffichageEquipe" parent="." instance=ExtResource("1_pq5c6")]
-layout_mode = 1
 offset_top = 24.0
 offset_bottom = 24.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-layout_mode = 0
 offset_left = 30.0
 offset_top = 370.0
 offset_right = 1216.0
@@ -43,11 +40,9 @@ offset_bottom = 720.0
 scale = Vector2(1.3, 1.3)
 
 [node name="Equipes" type="GridContainer" parent="ScrollContainer"]
-layout_mode = 2
 columns = 99
 
 [node name="Boutons" type="GridContainer" parent="."]
-layout_mode = 0
 offset_left = 503.0
 offset_top = 845.0
 offset_right = 901.0
@@ -56,16 +51,13 @@ scale = Vector2(1.5, 1.5)
 columns = 3
 
 [node name="Supprimer" type="TextureButton" parent="Boutons"]
-layout_mode = 2
 offset_right = 130.0
 offset_bottom = 32.0
-toggle_mode = true
 texture_normal = ExtResource("3_b6ngn")
 texture_pressed = ExtResource("4_44dll")
 texture_hover = ExtResource("5_u65qg")
 
 [node name="Editer" type="TextureButton" parent="Boutons"]
-layout_mode = 2
 offset_left = 134.0
 offset_right = 264.0
 offset_bottom = 32.0
@@ -74,7 +66,6 @@ texture_pressed = ExtResource("7_xv1xv")
 texture_hover = ExtResource("8_6clad")
 
 [node name="Creer" type="TextureButton" parent="Boutons"]
-layout_mode = 2
 offset_left = 268.0
 offset_right = 398.0
 offset_bottom = 32.0

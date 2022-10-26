@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://5i2iaiitef1b"]
+[gd_scene load_steps=4 format=3 uid="uid://5i2iaiitef1b"]
 
 [ext_resource type="Texture2D" uid="uid://bkjgp2jeowdv7" path="res://UI/Displays/secondary_stats_display.png" id="1_31cb2"]
+[ext_resource type="Script" path="res://UI/Scripts/affichage_stats_secondaires.gd" id="2_83sr6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7lm2r"]
 font_size = 11
@@ -10,6 +11,7 @@ font_color = Color(0, 0, 0, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_31cb2")
+script = ExtResource("2_83sr6")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 215.0
@@ -165,7 +167,7 @@ label_settings = SubResource("LabelSettings_7lm2r")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RenvoieDmg" type="Label" parent="GridContainer/Capacites"]
+[node name="RenvoiDmg" type="Label" parent="GridContainer/Capacites"]
 offset_top = 125.0
 offset_right = 29.0
 offset_bottom = 144.0

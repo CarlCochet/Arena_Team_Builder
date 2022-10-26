@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://UI/Scripts/creation_equipe.gd" id="1_jyadu"]
 [ext_resource type="PackedScene" uid="uid://rcby27lpo007" path="res://UI/Displays/Scenes/affichage_equipe.tscn" id="1_krrmm"]
 [ext_resource type="PackedScene" uid="uid://drgospxokfdgn" path="res://UI/Buttons/Scenes/recruter.tscn" id="2_idwrw"]
-[ext_resource type="Texture2D" uid="uid://b4h88cs2et6xr" path="res://UI/Buttons/creer_base.png" id="4_cr2pn"]
 [ext_resource type="PackedScene" uid="uid://bwfn3lux5l4lx" path="res://UI/Buttons/Scenes/fermer.tscn" id="4_fi4k2"]
-[ext_resource type="Texture2D" uid="uid://dxkee3lfb7ta6" path="res://UI/Buttons/creer_clicked.png" id="5_bklkr"]
+[ext_resource type="Texture2D" uid="uid://ynsewpoi05mt" path="res://UI/Buttons/editer_base.png" id="4_mml03"]
+[ext_resource type="Texture2D" uid="uid://dsyqby7qkyxpw" path="res://UI/Buttons/editer_clicked.png" id="5_mb6j0"]
 [ext_resource type="PackedScene" uid="uid://dlo7istbb8o4m" path="res://UI/Buttons/Scenes/tester.tscn" id="5_v146c"]
 [ext_resource type="PackedScene" uid="uid://drtgbjheuymi7" path="res://UI/Displays/Scenes/affichage_stats_primaires.tscn" id="6_3nuld"]
-[ext_resource type="Texture2D" uid="uid://cqi7smwgtmaar" path="res://UI/Buttons/creer_hovered.png" id="6_8gsfa"]
+[ext_resource type="Texture2D" uid="uid://chv4saw0kppm8" path="res://UI/Buttons/editer_hovered.png" id="6_4ccos"]
 [ext_resource type="PackedScene" uid="uid://5i2iaiitef1b" path="res://UI/Displays/Scenes/affichage_stats_secondaires.tscn" id="7_eyprt"]
 [ext_resource type="Texture2D" uid="uid://cj00tojaj188p" path="res://UI/Buttons/supprimer_base.png" id="7_o8iov"]
 [ext_resource type="PackedScene" uid="uid://bw1qw1u2hkek8" path="res://UI/Displays/Scenes/affichage_budget.tscn" id="8_5fbff"]
@@ -44,52 +44,52 @@ scale = Vector2(1.5, 1.5)
 theme_override_constants/h_separation = 48
 columns = 6
 
-[node name="Creer" parent="GridRecruter" instance=ExtResource("2_idwrw")]
+[node name="Editer" parent="GridRecruter" instance=ExtResource("2_idwrw")]
 offset_right = 130.0
 offset_bottom = 32.0
-texture_normal = ExtResource("4_cr2pn")
-texture_pressed = ExtResource("5_bklkr")
-texture_hover = ExtResource("6_8gsfa")
+texture_normal = ExtResource("4_mml03")
+texture_pressed = ExtResource("5_mb6j0")
+texture_hover = ExtResource("6_4ccos")
 
-[node name="Creer2" parent="GridRecruter" instance=ExtResource("2_idwrw")]
+[node name="Editer2" parent="GridRecruter" instance=ExtResource("2_idwrw")]
 offset_left = 178.0
 offset_right = 308.0
 offset_bottom = 32.0
-texture_normal = ExtResource("4_cr2pn")
-texture_pressed = ExtResource("5_bklkr")
-texture_hover = ExtResource("6_8gsfa")
+texture_normal = ExtResource("4_mml03")
+texture_pressed = ExtResource("5_mb6j0")
+texture_hover = ExtResource("6_4ccos")
 
-[node name="Creer3" parent="GridRecruter" instance=ExtResource("2_idwrw")]
+[node name="Editer3" parent="GridRecruter" instance=ExtResource("2_idwrw")]
 offset_left = 356.0
 offset_right = 486.0
 offset_bottom = 32.0
-texture_normal = ExtResource("4_cr2pn")
-texture_pressed = ExtResource("5_bklkr")
-texture_hover = ExtResource("6_8gsfa")
+texture_normal = ExtResource("4_mml03")
+texture_pressed = ExtResource("5_mb6j0")
+texture_hover = ExtResource("6_4ccos")
 
-[node name="Creer4" parent="GridRecruter" instance=ExtResource("2_idwrw")]
+[node name="Editer4" parent="GridRecruter" instance=ExtResource("2_idwrw")]
 offset_left = 534.0
 offset_right = 664.0
 offset_bottom = 32.0
-texture_normal = ExtResource("4_cr2pn")
-texture_pressed = ExtResource("5_bklkr")
-texture_hover = ExtResource("6_8gsfa")
+texture_normal = ExtResource("4_mml03")
+texture_pressed = ExtResource("5_mb6j0")
+texture_hover = ExtResource("6_4ccos")
 
-[node name="Creer5" parent="GridRecruter" instance=ExtResource("2_idwrw")]
+[node name="Editer5" parent="GridRecruter" instance=ExtResource("2_idwrw")]
 offset_left = 712.0
 offset_right = 842.0
 offset_bottom = 32.0
-texture_normal = ExtResource("4_cr2pn")
-texture_pressed = ExtResource("5_bklkr")
-texture_hover = ExtResource("6_8gsfa")
+texture_normal = ExtResource("4_mml03")
+texture_pressed = ExtResource("5_mb6j0")
+texture_hover = ExtResource("6_4ccos")
 
-[node name="Creer6" parent="GridRecruter" instance=ExtResource("2_idwrw")]
+[node name="Editer6" parent="GridRecruter" instance=ExtResource("2_idwrw")]
 offset_left = 890.0
 offset_right = 1020.0
 offset_bottom = 32.0
-texture_normal = ExtResource("4_cr2pn")
-texture_pressed = ExtResource("5_bklkr")
-texture_hover = ExtResource("6_8gsfa")
+texture_normal = ExtResource("4_mml03")
+texture_pressed = ExtResource("5_mb6j0")
+texture_hover = ExtResource("6_4ccos")
 
 [node name="Supprimer" type="TextureButton" parent="GridRecruter"]
 offset_top = 36.0
@@ -144,7 +144,7 @@ texture_normal = ExtResource("7_o8iov")
 texture_pressed = ExtResource("8_lhwf5")
 texture_hover = ExtResource("9_q44j5")
 
-[node name="GridContainer2" type="GridContainer" parent="."]
+[node name="BoutonsPrincipaux" type="GridContainer" parent="."]
 offset_left = 597.0
 offset_top = 845.0
 offset_right = 896.0
@@ -152,9 +152,9 @@ offset_bottom = 885.0
 scale = Vector2(1.5, 1.5)
 columns = 2
 
-[node name="Fermer" parent="GridContainer2" instance=ExtResource("4_fi4k2")]
+[node name="Fermer" parent="BoutonsPrincipaux" instance=ExtResource("4_fi4k2")]
 
-[node name="Tester" parent="GridContainer2" instance=ExtResource("5_v146c")]
+[node name="Tester" parent="BoutonsPrincipaux" instance=ExtResource("5_v146c")]
 offset_left = 134.0
 offset_right = 299.0
 offset_bottom = 32.0
@@ -167,36 +167,36 @@ offset_bottom = 369.008
 theme_override_constants/h_separation = 17
 columns = 6
 
-[node name="AffichageStatsPrimaires" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
+[node name="StatsPrimaires" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
 offset_right = 250.0
 offset_bottom = 111.0
 
-[node name="AffichageStatsPrimaires2" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
+[node name="StatsPrimaires2" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
 offset_left = 267.0
 offset_right = 517.0
 offset_bottom = 111.0
 
-[node name="AffichageStatsPrimaires3" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
+[node name="StatsPrimaires3" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
 offset_left = 534.0
 offset_right = 784.0
 offset_bottom = 111.0
 
-[node name="AffichageStatsPrimaires4" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
+[node name="StatsPrimaires4" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
 offset_left = 801.0
 offset_right = 1051.0
 offset_bottom = 111.0
 
-[node name="AffichageStatsPrimaires5" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
+[node name="StatsPrimaires5" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
 offset_left = 1068.0
 offset_right = 1318.0
 offset_bottom = 111.0
 
-[node name="AffichageStatsPrimaires6" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
+[node name="StatsPrimaires6" parent="GridStatsPrimaires" instance=ExtResource("6_3nuld")]
 offset_left = 1335.0
 offset_right = 1585.0
 offset_bottom = 111.0
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridStatsSecondaires" type="GridContainer" parent="."]
 offset_left = 40.0
 offset_top = 500.0
 offset_right = 2063.0
@@ -205,31 +205,31 @@ scale = Vector2(0.75, 0.75)
 theme_override_constants/h_separation = 107
 columns = 6
 
-[node name="AffichageStatsPrimaires" parent="GridContainer" instance=ExtResource("7_eyprt")]
+[node name="StatsSecondaires" parent="GridStatsSecondaires" instance=ExtResource("7_eyprt")]
 offset_right = 248.0
 offset_bottom = 453.0
 
-[node name="AffichageStatsPrimaires2" parent="GridContainer" instance=ExtResource("7_eyprt")]
+[node name="StatsSecondaires2" parent="GridStatsSecondaires" instance=ExtResource("7_eyprt")]
 offset_left = 355.0
 offset_right = 603.0
 offset_bottom = 453.0
 
-[node name="AffichageStatsPrimaires3" parent="GridContainer" instance=ExtResource("7_eyprt")]
+[node name="StatsSecondaires3" parent="GridStatsSecondaires" instance=ExtResource("7_eyprt")]
 offset_left = 710.0
 offset_right = 958.0
 offset_bottom = 453.0
 
-[node name="AffichageStatsPrimaires4" parent="GridContainer" instance=ExtResource("7_eyprt")]
+[node name="StatsSecondaires4" parent="GridStatsSecondaires" instance=ExtResource("7_eyprt")]
 offset_left = 1065.0
 offset_right = 1313.0
 offset_bottom = 453.0
 
-[node name="AffichageStatsPrimaires5" parent="GridContainer" instance=ExtResource("7_eyprt")]
+[node name="StatsSecondaires5" parent="GridStatsSecondaires" instance=ExtResource("7_eyprt")]
 offset_left = 1420.0
 offset_right = 1668.0
 offset_bottom = 453.0
 
-[node name="AffichageStatsPrimaires6" parent="GridContainer" instance=ExtResource("7_eyprt")]
+[node name="StatsSecondaires6" parent="GridStatsSecondaires" instance=ExtResource("7_eyprt")]
 offset_left = 1775.0
 offset_right = 2023.0
 offset_bottom = 453.0
@@ -238,10 +238,4 @@ offset_bottom = 453.0
 offset_left = 702.0
 offset_right = 899.0
 
-[connection signal="pressed" from="GridRecruter/Creer" to="." method="_on_recruter_pressed"]
-[connection signal="pressed" from="GridRecruter/Creer2" to="." method="_on_recruter_2_pressed"]
-[connection signal="pressed" from="GridRecruter/Creer3" to="." method="_on_recruter_3_pressed"]
-[connection signal="pressed" from="GridRecruter/Creer4" to="." method="_on_recruter_4_pressed"]
-[connection signal="pressed" from="GridRecruter/Creer5" to="." method="_on_recruter_5_pressed"]
-[connection signal="pressed" from="GridRecruter/Creer6" to="." method="_on_recruter_6_pressed"]
-[connection signal="pressed" from="GridContainer2/Fermer" to="." method="_on_fermer_pressed"]
+[connection signal="pressed" from="BoutonsPrincipaux/Fermer" to="." method="_on_fermer_pressed"]

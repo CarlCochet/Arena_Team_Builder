@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw1qw1u2hkek8"]
+[gd_scene load_steps=4 format=3 uid="uid://bw1qw1u2hkek8"]
 
 [ext_resource type="Texture2D" uid="uid://udvgjoussb5u" path="res://UI/Displays/budget_display.png" id="1_iaggs"]
+[ext_resource type="Script" path="res://UI/Scripts/affichage_budget.gd" id="2_xv421"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s7tb7"]
 font_size = 23
@@ -12,6 +13,7 @@ outline_color = Color(0, 0, 0, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_iaggs")
+script = ExtResource("2_xv421")
 
 [node name="CoutTotal" type="Label" parent="."]
 offset_left = 24.0

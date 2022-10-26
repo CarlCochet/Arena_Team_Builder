@@ -1,6 +1,38 @@
 extends Control
 
 
+var classes: Array
+
+
+func _ready():
+	classes = get_node("Classes").get_children()
+	for i in range(len(classes)):
+		classes[i].connect("pressed", _on_class_pressed.bind(i))
+	get_node("Personnage").texture = load(
+		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
+		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
+	)
+	var index_classe = GlobalData.classes.find(GlobalData.get_perso_actuel().classe)
+	classes[index_classe].button_pressed = true
+
+
+func _on_class_pressed(id):
+	for i in range(len(classes)):
+		if i != id:
+			classes[i].button_pressed = false
+		else:
+			classes[i].button_pressed = true
+			if GlobalData.get_perso_actuel().classe != GlobalData.classes[i]:
+				var nouveau_personnage = Personnage.new()
+				nouveau_personnage.classe = GlobalData.classes[i]
+				nouveau_personnage.calcul_stats()
+				GlobalData.set_perso_actuel(nouveau_personnage)
+				get_node("Personnage").texture = load(
+					"res://Classes/" + GlobalData.get_perso_actuel().classe + 
+					"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
+				)
+
+
 func _on_fermer_pressed():
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
 

@@ -61,7 +61,6 @@ columns = 6
 offset_right = 106.0
 offset_bottom = 106.0
 toggle_mode = true
-button_pressed = true
 texture_normal = ExtResource("1_v4byf")
 texture_pressed = ExtResource("2_fkwka")
 

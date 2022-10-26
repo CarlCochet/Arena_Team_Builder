@@ -2,23 +2,51 @@ extends Node
 class_name Personnage
 
 
-var classe: String = ""
+var classe: String
 var stats: Stats
-var equipements: Array = []
-var sorts: Array = []
+var equipements: Array
+var sorts: Array
 
 
-func _init(p_classe, p_stats, p_equipements, p_sorts):
-	classe = p_classe
-	stats = p_stats
-	equipements = p_equipements
-	sorts = p_sorts
+func _init():
+	classe = GlobalData.classes[randi() % GlobalData.classes.size()]
+	stats = Stats.new()
+	equipements = []
+	sorts = []
+	calcul_stats()
 
 
 func calcul_stats():
-	stats.kamas = 600
-	stats.esquive = 100
-	for equipement in equipements:
-		stats.kamas += equipement.kamas
-	for sort in sorts:
-		stats.kamas += sort.kamas
+	if classe:
+		stats = GlobalData.stats_classes[classe]
+		for equipement in equipements:
+			stats.kamas += GlobalData.equipements[equipement].kamas
+		for sort in sorts:
+			stats.kamas += GlobalData.sorts[sort].kamas
+	else:
+		stats.kamas = 0
+	return stats.kamas
+
+
+func ajoute_sort(nom_sort):
+	sorts.append(nom_sort)
+
+
+func from_json(personnage_json):
+	equipements = []
+	sorts = []
+	classe = personnage_json["classe"]
+	stats = Stats.new().from_json(personnage_json["stats"])
+	equipements = personnage_json["equipements"]
+	sorts = personnage_json["sorts"]
+	calcul_stats()
+	return self
+
+
+func to_json():	
+	return {
+		"classe": classe,
+		"stats": stats.to_json(),
+		"equipements": equipements,
+		"sorts": sorts
+	}
