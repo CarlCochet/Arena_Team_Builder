@@ -27,56 +27,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_541q8")
 
-[node name="GridLogos" type="GridContainer" parent="."]
-layout_mode = 0
-offset_left = 757.0
-offset_top = 57.0
-offset_right = 1952.0
-offset_bottom = 200.0
-scale = Vector2(0.281, 0.281)
-mouse_filter = 2
-theme_override_constants/h_separation = 120
-columns = 5
-
-[node name="Armes" type="TextureRect" parent="GridLogos"]
-layout_mode = 2
-offset_right = 143.0
-offset_bottom = 143.0
-mouse_filter = 2
-texture = ExtResource("17_e2hod")
-
-[node name="Familiers" type="TextureRect" parent="GridLogos"]
-layout_mode = 2
-offset_left = 263.0
-offset_right = 406.0
-offset_bottom = 143.0
-mouse_filter = 2
-texture = ExtResource("17_e2hod")
-
-[node name="Coiffes" type="TextureRect" parent="GridLogos"]
-layout_mode = 2
-offset_left = 526.0
-offset_right = 669.0
-offset_bottom = 143.0
-mouse_filter = 2
-texture = ExtResource("17_e2hod")
-
-[node name="Capes" type="TextureRect" parent="GridLogos"]
-layout_mode = 2
-offset_left = 789.0
-offset_right = 932.0
-offset_bottom = 143.0
-mouse_filter = 2
-texture = ExtResource("17_e2hod")
-
-[node name="Dofus" type="TextureRect" parent="GridLogos"]
-layout_mode = 2
-offset_left = 1052.0
-offset_right = 1195.0
-offset_bottom = 143.0
-mouse_filter = 2
-texture = ExtResource("17_e2hod")
-
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = -80.0
@@ -189,6 +139,56 @@ columns = 5
 layout_mode = 0
 offset_left = 826.0
 offset_right = 1023.0
+
+[node name="GridLogos" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 757.0
+offset_top = 57.0
+offset_right = 1952.0
+offset_bottom = 200.0
+scale = Vector2(0.281, 0.281)
+mouse_filter = 2
+theme_override_constants/h_separation = 120
+columns = 5
+
+[node name="Armes" type="TextureRect" parent="GridLogos"]
+layout_mode = 2
+offset_right = 143.0
+offset_bottom = 143.0
+mouse_filter = 2
+texture = ExtResource("17_e2hod")
+
+[node name="Familiers" type="TextureRect" parent="GridLogos"]
+layout_mode = 2
+offset_left = 263.0
+offset_right = 406.0
+offset_bottom = 143.0
+mouse_filter = 2
+texture = ExtResource("17_e2hod")
+
+[node name="Coiffes" type="TextureRect" parent="GridLogos"]
+layout_mode = 2
+offset_left = 526.0
+offset_right = 669.0
+offset_bottom = 143.0
+mouse_filter = 2
+texture = ExtResource("17_e2hod")
+
+[node name="Capes" type="TextureRect" parent="GridLogos"]
+layout_mode = 2
+offset_left = 789.0
+offset_right = 932.0
+offset_bottom = 143.0
+mouse_filter = 2
+texture = ExtResource("17_e2hod")
+
+[node name="Dofus" type="TextureRect" parent="GridLogos"]
+layout_mode = 2
+offset_left = 1052.0
+offset_right = 1195.0
+offset_bottom = 143.0
+mouse_filter = 2
+texture = ExtResource("17_e2hod")
 
 [connection signal="pressed" from="GridContainer/Sorts" to="." method="_on_sorts_pressed"]
 [connection signal="pressed" from="GridContainer/Retour" to="." method="_on_retour_pressed"]

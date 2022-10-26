@@ -48,14 +48,16 @@ func update_logos():
 		logo.texture = load("res://UI/Logos/Equipements/empty.png")
 	for equipement in GlobalData.get_perso_actuel().equipements:
 		if GlobalData.get_perso_actuel().equipements[equipement]:
-			grid_logos.get_node(equipement).texture = load(
-				"res://UI/Logos/Equipements/" + equipement + "/" + 
-				GlobalData.get_perso_actuel().equipements[equipement] + ".png"
-			)
+			var path = "res://UI/Logos/Equipements/" + equipement + "/" + GlobalData.get_perso_actuel().equipements[equipement] + ".png"
+			grid_logos.get_node(equipement).texture = load(path)
+			print(equipement + " --- " + path)
 
 
 func _on_card_clicked(nom_equipement, categorie):
-	GlobalData.get_perso_actuel().equipements[categorie] = nom_equipement
+	if GlobalData.get_perso_actuel().equipements[categorie] == nom_equipement:
+		GlobalData.get_perso_actuel().equipements[categorie] = ""
+	else:
+		GlobalData.get_perso_actuel().equipements[categorie] = nom_equipement
 	GlobalData.get_perso_actuel().calcul_stats()
 	update_affichage()
 	update_logos()
@@ -70,30 +72,25 @@ func _on_sorts_pressed():
 
 
 func _on_arme_pressed():
-	GlobalData.get_perso_actuel().equipements["Armes"] = ""
 	update_cartes("Armes")
 	update_logos()
 
 
 func _on_familier_pressed():
-	GlobalData.get_perso_actuel().equipements["Familiers"] = ""
 	update_cartes("Familiers")
 	update_logos()
 
 
 func _on_coiffe_pressed():
-	GlobalData.get_perso_actuel().equipements["Coiffes"] = ""
 	update_cartes("Coiffes")
 	update_logos()
 
 
 func _on_cape_pressed():
-	GlobalData.get_perso_actuel().equipements["Capes"] = ""
 	update_cartes("Capes")
 	update_logos()
 
 
 func _on_dofus_pressed():
-	GlobalData.get_perso_actuel().equipements["Dofus"] = ""
 	update_cartes("Dofus")
 	update_logos()
