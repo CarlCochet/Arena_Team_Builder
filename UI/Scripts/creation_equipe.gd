@@ -38,4 +38,5 @@ func _on_supprimer_pressed(id):
 
 
 func _on_fermer_pressed():
+	GlobalData.sauver_equipes()
 	get_tree().change_scene_to_file("res://UI/gestion_equipes.tscn")

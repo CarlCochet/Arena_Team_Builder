@@ -50,7 +50,6 @@ func update_logos():
 		if GlobalData.get_perso_actuel().equipements[equipement]:
 			var path = "res://UI/Logos/Equipements/" + equipement + "/" + GlobalData.get_perso_actuel().equipements[equipement] + ".png"
 			grid_logos.get_node(equipement).texture = load(path)
-			print(equipement + " --- " + path)
 
 
 func _on_card_clicked(nom_equipement, categorie):

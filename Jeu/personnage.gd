@@ -9,7 +9,7 @@ var sorts: Array
 
 
 func _init():
-	classe = GlobalData.classes[randi() % GlobalData.classes.size()]
+	classe = ""
 	stats = Stats.new()
 	equipements = {
 		"Armes": "",
