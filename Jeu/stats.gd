@@ -45,6 +45,29 @@ func _init():
 	renvoi_dommage = 0
 
 
+func add(stats):
+	kamas += stats.kamas
+	pa += stats.pa
+	pm += stats.pm
+	hp += stats.hp
+	initiative += stats.initiative
+	dommages_air += stats.dommages_air
+	dommages_terre += stats.dommages_terre
+	dommages_feu += stats.dommages_feu
+	dommages_eau += stats.dommages_eau
+	resistances_air += stats.resistances_air
+	resistances_terre += stats.resistances_terre
+	resistances_feu += stats.resistances_feu
+	resistances_eau += stats.resistances_eau
+	po += stats.po
+	esquive += stats.esquive
+	blocage += stats.blocage
+	soins += stats.soins
+	cc += stats.cc
+	renvoi_dommage += stats.renvoi_dommage
+	return self
+
+
 func from_json(data):
 	kamas = data["kamas"]
 	pa = data["pa"]
@@ -90,4 +113,3 @@ func to_json():
 		"cc": cc,
 		"renvoi_dommage": renvoi_dommage
 	}
-	

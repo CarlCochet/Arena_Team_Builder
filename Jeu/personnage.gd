@@ -18,9 +18,9 @@ func _init():
 
 func calcul_stats():
 	if classe:
-		stats = GlobalData.stats_classes[classe]
+		stats = Stats.new().add(GlobalData.stats_classes[classe])
 		for equipement in equipements:
-			stats.kamas += GlobalData.equipements[equipement].kamas
+			stats.add(GlobalData.equipements[equipement])
 		for sort in sorts:
 			stats.kamas += GlobalData.sorts[sort].kamas
 	else:

@@ -55,12 +55,17 @@ func update_logos():
 
 
 func _on_card_clicked(nom_sort):
-	GlobalData.get_perso_actuel().sorts.append(nom_sort)
+	if len(GlobalData.get_perso_actuel().sorts) < 6 and nom_sort not in GlobalData.get_perso_actuel().sorts:
+		GlobalData.get_perso_actuel().sorts.append(nom_sort)
+	GlobalData.get_perso_actuel().calcul_stats()
+	update_affichage()
 	update_logos()
 
 
 func _on_logo_clicked(sort):
 	GlobalData.get_perso_actuel().sorts.erase(sort)
+	GlobalData.get_perso_actuel().calcul_stats()
+	update_affichage()
 	update_logos()
 
 
