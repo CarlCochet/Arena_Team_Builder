@@ -8,11 +8,13 @@ func _ready():
 	classes = get_node("Classes").get_children()
 	for i in range(len(classes)):
 		classes[i].connect("pressed", _on_class_pressed.bind(i))
-	if GlobalData.get_perso_actuel().classe:
-		get_node("Personnage").texture = load(
-			"res://Classes/" + GlobalData.get_perso_actuel().classe + 
-			"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
-		)
+	if GlobalData.get_perso_actuel().classe == "":
+		GlobalData.get_perso_actuel().classe = GlobalData.classes[0]
+		GlobalData.get_perso_actuel().calcul_stats()
+	get_node("Personnage").texture = load(
+		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
+		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
+	)
 	var index_classe = GlobalData.classes.find(GlobalData.get_perso_actuel().classe)
 	classes[index_classe].button_pressed = true
 
