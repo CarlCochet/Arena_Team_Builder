@@ -6,10 +6,11 @@ var grid_logos
 
 
 func _ready():
-	get_node("Personnage").texture = load(
-		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
-		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
-	)
+	if GlobalData.get_perso_actuel().classe:
+		get_node("Personnage").texture = load(
+			"res://Classes/" + GlobalData.get_perso_actuel().classe + 
+			"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
+		)
 	grid_sorts = get_node("GridSortsCartes")
 	grid_logos = get_node("GridSortsLogos")
 	update_cartes()
@@ -24,21 +25,12 @@ func update_affichage():
 
 
 func update_cartes():
-	var base_path: String = "res://Classes/" + GlobalData.get_perso_actuel().classe + "/Sorts"
-	var directory = DirAccess.open(base_path)
-	if directory:
-		directory.list_dir_begin()
-		while true:
-			var file = directory.get_next()
-			if file == "":
-				break
-			var nom_sort = file.split(".")[0]
-			if file.split(".")[-1] == "png":
-				var bouton = TextureButton.new()
-				bouton.texture_normal = load(base_path + "/" + file)
-				bouton.connect("pressed", _on_card_clicked.bind(nom_sort))
-				grid_sorts.add_child(bouton)
-		directory.list_dir_end()
+	var base_path: String = "res://Classes/" + GlobalData.get_perso_actuel().classe + "/Sorts/"
+	for nom_sort in GlobalData.sorts_lookup[GlobalData.get_perso_actuel().classe]:
+		var bouton = TextureButton.new()
+		bouton.texture_normal = load(base_path + nom_sort + ".png")
+		bouton.connect("pressed", _on_card_clicked.bind(nom_sort))
+		grid_sorts.add_child(bouton)
 
 
 func update_logos():

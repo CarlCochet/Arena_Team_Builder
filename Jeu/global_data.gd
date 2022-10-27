@@ -11,6 +11,8 @@ var sorts: Dictionary
 var equipements: Dictionary
 var stats_classes: Dictionary
 var equipes: Array
+var sorts_lookup: Dictionary
+var equipements_lookup: Dictionary
 
 var equipe_actuelle: Equipe
 var perso_actuel: int
@@ -29,10 +31,13 @@ func charger_sorts():
 	var sort: Sort
 	
 	for classe in json_data.keys():
+		if classe not in sorts_lookup.keys():
+			sorts_lookup[classe] = []
 		for nom_sort in json_data[classe].keys():
 			sort = Sort.new()
 			sort.from_json(json_data[classe][nom_sort])
 			sorts[nom_sort] = sort
+			sorts_lookup[classe].append(nom_sort)
 
 
 func charger_equipements():
@@ -41,9 +46,13 @@ func charger_equipements():
 	var equipement: Equipement
 	
 	for categorie in json_data.keys():
+		print(categorie)
+		if categorie not in equipements_lookup.keys():
+			equipements_lookup[categorie] = []
 		for nom_equipement in json_data[categorie].keys():
 			equipement = Equipement.new().from_json(json_data[categorie][nom_equipement], categorie)
 			equipements[nom_equipement] = equipement
+			equipements_lookup[categorie].append(nom_equipement)
 
 
 func charger_stats_classes():

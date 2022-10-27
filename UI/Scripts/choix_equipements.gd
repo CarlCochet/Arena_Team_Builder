@@ -3,9 +3,17 @@ extends Control
 
 var grid_equipements
 var grid_logos
-
+var categorie_lookup: Dictionary
 
 func _ready():
+	categorie_lookup = {
+		"Armes": "ARME",
+		"Coiffes": "COIFFE",
+		"Capes": "CAPE",
+		"Dofus": "DOFUS",
+		"Familiers": "FAMILIER"
+	}
+	
 	get_node("Personnage").texture = load(
 		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
 		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
@@ -27,20 +35,11 @@ func update_cartes(categorie):
 	for equipement in grid_equipements.get_children():
 		equipement.queue_free()
 	var base_path: String = "res://Equipements/" + categorie
-	var directory = DirAccess.open(base_path)
-	if directory:
-		directory.list_dir_begin()
-		while true:
-			var file = directory.get_next()
-			if file == "":
-				break
-			var nom_equipement = file.split(".")[0]
-			if file.split(".")[-1] == "png":
-				var bouton = TextureButton.new()
-				bouton.texture_normal = load(base_path + "/" + file)
-				bouton.connect("pressed", _on_card_clicked.bind(nom_equipement, categorie))
-				grid_equipements.add_child(bouton)
-		directory.list_dir_end()
+	for nom_equipement in GlobalData.equipements_lookup[categorie_lookup[categorie]]:
+		var bouton = TextureButton.new()
+		bouton.texture_normal = load(base_path + "/" + nom_equipement + ".png")
+		bouton.connect("pressed", _on_card_clicked.bind(nom_equipement, categorie))
+		grid_equipements.add_child(bouton)
 
 
 func update_logos():
