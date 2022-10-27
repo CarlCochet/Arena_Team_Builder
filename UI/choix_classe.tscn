@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://byrls820tvsdn"]
+[gd_scene load_steps=32 format=3 uid="uid://byrls820tvsdn"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_classe.gd" id="1_e1xo3"]
 [ext_resource type="Texture2D" uid="uid://cnfldddiljcbc" path="res://UI/Logos/Classes/cra_unselected.png" id="1_v4byf"]
@@ -31,7 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://b5sgblea4yfqw" path="res://UI/Buttons/valider_base.png" id="28_ep3rm"]
 [ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="29_0max7"]
 [ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="30_f8pnp"]
-[ext_resource type="Texture2D" uid="uid://b02mrbqksygw4" path="res://Classes/Cra/cra.png" id="31_wkvt3"]
 
 [node name="ChoixClasse" type="Control"]
 layout_mode = 3
@@ -43,6 +42,7 @@ grow_vertical = 2
 script = ExtResource("1_e1xo3")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
@@ -50,6 +50,7 @@ offset_bottom = 965.0
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="Classes" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 266.0
 offset_right = 806.0
@@ -58,6 +59,7 @@ scale = Vector2(2, 2)
 columns = 6
 
 [node name="Cra" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_right = 106.0
 offset_bottom = 106.0
 toggle_mode = true
@@ -65,6 +67,7 @@ texture_normal = ExtResource("1_v4byf")
 texture_pressed = ExtResource("2_fkwka")
 
 [node name="Eca" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 110.0
 offset_right = 216.0
 offset_bottom = 106.0
@@ -73,6 +76,7 @@ texture_normal = ExtResource("3_ocyii")
 texture_pressed = ExtResource("4_8voy4")
 
 [node name="Eni" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 220.0
 offset_right = 326.0
 offset_bottom = 106.0
@@ -81,6 +85,7 @@ texture_normal = ExtResource("5_7yb18")
 texture_pressed = ExtResource("6_v82lt")
 
 [node name="Enu" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 330.0
 offset_right = 436.0
 offset_bottom = 106.0
@@ -89,6 +94,7 @@ texture_normal = ExtResource("7_wic1b")
 texture_pressed = ExtResource("8_jnkwq")
 
 [node name="Feca" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 440.0
 offset_right = 546.0
 offset_bottom = 106.0
@@ -97,6 +103,7 @@ texture_normal = ExtResource("9_xlinm")
 texture_pressed = ExtResource("10_ljcik")
 
 [node name="Iop" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 550.0
 offset_right = 656.0
 offset_bottom = 106.0
@@ -105,6 +112,7 @@ texture_normal = ExtResource("11_5fk2n")
 texture_pressed = ExtResource("12_0n3rw")
 
 [node name="Osa" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_top = 110.0
 offset_right = 106.0
 offset_bottom = 216.0
@@ -113,6 +121,7 @@ texture_normal = ExtResource("13_efvw2")
 texture_pressed = ExtResource("14_7pc30")
 
 [node name="Panda" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 110.0
 offset_top = 110.0
 offset_right = 216.0
@@ -122,6 +131,7 @@ texture_normal = ExtResource("15_j85l8")
 texture_pressed = ExtResource("16_p2jgv")
 
 [node name="Sacrieur" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 220.0
 offset_top = 110.0
 offset_right = 326.0
@@ -131,6 +141,7 @@ texture_normal = ExtResource("17_1plfy")
 texture_pressed = ExtResource("18_q6151")
 
 [node name="Sadida" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 330.0
 offset_top = 110.0
 offset_right = 436.0
@@ -140,6 +151,7 @@ texture_normal = ExtResource("19_4jkh2")
 texture_pressed = ExtResource("20_udano")
 
 [node name="Sram" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 440.0
 offset_top = 110.0
 offset_right = 546.0
@@ -149,6 +161,7 @@ texture_normal = ExtResource("21_j6ly1")
 texture_pressed = ExtResource("22_jwyis")
 
 [node name="Xelor" type="TextureButton" parent="Classes"]
+layout_mode = 2
 offset_left = 550.0
 offset_top = 110.0
 offset_right = 656.0
@@ -158,6 +171,7 @@ texture_normal = ExtResource("23_804c8")
 texture_pressed = ExtResource("24_vj35l")
 
 [node name="GridContainer2" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 607.0
 offset_top = 845.0
 offset_right = 871.0
@@ -166,6 +180,7 @@ scale = Vector2(1.5, 1.5)
 columns = 2
 
 [node name="Fermer" type="TextureButton" parent="GridContainer2"]
+layout_mode = 2
 offset_right = 130.0
 offset_bottom = 32.0
 texture_normal = ExtResource("25_aw81n")
@@ -173,6 +188,7 @@ texture_pressed = ExtResource("26_rk2q6")
 texture_hover = ExtResource("27_i3g1e")
 
 [node name="Valider" type="TextureButton" parent="GridContainer2"]
+layout_mode = 2
 offset_left = 134.0
 offset_right = 264.0
 offset_bottom = 32.0
@@ -181,12 +197,12 @@ texture_pressed = ExtResource("29_0max7")
 texture_hover = ExtResource("30_f8pnp")
 
 [node name="Personnage" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 746.0
 offset_top = 3.0
 offset_right = 816.0
 offset_bottom = 131.0
 scale = Vector2(2, 2)
-texture = ExtResource("31_wkvt3")
 
 [connection signal="pressed" from="GridContainer2/Fermer" to="." method="_on_fermer_pressed"]
 [connection signal="pressed" from="GridContainer2/Valider" to="." method="_on_valider_pressed"]
