@@ -61,9 +61,20 @@ func _on_logo_clicked(sort):
 	update_logos()
 
 
+func _input(event):
+	if event is InputEventKey and event.keycode == KEY_ESCAPE and not event.echo:
+		get_tree().change_scene_to_file("res://UI/choix_classe.tscn")
+	if event is InputEventKey and event.keycode == KEY_ENTER and not event.echo:
+		get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
+
+
 func _on_equipements_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_equipements.tscn")
 
 
 func _on_retour_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_classe.tscn")
+
+
+func _on_valider_pressed():
+	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")

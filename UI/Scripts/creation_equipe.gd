@@ -37,6 +37,12 @@ func _on_supprimer_pressed(id):
 	update_affichage()
 
 
+func _input(event):
+	if event is InputEventKey and event.keycode == KEY_ESCAPE and not event.echo:
+		GlobalData.sauver_equipes()
+		get_tree().change_scene_to_file("res://UI/gestion_equipes.tscn")
+
+
 func _on_fermer_pressed():
 	GlobalData.sauver_equipes()
 	get_tree().change_scene_to_file("res://UI/gestion_equipes.tscn")

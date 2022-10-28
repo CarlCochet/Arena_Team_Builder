@@ -1,6 +1,8 @@
 extends TextureButton
 
+
 var equipe_nodes
+var signal_id
 
 
 func _ready():
@@ -13,3 +15,5 @@ func update(id):
 			var personnage = GlobalData.equipes[id].personnages[i]
 			if personnage.classe:
 				equipe_nodes[i].texture = load("res://Classes/" + personnage.classe + "/" + personnage.classe.to_lower() + ".png")
+			else:
+				equipe_nodes[i].texture = load("res://Classes/empty.png")

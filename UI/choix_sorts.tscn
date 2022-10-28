@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cmf2n8n1bp6an"]
+[gd_scene load_steps=16 format=3 uid="uid://cmf2n8n1bp6an"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_sorts.gd" id="1_f5eif"]
 [ext_resource type="Texture2D" uid="uid://b02mrbqksygw4" path="res://Classes/Cra/cra.png" id="1_txvm2"]
@@ -6,8 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://5i2iaiitef1b" path="res://UI/Displays/Scenes/affichage_stats_secondaires.tscn" id="3_6q5fj"]
 [ext_resource type="Texture2D" uid="uid://bd73pmdft7ibe" path="res://UI/Buttons/equipements_base.png" id="4_ruewy"]
 [ext_resource type="Texture2D" uid="uid://darrvw5h2erch" path="res://UI/Buttons/equipements_clicked.png" id="5_nq0h2"]
+[ext_resource type="Texture2D" uid="uid://b5sgblea4yfqw" path="res://UI/Buttons/valider_base.png" id="5_r1jrg"]
 [ext_resource type="Texture2D" uid="uid://c8d2rikvgcf47" path="res://UI/Buttons/equipements_hoevered.png" id="6_3uysc"]
+[ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="6_71oce"]
 [ext_resource type="Texture2D" uid="uid://bknc5skjp7s4v" path="res://UI/Buttons/retour_base.png" id="7_i3cpl"]
+[ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="7_x2nyj"]
 [ext_resource type="Texture2D" uid="uid://dd20mihsbd7tw" path="res://UI/Buttons/retour_clicked.png" id="8_jx3lw"]
 [ext_resource type="Texture2D" uid="uid://bsx000i85450y" path="res://UI/Buttons/retour_hovered.png" id="9_76y1y"]
 [ext_resource type="Texture2D" uid="uid://c3kxsj8jry80l" path="res://UI/Displays/spell_large.png" id="10_g5q0f"]
@@ -23,13 +26,16 @@ grow_vertical = 2
 script = ExtResource("1_f5eif")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
 offset_bottom = 965.0
+scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="Personnage" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 93.0
 offset_top = 7.0
 offset_right = 163.0
@@ -37,38 +43,53 @@ offset_bottom = 135.0
 texture = ExtResource("1_txvm2")
 
 [node name="StatsPrimaires" parent="." instance=ExtResource("2_g4v8w")]
+layout_mode = 0
 offset_top = 66.0
 offset_right = 250.0
 offset_bottom = 177.0
 
 [node name="StatsSecondaires" parent="." instance=ExtResource("3_6q5fj")]
+layout_mode = 0
 offset_top = 177.0
 offset_right = 248.0
 offset_bottom = 630.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 693.0
 offset_right = 160.0
 offset_bottom = 797.0
 scale = Vector2(1.5, 1.5)
 
-[node name="Equipements" type="TextureButton" parent="GridContainer"]
+[node name="Valider" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
 offset_right = 130.0
 offset_bottom = 32.0
+texture_normal = ExtResource("5_r1jrg")
+texture_pressed = ExtResource("6_71oce")
+texture_hover = ExtResource("7_x2nyj")
+
+[node name="Equipements" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+offset_top = 36.0
+offset_right = 130.0
+offset_bottom = 68.0
 texture_normal = ExtResource("4_ruewy")
 texture_pressed = ExtResource("5_nq0h2")
 texture_hover = ExtResource("6_3uysc")
 
 [node name="Retour" type="TextureButton" parent="GridContainer"]
-offset_top = 36.0
+layout_mode = 2
+offset_top = 72.0
 offset_right = 130.0
-offset_bottom = 68.0
+offset_bottom = 104.0
 texture_normal = ExtResource("7_i3cpl")
 texture_pressed = ExtResource("8_jx3lw")
 texture_hover = ExtResource("9_76y1y")
 
 [node name="GridSortsFond" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 712.0
 offset_top = 50.0
 offset_right = 1136.0
@@ -77,41 +98,48 @@ theme_override_constants/h_separation = 20
 columns = 6
 
 [node name="TextureButton" type="TextureButton" parent="GridSortsFond"]
+layout_mode = 2
 offset_right = 54.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton2" type="TextureButton" parent="GridSortsFond"]
+layout_mode = 2
 offset_left = 74.0
 offset_right = 128.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton3" type="TextureButton" parent="GridSortsFond"]
+layout_mode = 2
 offset_left = 148.0
 offset_right = 202.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton4" type="TextureButton" parent="GridSortsFond"]
+layout_mode = 2
 offset_left = 222.0
 offset_right = 276.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton5" type="TextureButton" parent="GridSortsFond"]
+layout_mode = 2
 offset_left = 296.0
 offset_right = 350.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton6" type="TextureButton" parent="GridSortsFond"]
+layout_mode = 2
 offset_left = 370.0
 offset_right = 424.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="GridSortsCartes" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 380.0
 offset_top = 150.0
 offset_right = 1741.0
@@ -120,10 +148,12 @@ scale = Vector2(0.8, 0.8)
 columns = 5
 
 [node name="AffichageBudget" parent="." instance=ExtResource("22_pdjrf")]
+layout_mode = 0
 offset_left = 826.0
 offset_right = 1023.0
 
 [node name="GridSortsLogos" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 712.0
 offset_top = 50.0
 offset_right = 752.0
@@ -132,5 +162,6 @@ scale = Vector2(1.419, 1.419)
 theme_override_constants/h_separation = 14
 columns = 6
 
+[connection signal="pressed" from="GridContainer/Valider" to="." method="_on_valider_pressed"]
 [connection signal="pressed" from="GridContainer/Equipements" to="." method="_on_equipements_pressed"]
 [connection signal="pressed" from="GridContainer/Retour" to="." method="_on_retour_pressed"]
