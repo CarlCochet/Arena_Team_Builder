@@ -57,9 +57,8 @@ GlobalData="*res://Jeu/global_data.gd"
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
-window/size/resizable=false
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep_width"
 
 [dotnet]
 

@@ -15,9 +15,9 @@ script = ExtResource("2_83sr6")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 215.0
-offset_top = 39.0
+offset_top = 40.0
 offset_right = 244.0
-offset_bottom = 449.0
+offset_bottom = 450.0
 theme_override_constants/v_separation = 39
 
 [node name="Dommages" type="GridContainer" parent="GridContainer"]

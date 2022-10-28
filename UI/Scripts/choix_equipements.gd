@@ -61,12 +61,23 @@ func _on_card_clicked(nom_equipement, categorie):
 	update_logos()
 
 
+func _input(event):
+	if event is InputEventKey and event.keycode == KEY_ESCAPE and not event.echo:
+		get_tree().change_scene_to_file("res://UI/choix_classe.tscn")
+	if event is InputEventKey and event.keycode == KEY_ENTER and not event.echo:
+		get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
+
+
 func _on_retour_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_classe.tscn")
 
 
 func _on_sorts_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_sorts.tscn")
+
+
+func _on_valider_pressed():
+	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
 
 
 func _on_arme_pressed():

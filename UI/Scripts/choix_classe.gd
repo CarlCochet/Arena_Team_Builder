@@ -36,6 +36,13 @@ func _on_class_pressed(id):
 				)
 
 
+func _input(event):
+	if event is InputEventKey and event.keycode == KEY_ESCAPE and not event.echo:
+		get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
+	if event is InputEventKey and event.keycode == KEY_ENTER and not event.echo:
+		get_tree().change_scene_to_file("res://UI/choix_sorts.tscn")
+
+
 func _on_fermer_pressed():
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
 
