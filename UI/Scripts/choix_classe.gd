@@ -2,6 +2,8 @@ extends Control
 
 
 var classes: Array
+var classe_initiale: int
+var classe_selected: int
 
 
 func _ready():
@@ -15,25 +17,26 @@ func _ready():
 		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
 		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
 	)
-	var index_classe = GlobalData.classes.find(GlobalData.get_perso_actuel().classe)
-	classes[index_classe].button_pressed = true
+	classe_initiale = GlobalData.classes.find(GlobalData.get_perso_actuel().classe)
+	classes[classe_initiale].button_pressed = true
 
 
 func _on_class_pressed(id):
+	classe_selected = id
 	for i in range(len(classes)):
 		if i != id:
 			classes[i].button_pressed = false
 		else:
 			classes[i].button_pressed = true
-			if GlobalData.get_perso_actuel().classe != GlobalData.classes[i]:
-				var nouveau_personnage = Personnage.new()
-				nouveau_personnage.classe = GlobalData.classes[i]
-				nouveau_personnage.calcul_stats()
-				GlobalData.set_perso_actuel(nouveau_personnage)
-				get_node("Personnage").texture = load(
-					"res://Classes/" + GlobalData.get_perso_actuel().classe + 
-					"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
-				)
+#			if GlobalData.get_perso_actuel().classe != GlobalData.classes[i]:
+#				var nouveau_personnage = Personnage.new()
+#				nouveau_personnage.classe = GlobalData.classes[i]
+#				nouveau_personnage.calcul_stats()
+#				GlobalData.set_perso_actuel(nouveau_personnage)
+			get_node("Personnage").texture = load(
+				"res://Classes/" + GlobalData.classes[i] + 
+				"/" + GlobalData.classes[i].to_lower() + ".png"
+			)
 
 
 func _input(event):
@@ -48,4 +51,10 @@ func _on_fermer_pressed():
 
 
 func _on_valider_pressed():
+	if classe_selected != classe_initiale:
+		print(classe_selected, " / ", classe_initiale)
+		var nouveau_personnage = Personnage.new()
+		nouveau_personnage.classe = GlobalData.classes[classe_selected]
+		nouveau_personnage.calcul_stats()
+		GlobalData.set_perso_actuel(nouveau_personnage)
 	get_tree().change_scene_to_file("res://UI/choix_sorts.tscn")
