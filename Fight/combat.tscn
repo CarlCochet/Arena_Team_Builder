@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://egsxhipgew1"]
+[gd_scene load_steps=9 format=3 uid="uid://egsxhipgew1"]
 
-[ext_resource type="Texture2D" uid="uid://dn515cobe71df" path="res://Fight/Map/Images/tactic_mode.png" id="1_8vppe"]
-[ext_resource type="Texture2D" uid="uid://c2tgyt6ovtwf7" path="res://Fight/Map/Images/hole.png" id="2_83agn"]
-[ext_resource type="Texture2D" uid="uid://coyqsww2hpgyx" path="res://Fight/Map/Images/tiles_overlay.png" id="3_dxxy0"]
+[ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
+[ext_resource type="Texture2D" uid="uid://dn515cobe71df" path="res://Fight/Map/Images/tactic_mode.png" id="1_77dx5"]
+[ext_resource type="Texture2D" uid="uid://c2tgyt6ovtwf7" path="res://Fight/Map/Images/hole.png" id="2_g3262"]
+[ext_resource type="Texture2D" uid="uid://coyqsww2hpgyx" path="res://Fight/Map/Images/tiles_overlay.png" id="3_ts4gj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxif1"]
-texture = ExtResource("1_8vppe")
+texture = ExtResource("1_77dx5")
 texture_region_size = Vector2i(128, 128)
 1:0/0 = 0
 2:0/0 = 0
@@ -19,12 +20,12 @@ texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j1gd0"]
-texture = ExtResource("2_83agn")
+texture = ExtResource("2_g3262")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2kyvj"]
-texture = ExtResource("3_dxxy0")
+texture = ExtResource("3_ts4gj")
 texture_region_size = Vector2i(128, 128)
 1:0/0 = 0
 2:0/0 = 0
@@ -37,7 +38,8 @@ sources/0 = SubResource("TileSetAtlasSource_gxif1")
 sources/2 = SubResource("TileSetAtlasSource_j1gd0")
 sources/3 = SubResource("TileSetAtlasSource_2kyvj")
 
-[node name="Fight" type="Node2D"]
+[node name="Combat" type="Node2D"]
+script = ExtResource("1_2kr3w")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_wp0kc")
@@ -50,4 +52,4 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(1114120, 3, 0, 1179656, 3, 0, 1245191, 3, 0, 1048584, 3, 0, 983047, 3, 0, 1048585, 3, 0, 1114121, 3, 0, 1179657, 3, 0, 1245193, 3, 0, 1245192, 3, 0, 1114119, 3, 0, 983048, 3, 0)
+layer_1/tile_data = PackedInt32Array()

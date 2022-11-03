@@ -5,6 +5,7 @@ var equipe: Equipe
 var stats_primaires
 var stats_secondaires
 var boutons_recruter
+var fight = preload("res://Fight/combat.tscn")
 
 
 func _ready():

@@ -11,8 +11,51 @@
 			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"VOLE_STATS": {
+					"dommages_air": {
+						"base": {
+							"valeur": 25,
+							"duree": 1
+						},
+						"critique": {
+							"valeur": 40,
+							"duree": 1
+						}
+					},
+					"dommages_terre": {
+						"base": {
+							"valeur": 25,
+							"duree": 1
+						},
+						"critique": {
+							"valeur": 40,
+							"duree": 1
+						}
+					},
+					"dommages_feu": {
+						"base": {
+							"valeur": 25,
+							"duree": 1
+						},
+						"critique": {
+							"valeur": 40,
+							"duree": 1
+						}
+					},
+					"dommages_eau": {
+						"base": {
+							"valeur": 25,
+							"duree": 1
+						},
+						"critique": {
+							"valeur": 40,
+							"duree": 1
+						}
+					}
+				}
 			}
 		},
 		"fleche_chercheuse": {
@@ -26,8 +69,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+					"base": {
+						"valeur": 5
+					},
+					"critique": {
+						"valeur": 7
+					}
+				}
 			}
 		},
 		"fleche_de_recul": {
@@ -41,8 +93,18 @@
 			"type_ldv": 1,
 			"cooldown": 1,
 			"cooldown_global": 1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+					"base": {
+						"valeur": 5
+					},
+					"critique": {
+						"valeur": 7
+					}
+				},
+				"POUSSE": 3
 			}
 		},
 		"fleche_enflamme": {
@@ -56,8 +118,17 @@
 			"type_ldv": 1,
 			"cooldown": 1,
 			"cooldown_global": 1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FEU": {
+					"base": {
+						"valeur": 16
+					},
+					"critique": {
+						"valeur": 22
+					}
+				}
 			}
 		},
 		"fleche_glacee": {
@@ -71,8 +142,35 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_EAU": {
+					"base": {
+						"valeur": 4
+					},
+					"critique": {
+						"valeur": 6
+					}
+				},
+				"CHANGE_STATS": {
+					"pa": {
+						"base": {
+							"valeur": -1
+						},
+						"critique": {
+							"valeur": -1
+						}
+					},
+					"pm": {
+						"base": {
+							"valeur": -1
+						},
+						"critique": {
+							"valeur": -2
+						}
+					}
+				}
 			}
 		},
 		"fleche_magique": {
@@ -86,8 +184,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FEU": {
+					"base": {
+						"valeur": 7
+					},
+					"critique": {
+						"valeur": 11
+					}
+				}
 			}
 		},
 		"oeil_de_lynx": {
@@ -101,8 +208,17 @@
 			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+					"po": {
+						"base": {
+							"valeur": 1,
+							"duree": 1
+						}
+					}
+				}
 			}
 		},
 		"oeil_de_taupe": {
@@ -116,8 +232,21 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+					"po": {
+						"base": {
+							"valeur": -1,
+							"duree": 2
+						},
+						"critique": {
+							"valeur": -1,
+							"duree": 3
+						}
+					}
+				}
 			}
 		},
 		"tir_tranquilisant": {
@@ -131,8 +260,25 @@
 			"type_ldv": 0,
 			"cooldown": 3,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+					"base": {
+						"valeur": 4
+					},
+					"critique": {
+						"valeur": 6
+					}
+				},
+				"IMMOBILISE": {
+					"base": {
+						"duree": 1
+					},
+					"critique": {
+						"duree": 2
+					}
+				}
 			}
 		},
 		"tourmente_visuelle": {
@@ -146,8 +292,21 @@
 			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 4,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+					"po": {
+						"base": {
+							"valeur": -1,
+							"duree": 2
+						},
+						"critique": {
+							"valeur": -1,
+							"duree": 3
+						}
+					}
+				}
 			}
 		}
 	},
@@ -163,8 +322,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"TELEPORTE": 0
 			}
 		},
 		"esprit_felin": {
@@ -178,8 +339,25 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+					"base": {
+						"valeur": "4d4+3"
+					},
+					"critique": {
+						"valeur": "5d4+4"
+					}
+				},
+                "DOMMAGE_EAU": {
+                    "base": {
+                        "retour": "2d4+3"
+                    },
+                    "critique": {
+                        "retour": "1d4+1"
+                    }
+                }
 			}
 		},
 		"fascination": {
@@ -193,8 +371,10 @@
 			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"PETRIFIE": 1
 			}
 		},
 		"guigne": {
@@ -208,8 +388,10 @@
 			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"RATE_SORT": 1
 			}
 		},
 		"loterie": {
@@ -223,8 +405,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+					"base": {
+						"valeur": "1d8+7"
+					},
+					"critique": {
+						"valeur": "2d8+7"
+					}
+				}
 			}
 		},
 		"perception": {
@@ -238,8 +429,18 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+					"po": {
+						"base": {
+							"valeur": 1,
+							"duree": 1
+						}
+					}
+				},
+				"REVELE_INVISIBLE": 0
 			}
 		},
 		"pile_ou_face": {
@@ -253,8 +454,22 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+					"base": {
+						"valeur": "3d4+0"
+					},
+					"critique": {
+						"valeur": "4d4+1"
+					}
+				},
+				"SOIN": {
+					"base": {
+						"valeur": "1d4+0"
+					}
+				}
 			}
 		},
 		"roulette": {
@@ -268,8 +483,20 @@
 			"type_ldv": 0,
 			"cooldown": 3,
 			"cooldown_global": 3,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FIXE": {
+					"base": {
+						"valeur": 2,
+						"duree": 1
+					},
+					"critique": {
+						"valeur": 3,
+						"duree": 1
+					},
+					"cible": 8
+				}
 			}
 		},
 		"tout_ou_rien": {
@@ -283,8 +510,21 @@
 			"type_ldv": 0,
 			"cooldown": 3,
 			"cooldown_global": 3,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_POURCENT": {
+					"base": {
+						"valeur": 20
+					},
+					"cible": 10
+				},
+				"SOIN": {
+					"base": {
+						"valeur": "1d6+4"
+					},
+					"cible": 10
+				}
 			}
 		},
 		"trefle": {
@@ -298,8 +538,24 @@
 			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+					"cc": {
+						"base": {
+							"valeur": 15,
+							"duree": 99,
+							"retour": 15
+						},
+						"critique": {
+							"valeur": 20,
+							"duree": 99,
+							"retour": 20
+						},
+					}
+				},
+                "renouvelable": 3
 			}
 		}
 	},
@@ -315,8 +571,18 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"SOIN": {
+					"base": {
+						"valeur": 7
+					},
+					"critique": {
+						"valeur": 9
+					},
+					"cible": 8
+				}
 			}
 		},
 		"mot_curatif": {
@@ -330,8 +596,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"SOIN": {
+                    "base": {
+                        "valeur": 6
+                    },
+                    "critique": {
+                        "valeur": 9
+                    }
+                }
 			}
 		},
 		"mot_de_jouvence": {
@@ -345,8 +620,10 @@
 			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "DESENVOUTE": 0
 			}
 		},
 		"mot_de_regeneration": {
@@ -360,8 +637,19 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"SOIN": {
+                    "base": {
+                        "valeur": 3,
+                        "duree": 3
+                    },
+                    "critique": {
+                        "valeur": 5,
+                        "duree": 3
+                    }
+                }
 			}
 		},
 		"mot_de_sacrifice": {
@@ -375,8 +663,25 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"SOIN": {
+                    "base": {
+                        "valeur": 10
+                    },
+                    "critique": {
+                        "valeur": 12
+                    }
+                },
+                "DOMMAGE_FEU": {
+                    "base": {
+                        "retour": 9
+                    },
+                    "critique": {
+                        "retour": 7
+                    }
+                }
 			}
 		},
 		"mot_de_torture": {
@@ -391,7 +696,28 @@
 			"cooldown": -1,
 			"cooldown_global": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "hp": {
+                        "base": {
+                            "valeur": 10,
+                            "duree": 99
+                        },
+                        "critique": {
+                            "valeur": 12,
+                            "duree": 99
+                        }
+                    },
+                    "cible": 11
+                },
+                "DOMMAGE_FEU": {
+                    "base": {
+                        "retour": 35
+                    },
+                    "critique": {
+                        "retour": 30
+                    }
+                },
+                "renouvelable": 0
 			}
 		},
 		"mot_deffacement": {
@@ -405,8 +731,21 @@
 			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"SOIN": {
+                    "base": {
+                        "valeur": 6,
+                        "duree": 2,
+                        "instant": 1
+                    }
+                },
+                "DEVIENT_INVISIBLE": {
+                    "base": {
+                        "duree": 1
+                    }
+                }
 			}
 		},
 		"mot_revitalisant": {
@@ -420,8 +759,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"SOIN": {
+                    "base": {
+                        "valeur": 10
+                    },
+                    "critique": {
+                        "valeur": 15
+                    }
+                }
 			}
 		},
 		"mot_soignant": {
@@ -435,8 +783,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "SOIN": {
+                    "base": {
+                        "valeur": 7
+                    },
+                    "critique": {
+                        "valeur": 9
+                    }
+                }
 			}
 		},
 		"mot_stimulant": {
@@ -450,8 +807,17 @@
 			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "pa": {
+                        "base": {
+                            "valeur": 1
+                        }
+                    }
+                },
+                "desenvoute_delais": 3
 			}
 		}
 	},
@@ -467,8 +833,31 @@
 			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "pm": {
+                        "base": {
+                            "valeur": 1,
+                            "duree": 3
+                        },
+                        "critique": {
+                            "valeur": 1,
+                            "duree": 5
+                        }
+                    },
+                    "esquive": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 3
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 5
+                        }
+                    }
+                }
 			}
 		},
 		"corruption": {
@@ -482,8 +871,28 @@
 			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "IMMOBILISE": 1,
+                "CHANGE_STATS": {
+                    "blocage": {
+                        "base": {
+                            "valeur": -40
+                        },
+                        "critique": {
+                            "valeur": -60
+                        }
+                    }
+                },
+                "SOIN": {
+                    "base": {
+                        "valeur": 30
+                    },
+                    "critique": {
+                        "valeur": 0
+                    }
+                }
 			}
 		},
 		"force_de_lage": {
@@ -497,8 +906,39 @@
 			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "dommages_air": {
+                        "base": {
+                            "valeur": 30,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_terre": {
+                        "base": {
+                            "valeur": 30,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_feu": {
+                        "base": {
+                            "valeur": 30,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_eau": {
+                        "base": {
+                            "valeur": 30,
+                            "duree": 1
+                        }
+                    },
+                    "pm": {
+                        "base": 2
+                    }
+                },
+                "IMMUNISE_RETRAIT_PM": 1
 			}
 		},
 		"fossilisation": {
@@ -512,8 +952,27 @@
 			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"VOLE_STATS": {
+                    "pm": {
+                        "base": {
+                            "valeur": 1
+                        },
+                        "critique": {
+                            "valeur": 2
+                        }
+                    }
+                },
+                "DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 16
+                    },
+                    "critique": {
+                        "valeur": 20
+                    }
+                }
 			}
 		},
 		"lancer_de_piece": {
@@ -527,8 +986,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "DOMMAGE_EAU": {
+                    "base": {
+                        "valeur": 5
+                    },
+                    "critique": {
+                        "valeur": 7
+                    }
+                }
 			}
 		},
 		"maladresse": {
@@ -542,8 +1010,29 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "pm": {
+                        "base": {
+                            "valeur": -1
+                        },
+                        "critique": {
+                            "valeur": -2
+                        }
+                    },
+                    "esquive": {
+                        "base": {
+                            "valeur": -20,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -20,
+                            "duree": 1
+                        }
+                    }
+                },
 			}
 		},
 		"maladresse_de_masse": {
@@ -557,8 +1046,18 @@
 			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 6,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "pm": {
+                        "base": {
+                            "valeur": -2,
+                            "duree": 2
+                        }
+                    }
+                },
+                "cible": 10
 			}
 		},
 		"pelle_fantomatique": {
@@ -572,8 +1071,18 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DESENVOUTE": 1,
+                "DOMMAGE_EAU": {
+                    "base": {
+                        "valeur": 10
+                    },
+                    "critique": {
+                        "valeur": 15
+                    }
+                }
 			}
 		},
 		"pelle_massacrante": {
@@ -583,12 +1092,29 @@
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
-			"ldv": 1,
+			"ldv": 0,
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "DOMMAGE_EAU": {
+                    "base": {
+                        "valeur": 8
+                    },
+                    "critique": {
+                        "valeur": 12
+                    }
+                },
+                "DOMMAGE_AIR": {
+                    "base": {
+                        "valeur": 8
+                    },
+                    "critique": {
+                        "valeur": 12
+                    }
+                }
 			}
 		},
 		"taniere_des_roches": {
@@ -602,8 +1128,15 @@
 			"type_ldv": 0,
 			"cooldown": 7,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "DEVIENT_INVISIBLE": {
+                    "base": {
+                        "duree": 2
+                    }
+                },
+                "REVELE_INVISIBLE": 2
 			}
 		}
 	},
@@ -619,8 +1152,25 @@
 			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "resistances_eau": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 5
+                        }
+                    },
+                    "resistances_terre": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 5
+                        }
+                    }
+                },
+                "NON_PORTABLE": 5,
+                "desenvoute_delais": 2
 			}
 		},
 		"armure_orageuse": {
@@ -634,8 +1184,25 @@
 			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "CHANGE_STATS": {
+                    "resistances_air": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 5
+                        }
+                    },
+                    "resistances_feu": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 5
+                        }
+                    }
+                },
+                "INTRANSPOSABLE": 5,
+                "desenvoute_delais": 2
 			}
 		},
 		"attaque_nuageuse": {
@@ -649,8 +1216,25 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_EAU": {
+                    "base": {
+                        "valeur": 5
+                    },
+                    "critique": {
+                        "valeur": 8
+                    }
+                },
+                "DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 5
+                    },
+                    "critique": {
+                        "valeur": 8
+                    }
+                }
 			}
 		},
 		"bouclier_feca": {
@@ -664,8 +1248,48 @@
 			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "resistances_air": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 5
+                        }
+                    },
+                    "resistances_terre": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 5
+                        }
+                    },
+                    "resistances_feu": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 5
+                        }
+                    },
+                    "resistances_eau": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 5
+                        }
+                    },
+                    "resistances_zone": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 5
+                        }
+                    },
+                    "blocage": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 5
+                        }
+                    }
+                },
+                "desenvoute_delais": 2
 			}
 		},
 		"bulle": {
@@ -679,8 +1303,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_EAU": {
+                    "base": {
+                        "valeur": 9
+                    },
+                    "critique": {
+                        "valeur": 12
+                    }
+                }
 			}
 		},
 		"faiblesse": {
@@ -694,8 +1327,101 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "dommages_air": {
+                        "base": {
+                            "valeur": -25,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -30,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_terre": {
+                        "base": {
+                            "valeur": -25,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -30,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_feu": {
+                        "base": {
+                            "valeur": -25,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -30,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_eau": {
+                        "base": {
+                            "valeur": -25,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -30,
+                            "duree": 1
+                        }
+                    },
+                    "resistances_air": {
+                        "base": {
+                            "valeur": -15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -20,
+                            "duree": 1
+                        }
+                    },
+                    "resistances_terre": {
+                        "base": {
+                            "valeur": -15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -20,
+                            "duree": 1
+                        }
+                    },
+                    "resistances_feu": {
+                        "base": {
+                            "valeur": -15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -20,
+                            "duree": 1
+                        }
+                    },
+                    "resistances_eau": {
+                        "base": {
+                            "valeur": -15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -20,
+                            "duree": 1
+                        }
+                    },
+                    "esquive": {
+                        "base": {
+                            "valeur": -20,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -40,
+                            "duree": 1
+                        }
+                    }
+                }
 			}
 		},
 		"immunite": {
@@ -709,8 +1435,11 @@
 			"type_ldv": 0,
 			"cooldown": 8,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"IMMUNISE": 1,
+                "STABILISE": 1
 			}
 		},
 		"rebond": {
@@ -724,8 +1453,10 @@
 			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"RENVOIE_SORT": 1
 			}
 		},
 		"teleportation": {
@@ -739,8 +1470,10 @@
 			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 6,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"TELEPORTE": 0
 			}
 		},
 		"treve": {
@@ -754,8 +1487,12 @@
 			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 6,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"IMMUNISE": 1,
+                "STABILISE": 1,
+                "cible": 8
 			}
 		}
 	},
@@ -771,8 +1508,51 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "CHANGE_STATS": {
+                    "dommages_air": {
+                        "base": {
+                            "valeur": 15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_terre": {
+                        "base": {
+                            "valeur": 15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_feu": {
+                        "base": {
+                            "valeur": 15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_eau": {
+                        "base": {
+                            "valeur": 15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 1
+                        }
+                    },
+                }
 			}
 		},
 		"bond": {
@@ -786,8 +1566,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"TELEPORTE": 0
 			}
 		},
 		"colere_de_iop": {
@@ -801,8 +1583,29 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 22
+                    },
+                    "critique": {
+                        "valeur": 28
+                    }
+                },
+                "CHANGE_STATS": {
+                    "esquive": {
+                        "base": {
+                            "valeur": -40,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -60,
+                            "duree": 1
+                        }
+                    }
+                }
 			}
 		},
 		"couper": {
@@ -816,8 +1619,17 @@
 			"type_ldv": 0,
 			"cooldown": 1,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_POURCENT": {
+                    "base": {
+                        "valeur": 20
+                    },
+                    "critique": {
+                        "valeur": 25
+                    }
+                }
 			}
 		},
 		"epee_celeste": {
@@ -831,8 +1643,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 10
+                    },
+                    "critique": {
+                        "valeur": 15
+                    }
+                }
 			}
 		},
 		"epee_du_destin": {
@@ -846,8 +1667,25 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "DOMMAGE_AIR": {
+                    "base": {
+                        "valeur": 10
+                    },
+                    "critique": {
+                        "valeur": 15
+                    }
+                },
+                "DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 5
+                    },
+                    "critique": {
+                        "valeur": 7
+                    }
+                }
 			}
 		},
 		"guide_de_bravoure": {
@@ -861,8 +1699,51 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "dommages_air": {
+                        "base": {
+                            "valeur": 15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_terre": {
+                        "base": {
+                            "valeur": 15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_feu": {
+                        "base": {
+                            "valeur": 15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_eau": {
+                        "base": {
+                            "valeur": 15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 1
+                        }
+                    }
+                }
 			}
 		},
 		"mutilation": {
@@ -876,8 +1757,40 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+                    "base": {
+                        "valeur": 5
+                    }
+                },
+                "CHANGE_STATS": {
+                    "dommages_air": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_terre": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_feu": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_eau": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 1
+                        }
+                    }
+                }
 			}
 		},
 		"pression": {
@@ -891,8 +1804,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 10
+                    },
+                    "critique": {
+                        "valeur": 15
+                    }
+                }
 			}
 		},
 		"vitalite": {
@@ -906,8 +1828,61 @@
 			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "hp": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 99
+                        },
+                        "critique": {
+                            "valeur": 35,
+                            "duree": 99
+                        }
+                    },
+                    "resistances_air": {
+                        "base": {
+                            "valeur": 10,
+                            "duree": 99
+                        },
+                        "critique": {
+                            "valeur": 15,
+                            "duree": 99
+                        }
+                    },
+                    "resistances_terre": {
+                        "base": {
+                            "valeur": 10,
+                            "duree": 99
+                        },
+                        "critique": {
+                            "valeur": 15,
+                            "duree": 99
+                        }
+                    },
+                    "resistances_feu": {
+                        "base": {
+                            "valeur": 10,
+                            "duree": 99
+                        },
+                        "critique": {
+                            "valeur": 15,
+                            "duree": 99
+                        }
+                    },
+                    "resistances_eau": {
+                        "base": {
+                            "valeur": 10,
+                            "duree": 99
+                        },
+                        "critique": {
+                            "valeur": 15,
+                            "duree": 99
+                        }
+                    }
+                }
 			}
 		}
 	},
@@ -923,8 +1898,17 @@
 			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "invocations": {
+                        "base": {
+                            "valeur": 1
+                        }
+                    }
+                },
+                "desenvoute_delais": 3
 			}
 		},
 		"bouftou": {
@@ -938,8 +1922,10 @@
 			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 0
 			}
 		},
 		"carapace": {
@@ -953,8 +1939,18 @@
 			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"IMMUNISE": 1,
+                "CHANGE_STATS": {
+                    "blocage": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 4
+                        }
+                    }
+                }
 			}
 		},
 		"corbeau": {
@@ -964,12 +1960,21 @@
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
-			"ldv": 1,
+			"ldv": 0,
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 3
+                    },
+                    "critique": {
+                        "valeur": 4
+                    }
+                }
 			}
 		},
 		"craqueleur": {
@@ -983,8 +1988,10 @@
 			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 4,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 1
 			}
 		},
 		"cri_de_lours": {
@@ -998,8 +2005,17 @@
 			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "cc": {
+                        "base": {
+                            "valeur": 100
+                        }
+                    }
+                },
+                "cible": 6
 			}
 		},
 		"fouet": {
@@ -1013,8 +2029,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 15
+                    },
+                    "critique": {
+                        "valeur": 20
+                    }
+                }
 			}
 		},
 		"piqure_motivante": {
@@ -1028,8 +2053,16 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "pa": {
+                        "base": {
+                            "valeur": 6,
+                        }
+                    }
+                }
 			}
 		},
 		"prespic": {
@@ -1043,8 +2076,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 2
 			}
 		},
 		"tofu": {
@@ -1058,8 +2093,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 3
 			}
 		}
 	},
@@ -1075,8 +2112,10 @@
 			"type_ldv": 1,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"LANCE": 3
 			}
 		},
 		"coup_de_bambou": {
@@ -1090,8 +2129,51 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "resistances_air": {
+                        "base": {
+                            "valeur": -30,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -45,
+                            "duree": 1
+                        }
+                    },
+                    "resistances_terre": {
+                        "base": {
+                            "valeur": -30,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -45,
+                            "duree": 1
+                        }
+                    },
+                    "resistances_feu": {
+                        "base": {
+                            "valeur": -30,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -45,
+                            "duree": 1
+                        }
+                    },
+                    "resistances_eau": {
+                        "base": {
+                            "valeur": -30,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -45,
+                            "duree": 1
+                        }
+                    },
+                }
 			}
 		},
 		"flasque_explosive": {
@@ -1105,8 +2187,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 7
+                    },
+                    "critique": {
+                        "valeur": 12
+                    }
+                }
 			}
 		},
 		"karcham": {
@@ -1120,8 +2211,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"PORTE": 8
 			}
 		},
 		"karzam": {
@@ -1135,8 +2228,15 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"LANCE": 4,
+                "DOMMAGE_FIXE": {
+                    "base": {
+                        "valeur": 12
+                    }
+                }
 			}
 		},
 		"pandatak": {
@@ -1150,8 +2250,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 12
+                    },
+                    "critique": {
+                        "valeur": 16
+                    }
+                }
 			}
 		},
 		"picole": {
@@ -1165,8 +2274,25 @@
 			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"PICOLE": 99,
+                "CHANGE_STATS": {
+                    "dommages_feu": {
+                        "base": {
+                            "valeur": 25,
+                            "duree": 99
+                        }
+                    },
+                    "esquive": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 99
+                        }
+                    }
+                },
+                "desenvoute_delais": 0
 			}
 		},
 		"souffle_alcoolise": {
@@ -1180,8 +2306,20 @@
 			"type_ldv": 1,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "condition": {
+                    "picole": 1
+                },
+                "DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 9
+                    },
+                    "critique": {
+                        "valeur": 13
+                    }
+                }
 			}
 		},
 		"stabilisation": {
@@ -1195,8 +2333,18 @@
 			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "STABILISE": 4,
+                "CHANGE_STATS": {
+                    "blocage": {
+                        "base": {
+                            "valeur": 40,
+                            "duree": 4
+                        }
+                    }
+                }
 			}
 		},
 		"stabilisation_de_groupe": {
@@ -1210,8 +2358,19 @@
 			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 4,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "STABILISE": 3,
+                "CHANGE_STATS": {
+                    "blocage": {
+                        "base": {
+                            "valeur": 20,
+                            "duree": 3
+                        }
+                    }
+                },
+                "cible": 11
 			}
 		}
 	},
@@ -1227,8 +2386,18 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"TRANSPOSE": 8,
+                "DOMMAGE_AIR": {
+                    "base": {
+                        "valeur": 7
+                    },
+                    "critique": {
+                        "valeur": 10
+                    }
+                }
 			}
 		},
 		"attirance": {
@@ -1242,8 +2411,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"ATTIRE": 3
 			}
 		},
 		"demence": {
@@ -1257,8 +2428,22 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+                    "base": {
+                        "valeur": 18
+                    }
+                },
+                "DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 18
+                    }
+                },
+                "condition": {
+                    "hp_pourcent_inferieur": 25
+                }
 			}
 		},
 		"folie_sanguinaire": {
@@ -1272,8 +2457,19 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"VOLE_TERRE": {
+                    "base": {
+                        "valeur": 3,
+                        "allies": 10
+                    },
+                    "critique": {
+                        "valeur": 4,
+                        "allies": 15
+                    }
+                }
 			}
 		},
 		"furie": {
@@ -1287,8 +2483,29 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+                    "base": {
+                        "valeur": 5
+                    },
+                    "critique": {
+                        "valeur": 7
+                    }
+                },
+                "CHANGE_STATS": {
+                    "dommages_air": {
+                        "base": {
+                            "valeur": 15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 20,
+                            "duree": 1
+                        }
+                    }
+                }
 			}
 		},
 		"pied_du_sacrieur": {
@@ -1302,8 +2519,59 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 7
+                    },
+                    "critique": {
+                        "valeur": 12
+                    }
+                },
+                "CHANGE_STATS": {
+                    "dommages_air": {
+                        "base": {
+                            "valeur": -15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -20,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_terre": {
+                        "base": {
+                            "valeur": -15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -20,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_feu": {
+                        "base": {
+                            "valeur": -15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -20,
+                            "duree": 1
+                        }
+                    },
+                    "dommages_eau": {
+                        "base": {
+                            "valeur": -15,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": -20,
+                            "duree": 1
+                        }
+                    }
+                }
 			}
 		},
 		"punition": {
@@ -1317,8 +2585,25 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 25
+                    },
+                    "critique": {
+                        "valeur": 30
+                    }
+                },
+                "DOMMAGE_EAU": {
+                    "base": {
+                        "retour": 8
+                    },
+                    "critique": {
+                        "retour": 4
+                    }
+                }
 			}
 		},
 		"sacrifice": {
@@ -1332,8 +2617,10 @@
 			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"SACRIFICE": 1
 			}
 		},
 		"transfert_de_vie": {
@@ -1347,8 +2634,19 @@
 			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"SOIN": {
+                    "base": {
+                        "valeur": 22
+                    }
+                },
+                "DOMMAGE_FEU": {
+                    "base": {
+                        "retour": 22
+                    }
+                }
 			}
 		},
 		"transposition": {
@@ -1362,8 +2660,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"TRANSPOSE": 3
 			}
 		}
 	},
@@ -1379,8 +2679,10 @@
 			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 2,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 4
 			}
 		},
 		"la_bloqueuse": {
@@ -1394,8 +2696,10 @@
 			"type_ldv": 0,
 			"cooldown": 2,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 5
 			}
 		},
 		"la_folle": {
@@ -1409,8 +2713,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 6
 			}
 		},
 		"la_sacrifiee": {
@@ -1424,8 +2730,10 @@
 			"type_ldv": 0,
 			"cooldown": 3,
 			"cooldown_global": 1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 7
 			}
 		},
 		"poison": {
@@ -1439,8 +2747,19 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FIXE": {
+                    "base": {
+                        "valeur": 3,
+                        "duree": 3
+                    },
+                    "critique": {
+                        "valeur": 4,
+                        "duree": 3
+                    }
+                }
 			}
 		},
 		"puissance_sylvestre": {
@@ -1454,8 +2773,16 @@
 			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"SOIN": {
+                    "base": {
+                        "valeur": 10
+                    }
+                },
+                "IMMUNISE": 1,
+                "IMMOBILISE": 1
 			}
 		},
 		"ronce": {
@@ -1469,8 +2796,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 11
+                    },
+                    "critique": {
+                        "valeur": 15
+                    }
+                }
 			}
 		},
 		"sacrifice_poupesque": {
@@ -1484,8 +2820,21 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 13
+                    },
+                    "cible": 7
+                },
+                "VOLE_FEU": {
+                    "base": {
+                        "valeur": 13
+                    },
+                    "cible": 6
+                }
 			}
 		},
 		"savoir_poupesque": {
@@ -1499,8 +2848,18 @@
 			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "invocations": {
+                        "base": {
+                            "valeur": 1,
+                            "duree": 99
+                        }
+                    }
+                },
+                "desenvoute_delais": 3
 			}
 		},
 		"tremblement": {
@@ -1514,8 +2873,14 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 8
+                    }
+                }
 			}
 		}
 	},
@@ -1531,8 +2896,25 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "DOMMAGE_EAU": {
+                    "base": {
+                        "valeur": 11
+                    },
+                    "critique": {
+                        "valeur": 11
+                    }
+                },
+                "DOMMAGE_AIR": {
+                    "base": {
+                        "valeur": 11
+                    },
+                    "critique": {
+                        "valeur": 11
+                    }
+                }
 			}
 		},
 		"brume": {
@@ -1546,8 +2928,26 @@
 			"type_ldv": 0,
 			"cooldown": 8,
 			"cooldown_global": 8,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "glyphe": 1,
+                "DEVIENT_INVISIBLE": {
+                    "base": {
+                        "duree": 2
+                    },
+                    "critique": {
+                        "duree": 3
+                    }
+                },
+                "CHANGE_STATS": {
+                    "blocage": {
+                        "base": {
+                            "valeur": -40,
+                            "duree": 2
+                        }
+                    }
+                }
 			}
 		},
 		"coup_sournois": {
@@ -1561,8 +2961,18 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_AIR": {
+                    "base": {
+                        "valeur": 9
+                    },
+                    "critique": {
+                        "valeur": 14
+                    }
+                },
+                "POUSSE": 3
 			}
 		},
 		"diversion": {
@@ -1576,8 +2986,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"TOURNE": 0
 			}
 		},
 		"double": {
@@ -1591,8 +3003,10 @@
 			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 5,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 8
 			}
 		},
 		"invisibilite": {
@@ -1606,8 +3020,14 @@
 			"type_ldv": 0,
 			"cooldown": 7,
 			"cooldown_global": 4,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DEVIENT_INVISIBLE": {
+                    "base": {
+                        "duree": 3
+                    }
+                }
 			}
 		},
 		"invisibilite_dautrui": {
@@ -1621,8 +3041,14 @@
 			"type_ldv": 0,
 			"cooldown": 7,
 			"cooldown_global": 7,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+                "DEVIENT_INVISIBLE": {
+                    "base": {
+                        "duree": 2
+                    }
+                }
 			}
 		},
 		"peur": {
@@ -1636,8 +3062,10 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"POUSSE": 1
 			}
 		},
 		"piege_mortel": {
@@ -1651,8 +3079,15 @@
 			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 3,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"glyphe": 1,
+                "DOMMAGE_FIXE": {
+                    "base": {
+                        "valeur": 80
+                    }
+                }
 			}
 		},
 		"vol_de_vie": {
@@ -1666,8 +3101,19 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"VOLE_EAU": {
+                    "base": {
+                        "valeur": 6,
+                        "invocations": 8
+                    },
+                    "critique": {
+                        "valeur": 8,
+                        "invocations": 11
+                    }
+                }
 			}
 		}
 	},
@@ -1683,8 +3129,19 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 6,
+                        "invocations": 8
+                    },
+                    "critique": {
+                        "valeur": 9,
+                        "invocations": 11
+                    }
+                }
 			}
 		},
 		"cadran_de_xelor": {
@@ -1698,8 +3155,10 @@
 			"type_ldv": 0,
 			"cooldown": 5,
 			"cooldown_global": 5,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"INVOCATION": 9
 			}
 		},
 		"contre": {
@@ -1713,8 +3172,23 @@
 			"type_ldv": 0,
 			"cooldown": 4,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "renvoi_dommage": {
+                        "base": {
+                            "valeur": 30,
+                            "perso": 50,
+                            "duree": 2
+                        }
+                    },
+                    "pa": {
+                        "critique": {
+                            "retour": 2
+                        }
+                    }
+                }
 			}
 		},
 		"devouement": {
@@ -1728,8 +3202,21 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "pa": {
+                        "base": {
+                            "valeur": 2,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 3,
+                            "duree": 1
+                        }
+                    }
+                }
 			}
 		},
 		"fuite_du_temps": {
@@ -1743,8 +3230,20 @@
 			"type_ldv": 0,
 			"cooldown": 6,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"TELEPORTE": 0,
+                "CHANGE_STATS": {
+                    "pa": {
+                        "base": {
+                            "valeur": 2
+                        },
+                        "critique": {
+                            "valeur": 4
+                        }
+                    }
+                }
 			}
 		},
 		"horloge": {
@@ -1758,8 +3257,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_EAU": {
+                    "base": {
+                        "valeur": 21
+                    },
+                    "critique": {
+                        "valeur": 26
+                    }
+                }
 			}
 		},
 		"momification": {
@@ -1773,8 +3281,19 @@
 			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"IMMUNISE_RETRAIT_PA": 1,
+                "IMMUNISE_RETRAIT_PM": 1,
+                "CHANGE_STATS": {
+                    "esquive": {
+                        "base": {
+                            "valeur": -20
+                        }
+                    }
+                },
+                "renouvelable": 3
 			}
 		},
 		"poussiere_temporelle": {
@@ -1788,8 +3307,17 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 11
+                    },
+                    "critique": {
+                        "valeur": 15
+                    }
+                }
 			}
 		},
 		"ralentissement": {
@@ -1803,8 +3331,19 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": 1,
 			"effets": {
-				
+				"CHANGE_STATS": {
+                    "pa": {
+                        "base": {
+                            "valeur": -1
+                        },
+                        "critique": {
+                            "valeur": -2
+                        }
+                    }
+                }
 			}
 		},
 		"vol_du_temps": {
@@ -1818,8 +3357,29 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
-				
+				"DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 6
+                    },
+                    "critique": {
+                        "valeur": 10
+                    }
+                },
+                "CHANGE_STATS": {
+                    "pa": {
+                        "base": {
+                            "valeur": 1,
+                            "duree": 1
+                        },
+                        "critique": {
+                            "valeur": 1,
+                            "duree": 1
+                        }
+                    }
+                }
 			}
 		}
 	}

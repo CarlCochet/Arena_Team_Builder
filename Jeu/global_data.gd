@@ -1,9 +1,49 @@
 extends Node
 
 
-enum TypeZone {CERCLE, LIGNE, BATON, CARRE, CROIX, MARTEAU}
-enum Cible {LIBRE, MOI, VIDE, ALLIES, ENNEMIS, INVOCATIONS, INVOCATIONS_ALLIEES, INVOCATIONS_ENNEMIES}
-enum TypeLDV {CERCLE, LIGNE, DIAGONAL}
+enum TypeZone {
+	CERCLE = 0, 
+	LIGNE = 1, 
+	BATON = 2, 
+	CARRE = 3, 
+	CROIX = 4, 
+	MARTEAU = 5
+}
+
+enum Cible {
+	LIBRE = 0, 
+	MOI = 1, 
+	VIDE = 2, 
+	ALLIES = 3, 
+	ENNEMIS = 4, 
+	INVOCATIONS = 5, 
+	INVOCATIONS_ALLIEES = 6, 
+	INVOCATIONS_ENNEMIES = 7, 
+	TOUT = 8, 
+	CLASSE = 9, 
+	PERSONNAGES = 10, 
+	PERSONNAGES_ALLIES = 11, 
+	PERSONNAGES_ENNEMIS = 12
+}
+
+enum TypeLDV {
+	CERCLE = 0, 
+	LIGNE = 1, 
+	DIAGONAL = 2
+}
+
+enum Invocations {
+	BOUFTOU = 0,
+	CRAQUELEUR = 1,
+	PRESPIC = 2,
+	TOFU = 3,
+	ARBRE = 4,
+	BLOQUEUSE = 5,
+	FOLLE = 6,
+	SACRIFIEE = 7,
+	DOUBLE = 8,
+	CADRAN = 9
+}
 
 var classes = ["Cra", "Eca", "Eni", "Enu", "Feca", "Iop", "Osa", "Panda", "Sacrieur", "Sadida", "Sram", "Xelor"]
 
