@@ -49,7 +49,6 @@ func from_json(personnage_json):
 	}
 	sorts = []
 	classe = personnage_json["classe"]
-	stats = Stats.new().from_json(personnage_json["stats"])
 	equipements = personnage_json["equipements"]
 	sorts = personnage_json["sorts"]
 	calcul_stats()
@@ -59,7 +58,6 @@ func from_json(personnage_json):
 func to_json():	
 	return {
 		"classe": classe,
-		"stats": stats.to_json(),
 		"equipements": equipements,
 		"sorts": sorts
 	}
