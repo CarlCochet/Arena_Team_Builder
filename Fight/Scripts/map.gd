@@ -1,4 +1,4 @@
-extends Control
+extends TileMap
 
 
 func _ready():

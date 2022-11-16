@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name Equipement
 
 enum Categorie {VIDE, ARME, FAMILIER, COIFFE, CAPE, DOFUS}
@@ -10,6 +10,7 @@ var po: Vector2
 var type_zone: GlobalData.TypeZone
 var taille_zone: int
 var cible: GlobalData.Cible
+var effets: Dictionary
 
 
 func _init():
@@ -20,6 +21,7 @@ func _init():
 	type_zone = GlobalData.TypeZone.CERCLE
 	taille_zone = 0
 	cible = GlobalData.Cible.LIBRE
+	effets = {}
 
 
 func from_json(data, json_categorie):
@@ -31,6 +33,7 @@ func from_json(data, json_categorie):
 		type_zone = data["type_zone"] as GlobalData.TypeZone
 		taille_zone = data["taille_zone"]
 		cible = data["cible"] as GlobalData.Cible
+		effets = data["effets"]
 	return self
 
 
@@ -43,7 +46,8 @@ func to_json():
 			"po": po,
 			"type_zone": type_zone,
 			"taille_zone": taille_zone,
-			"cible": cible
+			"cible": cible,
+			"effets": effets
 		}
 	else:
 		return {

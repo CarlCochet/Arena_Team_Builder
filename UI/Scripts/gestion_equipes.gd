@@ -25,7 +25,7 @@ func generer_affichage():
 		equipes_grid.add_child(previsu_equipe)
 		previsu_equipe.update(i)
 	equipes[0].button_pressed = true
-	affichage_personnages.update()
+	affichage_personnages.update(GlobalData.equipe_actuelle)
 
 
 func previsu_pressed(id):
@@ -36,7 +36,7 @@ func previsu_pressed(id):
 		else:
 			equipes[i].button_pressed = true
 			GlobalData.equipe_actuelle = GlobalData.equipes[i]
-			affichage_personnages.update()
+			affichage_personnages.update(GlobalData.equipe_actuelle)
 
 
 func _on_supprimer_pressed():
@@ -50,13 +50,13 @@ func _on_supprimer_pressed():
 		equipes.clear()
 		GlobalData.equipe_actuelle = GlobalData.equipes[equipe_selectionnee]
 		generer_affichage()
-		affichage_personnages.update()
+		affichage_personnages.update(GlobalData.equipe_actuelle)
 		GlobalData.sauver_equipes()
 	else:
 		GlobalData.equipes[equipe_selectionnee] = Equipe.new()
 		GlobalData.equipe_actuelle = GlobalData.equipes[equipe_selectionnee]
 		equipes_grid.get_children()[equipe_selectionnee].update(equipe_selectionnee)
-		affichage_personnages.update()
+		affichage_personnages.update(GlobalData.equipe_actuelle)
 		GlobalData.sauver_equipes()
 
 

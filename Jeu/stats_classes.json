@@ -18,7 +18,8 @@
 		"blocage": 0,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Eca": {
 		"kamas": 600,
@@ -39,7 +40,8 @@
 		"blocage": 0,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Eni": {
 		"kamas": 600,
@@ -60,7 +62,8 @@
 		"blocage": 0,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Enu": {
 		"kamas": 600,
@@ -81,7 +84,8 @@
 		"blocage": 0,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Feca": {
 		"kamas": 600,
@@ -102,7 +106,8 @@
 		"blocage": 60,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Iop": {
 		"kamas": 600,
@@ -123,7 +128,8 @@
 		"blocage": 40,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Osa": {
 		"kamas": 600,
@@ -144,7 +150,8 @@
 		"blocage": 0,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Panda": {
 		"kamas": 600,
@@ -165,7 +172,8 @@
 		"blocage": 40,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Sacrieur": {
 		"kamas": 600,
@@ -186,7 +194,8 @@
 		"blocage": 20,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Sadida": {
 		"kamas": 600,
@@ -207,7 +216,8 @@
 		"blocage": 0,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Sram": {
 		"kamas": 600,
@@ -228,7 +238,8 @@
 		"blocage": 20,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	},
 	"Xelor": {
 		"kamas": 600,
@@ -249,6 +260,7 @@
 		"blocage": 0,
 		"soins": 0,
 		"cc": 0,
-		"renvoi_dommage": 0
+		"renvoi_dommage": 0,
+        "resistance_zone": 0
 	}
 }

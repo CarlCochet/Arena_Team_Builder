@@ -28,11 +28,6 @@ func _on_class_pressed(id):
 			classes[i].button_pressed = false
 		else:
 			classes[i].button_pressed = true
-#			if GlobalData.get_perso_actuel().classe != GlobalData.classes[i]:
-#				var nouveau_personnage = Personnage.new()
-#				nouveau_personnage.classe = GlobalData.classes[i]
-#				nouveau_personnage.calcul_stats()
-#				GlobalData.set_perso_actuel(nouveau_personnage)
 			get_node("Personnage").texture = load(
 				"res://Classes/" + GlobalData.classes[i] + 
 				"/" + GlobalData.classes[i].to_lower() + ".png"

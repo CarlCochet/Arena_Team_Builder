@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 enum TypeZone {
@@ -55,6 +55,7 @@ var sorts_lookup: Dictionary
 var equipements_lookup: Dictionary
 
 var equipe_actuelle: Equipe
+var equipe_test: Equipe
 var perso_actuel: int
 
 
@@ -117,6 +118,7 @@ func charger_equipes():
 		for equipe in json_content:
 			equipes.append(Equipe.new().from_json(equipe))
 	equipe_actuelle = equipes[0]
+	equipe_test = equipes[0]
 	sauver_equipes()
 
 

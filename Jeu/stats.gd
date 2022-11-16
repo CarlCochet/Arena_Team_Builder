@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name Stats
 
 
@@ -21,6 +21,8 @@ var blocage: int
 var soins: int
 var cc: int
 var renvoi_dommage: int
+var resistance_zone: int
+var invocations: int
 
 
 func _init():
@@ -43,6 +45,8 @@ func _init():
 	soins = 0
 	cc = 0
 	renvoi_dommage = 0
+	resistance_zone = 0
+	invocations = 1
 
 
 func add(stats):
@@ -65,7 +69,35 @@ func add(stats):
 	soins += stats.soins
 	cc += stats.cc
 	renvoi_dommage += stats.renvoi_dommage
+	resistance_zone += stats.resistance_zone
+	invocations += stats.invocations
 	return self
+
+
+
+func copy():
+	var stats_copy = Stats.new()
+	stats_copy.kamas = kamas
+	stats_copy.pa = pa
+	stats_copy.pm = pm
+	stats_copy.hp = hp
+	stats_copy.initiative = initiative
+	stats_copy.dommages_air = dommages_air
+	stats_copy.dommages_terre = dommages_terre
+	stats_copy.dommages_feu = dommages_feu
+	stats_copy.dommages_eau = dommages_eau
+	stats_copy.resistances_air = resistances_air
+	stats_copy.resistances_terre = resistances_terre
+	stats_copy.resistances_feu = resistances_feu
+	stats_copy.resistances_eau = resistances_eau
+	stats_copy.po = po
+	stats_copy.esquive = esquive
+	stats_copy.blocage = blocage
+	stats_copy.soins = soins
+	stats_copy.cc = cc
+	stats_copy.renvoi_dommage = renvoi_dommage
+	stats_copy.resistance_zone = resistance_zone
+	return stats_copy
 
 
 func from_json(data):
@@ -88,6 +120,7 @@ func from_json(data):
 	soins = data["soins"]
 	cc = data["cc"]
 	renvoi_dommage = data["renvoi_dommage"]
+	resistance_zone = data.get("resistance_zone", 0)
 	return self
 
 
@@ -111,5 +144,6 @@ func to_json():
 		"blocage": blocage,
 		"soins": soins,
 		"cc": cc,
-		"renvoi_dommage": renvoi_dommage
+		"renvoi_dommage": renvoi_dommage,
+		"resistance_zone": resistance_zone
 	}

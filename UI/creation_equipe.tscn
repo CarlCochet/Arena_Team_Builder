@@ -240,3 +240,4 @@ offset_left = 702.0
 offset_right = 899.0
 
 [connection signal="pressed" from="BoutonsPrincipaux/Fermer" to="." method="_on_fermer_pressed"]
+[connection signal="pressed" from="BoutonsPrincipaux/Tester" to="." method="_on_tester_pressed"]

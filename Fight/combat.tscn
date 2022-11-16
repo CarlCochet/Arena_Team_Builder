@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://egsxhipgew1"]
+[gd_scene load_steps=12 format=3 uid="uid://egsxhipgew1"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
 [ext_resource type="Texture2D" uid="uid://dn515cobe71df" path="res://Fight/Map/Images/tactic_mode.png" id="1_77dx5"]
 [ext_resource type="Texture2D" uid="uid://c2tgyt6ovtwf7" path="res://Fight/Map/Images/hole.png" id="2_g3262"]
 [ext_resource type="Texture2D" uid="uid://coyqsww2hpgyx" path="res://Fight/Map/Images/tiles_overlay.png" id="3_ts4gj"]
+[ext_resource type="Script" path="res://Fight/Scripts/map.gd" id="5_n7470"]
+[ext_resource type="PackedScene" uid="uid://cyuev8xs7ffv8" path="res://Fight/sorts.tscn" id="7_0vhv3"]
+[ext_resource type="PackedScene" uid="uid://cr4dhfep7jkje" path="res://Fight/timeline.tscn" id="8_rq6ft"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxif1"]
 texture = ExtResource("1_77dx5")
@@ -53,3 +56,8 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
+script = ExtResource("5_n7470")
+
+[node name="Sorts" parent="." instance=ExtResource("7_0vhv3")]
+
+[node name="Timeline" parent="." instance=ExtResource("8_rq6ft")]

@@ -13,7 +13,6 @@ func _ready():
 		"Dofus": "DOFUS",
 		"Familiers": "FAMILIER"
 	}
-	
 	get_node("Personnage").texture = load(
 		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
 		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"

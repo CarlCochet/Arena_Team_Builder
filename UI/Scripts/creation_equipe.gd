@@ -21,7 +21,7 @@ func _ready():
 
 
 func update_affichage():
-	get_node("AffichageEquipe").update()
+	get_node("AffichageEquipe").update(GlobalData.equipe_actuelle)
 	for i in range(len(GlobalData.equipe_actuelle.personnages)):
 		stats_primaires[i].update(i)
 		stats_secondaires[i].update(i)
@@ -47,3 +47,7 @@ func _input(event):
 func _on_fermer_pressed():
 	GlobalData.sauver_equipes()
 	get_tree().change_scene_to_file("res://UI/gestion_equipes.tscn")
+
+
+func _on_tester_pressed():
+	get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")

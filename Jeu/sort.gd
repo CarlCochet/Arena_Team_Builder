@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name Sort
 
 
@@ -27,6 +27,155 @@ func _init():
 	cooldown = 0
 	cooldown_global = 0
 	effets = {}
+
+
+func execute_effets(lanceur, cible, personnages):
+	pass
+
+
+func dommage_fixe(lanceur, cible, personnages):
+	pass
+
+
+func dommage_pourcent(lanceur, cible, personnages):
+	pass
+
+
+func dommage_air(lanceur, cible, personnages):
+	pass
+
+
+func dommage_terre(lanceur, cible, personnages):
+	pass
+
+
+func dommage_feu(lanceur, cible, personnages):
+	pass
+
+
+func dommage_eau(lanceur, cible, personnages):
+	pass
+
+
+func vole_air(lanceur, cible, personnages):
+	pass
+
+
+func vole_terre(lanceur, cible, personnages):
+	pass
+
+
+func vole_feu(lanceur, cible, personnages):
+	pass
+
+
+func vole_eau(lanceur, cible, personnages):
+	pass
+
+
+func soin(lanceur, cible, personnages):
+	pass
+
+
+func change_stats(lanceur, cible, personnages):
+	pass
+
+
+func vole_stats(lanceur, cible, personnages):
+	pass
+
+
+func pousse(lanceur, cible, personnages):
+	pass
+
+
+func attire(lanceur, cible, personnages):
+	pass
+
+
+func immobilise(lanceur, cible, personnages):
+	pass
+
+
+func teleporte(lanceur, cible, personnages):
+	pass
+
+
+func transpose(lanceur, cible, personnages):
+	pass
+
+
+func petrifie(lanceur, cible, personnages):
+	pass
+
+
+func rate_sort(lanceur, cible, personnages):
+	pass
+
+
+func revele_invisible(lanceur, cible, personnages):
+	pass
+
+
+func devient_invisible(lanceur, cible, personnages):
+	pass
+
+
+func desenvoute(lanceur, cible, personnages):
+	pass
+
+
+func non_portable(lanceur, cible, personnages):
+	pass
+
+
+func intransposable(lanceur, cible, personnages):
+	pass
+
+
+func immunise(lanceur, cible, personnages):
+	pass
+
+
+func stabilise(lanceur, cible, personnages):
+	pass
+
+
+func renvoie_sort(lanceur, cible, personnages):
+	pass
+
+
+func invocation(lanceur, cible, personnages):
+	pass
+
+
+func porte(lanceur, cible, personnages):
+	pass
+
+
+func lance(lanceur, cible, personnages):
+	pass
+
+
+func picole(lanceur, cible, personnages):
+	pass
+
+
+func sacrifice(lanceur, cible, personnages):
+	pass
+
+
+func tourne(lanceur, cible, personnages):
+	pass
+
+
+func immunise_retrait_pa(lanceur, cible, personnages):
+	pass
+
+
+func immunise_retrait_pm(lanceur, cible, personnages):
+	pass
+
 
 func from_json(data):
 	kamas = data["kamas"]
