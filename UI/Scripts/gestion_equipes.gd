@@ -76,3 +76,37 @@ func _on_creer_pressed():
 	GlobalData.equipes.append(Equipe.new())
 	GlobalData.equipe_actuelle = GlobalData.equipes[-1]
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
+
+
+func _on_exporter_pressed():
+	$ExportDialog.popup()
+
+
+func _on_importer_pressed():
+	$ImportDialog.popup()
+
+
+func _on_export_dialog_file_selected(path):
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	file.store_string(JSON.stringify(GlobalData.equipe_actuelle.to_json()))
+
+
+func _on_import_dialog_file_selected(path):
+	var file = FileAccess.open(path, FileAccess.READ)
+	var equipe_json = JSON.parse_string(file.get_as_text())
+	GlobalData.equipes.append(Equipe.new().from_json(equipe_json))
+	
+	var previsu_equipe = previsu.instantiate()
+	var equipe_id = len(equipes) - 1
+	previsu_equipe.connect("pressed", previsu_pressed.bind(equipe_id))
+	equipes.append(previsu_equipe)
+	equipes_grid.add_child(previsu_equipe)
+	
+	previsu_equipe.update(equipe_id)
+	equipes[equipe_selectionnee].button_pressed = false
+	equipes[-1].button_pressed = true
+	GlobalData.equipe_actuelle = GlobalData.equipes[-1]
+	equipe_selectionnee = equipe_id
+	affichage_personnages.update()
+	
+	GlobalData.sauver_equipes()
