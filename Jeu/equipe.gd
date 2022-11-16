@@ -22,7 +22,7 @@ func calcul_budget():
 func sort_ini():
 	personnages.sort_custom(
 		func(a: Personnage, b: Personnage): 
-			return (a.stats.initiative > b.stats.initiative) or (not a.classe.is_empty() and b.classe.is_empty())
+			return (a.stats.initiative >= b.stats.initiative) and not a.classe.is_empty()
 	)
 	return self
 

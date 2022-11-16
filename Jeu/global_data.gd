@@ -46,7 +46,6 @@ func charger_equipements():
 	var equipement: Equipement
 	
 	for categorie in json_data.keys():
-		print(categorie)
 		if categorie not in equipements_lookup.keys():
 			equipements_lookup[categorie] = []
 		for nom_equipement in json_data[categorie].keys():

@@ -11,7 +11,7 @@ var classe_selected: int
 func _ready():
 	for i in range(len(classes)):
 		classes[i].connect("pressed", _on_class_pressed.bind(i))
-	if GlobalData.get_perso_actuel().classe == "":
+	if GlobalData.get_perso_actuel().classe.is_empty():
 		GlobalData.get_perso_actuel().classe = GlobalData.classes[0]
 		GlobalData.get_perso_actuel().calcul_stats()
 	personnage.texture = load(
@@ -19,6 +19,7 @@ func _ready():
 		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
 	)
 	classe_initiale = GlobalData.classes.find(GlobalData.get_perso_actuel().classe)
+	classe_selected = classe_initiale
 	classes[classe_initiale].button_pressed = true
 
 

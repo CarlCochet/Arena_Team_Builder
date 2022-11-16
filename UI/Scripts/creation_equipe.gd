@@ -34,6 +34,7 @@ func _on_recruter_pressed(id):
 
 func _on_supprimer_pressed(id):
 	GlobalData.equipe_actuelle.personnages[id - 6] = Personnage.new()
+	GlobalData.equipe_actuelle.sort_ini()
 	update_affichage()
 
 
