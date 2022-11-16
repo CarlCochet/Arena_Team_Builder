@@ -12,6 +12,7 @@ func _ready():
 	equipes_grid = get_node("ScrollContainer/Equipes")
 	affichage_personnages = get_node("AffichageEquipe")
 	equipes = []
+	equipe_selectionnee = 0
 	GlobalData.charger_equipes()
 	generer_affichage()
 
@@ -24,7 +25,7 @@ func generer_affichage():
 		equipes.append(previsu_equipe)
 		equipes_grid.add_child(previsu_equipe)
 		previsu_equipe.update(i)
-	equipes[0].button_pressed = true
+	equipes[equipe_selectionnee].button_pressed = true
 	affichage_personnages.update()
 
 
@@ -96,17 +97,28 @@ func _on_import_dialog_file_selected(path):
 	var equipe_json = JSON.parse_string(file.get_as_text())
 	GlobalData.equipes.append(Equipe.new().from_json(equipe_json))
 	
-	var previsu_equipe = previsu.instantiate()
-	var equipe_id = len(equipes) - 1
-	previsu_equipe.connect("pressed", previsu_pressed.bind(equipe_id))
-	equipes.append(previsu_equipe)
-	equipes_grid.add_child(previsu_equipe)
+	for equipe in equipes_grid.get_children():
+		equipe.queue_free()
+		equipes_grid.get_children()[equipe_selectionnee].queue_free()
 	
-	previsu_equipe.update(equipe_id)
-	equipes[equipe_selectionnee].button_pressed = false
-	equipes[-1].button_pressed = true
-	GlobalData.equipe_actuelle = GlobalData.equipes[-1]
-	equipe_selectionnee = equipe_id
+	equipe_selectionnee = len(GlobalData.equipes) - 1
+	equipes.clear()
+	GlobalData.equipe_actuelle = GlobalData.equipes[equipe_selectionnee]
+	generer_affichage()
 	affichage_personnages.update()
-	
 	GlobalData.sauver_equipes()
+	
+#	var previsu_equipe = previsu.instantiate()
+#	var equipe_id = len(equipes) - 1
+#	previsu_equipe.connect("pressed", previsu_pressed.bind(equipe_id))
+#	equipes.append(previsu_equipe)
+#	equipes_grid.add_child(previsu_equipe)
+#
+#	previsu_equipe.update(equipe_id)
+#	equipes[equipe_selectionnee].button_pressed = false
+#	equipes[-1].button_pressed = true
+#	GlobalData.equipe_actuelle = GlobalData.equipes[-1]
+#	equipe_selectionnee = equipe_id
+#	affichage_personnages.update()
+#
+#	GlobalData.sauver_equipes()
