@@ -1,5 +1,8 @@
 extends TextureRect
 
 
+@onready var cout_total: Label = $CoutTotal
+
+
 func update():
-	get_node("CoutTotal").text = str(GlobalData.equipe_actuelle.calcul_budget())
+	cout_total.text = str(GlobalData.equipe_actuelle.calcul_budget())

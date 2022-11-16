@@ -16,6 +16,7 @@ texture = ExtResource("1_iaggs")
 script = ExtResource("2_xv421")
 
 [node name="CoutTotal" type="Label" parent="."]
+layout_mode = 0
 offset_left = 24.0
 offset_top = -1.0
 offset_right = 76.0

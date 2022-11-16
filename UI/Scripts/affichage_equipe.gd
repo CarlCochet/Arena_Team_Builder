@@ -1,13 +1,9 @@
 extends Control
 
 
-var equipe_nodes
-var fond_equipes
+@onready var equipe_nodes: Array = $Equipe.get_children()
+@onready var fond_equipes: Array = $FondEquipe.get_children()
 
-
-func _ready():
-	equipe_nodes = get_node("Equipe").get_children()
-	fond_equipes = get_node("FondEquipe").get_children()
 
 func update():
 	if GlobalData.equipe_actuelle.personnages:
