@@ -28,6 +28,7 @@ func _init():
 	cooldown_global = 0
 	effets = {}
 
+
 func from_json(data):
 	kamas = data["kamas"]
 	pa = data["pa"]

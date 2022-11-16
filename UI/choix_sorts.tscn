@@ -26,7 +26,6 @@ grow_vertical = 2
 script = ExtResource("1_f5eif")
 
 [node name="Background" type="ColorRect" parent="."]
-layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
@@ -35,7 +34,6 @@ scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="Personnage" type="TextureRect" parent="."]
-layout_mode = 0
 offset_left = 93.0
 offset_top = 7.0
 offset_right = 163.0
@@ -43,19 +41,16 @@ offset_bottom = 135.0
 texture = ExtResource("1_txvm2")
 
 [node name="StatsPrimaires" parent="." instance=ExtResource("2_g4v8w")]
-layout_mode = 0
 offset_top = 66.0
 offset_right = 250.0
 offset_bottom = 177.0
 
 [node name="StatsSecondaires" parent="." instance=ExtResource("3_6q5fj")]
-layout_mode = 0
 offset_top = 177.0
 offset_right = 248.0
 offset_bottom = 630.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 0
 offset_left = 30.0
 offset_top = 693.0
 offset_right = 160.0
@@ -63,7 +58,6 @@ offset_bottom = 797.0
 scale = Vector2(1.5, 1.5)
 
 [node name="Valider" type="TextureButton" parent="GridContainer"]
-layout_mode = 2
 offset_right = 130.0
 offset_bottom = 32.0
 texture_normal = ExtResource("5_r1jrg")
@@ -71,7 +65,6 @@ texture_pressed = ExtResource("6_71oce")
 texture_hover = ExtResource("7_x2nyj")
 
 [node name="Equipements" type="TextureButton" parent="GridContainer"]
-layout_mode = 2
 offset_top = 36.0
 offset_right = 130.0
 offset_bottom = 68.0
@@ -80,7 +73,6 @@ texture_pressed = ExtResource("5_nq0h2")
 texture_hover = ExtResource("6_3uysc")
 
 [node name="Retour" type="TextureButton" parent="GridContainer"]
-layout_mode = 2
 offset_top = 72.0
 offset_right = 130.0
 offset_bottom = 104.0
@@ -89,7 +81,6 @@ texture_pressed = ExtResource("8_jx3lw")
 texture_hover = ExtResource("9_76y1y")
 
 [node name="GridSortsFond" type="GridContainer" parent="."]
-layout_mode = 0
 offset_left = 712.0
 offset_top = 50.0
 offset_right = 1136.0
@@ -98,48 +89,41 @@ theme_override_constants/h_separation = 20
 columns = 6
 
 [node name="TextureButton" type="TextureButton" parent="GridSortsFond"]
-layout_mode = 2
 offset_right = 54.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton2" type="TextureButton" parent="GridSortsFond"]
-layout_mode = 2
 offset_left = 74.0
 offset_right = 128.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton3" type="TextureButton" parent="GridSortsFond"]
-layout_mode = 2
 offset_left = 148.0
 offset_right = 202.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton4" type="TextureButton" parent="GridSortsFond"]
-layout_mode = 2
 offset_left = 222.0
 offset_right = 276.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton5" type="TextureButton" parent="GridSortsFond"]
-layout_mode = 2
 offset_left = 296.0
 offset_right = 350.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="TextureButton6" type="TextureButton" parent="GridSortsFond"]
-layout_mode = 2
 offset_left = 370.0
 offset_right = 424.0
 offset_bottom = 55.0
 texture_normal = ExtResource("10_g5q0f")
 
 [node name="GridSortsCartes" type="GridContainer" parent="."]
-layout_mode = 0
 offset_left = 380.0
 offset_top = 150.0
 offset_right = 1741.0
@@ -148,12 +132,10 @@ scale = Vector2(0.8, 0.8)
 columns = 5
 
 [node name="AffichageBudget" parent="." instance=ExtResource("22_pdjrf")]
-layout_mode = 0
 offset_left = 826.0
 offset_right = 1023.0
 
 [node name="GridSortsLogos" type="GridContainer" parent="."]
-layout_mode = 0
 offset_left = 712.0
 offset_top = 50.0
 offset_right = 752.0

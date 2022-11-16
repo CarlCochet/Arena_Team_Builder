@@ -3,10 +3,10 @@ extends Control
 
 var equipe: Equipe
 
-@onready var boutons_recruter: Array = $GridStatsSecondaires.get_children()
+@onready var boutons_recruter: Array = $GridRecruter.get_children()
 @onready var affichage_equipe: Control = $AffichageEquipe
-@onready var stats_primaires: Array = $GridRecruter.get_children()
-@onready var stats_secondaires: Array = $GridStatsPrimaires.get_children()
+@onready var stats_primaires: Array = $GridStatsPrimaires.get_children()
+@onready var stats_secondaires: Array = $GridStatsSecondaires.get_children()
 @onready var affichage_budget: TextureRect = $AffichageBudget
 
 

@@ -79,5 +79,6 @@ func _on_retour_pressed():
 
 
 func _on_valider_pressed():
+	GlobalData.equipe_actuelle.sort_ini()
 	GlobalData.sauver_equipes()
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")

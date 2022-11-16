@@ -10,6 +10,7 @@ var categorie_lookup: Dictionary
 @onready var stats_primaires: TextureRect = $StatsPrimaires
 @onready var stats_secondaires: TextureRect = $StatsSecondaires
 
+
 func _ready():
 	categorie_lookup = {
 		"Armes": "ARME",
@@ -79,6 +80,7 @@ func _on_sorts_pressed():
 
 
 func _on_valider_pressed():
+	GlobalData.equipe_actuelle.sort_ini()
 	GlobalData.sauver_equipes()
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
 

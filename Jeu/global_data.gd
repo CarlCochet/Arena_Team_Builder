@@ -75,7 +75,7 @@ func charger_equipes():
 		var json_content = JSON.parse_string(file_access.get_as_text())
 		equipes = []
 		for equipe in json_content:
-			equipes.append(Equipe.new().from_json(equipe))
+			equipes.append(Equipe.new().from_json(equipe).sort_ini())
 	equipe_actuelle = equipes[0]
 	sauver_equipes()
 

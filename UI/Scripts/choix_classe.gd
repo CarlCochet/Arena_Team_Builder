@@ -43,6 +43,7 @@ func _input(event):
 
 
 func _on_fermer_pressed():
+	GlobalData.equipe_actuelle.sort_ini()
 	GlobalData.sauver_equipes()
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
 

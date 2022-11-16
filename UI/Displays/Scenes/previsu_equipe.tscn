@@ -15,7 +15,6 @@ texture_hover = ExtResource("3_ypwyv")
 script = ExtResource("4_reduk")
 
 [node name="Equipe" type="GridContainer" parent="."]
-layout_mode = 0
 offset_top = 8.0
 offset_right = 144.0
 offset_bottom = 400.0
@@ -23,32 +22,26 @@ scale = Vector2(0.801, 0.801)
 columns = 2
 
 [node name="Personnage" type="TextureRect" parent="Equipe"]
-layout_mode = 2
 
 [node name="Personnage2" type="TextureRect" parent="Equipe"]
-layout_mode = 2
 offset_left = 4.0
 offset_right = 4.0
 
 [node name="Personnage3" type="TextureRect" parent="Equipe"]
-layout_mode = 2
 offset_top = 4.0
 offset_bottom = 4.0
 
 [node name="Personnage4" type="TextureRect" parent="Equipe"]
-layout_mode = 2
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 4.0
 offset_bottom = 4.0
 
 [node name="Personnage5" type="TextureRect" parent="Equipe"]
-layout_mode = 2
 offset_top = 8.0
 offset_bottom = 8.0
 
 [node name="Personnage6" type="TextureRect" parent="Equipe"]
-layout_mode = 2
 offset_left = 4.0
 offset_top = 8.0
 offset_right = 4.0

@@ -98,7 +98,7 @@ func _on_export_dialog_file_selected(path):
 func _on_import_dialog_file_selected(path):
 	var file = FileAccess.open(path, FileAccess.READ)
 	var equipe_json = JSON.parse_string(file.get_as_text())
-	GlobalData.equipes.append(Equipe.new().from_json(equipe_json))
+	GlobalData.equipes.append(Equipe.new().from_json(equipe_json).sort_ini())
 	
 	for equipe in equipes_grid.get_children():
 		equipe.queue_free()
