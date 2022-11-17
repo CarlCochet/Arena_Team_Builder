@@ -27,7 +27,7 @@ func generer_affichage():
 		equipes_grid.add_child(previsu_equipe)
 		previsu_equipe.update(i)
 	equipes[equipe_selectionnee].button_pressed = true
-	affichage_personnages.update()
+	affichage_personnages.update(GlobalData.equipe_actuelle)
 
 
 func previsu_pressed(id):
@@ -108,5 +108,5 @@ func _on_import_dialog_file_selected(path):
 	equipes.clear()
 	GlobalData.equipe_actuelle = GlobalData.equipes[equipe_selectionnee]
 	generer_affichage()
-	affichage_personnages.update()
+	affichage_personnages.update(GlobalData.equipe_actuelle)
 	GlobalData.sauver_equipes()

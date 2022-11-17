@@ -23,7 +23,6 @@ func _ready():
 
 
 func _init():
-	print("INIT!")
 	classe = ""
 	stats = Stats.new()
 	equipements = {
@@ -55,7 +54,6 @@ func ajoute_sort(nom_sort):
 
 
 func copy(personnage: Personnage):
-	print("COPY")
 	classe = personnage.classe
 	stats =  personnage.stats.copy()
 	equipements = {}

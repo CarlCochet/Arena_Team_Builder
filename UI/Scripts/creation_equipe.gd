@@ -20,7 +20,7 @@ func _ready():
 
 
 func update_affichage():
-	affichage_equipe.update()
+	affichage_equipe.update(GlobalData.equipe_actuelle)
 	for i in range(len(GlobalData.equipe_actuelle.personnages)):
 		stats_primaires[i].update(i)
 		stats_secondaires[i].update(i)

@@ -10,6 +10,16 @@ config_version=5
 
 _global_script_classes=[{
 "base": "Node2D",
+"class": &"Combat",
+"language": &"GDScript",
+"path": "res://Fight/Scripts/combat.gd"
+}, {
+"base": "Node2D",
+"class": &"Combattant",
+"language": &"GDScript",
+"path": "res://Fight/Scripts/combattant.gd"
+}, {
+"base": "Node2D",
 "class": &"Equipe",
 "language": &"GDScript",
 "path": "res://Jeu/equipe.gd"
@@ -35,6 +45,8 @@ _global_script_classes=[{
 "path": "res://Jeu/stats.gd"
 }]
 _global_script_class_icons={
+"Combat": "",
+"Combattant": "",
 "Equipe": "",
 "Equipement": "",
 "Personnage": "",

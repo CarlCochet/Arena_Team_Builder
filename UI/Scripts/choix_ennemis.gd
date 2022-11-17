@@ -1,17 +1,16 @@
 extends Control
 
 
-var previsu = preload("res://UI/Displays/Scenes/previsu_equipe.tscn")
-var equipes_grid
+var previsu: PackedScene = preload("res://UI/Displays/Scenes/previsu_equipe.tscn")
 var equipes: Array
-var affichage_personnages
 var equipe_selectionnee: int
 
+@onready var equipes_grid: GridContainer = $ScrollContainer/Equipes
+@onready var affichage_personnages: Control = $AffichageEquipe
 
 func _ready():
-	equipes_grid = get_node("ScrollContainer/Equipes")
-	affichage_personnages = get_node("AffichageEquipe")
 	equipes = []
+	equipe_selectionnee = 0
 	generer_affichage()
 
 
@@ -23,7 +22,7 @@ func generer_affichage():
 		equipes.append(previsu_equipe)
 		equipes_grid.add_child(previsu_equipe)
 		previsu_equipe.update(i)
-	equipes[0].button_pressed = true
+	equipes[equipe_selectionnee].button_pressed = true
 	affichage_personnages.update(GlobalData.equipe_test)
 
 

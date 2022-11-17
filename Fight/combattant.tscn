@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b02mrbqksygw4" path="res://Classes/Cra/cra.png" id="4_eq6yq"]
 
 [node name="Combattant" type="Node2D"]
+z_index = 3
 script = ExtResource("1_8jfsj")
 
 [node name="Cercle" type="Sprite2D" parent="."]
