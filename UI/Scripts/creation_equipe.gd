@@ -2,29 +2,29 @@ extends Control
 
 
 var equipe: Equipe
-var stats_primaires
-var stats_secondaires
-var boutons_recruter
+
+@onready var boutons_recruter: Array = $GridRecruter.get_children()
+@onready var affichage_equipe: Control = $AffichageEquipe
+@onready var stats_primaires: Array = $GridStatsPrimaires.get_children()
+@onready var stats_secondaires: Array = $GridStatsSecondaires.get_children()
+@onready var affichage_budget: TextureRect = $AffichageBudget
 
 
 func _ready():
-	boutons_recruter = get_node("GridRecruter").get_children()
 	for i in range(len(boutons_recruter)):
 		if i < 6:
 			boutons_recruter[i].connect("pressed", _on_recruter_pressed.bind(i))
 		else:
 			boutons_recruter[i].connect("pressed", _on_supprimer_pressed.bind(i))
-	stats_primaires = get_node("GridStatsPrimaires").get_children()
-	stats_secondaires = get_node("GridStatsSecondaires").get_children()
 	update_affichage()
 
 
 func update_affichage():
-	get_node("AffichageEquipe").update()
+	affichage_equipe.update()
 	for i in range(len(GlobalData.equipe_actuelle.personnages)):
 		stats_primaires[i].update(i)
 		stats_secondaires[i].update(i)
-	get_node("AffichageBudget").update()
+	affichage_budget.update()
 
 
 func _on_recruter_pressed(id):
@@ -34,6 +34,7 @@ func _on_recruter_pressed(id):
 
 func _on_supprimer_pressed(id):
 	GlobalData.equipe_actuelle.personnages[id - 6] = Personnage.new()
+	GlobalData.equipe_actuelle.sort_ini()
 	update_affichage()
 
 

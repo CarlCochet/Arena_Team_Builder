@@ -1,13 +1,8 @@
 extends TextureRect
 
 
-var grid_sorts
-var grid_equipements
-
-
-func _ready():
-	grid_sorts = get_node("GridSorts")
-	grid_equipements = get_node("GridEquipements")
+@onready var grid_sorts: GridContainer = $GridSorts
+@onready var grid_equipements: GridContainer = $GridEquipements
 
 
 func update(id):

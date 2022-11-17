@@ -1,6 +1,7 @@
 extends Node
 class_name Equipement
 
+
 enum Categorie {VIDE, ARME, FAMILIER, COIFFE, CAPE, DOFUS}
 
 var categorie: Categorie

@@ -1,12 +1,9 @@
 extends TextureButton
 
 
-var equipe_nodes
-var signal_id
+var signal_id: int
 
-
-func _ready():
-	equipe_nodes = get_node("Equipe").get_children()
+@onready var equipe_nodes: Array = get_node("Equipe").get_children()
 
 
 func update(id):

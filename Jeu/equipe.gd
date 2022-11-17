@@ -19,6 +19,14 @@ func calcul_budget():
 	return budget
 
 
+func sort_ini():
+	personnages.sort_custom(
+		func(a: Personnage, b: Personnage): 
+			return (a.stats.initiative >= b.stats.initiative) and not a.classe.is_empty()
+	)
+	return self
+
+
 func from_json(personnages_json):
 	personnages = []
 	for personnage in personnages_json:

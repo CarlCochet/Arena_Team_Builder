@@ -2,15 +2,16 @@ extends Control
 
 
 var previsu = preload("res://UI/Displays/Scenes/previsu_equipe.tscn")
-var equipes_grid
 var equipes: Array
-var affichage_personnages
 var equipe_selectionnee: int
+
+@onready var equipes_grid: GridContainer = $ScrollContainer/Equipes
+@onready var affichage_personnages: Control = $AffichageEquipe
+@onready var export_dialog: FileDialog = $ExportDialog
+@onready var import_dialog: FileDialog = $ImportDialog
 
 
 func _ready():
-	equipes_grid = get_node("ScrollContainer/Equipes")
-	affichage_personnages = get_node("AffichageEquipe")
 	equipes = []
 	equipe_selectionnee = 0
 	GlobalData.charger_equipes()
@@ -44,9 +45,11 @@ func _on_supprimer_pressed():
 	if len(GlobalData.equipes) > 1:
 		GlobalData.equipes.remove_at(equipe_selectionnee)
 		equipes.remove_at(equipe_selectionnee)
+		
 		for equipe in equipes_grid.get_children():
 			equipe.queue_free()
 			equipes_grid.get_children()[equipe_selectionnee].queue_free()
+		
 		equipe_selectionnee = 0
 		equipes.clear()
 		GlobalData.equipe_actuelle = GlobalData.equipes[equipe_selectionnee]
@@ -80,11 +83,11 @@ func _on_creer_pressed():
 
 
 func _on_exporter_pressed():
-	$ExportDialog.popup()
+	export_dialog.popup()
 
 
 func _on_importer_pressed():
-	$ImportDialog.popup()
+	import_dialog.popup()
 
 
 func _on_export_dialog_file_selected(path):
@@ -95,7 +98,7 @@ func _on_export_dialog_file_selected(path):
 func _on_import_dialog_file_selected(path):
 	var file = FileAccess.open(path, FileAccess.READ)
 	var equipe_json = JSON.parse_string(file.get_as_text())
-	GlobalData.equipes.append(Equipe.new().from_json(equipe_json))
+	GlobalData.equipes.append(Equipe.new().from_json(equipe_json).sort_ini())
 	
 	for equipe in equipes_grid.get_children():
 		equipe.queue_free()
@@ -107,18 +110,3 @@ func _on_import_dialog_file_selected(path):
 	generer_affichage()
 	affichage_personnages.update()
 	GlobalData.sauver_equipes()
-	
-#	var previsu_equipe = previsu.instantiate()
-#	var equipe_id = len(equipes) - 1
-#	previsu_equipe.connect("pressed", previsu_pressed.bind(equipe_id))
-#	equipes.append(previsu_equipe)
-#	equipes_grid.add_child(previsu_equipe)
-#
-#	previsu_equipe.update(equipe_id)
-#	equipes[equipe_selectionnee].button_pressed = false
-#	equipes[-1].button_pressed = true
-#	GlobalData.equipe_actuelle = GlobalData.equipes[-1]
-#	equipe_selectionnee = equipe_id
-#	affichage_personnages.update()
-#
-#	GlobalData.sauver_equipes()
