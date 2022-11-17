@@ -3,10 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://udvgjoussb5u" path="res://UI/Displays/budget_display.png" id="1_iaggs"]
 [ext_resource type="Script" path="res://UI/Scripts/affichage_budget.gd" id="2_xv421"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_s7tb7"]
-font_size = 23
-font_color = Color(1, 0.768627, 0, 1)
-outline_size = 5
+[sub_resource type="LabelSettings" id="LabelSettings_8p7l6"]
+font_size = 22
+font_color = Color(1, 0.752941, 0, 1)
+outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [node name="AffichageBudget" type="TextureRect"]
@@ -16,11 +16,13 @@ texture = ExtResource("1_iaggs")
 script = ExtResource("2_xv421")
 
 [node name="CoutTotal" type="Label" parent="."]
+layout_mode = 0
 offset_left = 24.0
 offset_top = -1.0
 offset_right = 76.0
 offset_bottom = 34.0
-text = "0"
-label_settings = SubResource("LabelSettings_s7tb7")
+text = "6000
+"
+label_settings = SubResource("LabelSettings_8p7l6")
 horizontal_alignment = 1
 vertical_alignment = 1
