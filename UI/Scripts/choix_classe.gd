@@ -1,23 +1,25 @@
 extends Control
 
 
-var classes: Array
 var classe_initiale: int
 var classe_selected: int
 
+@onready var personnage: TextureRect = $Personnage
+@onready var classes: Array = $Classes.get_children()
+
 
 func _ready():
-	classes = get_node("Classes").get_children()
 	for i in range(len(classes)):
 		classes[i].connect("pressed", _on_class_pressed.bind(i))
-	if GlobalData.get_perso_actuel().classe == "":
+	if GlobalData.get_perso_actuel().classe.is_empty():
 		GlobalData.get_perso_actuel().classe = GlobalData.classes[0]
 		GlobalData.get_perso_actuel().calcul_stats()
-	get_node("Personnage").texture = load(
+	personnage.texture = load(
 		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
 		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
 	)
 	classe_initiale = GlobalData.classes.find(GlobalData.get_perso_actuel().classe)
+	classe_selected = classe_initiale
 	classes[classe_initiale].button_pressed = true
 
 
@@ -28,7 +30,7 @@ func _on_class_pressed(id):
 			classes[i].button_pressed = false
 		else:
 			classes[i].button_pressed = true
-			get_node("Personnage").texture = load(
+			personnage.texture = load(
 				"res://Classes/" + GlobalData.classes[i] + 
 				"/" + GlobalData.classes[i].to_lower() + ".png"
 			)
@@ -42,12 +44,13 @@ func _input(event):
 
 
 func _on_fermer_pressed():
+	GlobalData.equipe_actuelle.sort_ini()
+	GlobalData.sauver_equipes()
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
 
 
 func _on_valider_pressed():
 	if classe_selected != classe_initiale:
-		print(classe_selected, " / ", classe_initiale)
 		var nouveau_personnage = Personnage.new()
 		nouveau_personnage.classe = GlobalData.classes[classe_selected]
 		nouveau_personnage.calcul_stats()

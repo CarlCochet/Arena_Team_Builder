@@ -87,7 +87,6 @@ func charger_equipements():
 	var equipement: Equipement
 	
 	for categorie in json_data.keys():
-		print(categorie)
 		if categorie not in equipements_lookup.keys():
 			equipements_lookup[categorie] = []
 		for nom_equipement in json_data[categorie].keys():
@@ -116,7 +115,7 @@ func charger_equipes():
 		var json_content = JSON.parse_string(file_access.get_as_text())
 		equipes = []
 		for equipe in json_content:
-			equipes.append(Equipe.new().from_json(equipe))
+			equipes.append(Equipe.new().from_json(equipe).sort_ini())
 	equipe_actuelle = equipes[0]
 	equipe_test = equipes[0]
 	sauver_equipes()

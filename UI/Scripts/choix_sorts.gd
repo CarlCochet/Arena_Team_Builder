@@ -1,27 +1,29 @@
 extends Control
 
 
-var grid_sorts
-var grid_logos
+@onready var personnage: TextureRect = $Personnage
+@onready var grid_sorts: GridContainer = $GridSortsCartes
+@onready var grid_logos: GridContainer = $GridSortsLogos
+@onready var affichage_budget: TextureRect = $AffichageBudget
+@onready var stats_primaires: TextureRect = $StatsPrimaires
+@onready var stats_secondaires: TextureRect = $StatsSecondaires
 
 
 func _ready():
 	if GlobalData.get_perso_actuel().classe:
-		get_node("Personnage").texture = load(
+		personnage.texture = load(
 			"res://Classes/" + GlobalData.get_perso_actuel().classe + 
 			"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
 		)
-	grid_sorts = get_node("GridSortsCartes")
-	grid_logos = get_node("GridSortsLogos")
 	update_cartes()
 	update_affichage()
 	update_logos()
 
 
 func update_affichage():
-	get_node("AffichageBudget").update()
-	get_node("StatsPrimaires").update(GlobalData.perso_actuel)
-	get_node("StatsSecondaires").update(GlobalData.perso_actuel)
+	affichage_budget.update()
+	stats_primaires.update(GlobalData.perso_actuel)
+	stats_secondaires.update(GlobalData.perso_actuel)
 
 
 func update_cartes():
@@ -77,4 +79,6 @@ func _on_retour_pressed():
 
 
 func _on_valider_pressed():
+	GlobalData.equipe_actuelle.sort_ini()
+	GlobalData.sauver_equipes()
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")

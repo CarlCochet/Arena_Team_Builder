@@ -1,18 +1,14 @@
 extends Control
 
 
-var equipe_nodes
-var fond_equipes
+@onready var equipe_nodes: Array = $Equipe.get_children()
+@onready var fond_equipes: Array = $FondEquipe.get_children()
 
 
-func _ready():
-	equipe_nodes = get_node("Equipe").get_children()
-	fond_equipes = get_node("FondEquipe").get_children()
-
-func update(equipe):
-	if equipe.personnages:
-		for i in range(len(equipe.personnages)):
-			var personnage = equipe.personnages[i]
+func update():
+	if GlobalData.equipe_actuelle.personnages:
+		for i in range(len(GlobalData.equipe_actuelle.personnages)):
+			var personnage = GlobalData.equipe_actuelle.personnages[i]
 			if personnage.classe:
 				equipe_nodes[i].texture = load("res://Classes/" + personnage.classe + "/" + personnage.classe.to_lower() + ".png")
 				fond_equipes[i].update(i)

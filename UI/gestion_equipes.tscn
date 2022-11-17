@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://box1ypk4dtvni"]
+[gd_scene load_steps=18 format=3 uid="uid://box1ypk4dtvni"]
 
 [ext_resource type="Script" path="res://UI/Scripts/gestion_equipes.gd" id="1_4qtop"]
 [ext_resource type="PackedScene" uid="uid://rcby27lpo007" path="res://UI/Displays/Scenes/affichage_equipe.tscn" id="1_pq5c6"]
@@ -11,6 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://b4h88cs2et6xr" path="res://UI/Buttons/creer_base.png" id="9_0ucjf"]
 [ext_resource type="Texture2D" uid="uid://dxkee3lfb7ta6" path="res://UI/Buttons/creer_clicked.png" id="10_0whlk"]
 [ext_resource type="Texture2D" uid="uid://cqi7smwgtmaar" path="res://UI/Buttons/creer_hovered.png" id="11_bu8cj"]
+[ext_resource type="Texture2D" uid="uid://d4xf1atexnwr" path="res://UI/Buttons/exporter_base.png" id="12_3vtv8"]
+[ext_resource type="Texture2D" uid="uid://y0v0vx3rsmor" path="res://UI/Buttons/exporter_clicked.png" id="13_u8ei4"]
+[ext_resource type="Texture2D" uid="uid://nj210irru7sh" path="res://UI/Buttons/exporter_hovered.png" id="14_flckn"]
+[ext_resource type="Texture2D" uid="uid://den8xqkrcpr6x" path="res://UI/Buttons/importer_base.png" id="15_fhykk"]
+[ext_resource type="Texture2D" uid="uid://cmgmt6lj5sar0" path="res://UI/Buttons/importer_clicked.png" id="16_q82ej"]
+[ext_resource type="Texture2D" uid="uid://b4c0dbfgks1by" path="res://UI/Buttons/importer_hovered.png" id="17_durn8"]
 
 [node name="GestionEquipes" type="Control"]
 layout_mode = 3
@@ -30,26 +36,26 @@ scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="AffichageEquipe" parent="." instance=ExtResource("1_pq5c6")]
-offset_top = 24.0
-offset_bottom = 24.0
+offset_top = 41.0
+offset_bottom = 41.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_left = 30.0
-offset_top = 370.0
+offset_top = 380.0
 offset_right = 1216.0
-offset_bottom = 720.0
+offset_bottom = 730.0
 scale = Vector2(1.3, 1.3)
 
 [node name="Equipes" type="GridContainer" parent="ScrollContainer"]
 columns = 99
 
 [node name="Boutons" type="GridContainer" parent="."]
-offset_left = 503.0
+offset_left = 100.0
 offset_top = 845.0
-offset_right = 901.0
+offset_right = 1046.0
 offset_bottom = 885.0
 scale = Vector2(1.5, 1.5)
-columns = 3
+columns = 6
 
 [node name="Supprimer" type="TextureButton" parent="Boutons"]
 offset_right = 130.0
@@ -74,6 +80,47 @@ texture_normal = ExtResource("9_0ucjf")
 texture_pressed = ExtResource("10_0whlk")
 texture_hover = ExtResource("11_bu8cj")
 
+[node name="VSeparator" type="VSeparator" parent="Boutons"]
+offset_left = 402.0
+offset_right = 678.0
+offset_bottom = 32.0
+theme_override_constants/separation = 276
+
+[node name="Exporter" type="TextureButton" parent="Boutons"]
+offset_left = 682.0
+offset_right = 812.0
+offset_bottom = 32.0
+texture_normal = ExtResource("12_3vtv8")
+texture_pressed = ExtResource("13_u8ei4")
+texture_hover = ExtResource("14_flckn")
+
+[node name="Importer" type="TextureButton" parent="Boutons"]
+offset_left = 816.0
+offset_right = 946.0
+offset_bottom = 32.0
+texture_normal = ExtResource("15_fhykk")
+texture_pressed = ExtResource("16_q82ej")
+texture_hover = ExtResource("17_durn8")
+
+[node name="ExportDialog" type="FileDialog" parent="."]
+position = Vector2i(400, 100)
+size = Vector2i(800, 600)
+access = 2
+filters = PackedStringArray("*.json ; JSON Files")
+
+[node name="ImportDialog" type="FileDialog" parent="."]
+title = "Open a File"
+position = Vector2i(400, 100)
+size = Vector2i(800, 600)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json ; JSON Files")
+
 [connection signal="pressed" from="Boutons/Supprimer" to="." method="_on_supprimer_pressed"]
 [connection signal="pressed" from="Boutons/Editer" to="." method="_on_editer_pressed"]
 [connection signal="pressed" from="Boutons/Creer" to="." method="_on_creer_pressed"]
+[connection signal="pressed" from="Boutons/Exporter" to="." method="_on_exporter_pressed"]
+[connection signal="pressed" from="Boutons/Importer" to="." method="_on_importer_pressed"]
+[connection signal="file_selected" from="ExportDialog" to="." method="_on_export_dialog_file_selected"]
+[connection signal="file_selected" from="ImportDialog" to="." method="_on_import_dialog_file_selected"]

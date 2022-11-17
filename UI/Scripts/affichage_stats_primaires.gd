@@ -1,10 +1,17 @@
 extends TextureRect
 
 
+@onready var pm: Label = $PM
+@onready var hp: Label = $HP
+@onready var ini: Label = $Ini
+@onready var pa: Label = $PA
+@onready var kamas: Label = $Kamas
+
+
 func update(id):
 	var personnage = GlobalData.equipe_actuelle.personnages[id]
-	get_node("PM").text = str(personnage.stats.pm)
-	get_node("HP").text = str(personnage.stats.hp)
-	get_node("Ini").text = str(personnage.stats.initiative)
-	get_node("PA").text = str(personnage.stats.pa)
-	get_node("Kamas").text = str(personnage.stats.kamas)
+	pm.text = str(personnage.stats.pm)
+	hp.text = str(personnage.stats.hp)
+	ini.text = str(personnage.stats.initiative)
+	pa.text = str(personnage.stats.pa)
+	kamas.text = str(personnage.stats.kamas)
