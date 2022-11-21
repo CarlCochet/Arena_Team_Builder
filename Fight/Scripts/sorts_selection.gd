@@ -1,5 +1,5 @@
-extends Control
+extends HBoxContainer
 
 
 func _ready():
-	pass
+	get_parent()

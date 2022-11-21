@@ -14,6 +14,7 @@ var etat: int
 func _ready():
 	etat = 0
 	creer_personnages()
+	timeline.init(combattants)
 
 
 func creer_personnages():

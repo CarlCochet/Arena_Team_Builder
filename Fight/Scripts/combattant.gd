@@ -9,6 +9,8 @@ var sorts: Array
 var equipe: int
 var effets: Dictionary
 
+var cercle_bleu = preload("res://Fight/Images/cercle_personnage_bleu.png")
+var cercle_rouge = preload("res://Fight/Images/cercle_personnage_rouge.png")
 
 @onready var cercle: Sprite2D = $Cercle
 @onready var fleche: Sprite2D = $Fleche
@@ -21,9 +23,9 @@ func _ready():
 
 func update_visuel():
 	if equipe == 0:
-		cercle.texture = load("res://Fight/Images/cercle_personnage_bleu.png")
+		cercle.texture = cercle_bleu
 	else:
-		cercle.texture = load("res://Fight/Images/cercle_personnage_rouge.png")
+		cercle.texture = cercle_rouge
 	classe_sprite.texture = load(
 		"res://Classes/" + classe + "/" + classe.to_lower() + ".png"
 	)

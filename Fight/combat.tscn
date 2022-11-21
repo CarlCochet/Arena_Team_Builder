@@ -48,6 +48,7 @@ script = ExtResource("1_2kr3w")
 tile_set = SubResource("TileSet_wp0kc")
 format = 2
 layer_0/name = "overlay"
+layer_0/modulate = Color(1, 1, 1, 0.501961)
 layer_0/z_index = 2
 layer_0/tile_data = PackedInt32Array(524289, 131075, 0, 589825, 131075, 0, 655361, 131075, 0, 720897, 131075, 0, 786433, 131075, 0, 851969, 131075, 0, 917505, 131075, 0, 983041, 131075, 0, 1048577, 131075, 0, 1048587, 3, 0, 983050, 3, 0, 917515, 3, 0, 851978, 3, 0, 786443, 3, 0, 720906, 3, 0, 655371, 3, 0, 589834, 3, 0, 524299, 3, 0)
 layer_1/name = "arena"
@@ -67,5 +68,13 @@ layer_2/tile_data = PackedInt32Array(1507336, 2, 0, 1441801, 2, 0, 1376265, 2, 0
 script = ExtResource("5_n7470")
 
 [node name="Sorts" parent="." instance=ExtResource("7_0vhv3")]
+offset_left = 50.0
+offset_top = 800.0
+offset_right = 298.0
+offset_bottom = 840.0
 
 [node name="Timeline" parent="." instance=ExtResource("8_rq6ft")]
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 70.0
+offset_bottom = 60.0
