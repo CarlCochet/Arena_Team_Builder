@@ -37,6 +37,13 @@ func previsu_pressed(id):
 			affichage_personnages.update(GlobalData.equipe_test)
 
 
+func _input(event):
+	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
+		_on_retour_pressed()
+	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:
+		_on_valider_pressed()
+
+
 func _on_retour_pressed():
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
 

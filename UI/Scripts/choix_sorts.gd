@@ -64,10 +64,10 @@ func _on_logo_clicked(sort):
 
 
 func _input(event):
-	if event is InputEventKey and event.keycode == KEY_ESCAPE and not event.echo:
-		get_tree().change_scene_to_file("res://UI/choix_classe.tscn")
-	if event is InputEventKey and event.keycode == KEY_ENTER and not event.echo:
-		get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
+	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
+		_on_retour_pressed()
+	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:
+		_on_valider_pressed()
 
 
 func _on_equipements_pressed():

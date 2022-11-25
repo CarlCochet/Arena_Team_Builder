@@ -3,6 +3,10 @@ extends HBoxContainer
 
 var fond_rouge = preload("res://Fight/Images/timeline_rouge.png")
 var fond_bleu = preload("res://Fight/Images/timeline_bleu.png")
+var start_x: float
+var max_x: float
+var x_spacing: float = 73.3
+
 @onready var fleche = $Fleche
 
 
@@ -18,7 +22,8 @@ func init(combattants):
 		combattant_sprite.position = Vector2(38, 60)
 		combattant_sprite.texture = combattant.classe_sprite.texture
 		fond.add_child(combattant_sprite)
+	start_x = fleche.position.x
+	max_x = start_x + (x_spacing * (len(combattants) - 1))
 
-
-func passe_tour():
-	fleche.position.x += 73.3
+func select(id):
+	fleche.position.x = start_x + id * x_spacing

@@ -27,14 +27,14 @@ scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="AffichageEquipe" parent="." instance=ExtResource("2_ma482")]
-offset_top = 24.0
-offset_bottom = 24.0
+offset_top = 41.0
+offset_bottom = 41.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_left = 30.0
-offset_top = 370.0
+offset_top = 380.0
 offset_right = 1216.0
-offset_bottom = 720.0
+offset_bottom = 730.0
 scale = Vector2(1.3, 1.3)
 
 [node name="Equipes" type="GridContainer" parent="ScrollContainer"]
