@@ -7,6 +7,7 @@ signal clicked
 
 var classe: String
 var stats: Stats
+var max_stats: Stats
 var equipements: Dictionary
 var sorts: Array
 var equipe: int
@@ -61,6 +62,7 @@ func unselect():
 func from_personnage(personnage: Personnage, equipe_id: int):
 	classe = personnage.classe
 	stats = personnage.stats.copy()
+	max_stats = personnage.stats.copy()
 	equipements = personnage.equipements
 	sorts = personnage.sorts
 	equipe = equipe_id
@@ -80,6 +82,18 @@ func _on_area_2d_mouse_exited():
 	if is_selected:
 		classe_sprite.material.set_shader_parameter("width", 2.0)
 	get_parent().stats_hover.visible = false
+
+
+func change_orientation(orientation: int):
+	fleche.texture = load("res://Fight/Images/fleche_" + str(orientation) + ".png")
+
+
+func debut_tour():
+	pass
+
+
+func fin_tour():
+	pass
 
 
 func _input(event):

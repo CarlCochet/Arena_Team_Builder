@@ -7,6 +7,7 @@ var combattants: Array
 var combattant_selection: Combattant
 var selection_id: int
 var etat: int
+var action: int
 var offset: Vector2i
 
 @onready var sorts: Control = $Sorts
@@ -52,6 +53,7 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe):
 
 
 func passe_tour():
+	combattant_selection.fin_tour()
 	combattants[selection_id].unselect()
 	selection_id += 1
 	if selection_id >= len(combattants):
@@ -59,12 +61,14 @@ func passe_tour():
 	timeline.select(selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
+	combattant_selection.debut_tour()
 
 
 func lance_game():
 	_on_perso_clicked(0)
 	etat = 1
 	tilemap.clear_layer(2)
+	combattant_selection.debut_tour()
 
 
 func place_perso(mouse_pos: Vector2):
@@ -100,6 +104,14 @@ func deplace_perso(chemin: Array):
 	tilemap.grid[fin[0]][fin[1]] = -2
 
 
+func change_action(action):
+	print("Action: ", action)
+	if action == 1:
+		action == 0
+	else:
+		action = 1
+
+
 func _on_perso_clicked(id):
 	combattants[selection_id].unselect()
 	selection_id = id
@@ -114,6 +126,32 @@ func _input(event):
 			passe_tour()
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")
+		if event is InputEventMouseMotion:
+			pass
+		if event is InputEventMouseButton:
+			pass
+		if Input.is_key_pressed(KEY_APOSTROPHE) and event is InputEventKey and not event.echo:
+			change_action(0)
+		if Input.is_key_pressed(KEY_1) and event is InputEventKey and not event.echo:
+			change_action(1)
+		if Input.is_key_pressed(KEY_2) and event is InputEventKey and not event.echo:
+			change_action(2)
+		if Input.is_key_pressed(KEY_3) and event is InputEventKey and not event.echo:
+			change_action(3)
+		if Input.is_key_pressed(KEY_4) and event is InputEventKey and not event.echo:
+			change_action(4)
+		if Input.is_key_pressed(KEY_5) and event is InputEventKey and not event.echo:
+			change_action(5)
+		if Input.is_key_pressed(KEY_6) and event is InputEventKey and not event.echo:
+			change_action(6)
+		if Input.is_key_pressed(KEY_UP) and event is InputEventKey and not event.echo:
+			combattant_selection.change_orientation(3)
+		if Input.is_key_pressed(KEY_RIGHT) and event is InputEventKey and not event.echo:
+			combattant_selection.change_orientation(0)
+		if Input.is_key_pressed(KEY_DOWN) and event is InputEventKey and not event.echo:
+			combattant_selection.change_orientation(1)
+		if Input.is_key_pressed(KEY_LEFT) and event is InputEventKey and not event.echo:
+			combattant_selection.change_orientation(2)
 	if etat == 0:
 		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
 			lance_game()
