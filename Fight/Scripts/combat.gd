@@ -99,9 +99,9 @@ func deplace_perso(chemin: Array):
 	var fin = chemin[-1]
 	var tile_pos = fin - offset
 	var old_grid_pos = combattant_selection.grid_pos
-	var old_map_pos = tilemap.map_to_local(combattant_selection.position)
+	var old_map_pos = tilemap.local_to_map(combattant_selection.position)
 	tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-	tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = tilemap.get_cell_atlas_coords(2, old_map_pos).x
+	tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = tilemap.get_cell_atlas_coords(1, old_map_pos).x
 	combattant_selection.position = tilemap.map_to_local(tile_pos)
 	combattant_selection.grid_pos = fin
 	tilemap.a_star_grid.set_point_solid(fin)

@@ -134,7 +134,17 @@ func affiche_ldv(action, pos_event):
 	for cell in all_ldv:
 		get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(2, 0))
 	if pos_event in all_ldv:
-		get_parent().tilemap.set_cell(2, pos_event - get_parent().offset, 3, Vector2i(0, 0))
+		if data["taille_zone"] == 0:
+			get_parent().tilemap.set_cell(2, pos_event - get_parent().offset, 3, Vector2i(0, 0))
+		else:
+			var zone = get_parent().tilemap.get_zone(
+				grid_pos,
+				pos_event,
+				data["type_zone"],
+				data["taille_zone"]
+			)
+			for cell in zone:
+				get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(0, 0))
 
 
 func debut_tour():
