@@ -41,7 +41,6 @@ func _ready():
 	
 	get_start()
 	build_astar_grid()
-	affichage_atteignables(Vector2i(11, 6), 8)
 
 
 func get_start():
@@ -63,46 +62,55 @@ func build_astar_grid():
 			a_star_grid.set_point_solid(pos + offset, false)
 
 
-func affichage_atteignables(pos: Vector2i, pm: int):
+func get_atteignables(pos: Vector2i, pm: int):
 	var atteignables: Array = []
-	
-	for x in range(pos.x - pm, pos.x + pm):
-		for y in range(pos.y - pm, pos.y + pm):
+	for x in range(pos.x - pm, pos.x + pm + 1):
+		for y in range(pos.y - pm, pos.y + pm + 1):
 			if a_star_grid.is_in_bounds(pos.x, pos.y) and a_star_grid.is_in_bounds(x, y):
 				var path = a_star_grid.get_id_path(pos, Vector2i(x,y))
-				if len(path) <= pm:
+				if len(path) <= pm + 1:
 					for cell in path:
 						if cell not in atteignables:
 							atteignables.append(cell)
-	
-	for cell in atteignables:
-		set_cell(2, cell - offset, 3, Vector2i(1, 0))
-	set_cell(2, pos - offset, 3, Vector2i(2, 0))
+	atteignables.erase(pos)
+	return atteignables
 
 
-func affichage_chemin(debut: Vector2i, fin: Vector2i):
+func get_chemin(debut: Vector2i, fin: Vector2i) -> Array:
+	var path = []
 	if a_star_grid.is_in_bounds(debut.x, debut.y) and a_star_grid.is_in_bounds(fin.x, fin.y):
-		var path = a_star_grid.get_id_path(debut, fin)
-		for cell in path:
-			set_cell(2, cell - offset, 3, Vector2i(1, 0))
+		path = a_star_grid.get_id_path(debut, fin)
+	return path
 
 
-func ldv_full(pos: Vector2i, po: int):
+func get_ldv(pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, check_ldv: int) -> Array:
 	var atteignables: Array = []
-	
-	for x in range(pos.x - po, pos.x + po):
-		for y in range(pos.y - po, pos.y + po):
-			if abs(pos.x - x) + abs(pos.y - y) <= po:
-				var ldv = calcul_ldv(pos, Vector2i(x,y))
-				if ldv:
-					atteignables.append(Vector2i(x,y))
-
-	for cell in atteignables:
-		set_cell(2, cell - offset, 3, Vector2i(2, 0))
-	set_cell(2, pos - offset, 3, Vector2i(0, 0))
+	for x in range(pos.x - po_max, pos.x + po_max + 1):
+		for y in range(pos.y - po_max, pos.y + po_max + 1):
+			if check_ldv(x, y, pos, po_min, po_max, type_ldv, check_ldv):
+				atteignables.append(Vector2i(x,y))
+	return atteignables
 
 
-func calcul_ldv(debut: Vector2i, fin: Vector2i):
+func check_ldv(x: int, y: int, pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, check_ldv: int) -> bool:
+	if x < 0 or x >= len(grid) or y < 0 or y >= len(grid[0]):
+		return false
+	if abs(pos.x - x) + abs(pos.y - y) > po_max:
+		return false
+	if abs(pos.x - x) + abs(pos.y - y) < po_min:
+		return false
+	if grid[x][y] == 0 or grid[x][y] == -1:
+		return false
+	if type_ldv == GlobalData.TypeLDV.LIGNE and (x != pos.x and y != pos.y):
+		return false
+	if type_ldv == GlobalData.TypeLDV.DIAGONAL and (abs(x - pos.x) != abs(y - pos.y)):
+		return false
+	if check_ldv == 1 and not calcul_ldv(pos, Vector2i(x,y)):
+		return false
+	return true
+
+
+func calcul_ldv(debut: Vector2i, fin: Vector2i) -> bool:
 	if debut.x < 0 or debut.x >= len(grid) or debut.y < 0 or debut.y >= len(grid[0]):
 		return false
 	if fin.x < 0 or fin.x >= len(grid) or fin.y < 0 or fin.y >= len(grid[0]):
@@ -144,8 +152,11 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		pass
 		var map_pos = local_to_map(event.position)
+#		var ldv = get_ldv(map_pos + offset, 5, 5, GlobalData.TypeLDV.CERCLE, 0)
 #		clear_layer(2)
+#		for cell in ldv:
+#			set_cell(2, cell - offset, 3, Vector2i(2, 0))
 #		if mode:
-#			ldv_full(map_pos + offset, 10)
+#			ldv_full(map_pos + offset, 5, 5, GlobalData.TypeLDV.CERCLE, 1)
 #		else:
 #			affichage_atteignables(map_pos + offset, 8)

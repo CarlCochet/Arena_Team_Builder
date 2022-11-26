@@ -14,7 +14,10 @@ var equipe: int
 var effets: Dictionary
 
 var grid_pos: Vector2i
-var id
+var id: int
+var orientation: int
+var all_path: Array
+var all_ldv: Array
 
 var is_selected: bool
 var is_hovered: bool
@@ -88,12 +91,54 @@ func change_orientation(orientation: int):
 	fleche.texture = load("res://Fight/Images/fleche_" + str(orientation) + ".png")
 
 
-func debut_tour():
-	pass
+func affiche_path(pos_event):
+	all_path = get_parent().tilemap.get_atteignables(grid_pos, stats.pm)
+	var path = get_parent().tilemap.get_chemin(grid_pos, pos_event)
+	print(len(path))
+	if len(path) > 0 and len(path) <= stats.pm + 1:
+		path.pop_front()
+		get_parent().tilemap.clear_layer(2)
+		for cell in path:
+			get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(1, 0))
+	else:
+		get_parent().tilemap.clear_layer(2)
+		for cell in all_path:
+			get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(1, 0))
 
+
+func affiche_ldv(action, pos_event):
+	var data
+	if action == 0:
+		if not equipements["Armes"].is_empty():
+			data = GlobalData.equipements[equipements["Armes"]].to_json()
+			data["ldv"] = 1
+			data["type_ldv"] = 0
+		else:
+			data = {"po": [1, 1], "type_ldv": 0, "ldv": 1}
+	else:
+		data = GlobalData.sorts[sorts[action-1]]
+	all_ldv = get_parent().tilemap.get_ldv(
+		grid_pos, 
+		data["po"][0],
+		data["po"][1],
+		data["type_ldv"],
+		data["ldv"]
+	)
+	get_parent().tilemap.clear_layer(2)
+	for cell in all_ldv:
+		get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(2, 0))
+	if pos_event in all_ldv:
+		get_parent().tilemap.set_cell(2, pos_event - get_parent().offset, 3, Vector2i(0, 0))
+
+
+func debut_tour():
+	for effet in effets:
+		pass
+	all_path = get_parent().tilemap.get_atteignables(grid_pos, stats.pm)
 
 func fin_tour():
-	pass
+	stats.pa = max_stats.pa
+	stats.pm = max_stats.pm
 
 
 func _input(event):

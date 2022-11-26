@@ -20,6 +20,7 @@ var offset: Vector2i
 func _ready():
 	etat = 0
 	offset = tilemap.offset
+	randomize()
 	creer_personnages()
 	timeline.init(combattants)
 
@@ -54,6 +55,7 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe):
 
 func passe_tour():
 	combattant_selection.fin_tour()
+	tilemap.clear_layer(2)
 	combattants[selection_id].unselect()
 	selection_id += 1
 	if selection_id >= len(combattants):
@@ -61,6 +63,7 @@ func passe_tour():
 	timeline.select(selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
+	change_action(7)
 	combattant_selection.debut_tour()
 
 
@@ -68,6 +71,7 @@ func lance_game():
 	_on_perso_clicked(0)
 	etat = 1
 	tilemap.clear_layer(2)
+	change_action(7)
 	combattant_selection.debut_tour()
 
 
@@ -82,9 +86,9 @@ func place_perso(mouse_pos: Vector2):
 				place_libre = false
 		if place_libre:
 			var old_grid_pos = combattant_selection.grid_pos
-			var old_map_pos = tilemap.map_to_local(combattant_selection.position)
+			var old_map_pos = tilemap.local_to_map(combattant_selection.position)
 			tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-			tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = tilemap.get_cell_atlas_coords(2, old_map_pos).x
+			tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = tilemap.get_cell_atlas_coords(1, old_map_pos).x
 			combattant_selection.position = tilemap.map_to_local(tile_pos)
 			combattant_selection.grid_pos = grid_pos
 			tilemap.a_star_grid.set_point_solid(grid_pos)
@@ -104,20 +108,30 @@ func deplace_perso(chemin: Array):
 	tilemap.grid[fin[0]][fin[1]] = -2
 
 
-func change_action(action):
-	print("Action: ", action)
-	if action == 1:
-		action == 0
+func change_action(new_action: int):
+	if new_action > len(combattant_selection.sorts):
+		new_action = 7
+	if new_action == action:
+		action = 7
 	else:
-		action = 1
+		action = new_action
+	if 0 <= action and action <= len(combattant_selection.sorts):
+		combattant_selection.affiche_ldv(action, Vector2i(99, 99))
+	else:
+		combattant_selection.affiche_path(Vector2i(99, 99))
 
 
-func _on_perso_clicked(id):
-	combattants[selection_id].unselect()
-	selection_id = id
-	timeline.select(selection_id)
-	combattants[selection_id].select()
-	combattant_selection = combattants[selection_id]
+func joue_action(mouse_pos: Vector2i):
+	pass
+
+
+func _on_perso_clicked(id: int):
+	if etat == 0:
+		combattants[selection_id].unselect()
+		selection_id = id
+		timeline.select(selection_id)
+		combattants[selection_id].select()
+		combattant_selection = combattants[selection_id]
 
 
 func _input(event):
@@ -127,9 +141,12 @@ func _input(event):
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")
 		if event is InputEventMouseMotion:
-			pass
+			if action == 7:
+				combattant_selection.affiche_path(tilemap.local_to_map(event.position) + offset)
+			else:
+				combattant_selection.affiche_ldv(action, tilemap.local_to_map(event.position) + offset)
 		if event is InputEventMouseButton:
-			pass
+			joue_action(tilemap.local_to_map(event.position) + offset)
 		if Input.is_key_pressed(KEY_APOSTROPHE) and event is InputEventKey and not event.echo:
 			change_action(0)
 		if Input.is_key_pressed(KEY_1) and event is InputEventKey and not event.echo:
@@ -145,13 +162,13 @@ func _input(event):
 		if Input.is_key_pressed(KEY_6) and event is InputEventKey and not event.echo:
 			change_action(6)
 		if Input.is_key_pressed(KEY_UP) and event is InputEventKey and not event.echo:
-			combattant_selection.change_orientation(3)
-		if Input.is_key_pressed(KEY_RIGHT) and event is InputEventKey and not event.echo:
 			combattant_selection.change_orientation(0)
-		if Input.is_key_pressed(KEY_DOWN) and event is InputEventKey and not event.echo:
+		if Input.is_key_pressed(KEY_RIGHT) and event is InputEventKey and not event.echo:
 			combattant_selection.change_orientation(1)
-		if Input.is_key_pressed(KEY_LEFT) and event is InputEventKey and not event.echo:
+		if Input.is_key_pressed(KEY_DOWN) and event is InputEventKey and not event.echo:
 			combattant_selection.change_orientation(2)
+		if Input.is_key_pressed(KEY_LEFT) and event is InputEventKey and not event.echo:
+			combattant_selection.change_orientation(3)
 	if etat == 0:
 		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
 			lance_game()

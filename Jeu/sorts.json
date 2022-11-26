@@ -2225,7 +2225,7 @@
 			"taille_zone": 0,
 			"cible": 2,
 			"ldv": 1,
-			"type_ldv": 0,
+			"type_ldv": 1,
 			"cooldown": 0,
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
