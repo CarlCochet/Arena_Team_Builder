@@ -9,6 +9,7 @@ var x_max
 var y_max
 var offset
 var mode = false
+var zonetype = GlobalData.TypeZone.CARRE
 
 @onready var overlay = get_used_cells(2)
 @onready var arena = get_used_cells(1)
@@ -142,20 +143,72 @@ func calcul_ldv(debut: Vector2i, fin: Vector2i) -> bool:
 	return pos.x == fin.x and pos.y == fin.y
 
 
-func calcul_zone(pos: Vector2i, type_zone: int, taille_zone: int):
-	pass
+func get_zone(source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_zone: int):
+	var zone = []
+	var orientation = source - target
+	for x in range(target.x - taille_zone, target.x + taille_zone + 1):
+		for y in range(target.y - taille_zone, target.y + taille_zone + 1):
+			if check_zone(x, y, source, target, type_zone, taille_zone, orientation):
+				zone.append(Vector2i(x, y))
+	return zone
+
+
+func check_zone(x: int, y: int, source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_zone: int, orientation: Vector2i) -> bool:
+	if x < 0 or x >= len(grid) or y < 0 or y >= len(grid[0]):
+		return false
+	if abs(target.x - x) + abs(target.y - y) > taille_zone and type_zone != GlobalData.TypeZone.CARRE:
+		return false
+	if grid[x][y] == 0 or grid[x][y] == -1:
+		return false
+	if type_zone == GlobalData.TypeZone.CROIX and (x != target.x and y != target.y):
+		return false
+	if type_zone == GlobalData.TypeZone.BATON and (
+		orientation.x != 0 and x != target.x or 
+		orientation.y != 0 and y != target.y
+		):
+		return false
+	if type_zone == GlobalData.TypeZone.LIGNE and (
+		orientation.x > 0 and (x > target.x or y != target.y) or
+		orientation.x < 0 and (x < target.x or y != target.y) or
+		orientation.y > 0 and (y > target.y or x != target.x) or
+		orientation.y < 0 and (y < target.y or x != target.x)
+		):
+		return false
+	if type_zone == GlobalData.TypeZone.MARTEAU and (
+		orientation.x > 0 and x > target.x or
+		orientation.x < 0 and x < target.x or
+		orientation.y > 0 and y > target.y or
+		orientation.y < 0 and y < target.y
+		):
+		return false
+	return true
 
 
 func _input(event):
 	if Input.is_key_pressed(KEY_F2) and event is InputEventKey and not event.echo:
 		mode = not mode
+	if Input.is_key_pressed(KEY_1) and event is InputEventKey and not event.echo:
+		zonetype = GlobalData.TypeZone.CARRE
+	if Input.is_key_pressed(KEY_2) and event is InputEventKey and not event.echo:
+		zonetype = GlobalData.TypeZone.CERCLE
+	if Input.is_key_pressed(KEY_3) and event is InputEventKey and not event.echo:
+		zonetype = GlobalData.TypeZone.BATON
+	if Input.is_key_pressed(KEY_4) and event is InputEventKey and not event.echo:
+		zonetype = GlobalData.TypeZone.LIGNE
+	if Input.is_key_pressed(KEY_5) and event is InputEventKey and not event.echo:
+		zonetype = GlobalData.TypeZone.CROIX
+	if Input.is_key_pressed(KEY_6) and event is InputEventKey and not event.echo:
+		zonetype = GlobalData.TypeZone.MARTEAU
 	if event is InputEventMouseMotion:
 		pass
-		var map_pos = local_to_map(event.position)
-#		var ldv = get_ldv(map_pos + offset, 5, 5, GlobalData.TypeLDV.CERCLE, 0)
+#		var map_pos = local_to_map(event.position)
+#		var source = Vector2i(11, 6)
+#		var zonesize = 3 if zonetype != GlobalData.TypeZone.MARTEAU else 1
+#		var zone = get_zone(source, map_pos + offset, zonetype, zonesize)
 #		clear_layer(2)
-#		for cell in ldv:
-#			set_cell(2, cell - offset, 3, Vector2i(2, 0))
+#		for cell in zone:
+#			set_cell(2, cell - offset, 3, Vector2i(0, 0))
+#		set_cell(2, source - offset, 3, Vector2i(2, 0))
 #		if mode:
 #			ldv_full(map_pos + offset, 5, 5, GlobalData.TypeLDV.CERCLE, 1)
 #		else:
