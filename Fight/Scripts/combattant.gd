@@ -17,6 +17,7 @@ var grid_pos: Vector2i
 var id: int
 var orientation: int
 var all_path: Array
+var path_actuel: Array
 var all_ldv: Array
 
 var is_selected: bool
@@ -77,6 +78,8 @@ func _on_area_2d_mouse_entered():
 	is_hovered = true
 	get_parent().stats_hover.update(stats, stats)
 	get_parent().stats_hover.visible = true
+	if get_parent().action == 7:
+		affiche_path(Vector2i(99, 99))
 
 
 func _on_area_2d_mouse_exited():
@@ -85,6 +88,8 @@ func _on_area_2d_mouse_exited():
 	if is_selected:
 		classe_sprite.material.set_shader_parameter("width", 2.0)
 	get_parent().stats_hover.visible = false
+	if get_parent().action == 7:
+		get_parent().change_action(7)
 
 
 func change_orientation(orientation: int):
@@ -94,13 +99,14 @@ func change_orientation(orientation: int):
 func affiche_path(pos_event):
 	all_path = get_parent().tilemap.get_atteignables(grid_pos, stats.pm)
 	var path = get_parent().tilemap.get_chemin(grid_pos, pos_event)
-	print(len(path))
 	if len(path) > 0 and len(path) <= stats.pm + 1:
 		path.pop_front()
+		path_actuel = path
 		get_parent().tilemap.clear_layer(2)
 		for cell in path:
 			get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(1, 0))
 	else:
+		path_actuel = []
 		get_parent().tilemap.clear_layer(2)
 		for cell in all_path:
 			get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(1, 0))

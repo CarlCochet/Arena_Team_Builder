@@ -122,7 +122,9 @@ func change_action(new_action: int):
 
 
 func joue_action(mouse_pos: Vector2i):
-	pass
+	if action == 7 and len(combattant_selection.path_actuel) > 0:
+		deplace_perso(combattant_selection.path_actuel)
+		combattant_selection.stats.pm -= len(combattant_selection.path_actuel)
 
 
 func _on_perso_clicked(id: int):
@@ -142,10 +144,13 @@ func _input(event):
 			get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")
 		if event is InputEventMouseMotion:
 			if action == 7:
+				for combattant in combattants:
+					if combattant.is_hovered:
+						return
 				combattant_selection.affiche_path(tilemap.local_to_map(event.position) + offset)
 			else:
 				combattant_selection.affiche_ldv(action, tilemap.local_to_map(event.position) + offset)
-		if event is InputEventMouseButton:
+		if event is InputEventMouseButton and event.pressed:
 			joue_action(tilemap.local_to_map(event.position) + offset)
 		if Input.is_key_pressed(KEY_APOSTROPHE) and event is InputEventKey and not event.echo:
 			change_action(0)
