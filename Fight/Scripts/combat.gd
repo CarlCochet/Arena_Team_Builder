@@ -3,6 +3,7 @@ class_name Combat
 
 
 var scene_combattant = preload("res://Fight/combattant.tscn")
+var stats_perdu = preload("res://Fight/stats_perdu.tscn")
 var combattants: Array
 var combattant_selection: Combattant
 var selection_id: int
@@ -106,6 +107,10 @@ func deplace_perso(chemin: Array):
 	combattant_selection.grid_pos = fin
 	tilemap.a_star_grid.set_point_solid(fin)
 	tilemap.grid[fin[0]][fin[1]] = -2
+	combattant_selection.stats.pm -= len(combattant_selection.path_actuel)
+	var stat_perdu = stats_perdu.instantiate()
+	stat_perdu.set_data(-len(combattant_selection.path_actuel), "pm")
+	combattant_selection.add_child(stat_perdu)
 
 
 func change_action(new_action: int):
@@ -124,7 +129,8 @@ func change_action(new_action: int):
 func joue_action(mouse_pos: Vector2i):
 	if action == 7 and len(combattant_selection.path_actuel) > 0:
 		deplace_perso(combattant_selection.path_actuel)
-		combattant_selection.stats.pm -= len(combattant_selection.path_actuel)
+	elif action <= len(combattant_selection.sorts):
+		change_action(7)
 
 
 func _on_perso_clicked(id: int):

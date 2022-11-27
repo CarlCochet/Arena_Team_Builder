@@ -8,6 +8,7 @@ signal clicked
 var classe: String
 var stats: Stats
 var max_stats: Stats
+var init_stats: Stats
 var equipements: Dictionary
 var sorts: Array
 var equipe: int
@@ -30,6 +31,8 @@ var outline_shader = preload("res://Fight/Shaders/combattant_outline.gdshader")
 @onready var cercle: Sprite2D = $Cercle
 @onready var fleche: Sprite2D = $Fleche
 @onready var classe_sprite: Sprite2D = $Classe
+@onready var hp: Sprite2D = $HP
+@onready var hp_label: Label = $HP/Label
 
 
 func _ready():
@@ -39,6 +42,7 @@ func _ready():
 	classe_sprite.material.set_shader_parameter("width", 0.0)
 	is_selected = false
 	is_hovered = false
+	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 
 
 func update_visuel():
@@ -67,6 +71,7 @@ func from_personnage(personnage: Personnage, equipe_id: int):
 	classe = personnage.classe
 	stats = personnage.stats.copy()
 	max_stats = personnage.stats.copy()
+	init_stats = personnage.stats.copy()
 	equipements = personnage.equipements
 	sorts = personnage.sorts
 	equipe = equipe_id
@@ -74,22 +79,28 @@ func from_personnage(personnage: Personnage, equipe_id: int):
 
 
 func _on_area_2d_mouse_entered():
+	for combattant in get_parent().combattants:
+		if combattant.is_hovered:
+			combattant._on_area_2d_mouse_exited()
 	classe_sprite.material.set_shader_parameter("width", 3.0)
 	is_hovered = true
 	get_parent().stats_hover.update(stats, stats)
 	get_parent().stats_hover.visible = true
+	hp.visible = true
 	if get_parent().action == 7:
 		affiche_path(Vector2i(99, 99))
 
 
 func _on_area_2d_mouse_exited():
-	classe_sprite.material.set_shader_parameter("width", 0.0)
-	is_hovered = false
-	if is_selected:
-		classe_sprite.material.set_shader_parameter("width", 2.0)
-	get_parent().stats_hover.visible = false
-	if get_parent().action == 7:
-		get_parent().change_action(7)
+	if is_hovered:
+		classe_sprite.material.set_shader_parameter("width", 0.0)
+		is_hovered = false
+		if is_selected:
+			classe_sprite.material.set_shader_parameter("width", 2.0)
+		get_parent().stats_hover.visible = false
+		hp.visible = false
+		if get_parent().action == 7:
+			get_parent().change_action(7)
 
 
 func change_orientation(orientation: int):
@@ -152,9 +163,17 @@ func debut_tour():
 		pass
 	all_path = get_parent().tilemap.get_atteignables(grid_pos, stats.pm)
 
+
 func fin_tour():
 	stats.pa = max_stats.pa
 	stats.pm = max_stats.pm
+
+
+func execute_effets():
+	for effet in effets:
+		pass
+
+
 
 
 func _input(event):
