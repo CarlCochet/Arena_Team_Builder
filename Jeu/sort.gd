@@ -2,6 +2,7 @@ extends Node2D
 class_name Sort
 
 
+var nom: String
 var kamas: int = 0
 var pa: int
 var po: Vector2
@@ -12,10 +13,13 @@ var ldv: int
 var type_ldv: GlobalData.TypeLDV
 var cooldown: int
 var cooldown_global: int
+var lancer_par_tour: int
+var lancer_par_cible: int
 var effets: Dictionary
 
 
 func _init():
+	nom = ""
 	kamas = 0
 	pa = 0
 	po = Vector2(0, 0)
@@ -26,155 +30,60 @@ func _init():
 	type_ldv = GlobalData.TypeLDV.CERCLE
 	cooldown = 0
 	cooldown_global = 0
+	lancer_par_tour = -1
+	lancer_par_cible = -1
 	effets = {}
 
 
-func execute_effets(lanceur, cible, personnages):
-	pass
-
-
-func dommage_fixe(lanceur, cible, personnages):
-	pass
-
-
-func dommage_pourcent(lanceur, cible, personnages):
-	pass
-
-
-func dommage_air(lanceur, cible, personnages):
-	pass
-
-
-func dommage_terre(lanceur, cible, personnages):
-	pass
-
-
-func dommage_feu(lanceur, cible, personnages):
-	pass
-
-
-func dommage_eau(lanceur, cible, personnages):
-	pass
-
-
-func vole_air(lanceur, cible, personnages):
-	pass
-
-
-func vole_terre(lanceur, cible, personnages):
-	pass
-
-
-func vole_feu(lanceur, cible, personnages):
-	pass
-
-
-func vole_eau(lanceur, cible, personnages):
-	pass
-
-
-func soin(lanceur, cible, personnages):
-	pass
-
-
-func change_stats(lanceur, cible, personnages):
-	pass
-
-
-func vole_stats(lanceur, cible, personnages):
-	pass
-
-
-func pousse(lanceur, cible, personnages):
-	pass
-
-
-func attire(lanceur, cible, personnages):
-	pass
-
-
-func immobilise(lanceur, cible, personnages):
-	pass
-
-
-func teleporte(lanceur, cible, personnages):
-	pass
-
-
-func transpose(lanceur, cible, personnages):
-	pass
-
-
-func petrifie(lanceur, cible, personnages):
-	pass
-
-
-func rate_sort(lanceur, cible, personnages):
-	pass
-
-
-func revele_invisible(lanceur, cible, personnages):
-	pass
-
-
-func devient_invisible(lanceur, cible, personnages):
-	pass
-
-
-func desenvoute(lanceur, cible, personnages):
-	pass
-
-
-func non_portable(lanceur, cible, personnages):
-	pass
-
-
-func intransposable(lanceur, cible, personnages):
-	pass
-
-
-func immunise(lanceur, cible, personnages):
-	pass
-
-
-func stabilise(lanceur, cible, personnages):
-	pass
-
-
-func renvoie_sort(lanceur, cible, personnages):
-	pass
-
-
-func invocation(lanceur, cible, personnages):
-	pass
-
-
-func porte(lanceur, cible, personnages):
-	pass
-
-
-func lance(lanceur, cible, personnages):
-	pass
-
-
-func picole(lanceur, cible, personnages):
-	pass
-
-
-func sacrifice(lanceur, cible, personnages):
-	pass
-
-
-func tourne(lanceur, cible, personnages):
-	pass
-
-
-func immunise_retrait_pa(lanceur, cible, personnages):
-	pass
-
-
-func immunise_retrait_pm(lanceur, cible, personnages):
-	pass
+func execute_effets(lanceur, cases_cibles) -> bool:
+	var sort_valide = true
+	if len(cases_cibles) == 0:
+		return false
+	if pa > lanceur.stats.pa:
+		return false
+	
+	var combattants = lanceur.get_parent().combattants
+	var trouve = false
+	for combattant in combattants:
+		if combattant.grid_pos in cases_cibles:
+			trouve = true
+			for effet in effets.keys():
+				var new_effet = Effet.new(lanceur, combattant, effet, effets[effet])
+				if new_effet.duree == 0:
+					new_effet.execute()
+				else:
+					combattant.effets.append(new_effet)
+	
+	if not trouve:
+		for effet in effets.keys():
+			var new_effet = Effet.new(lanceur, cases_cibles, effet, effets[effet])
+			if new_effet.duree == 0:
+				new_effet.execute()
+			else:
+				lanceur.get_parent().tilemap.effets.append(new_effet)
+	return sort_valide
+
+
+func from_arme(_combattant, arme):
+	if not arme.is_empty():
+		var data = GlobalData.equipements[arme].to_json()
+		pa = data["pa"]
+		po = data["po"]
+		type_zone = data["type_zone"]
+		taille_zone = data["taille_zone"]
+		effets = data["effets"]
+	else:
+		pa = 3
+		po = Vector2(1, 1)
+		type_zone = 0
+		taille_zone = 0
+		effets = { "DOMMAGE_FIXE": { "base": { "valeur": 5 }, "critique": { "valeur": 7 } } }
+	type_ldv = 0
+	ldv = 1
+	cooldown = 0
+	cooldown_global = 0
+	lancer_par_tour = -1
+	lancer_par_cible = -1
 
 
 func from_json(data):
@@ -188,6 +97,8 @@ func from_json(data):
 	type_ldv = data["type_ldv"] as GlobalData.TypeLDV
 	cooldown = data["cooldown"]
 	cooldown_global = data["cooldown_global"]
+	lancer_par_tour = data["lancer_par_tour"]
+	lancer_par_cible = data["lancer_par_cible"]
 	effets = data["effets"]
 	return self
 
@@ -204,5 +115,7 @@ func to_json():
 		"type_ldv": type_ldv,
 		"cooldown": cooldown,
 		"cooldown_global": cooldown_global,
+		"lancer_par_tour": lancer_par_tour,
+		"lancer_par_cible": lancer_par_cible,
 		"effets": effets
 	}

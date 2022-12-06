@@ -26,4 +26,3 @@ And every items
 - Click on Import
 - Navigate to where you downloaded this repository and click on the project.godot file
 - Launch the tool with F5 once the project is launched
-

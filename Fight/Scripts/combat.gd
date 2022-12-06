@@ -76,43 +76,6 @@ func lance_game():
 	combattant_selection.debut_tour()
 
 
-func place_perso(mouse_pos: Vector2):
-	var tile_pos = tilemap.local_to_map(mouse_pos)
-	var tile_data = tilemap.get_cell_atlas_coords(2, tile_pos)
-	if (tile_data.x == 0 and combattant_selection.equipe == 1) or (tile_data.x == 2 and combattant_selection.equipe == 0):
-		var grid_pos = tile_pos + offset
-		var place_libre = true
-		for combattant in combattants:
-			if combattant.grid_pos == grid_pos:
-				place_libre = false
-		if place_libre:
-			var old_grid_pos = combattant_selection.grid_pos
-			var old_map_pos = tilemap.local_to_map(combattant_selection.position)
-			tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-			tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = tilemap.get_cell_atlas_coords(1, old_map_pos).x
-			combattant_selection.position = tilemap.map_to_local(tile_pos)
-			combattant_selection.grid_pos = grid_pos
-			tilemap.a_star_grid.set_point_solid(grid_pos)
-			tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
-
-
-func deplace_perso(chemin: Array):
-	var fin = chemin[-1]
-	var tile_pos = fin - offset
-	var old_grid_pos = combattant_selection.grid_pos
-	var old_map_pos = tilemap.local_to_map(combattant_selection.position)
-	tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-	tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = tilemap.get_cell_atlas_coords(1, old_map_pos).x
-	combattant_selection.position = tilemap.map_to_local(tile_pos)
-	combattant_selection.grid_pos = fin
-	tilemap.a_star_grid.set_point_solid(fin)
-	tilemap.grid[fin[0]][fin[1]] = -2
-	combattant_selection.stats.pm -= len(combattant_selection.path_actuel)
-	var stat_perdu = stats_perdu.instantiate()
-	stat_perdu.set_data(-len(combattant_selection.path_actuel), "pm")
-	combattant_selection.add_child(stat_perdu)
-
-
 func change_action(new_action: int):
 	if new_action > len(combattant_selection.sorts):
 		new_action = 7
@@ -121,16 +84,9 @@ func change_action(new_action: int):
 	else:
 		action = new_action
 	if 0 <= action and action <= len(combattant_selection.sorts):
-		combattant_selection.affiche_ldv(action, Vector2i(99, 99))
+		combattant_selection.affiche_ldv(action, tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
 	else:
-		combattant_selection.affiche_path(Vector2i(99, 99))
-
-
-func joue_action(mouse_pos: Vector2i):
-	if action == 7 and len(combattant_selection.path_actuel) > 0:
-		deplace_perso(combattant_selection.path_actuel)
-	elif action <= len(combattant_selection.sorts):
-		change_action(7)
+		combattant_selection.affiche_path(tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
 
 
 func _on_perso_clicked(id: int):
@@ -157,7 +113,7 @@ func _input(event):
 			else:
 				combattant_selection.affiche_ldv(action, tilemap.local_to_map(event.position) + offset)
 		if event is InputEventMouseButton and event.pressed:
-			joue_action(tilemap.local_to_map(event.position) + offset)
+			combattant_selection.joue_action(action, tilemap.local_to_map(event.position) + offset)
 		if Input.is_key_pressed(KEY_APOSTROPHE) and event is InputEventKey and not event.echo:
 			change_action(0)
 		if Input.is_key_pressed(KEY_1) and event is InputEventKey and not event.echo:
@@ -186,4 +142,4 @@ func _input(event):
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")
 		if event is InputEventMouseButton:
-			place_perso(event.position)
+			combattant_selection.place_perso(tilemap.local_to_map(event.position))

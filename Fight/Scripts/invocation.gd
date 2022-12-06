@@ -6,7 +6,7 @@ class_name Invocation
 
 
 func _ready():
-	effets = {}
+	effets = []
 	classe_sprite.material = ShaderMaterial.new()
 	classe_sprite.material.shader = outline_shader
 	classe_sprite.material.set_shader_parameter("width", 0.0)

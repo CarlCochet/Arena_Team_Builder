@@ -10,6 +10,7 @@ var y_max
 var offset
 var mode = false
 var zonetype = GlobalData.TypeZone.CARRE
+var effets: Dictionary
 
 @onready var overlay = get_used_cells(2)
 @onready var arena = get_used_cells(1)
@@ -63,7 +64,7 @@ func build_astar_grid():
 			a_star_grid.set_point_solid(pos + offset, false)
 
 
-func get_atteignables(pos: Vector2i, pm: int):
+func get_atteignables(pos: Vector2i, pm: int) -> Array:
 	var atteignables: Array = []
 	for x in range(pos.x - pm, pos.x + pm + 1):
 		for y in range(pos.y - pm, pos.y + pm + 1):
@@ -84,16 +85,16 @@ func get_chemin(debut: Vector2i, fin: Vector2i) -> Array:
 	return path
 
 
-func get_ldv(pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, check_ldv: int) -> Array:
+func get_ldv(pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, doit_check_ldv: int) -> Array:
 	var atteignables: Array = []
 	for x in range(pos.x - po_max, pos.x + po_max + 1):
 		for y in range(pos.y - po_max, pos.y + po_max + 1):
-			if check_ldv(x, y, pos, po_min, po_max, type_ldv, check_ldv):
+			if check_ldv(x, y, pos, po_min, po_max, type_ldv, doit_check_ldv):
 				atteignables.append(Vector2i(x,y))
 	return atteignables
 
 
-func check_ldv(x: int, y: int, pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, check_ldv: int) -> bool:
+func check_ldv(x: int, y: int, pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, doit_check_ldv: int) -> bool:
 	if x < 0 or x >= len(grid) or y < 0 or y >= len(grid[0]):
 		return false
 	if abs(pos.x - x) + abs(pos.y - y) > po_max:
@@ -106,7 +107,7 @@ func check_ldv(x: int, y: int, pos: Vector2i, po_min: int, po_max: int, type_ldv
 		return false
 	if type_ldv == GlobalData.TypeLDV.DIAGONAL and (abs(x - pos.x) != abs(y - pos.y)):
 		return false
-	if check_ldv == 1 and not calcul_ldv(pos, Vector2i(x,y)):
+	if doit_check_ldv == 1 and not calcul_ldv(pos, Vector2i(x,y)):
 		return false
 	return true
 
@@ -143,17 +144,17 @@ func calcul_ldv(debut: Vector2i, fin: Vector2i) -> bool:
 	return pos.x == fin.x and pos.y == fin.y
 
 
-func get_zone(source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_zone: int):
+func get_zone(source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_zone: int) -> Array:
 	var zone = []
 	var orientation = source - target
 	for x in range(target.x - taille_zone, target.x + taille_zone + 1):
 		for y in range(target.y - taille_zone, target.y + taille_zone + 1):
-			if check_zone(x, y, source, target, type_zone, taille_zone, orientation):
+			if check_zone(x, y, target, type_zone, taille_zone, orientation):
 				zone.append(Vector2i(x, y))
 	return zone
 
 
-func check_zone(x: int, y: int, source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_zone: int, orientation: Vector2i) -> bool:
+func check_zone(x: int, y: int, target: Vector2i, type_zone: GlobalData.TypeZone, taille_zone: int, orientation: Vector2i) -> bool:
 	if x < 0 or x >= len(grid) or y < 0 or y >= len(grid[0]):
 		return false
 	if abs(target.x - x) + abs(target.y - y) > taille_zone and type_zone != GlobalData.TypeZone.CARRE:
@@ -199,17 +200,3 @@ func _input(event):
 		zonetype = GlobalData.TypeZone.CROIX
 	if Input.is_key_pressed(KEY_6) and event is InputEventKey and not event.echo:
 		zonetype = GlobalData.TypeZone.MARTEAU
-	if event is InputEventMouseMotion:
-		pass
-#		var map_pos = local_to_map(event.position)
-#		var source = Vector2i(11, 6)
-#		var zonesize = 3 if zonetype != GlobalData.TypeZone.MARTEAU else 1
-#		var zone = get_zone(source, map_pos + offset, zonetype, zonesize)
-#		clear_layer(2)
-#		for cell in zone:
-#			set_cell(2, cell - offset, 3, Vector2i(0, 0))
-#		set_cell(2, source - offset, 3, Vector2i(2, 0))
-#		if mode:
-#			ldv_full(map_pos + offset, 5, 5, GlobalData.TypeLDV.CERCLE, 1)
-#		else:
-#			affichage_atteignables(map_pos + offset, 8)

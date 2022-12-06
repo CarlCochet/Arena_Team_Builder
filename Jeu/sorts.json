@@ -695,6 +695,8 @@
 			"type_ldv": 0,
 			"cooldown": -1,
 			"cooldown_global": -1,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
 			"effets": {
 				"CHANGE_STATS": {
                     "hp": {

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Fight/Scripts/stats_perdu.gd" id="1_jup3a"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_b1gm4"]
+[sub_resource type="LabelSettings" id="LabelSettings_w4fy6"]
 
 [node name="StatsPerdu" type="Label"]
 custom_minimum_size = Vector2(40, 0)
@@ -11,7 +11,7 @@ offset_top = -100.0
 offset_right = 20.0
 offset_bottom = -74.0
 text = "-45"
-label_settings = SubResource("LabelSettings_b1gm4")
+label_settings = SubResource("LabelSettings_w4fy6")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_jup3a")
