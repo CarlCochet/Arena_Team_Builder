@@ -4,17 +4,23 @@ class_name Effet
 
 var lanceur
 var cible
+var nom_sort: String
 var categorie: String
 var contenu
+var etat: String
 var duree: int
+var instant: bool
+var critique: bool
 
 
-func _init(p_lanceur, p_cible, p_categorie, p_contenu):
+func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique):
 	lanceur = p_lanceur
 	cible = p_cible
 	categorie = p_categorie
 	contenu = p_contenu
 	duree = 0
+	instant = true
+	critique = p_critique
 	if contenu is Dictionary:
 		duree = trouve_duree(contenu)
 
@@ -23,6 +29,8 @@ func trouve_duree(data):
 	for key in data.keys():
 		if data[key] is Dictionary:
 			if data[key].has("duree"):
+				if data.has("instant"):
+					instant = false
 				return data[key]["duree"]
 			else:
 				return trouve_duree(data[key])
@@ -108,14 +116,34 @@ func execute():
 
 
 func dommage_fixe():
-	pass
+	var damage = contenu["base"]["valeur"]
+	for effet in cible.effets:
+		if "IMMUNISE" == effet.etat:
+			return
+		if "RENVOIE_SORT" == effet.etat and nom_sort != "arme":
+			lanceur.stats.hp -= damage
+			return
+	cible.stats.hp -= damage
 
 
 func dommage_pourcent():
-	pass
+	for effet in cible.effets:
+		if "IMMUNISE" == effet.etat:
+			return
+		if "RENVOIE_SORT" == effet.etat:
+			lanceur.stats.hp -= lanceur.stats.hp * (contenu["base"]["valeur"] / 100)
+			return
+	cible.stats.hp -= cible.stats.hp * (contenu["base"]["valeur"] / 100)
 
 
 func dommage_air():
+	var damage = contenu["base"]["valeur"] * (1 + lanceur.stats.dommages_air)
+	for effet in cible.effets:
+		if "IMMUNISE" == effet.etat:
+			return
+		if "RENVOIE_SORT" == effet.etat:
+			lanceur.stats.hp -= contenu["base"]["valeur"]
+			return
 	pass
 
 

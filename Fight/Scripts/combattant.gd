@@ -11,7 +11,6 @@ var max_stats: Stats
 var init_stats: Stats
 var equipements: Dictionary
 var sorts: Array
-var noms_sorts: Array
 var equipe: int
 var effets: Array
 
@@ -62,7 +61,7 @@ func select():
 	classe_sprite.material.set_shader_parameter("width", 2.0)
 	get_parent().stats_select.update(stats, stats)
 	is_selected = true
-	get_parent().sorts.update(classe, noms_sorts)
+	get_parent().sorts.update(classe, sorts)
 
 
 func unselect():
@@ -76,10 +75,11 @@ func from_personnage(personnage: Personnage, equipe_id: int):
 	max_stats = personnage.stats.copy()
 	init_stats = personnage.stats.copy()
 	equipements = personnage.equipements
-	sorts = [Sort.new().from_arme(self, equipements["Arme"])]
+	sorts = [Sort.new().from_arme(self, equipements["Armes"])]
 	for sort in personnage.sorts:
-		sorts.append(GlobalData.sorts[sort])
-	noms_sorts = personnage.sorts
+		var new_sort = GlobalData.sorts[sort]
+		new_sort.nom = sort
+		sorts.append(new_sort)
 	equipe = equipe_id
 	return self
 
@@ -106,45 +106,53 @@ func affiche_path(pos_event: Vector2i):
 			get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(1, 0))
 
 
-func affiche_ldv(action: int, pos_event: Vector2i):
+func affiche_ldv(action: int):
 	all_path = []
 	path_actuel = []
-	var data
-	if action == 0:
-		if not equipements["Armes"].is_empty():
-			data = GlobalData.equipements[equipements["Armes"]].to_json()
-			data["ldv"] = 1
-			data["type_ldv"] = 0
-		else:
-			data = {"po": [1, 1], "type_ldv": 0, "ldv": 1, "type_zone": 0, "taille_zone": 0}
-	else:
-		data = sorts[action]
+	var sort
+	sort = sorts[action]
+	if not sort.precheck_cast(self):
+		get_parent().change_action(7)
+		return
 	all_ldv = get_parent().tilemap.get_ldv(
 		grid_pos, 
-		data["po"][0],
-		data["po"][1],
-		data["type_ldv"],
-		data["ldv"]
+		sort.po[0],
+		sort.po[1],
+		sort.type_ldv,
+		sort.ldv
 	)
+	var valides = []
+	for tile in all_ldv:
+		if sort.check_cible(self, tile):
+			valides.append(tile)
+	all_ldv = valides
+	get_parent().tilemap.clear_layer(2)
+	for cell in all_ldv:
+		get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(2, 0))
+
+
+func affiche_zone(action: int, pos_event: Vector2i):
+	all_path = []
+	path_actuel = []
+	var sort
+	if action < len(sorts):
+		sort = sorts[action]
 	get_parent().tilemap.clear_layer(2)
 	for cell in all_ldv:
 		get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(2, 0))
 	if pos_event in all_ldv:
-		if data["taille_zone"] == 0:
-			get_parent().tilemap.set_cell(2, pos_event - get_parent().offset, 3, Vector2i(0, 0))
-			zone = [pos_event]
-		else:
-			zone = get_parent().tilemap.get_zone(
-				grid_pos,
-				pos_event,
-				data["type_zone"],
-				data["taille_zone"]
-			)
-			for cell in zone:
-				get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(0, 0))
+		zone = get_parent().tilemap.get_zone(
+			grid_pos,
+			pos_event,
+			sort.type_zone,
+			sort.taille_zone
+		)
+		for cell in zone:
+			get_parent().tilemap.set_cell(2, cell - get_parent().offset, 3, Vector2i(0, 0))
 
 
 func debut_tour():
+	retrait_durees()
 	execute_effets()
 	all_path = get_parent().tilemap.get_atteignables(grid_pos, stats.pm)
 
@@ -152,16 +160,18 @@ func debut_tour():
 func fin_tour():
 	stats.pa = max_stats.pa
 	stats.pm = max_stats.pm
-	retrait_durees()
+	retrait_cooldown()
 
 
 func joue_action(action: int, tile_pos: Vector2i):
 	if action == 7 and len(path_actuel) > 0:
 		deplace_perso(path_actuel)
-	elif action <= len(sorts):
-		var sort: Sort = GlobalData.sorts[sorts[action-1]]
+	elif action < len(sorts):
+		if not tile_pos in all_ldv:
+			get_parent().change_action(7)
+			return
+		var sort: Sort = sorts[action]
 		var valide = sort.execute_effets(self, zone)
-		print(valide)
 		if valide:
 			stats.pa -= sort.pa
 			var stat_perdu = stats_perdu.instantiate()
@@ -214,7 +224,21 @@ func execute_effets():
 
 
 func retrait_durees():
-	pass
+	for combattant in get_parent().combattants:
+		for effet in combattant.effets:
+			if effet.lanceur.id == id:
+				effet.duree -= 1
+	
+	var new_effets = []
+	for effet in effets:
+		if effet.duree > 0:
+			new_effets.append(effet)
+	effets = new_effets
+
+func retrait_cooldown():
+	for sort in sorts:
+		if sort.cooldown_actuel > 0:
+			sort.cooldown_actuel -=1
 
 
 func _input(event):

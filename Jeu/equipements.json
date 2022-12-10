@@ -109,12 +109,12 @@
                 "resistance_zone": 0
 			},
 			"effets": {
+                "cible": 9,
                 "DOMMAGE_AIR": {
                     "base": {
                         "valeur": 8
                     }
-                },
-                "cible": 9
+                }
 			}
 		},
 		"bashers": {

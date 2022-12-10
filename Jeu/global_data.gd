@@ -42,7 +42,7 @@ enum Invocations {
 	FOLLE = 6,
 	SACRIFIEE = 7,
 	DOUBLE = 8,
-	CADRAN = 9
+	CADRAN_DE_XELOR = 9
 }
 
 var classes = ["Cra", "Eca", "Eni", "Enu", "Feca", "Iop", "Osa", "Panda", "Sacrieur", "Sadida", "Sram", "Xelor"]
@@ -76,6 +76,7 @@ func charger_sorts():
 			sorts_lookup[classe] = []
 		for nom_sort in json_data[classe].keys():
 			sort = Sort.new()
+			print(nom_sort)
 			sort.from_json(json_data[classe][nom_sort])
 			sorts[nom_sort] = sort
 			sorts_lookup[classe].append(nom_sort)

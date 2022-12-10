@@ -83,8 +83,9 @@ func change_action(new_action: int):
 		action = 7
 	else:
 		action = new_action
-	if 0 <= action and action <= len(combattant_selection.sorts):
-		combattant_selection.affiche_ldv(action, tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
+	if 0 <= action and action < len(combattant_selection.sorts):
+		combattant_selection.affiche_ldv(action)
+		combattant_selection.affiche_zone(action, tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
 	else:
 		combattant_selection.affiche_path(tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
 
@@ -111,7 +112,7 @@ func _input(event):
 						return
 				combattant_selection.affiche_path(tilemap.local_to_map(event.position) + offset)
 			else:
-				combattant_selection.affiche_ldv(action, tilemap.local_to_map(event.position) + offset)
+				combattant_selection.affiche_zone(action, tilemap.local_to_map(event.position) + offset)
 		if event is InputEventMouseButton and event.pressed:
 			combattant_selection.joue_action(action, tilemap.local_to_map(event.position) + offset)
 		if Input.is_key_pressed(KEY_APOSTROPHE) and event is InputEventKey and not event.echo:

@@ -4,6 +4,7 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 6],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 0,
@@ -13,6 +14,11 @@
 			"cooldown_global": 1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"VOLE_STATS": {
 					"dommages_air": {
@@ -62,6 +68,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [5, 8],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -71,6 +78,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -86,7 +98,8 @@
 			"kamas": 250,
 			"pa": 3,
 			"po": [2, 5],
-			"type_zone": 0,
+            "po_modifiable": 1,
+            "type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
@@ -95,6 +108,11 @@
 			"cooldown_global": 1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -111,6 +129,7 @@
 			"kamas": 350,
 			"pa": 6,
 			"po": [2, 5],
+            "po_modifiable": 1,
 			"type_zone": 1,
 			"taille_zone": 4,
 			"cible": 0,
@@ -120,6 +139,11 @@
 			"cooldown_global": 1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_FEU": {
 					"base": {
@@ -135,6 +159,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -144,6 +169,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_EAU": {
 					"base": {
@@ -177,6 +207,7 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [2, 5],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -186,6 +217,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_FEU": {
 					"base": {
@@ -201,6 +237,7 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 1,
 			"cible": 0,
@@ -210,6 +247,11 @@
 			"cooldown_global": 1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
 					"po": {
@@ -225,6 +267,7 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [1, 7],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -234,6 +277,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
 					"po": {
@@ -253,6 +301,7 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [2, 6],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -262,6 +311,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -285,6 +339,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -294,7 +349,13 @@
 			"cooldown_global": 4,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
+                "cible": 4,
 				"CHANGE_STATS": {
 					"po": {
 						"base": {
@@ -315,6 +376,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -324,14 +386,20 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"TELEPORTE": 0
+				"TELEPORTE": 1
 			}
 		},
 		"esprit_felin": {
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -341,6 +409,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -364,6 +437,7 @@
 			"kamas": 150,
 			"pa": 6,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 1,
 			"cible": 1,
@@ -373,14 +447,22 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"PETRIFIE": 1
+				"PETRIFIE": {
+                    "duree": 1
+                }
 			}
 		},
 		"guigne": {
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 7],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -390,6 +472,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"RATE_SORT": 1
 			}
@@ -398,6 +485,7 @@
 			"kamas": 200,
 			"pa": 5,
 			"po": [2, 5],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -407,6 +495,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -422,6 +515,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -431,6 +525,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
 					"po": {
@@ -440,13 +539,16 @@
 						}
 					}
 				},
-				"REVELE_INVISIBLE": 0
+				"REVELE_INVISIBLE": {
+                    "duree": 0
+                }
 			}
 		},
 		"pile_ou_face": {
 			"kamas": 200,
 			"pa": 3,
 			"po": [2, 5],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -456,6 +558,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -476,6 +583,7 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -485,7 +593,13 @@
 			"cooldown_global": 3,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
+                "cible": 8,
 				"DOMMAGE_FIXE": {
 					"base": {
 						"valeur": 2,
@@ -494,8 +608,7 @@
 					"critique": {
 						"valeur": 3,
 						"duree": 1
-					},
-					"cible": 8
+					}
 				}
 			}
 		},
@@ -503,6 +616,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -512,18 +626,22 @@
 			"cooldown_global": 3,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
+                "cible": 10,
 				"DOMMAGE_POURCENT": {
 					"base": {
 						"valeur": 20
-					},
-					"cible": 10
+					}
 				},
 				"SOIN": {
 					"base": {
 						"valeur": "1d6+4"
-					},
-					"cible": 10
+					}
 				}
 			}
 		},
@@ -531,6 +649,7 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [0, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 3,
@@ -540,6 +659,11 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": 3,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
 					"cc": {
@@ -552,10 +676,9 @@
 							"valeur": 20,
 							"duree": 99,
 							"retour": 20
-						},
+						}
 					}
-				},
-                "renouvelable": 3
+				}
 			}
 		}
 	},
@@ -564,6 +687,7 @@
 			"kamas": 100,
 			"pa": 4,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -573,15 +697,20 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
+                "cible": 8,
 				"SOIN": {
 					"base": {
 						"valeur": 7
 					},
 					"critique": {
 						"valeur": 9
-					},
-					"cible": 8
+					}
 				}
 			}
 		},
@@ -589,6 +718,7 @@
 			"kamas": 100,
 			"pa": 3,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -598,6 +728,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -613,6 +748,7 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [0, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -622,14 +758,20 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-                "DESENVOUTE": 0
+                "DESENVOUTE": 1
 			}
 		},
 		"mot_de_regeneration": {
 			"kamas": 250,
 			"pa": 3,
 			"po": [0, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -639,8 +781,14 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"SOIN": {
+                    "instant": 0,
                     "base": {
                         "valeur": 3,
                         "duree": 3
@@ -656,6 +804,7 @@
 			"kamas": 100,
 			"pa": 3,
 			"po": [1, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -665,6 +814,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -688,6 +842,7 @@
 			"kamas": 250,
 			"pa": 4,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -697,7 +852,13 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": 1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
+                "cible": 11,
 				"CHANGE_STATS": {
                     "hp": {
                         "base": {
@@ -708,8 +869,7 @@
                             "valeur": 12,
                             "duree": 99
                         }
-                    },
-                    "cible": 11
+                    }
                 },
                 "DOMMAGE_FEU": {
                     "base": {
@@ -718,14 +878,14 @@
                     "critique": {
                         "retour": 30
                     }
-                },
-                "renouvelable": 0
+                }
 			}
 		},
 		"mot_deffacement": {
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -735,12 +895,16 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"SOIN": {
                     "base": {
                         "valeur": 6,
-                        "duree": 2,
-                        "instant": 1
+                        "duree": 6
                     }
                 },
                 "DEVIENT_INVISIBLE": {
@@ -754,6 +918,7 @@
 			"kamas": 200,
 			"pa": 5,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 1,
 			"cible": 1,
@@ -763,6 +928,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -778,6 +948,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -787,6 +958,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "SOIN": {
                     "base": {
@@ -802,6 +978,7 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [0, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 3,
@@ -811,6 +988,11 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": 3,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "pa": {
@@ -818,8 +1000,7 @@
                             "valeur": 1
                         }
                     }
-                },
-                "desenvoute_delais": 3
+                }
 			}
 		}
 	},
@@ -828,6 +1009,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 3,
@@ -837,6 +1019,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "pm": {
@@ -866,6 +1053,7 @@
 			"kamas": 150,
 			"pa": 5,
 			"po": [1, 5],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 4,
@@ -875,6 +1063,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "IMMOBILISE": 1,
                 "CHANGE_STATS": {
@@ -901,6 +1094,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -910,6 +1104,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "dommages_air": {
@@ -940,13 +1139,16 @@
                         "base": 2
                     }
                 },
-                "IMMUNISE_RETRAIT_PM": 1
+                "IMMUNISE_RETRAIT_PM": {
+                    "duree": 1
+                }
 			}
 		},
 		"fossilisation": {
 			"kamas": 200,
 			"pa": 5,
 			"po": [1, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -956,6 +1158,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"VOLE_STATS": {
                     "pm": {
@@ -981,6 +1188,7 @@
 			"kamas": 250,
 			"pa": 2,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -990,6 +1198,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
@@ -1005,6 +1218,7 @@
 			"kamas": 150,
 			"pa": 1,
 			"po": [1, 5],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1013,7 +1227,12 @@
 			"cooldown": 0,
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
-            "lancer_par_cible": -1,
+            "lancer_par_cible": 1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "pm": {
@@ -1034,13 +1253,14 @@
                             "duree": 1
                         }
                     }
-                },
+                }
 			}
 		},
 		"maladresse_de_masse": {
 			"kamas": 150,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -1050,7 +1270,13 @@
 			"cooldown_global": 6,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
+                "cible": 10,
 				"CHANGE_STATS": {
                     "pm": {
                         "base": {
@@ -1058,14 +1284,14 @@
                             "duree": 2
                         }
                     }
-                },
-                "cible": 10
+                }
 			}
 		},
 		"pelle_fantomatique": {
 			"kamas": 250,
 			"pa": 5,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1075,6 +1301,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DESENVOUTE": 1,
                 "DOMMAGE_EAU": {
@@ -1091,6 +1322,7 @@
 			"kamas": 300,
 			"pa": 6,
 			"po": [1, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1100,6 +1332,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
@@ -1123,6 +1360,7 @@
 			"kamas": 200,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -1132,13 +1370,20 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "DEVIENT_INVISIBLE": {
                     "base": {
                         "duree": 2
                     }
                 },
-                "REVELE_INVISIBLE": 2
+                "REVELE_INVISIBLE": {
+                    "duree": 2
+                }
 			}
 		}
 	},
@@ -1147,6 +1392,7 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -1156,6 +1402,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": 2,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "resistances_eau": {
@@ -1171,14 +1422,16 @@
                         }
                     }
                 },
-                "NON_PORTABLE": 5,
-                "desenvoute_delais": 2
+                "NON_PORTABLE": {
+                    "duree": 5
+                }
 			}
 		},
 		"armure_orageuse": {
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -1188,6 +1441,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": 2,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "CHANGE_STATS": {
                     "resistances_air": {
@@ -1203,14 +1461,16 @@
                         }
                     }
                 },
-                "INTRANSPOSABLE": 5,
-                "desenvoute_delais": 2
+                "INTRANSPOSABLE": {
+                    "duree": 5
+                }
 			}
 		},
 		"attaque_nuageuse": {
 			"kamas": 250,
 			"pa": 4,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1220,6 +1480,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_EAU": {
                     "base": {
@@ -1243,6 +1508,7 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [0, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 3,
@@ -1252,6 +1518,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": 2,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "resistances_air": {
@@ -1290,14 +1561,14 @@
                             "duree": 5
                         }
                     }
-                },
-                "desenvoute_delais": 2
+                }
 			}
 		},
 		"bulle": {
 			"kamas": 350,
 			"pa": 3,
 			"po": [5, 5],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1307,6 +1578,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_EAU": {
                     "base": {
@@ -1322,6 +1598,7 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1330,7 +1607,12 @@
 			"cooldown": 0,
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
-            "lancer_par_cible": -1,
+            "lancer_par_cible": 1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "dommages_air": {
@@ -1430,6 +1712,7 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [0, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 3,
@@ -1439,15 +1722,25 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"IMMUNISE": 1,
-                "STABILISE": 1
+				"IMMUNISE": {
+                    "duree": 1
+                },
+                "STABILISE": {
+                    "duree": 1
+                }
 			}
 		},
 		"rebond": {
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -1457,14 +1750,22 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"RENVOIE_SORT": 1
+				"RENVOIE_SORT": {
+                    "duree": 1
+                }
 			}
 		},
 		"teleportation": {
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 5],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -1474,14 +1775,20 @@
 			"cooldown_global": 6,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"TELEPORTE": 0
+				"TELEPORTE": 1
 			}
 		},
 		"treve": {
 			"kamas": 100,
 			"pa": 3,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -1491,10 +1798,19 @@
 			"cooldown_global": 6,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"IMMUNISE": 1,
-                "STABILISE": 1,
-                "cible": 8
+                "cible": 8,
+				"IMMUNISE": {
+                    "duree": 1
+                },
+                "STABILISE": {
+                    "duree": 1
+                }
 			}
 		}
 	},
@@ -1503,6 +1819,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 3,
@@ -1512,6 +1829,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": 2,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "CHANGE_STATS": {
                     "dommages_air": {
@@ -1561,6 +1883,7 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 2],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -1570,14 +1893,20 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"TELEPORTE": 0
+				"TELEPORTE": 1
 			}
 		},
 		"colere_de_iop": {
 			"kamas": 350,
 			"pa": 8,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 1,
@@ -1587,6 +1916,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -1614,6 +1948,7 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1623,6 +1958,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_POURCENT": {
                     "base": {
@@ -1638,6 +1978,7 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 1,
 			"cible": 0,
@@ -1647,6 +1988,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -1662,6 +2008,7 @@
 			"kamas": 250,
 			"pa": 5,
 			"po": [1, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1671,6 +2018,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "DOMMAGE_AIR": {
                     "base": {
@@ -1694,6 +2046,7 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 1,
@@ -1703,6 +2056,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": 1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "dommages_air": {
@@ -1752,6 +2110,7 @@
 			"kamas": 150,
 			"pa": 1,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -1759,8 +2118,13 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-            "lancer_par_tour": -1,
+            "lancer_par_tour": 3,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
                     "base": {
@@ -1799,6 +2163,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1808,6 +2173,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -1823,6 +2193,7 @@
 			"kamas": 250,
 			"pa": 1,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -1832,6 +2203,11 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": 1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "hp": {
@@ -1893,6 +2269,7 @@
 			"kamas": 250,
 			"pa": 3,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -1902,6 +2279,11 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": 3,
+            "nombre_lancers": 1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "invocations": {
@@ -1909,14 +2291,14 @@
                             "valeur": 1
                         }
                     }
-                },
-                "desenvoute_delais": 3
+                }
 			}
 		},
 		"bouftou": {
 			"kamas": 250,
 			"pa": 4,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -1926,6 +2308,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"INVOCATION": 0
 			}
@@ -1934,6 +2321,7 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 6,
@@ -1943,8 +2331,15 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"IMMUNISE": 1,
+				"IMMUNISE": {
+                    "duree": 1
+                },
                 "CHANGE_STATS": {
                     "blocage": {
                         "base": {
@@ -1959,6 +2354,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -1968,6 +2364,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -1983,6 +2384,7 @@
 			"kamas": 300,
 			"pa": 6,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -1992,6 +2394,11 @@
 			"cooldown_global": 4,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"INVOCATION": 1
 			}
@@ -2000,6 +2407,7 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 4,
 			"cible": 1,
@@ -2009,21 +2417,27 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "cc": {
                         "base": {
+                            "cible": 6,
                             "valeur": 100
                         }
                     }
-                },
-                "cible": 6
+                }
 			}
 		},
 		"fouet": {
 			"kamas": 50,
 			"pa": 3,
 			"po": [1, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 5,
@@ -2033,6 +2447,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2048,6 +2467,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 6,
@@ -2057,11 +2477,17 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": 1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "pa": {
                         "base": {
                             "valeur": 6,
+                            "duree": 1
                         }
                     }
                 }
@@ -2071,6 +2497,7 @@
 			"kamas": 200,
 			"pa": 5,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -2080,6 +2507,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"INVOCATION": 2
 			}
@@ -2088,6 +2520,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -2097,6 +2530,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"INVOCATION": 3
 			}
@@ -2107,6 +2545,7 @@
 			"kamas": 200,
 			"pa": 2,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -2116,6 +2555,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "PORTE_ALLIE",
+            "etats_interdits": ["PORTE", "PORTE_ENNEMI"],
 			"effets": {
 				"LANCE": 3
 			}
@@ -2124,6 +2568,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 6],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2132,7 +2577,12 @@
 			"cooldown": 0,
 			"cooldown_global": 1,
             "lancer_par_tour": -1,
-            "lancer_par_cible": -1,
+            "lancer_par_cible": 1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "resistances_air": {
@@ -2174,7 +2624,7 @@
                             "valeur": -45,
                             "duree": 1
                         }
-                    },
+                    }
                 }
 			}
 		},
@@ -2182,6 +2632,7 @@
 			"kamas": 350,
 			"pa": 4,
 			"po": [1, 4],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 0,
@@ -2191,6 +2642,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -2206,6 +2662,7 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 1],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2215,6 +2672,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
 				"PORTE": 8
 			}
@@ -2223,6 +2685,7 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -2232,8 +2695,13 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "PORTE_ENNEMI",
+            "etats_interdits": ["PORTE", "PORTE_ALLIE"],
 			"effets": {
-				"LANCE": 4,
+                "LANCE": 4,
                 "DOMMAGE_FIXE": {
                     "base": {
                         "valeur": 12
@@ -2245,6 +2713,7 @@
 			"kamas": 300,
 			"pa": 5,
 			"po": [2, 5],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 1,
 			"cible": 0,
@@ -2254,6 +2723,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2269,6 +2743,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -2278,6 +2753,11 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": 0,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
 				"PICOLE": 99,
                 "CHANGE_STATS": {
@@ -2293,14 +2773,14 @@
                             "duree": 99
                         }
                     }
-                },
-                "desenvoute_delais": 0
+                }
 			}
 		},
 		"souffle_alcoolise": {
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 1,
 			"taille_zone": 2,
 			"cible": 0,
@@ -2310,10 +2790,12 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "PICOLE",
+            "etats_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
-                "condition": {
-                    "picole": 1
-                },
                 "DOMMAGE_FEU": {
                     "base": {
                         "valeur": 9
@@ -2328,6 +2810,7 @@
 			"kamas": 100,
 			"pa": 1,
 			"po": [0, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2337,8 +2820,15 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
-                "STABILISE": 4,
+                "STABILISE": {
+                    "duree": 4
+                },
                 "CHANGE_STATS": {
                     "blocage": {
                         "base": {
@@ -2353,6 +2843,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -2362,8 +2853,16 @@
 			"cooldown_global": 4,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
-                "STABILISE": 3,
+                "cible": 11,
+                "STABILISE": {
+                    "duree": 3
+                },
                 "CHANGE_STATS": {
                     "blocage": {
                         "base": {
@@ -2371,8 +2870,7 @@
                             "duree": 3
                         }
                     }
-                },
-                "cible": 11
+                }
 			}
 		}
 	},
@@ -2381,6 +2879,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2390,8 +2889,13 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"TRANSPOSE": 8,
+                "TRANSPOSE": 8,
                 "DOMMAGE_AIR": {
                     "base": {
                         "valeur": 7
@@ -2406,6 +2910,7 @@
 			"kamas": 100,
 			"pa": 7,
 			"po": [1, 7],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2415,6 +2920,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"ATTIRE": 3
 			}
@@ -2423,6 +2933,7 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2430,8 +2941,13 @@
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-            "lancer_par_tour": -1,
+            "lancer_par_tour": 1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "VIE_FAIBLE",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
                     "base": {
@@ -2442,9 +2958,6 @@
                     "base": {
                         "valeur": 18
                     }
-                },
-                "condition": {
-                    "hp_pourcent_inferieur": 25
                 }
 			}
 		},
@@ -2452,6 +2965,7 @@
 			"kamas": 200,
 			"pa": 2,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2461,6 +2975,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"VOLE_TERRE": {
                     "base": {
@@ -2478,6 +2997,7 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2487,6 +3007,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
                     "base": {
@@ -2514,6 +3039,7 @@
 			"kamas": 100,
 			"pa": 3,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2523,6 +3049,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2580,6 +3111,7 @@
 			"kamas": 300,
 			"pa": 6,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2589,6 +3121,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2612,6 +3149,7 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2621,6 +3159,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"SACRIFICE": 1
 			}
@@ -2629,6 +3172,7 @@
 			"kamas": 150,
 			"pa": 6,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 1,
@@ -2638,6 +3182,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -2655,6 +3204,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2664,6 +3214,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"TRANSPOSE": 3
 			}
@@ -2674,6 +3229,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [1, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -2683,6 +3239,11 @@
 			"cooldown_global": 2,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
 				"INVOCATION": 4
 			}
@@ -2691,6 +3252,7 @@
 			"kamas": 250,
 			"pa": 4,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -2700,6 +3262,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
 				"INVOCATION": 5
 			}
@@ -2708,6 +3275,7 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -2717,6 +3285,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
 				"INVOCATION": 6
 			}
@@ -2725,6 +3298,7 @@
 			"kamas": 300,
 			"pa": 4,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -2734,6 +3308,11 @@
 			"cooldown_global": 1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
 				"INVOCATION": 7
 			}
@@ -2742,6 +3321,7 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2751,8 +3331,14 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
 				"DOMMAGE_FIXE": {
+                    "instant": 0,
                     "base": {
                         "valeur": 3,
                         "duree": 3
@@ -2768,6 +3354,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -2777,20 +3364,31 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
+                "ARBRE": 1,
 				"SOIN": {
                     "base": {
                         "valeur": 10
                     }
                 },
-                "IMMUNISE": 1,
-                "IMMOBILISE": 1
+                "IMMUNISE": {
+                    "duree": 1
+                },
+                "IMMOBILISE": {
+                    "duree": 1
+                }
 			}
 		},
 		"ronce": {
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 4],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2800,6 +3398,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2815,6 +3418,7 @@
 			"kamas": 150,
 			"pa": 3,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 7,
@@ -2824,18 +3428,23 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
                 "DOMMAGE_FEU": {
+                    "cible": 7,
                     "base": {
                         "valeur": 13
-                    },
-                    "cible": 7
+                    }
                 },
                 "VOLE_FEU": {
+                    "cible": 6,
                     "base": {
                         "valeur": 13
-                    },
-                    "cible": 6
+                    }
                 }
 			}
 		},
@@ -2843,6 +3452,7 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -2852,6 +3462,11 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": 3,
+            "nombre_lancers": 1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "invocations": {
@@ -2860,14 +3475,14 @@
                             "duree": 99
                         }
                     }
-                },
-                "desenvoute_delais": 3
+                }
 			}
 		},
 		"tremblement": {
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 36],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 6,
@@ -2877,6 +3492,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE", "ARBRE"],
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2891,6 +3511,7 @@
 			"kamas": 350,
 			"pa": 6,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2900,6 +3521,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
@@ -2923,6 +3549,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 0,
@@ -2932,9 +3559,13 @@
 			"cooldown_global": 8,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-                "glyphe": 1,
-                "DEVIENT_INVISIBLE": {
+                "GLYPHE": {
                     "base": {
                         "duree": 2
                     },
@@ -2942,11 +3573,19 @@
                         "duree": 3
                     }
                 },
+                "DEVIENT_INVISIBLE": {
+                    "base": {
+                        "duree": 0
+                    },
+                    "critique": {
+                        "duree": 0
+                    }
+                },
                 "CHANGE_STATS": {
                     "blocage": {
                         "base": {
                             "valeur": -40,
-                            "duree": 2
+                            "duree": 0
                         }
                     }
                 }
@@ -2956,6 +3595,7 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -2965,6 +3605,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_AIR": {
                     "base": {
@@ -2981,6 +3626,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 7],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 0,
@@ -2990,6 +3636,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"TOURNE": 0
 			}
@@ -2998,6 +3649,7 @@
 			"kamas": 200,
 			"pa": 6,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -3007,6 +3659,11 @@
 			"cooldown_global": 5,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"INVOCATION": 8
 			}
@@ -3015,6 +3672,7 @@
 			"kamas": 250,
 			"pa": 2,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -3024,6 +3682,11 @@
 			"cooldown_global": 4,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DEVIENT_INVISIBLE": {
                     "base": {
@@ -3036,6 +3699,7 @@
 			"kamas": 150,
 			"pa": 2,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 3,
@@ -3045,6 +3709,11 @@
 			"cooldown_global": 7,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
                 "DEVIENT_INVISIBLE": {
                     "base": {
@@ -3057,6 +3726,7 @@
 			"kamas": 150,
 			"pa": 1,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -3066,6 +3736,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"POUSSE": 1
 			}
@@ -3074,6 +3749,7 @@
 			"kamas": 400,
 			"pa": 7,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -3083,8 +3759,15 @@
 			"cooldown_global": 3,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"glyphe": 1,
+                "GLYPHE": {
+                    "duree": 99
+                },
                 "DOMMAGE_FIXE": {
                     "base": {
                         "valeur": 80
@@ -3096,6 +3779,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -3105,15 +3789,20 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"VOLE_EAU": {
                     "base": {
-                        "valeur": 6,
-                        "invocations": 8
+                        "invocations": 8,
+                        "valeur": 6
                     },
                     "critique": {
-                        "valeur": 8,
-                        "invocations": 11
+                        "invocations": 11,
+                        "valeur": 8
                     }
                 }
 			}
@@ -3124,6 +3813,7 @@
 			"kamas": 200,
 			"pa": 3,
 			"po": [2, 6],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 0,
@@ -3133,15 +3823,20 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
-                        "valeur": 6,
-                        "invocations": 8
+                        "invocations": 8,
+                        "valeur": 6
                     },
                     "critique": {
-                        "valeur": 9,
-                        "invocations": 11
+                        "invocations": 11,
+                        "valeur": 9
                     }
                 }
 			}
@@ -3150,6 +3845,7 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 1],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -3159,6 +3855,11 @@
 			"cooldown_global": 5,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"INVOCATION": 9
 			}
@@ -3167,6 +3868,7 @@
 			"kamas": 100,
 			"pa": 2,
 			"po": [0, 2],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -3176,6 +3878,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "renvoi_dommage": {
@@ -3197,6 +3904,7 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [1, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 3,
@@ -3206,6 +3914,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": 1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "pa": {
@@ -3225,6 +3938,7 @@
 			"kamas": 100,
 			"pa": 4,
 			"po": [1, 5],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
@@ -3234,8 +3948,13 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"TELEPORTE": 0,
+                "TELEPORTE": 1,
                 "CHANGE_STATS": {
                     "pa": {
                         "base": {
@@ -3252,6 +3971,7 @@
 			"kamas": 300,
 			"pa": 6,
 			"po": [2, 7],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -3261,6 +3981,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_EAU": {
                     "base": {
@@ -3276,6 +4001,7 @@
 			"kamas": 150,
 			"pa": 4,
 			"po": [0, 0],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 1,
@@ -3285,23 +4011,33 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": 3,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
-				"IMMUNISE_RETRAIT_PA": 1,
-                "IMMUNISE_RETRAIT_PM": 1,
+                "IMMUNISE_RETRAIT_PA": {
+                    "duree": 99
+                },
+                "IMMUNISE_RETRAIT_PM": {
+                    "duree": 99
+                },
                 "CHANGE_STATS": {
                     "esquive": {
                         "base": {
-                            "valeur": -20
+                            "valeur": -20,
+                            "duree": 99
                         }
                     }
-                },
-                "renouvelable": 3
+                }
 			}
 		},
 		"poussiere_temporelle": {
 			"kamas": 300,
 			"pa": 6,
 			"po": [1, 4],
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": 2,
 			"cible": 0,
@@ -3311,6 +4047,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -3326,6 +4067,7 @@
 			"kamas": 200,
 			"pa": 1,
 			"po": [1, 6],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -3335,6 +4077,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": 1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
                     "pa": {
@@ -3352,6 +4099,7 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 3],
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 0,
@@ -3361,6 +4109,11 @@
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -3384,5 +4137,250 @@
                 }
 			}
 		}
-	}
+	},
+    "Bouftou": {
+        "morsure": {
+            "kamas": 0,
+            "pa": 5,
+            "po": [1, 1],
+            "po_modifiable": 0,
+            "type_zone": 0,
+            "taille_zone": 0,
+            "cible": 0,
+            "ldv": 1,
+            "type_ldv": 0,
+            "cooldown": 0,
+            "cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
+            "effets": {
+                "DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 8
+                    },
+                    "critique": {
+                        "valeur": 12
+                    }
+                }
+            }
+        }
+    },
+    "Craqueleur": {
+        "ecrasement": {
+            "kamas": 0,
+            "pa": 4,
+            "po": [1, 1],
+            "po_modifiable": 0,
+            "type_zone": 0,
+            "taille_zone": 0,
+            "cible": 0,
+            "ldv": 1,
+            "type_ldv": 0,
+            "cooldown": 0,
+            "cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
+            "effets": {
+                "DOMMAGE_TERRE": {
+                    "base": {
+                        "valeur": 8
+                    },
+                    "critique": {
+                        "valeur": 12
+                    }
+                },
+                "CHANGE_STATS": {
+                    "pm": {
+                        "base": {
+                            "valeur": -1
+                        },
+                        "critique": {
+                            "valeur": -1
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Prespic": {
+        "moquerie": {
+            "kamas": 0,
+            "pa": 5,
+            "po": [1, 1],
+            "po_modifiable": 0,
+            "type_zone": 0,
+            "taille_zone": 0,
+            "cible": 0,
+            "ldv": 1,
+            "type_ldv": 0,
+            "cooldown": 0,
+            "cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
+            "effets": {
+                "DOMMAGE_EAU": {
+                    "base": {
+                        "valeur": 3
+                    },
+                    "critique": {
+                        "valeur": 5
+                    }
+                },
+                "CHANGE_STATS": {
+                    "pa": {
+                        "base": {
+                            "valeur": -1
+                        },
+                        "critique": {
+                            "valeur": -2
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Tofu": {
+        "beco_du_tofu": {
+            "kamas": 0,
+            "pa": 4,
+            "po": [1, 1],
+            "po_modifiable": 0,
+            "type_zone": 0,
+            "taille_zone": 0,
+            "cible": 0,
+            "ldv": 1,
+            "type_ldv": 0,
+            "cooldown": 0,
+            "cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
+            "effets": {
+                "DOMMAGE_AIR": {
+                    "base": {
+                        "valeur": 4
+                    },
+                    "critique": {
+                        "valeur": 7
+                    }
+                }
+            }
+        }
+    },
+    "La_Folle": {
+        "agacement": {
+            "kamas": 0,
+            "pa": 4,
+            "po": [1, 1],
+            "po_modifiable": 0,
+            "type_zone": 0,
+            "taille_zone": 0,
+            "cible": 0,
+            "ldv": 1,
+            "type_ldv": 0,
+            "cooldown": 0,
+            "cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
+            "effets": {
+                "CHANGE_STATS": {
+                    "pa": {
+                        "base": {
+                            "valeur": -1
+                        },
+                        "critique": {
+                            "valeur": -1
+                        }
+                    },
+                    "pm": {
+                        "critique": {
+                            "valeur": -1
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "La_Sacrifiee": {
+        "kamikazi": {
+            "kamas": 0,
+            "pa": 5,
+            "po": [1, 1],
+            "po_modifiable": 0,
+            "type_zone": 0,
+            "taille_zone": 0,
+            "cible": 0,
+            "ldv": 1,
+            "type_ldv": 0,
+            "cooldown": 0,
+            "cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
+            "desenvoute_delais": -1,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
+            "effets": {
+                "DOMMAGE_FEU": {
+                    "base": {
+                        "valeur": 26
+                    },
+                    "critique": {
+                        "valeur": 35
+                    }
+                },
+                "SUICIDE": 1
+            }
+        }
+    },
+    "Cadran_De_Xelor": {
+        "mirwar": {
+            "kamas": 0,
+            "pa": 2,
+            "po": [0, 0],
+            "po_modifiable": 0,
+            "type_zone": 0,
+            "taille_zone": 0,
+            "cible": 0,
+            "ldv": 1,
+            "type_ldv": 0,
+            "cooldown": 0,
+            "cooldown_global": 0,
+            "lancer_par_tour": -1,
+            "lancer_par_cible": -1,
+            "desenvoute_delais": 0,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_interdits": ["PORTE"],
+            "effets": {
+                "RENVOIE_SORT": 99
+            }
+        }
+    }
 }
