@@ -68,7 +68,3 @@ func update_hitbox():
 			hitbox.position = Vector2(0, -30)
 			hitbox.scale = Vector2(2, 3)
 			hp.position = Vector2(0, -80)
-
-
-func _input(event):
-	pass

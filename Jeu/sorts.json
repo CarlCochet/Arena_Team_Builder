@@ -2424,9 +2424,9 @@
             "etats_interdits": ["PORTE"],
 			"effets": {
 				"CHANGE_STATS": {
+                    "cible": 6,
                     "cc": {
                         "base": {
-                            "cible": 6,
                             "valeur": 100
                         }
                     }
@@ -3888,7 +3888,7 @@
                     "renvoi_dommage": {
                         "base": {
                             "valeur": 30,
-                            "perso": 50,
+                            "perso": 20,
                             "duree": 2
                         }
                     },

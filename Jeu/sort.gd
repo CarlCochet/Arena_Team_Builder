@@ -94,7 +94,7 @@ func execute_effets(lanceur, cases_cibles) -> bool:
 	
 	if not trouve:
 		for effet in effets.keys():
-			var new_effet = Effet.new(lanceur, cases_cibles, effet, effets[effet])
+			var new_effet = Effet.new(lanceur, cases_cibles, effet, effets[effet], critique)
 			if new_effet.instant:
 				new_effet.execute()
 			if new_effet.duree > 0 and effets.has("GLYPHE"):
@@ -102,13 +102,13 @@ func execute_effets(lanceur, cases_cibles) -> bool:
 	return sort_valide
 
 
-func parse_effets(lanceur, cible, effets, critique):
-	for effet in effets.keys():
-		var new_effet = Effet.new(lanceur, cible, effet, effets[effet], critique)
+func parse_effets(lanceur, p_cible, p_effets, critique):
+	for effet in p_effets.keys():
+		var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique)
 		if new_effet.instant:
 			new_effet.execute()
 		if new_effet.duree > 0:
-			cible.effets.append(new_effet)
+			p_cible.effets.append(new_effet)
 
 
 func precheck_cast(lanceur) -> bool:
@@ -163,13 +163,13 @@ func from_arme(_combattant, arme):
 		var data = GlobalData.equipements[arme].to_json()
 		pa = data["pa"]
 		po = data["po"]
-		type_zone = data["type_zone"]
+		type_zone = data["type_zone"] as GlobalData.TypeZone
 		taille_zone = data["taille_zone"]
 		effets = data["effets"]
 	else:
 		pa = 3
 		po = Vector2(1, 1)
-		type_zone = 0
+		type_zone = GlobalData.TypeZone.CERCLE
 		taille_zone = 0
 		effets = { "DOMMAGE_FIXE": { "base": { "valeur": 5 }, "critique": { "valeur": 7 } } }
 	nom = "arme"

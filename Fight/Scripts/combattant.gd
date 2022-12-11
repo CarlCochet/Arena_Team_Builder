@@ -174,11 +174,15 @@ func joue_action(action: int, tile_pos: Vector2i):
 		var valide = sort.execute_effets(self, zone)
 		if valide:
 			stats.pa -= sort.pa
-			var stat_perdu = stats_perdu.instantiate()
-			stat_perdu.set_data(-sort.pa, "pa")
-			add_child(stat_perdu)
+			affiche_stats_change(-sort.pa, "pa")
 			get_parent().stats_select.update(stats, max_stats)
 		get_parent().change_action(7)
+
+
+func affiche_stats_change(valeur, stat):
+	var stat_perdu = stats_perdu.instantiate()
+	stat_perdu.set_data(valeur, stat)
+	add_child(stat_perdu)
 
 
 func deplace_perso(chemin: Array):
@@ -193,9 +197,7 @@ func deplace_perso(chemin: Array):
 	get_parent().tilemap.a_star_grid.set_point_solid(fin)
 	get_parent().tilemap.grid[fin[0]][fin[1]] = -2
 	stats.pm -= len(path_actuel)
-	var stat_perdu = stats_perdu.instantiate()
-	stat_perdu.set_data(-len(path_actuel), "pm")
-	add_child(stat_perdu)
+	affiche_stats_change(-len(path_actuel), "pm")
 	get_parent().stats_select.update(stats, max_stats)
 
 
@@ -216,6 +218,17 @@ func place_perso(tile_pos: Vector2i):
 			grid_pos = new_grid_pos
 			get_parent().tilemap.a_star_grid.set_point_solid(grid_pos)
 			get_parent().tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+
+
+func bouge_perso(new_pos):
+	var old_grid_pos = grid_pos
+	var old_map_pos = get_parent().tilemap.local_to_map(position)
+	get_parent().tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
+	get_parent().tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = get_parent().tilemap.get_cell_atlas_coords(1, old_map_pos).x
+	position = get_parent().tilemap.map_to_local(new_pos - get_parent().offset)
+	grid_pos = new_pos
+	get_parent().tilemap.a_star_grid.set_point_solid(grid_pos)
+	get_parent().tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 
 
 func execute_effets():
@@ -253,8 +266,9 @@ func _on_area_2d_mouse_entered():
 			combattant._on_area_2d_mouse_exited()
 	classe_sprite.material.set_shader_parameter("width", 3.0)
 	is_hovered = true
-	get_parent().stats_hover.update(stats, stats)
+	get_parent().stats_hover.update(stats, max_stats)
 	get_parent().stats_hover.visible = true
+	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	hp.visible = true
 	if get_parent().action == 7:
 		affiche_path(Vector2i(99, 99))

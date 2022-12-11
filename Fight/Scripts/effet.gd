@@ -37,7 +37,40 @@ func trouve_duree(data):
 	return 0
 
 
+func check_cible():
+	if contenu["cible"] == 6 and (cible.equipe != lanceur.equipe or not cible is Invocation):
+		return false
+	if contenu["cible"] == 7 and (cible.equipe == lanceur.equipe or not cible is Invocation):
+		return false
+	return true
+
+
+func trouve_crit():
+	var base_crit: String = ""
+	if critique:
+		if contenu.has("critique"):
+			base_crit = "critique"
+		else:
+			for key in contenu.keys():
+				if contenu[key].has("critique"):
+					base_crit = "critique"
+			if base_crit.is_empty():
+				base_crit = "base"
+	else:
+		if contenu.has("base"):
+			base_crit = "base"
+		else:
+			for key in contenu.keys():
+				if contenu[key].has("base"):
+					base_crit = "base"
+	return base_crit
+
+
 func execute():
+	if contenu is Dictionary and contenu.has("cible"):
+		if not check_cible():
+			return
+	
 	match categorie:
 		"DOMMAGE_FIXE": 
 			dommage_fixe()
@@ -115,104 +148,495 @@ func execute():
 			print("No effect matching ", categorie)
 
 
-func dommage_fixe():
-	var damage = contenu["base"]["valeur"]
+func check_immu(dommages: int) -> bool:
 	for effet in cible.effets:
 		if "IMMUNISE" == effet.etat:
-			return
+			return true
 		if "RENVOIE_SORT" == effet.etat and nom_sort != "arme":
-			lanceur.stats.hp -= damage
+			for effet_lanceur in lanceur.effets:
+				if "IMMUNISE" == effet_lanceur.etat or "RENVOIE_SORT" == effet_lanceur.etat:
+					return true
+			lanceur.stats.hp -= dommages
+			lanceur.affiche_stats_change(-dommages, "hp")
+			update_widgets()
+			return true
+	return false
+
+
+func update_widgets():
+	for combattant in lanceur.get_parent().combattants:
+		if combattant.is_hovered:
+			combattant.get_parent().stats_hover.update(combattant.stats, combattant.max_stats)
+			combattant.hp_label.text = str(combattant.stats.hp) + "/" + str(combattant.max_stats.hp)
+
+
+func dommage_fixe():
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = contenu[base_crit]["allies"]
+		if check_immu(dommages):
 			return
-	cible.stats.hp -= damage
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = contenu[base_crit]["invocations"]
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = contenu[base_crit]["valeur"]
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	if contenu[base_crit].has("retour"):
+		for effet in lanceur.effets:
+			if "IMMUNISE" == effet.etat:
+				return
+		lanceur.stats.hp -= contenu[base_crit]["retour"]
+		lanceur.affiche_stats_change(-contenu[base_crit]["retour"], "hp")
+		update_widgets()
 
 
 func dommage_pourcent():
-	for effet in cible.effets:
-		if "IMMUNISE" == effet.etat:
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = cible.stats.hp * (contenu[base_crit]["allies"] / 100)
+		if check_immu(dommages):
 			return
-		if "RENVOIE_SORT" == effet.etat:
-			lanceur.stats.hp -= lanceur.stats.hp * (contenu["base"]["valeur"] / 100)
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = cible.stats.hp * (contenu[base_crit]["invocations"] / 100)
+		if check_immu(dommages):
 			return
-	cible.stats.hp -= cible.stats.hp * (contenu["base"]["valeur"] / 100)
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = cible.stats.hp * (contenu[base_crit]["valeur"] / 100)
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	if contenu[base_crit].has("retour"):
+		for effet in lanceur.effets:
+			if "IMMUNISE" == effet.etat:
+				return
+		var dommages = lanceur.stats.hp * (contenu[base_crit]["retour"] / 100)
+		lanceur.stats.hp -= dommages
+		lanceur.affiche_stats_change(-dommages, "hp")
+		update_widgets()
 
 
 func dommage_air():
-	var damage = contenu["base"]["valeur"] * (1 + lanceur.stats.dommages_air)
-	for effet in cible.effets:
-		if "IMMUNISE" == effet.etat:
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.dommages_air / 100.0) * (1 - cible.stats.resistances_air / 100.0))
+		if check_immu(dommages):
 			return
-		if "RENVOIE_SORT" == effet.etat:
-			lanceur.stats.hp -= contenu["base"]["valeur"]
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.dommages_air / 100.0) * (1 - cible.stats.resistances_air / 100.0))
+		if check_immu(dommages):
 			return
-	pass
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_air / 100.0) * (1 - cible.stats.resistances_air / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	if contenu[base_crit].has("retour"):
+		for effet in lanceur.effets:
+			if "IMMUNISE" == effet.etat:
+				return
+		var dommages = int(contenu[base_crit]["retour"] * (1 + lanceur.stats.dommages_air / 100.0) * (1 - cible.stats.resistances_air / 100.0))
+		lanceur.stats.hp -= dommages
+		lanceur.affiche_stats_change(-dommages, "hp")
+		update_widgets()
 
 
 func dommage_terre():
-	pass
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.dommages_terre / 100.0) * (1 - cible.stats.resistances_terre / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.dommages_terre / 100.0) * (1 - cible.stats.resistances_terre / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_terre / 100.0) * (1 - cible.stats.resistances_terre / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	if contenu[base_crit].has("retour"):
+		for effet in lanceur.effets:
+			if "IMMUNISE" == effet.etat:
+				return
+		var dommages = int(contenu[base_crit]["retour"] * (1 + lanceur.stats.dommages_terre / 100.0) * (1 - cible.stats.resistances_terre / 100.0))
+		lanceur.stats.hp -= dommages
+		lanceur.affiche_stats_change(-dommages, "hp")
+		update_widgets()
 
 
 func dommage_feu():
-	pass
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.dommages_feu / 100.0) * (1 - cible.stats.resistances_feu / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.dommages_feu / 100.0) * (1 - cible.stats.resistances_feu / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_feu / 100.0) * (1 - cible.stats.resistances_feu / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	if contenu[base_crit].has("retour"):
+		for effet in lanceur.effets:
+			if "IMMUNISE" == effet.etat:
+				return
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_feu / 100.0) * (1 - cible.stats.resistances_feu / 100.0))
+		lanceur.stats.hp -= dommages
+		lanceur.affiche_stats_change(-dommages, "hp")
+		update_widgets()
 
 
 func dommage_eau():
-	pass
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.dommages_eau / 100.0) * (1 - cible.stats.resistances_eau / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.dommages_eau / 100.0) * (1 - cible.stats.resistances_eau / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_eau / 100.0) * (1 - cible.stats.resistances_eau / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		cible.affiche_stats_change(-dommages, "hp")
+		update_widgets()
+	if contenu[base_crit].has("retour"):
+		for effet in lanceur.effets:
+			if "IMMUNISE" == effet.etat:
+				return
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_eau / 100.0) * (1 - cible.stats.resistances_eau / 100.0))
+		lanceur.stats.hp -= dommages
+		lanceur.affiche_stats_change(-dommages, "hp")
+		update_widgets()
 
 
 func vole_air():
-	pass
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.dommages_air / 100.0) * (1 - cible.stats.resistances_air / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.dommages_air / 100.0) * (1 - cible.stats.resistances_air / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_air / 100.0) * (1 - cible.stats.resistances_air / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	if lanceur.stats.hp > lanceur.max_stats.hp:
+		lanceur.stats.hp = lanceur.max_stats.hp
 
 
 func vole_terre():
-	pass
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.dommages_terre / 100.0) * (1 - cible.stats.resistances_terre / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.dommages_terre / 100.0) * (1 - cible.stats.resistances_terre / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_terre / 100.0) * (1 - cible.stats.resistances_terre / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	if lanceur.stats.hp > lanceur.max_stats.hp:
+		lanceur.stats.hp = lanceur.max_stats.hp
 
 
 func vole_feu():
-	pass
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.dommages_feu / 100.0) * (1 - cible.stats.resistances_feu / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.dommages_feu / 100.0) * (1 - cible.stats.resistances_feu / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_feu / 100.0) * (1 - cible.stats.resistances_feu / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	if lanceur.stats.hp > lanceur.max_stats.hp:
+		lanceur.stats.hp = lanceur.max_stats.hp
 
 
 func vole_eau():
-	pass
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var dommages = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.dommages_eau / 100.0) * (1 - cible.stats.resistances_eau / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var dommages = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.dommages_eau / 100.0) * (1 - cible.stats.resistances_eau / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var dommages = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.dommages_eau / 100.0) * (1 - cible.stats.resistances_eau / 100.0))
+		if check_immu(dommages):
+			return
+		cible.stats.hp -= dommages
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		cible.affiche_stats_change(-dommages, "hp")
+		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		update_widgets()
+	if lanceur.stats.hp > lanceur.max_stats.hp:
+		lanceur.stats.hp = lanceur.max_stats.hp
 
 
 func soin():
-	pass
+	var base_crit = trouve_crit()
+	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
+		var soins = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.soins / 100.0))
+		cible.stats.hp += min(soins, cible.max_stats.hp - cible.stats.hp)
+		cible.affiche_stats_change(soins, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("invocations") and cible is Invocation:
+		var soins = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.soins / 100.0))
+		cible.stats.hp += min(soins, cible.max_stats.hp - cible.stats.hp)
+		cible.affiche_stats_change(soins, "hp")
+		update_widgets()
+	elif contenu[base_crit].has("valeur"):
+		var soins = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.soins / 100.0))
+		cible.stats.hp += min(soins, cible.max_stats.hp - cible.stats.hp)
+		cible.affiche_stats_change(soins, "hp")
+		update_widgets()
+	if lanceur.stats.hp > lanceur.max_stats.hp:
+		lanceur.stats.hp = lanceur.max_stats.hp
 
 
 func change_stats():
-	pass
+	var base_crit = trouve_crit()
+	for stat in contenu.keys():
+		if contenu[stat][base_crit].has("perso") and cible.id == lanceur.id:
+			cible.stats[stat] += contenu[stat][base_crit]["perso"]
+			if contenu[stat][base_crit]["perso"] > 0:
+				cible.max_stats[stat] += contenu[stat][base_crit]["perso"]
+			if stat in ["pa", "pm", "hp"]:
+				cible.affiche_stats_change(contenu[stat][base_crit]["perso"], stat)
+		if contenu[stat][base_crit].has("valeur"):
+			cible.stats[stat] += contenu[stat][base_crit]["valeur"]
+			if contenu[stat][base_crit]["valeur"] > 0:
+				cible.max_stats[stat] += contenu[stat][base_crit]["valeur"]
+			if stat in ["pa", "pm", "hp"]:
+				cible.affiche_stats_change(contenu[stat][base_crit]["valeur"], stat)
+		if contenu[stat][base_crit].has("retour"):
+			lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
+			if contenu[stat][base_crit]["retour"] > 0:
+				lanceur.max_stats[stat] += contenu[stat][base_crit]["retour"]
+			if stat in ["pa", "pm", "hp"]:
+				lanceur.affiche_stats_change(contenu[stat][base_crit]["retour"], stat)
+	update_widgets()
 
 
 func vole_stats():
-	pass
+	var base_crit = trouve_crit()
+	for stat in contenu.keys():
+		if contenu[stat][base_crit].has("valeur"):
+			cible.stats[stat] -= contenu[stat][base_crit]["valeur"]
+			lanceur.stats[stat] += contenu[stat][base_crit]["valeur"]
+			lanceur.max_stats[stat] += contenu[stat][base_crit]["valeur"]
+			if stat in ["pa", "pm", "hp"]:
+				cible.affiche_stats_change(contenu[stat][base_crit]["valeur"], stat)
+	update_widgets()
 
 
 func pousse():
-	pass
+	var direction: Vector2i = (cible.grid_pos - lanceur.grid_pos).sign()
+	var grid = lanceur.get_parent().tilemap.grid
+	var stopped = false
+	for i in range(contenu):
+		var grid_pos = cible.grid_pos + (i + 1) * direction
+		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
+			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
+				if not stopped:
+					cible.stats.hp -= (contenu - i) * 3
+					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					stopped = true
+					cible.bouge_perso(grid_pos - direction)
+				break
+			elif grid[grid_pos.x][grid_pos.y] == -2:
+				if not stopped:
+					cible.stats.hp -= (contenu - i) * 3
+					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					stopped = true
+					cible.bouge_perso(grid_pos - direction)
+					for combattant in lanceur.get_parent().combattants:
+						if combattant.grid_pos == grid_pos:
+							combattant.stats.hp -= (contenu - i) * 3
+							combattant.affiche_stats_change(-(contenu - i) * 3, "hp")
+		else:
+			break
+	if not stopped:
+		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
+	update_widgets()
 
 
 func attire():
-	pass
+	var direction = -(cible.grid_pos - lanceur.grid_pos).sign()
+	var grid = lanceur.get_parent().tilemap.grid
+	var stopped = false
+	for i in range(contenu):
+		var grid_pos = cible.grid_pos + (i + 1) * direction
+		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
+			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
+				if not stopped:
+					cible.stats.hp -= (contenu - i) * 3
+					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					stopped = true
+					cible.bouge_perso(grid_pos - direction)
+				break
+			elif grid[grid_pos.x][grid_pos.y] == -2:
+				if not stopped:
+					cible.stats.hp -= (contenu - i) * 3
+					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					stopped = true
+					cible.bouge_perso(grid_pos - direction)
+					for combattant in lanceur.get_parent().combattants:
+						if combattant.grid_pos == grid_pos:
+							combattant.stats.hp -= (contenu - i) * 3
+							combattant.affiche_stats_change(-(contenu - i) * 3, "hp")
+		else:
+			break
+	if not stopped:
+		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
+	update_widgets()
 
 
 func immobilise():
-	pass
+	etat = "IMMOBILISE"
 
 
 func teleporte():
-	pass
+	lanceur.bouge_perso(cible)
 
 
 func transpose():
-	pass
+	lanceur.bouge_perso(cible.grid_pos)
+	cible.bouge_perso(lanceur.grid_pos)
 
 
 func petrifie():
-	pass
+	etat = "PETRIFIE"
 
 
 func rate_sort():
-	pass
+	etat = "RATE_SORT"
 
 
 func revele_invisible():
@@ -220,7 +644,7 @@ func revele_invisible():
 
 
 func devient_invisible():
-	pass
+	etat = "INVISIBLE"
 
 
 func desenvoute():
@@ -228,23 +652,23 @@ func desenvoute():
 
 
 func non_portable():
-	pass
+	etat = "NON_PORTABLE"
 
 
 func intransposable():
-	pass
+	etat = "INTRANSPOSABLE"
 
 
 func immunise():
-	pass
+	etat = "IMMUNISE"
 
 
 func stabilise():
-	pass
+	etat = "STABILISE"
 
 
 func renvoie_sort():
-	pass
+	etat = "RENVOIE_SORT"
 
 
 func invocation():
@@ -260,7 +684,7 @@ func lance():
 
 
 func picole():
-	pass
+	etat = "PICOLE"
 
 
 func sacrifice():
@@ -272,8 +696,8 @@ func tourne():
 
 
 func immunise_retrait_pa():
-	pass
+	etat = "IMMUNISE_RETRAIT_PA"
 
 
 func immunise_retrait_pm():
-	pass
+	etat = "IMMUNISE_RETRAIT_PM"

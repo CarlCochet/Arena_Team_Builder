@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b02mrbqksygw4" path="res://Classes/Cra/cra.png" id="4_eq6yq"]
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_o5476"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3a32n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpgf5"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_mioin"]
+[sub_resource type="LabelSettings" id="LabelSettings_40qi1"]
 font_size = 25
 
 [node name="Combattant" type="Node2D"]
@@ -31,7 +31,7 @@ position = Vector2(0, -38)
 scale = Vector2(2, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_3a32n")
+shape = SubResource("RectangleShape2D_fpgf5")
 
 [node name="HP" type="Sprite2D" parent="."]
 visible = false
@@ -46,7 +46,7 @@ offset_top = -18.0
 offset_right = 49.0
 offset_bottom = 20.0
 text = "0/0"
-label_settings = SubResource("LabelSettings_mioin")
+label_settings = SubResource("LabelSettings_40qi1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
