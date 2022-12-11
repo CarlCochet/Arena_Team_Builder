@@ -596,8 +596,9 @@ func attire():
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
-					cible.stats.hp -= (contenu - i) * 3
-					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					if grid_pos != lanceur.grid_pos:
+						cible.stats.hp -= (contenu - i) * 3
+						cible.affiche_stats_change(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 				break
@@ -627,8 +628,9 @@ func teleporte():
 
 
 func transpose():
+	var grid_pos = lanceur.grid_pos
 	lanceur.bouge_perso(cible.grid_pos)
-	cible.bouge_perso(lanceur.grid_pos)
+	cible.bouge_perso(grid_pos)
 
 
 func petrifie():
