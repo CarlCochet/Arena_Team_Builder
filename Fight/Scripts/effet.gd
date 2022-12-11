@@ -596,22 +596,22 @@ func attire():
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
-					if grid_pos != lanceur.grid_pos:
-						cible.stats.hp -= (contenu - i) * 3
-						cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					cible.stats.hp -= (contenu - i) * 3
+					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
-					cible.stats.hp -= (contenu - i) * 3
-					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					if grid_pos != lanceur.grid_pos:
+						cible.stats.hp -= (contenu - i) * 3
+						cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+						for combattant in lanceur.get_parent().combattants:
+							if combattant.grid_pos == grid_pos:
+								combattant.stats.hp -= (contenu - i) * 3
+								combattant.affiche_stats_change(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
-					for combattant in lanceur.get_parent().combattants:
-						if combattant.grid_pos == grid_pos:
-							combattant.stats.hp -= (contenu - i) * 3
-							combattant.affiche_stats_change(-(contenu - i) * 3, "hp")
 		else:
 			break
 	if not stopped:
