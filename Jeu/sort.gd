@@ -19,6 +19,9 @@ var lancer_par_cible: int
 var desenvoute_delais: int
 var nombre_lancers: int
 var cumul_max: int
+var etat_requis: String
+var etats_cible_interdits: Array
+var etats_lanceur_interdits: Array
 var effets: Dictionary
 
 var compte_lancers: int
@@ -44,6 +47,9 @@ func _init():
 	desenvoute_delais = -1
 	nombre_lancers = -1
 	cumul_max = -1
+	etat_requis = ""
+	etats_cible_interdits = []
+	etats_lanceur_interdits = []
 	effets = {}
 	
 	compte_lancers = 0
@@ -51,7 +57,7 @@ func _init():
 	compte_lancers_tour = 0
 
 
-func execute_effets(lanceur, cases_cibles) -> bool:
+func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	var sort_valide = true
 	if len(cases_cibles) == 0:
 		return false
@@ -63,38 +69,38 @@ func execute_effets(lanceur, cases_cibles) -> bool:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique)
+				parse_effets(lanceur, combattant, effets, critique, centre)
 	elif effets["cible"] == 4:
 		for combattant in combattants:
 			if combattant.equipe != lanceur.equipe:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique)
+				parse_effets(lanceur, combattant, effets, critique, centre)
 	elif effets["cible"] == 8:
 		for combattant in combattants:
 			trouve = true
-			parse_effets(lanceur, combattant, effets, critique)
+			parse_effets(lanceur, combattant, effets, critique, centre)
 	elif effets["cible"] == 9:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique)
+				parse_effets(lanceur, combattant, effets, critique, centre)
 				for combattant_bis in combattants:
 					if combattant_bis.classe == combattant.classe:
-						parse_effets(lanceur, combattant, effets, critique)
+						parse_effets(lanceur, combattant, effets, critique, centre)
 	elif effets["cible"] == 10:
 		for combattant in combattants:
-			if not combattant is Invocation:
+			if not combattant.is_invocation: 
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique)
+				parse_effets(lanceur, combattant, effets, critique, centre)
 	elif effets["cible"] == 11:
 		for combattant in combattants:
-			if combattant.equipe == lanceur.equipe and not combattant is Invocation:
+			if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique)
+				parse_effets(lanceur, combattant, effets, critique, centre)
 	
 	if not trouve:
 		for effet in effets.keys():
-			var new_effet = Effet.new(lanceur, cases_cibles, effet, effets[effet], critique)
+			var new_effet = Effet.new(lanceur, cases_cibles, effet, effets[effet], critique, centre)
 			if new_effet.instant:
 				new_effet.execute()
 			if new_effet.duree > 0 and effets.has("GLYPHE"):
@@ -102,9 +108,9 @@ func execute_effets(lanceur, cases_cibles) -> bool:
 	return sort_valide
 
 
-func parse_effets(lanceur, p_cible, p_effets, critique):
+func parse_effets(lanceur, p_cible, p_effets, critique, centre):
 	for effet in p_effets.keys():
-		var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique)
+		var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre)
 		if new_effet.instant:
 			new_effet.execute()
 		if new_effet.duree > 0:
@@ -120,6 +126,9 @@ func precheck_cast(lanceur) -> bool:
 		return false
 	if compte_lancers_tour >= lancer_par_tour and lancer_par_tour > 0:
 		return false
+	for effet in lanceur.effets:
+		if effet.etat == "PORTE":
+			return false
 	return true
 
 
@@ -140,17 +149,17 @@ func check_cible(lanceur, case_cible) -> bool:
 			return false
 		if cible == GlobalData.Cible.ENNEMIS and lanceur.equipe == target.equipe:
 			return false
-		if cible == GlobalData.Cible.INVOCATIONS and not target is Invocation:
+		if cible == GlobalData.Cible.INVOCATIONS and not target.is_invocation: 
 			return false
-		if cible == GlobalData.Cible.INVOCATIONS_ALLIEES and lanceur.equipe != target.equipe and not target is Invocation:
+		if cible == GlobalData.Cible.INVOCATIONS_ALLIEES and lanceur.equipe != target.equipe and not target.is_invocation: 
 			return false
-		if cible == GlobalData.Cible.INVOCATIONS_ENNEMIES and lanceur.equipe == target.equipe and not target is Invocation:
+		if cible == GlobalData.Cible.INVOCATIONS_ENNEMIES and lanceur.equipe == target.equipe and not target.is_invocation: 
 			return false
-		if cible == GlobalData.Cible.PERSONNAGES and target is Invocation:
+		if cible == GlobalData.Cible.PERSONNAGES and target.is_invocation: 
 			return false
-		if cible == GlobalData.Cible.PERSONNAGES_ALLIES and (target is Invocation or lanceur.equipe != target.equipe):
+		if cible == GlobalData.Cible.PERSONNAGES_ALLIES and (target.is_invocation or lanceur.equipe != target.equipe): 
 			return false
-		if cible == GlobalData.Cible.PERSONNAGES_ENNEMIS and (target is Invocation or lanceur.equipe == target.equipe):
+		if cible == GlobalData.Cible.PERSONNAGES_ENNEMIS and (target.is_invocation or lanceur.equipe == target.equipe): 
 			return false
 	else:
 		if cible != GlobalData.Cible.LIBRE and cible != GlobalData.Cible.TOUT and cible != GlobalData.Cible.VIDE:
@@ -194,6 +203,9 @@ func from_json(data):
 	desenvoute_delais = data["desenvoute_delais"]
 	nombre_lancers = data["nombre_lancers"]
 	cumul_max = data["cumul_max"]
+	etat_requis = data["etat_requis"]
+	etats_cible_interdits = data["etats_cible_interdits"]
+	etats_lanceur_interdits = data["etats_lanceur_interdits"]
 	effets = data["effets"]
 	return self
 
@@ -216,5 +228,8 @@ func to_json():
 		"desenvoute_delais": desenvoute_delais,
 		"nombre_lancers": nombre_lancers,
 		"cumul_max": cumul_max,
+		"etat_requis": etat_requis,
+		"etats_cible_interdits": etats_cible_interdits,
+		"etats_lanceur_interdits": etats_lanceur_interdits,
 		"effets": effets
 	}

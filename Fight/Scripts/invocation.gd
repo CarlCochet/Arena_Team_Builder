@@ -12,6 +12,7 @@ func _ready():
 	classe_sprite.material.set_shader_parameter("width", 0.0)
 	is_selected = false
 	is_hovered = false
+	is_invocation = true
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	update_hitbox()
 
