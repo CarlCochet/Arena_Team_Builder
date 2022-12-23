@@ -74,7 +74,6 @@ func add(stats):
 	return self
 
 
-
 func copy():
 	var stats_copy = Stats.new()
 	stats_copy.kamas = kamas

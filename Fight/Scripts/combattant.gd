@@ -10,6 +10,8 @@ var is_invocation: bool
 var stats: Stats
 var max_stats: Stats
 var init_stats: Stats
+var stat_buffs: Stats
+var stat_ret: Stats
 var equipements: Dictionary
 var sorts: Array
 var equipe: int
@@ -45,6 +47,8 @@ func _ready():
 	classe_sprite.material.shader = outline_shader
 	classe_sprite.material.set_shader_parameter("width", 0.0)
 	orientation = 1
+	stat_buffs = Stats.new()
+	stat_ret = Stats.new()
 	is_selected = false
 	is_hovered = false
 	is_invocation = false
@@ -66,7 +70,7 @@ func select():
 	classe_sprite.material.set_shader_parameter("width", 2.0)
 	combat.stats_select.update(stats, max_stats)
 	is_selected = true
-	combat.sorts.update(classe, sorts)
+	combat.sorts.update(self)
 
 
 func unselect():
@@ -82,7 +86,7 @@ func from_personnage(personnage: Personnage, equipe_id: int):
 	equipements = personnage.equipements
 	sorts = [Sort.new().from_arme(self, equipements["Armes"])]
 	for sort in personnage.sorts:
-		var new_sort = GlobalData.sorts[sort]
+		var new_sort = GlobalData.sorts[sort].copy()
 		new_sort.nom = sort
 		sorts.append(new_sort)
 	equipe = equipe_id
@@ -158,15 +162,23 @@ func affiche_zone(action: int, pos_event: Vector2i):
 
 
 func debut_tour():
+	var hp = stats.hp
+	stats = init_stats.add(stat_ret).add(stat_buffs)
+	stats.hp = hp
 	retrait_durees()
 	execute_effets()
+	print(classe)
+	for effet in effets:
+		print(effet.etat, " - ", str(effet.duree))
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 
 
 func fin_tour():
-	stats.pa = max_stats.pa
-	stats.pm = max_stats.pm
 	retrait_cooldown()
+	stat_ret = Stats.new()
+	var hp = stats.hp
+	stats = init_stats.add(stat_buffs)
+	stats.hp = hp
 
 
 func joue_action(action: int, tile_pos: Vector2i):
@@ -239,7 +251,10 @@ func bouge_perso(new_pos):
 
 func execute_effets():
 	for effet in effets:
-		effet.execute()
+		if effet.instant:
+			effet.instant = false
+		else:
+			effet.execute()
 
 
 func check_etat(etat: String) -> bool:
@@ -250,6 +265,8 @@ func check_etat(etat: String) -> bool:
 
 
 func retrait_durees():
+	stat_buffs = Stats.new()
+	max_stats = init_stats.copy()
 	for combattant in combat.combattants:
 		for effet in combattant.effets:
 			if effet.lanceur.id == id:
@@ -260,6 +277,18 @@ func retrait_durees():
 		if effet.duree > 0:
 			new_effets.append(effet)
 	effets = new_effets
+	
+	var new_map_effets = {}
+	for tile in combat.tilemap.effets:
+		for effet in combat.tilemap.effets[tile]:
+			if effet.lanceur.id == id:
+				effet.duree -= 1
+			if effet.duree > 0:
+				if not new_map_effets.has(tile):
+					new_map_effets[tile] = [effet]
+				else:
+					new_map_effets[tile].append(effet)
+	combat.tilemap.update_glyphes()
 
 
 func retrait_cooldown():

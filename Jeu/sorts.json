@@ -3875,7 +3875,9 @@
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
                 "GLYPHE": {
-                    "duree": 99
+                    "base": {
+                        "duree": 99
+                    }
                 },
                 "DOMMAGE_FIXE": {
                     "base": {
@@ -4243,7 +4245,7 @@
                         "valeur": 10
                     }
                 },
-                "CHANGE_STATS": {
+                "VOLE_STATS": {
                     "pa": {
                         "base": {
                             "valeur": 1,

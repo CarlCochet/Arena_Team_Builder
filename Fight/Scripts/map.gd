@@ -10,7 +10,7 @@ var y_max
 var offset
 var mode = false
 var zonetype = GlobalData.TypeZone.CARRE
-var effets: Dictionary
+var glyphes: Array
 
 @onready var overlay = get_used_cells(2)
 @onready var arena = get_used_cells(1)
@@ -32,7 +32,7 @@ func _ready():
 	a_star_grid.size = Vector2i(x_max + 1, y_max + 1) + offset
 	a_star_grid.update()
 	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-
+	
 	for x in range(x_max + 1):
 		var col = []
 		col.resize(y_max + 1 + offset.y)
@@ -54,6 +54,18 @@ func get_start():
 			start_bleu.append(pos)
 	start_bleu.shuffle()
 	start_rouge.shuffle()
+
+
+func update_glyphes():
+	clear_layer(3)
+	clear_layer(4)
+	for glyphe in glyphes:
+		glyphe.active()
+		glyphe.affiche()
+
+
+func delete_glyphe(glyphe_id):
+	pass
 
 
 func build_astar_grid():
