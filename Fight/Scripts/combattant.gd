@@ -162,11 +162,11 @@ func affiche_zone(action: int, pos_event: Vector2i):
 
 
 func debut_tour():
+	retrait_durees()
+	execute_effets()
 	var hp = stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp = hp
-	retrait_durees()
-	execute_effets()
 	print(classe)
 	for effet in effets:
 		print(effet.etat, " - ", str(effet.duree))
@@ -251,6 +251,7 @@ func bouge_perso(new_pos):
 
 
 func execute_effets():
+	stat_buffs = Stats.new()
 	for effet in effets:
 		if effet.instant:
 			effet.instant = false

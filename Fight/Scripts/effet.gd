@@ -201,9 +201,10 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 		base = int(values[2])
 		for i in range(int(values[0])):
 			base += randi_range(1, int(values[1]) + 1)
-		
-	var bonus = get_orientation_bonus() if orientation_bonus else 0
-	return roundi(base * (1.0 + stat / 100.0 - resistance / 100.0 + bonus))
+	
+	var resistance_zone = cible.stats.resistance_zone / 100.0 if aoe else 0.0
+	var bonus = get_orientation_bonus() if orientation_bonus else 0.0
+	return roundi(base * (1.0 + (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone))
 
 
 func applique_dommage(base, stat, resistance, orientation_bonus, type):
@@ -445,6 +446,8 @@ func vole_stats():
 			cible.stats[stat] -= contenu[stat][base_crit]["valeur"]
 			lanceur.stats[stat] += contenu[stat][base_crit]["valeur"]
 			lanceur.max_stats[stat] += contenu[stat][base_crit]["valeur"]
+			if duree > 0:
+				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
 			if stat in ["pa", "pm", "hp"]:
 				cible.stats_perdu.ajoute(contenu[stat][base_crit]["valeur"], stat)
 	update_widgets()
@@ -547,10 +550,11 @@ func devient_invisible():
 
 
 func desenvoute():
-	for effet in cible.effets:
-		if effet.nom == "CHANGE_STATS":
-			pass
 	cible.effets = []
+	cible.stat_buffs = Stats.new()
+	var hp = cible.stats.hp
+	cible.stats = cible.init_stats.copy().add(cible.stat_ret).add(cible.stat_buffs)
+	cible.stats.hp = hp
 	
 
 
@@ -602,7 +606,7 @@ func sacrifice():
 
 
 func tourne():
-	var direction = (cible.grid_pos - lanceur.grid_pos).sign()
+	var direction = (cible.grid_pos - centre).sign()
 
 
 func immunise_retrait_pa():
