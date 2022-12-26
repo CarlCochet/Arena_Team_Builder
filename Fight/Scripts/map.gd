@@ -60,7 +60,7 @@ func update_glyphes():
 	clear_layer(3)
 	clear_layer(4)
 	for glyphe in glyphes:
-		glyphe.active()
+		glyphe.active_full()
 		glyphe.affiche()
 
 

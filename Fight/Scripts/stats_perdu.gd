@@ -24,6 +24,8 @@ func _process(_delta):
 
 
 func ajoute(valeur: int, stat: String):
+	if valeur == 0:
+		return
 	queue.append([valeur, stat])
 
 

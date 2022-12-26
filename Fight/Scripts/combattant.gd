@@ -127,7 +127,7 @@ func affiche_ldv(action: int):
 	all_ldv = combat.tilemap.get_ldv(
 		grid_pos, 
 		sort.po[0],
-		sort.po[1],
+		sort.po[1] + (stats.po if sort.po_modifiable else 0),
 		sort.type_ldv,
 		sort.ldv
 	)
@@ -284,7 +284,7 @@ func retrait_durees():
 		if glyphe.lanceur.id == id:
 			glyphe.duree -= 1
 		if glyphe.duree > 0:
-			if not new_map_glyphes:
+			if len(new_map_glyphes) < 1:
 				new_map_glyphes = [glyphe]
 			else:
 				new_map_glyphes.append(glyphe)

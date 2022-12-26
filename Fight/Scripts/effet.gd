@@ -206,236 +206,115 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 	return roundi(base * (1.0 + stat / 100.0 - resistance / 100.0 + bonus))
 
 
+func applique_dommage(base, stat, resistance, orientation_bonus, type):
+	var dommages = max(calcul_dommage(base, stat, resistance, orientation_bonus), cible.stats.hp - cible.max_stats.hp)
+	
+	if type == "retour":
+		if lanceur.check_etat("IMMUNISE") and base > 0:
+			return
+		lanceur.stats.hp -= dommages
+		lanceur.stats_perdu.ajoute(-dommages, "hp")
+		return
+	
+	if check_immu(dommages):
+		return
+	
+	cible.stats.hp -= dommages
+	cible.stats_perdu.ajoute(-dommages, "hp")
+	
+	lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage / 100)
+	if cible.stats.renvoi_dommage > 0:
+		lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage / 100), "hp")
+	
+	if type == "vol":
+		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+	
+	update_widgets()
+
+
 func dommage_fixe():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = calcul_dommage(contenu[base_crit]["allies"], 0.0, 0.0, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		if cible.stats.renvoi_dommage > 0:
-			lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], 0.0, 0.0, not aoe, "normal")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
+		applique_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, not aoe, "normal")
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		if cible.stats.renvoi_dommage > 0:
-			lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage), "hp")
-		update_widgets()
 	elif contenu[base_crit].has("valeur"):
-		var dommages = calcul_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		if cible.stats.renvoi_dommage > 0:
-			lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, not aoe, "normal")
 	if contenu[base_crit].has("retour"):
-		if lanceur.check_etat("IMMUNISE"):
-			return
-		lanceur.stats.hp -= contenu[base_crit]["retour"]
-		lanceur.stats_perdu.ajoute(-contenu[base_crit]["retour"], "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["retour"], 0.0, 0.0, false, "retour")
 
 
 func dommage_pourcent():
 	var base_crit = trouve_crit()
 	var bonus_orientation = 1 if aoe else 1 + get_orientation_bonus()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = cible.stats.hp * (contenu[base_crit]["allies"] / 100) * bonus_orientation
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
-	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		var dommages = cible.stats.hp * (contenu[base_crit]["invocations"] / 100) * bonus_orientation
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(cible.stats.hp * (contenu[base_crit]["allies"] / 100), 0.0, 0.0, not aoe, "normal")
+	elif contenu[base_crit].has("invocations") and cible.is_invocation:
+		applique_dommage(cible.stats.hp * (contenu[base_crit]["invocations"] / 100), 0.0, 0.0, not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		var dommages = cible.stats.hp * (contenu[base_crit]["valeur"] / 100) * bonus_orientation
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(cible.stats.hp * (contenu[base_crit]["valeur"] / 100), 0.0, 0.0, not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		if lanceur.check_etat("IMMUNISE"):
-			return
-		var dommages = lanceur.stats.hp * (contenu[base_crit]["retour"] / 100)
-		lanceur.stats.hp -= dommages
-		lanceur.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(cible.stats.hp * (contenu[base_crit]["retour"] / 100), 0.0, 0.0, not aoe, "retour") 
 
 
 func dommage_air():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		if lanceur.check_etat("IMMUNISE"):
-			return
-		var dommages = calcul_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_air, cible.stats.resistances_air, false)
-		lanceur.stats.hp -= dommages
-		lanceur.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_air, lanceur.stats.resistances_air, not aoe, "retour") 
 
 
 func dommage_terre():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		if lanceur.check_etat("IMMUNISE"):
-			return
-		var dommages = calcul_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, false)
-		lanceur.stats.hp -= dommages
-		lanceur.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_terre, lanceur.stats.resistances_terre, not aoe, "retour") 
 
 
 func dommage_feu():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
-		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		if lanceur.check_etat("IMMUNISE"):
-			return
-		var dommages = calcul_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, false)
-		lanceur.stats.hp -= dommages
-		lanceur.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_feu, lanceur.stats.resistances_feu, not aoe, "retour") 
 
 
 func dommage_eau():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
-		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		if lanceur.check_etat("IMMUNISE"):
-			return
-		var dommages = calcul_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, false)
-		lanceur.stats.hp -= dommages
-		lanceur.stats_perdu.ajoute(-dommages, "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_eau, lanceur.stats.resistances_eau, not aoe, "retour") 
 
 
 func vole_air():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
-	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
-		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
+	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
+		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -443,32 +322,11 @@ func vole_air():
 func vole_terre():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -476,32 +334,11 @@ func vole_terre():
 func vole_feu():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -509,32 +346,11 @@ func vole_feu():
 func vole_eau():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var dommages = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
-		if check_immu(dommages):
-			return
-		cible.stats.hp -= dommages
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.stats_perdu.ajoute(-dommages, "hp")
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		update_widgets()
+		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -542,20 +358,11 @@ func vole_eau():
 func soin():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var soins = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.soins, 0, false)
-		cible.stats.hp += min(soins, cible.max_stats.hp - cible.stats.hp)
-		cible.stats_perdu.ajoute(soins, "hp")
-		update_widgets()
+		applique_dommage(-contenu[base_crit]["allies"], lanceur.stats.soins, 0, false, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		var soins = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.soins, 0, false)
-		cible.stats.hp += min(soins, cible.max_stats.hp - cible.stats.hp)
-		cible.stats_perdu.ajoute(soins, "hp")
-		update_widgets()
+		applique_dommage(-contenu[base_crit]["invocations"], lanceur.stats.soins, 0, false, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		var soins = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.soins, 0, false)
-		cible.stats.hp += min(soins, cible.max_stats.hp - cible.stats.hp)
-		cible.stats_perdu.ajoute(soins, "hp")
-		update_widgets()
+		applique_dommage(-contenu[base_crit]["valeur"], lanceur.stats.soins, 0, false, "normal") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
