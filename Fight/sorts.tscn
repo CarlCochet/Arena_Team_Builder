@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cyuev8xs7ffv8"]
+[gd_scene load_steps=4 format=3 uid="uid://cyuev8xs7ffv8"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/sorts_selection.gd" id="1_cldj7"]
+[ext_resource type="Texture2D" uid="uid://dvj1nsuq5mkiy" path="res://UI/Logos/Spells/Cra/fleche_absorbante.png" id="2_mdodq"]
+[ext_resource type="Texture2D" uid="uid://bchvky20yqgij" path="res://Classes/Cra/Sorts/fleche_absorbante.png" id="3_xlqcf"]
 
 [node name="Sorts" type="HBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_cldj7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_mdodq")
+
+[node name="Sprite2D" type="Sprite2D" parent="TextureRect"]
+position = Vector2(82.6667, -106)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_xlqcf")

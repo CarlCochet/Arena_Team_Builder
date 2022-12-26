@@ -32,13 +32,13 @@ var is_hovered: bool
 var cercle_bleu = preload("res://Fight/Images/cercle_personnage_bleu.png")
 var cercle_rouge = preload("res://Fight/Images/cercle_personnage_rouge.png")
 var outline_shader = preload("res://Fight/Shaders/combattant_outline.gdshader")
-var stats_perdu = preload("res://Fight/stats_perdu.tscn")
 
 @onready var cercle: Sprite2D = $Cercle
 @onready var fleche: Sprite2D = $Fleche
 @onready var classe_sprite: Sprite2D = $Classe
 @onready var hp: Sprite2D = $HP
 @onready var hp_label: Label = $HP/Label
+@onready var stats_perdu: Label = $StatsPerdu
 
 
 func _ready():
@@ -163,7 +163,7 @@ func affiche_zone(action: int, pos_event: Vector2i):
 
 func debut_tour():
 	var hp = stats.hp
-	stats = init_stats.add(stat_ret).add(stat_buffs)
+	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp = hp
 	retrait_durees()
 	execute_effets()
@@ -177,7 +177,7 @@ func fin_tour():
 	retrait_cooldown()
 	stat_ret = Stats.new()
 	var hp = stats.hp
-	stats = init_stats.add(stat_buffs)
+	stats = init_stats.copy().add(stat_buffs)
 	stats.hp = hp
 
 
@@ -192,15 +192,15 @@ func joue_action(action: int, tile_pos: Vector2i):
 		var valide = sort.execute_effets(self, zone, tile_pos)
 		if valide:
 			stats.pa -= sort.pa
-			affiche_stats_change(-sort.pa, "pa")
+			stats_perdu.ajoute(-sort.pa, "pa")
 			combat.stats_select.update(stats, max_stats)
+			combat.sorts.update(self)
+			
 		combat.change_action(7)
 
 
 func affiche_stats_change(valeur, stat):
-	var stat_perdu = stats_perdu.instantiate()
-	stat_perdu.set_data(valeur, stat)
-	add_child(stat_perdu)
+	stats_perdu.ajoute()
 
 
 func deplace_perso(chemin: Array):
@@ -215,8 +215,9 @@ func deplace_perso(chemin: Array):
 	combat.tilemap.a_star_grid.set_point_solid(fin)
 	combat.tilemap.grid[fin[0]][fin[1]] = -2
 	stats.pm -= len(path_actuel)
-	affiche_stats_change(-len(path_actuel), "pm")
+	stats_perdu.ajoute(-len(path_actuel), "pm")
 	combat.stats_select.update(stats, max_stats)
+	combat.tilemap.clear_layer(2)
 
 
 func place_perso(tile_pos: Vector2i):
@@ -278,16 +279,16 @@ func retrait_durees():
 			new_effets.append(effet)
 	effets = new_effets
 	
-	var new_map_effets = {}
-	for tile in combat.tilemap.effets:
-		for effet in combat.tilemap.effets[tile]:
-			if effet.lanceur.id == id:
-				effet.duree -= 1
-			if effet.duree > 0:
-				if not new_map_effets.has(tile):
-					new_map_effets[tile] = [effet]
-				else:
-					new_map_effets[tile].append(effet)
+	var new_map_glyphes = []
+	for glyphe in combat.tilemap.glyphes:
+		if glyphe.lanceur.id == id:
+			glyphe.duree -= 1
+		if glyphe.duree > 0:
+			if not new_map_glyphes:
+				new_map_glyphes = [glyphe]
+			else:
+				new_map_glyphes.append(glyphe)
+	combat.tilemap.glyphes = new_map_glyphes
 	combat.tilemap.update_glyphes()
 
 
@@ -295,6 +296,7 @@ func retrait_cooldown():
 	for sort in sorts:
 		if sort.cooldown_actuel > 0:
 			sort.cooldown_actuel -=1
+		sort.compte_lancers_tour = 0
 
 
 func _input(event):

@@ -401,7 +401,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+            "etats_lanceur_interdits": ["PORTE", "IMMOBILISE"],
 			"effets": {
 				"TELEPORTE": 1
 			}
@@ -556,7 +556,9 @@
 					}
 				},
 				"REVELE_INVISIBLE": {
-                    "duree": 0
+					"base": {
+						"duree": 0
+					}
                 }
 			}
 		},
@@ -1169,7 +1171,10 @@
                         }
                     },
                     "pm": {
-                        "base": 2
+                        "base": {
+                        	"valeur": 2,
+                        	"duree": 1
+                        }
                     }
                 },
                 "IMMUNISE_RETRAIT_PM": {
@@ -1938,18 +1943,18 @@
 			"type_zone": 0,
 			"taille_zone": 0,
 			"cible": 2,
-			"ldv": 1,
+			"ldv": 0,
 			"type_ldv": 0,
 			"cooldown": 0,
 			"cooldown_global": 0,
-            "lancer_par_tour": -1,
+            "lancer_par_tour": 1,
             "lancer_par_cible": -1,
             "desenvoute_delais": -1,
             "nombre_lancers": -1,
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+            "etats_lanceur_interdits": ["PORTE", "IMMOBILISE"],
 			"effets": {
 				"TELEPORTE": 1
 			}
@@ -2836,7 +2841,11 @@
             "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
-				"PICOLE": 99,
+				"PICOLE": {
+					"base": {
+						"duree": 99
+					}
+				},
                 "CHANGE_STATS": {
                     "dommages_feu": {
                         "base": {
@@ -2976,7 +2985,6 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-                "TRANSPOSE": 8,
                 "DOMMAGE_AIR": {
                     "base": {
                         "valeur": 7
@@ -2984,7 +2992,8 @@
                     "critique": {
                         "valeur": 10
                     }
-                }
+                },
+                "TRANSPOSE": 8
 			}
 		},
 		"attirance": {
@@ -3307,8 +3316,8 @@
             "nombre_lancers": -1,
             "cumul_max": -1,
             "etat_requis": "",
-            "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+            "etats_cible_interdits": ["INTRANSPOSABLE"],
+            "etats_lanceur_interdits": ["PORTE", "INTRANSPOSABLE"],
 			"effets": {
 				"TRANSPOSE": 3
 			}
@@ -3927,7 +3936,7 @@
 			"po": [2, 6],
             "po_modifiable": 1,
 			"type_zone": 0,
-			"taille_zone": 2,
+			"taille_zone": 0,
 			"cible": 0,
 			"ldv": 1,
 			"type_ldv": 0,
@@ -4069,7 +4078,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+            "etats_lanceur_interdits": ["PORTE", "IMMOBILISE"],
 			"effets": {
                 "TELEPORTE": 1,
                 "CHANGE_STATS": {

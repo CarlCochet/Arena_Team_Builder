@@ -165,7 +165,7 @@ func check_immu(dommages: int) -> bool:
 				if "IMMUNISE" == effet_lanceur.etat or "RENVOIE_SORT" == effet_lanceur.etat:
 					return true
 			lanceur.stats.hp -= dommages
-			lanceur.affiche_stats_change(-dommages, "hp")
+			lanceur.stats_perdu.ajoute(-dommages, "hp")
 			update_widgets()
 			return true
 	return false
@@ -196,8 +196,13 @@ func update_widgets():
 
 
 func calcul_dommage(base, stat, resistance, orientation_bonus):
+	if base is String:
+		var values = base.replace("+", "d").split("d")
+		base = int(values[2])
+		for i in range(int(values[0])):
+			base += randi_range(1, int(values[1]) + 1)
+		
 	var bonus = get_orientation_bonus() if orientation_bonus else 0
-	print(str(base), " ", str(stat), " ", str(resistance), " ", str(bonus))
 	return roundi(base * (1.0 + stat / 100.0 - resistance / 100.0 + bonus))
 
 
@@ -209,9 +214,9 @@ func dommage_fixe():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage)
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		if cible.stats.renvoi_dommage > 0:
-			lanceur.affiche_stats_change(-dommages * (cible.stats.renvoi_dommage), "hp")
+			lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, not aoe)
@@ -219,9 +224,9 @@ func dommage_fixe():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage)
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		if cible.stats.renvoi_dommage > 0:
-			lanceur.affiche_stats_change(-dommages * (cible.stats.renvoi_dommage), "hp")
+			lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = calcul_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, not aoe)
@@ -229,48 +234,48 @@ func dommage_fixe():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage)
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		if cible.stats.renvoi_dommage > 0:
-			lanceur.affiche_stats_change(-dommages * (cible.stats.renvoi_dommage), "hp")
+			lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage), "hp")
 		update_widgets()
 	if contenu[base_crit].has("retour"):
 		if lanceur.check_etat("IMMUNISE"):
 			return
 		lanceur.stats.hp -= contenu[base_crit]["retour"]
-		lanceur.affiche_stats_change(-contenu[base_crit]["retour"], "hp")
+		lanceur.stats_perdu.ajoute(-contenu[base_crit]["retour"], "hp")
 		update_widgets()
 
 
 func dommage_pourcent():
 	var base_crit = trouve_crit()
-	var bonus_orientation = 1 if aoe else get_orientation_bonus()
+	var bonus_orientation = 1 if aoe else 1 + get_orientation_bonus()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		var dommages = cible.stats.hp * (contenu[base_crit]["allies"] / 100) * bonus_orientation
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		var dommages = cible.stats.hp * (contenu[base_crit]["invocations"] / 100) * bonus_orientation
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = cible.stats.hp * (contenu[base_crit]["valeur"] / 100) * bonus_orientation
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	if contenu[base_crit].has("retour"):
 		if lanceur.check_etat("IMMUNISE"):
 			return
 		var dommages = lanceur.stats.hp * (contenu[base_crit]["retour"] / 100)
 		lanceur.stats.hp -= dommages
-		lanceur.affiche_stats_change(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 
 
@@ -281,28 +286,28 @@ func dommage_air():
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	if contenu[base_crit].has("retour"):
 		if lanceur.check_etat("IMMUNISE"):
 			return
 		var dommages = calcul_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_air, cible.stats.resistances_air, false)
 		lanceur.stats.hp -= dommages
-		lanceur.affiche_stats_change(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 
 
@@ -313,28 +318,28 @@ func dommage_terre():
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	if contenu[base_crit].has("retour"):
 		if lanceur.check_etat("IMMUNISE"):
 			return
 		var dommages = calcul_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, false)
 		lanceur.stats.hp -= dommages
-		lanceur.affiche_stats_change(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 
 
@@ -345,28 +350,28 @@ func dommage_feu():
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	if contenu[base_crit].has("retour"):
 		if lanceur.check_etat("IMMUNISE"):
 			return
 		var dommages = calcul_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, false)
 		lanceur.stats.hp -= dommages
-		lanceur.affiche_stats_change(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 
 
@@ -377,28 +382,28 @@ func dommage_eau():
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
 		if check_immu(dommages):
 			return
 		cible.stats.hp -= dommages
-		cible.affiche_stats_change(-dommages, "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 	if contenu[base_crit].has("retour"):
 		if lanceur.check_etat("IMMUNISE"):
 			return
 		var dommages = calcul_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, false)
 		lanceur.stats.hp -= dommages
-		lanceur.affiche_stats_change(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(-dommages, "hp")
 		update_widgets()
 
 
@@ -410,8 +415,8 @@ func vole_air():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
@@ -419,8 +424,8 @@ func vole_air():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe)
@@ -428,8 +433,8 @@ func vole_air():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
@@ -443,8 +448,8 @@ func vole_terre():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
@@ -452,8 +457,8 @@ func vole_terre():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe)
@@ -461,8 +466,8 @@ func vole_terre():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
@@ -476,8 +481,8 @@ func vole_feu():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
@@ -485,8 +490,8 @@ func vole_feu():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe)
@@ -494,8 +499,8 @@ func vole_feu():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
@@ -509,8 +514,8 @@ func vole_eau():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		var dommages = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
@@ -518,8 +523,8 @@ func vole_eau():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
 		var dommages = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe)
@@ -527,8 +532,8 @@ func vole_eau():
 			return
 		cible.stats.hp -= dommages
 		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		cible.affiche_stats_change(-dommages, "hp")
-		lanceur.affiche_stats_change(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		cible.stats_perdu.ajoute(-dommages, "hp")
+		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
 		update_widgets()
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
@@ -537,19 +542,19 @@ func vole_eau():
 func soin():
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		var soins = int(contenu[base_crit]["allies"] * (1 + lanceur.stats.soins / 100.0))
+		var soins = calcul_dommage(contenu[base_crit]["allies"], lanceur.stats.soins, 0, false)
 		cible.stats.hp += min(soins, cible.max_stats.hp - cible.stats.hp)
-		cible.affiche_stats_change(soins, "hp")
+		cible.stats_perdu.ajoute(soins, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		var soins = int(contenu[base_crit]["invocations"] * (1 + lanceur.stats.soins / 100.0))
+		var soins = calcul_dommage(contenu[base_crit]["invocations"], lanceur.stats.soins, 0, false)
 		cible.stats.hp += min(soins, cible.max_stats.hp - cible.stats.hp)
-		cible.affiche_stats_change(soins, "hp")
+		cible.stats_perdu.ajoute(soins, "hp")
 		update_widgets()
 	elif contenu[base_crit].has("valeur"):
-		var soins = int(contenu[base_crit]["valeur"] * (1 + lanceur.stats.soins / 100.0))
+		var soins = calcul_dommage(contenu[base_crit]["valeur"], lanceur.stats.soins, 0, false)
 		cible.stats.hp += min(soins, cible.max_stats.hp - cible.stats.hp)
-		cible.affiche_stats_change(soins, "hp")
+		cible.stats_perdu.ajoute(soins, "hp")
 		update_widgets()
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
@@ -578,7 +583,7 @@ func change_stats():
 			if contenu[stat][base_crit]["perso"] > 0:
 				cible.max_stats[stat] += contenu[stat][base_crit]["perso"]
 			if stat in ["pa", "pm", "hp"]:
-				cible.affiche_stats_change(contenu[stat][base_crit]["perso"], stat)
+				cible.stats_perdu.ajoute(contenu[stat][base_crit]["perso"], stat)
 		if contenu[stat][base_crit].has("valeur"):
 			if check_retrait_immunite(cible, stat, contenu[stat][base_crit]["valeur"]):
 				continue
@@ -591,7 +596,7 @@ func change_stats():
 			if contenu[stat][base_crit]["valeur"] > 0:
 				cible.max_stats[stat] += contenu[stat][base_crit]["valeur"]
 			if stat in ["pa", "pm", "hp"]:
-				cible.affiche_stats_change(contenu[stat][base_crit]["valeur"], stat)
+				cible.stats_perdu.ajoute(contenu[stat][base_crit]["valeur"], stat)
 		if contenu[stat][base_crit].has("retour"):
 			if check_retrait_immunite(cible, stat, contenu[stat][base_crit]["retour"]):
 				continue
@@ -604,7 +609,7 @@ func change_stats():
 			if contenu[stat][base_crit]["retour"] > 0:
 				lanceur.max_stats[stat] += contenu[stat][base_crit]["retour"]
 			if stat in ["pa", "pm", "hp"]:
-				lanceur.affiche_stats_change(contenu[stat][base_crit]["retour"], stat)
+				lanceur.stats_perdu.ajoute(contenu[stat][base_crit]["retour"], stat)
 	update_widgets()
 
 
@@ -634,7 +639,7 @@ func vole_stats():
 			lanceur.stats[stat] += contenu[stat][base_crit]["valeur"]
 			lanceur.max_stats[stat] += contenu[stat][base_crit]["valeur"]
 			if stat in ["pa", "pm", "hp"]:
-				cible.affiche_stats_change(contenu[stat][base_crit]["valeur"], stat)
+				cible.stats_perdu.ajoute(contenu[stat][base_crit]["valeur"], stat)
 	update_widgets()
 
 
@@ -648,20 +653,20 @@ func pousse():
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
 					cible.stats.hp -= (contenu - i) * 3
-					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
 					cible.stats.hp -= (contenu - i) * 3
-					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos:
 							combattant.stats.hp -= (contenu - i) * 3
-							combattant.affiche_stats_change(-(contenu - i) * 3, "hp")
+							combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 		else:
 			break
 	if not stopped:
@@ -679,7 +684,7 @@ func attire():
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
 					cible.stats.hp -= (contenu - i) * 3
-					cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 				break
@@ -687,11 +692,11 @@ func attire():
 				if not stopped:
 					if grid_pos != lanceur.grid_pos:
 						cible.stats.hp -= (contenu - i) * 3
-						cible.affiche_stats_change(-(contenu - i) * 3, "hp")
+						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						for combattant in combat.combattants:
 							if combattant.grid_pos == grid_pos:
 								combattant.stats.hp -= (contenu - i) * 3
-								combattant.affiche_stats_change(-(contenu - i) * 3, "hp")
+								combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 		else:
@@ -706,8 +711,6 @@ func immobilise():
 
 
 func teleporte():
-	if lanceur.check_etat("IMMOBILISE"):
-		return
 	lanceur.bouge_perso(centre)
 
 
@@ -728,7 +731,8 @@ func rate_sort():
 
 
 func revele_invisible():
-	pass
+	if cible.check_etat("INVISIBLE"):
+		pass
 
 
 func devient_invisible():
@@ -768,8 +772,6 @@ func invocation():
 
 
 func porte():
-	if cible.check_etat("NON_PORTABLE"):
-		return
 	var effet_cible = Effet.new(lanceur, cible, "PORTE", {}, false, lanceur.grid_pos, false)
 	cible.effets.append(effet_cible)
 	etat = "PORTE_ALLIE" if lanceur.equipe == cible.equipe else "PORTE_ENNEMI"
@@ -789,7 +791,7 @@ func picole():
 
 
 func sacrifice():
-	pass
+	etat = "SACRIFICE"
 
 
 func tourne():

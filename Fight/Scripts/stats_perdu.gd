@@ -1,14 +1,33 @@
 extends Label
 
 
+var queue: Array
+var init_position: Vector2
+
+
+func _ready():
+	queue = []
+	text = ""
+	label_settings = LabelSettings.new()
+	init_position = position
+
+
 func _process(_delta):
-	position -= Vector2(0, 0.5)
-	if position.y < -150:
-		queue_free()
+	if len(queue) > 0:
+		if text.is_empty():
+			set_data(queue[0][0], queue[0][1])
+		position -= Vector2(0, 0.5)
+		if position.y < -150:
+			position = init_position
+			queue.pop_front()
+			text = ""
+
+
+func ajoute(valeur: int, stat: String):
+	queue.append([valeur, stat])
 
 
 func set_data(valeur: int, stat: String):
-	label_settings = LabelSettings.new()
 	if stat == "pa":
 		label_settings.font_color = Color.BLUE
 	if stat == "pm":

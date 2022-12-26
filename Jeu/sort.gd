@@ -77,11 +77,11 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		for combattant in combattants:
 			if combattant.equipe != lanceur.equipe:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique, centre, aoe)
+				parse_effets(lanceur, combattant, effets, critique, centre, true)
 	elif effets["cible"] == 8:
 		for combattant in combattants:
 			trouve = true
-			parse_effets(lanceur, combattant, effets, critique, centre, aoe)
+			parse_effets(lanceur, combattant, effets, critique, centre, true)
 	elif effets["cible"] == 9:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
@@ -89,37 +89,34 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 				parse_effets(lanceur, combattant, effets, critique, centre, aoe)
 				for combattant_bis in combattants:
 					if combattant_bis.classe == combattant.classe:
-						parse_effets(lanceur, combattant, effets, critique, centre, aoe)
+						parse_effets(lanceur, combattant, effets, critique, centre, true)
 	elif effets["cible"] == 10:
 		for combattant in combattants:
 			if not combattant.is_invocation: 
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique, centre, aoe)
+				parse_effets(lanceur, combattant, effets, critique, centre, true)
 	elif effets["cible"] == 11:
 		for combattant in combattants:
 			if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique, centre, aoe)
+				parse_effets(lanceur, combattant, effets, critique, centre, true)
 	
-	if not trouve:
-		if "GLYPHE" in effets.keys():
-			var new_glyphe = Glyphe.new(
-				len(lanceur.combat.tilemap.glyphes) - 1, 
-				lanceur, 
-				cases_cibles, 
-				effets, 
-				effets.has("DOMMAGE_FIXE"), 
-				critique, 
-				centre, 
-				aoe)
-			
-			for effet in effets.keys():
-				var new_effet = Effet.new(lanceur, cases_cibles, effet, effets[effet], critique, centre, aoe)
-				for case in cases_cibles:
-					if lanceur.get_parent().tilemap.effets.has(case):
-						lanceur.get_parent().tilemap.effets[case].append(new_effet)
-					else:
-						lanceur.get_parent().tilemap.effets[case] = [new_effet]
+	if effets.has("GLYPHE"):
+		var new_glyphe = Glyphe.new(
+			len(lanceur.combat.tilemap.glyphes) - 1, 
+			lanceur, 
+			cases_cibles, 
+			effets, 
+			effets.has("DOMMAGE_FIXE"), 
+			critique, 
+			centre, 
+			aoe)
+		
+		lanceur.combat.tilemap.glyphes.append(new_glyphe)
+		lanceur.combat.tilemap.update_glyphes()
+		new_glyphe.active_full()
+	elif not trouve and cible == 2:
+		parse_effets(lanceur, cases_cibles, effets, critique, centre, true)
 	
 	compte_lancers += 1
 	compte_lancers_tour += 1
@@ -128,10 +125,9 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	if cooldown_global > 0:
 		for combattant in combattants:
 			for sort in combattant.sorts:
-				if sort.nom == nom and sort.cooldown_actuel < cooldown_global:
+				if sort.nom == nom and sort.cooldown_actuel < cooldown_global and combattant.equipe == lanceur.equipe:
 					sort.cooldown_actuel = cooldown_global
 	
-	lanceur.combat.sorts.update(lanceur)
 	return sort_valide
 
 
@@ -184,7 +180,6 @@ func check_cible(lanceur, case_cible) -> bool:
 		return false
 	
 	if target != null:
-		print(not target is Combattant)
 		if cible == GlobalData.Cible.MOI and target.id != lanceur.id:
 			return false
 		if cible == GlobalData.Cible.ALLIES and lanceur.equipe != target.equipe:
