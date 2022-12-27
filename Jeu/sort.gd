@@ -26,6 +26,7 @@ var effets: Dictionary
 
 var compte_lancers: int
 var compte_lancers_tour: int
+var compte_cible: Dictionary
 var cooldown_actuel: int
 
 
@@ -55,10 +56,11 @@ func _init():
 	compte_lancers = 0
 	cooldown_actuel = 0
 	compte_lancers_tour = 0
+	compte_cible = {}
 
 
 func execute_effets(lanceur, cases_cibles, centre) -> bool:
-	var sort_valide = true
+	var sort_valide = false
 	var aoe = false
 	if len(cases_cibles) == 0:
 		return false
@@ -72,34 +74,34 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique, centre, aoe)
+				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, aoe)
 	elif effets["cible"] == 4:
 		for combattant in combattants:
 			if combattant.equipe != lanceur.equipe:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique, centre, true)
+				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
 	elif effets["cible"] == 8:
 		for combattant in combattants:
 			trouve = true
-			parse_effets(lanceur, combattant, effets, critique, centre, true)
+			sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
 	elif effets["cible"] == 9:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique, centre, aoe)
+				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, aoe)
 				for combattant_bis in combattants:
 					if combattant_bis.classe == combattant.classe:
-						parse_effets(lanceur, combattant, effets, critique, centre, true)
+						sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
 	elif effets["cible"] == 10:
 		for combattant in combattants:
 			if not combattant.is_invocation: 
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique, centre, true)
+				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
 	elif effets["cible"] == 11:
 		for combattant in combattants:
 			if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
 				trouve = true
-				parse_effets(lanceur, combattant, effets, critique, centre, true)
+				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
 	
 	if effets.has("GLYPHE"):
 		var new_glyphe = Glyphe.new(
@@ -116,7 +118,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		lanceur.combat.tilemap.update_glyphes()
 		new_glyphe.active_full()
 	elif not trouve and cible == 2:
-		parse_effets(lanceur, cases_cibles, effets, critique, centre, true)
+		sort_valide = true if sort_valide else parse_effets(lanceur, cases_cibles, effets, critique, centre, true)
 	
 	compte_lancers += 1
 	compte_lancers_tour += 1
@@ -135,6 +137,14 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 	for etat in etats_cible_interdits:
 		if p_cible.check_etat(etat):
 			return false
+	if lancer_par_cible > 0 and not p_cible is Vector2i:
+		if compte_cible.has(p_cible.id):
+			if compte_cible[p_cible.id] >= lancer_par_cible:
+				return false
+			else:
+				compte_cible[p_cible.id] += 1
+		else:
+			compte_cible[p_cible.id] = 1
 	for effet in p_effets.keys():
 		var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre, aoe)
 		if new_effet.instant:

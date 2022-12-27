@@ -298,6 +298,7 @@ func retrait_cooldown():
 		if sort.cooldown_actuel > 0:
 			sort.cooldown_actuel -=1
 		sort.compte_lancers_tour = 0
+		sort.compte_cible = {}
 
 
 func _input(event):

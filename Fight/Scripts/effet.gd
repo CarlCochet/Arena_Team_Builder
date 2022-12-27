@@ -555,7 +555,6 @@ func desenvoute():
 	var hp = cible.stats.hp
 	cible.stats = cible.init_stats.copy().add(cible.stat_ret).add(cible.stat_buffs)
 	cible.stats.hp = hp
-	
 
 
 func non_portable():
