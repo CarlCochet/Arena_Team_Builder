@@ -82,6 +82,10 @@ func execute():
 			dommage_fixe()
 		"DOMMAGE_POURCENT":
 			dommage_pourcent()
+		"DOMMAGE_PAR_PA":
+			dommage_par_pa()
+		"DOMMAGE_PAR_PM":
+			dommage_par_pm()
 		"DOMMAGE_AIR":
 			dommage_air()
 		"DOMMAGE_TERRE":
@@ -258,6 +262,18 @@ func dommage_pourcent():
 		applique_dommage(cible.stats.hp * (contenu[base_crit]["valeur"] / 100), 0.0, 0.0, not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
 		applique_dommage(cible.stats.hp * (contenu[base_crit]["retour"] / 100), 0.0, 0.0, not aoe, "retour") 
+
+
+func dommage_par_pa():
+	pass
+
+
+func dommage_par_pm():
+	pass
+
+
+func dommage_si_bouge():
+	pass
 
 
 func dommage_air():
@@ -516,6 +532,14 @@ func attire():
 	update_widgets()
 
 
+func recul():
+	pass
+
+
+func avance():
+	pass
+
+
 func immobilise():
 	etat = "IMMOBILISE"
 
@@ -614,6 +638,26 @@ func immunise_retrait_pa():
 
 func immunise_retrait_pm():
 	etat = "IMMUNISE_RETRAIT_PM"
+
+
+func choix():
+	pass
+
+
+func swap():
+	pass
+
+
+func active_aura():
+	pass
+
+
+func maudit_classe():
+	pass
+
+
+func maudit_case():
+	pass
 
 
 func glyphe():

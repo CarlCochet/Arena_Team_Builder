@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq2kalg0ajfef"
-path="res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"
+uid="uid://x8raioevb61s"
+path="res://.godot/imported/second_souffle.png-e220bceae7a2d5af0831730269fa0a4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Logos/Classes/iop_unselected.png"
-dest_files=["res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"]
+source_file="res://UI/Logos/Spells/Zobal/second_souffle.png"
+dest_files=["res://.godot/imported/second_souffle.png-e220bceae7a2d5af0831730269fa0a4a.ctex"]
 
 [params]
 

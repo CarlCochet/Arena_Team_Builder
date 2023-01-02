@@ -42,10 +42,12 @@ enum Invocations {
 	FOLLE = 6,
 	SACRIFIEE = 7,
 	DOUBLE = 8,
-	CADRAN_DE_XELOR = 9
+	CADRAN_DE_XELOR = 9,
+	BOMBE_A_EAU = 10,
+	BOMBE_INCENDIAIRE = 11
 }
 
-var classes = ["Cra", "Eca", "Eni", "Enu", "Feca", "Iop", "Osa", "Panda", "Sacrieur", "Sadida", "Sram", "Xelor"]
+var classes = ["Cra", "Eca", "Eni", "Enu", "Feca", "Iop", "Osa", "Panda", "Sacrieur", "Sadida", "Sram", "Xelor", "Roublard", "Zobal"]
 
 var sorts: Dictionary
 var equipements: Dictionary

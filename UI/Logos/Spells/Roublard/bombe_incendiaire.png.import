@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq2kalg0ajfef"
-path="res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"
+uid="uid://clq5mvxwykh6a"
+path="res://.godot/imported/bombe_incendiaire.png-12ee45a78e1806de4a1788f17350f0a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Logos/Classes/iop_unselected.png"
-dest_files=["res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"]
+source_file="res://UI/Logos/Spells/Roublard/bombe_incendiaire.png"
+dest_files=["res://.godot/imported/bombe_incendiaire.png-12ee45a78e1806de4a1788f17350f0a4.ctex"]
 
 [params]
 

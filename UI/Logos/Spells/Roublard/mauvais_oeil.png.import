@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq2kalg0ajfef"
-path="res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"
+uid="uid://c88yfadttbovb"
+path="res://.godot/imported/mauvais_oeil.png-0d230e4c08d1e4ba90874afa971e2304.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Logos/Classes/iop_unselected.png"
-dest_files=["res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"]
+source_file="res://UI/Logos/Spells/Roublard/mauvais_oeil.png"
+dest_files=["res://.godot/imported/mauvais_oeil.png-0d230e4c08d1e4ba90874afa971e2304.ctex"]
 
 [params]
 

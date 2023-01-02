@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq2kalg0ajfef"
-path="res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"
+uid="uid://ial8f65y0wso"
+path="res://.godot/imported/furia.png-9193c73e194f65fa2f77e21d0bb1c2fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Logos/Classes/iop_unselected.png"
-dest_files=["res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"]
+source_file="res://Classes/Zobal/Sorts/furia.png"
+dest_files=["res://.godot/imported/furia.png-9193c73e194f65fa2f77e21d0bb1c2fc.ctex"]
 
 [params]
 

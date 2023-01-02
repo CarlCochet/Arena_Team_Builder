@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq2kalg0ajfef"
-path="res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"
+uid="uid://bxb28k41l7frv"
+path="res://.godot/imported/arsenal.png-e87355c34d5c7591a36f658723996d28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Logos/Classes/iop_unselected.png"
-dest_files=["res://.godot/imported/iop_unselected.png-bb2dd797497b2f3945ee34c56a8da3e6.ctex"]
+source_file="res://Classes/Roublard/Sorts/arsenal.png"
+dest_files=["res://.godot/imported/arsenal.png-e87355c34d5c7591a36f658723996d28.ctex"]
 
 [params]
 
