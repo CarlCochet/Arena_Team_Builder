@@ -171,6 +171,8 @@ func debut_tour():
 	for effet in effets:
 		print(effet.etat, " - ", str(effet.duree))
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
+	if check_etat("PETRIFIE"):
+		combat.passe_tour()
 
 
 func fin_tour():
@@ -205,6 +207,7 @@ func affiche_stats_change(valeur, stat):
 
 func deplace_perso(chemin: Array):
 	var fin = chemin[-1]
+	var prefin = grid_pos if len(chemin) < 2 else chemin[-2]
 	var tile_pos = fin - combat.offset
 	var old_grid_pos = grid_pos
 	var old_map_pos = combat.tilemap.local_to_map(position)
@@ -218,6 +221,7 @@ func deplace_perso(chemin: Array):
 	stats_perdu.ajoute(-len(path_actuel), "pm")
 	combat.stats_select.update(stats, max_stats)
 	combat.tilemap.clear_layer(2)
+	oriente_vers(grid_pos + (fin - prefin))
 
 
 func place_perso(tile_pos: Vector2i):
@@ -250,6 +254,17 @@ func bouge_perso(new_pos):
 	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 
 
+func oriente_vers(pos: Vector2i):
+	var ref_vectors = [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
+	var min_dist = 999999999.0
+	var min_vec = 0
+	for i in range(len(ref_vectors)):
+		var new_dist = Vector2(pos).distance_to(Vector2(grid_pos) + ref_vectors[i])
+		if new_dist < min_dist:
+			min_dist = new_dist
+			min_vec = i
+	change_orientation(min_vec)
+
 func execute_effets():
 	stat_buffs = Stats.new()
 	for effet in effets:
@@ -266,19 +281,25 @@ func check_etat(etat: String) -> bool:
 	return false
 
 
+func retire_etats(etats: Array):
+	var new_effets = []
+	for effet in effets:
+		if effet.etat not in etats:
+			new_effets.append(effet)
+	effets = new_effets
+
+
 func retrait_durees():
 	stat_buffs = Stats.new()
 	max_stats = init_stats.copy()
 	for combattant in combat.combattants:
+		var new_effets = []
 		for effet in combattant.effets:
 			if effet.lanceur.id == id:
 				effet.duree -= 1
-	
-	var new_effets = []
-	for effet in effets:
-		if effet.duree > 0:
-			new_effets.append(effet)
-	effets = new_effets
+			if effet.duree > 0:
+				new_effets.append(effet)
+		combattant.effets = new_effets
 	
 	var new_map_glyphes = []
 	for glyphe in combat.tilemap.glyphes:

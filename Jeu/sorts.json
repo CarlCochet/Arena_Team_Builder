@@ -467,7 +467,9 @@
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
 				"PETRIFIE": {
-                    "duree": 1
+                    "base": {
+                        "duree": 1
+                    }
                 }
 			}
 		},
@@ -1178,7 +1180,9 @@
                     }
                 },
                 "IMMUNISE_RETRAIT_PM": {
-                    "duree": 1
+                    "base": {
+                        "duree": 1
+                    }
                 }
 			}
 		},
@@ -1427,7 +1431,9 @@
                     }
                 },
                 "REVELE_INVISIBLE": {
-                    "duree": 2
+                    "base": {
+                        "duree": 2
+                    }
                 }
 			}
 		}
@@ -1469,7 +1475,9 @@
                     }
                 },
                 "NON_PORTABLE": {
-                    "duree": 5
+                    "base": {
+                        "duree": 5
+                    }
                 }
 			}
 		},
@@ -1509,7 +1517,9 @@
                     }
                 },
                 "INTRANSPOSABLE": {
-                    "duree": 5
+                    "base": {
+                        "duree": 5
+                    }
                 }
 			}
 		},
@@ -1780,11 +1790,15 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"IMMUNISE": {
-                    "duree": 1
+                "IMMUNISE": {
+                    "base": {
+                        "duree": 1
+                    }
                 },
                 "STABILISE": {
-                    "duree": 1
+                    "base": {
+                        "duree": 1
+                    }
                 }
 			}
 		},
@@ -1810,7 +1824,9 @@
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
 				"RENVOIE_SORT": {
-                    "duree": 1
+                    "base": {
+                        "duree": 1
+                    }
                 }
 			}
 		},
@@ -1861,10 +1877,14 @@
 			"effets": {
                 "cible": 8,
 				"IMMUNISE": {
-                    "duree": 1
+                    "base": {
+                        "duree": 1
+                    }
                 },
                 "STABILISE": {
-                    "duree": 1
+                    "base": {
+                        "duree": 1
+                    }
                 }
 			}
 		}
@@ -2405,8 +2425,10 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"IMMUNISE": {
-                    "duree": 1
+                "IMMUNISE": {
+                    "base": {
+                        "duree": 1
+                    }
                 },
                 "CHANGE_STATS": {
                     "blocage": {
@@ -2757,7 +2779,11 @@
             "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE", "NON_PORTABLE"],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
-				"PORTE": 8
+				"PORTE": {
+                    "base": {
+                        "duree": 99
+                    }
+                }
 			}
 		},
 		"karzam": {
@@ -2915,7 +2941,9 @@
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
                 "STABILISE": {
-                    "duree": 4
+                    "base": {
+                        "duree": 4
+                    }
                 },
                 "CHANGE_STATS": {
                     "blocage": {
@@ -2950,7 +2978,9 @@
 			"effets": {
                 "cible": 11,
                 "STABILISE": {
-                    "duree": 3
+                    "base": {
+                        "duree": 3
+                    }
                 },
                 "CHANGE_STATS": {
                     "blocage": {
@@ -3262,7 +3292,11 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"SACRIFICE": 1
+				"SACRIFICE": {
+                    "base": {
+                        "duree": 1
+                    }
+                }
 			}
 		},
 		"transfert_de_vie": {
@@ -3482,7 +3516,9 @@
                     }
                 },
                 "IMMUNISE": {
-                    "duree": 1
+                    "base": {
+                        "duree": 1
+                    }
                 },
                 "IMMOBILISE": {
                     "duree": 1
@@ -4149,10 +4185,14 @@
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
                 "IMMUNISE_RETRAIT_PA": {
-                    "duree": 99
+                    "base": {
+                        "duree": 99
+                    }
                 },
                 "IMMUNISE_RETRAIT_PM": {
-                    "duree": 99
+                    "base": {
+                        "duree": 99
+                    }
                 },
                 "CHANGE_STATS": {
                     "esquive": {
@@ -5314,7 +5354,11 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
             "effets": {
-                "RENVOIE_SORT": 99
+                "RENVOIE_SORT": {
+                    "base": {
+                        "duree": 99
+                    }
+                }
             }
         }
     }

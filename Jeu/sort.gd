@@ -69,39 +69,44 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	var combattants = lanceur.get_parent().combattants
 	var trouve = false
 	var critique = randi_range(1, 100) <= lanceur.stats.cc
+	var targets = []
 	
 	if not effets.has("cible"):
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, aoe)
+				targets.append(combattant)
 	elif effets["cible"] == 4:
 		for combattant in combattants:
 			if combattant.equipe != lanceur.equipe:
 				trouve = true
-				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
+				targets.append(combattant)
 	elif effets["cible"] == 8:
 		for combattant in combattants:
 			trouve = true
-			sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
+			targets.append(combattant)
 	elif effets["cible"] == 9:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, aoe)
+				targets.append(combattant)
 				for combattant_bis in combattants:
 					if combattant_bis.classe == combattant.classe:
-						sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
+						targets.append(combattant)
 	elif effets["cible"] == 10:
 		for combattant in combattants:
 			if not combattant.is_invocation: 
 				trouve = true
-				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
+				targets.append(combattant)
 	elif effets["cible"] == 11:
 		for combattant in combattants:
 			if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
 				trouve = true
-				sort_valide = true if sort_valide else parse_effets(lanceur, combattant, effets, critique, centre, true)
+				targets.append(combattant)
+	
+	if trouve:
+		for combattant in targets:
+			sort_valide = parse_effets(lanceur, combattant, effets, critique, centre, aoe) or sort_valide
 	
 	if effets.has("GLYPHE"):
 		var new_glyphe = Glyphe.new(
@@ -118,7 +123,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		lanceur.combat.tilemap.update_glyphes()
 		new_glyphe.active_full()
 	elif not trouve and cible == 2:
-		sort_valide = true if sort_valide else parse_effets(lanceur, cases_cibles, effets, critique, centre, true)
+		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
 	
 	compte_lancers += 1
 	compte_lancers_tour += 1
@@ -134,10 +139,17 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 
 
 func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
+	if p_cible is Array:
+		for case in p_cible:
+			for effet in p_effets:
+				var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre, aoe)
+				new_effet.execute()
+		return true
+	
 	for etat in etats_cible_interdits:
 		if p_cible.check_etat(etat):
 			return false
-	if lancer_par_cible > 0 and not p_cible is Vector2i:
+	if lancer_par_cible > 0 and (not p_cible is Vector2i) and (not p_cible is Array):
 		if compte_cible.has(p_cible.id):
 			if compte_cible[p_cible.id] >= lancer_par_cible:
 				return false

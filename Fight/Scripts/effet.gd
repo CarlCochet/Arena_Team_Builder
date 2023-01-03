@@ -86,6 +86,8 @@ func execute():
 			dommage_par_pa()
 		"DOMMAGE_PAR_PM":
 			dommage_par_pm()
+		"DOMMAGE_SI_BOUGE":
+			dommage_si_bouge()
 		"DOMMAGE_AIR":
 			dommage_air()
 		"DOMMAGE_TERRE":
@@ -112,6 +114,10 @@ func execute():
 			pousse()
 		"ATTIRE":
 			attire()
+		"RECUL":
+			recul()
+		"AVANCE":
+			avance()
 		"IMMOBILISE":
 			immobilise()
 		"TELEPORTE":
@@ -154,6 +160,16 @@ func execute():
 			immunise_retrait_pa()
 		"IMMUNISE_RETRAIT_PM":
 			immunise_retrait_pm()
+		"CHOIX":
+			choix()
+		"SWAP":
+			swap()
+		"ACTIVE_AURA":
+			active_aura()
+		"MAUDIT_CLASSE":
+			maudit_classe()
+		"MAUDIT_CASE":
+			maudit_case()
 		"GLYPHE":
 			glyphe()
 		_:
@@ -162,6 +178,7 @@ func execute():
 
 func check_immu(dommages: int) -> bool:
 	for effet in cible.effets:
+		print(effet.etat)
 		if "IMMUNISE" == effet.etat:
 			return true
 		if "RENVOIE_SORT" == effet.etat and nom_sort != "arme":
@@ -181,7 +198,6 @@ func get_orientation_bonus():
 	
 	var ref_vectors = [Vector2(0, -1), Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0)]
 	var bonus = [0.0, 0.2, 0.4, 0.2]
-	var delta = Vector2(lanceur.grid_pos - cible.grid_pos)
 	var min_dist = 999999999.0
 	var min_vec = 0
 	for i in range(len(ref_vectors)):
@@ -211,8 +227,28 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 	return roundi(base * (1.0 + (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone))
 
 
+func update_sacrifice(p_cible):
+	for effet in p_cible.effets:
+		if effet.etat == "SACRIFICE" and effet.lanceur.id == cible.id:
+			if (not effet.lanceur.check_etat("INTRANSPOSABLE")) and (not p_cible.check_etat("INTRANSPOSABLE")):
+				var grid_pos = effet.lanceur.grid_pos
+				effet.lanceur.bouge_perso(p_cible.grid_pos)
+				p_cible.bouge_perso(grid_pos)
+			return p_cible
+		elif effet.etat == "SACRIFICE":
+			if (not effet.lanceur.check_etat("INTRANSPOSABLE")) and (not p_cible.check_etat("INTRANSPOSABLE")):
+				var grid_pos = effet.lanceur.grid_pos
+				effet.lanceur.bouge_perso(p_cible.grid_pos)
+				p_cible.bouge_perso(grid_pos)
+			return update_sacrifice(effet.lanceur)
+	return p_cible
+
+
 func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	var dommages = max(calcul_dommage(base, stat, resistance, orientation_bonus), cible.stats.hp - cible.max_stats.hp)
+	
+	if cible.check_etat("SACRIFICE"):
+		cible = update_sacrifice(cible)
 	
 	if type == "retour":
 		if lanceur.check_etat("IMMUNISE") and base > 0:
@@ -478,19 +514,21 @@ func pousse():
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
-					cible.stats.hp -= (contenu - i) * 3
-					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+					if not cible.check_etat("IMMUNISE"):
+						cible.stats.hp -= (contenu - i) * 3
+						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
-					cible.stats.hp -= (contenu - i) * 3
-					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+					if not cible.check_etat("IMMUNISE"):
+						cible.stats.hp -= (contenu - i) * 3
+						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 					for combattant in combat.combattants:
-						if combattant.grid_pos == grid_pos:
+						if combattant.grid_pos == grid_pos and not cible.check_etat("IMMUNISE"):
 							combattant.stats.hp -= (contenu - i) * 3
 							combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 		else:
@@ -509,18 +547,20 @@ func attire():
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
-					cible.stats.hp -= (contenu - i) * 3
-					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+					if not cible.check_etat("IMMUNISE"):
+						cible.stats.hp -= (contenu - i) * 3
+						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
 					if grid_pos != lanceur.grid_pos:
-						cible.stats.hp -= (contenu - i) * 3
-						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+						if not cible.check_etat("IMMUNISE"):
+							cible.stats.hp -= (contenu - i) * 3
+							cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						for combattant in combat.combattants:
-							if combattant.grid_pos == grid_pos:
+							if combattant.grid_pos == grid_pos and not combattant.check_etat("IMMUNISE"):
 								combattant.stats.hp -= (contenu - i) * 3
 								combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
@@ -565,8 +605,7 @@ func rate_sort():
 
 
 func revele_invisible():
-	if cible.check_etat("INVISIBLE"):
-		pass
+	cible.retire_etats(["INVISIBLE"])
 
 
 func devient_invisible():
@@ -606,9 +645,11 @@ func invocation():
 
 
 func porte():
-	var effet_cible = Effet.new(lanceur, cible, "PORTE", {}, false, lanceur.grid_pos, false)
-	cible.effets.append(effet_cible)
-	etat = "PORTE_ALLIE" if lanceur.equipe == cible.equipe else "PORTE_ENNEMI"
+	var etat_lanceur = "PORTE_ALLIE" if lanceur.equipe == cible.equipe else "PORTE_ENNEMI"
+	var effet_lanceur = Effet.new(lanceur, cible, etat_lanceur, contenu, false, lanceur.grid_pos, false)
+	effet_lanceur.etat = etat_lanceur
+	lanceur.effets.append(effet_lanceur)
+	etat = "PORTE"
 
 
 func lance():
@@ -616,7 +657,9 @@ func lance():
 	for combattant in combat.combattants:
 		for effet in combattant.effets:
 			if effet.etat == "PORTE" and lanceur.id == effet.lanceur.id:
-				combattant.bouge_perso(cible)
+				combattant.bouge_perso(centre)
+				combattant.retire_etats(["PORTE"])
+				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
 				return
 
 
@@ -625,11 +668,12 @@ func picole():
 
 
 func sacrifice():
+	cible.retire_etats(["SACRIFICE"])
 	etat = "SACRIFICE"
 
 
 func tourne():
-	var direction = (cible.grid_pos - centre).sign()
+	cible.oriente_vers(centre)
 
 
 func immunise_retrait_pa():
