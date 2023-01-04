@@ -1,14 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr4dhfep7jkje"]
+[gd_scene load_steps=2 format=3 uid="uid://cr4dhfep7jkje"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/timeline.gd" id="1_ofe6g"]
-[ext_resource type="Texture2D" uid="uid://c13funwn7bgli" path="res://Fight/Images/fleche_timeline.png" id="2_44tvq"]
 
-[node name="Timeline" type="HBoxContainer"]
+[node name="Personnages" type="HBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_ofe6g")
-
-[node name="Fleche" type="Sprite2D" parent="."]
-position = Vector2(36.5, -15)
-texture = ExtResource("2_44tvq")

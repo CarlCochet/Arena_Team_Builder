@@ -15,6 +15,8 @@ var critique: bool
 var aoe: bool
 var combat: Combat
 
+var scene_invocation = preload("res://Fight/invocation.tscn")
+
 
 func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_aoe):
 	lanceur = p_lanceur
@@ -160,6 +162,8 @@ func execute():
 			immunise_retrait_pa()
 		"IMMUNISE_RETRAIT_PM":
 			immunise_retrait_pm()
+		"SUICIDE":
+			suicide()
 		"CHOIX":
 			choix()
 		"SWAP":
@@ -509,6 +513,7 @@ func pousse():
 	var direction: Vector2i = (cible.grid_pos - lanceur.grid_pos).sign()
 	var grid = combat.tilemap.grid
 	var stopped = false
+	var old_grid_pos = cible.grid_pos
 	for i in range(contenu):
 		var grid_pos = cible.grid_pos + (i + 1) * direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
@@ -535,6 +540,9 @@ func pousse():
 			break
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
+	if cible.check_etat("PORTE_ALLIE") or cible.check_etat("PORTE_ENNEMI"):
+		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false)
+		effet_lance.execute()
 	update_widgets()
 
 
@@ -542,6 +550,7 @@ func attire():
 	var direction = -(cible.grid_pos - lanceur.grid_pos).sign()
 	var grid = combat.tilemap.grid
 	var stopped = false
+	var old_grid_pos = cible.grid_pos
 	for i in range(contenu):
 		var grid_pos = cible.grid_pos + (i + 1) * direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
@@ -569,6 +578,9 @@ func attire():
 			break
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
+	if cible.check_etat("PORTE_ALLIE") or cible.check_etat("PORTE_ENNEMI"):
+		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false)
+		effet_lance.execute()
 	update_widgets()
 
 
@@ -589,7 +601,7 @@ func teleporte():
 
 
 func transpose():
-	if lanceur.check_etat("INTRANSPOSABLE") or cible.check_etat("INTRANSPOSABLE"):
+	if lanceur.check_etat("INTRANSPOSABLE") or cible.check_etat("INTRANSPOSABLE") or cible.check_etat("PORTE"):
 		return
 	var grid_pos = lanceur.grid_pos
 	lanceur.bouge_perso(cible.grid_pos)
@@ -641,7 +653,24 @@ func renvoie_sort():
 
 
 func invocation():
-	pass
+	var invoc = scene_invocation.instantiate()
+	invoc.init(int(contenu))
+	invoc.position = combat.tilemap.map_to_local(centre - combat.offset)
+	invoc.grid_pos = centre
+	combat.tilemap.a_star_grid.set_point_solid(invoc.grid_pos)
+	combat.tilemap.grid[invoc.grid_pos[0]][invoc.grid_pos[1]] = -2
+	invoc.equipe = lanceur.equipe
+	combat.indexeur_global += 1
+	invoc.id = combat.indexeur_global
+	combat.add_child(invoc)
+	for i in range(len(combat.combattants)):
+		if combat.combattants[i].id == lanceur.id:
+			if i < len(combat.combattants) - 1:
+				combat.combattants.insert(i + 1, invoc)
+				break
+			else:
+				combat.combattants.append(invoc)
+				break
 
 
 func porte():
@@ -650,6 +679,11 @@ func porte():
 	effet_lanceur.etat = etat_lanceur
 	lanceur.effets.append(effet_lanceur)
 	etat = "PORTE"
+	var map_pos = cible.combat.tilemap.local_to_map(cible.position)
+	cible.combat.tilemap.a_star_grid.set_point_solid(cible.grid_pos, false)
+	cible.combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = cible.combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	cible.position = lanceur.position + Vector2(0, -90)
+	cible.z_index = 1
 
 
 func lance():
@@ -657,7 +691,11 @@ func lance():
 	for combattant in combat.combattants:
 		for effet in combattant.effets:
 			if effet.etat == "PORTE" and lanceur.id == effet.lanceur.id:
-				combattant.bouge_perso(centre)
+				combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
+				combattant.grid_pos = centre
+				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
+				combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
+				combattant.z_index = 0
 				combattant.retire_etats(["PORTE"])
 				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
 				return
@@ -682,6 +720,11 @@ func immunise_retrait_pa():
 
 func immunise_retrait_pm():
 	etat = "IMMUNISE_RETRAIT_PM"
+
+
+func suicide():
+	lanceur.stats.hp = 0
+	combat.check_morts()
 
 
 func choix():

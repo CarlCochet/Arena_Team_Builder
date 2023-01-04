@@ -17,6 +17,7 @@ var sorts: Array
 var equipe: int
 var effets: Array
 var combat: Combat
+var invocations: Array
 
 var grid_pos: Vector2i
 var id: int
@@ -54,6 +55,7 @@ func _ready():
 	is_invocation = false
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	combat = get_parent()
+	invocations = []
 
 
 func update_visuel():
@@ -173,6 +175,7 @@ func debut_tour():
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etat("PETRIFIE"):
 		combat.passe_tour()
+	combat.check_morts()
 
 
 func fin_tour():
@@ -181,6 +184,7 @@ func fin_tour():
 	var hp = stats.hp
 	stats = init_stats.copy().add(stat_buffs)
 	stats.hp = hp
+	combat.check_morts()
 
 
 func joue_action(action: int, tile_pos: Vector2i):
@@ -191,22 +195,47 @@ func joue_action(action: int, tile_pos: Vector2i):
 			combat.change_action(7)
 			return
 		var sort: Sort = sorts[action]
-		var valide = sort.execute_effets(self, zone, tile_pos)
+		var valide = false
+		if check_etat("RATE_SORT"):
+			valide = true
+			retire_etats(["RATE_SORT"])
+		else:
+			valide = sort.execute_effets(self, zone, tile_pos)
 		if valide:
 			stats.pa -= sort.pa
 			stats_perdu.ajoute(-sort.pa, "pa")
 			combat.stats_select.update(stats, max_stats)
 			combat.sorts.update(self)
-			
 		combat.change_action(7)
+	combat.check_morts()
 
 
 func affiche_stats_change(valeur, stat):
 	stats_perdu.ajoute()
 
 
+func check_tacle(chemin: Array) -> Vector2i:
+	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
+	chemin.push_front(grid_pos)
+	for case in chemin:
+		var blocage_total = 0
+		for combattant in combat.combattants:
+			if combattant.equipe == equipe:
+				continue
+			if (combattant.grid_pos - case) in voisins:
+				blocage_total += combattant.stats.blocage
+			for invoc in combattant.invocations:
+				if (invoc.grid_pos - case) in voisins:
+					blocage_total += invoc.stats.blocage
+		var chance_esquive = stats.esquive - blocage_total
+		if randi_range(1, 100) > chance_esquive:
+			return case
+	return chemin[-1]
+
+
 func deplace_perso(chemin: Array):
-	var fin = chemin[-1]
+	var fin = check_tacle(chemin)
+	chemin.pop_front()
 	var prefin = grid_pos if len(chemin) < 2 else chemin[-2]
 	var tile_pos = fin - combat.offset
 	var old_grid_pos = grid_pos
@@ -222,6 +251,13 @@ func deplace_perso(chemin: Array):
 	combat.stats_select.update(stats, max_stats)
 	combat.tilemap.clear_layer(2)
 	oriente_vers(grid_pos + (fin - prefin))
+	for combattant in combat.combattants:
+		for effet in combattant.effets:
+			if effet.etat == "PORTE" and effet.lanceur.id == id:
+				combattant.position = position + Vector2(0, -90)
+				combattant.grid_pos = grid_pos
+	if fin != chemin[-1]:
+		combat.passe_tour()
 
 
 func place_perso(tile_pos: Vector2i):
@@ -264,6 +300,14 @@ func oriente_vers(pos: Vector2i):
 			min_dist = new_dist
 			min_vec = i
 	change_orientation(min_vec)
+
+
+func meurt():
+	var map_pos = combat.tilemap.local_to_map(position)
+	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
+	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	queue_free()
+
 
 func execute_effets():
 	stat_buffs = Stats.new()

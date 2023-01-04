@@ -7,6 +7,7 @@ var stats_perdu = preload("res://Fight/stats_perdu.tscn")
 var combattants: Array
 var combattant_selection: Combattant
 var selection_id: int
+var indexeur_global: int
 var etat: int
 var action: int
 var offset: Vector2i
@@ -20,10 +21,11 @@ var offset: Vector2i
 
 func _ready():
 	etat = 0
+	indexeur_global = 0
 	offset = tilemap.offset
 	randomize()
 	creer_personnages()
-	timeline.init(combattants)
+	timeline.init(combattants, selection_id)
 
 
 func creer_personnages():
@@ -32,7 +34,8 @@ func creer_personnages():
 
 	combattants.sort_custom(func(a, b): return a.stats.initiative > b.stats.initiative)
 	for k in range(len(combattants)):
-		combattants[k].id = k
+		indexeur_global = k
+		combattants[k].id = indexeur_global
 		combattants[k].connect("clicked", _on_perso_clicked.bind(k))
 	selection_id = 0
 	combattants[selection_id].select()
@@ -61,7 +64,7 @@ func passe_tour():
 	selection_id += 1
 	if selection_id >= len(combattants):
 		selection_id = 0
-	timeline.select(selection_id)
+	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
 	change_action(7)
@@ -90,11 +93,22 @@ func change_action(new_action: int):
 		combattant_selection.affiche_path(tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
 
 
+func check_morts():
+	var new_combattants = []
+	for combattant in combattants:
+		if combattant.stats.hp > 0:
+			new_combattants.append(combattant)
+		else:
+			combattant.meurt()
+	combattants = new_combattants
+	timeline.init(combattants, selection_id)
+
+
 func _on_perso_clicked(id: int):
 	if etat == 0:
 		combattants[selection_id].unselect()
 		selection_id = id
-		timeline.select(selection_id)
+		timeline.init(combattants, selection_id)
 		combattants[selection_id].select()
 		combattant_selection = combattants[selection_id]
 

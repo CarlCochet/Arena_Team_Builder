@@ -78,7 +78,6 @@ func charger_sorts():
 			sorts_lookup[classe] = []
 		for nom_sort in json_data[classe].keys():
 			sort = Sort.new()
-			print(nom_sort)
 			sort.from_json(json_data[classe][nom_sort])
 			sorts[nom_sort] = sort
 			sorts_lookup[classe].append(nom_sort)

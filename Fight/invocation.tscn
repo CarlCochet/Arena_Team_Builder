@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvjli8n5mkrg5"]
+[gd_scene load_steps=9 format=3 uid="uid://cvjli8n5mkrg5"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/invocation.gd" id="1_rnnus"]
 [ext_resource type="Texture2D" uid="uid://cjolxj4e25lwg" path="res://Fight/Images/cercle_personnage_bleu.png" id="2_fjxoj"]
 [ext_resource type="Texture2D" uid="uid://8mv5o8k6p084" path="res://Fight/Images/fleche_1.png" id="3_qegsi"]
-[ext_resource type="Texture2D" uid="uid://dfxvlwj37eltu" path="res://Classes/Invocations/tofu.png" id="4_5hyr2"]
+[ext_resource type="Texture2D" uid="uid://bv3bj3sa87d6s" path="res://Classes/Invocations/bombe_a_eau.png" id="4_wy2l5"]
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_eb3vf"]
+[ext_resource type="PackedScene" uid="uid://wjqjfqvfle7s" path="res://Fight/stats_perdu.tscn" id="6_aopma"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7lkeo"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0l4n"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_rkioh"]
+[sub_resource type="LabelSettings" id="LabelSettings_0wpnx"]
 font_size = 25
 
 [node name="Invocation" type="Node2D"]
@@ -21,15 +22,16 @@ texture = ExtResource("2_fjxoj")
 texture = ExtResource("3_qegsi")
 
 [node name="Classe" type="Sprite2D" parent="."]
-position = Vector2(0, -10)
-texture = ExtResource("4_5hyr2")
+position = Vector2(0, -20)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_wy2l5")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -10)
 scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_7lkeo")
+shape = SubResource("RectangleShape2D_t0l4n")
 
 [node name="HP" type="Sprite2D" parent="."]
 position = Vector2(0, -60)
@@ -43,6 +45,11 @@ offset_top = -18.0
 offset_right = 49.0
 offset_bottom = 5.0
 text = "40/40"
-label_settings = SubResource("LabelSettings_rkioh")
+label_settings = SubResource("LabelSettings_0wpnx")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StatsPerdu" parent="." instance=ExtResource("6_aopma")]
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

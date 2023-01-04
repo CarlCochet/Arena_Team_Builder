@@ -494,7 +494,11 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"RATE_SORT": 1
+				"RATE_SORT": {
+                    "base": {
+                        "duree": 99
+                    }
+                }
 			}
 		},
 		"loterie": {
@@ -2680,7 +2684,7 @@
             "nombre_lancers": -1,
             "cumul_max": -1,
             "etat_requis": "",
-            "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE", "NON_PORTABLE"],
+            "etats_cible_interdits": ["PORTE"],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
 				"CHANGE_STATS": {
@@ -2745,7 +2749,7 @@
             "nombre_lancers": -1,
             "cumul_max": -1,
             "etat_requis": "",
-            "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE", "NON_PORTABLE"],
+            "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
 				"DOMMAGE_FEU": {
@@ -2833,7 +2837,7 @@
             "nombre_lancers": -1,
             "cumul_max": -1,
             "etat_requis": "",
-            "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+            "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
 				"DOMMAGE_TERRE": {
@@ -2864,7 +2868,7 @@
             "nombre_lancers": 1,
             "cumul_max": -1,
             "etat_requis": "",
-            "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+            "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
 				"PICOLE": {
@@ -2906,7 +2910,7 @@
             "nombre_lancers": -1,
             "cumul_max": -1,
             "etat_requis": "PICOLE",
-            "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+            "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
                 "DOMMAGE_FEU": {
@@ -2937,7 +2941,7 @@
             "nombre_lancers": -1,
             "cumul_max": -1,
             "etat_requis": "",
-            "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+            "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
                 "STABILISE": {
@@ -2973,7 +2977,7 @@
             "nombre_lancers": -1,
             "cumul_max": -1,
             "etat_requis": "",
-            "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+            "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
 			"effets": {
                 "cible": 11,
@@ -5357,6 +5361,66 @@
                 "RENVOIE_SORT": {
                     "base": {
                         "duree": 99
+                    }
+                }
+            }
+        }
+    },
+    "Bombe_A_Eau": {
+        "auto_dommage": {
+            "kamas": 0,
+            "pa": 1,
+            "po": [0, 0],
+            "po_modifiable": 0,
+            "type_zone": 0,
+            "taille_zone": 0,
+            "cible": 0,
+            "ldv": 1,
+            "type_ldv": 0,
+            "cooldown": 0,
+            "cooldown_global": 0,
+            "lancer_par_tour": 1,
+            "lancer_par_cible": -1,
+            "desenvoute_delais": 0,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_cible_interdits": [],
+            "etats_lanceur_interdits": ["PORTE"],
+            "effets": {
+                "DOMMAGE_FIXE": {
+                    "base": {
+                        "valeur": 2
+                    }
+                }
+            }
+        }
+    },
+    "Bombe_Incendiaire": {
+        "auto_dommage": {
+            "kamas": 0,
+            "pa": 1,
+            "po": [0, 0],
+            "po_modifiable": 0,
+            "type_zone": 0,
+            "taille_zone": 0,
+            "cible": 0,
+            "ldv": 1,
+            "type_ldv": 0,
+            "cooldown": 0,
+            "cooldown_global": 0,
+            "lancer_par_tour": 1,
+            "lancer_par_cible": -1,
+            "desenvoute_delais": 0,
+            "nombre_lancers": -1,
+            "cumul_max": -1,
+            "etat_requis": "",
+            "etats_cible_interdits": [],
+            "etats_lanceur_interdits": ["PORTE"],
+            "effets": {
+                "DOMMAGE_FIXE": {
+                    "base": {
+                        "valeur": 2
                     }
                 }
             }

@@ -75,34 +75,41 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				targets.append(combattant)
+				if aoe or not combattant.check_etat("PORTE"):
+					targets.append(combattant)
 	elif effets["cible"] == 4:
 		for combattant in combattants:
 			if combattant.equipe != lanceur.equipe:
 				trouve = true
-				targets.append(combattant)
+				if aoe or not combattant.check_etat("PORTE"):
+					targets.append(combattant)
 	elif effets["cible"] == 8:
 		for combattant in combattants:
 			trouve = true
-			targets.append(combattant)
+			if aoe or not combattant.check_etat("PORTE"):
+				targets.append(combattant)
 	elif effets["cible"] == 9:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				targets.append(combattant)
+				if aoe or not combattant.check_etat("PORTE"):
+					targets.append(combattant)
 				for combattant_bis in combattants:
 					if combattant_bis.classe == combattant.classe:
-						targets.append(combattant)
+						if aoe or not combattant.check_etat("PORTE"):
+							targets.append(combattant)
 	elif effets["cible"] == 10:
 		for combattant in combattants:
 			if not combattant.is_invocation: 
 				trouve = true
-				targets.append(combattant)
+				if aoe or not combattant.check_etat("PORTE"):
+					targets.append(combattant)
 	elif effets["cible"] == 11:
 		for combattant in combattants:
 			if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
 				trouve = true
-				targets.append(combattant)
+				if aoe or not combattant.check_etat("PORTE"):
+					targets.append(combattant)
 	
 	if trouve:
 		for combattant in targets:
@@ -146,6 +153,8 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 				new_effet.execute()
 		return true
 	
+	if p_cible.check_etat("PORTE") and not aoe:
+		return false
 	for etat in etats_cible_interdits:
 		if p_cible.check_etat(etat):
 			return false
