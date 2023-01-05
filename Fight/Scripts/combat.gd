@@ -11,7 +11,6 @@ var indexeur_global: int
 var etat: int
 var action: int
 var offset: Vector2i
-var input_lock: bool
 
 @onready var sorts: Control = $Sorts
 @onready var timeline: Control = $Timeline
@@ -24,7 +23,6 @@ func _ready():
 	etat = 0
 	indexeur_global = 0
 	offset = tilemap.offset
-	input_lock = false
 	randomize()
 	creer_personnages()
 	timeline.init(combattants, selection_id)
@@ -131,8 +129,6 @@ func _on_perso_clicked(id: int):
 
 
 func _input(event):
-	if input_lock:
-		return
 	if etat == 1:
 		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
 			passe_tour()

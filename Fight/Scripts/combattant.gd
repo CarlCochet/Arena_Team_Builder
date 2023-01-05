@@ -162,15 +162,55 @@ func affiche_zone(action: int, pos_event: Vector2i):
 			combat.tilemap.set_cell(2, cell - combat.offset, 3, Vector2i(0, 0))
 
 
+func check_case_bonus():
+	var case_id = combat.tilemap.get_cell_atlas_coords(1, grid_pos - combat.offset).x
+	var categorie = ""
+	var contenu = ""
+	match case_id:
+		2:
+			categorie = "CHANGE_STATS"
+			contenu = {
+				"dommages_air":{"base":{"valeur":30,"duree":1}},
+				"dommages_terre":{"base":{"valeur":30,"duree":1}},
+				"dommages_feu":{"base":{"valeur":30,"duree":1}},
+				"dommages_eau":{"base":{"valeur":30,"duree":1}}
+			}
+		3:
+			categorie = "CHANGE_STATS"
+			contenu = {
+				"resistances_air":{"base":{"valeur":30,"duree":1}},
+				"resistances_terre":{"base":{"valeur":30,"duree":1}},
+				"resistances_feu":{"base":{"valeur":30,"duree":1}},
+				"resistances_eau":{"base":{"valeur":30,"duree":1}}
+			}
+		4:
+			categorie = "SOIN"
+			contenu = {"base":{"valeur":7}}
+		5:
+			categorie = "CHANGE_STATS"
+			contenu = {"pa":{"base":{"valeur":2,"duree":1}}}
+		6:
+			categorie = "CHANGE_STATS"
+			contenu = {"po":{"base":{"valeur":2,"duree":1}}}
+		7:
+			categorie = "CHANGE_STATS"
+			contenu = {"soins":{"base":{"valeur":25,"duree":1}}}
+		8:
+			categorie = "DOMMAGE_POURCENT"
+			contenu = {"base":{"valeur":80}}
+		9:
+			categorie = "DOMMAGE_FIXE"
+			contenu = {"base":{"valeur":15}}
+	var effet = Effet.new(self, self, categorie, contenu, false, grid_pos, false, null)
+	effet.execute()
+
 func debut_tour():
 	retrait_durees()
 	execute_effets()
+	check_case_bonus()
 	var hp = stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp = hp
-	print(classe)
-	for effet in effets:
-		print(effet.etat, " - ", str(effet.duree))
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etat("PETRIFIE"):
 		combat.passe_tour()
@@ -235,7 +275,7 @@ func deplace_perso(chemin: Array):
 	var prefin = grid_pos if len(chemin) < 2 else chemin[-2]
 	var tile_pos = fin - combat.offset
 	var old_grid_pos = grid_pos
-	var old_map_pos = combat.tilemap.local_to_map(position)
+	var old_map_pos = grid_pos - combat.offset # combat.tilemap.local_to_map(position)
 	combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
 	combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
 	position = combat.tilemap.map_to_local(tile_pos)
@@ -267,19 +307,18 @@ func place_perso(tile_pos: Vector2i):
 				place_libre = false
 		if place_libre:
 			var old_grid_pos = grid_pos
-			var old_map_pos = combat.tilemap.local_to_map(position)
+			var old_map_pos = grid_pos - combat.offset # combat.tilemap.local_to_map(position)
 			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
 			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
 			position = combat.tilemap.map_to_local(tile_pos)
 			grid_pos = new_grid_pos
 			combat.tilemap.a_star_grid.set_point_solid(grid_pos)
 			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
-	combat.tilemap.update_glyphes()
 
 
 func bouge_perso(new_pos):
 	var old_grid_pos = grid_pos
-	var old_map_pos = combat.tilemap.local_to_map(position)
+	var old_map_pos = grid_pos - combat.offset # combat.tilemap.local_to_map(position)
 	combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
 	combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
 	position = combat.tilemap.map_to_local(new_pos - combat.offset)

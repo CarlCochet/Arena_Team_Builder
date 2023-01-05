@@ -184,7 +184,6 @@ func execute():
 
 func check_immu(dommages: int) -> bool:
 	for effet in cible.effets:
-		print(effet.etat)
 		if "IMMUNISE" == effet.etat:
 			return true
 		if "RENVOIE_SORT" == effet.etat and nom_sort != "arme":
@@ -230,7 +229,10 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 	
 	var resistance_zone = cible.stats.resistance_zone / 100.0 if aoe else 0.0
 	var bonus = get_orientation_bonus() if orientation_bonus else 0.0
-	return roundi(base * (1.0 + (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone))
+	var result = float(base * (1.0 + (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone))
+	var proba_roundup = result - int(result)
+	result = int(result) + 1 if randf() < proba_roundup else int(result)
+	return result
 
 
 func update_sacrifice(p_cible):
@@ -297,21 +299,33 @@ func dommage_pourcent():
 	var base_crit = trouve_crit()
 	var bonus_orientation = 1 if aoe else 1 + get_orientation_bonus()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(cible.stats.hp * (contenu[base_crit]["allies"] / 100), 0.0, 0.0, not aoe, "normal")
+		applique_dommage(cible.stats.hp * (contenu[base_crit]["allies"] / 100.0), 0.0, 0.0, not aoe, "normal")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:
-		applique_dommage(cible.stats.hp * (contenu[base_crit]["invocations"] / 100), 0.0, 0.0, not aoe, "normal") 
+		applique_dommage(cible.stats.hp * (contenu[base_crit]["invocations"] / 100.0), 0.0, 0.0, not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(cible.stats.hp * (contenu[base_crit]["valeur"] / 100), 0.0, 0.0, not aoe, "normal") 
+		applique_dommage(cible.stats.hp * (contenu[base_crit]["valeur"] / 100.0), 0.0, 0.0, not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(cible.stats.hp * (contenu[base_crit]["retour"] / 100), 0.0, 0.0, not aoe, "retour") 
+		applique_dommage(cible.stats.hp * (contenu[base_crit]["retour"] / 100.0), 0.0, 0.0, not aoe, "retour") 
+	if cible.stats.hp <= 0:
+		cible.stats.hp = 1
 
 
 func dommage_par_pa():
-	pass
+	var pa_restants = lanceur.stats.pa - sort.pa
+	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, lanceur.grid_pos, aoe, sort)
+	for i in range(pa_restants):
+		effet.execute()
+	lanceur.stats.pa -= pa_restants
+	lanceur.stats_perdu.ajoute(-pa_restants, "pa")
 
 
 func dommage_par_pm():
-	pass
+	var pm_restants = lanceur.stats.pm
+	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, lanceur.grid_pos, aoe, sort)
+	for i in range(pm_restants):
+		effet.execute()
+	lanceur.stats.pm -= pm_restants
+	lanceur.stats_perdu.ajoute(-pm_restants, "pm")
 
 
 func dommage_si_bouge():
@@ -630,7 +644,7 @@ func devient_invisible():
 
 func desenvoute():
 	for effet in cible.effets:
-		if effet.sort.desenvoute_delais >= 0:
+		if effet.sort != null and effet.sort.desenvoute_delais >= 0:
 			effet.sort.cooldown = effet.sort.desenvoute_delais
 			effet.sort.compte_lancers = 0
 			effet.sort.compte_cible = {}

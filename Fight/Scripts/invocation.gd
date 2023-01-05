@@ -137,12 +137,10 @@ func update_hitbox():
 func debut_tour():
 	retrait_durees()
 	execute_effets()
+	check_case_bonus()
 	var hp = stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp = hp
-	print(classe)
-	for effet in effets:
-		print(effet.etat, " - ", str(effet.duree))
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etat("PETRIFIE"):
 		combat.passe_tour()

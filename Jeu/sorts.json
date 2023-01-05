@@ -1631,7 +1631,7 @@
 			"kamas": 350,
 			"pa": 3,
 			"po": [5, 5],
-            "po_modifiable": 0,
+            "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": [0, 0],
 			"cible": 0,

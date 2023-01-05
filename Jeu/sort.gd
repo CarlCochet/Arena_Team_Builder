@@ -177,26 +177,19 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 
 func precheck_cast(lanceur) -> bool:
 	if pa > lanceur.stats.pa:
-		print("Not enough AP")
 		return false
 	if cooldown_actuel > 0:
-		print("Spell in CD")
 		return false
 	if compte_lancers >= nombre_lancers and nombre_lancers > 0:
-		print("Max cast reached")
 		return false
 	if compte_lancers_tour >= lancer_par_tour and lancer_par_tour > 0:
-		print("Max cast per turn reached")
 		return false
 	if lanceur.check_etat("PORTE"):
-		print("Caster is carried")
 		return false
 	for etat in etats_lanceur_interdits:
 		if lanceur.check_etat(etat):
-			print("Caster is in forbidden state ", etat)
 			return false
 	if not etat_requis.is_empty() and not lanceur.check_etat(etat_requis):
-		print("Caster is not in required state ", etat_requis)
 		return false
 	return true
 
@@ -365,7 +358,6 @@ class Glyphe:
 					new_effet.execute()
 				triggered = true
 		if triggered and effets.has("DOMMAGE_FIXE"):
-			print("PIEGE TRIGGERED")
 			lanceur.combat.tilemap.delete_glyphes([id])
 			lanceur.combat.tilemap.update_glyphes()
 	
