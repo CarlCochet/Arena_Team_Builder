@@ -191,6 +191,13 @@ func precheck_cast(lanceur) -> bool:
 			return false
 	if not etat_requis.is_empty() and not lanceur.check_etat(etat_requis):
 		return false
+	if effets.has("INVOCATION"):
+		var invoc_count = 0
+		for combattant in lanceur.combat.combattants:
+			if combattant.is_invocation and combattant.invocateur.id == lanceur.id:
+				invoc_count += 1
+		if invoc_count >= lanceur.stats.invocations:
+			return false
 	return true
 
 
@@ -212,9 +219,9 @@ func check_cible(lanceur, case_cible) -> bool:
 			return false
 		if cible == GlobalData.Cible.INVOCATIONS and not target.is_invocation: 
 			return false
-		if cible == GlobalData.Cible.INVOCATIONS_ALLIEES and lanceur.equipe != target.equipe and not target.is_invocation: 
+		if cible == GlobalData.Cible.INVOCATIONS_ALLIEES and (lanceur.equipe != target.equipe or not target.is_invocation): 
 			return false
-		if cible == GlobalData.Cible.INVOCATIONS_ENNEMIES and lanceur.equipe == target.equipe and not target.is_invocation: 
+		if cible == GlobalData.Cible.INVOCATIONS_ENNEMIES and (lanceur.equipe == target.equipe or not target.is_invocation): 
 			return false
 		if cible == GlobalData.Cible.PERSONNAGES and target.is_invocation: 
 			return false

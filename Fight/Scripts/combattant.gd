@@ -81,8 +81,8 @@ func unselect():
 func from_personnage(personnage: Personnage, equipe_id: int):
 	classe = personnage.classe
 	stats = personnage.stats.copy()
-	max_stats = personnage.stats.copy()
-	init_stats = personnage.stats.copy()
+	max_stats = stats.copy()
+	init_stats = stats.copy()
 	equipements = personnage.equipements
 	sorts = [Sort.new().from_arme(self, equipements["Armes"])]
 	for sort in personnage.sorts:
@@ -350,10 +350,7 @@ func meurt():
 func execute_effets():
 	stat_buffs = Stats.new()
 	for effet in effets:
-		if effet.instant:
-			effet.instant = false
-		else:
-			effet.execute()
+		effet.execute()
 
 
 func check_etat(etat: String) -> bool:

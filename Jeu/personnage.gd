@@ -39,6 +39,7 @@ func _init():
 func calcul_stats():
 	if classe:
 		stats = Stats.new().add(GlobalData.stats_classes[classe])
+		stats.invocations = 1
 		for equipement in equipements.values():
 			if equipement:
 				stats.add(GlobalData.equipements[equipement].stats)

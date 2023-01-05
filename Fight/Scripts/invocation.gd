@@ -172,7 +172,7 @@ func choix_cible(all_ldv: Array):
 	var min_hp = 9999999
 	var cible = null
 	for combattant in combat.combattants:
-		if combattant.grid_pos in all_ldv:
+		if combattant.grid_pos in all_ldv and combattant.equipe != equipe:
 			var delta = combattant.grid_pos - grid_pos
 			var dist = abs(delta.x) + abs(delta.y)
 			if dist < min_dist:

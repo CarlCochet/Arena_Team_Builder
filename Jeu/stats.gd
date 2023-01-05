@@ -46,7 +46,7 @@ func _init():
 	cc = 0
 	renvoi_dommage = 0
 	resistance_zone = 0
-	invocations = 1
+	invocations = 0
 
 
 func add(stats):
@@ -96,6 +96,7 @@ func copy():
 	stats_copy.cc = cc
 	stats_copy.renvoi_dommage = renvoi_dommage
 	stats_copy.resistance_zone = resistance_zone
+	stats_copy.invocations = invocations
 	return stats_copy
 
 

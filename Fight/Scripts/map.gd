@@ -61,7 +61,6 @@ func get_start():
 func update_glyphes():
 	clear_layer(3)
 	clear_layer(4)
-	print(glyphes)
 	for glyphe in glyphes:
 		glyphe.active_full()
 		glyphe.affiche()
@@ -74,7 +73,6 @@ func delete_glyphes(glyphes_ids: Array):
 		if not glyphe.id in glyphes_ids:
 			new_glyphes.append(glyphe)
 	glyphes = new_glyphes
-	print(glyphes)
 	update_glyphes()
 
 
