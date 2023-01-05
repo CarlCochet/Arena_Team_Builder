@@ -1536,7 +1536,7 @@
 			"taille_zone": [0, 0],
 			"cible": 0,
 			"ldv": 0,
-			"type_ldv": 0,
+			"type_ldv": 1,
 			"cooldown": 0,
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
@@ -2766,7 +2766,7 @@
 			"kamas": 200,
 			"pa": 4,
 			"po": [1, 1],
-            "po_modifiable": 1,
+            "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": [0, 0],
 			"cible": 0,
@@ -3007,7 +3007,7 @@
 			"taille_zone": [0, 0],
 			"cible": 0,
 			"ldv": 1,
-			"type_ldv": 0,
+			"type_ldv": 1,
 			"cooldown": 0,
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
@@ -3152,11 +3152,11 @@
                 "CHANGE_STATS": {
                     "dommages_air": {
                         "base": {
-                            "valeur": 15,
+                            "retour": 15,
                             "duree": 1
                         },
                         "critique": {
-                            "valeur": 20,
+                            "retour": 20,
                             "duree": 1
                         }
                     }

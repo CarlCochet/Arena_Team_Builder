@@ -238,13 +238,13 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 func update_sacrifice(p_cible):
 	for effet in p_cible.effets:
 		if effet.etat == "SACRIFICE" and effet.lanceur.id == cible.id:
-			if (not effet.lanceur.check_etat("INTRANSPOSABLE")) and (not p_cible.check_etat("INTRANSPOSABLE")):
+			if (not effet.lanceur.check_etats(["INTRANSPOSABLE"])) and (not p_cible.check_etats(["INTRANSPOSABLE"])):
 				var grid_pos = effet.lanceur.grid_pos
 				effet.lanceur.bouge_perso(p_cible.grid_pos)
 				p_cible.bouge_perso(grid_pos)
 			return p_cible
 		elif effet.etat == "SACRIFICE":
-			if (not effet.lanceur.check_etat("INTRANSPOSABLE")) and (not p_cible.check_etat("INTRANSPOSABLE")):
+			if (not effet.lanceur.check_etats(["INTRANSPOSABLE"])) and (not p_cible.check_etats(["INTRANSPOSABLE"])):
 				var grid_pos = effet.lanceur.grid_pos
 				effet.lanceur.bouge_perso(p_cible.grid_pos)
 				p_cible.bouge_perso(grid_pos)
@@ -255,11 +255,11 @@ func update_sacrifice(p_cible):
 func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	var dommages = max(calcul_dommage(base, stat, resistance, orientation_bonus), cible.stats.hp - cible.max_stats.hp)
 	
-	if cible.check_etat("SACRIFICE"):
+	if cible.check_etats(["SACRIFICE"]):
 		cible = update_sacrifice(cible)
 	
 	if type == "retour":
-		if lanceur.check_etat("IMMUNISE") and base > 0:
+		if lanceur.check_etats(["IMMUNISE"]) and base > 0:
 			return
 		lanceur.stats.hp -= dommages
 		lanceur.stats_perdu.ajoute(-dommages, "hp")
@@ -441,9 +441,9 @@ func soin():
 
 
 func check_retrait_immunite(cible, stat, valeur):
-	if cible.check_etat("IMMUNISE_RETRAIT_PA") and stat == "pa" and valeur < 0:
+	if cible.check_etats(["IMMUNISE_RETRAIT_PA"]) and stat == "pa" and valeur < 0:
 		return true
-	if cible.check_etat("IMMUNISE_RETRAIT_PM") and stat == "pm" and valeur < 0:
+	if cible.check_etats(["IMMUNISE_RETRAIT_PM"]) and stat == "pm" and valeur < 0:
 		return true
 	return false
 
@@ -535,7 +535,7 @@ func pousse():
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
-					if not cible.check_etat("IMMUNISE"):
+					if not cible.check_etats(["IMMUNISE"]):
 						cible.stats.hp -= (contenu - i) * 3
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
@@ -543,20 +543,20 @@ func pousse():
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
-					if not cible.check_etat("IMMUNISE"):
+					if not cible.check_etats(["IMMUNISE"]):
 						cible.stats.hp -= (contenu - i) * 3
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
 					cible.bouge_perso(grid_pos - direction)
 					for combattant in combat.combattants:
-						if combattant.grid_pos == grid_pos and not cible.check_etat("IMMUNISE"):
+						if combattant.grid_pos == grid_pos and not cible.check_etats(["IMMUNISE"]):
 							combattant.stats.hp -= (contenu - i) * 3
 							combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 		else:
 			break
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
-	if cible.check_etat("PORTE_ALLIE") or cible.check_etat("PORTE_ENNEMI"):
+	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
 		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
 		effet_lance.execute()
 	update_widgets()
@@ -573,7 +573,7 @@ func attire():
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
-					if not cible.check_etat("IMMUNISE"):
+					if not cible.check_etats(["IMMUNISE"]):
 						cible.stats.hp -= (contenu - i) * 3
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
@@ -582,11 +582,11 @@ func attire():
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
 					if grid_pos != lanceur.grid_pos:
-						if not cible.check_etat("IMMUNISE"):
+						if not cible.check_etats(["IMMUNISE"]):
 							cible.stats.hp -= (contenu - i) * 3
 							cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						for combattant in combat.combattants:
-							if combattant.grid_pos == grid_pos and not combattant.check_etat("IMMUNISE"):
+							if combattant.grid_pos == grid_pos and not combattant.check_etats(["IMMUNISE"]):
 								combattant.stats.hp -= (contenu - i) * 3
 								combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					stopped = true
@@ -595,7 +595,7 @@ func attire():
 			break
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
-	if cible.check_etat("PORTE_ALLIE") or cible.check_etat("PORTE_ENNEMI"):
+	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
 		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
 		effet_lance.execute()
 	update_widgets()
@@ -619,7 +619,7 @@ func teleporte():
 
 
 func transpose():
-	if lanceur.check_etat("INTRANSPOSABLE") or cible.check_etat("INTRANSPOSABLE") or cible.check_etat("PORTE"):
+	if lanceur.check_etats(["INTRANSPOSABLE"]) or cible.check_etats(["INTRANSPOSABLE", "PORTE"]):
 		return
 	var grid_pos = lanceur.grid_pos
 	lanceur.bouge_perso(cible.grid_pos)

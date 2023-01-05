@@ -142,7 +142,7 @@ func debut_tour():
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp = hp
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
-	if check_etat("PETRIFIE"):
+	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
 	combat.check_morts()
 	joue_ia()
@@ -208,7 +208,7 @@ func joue_ia():
 			continue
 		if sort.pa <= stats.pa:
 			var valide = false
-			if check_etat("RATE_SORT"):
+			if check_etats(["RATE_SORT"]):
 				valide = true
 				retire_etats(["RATE_SORT"])
 			else:
