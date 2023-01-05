@@ -20,7 +20,7 @@ func _ready():
 
 
 func update_affichage():
-	affichage_equipe.update()
+	affichage_equipe.update(GlobalData.equipe_actuelle)
 	for i in range(len(GlobalData.equipe_actuelle.personnages)):
 		stats_primaires[i].update(i)
 		stats_secondaires[i].update(i)
@@ -39,11 +39,16 @@ func _on_supprimer_pressed(id):
 
 
 func _input(event):
-	if event is InputEventKey and event.keycode == KEY_ESCAPE and not event.echo:
-		GlobalData.sauver_equipes()
-		get_tree().change_scene_to_file("res://UI/gestion_equipes.tscn")
+	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
+		_on_fermer_pressed()
+	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:
+		_on_tester_pressed()
 
 
 func _on_fermer_pressed():
 	GlobalData.sauver_equipes()
 	get_tree().change_scene_to_file("res://UI/gestion_equipes.tscn")
+
+
+func _on_tester_pressed():
+	get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")

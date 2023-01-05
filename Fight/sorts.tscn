@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyuev8xs7ffv8"]
+
+[ext_resource type="Script" path="res://Fight/Scripts/sorts_selection.gd" id="1_cldj7"]
+
+[node name="Sorts" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_cldj7")

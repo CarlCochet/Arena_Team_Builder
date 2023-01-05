@@ -27,7 +27,7 @@ func generer_affichage():
 		equipes_grid.add_child(previsu_equipe)
 		previsu_equipe.update(i)
 	equipes[equipe_selectionnee].button_pressed = true
-	affichage_personnages.update()
+	affichage_personnages.update(GlobalData.equipe_actuelle)
 
 
 func previsu_pressed(id):
@@ -38,7 +38,7 @@ func previsu_pressed(id):
 		else:
 			equipes[i].button_pressed = true
 			GlobalData.equipe_actuelle = GlobalData.equipes[i]
-			affichage_personnages.update()
+			affichage_personnages.update(GlobalData.equipe_actuelle)
 
 
 func _on_supprimer_pressed():
@@ -54,22 +54,22 @@ func _on_supprimer_pressed():
 		equipes.clear()
 		GlobalData.equipe_actuelle = GlobalData.equipes[equipe_selectionnee]
 		generer_affichage()
-		affichage_personnages.update()
+		affichage_personnages.update(GlobalData.equipe_actuelle)
 		GlobalData.sauver_equipes()
 	else:
 		GlobalData.equipes[equipe_selectionnee] = Equipe.new()
 		GlobalData.equipe_actuelle = GlobalData.equipes[equipe_selectionnee]
 		equipes_grid.get_children()[equipe_selectionnee].update(equipe_selectionnee)
-		affichage_personnages.update()
+		affichage_personnages.update(GlobalData.equipe_actuelle)
 		GlobalData.sauver_equipes()
 
 
 func _input(event):
-	if event is InputEventKey and event.keycode == KEY_ESCAPE and not event.echo:
+	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		GlobalData.sauver_equipes()
 		get_tree().quit()
-	if event is InputEventKey and event.keycode == KEY_ENTER and not event.echo:
-		get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
+	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:
+		_on_editer_pressed()
 
 
 func _on_editer_pressed():
@@ -108,5 +108,5 @@ func _on_import_dialog_file_selected(path):
 	equipes.clear()
 	GlobalData.equipe_actuelle = GlobalData.equipes[equipe_selectionnee]
 	generer_affichage()
-	affichage_personnages.update()
+	affichage_personnages.update(GlobalData.equipe_actuelle)
 	GlobalData.sauver_equipes()

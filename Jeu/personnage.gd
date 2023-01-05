@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name Personnage
 
 
@@ -6,6 +6,20 @@ var classe: String
 var stats: Stats
 var equipements: Dictionary
 var sorts: Array
+
+
+func _ready():
+	classe = ""
+	stats = Stats.new()
+	equipements = {
+		"Armes": "",
+		"Familiers": "",
+		"Coiffes": "",
+		"Capes": "",
+		"Dofus": ""
+	}
+	sorts = []
+	calcul_stats()
 
 
 func _init():
@@ -25,6 +39,7 @@ func _init():
 func calcul_stats():
 	if classe:
 		stats = Stats.new().add(GlobalData.stats_classes[classe])
+		stats.invocations = 1
 		for equipement in equipements.values():
 			if equipement:
 				stats.add(GlobalData.equipements[equipement].stats)
@@ -37,6 +52,20 @@ func calcul_stats():
 
 func ajoute_sort(nom_sort):
 	sorts.append(nom_sort)
+
+
+func copy(personnage: Personnage):
+	classe = personnage.classe
+	stats =  personnage.stats.copy()
+	equipements = {}
+	sorts = []
+	
+	for equipement in personnage.equipements:
+		equipements[equipement] = personnage.equipements[equipement]
+	for sort in personnage.sorts:
+		sorts.append(sort)
+	
+	return self
 
 
 func from_json(personnage_json):
@@ -55,7 +84,7 @@ func from_json(personnage_json):
 	return self
 
 
-func to_json():	
+func to_json():
 	return {
 		"classe": classe,
 		"equipements": equipements,

@@ -9,34 +9,58 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Node2D",
+"class": &"Combat",
+"language": &"GDScript",
+"path": "res://Fight/Scripts/combat.gd"
+}, {
+"base": "Node2D",
+"class": &"Combattant",
+"language": &"GDScript",
+"path": "res://Fight/Scripts/combattant.gd"
+}, {
 "base": "Node",
+"class": &"Effet",
+"language": &"GDScript",
+"path": "res://Fight/Scripts/effet.gd"
+}, {
+"base": "Node2D",
 "class": &"Equipe",
 "language": &"GDScript",
 "path": "res://Jeu/equipe.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": &"Equipement",
 "language": &"GDScript",
 "path": "res://Jeu/equipement.gd"
 }, {
-"base": "Node",
+"base": "Combattant",
+"class": &"Invocation",
+"language": &"GDScript",
+"path": "res://Fight/Scripts/invocation.gd"
+}, {
+"base": "Node2D",
 "class": &"Personnage",
 "language": &"GDScript",
 "path": "res://Jeu/personnage.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": &"Sort",
 "language": &"GDScript",
 "path": "res://Jeu/sort.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": &"Stats",
 "language": &"GDScript",
 "path": "res://Jeu/stats.gd"
 }]
 _global_script_class_icons={
+"Combat": "",
+"Combattant": "",
+"Effet": "",
 "Equipe": "",
 "Equipement": "",
+"Invocation": "",
 "Personnage": "",
 "Sort": "",
 "Stats": ""
