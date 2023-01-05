@@ -14,11 +14,12 @@ var instant: bool
 var critique: bool
 var aoe: bool
 var combat: Combat
+var sort: Sort
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
 
 
-func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_aoe):
+func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_aoe, p_sort):
 	lanceur = p_lanceur
 	cible = p_cible
 	centre = p_centre
@@ -29,6 +30,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	critique = p_critique
 	aoe = p_aoe
 	combat = p_lanceur.get_parent()
+	sort = p_sort
 	if contenu is Dictionary:
 		duree = trouve_duree(contenu)
 
@@ -541,9 +543,10 @@ func pousse():
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
 	if cible.check_etat("PORTE_ALLIE") or cible.check_etat("PORTE_ENNEMI"):
-		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false)
+		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
 		effet_lance.execute()
 	update_widgets()
+	combat.tilemap.update_glyphes()
 
 
 func attire():
@@ -579,9 +582,10 @@ func attire():
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
 	if cible.check_etat("PORTE_ALLIE") or cible.check_etat("PORTE_ENNEMI"):
-		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false)
+		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
 		effet_lance.execute()
 	update_widgets()
+	combat.tilemap.update_glyphes()
 
 
 func recul():
@@ -625,6 +629,11 @@ func devient_invisible():
 
 
 func desenvoute():
+	for effet in cible.effets:
+		if effet.sort.desenvoute_delais >= 0:
+			effet.sort.cooldown = effet.sort.desenvoute_delais
+			effet.sort.compte_lancers = 0
+			effet.sort.compte_cible = {}
 	cible.effets = []
 	cible.stat_buffs = Stats.new()
 	var hp = cible.stats.hp
@@ -662,6 +671,7 @@ func invocation():
 	invoc.equipe = lanceur.equipe
 	combat.indexeur_global += 1
 	invoc.id = combat.indexeur_global
+	invoc.invocateur = lanceur
 	combat.add_child(invoc)
 	for i in range(len(combat.combattants)):
 		if combat.combattants[i].id == lanceur.id:
@@ -675,7 +685,7 @@ func invocation():
 
 func porte():
 	var etat_lanceur = "PORTE_ALLIE" if lanceur.equipe == cible.equipe else "PORTE_ENNEMI"
-	var effet_lanceur = Effet.new(lanceur, cible, etat_lanceur, contenu, false, lanceur.grid_pos, false)
+	var effet_lanceur = Effet.new(lanceur, cible, etat_lanceur, contenu, false, lanceur.grid_pos, false, sort)
 	effet_lanceur.etat = etat_lanceur
 	lanceur.effets.append(effet_lanceur)
 	etat = "PORTE"

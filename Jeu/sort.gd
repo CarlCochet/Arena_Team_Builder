@@ -8,7 +8,7 @@ var pa: int
 var po: Vector2
 var po_modifiable: int
 var type_zone: GlobalData.TypeZone
-var taille_zone: int
+var taille_zone: Vector2
 var cible: GlobalData.Cible
 var ldv: int
 var type_ldv: GlobalData.TypeLDV
@@ -37,7 +37,7 @@ func _init():
 	po = Vector2(0, 0)
 	po_modifiable = 1
 	type_zone = GlobalData.TypeZone.CERCLE
-	taille_zone = 0
+	taille_zone = Vector2(0, 0)
 	cible = GlobalData.Cible.LIBRE
 	ldv = 0
 	type_ldv = GlobalData.TypeLDV.CERCLE
@@ -53,9 +53,9 @@ func _init():
 	etats_lanceur_interdits = []
 	effets = {}
 	
-	compte_lancers = 0
 	cooldown_actuel = 0
 	compte_lancers_tour = 0
+	compte_lancers = 0
 	compte_cible = {}
 
 
@@ -70,6 +70,21 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	var trouve = false
 	var critique = randi_range(1, 100) <= lanceur.stats.cc
 	var targets = []
+	if effets.has("GLYPHE"):
+		var new_glyphe = Glyphe.new(
+			lanceur.combat.tilemap.glyphes_indexeur, 
+			lanceur, 
+			cases_cibles, 
+			effets, 
+			effets.has("DOMMAGE_FIXE"), 
+			critique, 
+			centre, 
+			aoe,
+			self)
+		lanceur.combat.tilemap.glyphes_indexeur += 1
+		lanceur.combat.tilemap.glyphes.append(new_glyphe)
+		lanceur.combat.tilemap.update_glyphes()
+		return true
 	
 	if not effets.has("cible"):
 		for combattant in combattants:
@@ -114,22 +129,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	if trouve:
 		for combattant in targets:
 			sort_valide = parse_effets(lanceur, combattant, effets, critique, centre, aoe) or sort_valide
-	
-	if effets.has("GLYPHE"):
-		var new_glyphe = Glyphe.new(
-			len(lanceur.combat.tilemap.glyphes) - 1, 
-			lanceur, 
-			cases_cibles, 
-			effets, 
-			effets.has("DOMMAGE_FIXE"), 
-			critique, 
-			centre, 
-			aoe)
-		
-		lanceur.combat.tilemap.glyphes.append(new_glyphe)
-		lanceur.combat.tilemap.update_glyphes()
-		new_glyphe.active_full()
-	elif not trouve and cible == 2:
+	if not trouve and cible == 2:
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
 	
 	compte_lancers += 1
@@ -149,7 +149,7 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 	if p_cible is Array:
 		for case in p_cible:
 			for effet in p_effets:
-				var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre, aoe)
+				var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre, aoe, self)
 				new_effet.execute()
 		return true
 	
@@ -167,7 +167,7 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 		else:
 			compte_cible[p_cible.id] = 1
 	for effet in p_effets.keys():
-		var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre, aoe)
+		var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre, aoe, self)
 		if new_effet.instant:
 			new_effet.execute()
 		if new_effet.duree > 0:
@@ -247,7 +247,7 @@ func from_arme(_combattant, arme):
 		pa = 3
 		po = Vector2(1, 1)
 		type_zone = GlobalData.TypeZone.CERCLE
-		taille_zone = 0
+		taille_zone = Vector2(0, 0)
 		effets = { "DOMMAGE_FIXE": { "base": { "valeur": 5 }, "critique": { "valeur": 7 } } }
 	nom = "arme"
 	ldv = 1
@@ -286,7 +286,7 @@ func from_json(data):
 	po = Vector2(data["po"][0], data["po"][1])
 	po_modifiable = data["po_modifiable"]
 	type_zone = data["type_zone"] as GlobalData.TypeZone
-	taille_zone = data["taille_zone"]
+	taille_zone = Vector2(data["taille_zone"][0], data["taille_zone"][1])
 	cible = data["cible"] as GlobalData.Cible
 	ldv = data["ldv"]
 	type_ldv = data["type_ldv"] as GlobalData.TypeLDV
@@ -339,8 +339,9 @@ class Glyphe:
 	var duree
 	var centre
 	var aoe
+	var sort
 	
-	func _init(p_id, p_lanceur, p_tiles, p_effets, p_bloqueur, p_critique, p_centre, p_aoe):
+	func _init(p_id, p_lanceur, p_tiles, p_effets, p_bloqueur, p_critique, p_centre, p_aoe, p_sort):
 		id = p_id
 		lanceur = p_lanceur
 		tiles = p_tiles
@@ -353,23 +354,31 @@ class Glyphe:
 			duree = effets["GLYPHE"]["base"]["duree"]
 		centre = p_centre
 		aoe = p_aoe
+		sort = p_sort
 	
 	func active_full():
-		for tile in tiles:
-			for combattant in lanceur.combat.combattants:
-				if combattant.grid_pos == tile:
-					for effet in effets:
-						var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		var triggered = false
+		for combattant in lanceur.combat.combattants:
+			if combattant.grid_pos in tiles:
+				for effet in effets:
+					var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, true, sort)
+					new_effet.execute()
+				triggered = true
+		if triggered and effets.has("DOMMAGE_FIXE"):
+			print("PIEGE TRIGGERED")
+			lanceur.combat.tilemap.delete_glyphes([id])
+			lanceur.combat.tilemap.update_glyphes()
 	
 	func active_mono(combattant):
 		for tile in tiles:
 			if combattant.grid_pos == tile:
 				for effet in effets:
-					var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+					var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, true, sort)
+					new_effet.execute()
 	
 	func affiche():
 		for tile in tiles:
 			if effets.has("DOMMAGE_FIXE"):
-				lanceur.combat.tilemap.set_cell(3, tile, 1, Vector2i(0, 0))
-			if effets.has("INVISIBLE"):
-				lanceur.combat.tilemap.set_cell(4, tile, 1, Vector2i(1, 0))
+				lanceur.combat.tilemap.set_cell(3, tile - lanceur.combat.offset, 1, Vector2i(0, 0))
+			if effets.has("DEVIENT_INVISIBLE"):
+				lanceur.combat.tilemap.set_cell(4, tile - lanceur.combat.offset, 1, Vector2i(1, 0))

@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_eb3vf"]
 [ext_resource type="PackedScene" uid="uid://wjqjfqvfle7s" path="res://Fight/stats_perdu.tscn" id="6_aopma"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0l4n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b6t5b"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_0wpnx"]
+[sub_resource type="LabelSettings" id="LabelSettings_6wdmy"]
 font_size = 25
 
 [node name="Invocation" type="Node2D"]
@@ -30,9 +30,11 @@ position = Vector2(0, -10)
 scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_t0l4n")
+shape = SubResource("RectangleShape2D_b6t5b")
 
 [node name="HP" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
 position = Vector2(0, -60)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_eb3vf")
@@ -44,11 +46,12 @@ offset_top = -18.0
 offset_right = 49.0
 offset_bottom = 5.0
 text = "40/40"
-label_settings = SubResource("LabelSettings_0wpnx")
+label_settings = SubResource("LabelSettings_6wdmy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StatsPerdu" parent="." instance=ExtResource("6_aopma")]
+z_index = 3
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

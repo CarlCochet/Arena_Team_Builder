@@ -2,6 +2,7 @@ extends Combattant
 class_name Invocation
 
 
+var invocateur
 @onready var hitbox: Area2D = $Area2D
 
 
@@ -19,11 +20,9 @@ func _ready():
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	combat = get_parent()
 	update_hitbox()
-	invocations = []
 
 
 func init(classe_int: int):
-	print(classe_int as GlobalData.Invocations)
 	match classe_int as GlobalData.Invocations:
 		GlobalData.Invocations.BOUFTOU:
 			classe = "Bouftou"
@@ -50,8 +49,7 @@ func init(classe_int: int):
 		GlobalData.Invocations.BOMBE_INCENDIAIRE:
 			classe = "Bombe_Incendiaire"
 		_:
-			print("Non-existent summon.")
-	print(classe)
+			print("Incorrect summon.")
 	stats = GlobalData.stats_classes[classe].copy()
 	max_stats = GlobalData.stats_classes[classe].copy()
 	init_stats = GlobalData.stats_classes[classe].copy()

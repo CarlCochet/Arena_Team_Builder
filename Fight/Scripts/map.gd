@@ -11,6 +11,7 @@ var offset
 var mode = false
 var zonetype = GlobalData.TypeZone.CARRE
 var glyphes: Array
+var glyphes_indexeur: int
 
 @onready var overlay = get_used_cells(2)
 @onready var arena = get_used_cells(1)
@@ -41,6 +42,7 @@ func _ready():
 		for y in range(y_max + 1 + offset.y):
 			a_star_grid.set_point_solid(Vector2i(x, y), true)
 	
+	glyphes_indexeur = 0
 	get_start()
 	build_astar_grid()
 
@@ -59,13 +61,21 @@ func get_start():
 func update_glyphes():
 	clear_layer(3)
 	clear_layer(4)
+	print(glyphes)
 	for glyphe in glyphes:
 		glyphe.active_full()
 		glyphe.affiche()
+	get_parent().check_morts()
 
 
-func delete_glyphe(glyphe_id):
-	pass
+func delete_glyphes(glyphes_ids: Array):
+	var new_glyphes = []
+	for glyphe in glyphes:
+		if not glyphe.id in glyphes_ids:
+			new_glyphes.append(glyphe)
+	glyphes = new_glyphes
+	print(glyphes)
+	update_glyphes()
 
 
 func build_astar_grid():
@@ -156,20 +166,22 @@ func calcul_ldv(debut: Vector2i, fin: Vector2i) -> bool:
 	return pos.x == fin.x and pos.y == fin.y
 
 
-func get_zone(source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_zone: int) -> Array:
+func get_zone(source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_min: int, taille_max: int) -> Array:
 	var zone = []
 	var orientation = source - target
-	for x in range(target.x - taille_zone, target.x + taille_zone + 1):
-		for y in range(target.y - taille_zone, target.y + taille_zone + 1):
-			if check_zone(x, y, target, type_zone, taille_zone, orientation):
+	for x in range(target.x - taille_max, target.x + taille_max + 1):
+		for y in range(target.y - taille_max, target.y + taille_max + 1):
+			if check_zone(x, y, target, type_zone, taille_min, taille_max, orientation):
 				zone.append(Vector2i(x, y))
 	return zone
 
 
-func check_zone(x: int, y: int, target: Vector2i, type_zone: GlobalData.TypeZone, taille_zone: int, orientation: Vector2i) -> bool:
+func check_zone(x: int, y: int, target: Vector2i, type_zone: GlobalData.TypeZone, taille_min: int, taille_max: int, orientation: Vector2i) -> bool:
 	if x < 0 or x >= len(grid) or y < 0 or y >= len(grid[0]):
 		return false
-	if abs(target.x - x) + abs(target.y - y) > taille_zone and type_zone != GlobalData.TypeZone.CARRE:
+	if abs(target.x - x) + abs(target.y - y) > taille_max and type_zone != GlobalData.TypeZone.CARRE:
+		return false
+	if abs(target.x - x) + abs(target.y - y) < taille_min:
 		return false
 	if grid[x][y] == 0 or grid[x][y] == -1:
 		return false

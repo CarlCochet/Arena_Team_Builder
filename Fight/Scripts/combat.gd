@@ -11,6 +11,7 @@ var indexeur_global: int
 var etat: int
 var action: int
 var offset: Vector2i
+var input_lock: bool
 
 @onready var sorts: Control = $Sorts
 @onready var timeline: Control = $Timeline
@@ -23,6 +24,7 @@ func _ready():
 	etat = 0
 	indexeur_global = 0
 	offset = tilemap.offset
+	input_lock = false
 	randomize()
 	creer_personnages()
 	timeline.init(combattants, selection_id)
@@ -95,12 +97,27 @@ func change_action(new_action: int):
 
 func check_morts():
 	var new_combattants = []
+	var delete_glyphes = []
+	combattants[selection_id].unselect()
 	for combattant in combattants:
-		if combattant.stats.hp > 0:
-			new_combattants.append(combattant)
-		else:
+		if combattant.stats.hp <= 0:
+			for glyphe in tilemap.glyphes:
+				if glyphe.lanceur.id == combattant.id:
+					delete_glyphes.append(glyphe.id)
 			combattant.meurt()
+		elif combattant is Invocation and combattant.invocateur.stats.hp <= 0:
+			combattant.meurt()
+		else: 
+			new_combattants.append(combattant)
 	combattants = new_combattants
+	if len(delete_glyphes) > 0:
+		tilemap.delete_glyphes(delete_glyphes)
+	tilemap.clear_layer(2)
+	if selection_id >= len(combattants):
+		selection_id = 0
+	combattants[selection_id].select()
+	combattant_selection = combattants[selection_id]
+	change_action(7)
 	timeline.init(combattants, selection_id)
 
 
@@ -114,6 +131,8 @@ func _on_perso_clicked(id: int):
 
 
 func _input(event):
+	if input_lock:
+		return
 	if etat == 1:
 		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
 			passe_tour()

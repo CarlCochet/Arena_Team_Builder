@@ -17,7 +17,6 @@ var sorts: Array
 var equipe: int
 var effets: Array
 var combat: Combat
-var invocations: Array
 
 var grid_pos: Vector2i
 var id: int
@@ -55,7 +54,6 @@ func _ready():
 	is_invocation = false
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	combat = get_parent()
-	invocations = []
 
 
 func update_visuel():
@@ -157,7 +155,8 @@ func affiche_zone(action: int, pos_event: Vector2i):
 			grid_pos,
 			pos_event,
 			sort.type_zone,
-			sort.taille_zone
+			sort.taille_zone[0],
+			sort.taille_zone[1]
 		)
 		for cell in zone:
 			combat.tilemap.set_cell(2, cell - combat.offset, 3, Vector2i(0, 0))
@@ -224,9 +223,6 @@ func check_tacle(chemin: Array) -> Vector2i:
 				continue
 			if (combattant.grid_pos - case) in voisins:
 				blocage_total += combattant.stats.blocage
-			for invoc in combattant.invocations:
-				if (invoc.grid_pos - case) in voisins:
-					blocage_total += invoc.stats.blocage
 		var chance_esquive = stats.esquive - blocage_total
 		if randi_range(1, 100) > chance_esquive:
 			return case
@@ -256,6 +252,7 @@ func deplace_perso(chemin: Array):
 			if effet.etat == "PORTE" and effet.lanceur.id == id:
 				combattant.position = position + Vector2(0, -90)
 				combattant.grid_pos = grid_pos
+	combat.tilemap.update_glyphes()
 	if fin != chemin[-1]:
 		combat.passe_tour()
 
@@ -277,6 +274,7 @@ func place_perso(tile_pos: Vector2i):
 			grid_pos = new_grid_pos
 			combat.tilemap.a_star_grid.set_point_solid(grid_pos)
 			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+	combat.tilemap.update_glyphes()
 
 
 func bouge_perso(new_pos):
@@ -288,6 +286,7 @@ func bouge_perso(new_pos):
 	grid_pos = new_pos
 	combat.tilemap.a_star_grid.set_point_solid(grid_pos)
 	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+	combat.tilemap.update_glyphes()
 
 
 func oriente_vers(pos: Vector2i):
@@ -361,7 +360,7 @@ func retrait_durees():
 func retrait_cooldown():
 	for sort in sorts:
 		if sort.cooldown_actuel > 0:
-			sort.cooldown_actuel -=1
+			sort.cooldown_actuel -= 1
 		sort.compte_lancers_tour = 0
 		sort.compte_cible = {}
 
