@@ -1109,14 +1109,20 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-                "IMMOBILISE": 1,
+                "IMMOBILISE": {
+                    "base": {
+                        "duree": 1
+                    }
+                },
                 "CHANGE_STATS": {
                     "blocage": {
                         "base": {
-                            "valeur": -40
+                            "valeur": -40,
+                            "duree": 1
                         },
                         "critique": {
-                            "valeur": -60
+                            "valeur": -60,
+                            "duree": 1
                         }
                     }
                 },
@@ -3525,7 +3531,9 @@
                     }
                 },
                 "IMMOBILISE": {
-                    "duree": 1
+                    "base": {
+                        "duree": 1
+                    }
                 }
 			}
 		},

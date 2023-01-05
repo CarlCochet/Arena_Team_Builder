@@ -103,6 +103,9 @@ func affiche_path(pos_event: Vector2i):
 	zone = []
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	var path = combat.tilemap.get_chemin(grid_pos, pos_event)
+	if check_etats(["IMMOBILISE"]):
+		all_path = []
+		path = []
 	if len(path) > 0 and len(path) <= stats.pm + 1:
 		path.pop_front()
 		path_actuel = path
@@ -300,6 +303,7 @@ func deplace_perso(chemin: Array):
 					porteur = combattant
 		retire_etats(["PORTE"])
 		porteur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
+		z_index = 0
 		combat.tilemap.a_star_grid.set_point_solid(old_grid_pos)
 		combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
 	combat.tilemap.update_glyphes()
