@@ -730,7 +730,10 @@ func picole():
 
 
 func sacrifice():
-	cible.retire_etats(["SACRIFICE"])
+	for effet in cible.effets:
+		if effet.etat == "SACRIFICE" and effet.lanceur.id != lanceur.id:
+			cible.retire_etats(["SACRIFICE"])
+			break
 	etat = "SACRIFICE"
 
 
