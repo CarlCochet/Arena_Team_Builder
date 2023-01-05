@@ -5294,6 +5294,9 @@
                         }
                     },
                     "pm": {
+                        "base": {
+                            "valeur": 0
+                        },
                         "critique": {
                             "valeur": -1
                         }

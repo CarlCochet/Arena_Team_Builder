@@ -171,14 +171,57 @@ func chemin_vers_proche() -> Array:
 	return min_chemin
 
 
+func choix_cible(all_ldv: Array):
+	var min_dist = 9999999
+	var min_hp = 9999999
+	var cible = null
+	for combattant in combat.combattants:
+		if combattant.grid_pos in all_ldv:
+			var delta = combattant.grid_pos - grid_pos
+			var dist = abs(delta.x) + abs(delta.y)
+			if dist < min_dist:
+				min_dist = dist
+				cible = combattant.grid_pos
+				min_hp = combattant.stats.hp
+			elif dist == min_dist and combattant.stats.hp < min_hp:
+				min_dist = dist
+				cible = combattant.grid_pos
+				min_hp = combattant.stats.hp
+	return cible
+
+
 func joue_ia():
+	combat.check_morts()
 	var chemin = chemin_vers_proche()
 	if len(chemin) > stats.pm + 1:
 		chemin = chemin.slice(0, stats.pm + 1)
 	if len(chemin) > 0:
 		deplace_perso(chemin)
 	for sort in sorts:
-		pass
+		if not sort.precheck_cast(self):
+			continue
+		all_ldv = combat.tilemap.get_ldv(
+			grid_pos, 
+			sort.po[0],
+			sort.po[1] + (stats.po if sort.po_modifiable else 0),
+			sort.type_ldv,
+			sort.ldv
+		)
+		var cible = choix_cible(all_ldv)
+		if cible == null:
+			continue
+		if sort.pa <= stats.pa:
+			var valide = false
+			if check_etat("RATE_SORT"):
+				valide = true
+				retire_etats(["RATE_SORT"])
+			else:
+				valide = sort.execute_effets(self, [cible], cible)
+			if valide:
+				stats.pa -= sort.pa
+				stats_perdu.ajoute(-sort.pa, "pa")
+				combat.stats_select.update(stats, max_stats)
+			joue_ia()
 
 
 func fin_tour():
