@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://egsxhipgew1"]
+[gd_scene load_steps=26 format=3 uid="uid://egsxhipgew1"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
 [ext_resource type="Texture2D" uid="uid://dn515cobe71df" path="res://Fight/Map/Images/tactic_mode.png" id="1_77dx5"]
@@ -9,6 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://cyuev8xs7ffv8" path="res://Fight/sorts.tscn" id="7_0vhv3"]
 [ext_resource type="PackedScene" uid="uid://dkum5bskrgt8k" path="res://Fight/affichage_stats.tscn" id="8_mm5mb"]
 [ext_resource type="PackedScene" uid="uid://cr4dhfep7jkje" path="res://Fight/timeline.tscn" id="8_rq6ft"]
+[ext_resource type="Texture2D" uid="uid://cbc33y58ir5b3" path="res://Fight/Images/fleche_UI_0_base.png" id="10_mc0eu"]
+[ext_resource type="Texture2D" uid="uid://drpfkof5g2pxv" path="res://Fight/Images/fleche_UI_0_selected.png" id="11_4niei"]
+[ext_resource type="Texture2D" uid="uid://dl7ysbkuefn4i" path="res://Fight/Images/fleche_UI_1_base.png" id="12_toemx"]
+[ext_resource type="Texture2D" uid="uid://bldfuouiu3ksc" path="res://Fight/Images/fleche_UI_1_selected.png" id="13_ffdov"]
+[ext_resource type="Texture2D" uid="uid://cwawriukghosq" path="res://Fight/Images/fleche_UI_2_base.png" id="14_7ic16"]
+[ext_resource type="Texture2D" uid="uid://cdnpto4tcmy1b" path="res://Fight/Images/fleche_UI_2_selected.png" id="15_rvv21"]
+[ext_resource type="Texture2D" uid="uid://cngofkq14ygeh" path="res://Fight/Images/fleche_UI_3_base.png" id="16_gcqp1"]
+[ext_resource type="Texture2D" uid="uid://b8jfmij81ohx6" path="res://Fight/Images/fleche_UI_3_selected.png" id="17_j3o6q"]
+[ext_resource type="Texture2D" uid="uid://d1xu674o3qbrs" path="res://UI/Buttons/passe_tour_base.png" id="18_ctpdw"]
+[ext_resource type="Texture2D" uid="uid://dsmninkk3w66q" path="res://UI/Buttons/passe_tour_clicked.png" id="19_d7cu6"]
+[ext_resource type="Texture2D" uid="uid://6qux5yc23gvx" path="res://UI/Buttons/passe_tour_hovered.png" id="20_aeni8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxif1"]
 texture = ExtResource("1_77dx5")
@@ -126,3 +137,64 @@ offset_left = 1200.0
 offset_top = 802.0
 offset_right = 1566.0
 offset_bottom = 900.0
+
+[node name="OrientationControls" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 59.0
+offset_top = 670.0
+offset_right = 129.0
+offset_bottom = 716.0
+
+[node name="Fleche0" type="TextureButton" parent="OrientationControls"]
+layout_mode = 0
+offset_left = 33.0
+offset_right = 142.0
+offset_bottom = 70.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("10_mc0eu")
+texture_pressed = ExtResource("11_4niei")
+
+[node name="Fleche1" type="TextureButton" parent="OrientationControls"]
+layout_mode = 1
+offset_left = 33.0
+offset_top = 21.0
+offset_right = 142.0
+offset_bottom = 91.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("12_toemx")
+texture_pressed = ExtResource("13_ffdov")
+
+[node name="Fleche2" type="TextureButton" parent="OrientationControls"]
+layout_mode = 1
+offset_top = 21.0
+offset_right = 109.0
+offset_bottom = 91.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("14_7ic16")
+texture_pressed = ExtResource("15_rvv21")
+
+[node name="Fleche3" type="TextureButton" parent="OrientationControls"]
+layout_mode = 1
+offset_right = 109.0
+offset_bottom = 70.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("16_gcqp1")
+texture_pressed = ExtResource("17_j3o6q")
+
+[node name="PasseTour" type="TextureButton" parent="."]
+z_index = 1
+offset_left = 51.0
+offset_top = 742.0
+offset_right = 181.0
+offset_bottom = 782.0
+texture_normal = ExtResource("18_ctpdw")
+texture_pressed = ExtResource("19_d7cu6")
+texture_hover = ExtResource("20_aeni8")
+
+[connection signal="pressed" from="OrientationControls/Fleche0" to="." method="_on_fleche_0_pressed"]
+[connection signal="pressed" from="OrientationControls/Fleche1" to="." method="_on_fleche_1_pressed"]
+[connection signal="pressed" from="OrientationControls/Fleche2" to="." method="_on_fleche_2_pressed"]
+[connection signal="pressed" from="OrientationControls/Fleche3" to="." method="_on_fleche_3_pressed"]
+[connection signal="pressed" from="PasseTour" to="." method="_on_passe_tour_pressed"]

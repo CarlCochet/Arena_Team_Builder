@@ -173,4 +173,26 @@ func _input(event):
 			get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")
 		if event is InputEventMouseButton:
 			combattant_selection.place_perso(tilemap.local_to_map(event.position))
-	
+
+
+func _on_fleche_0_pressed():
+	combattant_selection.change_orientation(0)
+
+
+func _on_fleche_1_pressed():
+	combattant_selection.change_orientation(1)
+
+
+func _on_fleche_2_pressed():
+	combattant_selection.change_orientation(2)
+
+
+func _on_fleche_3_pressed():
+	combattant_selection.change_orientation(3)
+
+
+func _on_passe_tour_pressed():
+	if etat == 0:
+		lance_game()
+	if etat == 1:
+		passe_tour()
