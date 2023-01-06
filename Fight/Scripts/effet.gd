@@ -15,6 +15,7 @@ var critique: bool
 var aoe: bool
 var combat: Combat
 var sort: Sort
+var type_cible: GlobalData.Cible
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
 
@@ -25,6 +26,11 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	centre = p_centre
 	categorie = p_categorie
 	contenu = p_contenu
+	if contenu is Dictionary and contenu.has("cible"):
+		type_cible = contenu["cible"] as GlobalData.Cible
+		contenu.erase("cible")
+	else:
+		type_cible = GlobalData.Cible.LIBRE
 	duree = 0
 	instant = true
 	critique = p_critique
@@ -48,9 +54,9 @@ func trouve_duree(data):
 
 
 func check_cible():
-	if contenu["cible"] == 6 and (cible.equipe != lanceur.equipe or not cible.is_invocation): 
+	if type_cible == GlobalData.Cible.INVOCATIONS_ALLIEES and (cible.equipe != lanceur.equipe or not cible.is_invocation): 
 		return false
-	if contenu["cible"] == 7 and (cible.equipe == lanceur.equipe or not cible.is_invocation): 
+	if type_cible == GlobalData.Cible.INVOCATIONS_ENNEMIES and (cible.equipe == lanceur.equipe or not cible.is_invocation): 
 		return false
 	return true
 
@@ -62,8 +68,11 @@ func trouve_crit():
 			base_crit = "critique"
 		else:
 			for key in contenu.keys():
-				if contenu[key].has("critique"):
-					base_crit = "critique"
+				if contenu[key] is Dictionary:
+					if contenu[key].has("critique"):
+						base_crit = "critique"
+				else:
+					continue
 			if base_crit.is_empty():
 				base_crit = "base"
 	else:
@@ -71,15 +80,17 @@ func trouve_crit():
 			base_crit = "base"
 		else:
 			for key in contenu.keys():
-				if contenu[key].has("base"):
-					base_crit = "base"
+				if contenu[key] is Dictionary:
+					if contenu[key].has("base"):
+						base_crit = "base"
+				else:
+					continue
 	return base_crit
 
 
 func execute():
-	if contenu is Dictionary and contenu.has("cible"):
-		if not check_cible():
-			return
+	if not check_cible():
+		return
 	
 	match categorie:
 		"DOMMAGE_FIXE": 
