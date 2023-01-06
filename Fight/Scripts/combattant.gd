@@ -127,10 +127,11 @@ func affiche_ldv(action: int):
 	if not sort.precheck_cast(self):
 		combat.change_action(7)
 		return
+	var bonus_po = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
 	all_ldv = combat.tilemap.get_ldv(
 		grid_pos, 
 		sort.po[0],
-		sort.po[1] + (stats.po if sort.po_modifiable else 0),
+		sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0],
 		sort.type_ldv,
 		sort.ldv
 	)
@@ -342,6 +343,15 @@ func bouge_perso(new_pos):
 	combat.tilemap.update_glyphes()
 
 
+func echange_positions(combattant):
+	var old_grid_pos = grid_pos
+	var old_position = position
+	grid_pos = combattant.grid_pos
+	position = combattant.position
+	combattant.grid_pos = old_grid_pos
+	combattant.position = old_position
+
+
 func oriente_vers(pos: Vector2i):
 	var ref_vectors = [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
 	var min_dist = 999999999.0
@@ -355,6 +365,17 @@ func oriente_vers(pos: Vector2i):
 
 
 func meurt():
+	if check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
+		var effet_lance = Effet.new(self, grid_pos, "LANCE", 1, false, grid_pos, false, null)
+		effet_lance.execute()
+	
+	for combattant in combat.combattants:
+		var new_effets = []
+		for effet in combattant.effets:
+			if effet.lanceur.id != id:
+				new_effets.append(effet)
+		combattant.effets = new_effets
+	
 	var map_pos = combat.tilemap.local_to_map(position)
 	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
 	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x

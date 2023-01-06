@@ -173,3 +173,4 @@ func _input(event):
 			get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")
 		if event is InputEventMouseButton:
 			combattant_selection.place_perso(tilemap.local_to_map(event.position))
+	

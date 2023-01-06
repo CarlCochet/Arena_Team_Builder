@@ -186,7 +186,7 @@ func check_immu(dommages: int) -> bool:
 	for effet in cible.effets:
 		if "IMMUNISE" == effet.etat:
 			return true
-		if "RENVOIE_SORT" == effet.etat and nom_sort != "arme":
+		if "RENVOIE_SORT" == effet.etat and sort.nom != "arme":
 			for effet_lanceur in lanceur.effets:
 				if "IMMUNISE" == effet_lanceur.etat or "RENVOIE_SORT" == effet_lanceur.etat:
 					return true
@@ -240,14 +240,12 @@ func update_sacrifice(p_cible):
 		if effet.etat == "SACRIFICE" and effet.lanceur.id == cible.id:
 			if (not effet.lanceur.check_etats(["INTRANSPOSABLE"])) and (not p_cible.check_etats(["INTRANSPOSABLE"])):
 				var grid_pos = effet.lanceur.grid_pos
-				effet.lanceur.bouge_perso(p_cible.grid_pos)
-				p_cible.bouge_perso(grid_pos)
+				p_cible.echange_positions(effet.lanceur)
 			return p_cible
 		elif effet.etat == "SACRIFICE":
 			if (not effet.lanceur.check_etats(["INTRANSPOSABLE"])) and (not p_cible.check_etats(["INTRANSPOSABLE"])):
 				var grid_pos = effet.lanceur.grid_pos
-				effet.lanceur.bouge_perso(p_cible.grid_pos)
-				p_cible.bouge_perso(grid_pos)
+				p_cible.echange_positions(effet.lanceur)
 			return update_sacrifice(effet.lanceur)
 	return p_cible
 
@@ -265,7 +263,7 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 		lanceur.stats_perdu.ajoute(-dommages, "hp")
 		return
 	
-	if check_immu(dommages):
+	if check_immu(dommages) and dommages >= 0:
 		return
 	
 	cible.stats.hp -= dommages
@@ -441,10 +439,16 @@ func soin():
 
 
 func check_retrait_immunite(cible, stat, valeur):
-	if cible.check_etats(["IMMUNISE_RETRAIT_PA"]) and stat == "pa" and valeur < 0:
-		return true
-	if cible.check_etats(["IMMUNISE_RETRAIT_PM"]) and stat == "pm" and valeur < 0:
-		return true
+	if not cible is Array:
+		if cible.check_etats(["IMMUNISE_RETRAIT_PA"]) and stat == "pa" and valeur < 0:
+			return true
+		if cible.check_etats(["IMMUNISE_RETRAIT_PM"]) and stat == "pm" and valeur < 0:
+			return true
+	else:
+		if lanceur.check_etats(["IMMUNISE_RETRAIT_PA"]) and stat == "pa" and valeur < 0:
+			return true
+		if lanceur.check_etats(["IMMUNISE_RETRAIT_PM"]) and stat == "pm" and valeur < 0:
+			return true
 	return false
 
 
@@ -483,9 +487,9 @@ func change_stats():
 			if instant:
 				lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
 			if duree > 0:
-				cible.stat_buffs[stat] += contenu[stat][base_crit]["retour"]
+				lanceur.stat_buffs[stat] += contenu[stat][base_crit]["retour"]
 			else:
-				cible.stat_ret[stat] += contenu[stat][base_crit]["retour"]
+				lanceur.stat_ret[stat] += contenu[stat][base_crit]["retour"]
 			if contenu[stat][base_crit]["retour"] > 0:
 				lanceur.max_stats[stat] += contenu[stat][base_crit]["retour"]
 			if stat in ["pa", "pm", "hp"]:
@@ -595,7 +599,7 @@ func attire():
 			break
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
-	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
+	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]) and cible.grid_pos != old_grid_pos:
 		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
 		effet_lance.execute()
 	update_widgets()
@@ -621,9 +625,7 @@ func teleporte():
 func transpose():
 	if lanceur.check_etats(["INTRANSPOSABLE"]) or cible.check_etats(["INTRANSPOSABLE", "PORTE"]):
 		return
-	var grid_pos = lanceur.grid_pos
-	lanceur.bouge_perso(cible.grid_pos)
-	cible.bouge_perso(grid_pos)
+	cible.echange_positions(lanceur)
 
 
 func petrifie():
@@ -698,16 +700,17 @@ func invocation():
 
 
 func porte():
-	var etat_lanceur = "PORTE_ALLIE" if lanceur.equipe == cible.equipe else "PORTE_ENNEMI"
-	var effet_lanceur = Effet.new(lanceur, cible, etat_lanceur, contenu, false, lanceur.grid_pos, false, sort)
-	effet_lanceur.etat = etat_lanceur
-	lanceur.effets.append(effet_lanceur)
-	etat = "PORTE"
-	var map_pos = cible.combat.tilemap.local_to_map(cible.position)
-	cible.combat.tilemap.a_star_grid.set_point_solid(cible.grid_pos, false)
-	cible.combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = cible.combat.tilemap.get_cell_atlas_coords(1, map_pos).x
-	cible.position = lanceur.position + Vector2(0, -90)
-	cible.z_index = 1
+	if etat != "PORTE":
+		var etat_lanceur = "PORTE_ALLIE" if lanceur.equipe == cible.equipe else "PORTE_ENNEMI"
+		var effet_lanceur = Effet.new(lanceur, cible, etat_lanceur, contenu, false, lanceur.grid_pos, false, sort)
+		effet_lanceur.etat = etat_lanceur
+		lanceur.effets.append(effet_lanceur)
+		etat = "PORTE"
+		var map_pos = cible.combat.tilemap.local_to_map(cible.position)
+		cible.combat.tilemap.a_star_grid.set_point_solid(cible.grid_pos, false)
+		cible.combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = cible.combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+		cible.position = lanceur.position + Vector2(0, -90)
+		cible.z_index = 1
 
 
 func lance():

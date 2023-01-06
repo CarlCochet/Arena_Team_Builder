@@ -90,6 +90,13 @@ layer_4/y_sort_enabled = true
 layer_4/y_sort_origin = 0
 layer_4/z_index = 1
 layer_4/tile_data = PackedInt32Array()
+layer_5/name = "debug"
+layer_5/enabled = true
+layer_5/modulate = Color(1, 1, 1, 0.478431)
+layer_5/y_sort_enabled = false
+layer_5/y_sort_origin = 0
+layer_5/z_index = 1
+layer_5/tile_data = PackedInt32Array()
 script = ExtResource("5_n7470")
 
 [node name="Sorts" parent="." instance=ExtResource("7_0vhv3")]

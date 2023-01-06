@@ -207,6 +207,14 @@ func check_zone(x: int, y: int, target: Vector2i, type_zone: GlobalData.TypeZone
 	return true
 
 
+func affiche_obstacles():
+	clear_layer(5)
+	for x in range(0, 40):
+		for y in range(0, 40):
+			if a_star_grid.is_in_bounds(x, y) and a_star_grid.is_point_solid(Vector2i(x, y)):
+				set_cell(5, Vector2i(x, y) - offset, 3, Vector2i(0, 0))
+
+
 func _input(event):
 	if Input.is_key_pressed(KEY_F2) and event is InputEventKey and not event.echo:
 		mode = not mode
