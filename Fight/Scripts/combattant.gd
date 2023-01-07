@@ -70,7 +70,8 @@ func select():
 	classe_sprite.material.set_shader_parameter("width", 2.0)
 	combat.stats_select.update(stats, max_stats)
 	is_selected = true
-	combat.sorts.update(self)
+	if not is_invocation:
+		combat.sorts.update(self)
 
 
 func unselect():
@@ -248,7 +249,8 @@ func joue_action(action: int, tile_pos: Vector2i):
 			stats.pa -= sort.pa
 			stats_perdu.ajoute(-sort.pa, "pa")
 			combat.stats_select.update(stats, max_stats)
-			combat.sorts.update(self)
+			if not is_invocation:
+				combat.sorts.update(self)
 		combat.change_action(7)
 	combat.check_morts()
 
@@ -275,39 +277,40 @@ func check_tacle(chemin: Array) -> Vector2i:
 
 func deplace_perso(chemin: Array):
 	var fin = check_tacle(chemin)
-	chemin.pop_front()
-	var prefin = grid_pos if len(chemin) < 2 else chemin[-2]
-	var tile_pos = fin - combat.offset
-	var old_grid_pos = grid_pos
-	var old_map_pos = grid_pos - combat.offset
-	combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-	combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
-	position = combat.tilemap.map_to_local(tile_pos)
-	grid_pos = fin
-	combat.tilemap.a_star_grid.set_point_solid(fin)
-	combat.tilemap.grid[fin[0]][fin[1]] = -2
-	stats.pm -= len(path_actuel)
-	stats_perdu.ajoute(-len(path_actuel), "pm")
-	combat.stats_select.update(stats, max_stats)
-	combat.tilemap.clear_layer(2)
-	oriente_vers(grid_pos + (fin - prefin))
-	for combattant in combat.combattants:
-		for effet in combattant.effets:
-			if effet.etat == "PORTE" and effet.lanceur.id == id:
-				combattant.position = position + Vector2(0, -90)
-				combattant.grid_pos = grid_pos
-	if check_etats(["PORTE"]):
-		var porteur = null
+	if fin != grid_pos:
+		chemin.pop_front()
+		var prefin = grid_pos if len(chemin) < 2 else chemin[-2]
+		var tile_pos = fin - combat.offset
+		var old_grid_pos = grid_pos
+		var old_map_pos = grid_pos - combat.offset
+		combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
+		combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
+		position = combat.tilemap.map_to_local(tile_pos)
+		grid_pos = fin
+		combat.tilemap.a_star_grid.set_point_solid(fin)
+		combat.tilemap.grid[fin[0]][fin[1]] = -2
+		stats.pm -= len(path_actuel)
+		stats_perdu.ajoute(-len(path_actuel), "pm")
+		combat.stats_select.update(stats, max_stats)
+		combat.tilemap.clear_layer(2)
+		oriente_vers(grid_pos + (fin - prefin))
 		for combattant in combat.combattants:
 			for effet in combattant.effets:
-				if (effet.etat == "PORTE_ALLIE" or effet.etat == "PORTE_ENNEMI") and effet.cible.id == id:
-					porteur = combattant
-		retire_etats(["PORTE"])
-		porteur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
-		z_index = 0
-		combat.tilemap.a_star_grid.set_point_solid(old_grid_pos)
-		combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
-	combat.tilemap.update_glyphes()
+				if effet.etat == "PORTE" and effet.lanceur.id == id:
+					combattant.position = position + Vector2(0, -90)
+					combattant.grid_pos = grid_pos
+		if check_etats(["PORTE"]):
+			var porteur = null
+			for combattant in combat.combattants:
+				for effet in combattant.effets:
+					if (effet.etat == "PORTE_ALLIE" or effet.etat == "PORTE_ENNEMI") and effet.cible.id == id:
+						porteur = combattant
+			retire_etats(["PORTE"])
+			porteur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
+			z_index = 0
+			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos)
+			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
+		combat.tilemap.update_glyphes()
 	if fin != chemin[-1]:
 		combat.passe_tour()
 
@@ -379,6 +382,7 @@ func meurt():
 	var map_pos = combat.tilemap.local_to_map(position)
 	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
 	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	print(classe, "_", str(id), " est mort.")
 	queue_free()
 
 

@@ -66,9 +66,12 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		return false
 	if len(cases_cibles) > 1:
 		aoe = true
+	print(lanceur.classe, "_", str(lanceur.id), " lance ", nom, ".")
 	var combattants = lanceur.combat.combattants
 	var trouve = false
 	var critique = randi_range(1, 100) <= lanceur.stats.cc
+	if critique:
+		print("Coup critique!")
 	var targets = []
 	if effets.has("GLYPHE"):
 		var new_glyphe = Glyphe.new(
@@ -133,6 +136,9 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	if not trouve and cible == 2:
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
 	update_limite_lancers(lanceur)
+	
+	if not sort_valide:
+		print("Sort invalide, annulation de l'action !")
 	return sort_valide
 
 

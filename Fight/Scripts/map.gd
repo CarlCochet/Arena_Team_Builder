@@ -88,7 +88,7 @@ func get_atteignables(pos: Vector2i, pm: int) -> Array:
 	var atteignables: Array = []
 	for x in range(pos.x - pm, pos.x + pm + 1):
 		for y in range(pos.y - pm, pos.y + pm + 1):
-			if a_star_grid.is_in_bounds(pos.x, pos.y) and a_star_grid.is_in_bounds(x, y):
+			if a_star_grid.is_in_bounds(pos.x, pos.y) and a_star_grid.is_in_bounds(x, y) and (x != pos.x or y != pos.y):
 				var path = a_star_grid.get_id_path(pos, Vector2i(x,y))
 				if len(path) <= pm + 1:
 					for cell in path:
@@ -100,7 +100,7 @@ func get_atteignables(pos: Vector2i, pm: int) -> Array:
 
 func get_chemin(debut: Vector2i, fin: Vector2i) -> Array:
 	var path = []
-	if a_star_grid.is_in_bounds(debut.x, debut.y) and a_star_grid.is_in_bounds(fin.x, fin.y):
+	if a_star_grid.is_in_bounds(debut.x, debut.y) and a_star_grid.is_in_bounds(fin.x, fin.y) and (debut.x != fin.x or debut.y != fin.y):
 		path = a_star_grid.get_id_path(debut, fin)
 	return path
 

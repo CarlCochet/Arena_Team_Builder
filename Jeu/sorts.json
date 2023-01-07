@@ -496,7 +496,7 @@
 			"effets": {
 				"RATE_SORT": {
                     "base": {
-                        "duree": 99
+                        "duree": 999
                     }
                 }
 			}
@@ -697,12 +697,12 @@
 					"cc": {
 						"base": {
 							"valeur": 15,
-							"duree": 99,
+							"duree": 999,
 							"retour": 15
 						},
 						"critique": {
 							"valeur": 20,
-							"duree": 99,
+							"duree": 999,
 							"retour": 20
 						}
 					}
@@ -897,11 +897,11 @@
                     "hp": {
                         "base": {
                             "valeur": 10,
-                            "duree": 99
+                            "duree": 999
                         },
                         "critique": {
                             "valeur": 12,
-                            "duree": 99
+                            "duree": 999
                         }
                     }
                 },
@@ -2308,51 +2308,51 @@
                     "hp": {
                         "base": {
                             "valeur": 25,
-                            "duree": 99
+                            "duree": 999
                         },
                         "critique": {
                             "valeur": 35,
-                            "duree": 99
+                            "duree": 999
                         }
                     },
                     "resistances_air": {
                         "base": {
                             "valeur": 10,
-                            "duree": 99
+                            "duree": 999
                         },
                         "critique": {
                             "valeur": 15,
-                            "duree": 99
+                            "duree": 999
                         }
                     },
                     "resistances_terre": {
                         "base": {
                             "valeur": 10,
-                            "duree": 99
+                            "duree": 999
                         },
                         "critique": {
                             "valeur": 15,
-                            "duree": 99
+                            "duree": 999
                         }
                     },
                     "resistances_feu": {
                         "base": {
                             "valeur": 10,
-                            "duree": 99
+                            "duree": 999
                         },
                         "critique": {
                             "valeur": 15,
-                            "duree": 99
+                            "duree": 999
                         }
                     },
                     "resistances_eau": {
                         "base": {
                             "valeur": 10,
-                            "duree": 99
+                            "duree": 999
                         },
                         "critique": {
                             "valeur": 15,
-                            "duree": 99
+                            "duree": 999
                         }
                     }
                 }
@@ -2791,7 +2791,7 @@
 			"effets": {
 				"PORTE": {
                     "base": {
-                        "duree": 99
+                        "duree": 999
                     }
                 }
 			}
@@ -2879,20 +2879,20 @@
 			"effets": {
 				"PICOLE": {
 					"base": {
-						"duree": 99
+						"duree": 999
 					}
 				},
                 "CHANGE_STATS": {
                     "dommages_feu": {
                         "base": {
                             "valeur": 25,
-                            "duree": 99
+                            "duree": 999
                         }
                     },
                     "esquive": {
                         "base": {
                             "valeur": 20,
-                            "duree": 99
+                            "duree": 999
                         }
                     }
                 }
@@ -3628,7 +3628,7 @@
                     "invocations": {
                         "base": {
                             "valeur": 1,
-                            "duree": 99
+                            "duree": 999
                         }
                     }
                 }
@@ -3933,7 +3933,7 @@
 			"effets": {
                 "GLYPHE": {
                     "base": {
-                        "duree": 99
+                        "duree": 999
                     }
                 },
                 "DOMMAGE_FIXE": {
@@ -4198,19 +4198,19 @@
 			"effets": {
                 "IMMUNISE_RETRAIT_PA": {
                     "base": {
-                        "duree": 99
+                        "duree": 999
                     }
                 },
                 "IMMUNISE_RETRAIT_PM": {
                     "base": {
-                        "duree": 99
+                        "duree": 999
                     }
                 },
                 "CHANGE_STATS": {
                     "esquive": {
                         "base": {
                             "valeur": -20,
-                            "duree": 99
+                            "duree": 999
                         }
                     }
                 }
@@ -4917,12 +4917,12 @@
                 "SWAP": {
                     "PLEUTRE": {
                         "base": {
-                            "duree": 99
+                            "duree": 999
                         }
                     },
                     "PSYCHOPATHE": {
                         "base": {
-                            "duree": 99
+                            "duree": 999
                         }
                     }
                 }
@@ -5112,7 +5112,7 @@
             "effets": {
                 "MAUDIT_CLASSE": {
                     "base": {
-                        "duree": 99
+                        "duree": 999
                     }
                 }
             }
@@ -5371,7 +5371,7 @@
             "effets": {
                 "RENVOIE_SORT": {
                     "base": {
-                        "duree": 99
+                        "duree": 999
                     }
                 }
             }
