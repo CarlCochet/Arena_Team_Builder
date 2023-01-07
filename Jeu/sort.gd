@@ -66,9 +66,12 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		return false
 	if len(cases_cibles) > 1:
 		aoe = true
-	var combattants = lanceur.get_parent().combattants
+	print(lanceur.classe, "_", str(lanceur.id), " lance ", nom, ".")
+	var combattants = lanceur.combat.combattants
 	var trouve = false
 	var critique = randi_range(1, 100) <= lanceur.stats.cc
+	if critique:
+		print("Coup critique!")
 	var targets = []
 	if effets.has("GLYPHE"):
 		var new_glyphe = Glyphe.new(
@@ -84,46 +87,47 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		lanceur.combat.tilemap.glyphes_indexeur += 1
 		lanceur.combat.tilemap.glyphes.append(new_glyphe)
 		lanceur.combat.tilemap.update_glyphes()
+		update_limite_lancers(lanceur)
 		return true
 	
 	if not effets.has("cible"):
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				if aoe or not combattant.check_etat("PORTE"):
+				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
 	elif effets["cible"] == 4:
 		for combattant in combattants:
 			if combattant.equipe != lanceur.equipe:
 				trouve = true
-				if aoe or not combattant.check_etat("PORTE"):
+				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
 	elif effets["cible"] == 8:
 		for combattant in combattants:
 			trouve = true
-			if aoe or not combattant.check_etat("PORTE"):
+			if aoe or not combattant.check_etats(["PORTE"]):
 				targets.append(combattant)
 	elif effets["cible"] == 9:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
-				if aoe or not combattant.check_etat("PORTE"):
+				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
 				for combattant_bis in combattants:
 					if combattant_bis.classe == combattant.classe:
-						if aoe or not combattant.check_etat("PORTE"):
+						if aoe or not combattant.check_etats(["PORTE"]):
 							targets.append(combattant)
 	elif effets["cible"] == 10:
 		for combattant in combattants:
 			if not combattant.is_invocation: 
 				trouve = true
-				if aoe or not combattant.check_etat("PORTE"):
+				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
 	elif effets["cible"] == 11:
 		for combattant in combattants:
 			if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
 				trouve = true
-				if aoe or not combattant.check_etat("PORTE"):
+				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
 	
 	if trouve:
@@ -131,18 +135,23 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 			sort_valide = parse_effets(lanceur, combattant, effets, critique, centre, aoe) or sort_valide
 	if not trouve and cible == 2:
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
+	update_limite_lancers(lanceur)
 	
+	if not sort_valide:
+		print("Sort invalide, annulation de l'action !")
+	return sort_valide
+
+
+func update_limite_lancers(lanceur):
 	compte_lancers += 1
 	compte_lancers_tour += 1
 	cooldown_actuel = cooldown
 	
 	if cooldown_global > 0:
-		for combattant in combattants:
+		for combattant in lanceur.combat.combattants:
 			for sort in combattant.sorts:
 				if sort.nom == nom and sort.cooldown_actuel < cooldown_global and combattant.equipe == lanceur.equipe:
 					sort.cooldown_actuel = cooldown_global
-	
-	return sort_valide
 
 
 func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
@@ -153,11 +162,10 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 				new_effet.execute()
 		return true
 	
-	if p_cible.check_etat("PORTE") and not aoe:
+	if p_cible.check_etats(["PORTE"]) and not aoe:
 		return false
-	for etat in etats_cible_interdits:
-		if p_cible.check_etat(etat):
-			return false
+	if p_cible.check_etats(etats_cible_interdits):
+		return false
 	if lancer_par_cible > 0 and (not p_cible is Vector2i) and (not p_cible is Array):
 		if compte_cible.has(p_cible.id):
 			if compte_cible[p_cible.id] >= lancer_par_cible:
@@ -184,12 +192,11 @@ func precheck_cast(lanceur) -> bool:
 		return false
 	if compte_lancers_tour >= lancer_par_tour and lancer_par_tour > 0:
 		return false
-	if lanceur.check_etat("PORTE"):
+	if lanceur.check_etats(["PORTE"]):
 		return false
-	for etat in etats_lanceur_interdits:
-		if lanceur.check_etat(etat):
-			return false
-	if not etat_requis.is_empty() and not lanceur.check_etat(etat_requis):
+	if lanceur.check_etats(etats_lanceur_interdits):
+		return false
+	if not etat_requis.is_empty() and not lanceur.check_etats([etat_requis]):
 		return false
 	if effets.has("INVOCATION"):
 		var invoc_count = 0

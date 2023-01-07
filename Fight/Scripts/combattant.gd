@@ -70,7 +70,8 @@ func select():
 	classe_sprite.material.set_shader_parameter("width", 2.0)
 	combat.stats_select.update(stats, max_stats)
 	is_selected = true
-	combat.sorts.update(self)
+	if not is_invocation:
+		combat.sorts.update(self)
 
 
 func unselect():
@@ -103,6 +104,9 @@ func affiche_path(pos_event: Vector2i):
 	zone = []
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	var path = combat.tilemap.get_chemin(grid_pos, pos_event)
+	if check_etats(["IMMOBILISE"]):
+		all_path = []
+		path = []
 	if len(path) > 0 and len(path) <= stats.pm + 1:
 		path.pop_front()
 		path_actuel = path
@@ -124,10 +128,11 @@ func affiche_ldv(action: int):
 	if not sort.precheck_cast(self):
 		combat.change_action(7)
 		return
+	var bonus_po = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
 	all_ldv = combat.tilemap.get_ldv(
 		grid_pos, 
 		sort.po[0],
-		sort.po[1] + (stats.po if sort.po_modifiable else 0),
+		sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0],
 		sort.type_ldv,
 		sort.ldv
 	)
@@ -212,7 +217,7 @@ func debut_tour():
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp = hp
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
-	if check_etat("PETRIFIE"):
+	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
 	combat.check_morts()
 
@@ -235,7 +240,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 			return
 		var sort: Sort = sorts[action]
 		var valide = false
-		if check_etat("RATE_SORT"):
+		if check_etats(["RATE_SORT"]):
 			valide = true
 			retire_etats(["RATE_SORT"])
 		else:
@@ -244,7 +249,8 @@ func joue_action(action: int, tile_pos: Vector2i):
 			stats.pa -= sort.pa
 			stats_perdu.ajoute(-sort.pa, "pa")
 			combat.stats_select.update(stats, max_stats)
-			combat.sorts.update(self)
+			if not is_invocation:
+				combat.sorts.update(self)
 		combat.change_action(7)
 	combat.check_morts()
 
@@ -259,7 +265,7 @@ func check_tacle(chemin: Array) -> Vector2i:
 	for case in chemin:
 		var blocage_total = 0
 		for combattant in combat.combattants:
-			if combattant.equipe == equipe:
+			if combattant.equipe == equipe or combattant.check_etats(["PORTE"]):
 				continue
 			if (combattant.grid_pos - case) in voisins:
 				blocage_total += combattant.stats.blocage
@@ -271,28 +277,40 @@ func check_tacle(chemin: Array) -> Vector2i:
 
 func deplace_perso(chemin: Array):
 	var fin = check_tacle(chemin)
-	chemin.pop_front()
-	var prefin = grid_pos if len(chemin) < 2 else chemin[-2]
-	var tile_pos = fin - combat.offset
-	var old_grid_pos = grid_pos
-	var old_map_pos = grid_pos - combat.offset # combat.tilemap.local_to_map(position)
-	combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-	combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
-	position = combat.tilemap.map_to_local(tile_pos)
-	grid_pos = fin
-	combat.tilemap.a_star_grid.set_point_solid(fin)
-	combat.tilemap.grid[fin[0]][fin[1]] = -2
-	stats.pm -= len(path_actuel)
-	stats_perdu.ajoute(-len(path_actuel), "pm")
-	combat.stats_select.update(stats, max_stats)
-	combat.tilemap.clear_layer(2)
-	oriente_vers(grid_pos + (fin - prefin))
-	for combattant in combat.combattants:
-		for effet in combattant.effets:
-			if effet.etat == "PORTE" and effet.lanceur.id == id:
-				combattant.position = position + Vector2(0, -90)
-				combattant.grid_pos = grid_pos
-	combat.tilemap.update_glyphes()
+	if fin != grid_pos:
+		chemin.pop_front()
+		var prefin = grid_pos if len(chemin) < 2 else chemin[-2]
+		var tile_pos = fin - combat.offset
+		var old_grid_pos = grid_pos
+		var old_map_pos = grid_pos - combat.offset
+		combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
+		combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
+		position = combat.tilemap.map_to_local(tile_pos)
+		grid_pos = fin
+		combat.tilemap.a_star_grid.set_point_solid(fin)
+		combat.tilemap.grid[fin[0]][fin[1]] = -2
+		stats.pm -= len(path_actuel)
+		stats_perdu.ajoute(-len(path_actuel), "pm")
+		combat.stats_select.update(stats, max_stats)
+		combat.tilemap.clear_layer(2)
+		oriente_vers(grid_pos + (fin - prefin))
+		for combattant in combat.combattants:
+			for effet in combattant.effets:
+				if effet.etat == "PORTE" and effet.lanceur.id == id:
+					combattant.position = position + Vector2(0, -90)
+					combattant.grid_pos = grid_pos
+		if check_etats(["PORTE"]):
+			var porteur = null
+			for combattant in combat.combattants:
+				for effet in combattant.effets:
+					if (effet.etat == "PORTE_ALLIE" or effet.etat == "PORTE_ENNEMI") and effet.cible.id == id:
+						porteur = combattant
+			retire_etats(["PORTE"])
+			porteur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
+			z_index = 0
+			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos)
+			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
+		combat.tilemap.update_glyphes()
 	if fin != chemin[-1]:
 		combat.passe_tour()
 
@@ -328,6 +346,15 @@ func bouge_perso(new_pos):
 	combat.tilemap.update_glyphes()
 
 
+func echange_positions(combattant):
+	var old_grid_pos = grid_pos
+	var old_position = position
+	grid_pos = combattant.grid_pos
+	position = combattant.position
+	combattant.grid_pos = old_grid_pos
+	combattant.position = old_position
+
+
 func oriente_vers(pos: Vector2i):
 	var ref_vectors = [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
 	var min_dist = 999999999.0
@@ -341,9 +368,21 @@ func oriente_vers(pos: Vector2i):
 
 
 func meurt():
+	if check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
+		var effet_lance = Effet.new(self, grid_pos, "LANCE", 1, false, grid_pos, false, null)
+		effet_lance.execute()
+	
+	for combattant in combat.combattants:
+		var new_effets = []
+		for effet in combattant.effets:
+			if effet.lanceur.id != id:
+				new_effets.append(effet)
+		combattant.effets = new_effets
+	
 	var map_pos = combat.tilemap.local_to_map(position)
 	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
 	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	print(classe, "_", str(id), " est mort.")
 	queue_free()
 
 
@@ -353,9 +392,9 @@ func execute_effets():
 		effet.execute()
 
 
-func check_etat(etat: String) -> bool:
+func check_etats(etats: Array) -> bool:
 	for effet in effets:
-		if effet.etat == etat:
+		if effet.etat in etats:
 			return true
 	return false
 
