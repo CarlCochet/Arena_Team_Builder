@@ -43,9 +43,9 @@ func update(combattant):
 			texture_rect.connect("mouse_exited", sort_exited.bind(texture_rect, sort.nom))
 
 
-func sort_hovered(sort, nom):
+func sort_hovered(sort, _nom):
 	sort.get_node("carte").visible = true
 
 
-func sort_exited(sort, nom):
+func sort_exited(sort, _nom):
 	sort.get_node("carte").visible = false

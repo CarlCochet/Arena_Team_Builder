@@ -230,9 +230,9 @@ func debut_tour():
 func fin_tour():
 	retrait_cooldown()
 	stat_ret = Stats.new()
-	var hp = stats.hp
+	var temp_hp = stats.hp
 	stats = init_stats.copy().add(stat_buffs)
-	stats.hp = hp
+	stats.hp = temp_hp
 	combat.check_morts()
 
 
@@ -254,6 +254,10 @@ func joue_action(action: int, tile_pos: Vector2i):
 			stats.pa -= sort.pa
 			stats_perdu.ajoute(-sort.pa, "pa")
 			combat.stats_select.update(stats, max_stats)
+			for effet in effets:
+				if effet.etat == "DOMMAGE_SI_UTILISE_PA":
+					for i in range(sort.pa):
+						effet.execute()
 			if not is_invocation:
 				combat.sorts.update(self)
 		combat.change_action(7)
@@ -261,7 +265,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 
 
 func affiche_stats_change(valeur, stat):
-	stats_perdu.ajoute()
+	stats_perdu.ajoute(valeur, stat)
 
 
 func check_tacle(chemin: Array) -> Vector2i:
@@ -395,8 +399,9 @@ func meurt():
 
 func execute_effets():
 	stat_buffs = Stats.new()
+	var triggers = ["DOMMAGE_SI_BOUGE", "DOMMAGE_SI_UTILISE_PA"]
 	for effet in effets:
-		if not effet.etat in ["DOMMAGE_SI_BOUGE"]:
+		if not effet.etat in triggers:
 			effet.execute()
 
 

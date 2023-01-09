@@ -626,15 +626,15 @@
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
                 "cible": 8,
-				"ROULETTE": {
-					"base": {
-						"valeur": 2,
-						"duree": 1
-					},
-					"critique": {
-						"valeur": 3,
-						"duree": 1
-					}
+				"DOMMAGE_SI_UTILISE_PA": {
+                    "DOMMAGE_FIXE": {
+                        "base": {
+                            "valeur": 2,
+                        },
+                        "critique": {
+                            "valeur": 3,
+                        }
+                    }
 				}
 			}
 		},
@@ -4443,9 +4443,6 @@
                         "critique": {
                             "valeur": 6
                         }
-                    },
-                    "base": {
-                        "duree": 1
                     }
                 }
             }
