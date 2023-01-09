@@ -217,7 +217,7 @@ func joue_ia():
 			if valide:
 				stats.pa -= sort.pa
 				stats_perdu.ajoute(-sort.pa, "pa")
-				combat.stats_select.update(stats, max_stats)
+				combat.stats_select.update(stats)
 			joue_ia()
 
 

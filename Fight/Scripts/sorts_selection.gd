@@ -1,12 +1,13 @@
 extends HBoxContainer
 
 
-var carte_hovered
+var carte_hovered = -1
 
 
 func update(combattant):
 	for sort in get_children():
 		sort.queue_free()
+	var sort_id = 1
 	for sort in combattant.sorts:
 		if sort.nom != "arme":
 			var texture_rect = TextureRect.new()
@@ -39,13 +40,23 @@ func update(combattant):
 			carte.visible = false
 			texture_rect.add_child(carte)
 			
-			texture_rect.connect("mouse_entered", sort_hovered.bind(texture_rect, sort.nom))
-			texture_rect.connect("mouse_exited", sort_exited.bind(texture_rect, sort.nom))
+			texture_rect.connect("mouse_entered", sort_hovered.bind(texture_rect, sort_id))
+			texture_rect.connect("mouse_exited", sort_exited.bind(texture_rect, sort_id))
+			sort_id += 1
 
 
-func sort_hovered(sort, _nom):
+func sort_hovered(sort, sort_id):
 	sort.get_node("carte").visible = true
+	carte_hovered = sort_id
 
 
-func sort_exited(sort, _nom):
+func sort_exited(sort, sort_id):
 	sort.get_node("carte").visible = false
+	carte_hovered = -1
+
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		if carte_hovered > 0:
+			get_parent().spell_pressed = true
+			get_parent().change_action(carte_hovered)

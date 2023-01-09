@@ -12,10 +12,10 @@ var etat: int
 var action: int
 var offset: Vector2i
 var tilemap: TileMap
+var spell_pressed: bool
 
 @onready var sorts: Control = $Sorts
 @onready var timeline: Control = $Timeline
-#@onready var tilemap: TileMap = $TileMap
 @onready var stats_select: TextureRect = $AffichageStatsSelect
 @onready var stats_hover: TextureRect = $AffichageStatsHover
 
@@ -24,6 +24,7 @@ func _ready():
 	tilemap = load("res://Fight/Map/" + GlobalData.map_actuelle + ".tscn").instantiate()
 	add_child(tilemap)
 	etat = 0
+	spell_pressed = false
 	indexeur_global = 0
 	offset = tilemap.offset
 	randomize()
@@ -153,6 +154,9 @@ func _input(event):
 			else:
 				combattant_selection.affiche_zone(action, tilemap.local_to_map(event.position) + offset)
 		if event is InputEventMouseButton and event.pressed:
+			if spell_pressed:
+				spell_pressed = false
+				return
 			combattant_selection.joue_action(action, tilemap.local_to_map(event.position) + offset)
 		if Input.is_key_pressed(KEY_APOSTROPHE) and event is InputEventKey and not event.echo:
 			change_action(0)

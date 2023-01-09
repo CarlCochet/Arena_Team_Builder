@@ -68,7 +68,7 @@ func update_visuel():
 
 func select():
 	classe_sprite.material.set_shader_parameter("width", 2.0)
-	combat.stats_select.update(stats, max_stats)
+	combat.stats_select.update(stats)
 	is_selected = true
 	if not is_invocation:
 		combat.sorts.update(self)
@@ -255,7 +255,6 @@ func joue_action(action: int, tile_pos: Vector2i):
 		if valide:
 			stats.pa -= sort.pa
 			stats_perdu.ajoute(-sort.pa, "pa")
-			combat.stats_select.update(stats, max_stats)
 			for effet in effets:
 				if effet.etat == "DOMMAGE_SI_UTILISE_PA":
 					for i in range(sort.pa):
@@ -264,9 +263,11 @@ func joue_action(action: int, tile_pos: Vector2i):
 				combat.sorts.update(self)
 			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 			retire_etats(["INVISIBLE"])
+			if grid_pos != tile_pos:
+				oriente_vers(tile_pos)
 		combat.change_action(7)
+	combat.stats_select.update(stats)
 	combat.check_morts()
-	combat.tilemap.affiche_ldv_obstacles()
 
 
 func affiche_stats_change(valeur, stat):
@@ -330,7 +331,6 @@ func deplace_perso(chemin: Array):
 				break
 	stats.pm -= pm_utilise
 	stats_perdu.ajoute(-pm_utilise, "pm")
-	combat.stats_select.update(stats, max_stats)
 	combat.tilemap.clear_layer(2)
 	if grid_pos != chemin[-1]:
 		combat.passe_tour()
