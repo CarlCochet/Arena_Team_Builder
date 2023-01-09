@@ -119,13 +119,11 @@ func update_hitbox():
 			hp.position = Vector2(0, -80)
 		"Bombe_A_Eau":
 			classe_sprite.position = Vector2(0, -20)
-			classe_sprite.scale = Vector2(0.4, 0.4)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -80)
 		"Bombe_Incendiaire":
 			classe_sprite.position = Vector2(0, -20)
-			classe_sprite.scale = Vector2(0.4, 0.4)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -80)
@@ -138,9 +136,14 @@ func debut_tour():
 	retrait_durees()
 	execute_effets()
 	check_case_bonus()
-	var hp = stats.hp
+	var temp_hp = stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
-	stats.hp = hp
+	stats.hp = temp_hp
+	
+	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
+		stats.hp -= 2
+		stats_perdu.ajoute(-2, "hp")
+
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
@@ -152,7 +155,6 @@ func debut_tour():
 func chemin_vers_proche() -> Array:
 	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	var min_dist = 99999999
-	var plus_proche = combat.combattants[0]
 	var min_chemin = []
 	for combattant in combat.combattants:
 		if combattant.equipe != equipe:
@@ -161,18 +163,17 @@ func chemin_vers_proche() -> Array:
 					return []
 				var chemin = combat.tilemap.get_chemin(grid_pos, combattant.grid_pos + voisin)
 				if len(chemin) < min_dist and len(chemin) > 0:
-					plus_proche = combattant
 					min_dist = len(chemin)
 					min_chemin = chemin
 	return min_chemin
 
 
-func choix_cible(all_ldv: Array):
+func choix_cible(p_all_ldv: Array):
 	var min_dist = 9999999
 	var min_hp = 9999999
 	var cible = null
 	for combattant in combat.combattants:
-		if combattant.grid_pos in all_ldv and combattant.equipe != equipe:
+		if combattant.grid_pos in p_all_ldv and combattant.equipe != equipe:
 			var delta = combattant.grid_pos - grid_pos
 			var dist = abs(delta.x) + abs(delta.y)
 			if dist < min_dist:
@@ -216,14 +217,44 @@ func joue_ia():
 			if valide:
 				stats.pa -= sort.pa
 				stats_perdu.ajoute(-sort.pa, "pa")
-				combat.stats_select.update(stats, max_stats)
+				combat.stats_select.update(stats)
 			joue_ia()
+
+
+func meurt():
+	if check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
+		var effet_lance = Effet.new(self, grid_pos, "LANCE", 1, false, grid_pos, false, null)
+		effet_lance.execute()
+	
+	for combattant in combat.combattants:
+		var new_effets = []
+		for effet in combattant.effets:
+			if effet.lanceur.id != id:
+				new_effets.append(effet)
+		combattant.effets = new_effets
+	
+	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
+		var sort = sorts[0]
+		zone = combat.tilemap.get_zone(
+			grid_pos,
+			grid_pos,
+			sort.type_zone,
+			sort.taille_zone[0],
+			sort.taille_zone[1]
+		)
+		sort.execute_effets(self, zone, grid_pos)
+	
+	var map_pos = combat.tilemap.local_to_map(position)
+	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
+	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	print(classe, "_", str(id), " est mort.")
+	queue_free()
 
 
 func fin_tour():
 	retrait_cooldown()
 	stat_ret = Stats.new()
-	var hp = stats.hp
+	var temp_hp = stats.hp
 	stats = init_stats.copy().add(stat_buffs)
-	stats.hp = hp
+	stats.hp = temp_hp
 	combat.check_morts()

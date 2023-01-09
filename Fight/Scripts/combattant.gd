@@ -68,7 +68,7 @@ func update_visuel():
 
 func select():
 	classe_sprite.material.set_shader_parameter("width", 2.0)
-	combat.stats_select.update(stats, max_stats)
+	combat.stats_select.update(stats)
 	is_selected = true
 	if not is_invocation:
 		combat.sorts.update(self)
@@ -171,63 +171,70 @@ func check_case_bonus():
 	var case_id = combat.tilemap.get_cell_atlas_coords(1, grid_pos - combat.offset).x
 	var categorie = ""
 	var contenu = ""
+	var maudit = false
+	for case in combat.tilemap.cases_maudites.values():
+		if case == grid_pos:
+			maudit = true
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
 			contenu = {
-				"dommages_air":{"base":{"valeur":30,"duree":1}},
-				"dommages_terre":{"base":{"valeur":30,"duree":1}},
-				"dommages_feu":{"base":{"valeur":30,"duree":1}},
-				"dommages_eau":{"base":{"valeur":30,"duree":1}}
+				"dommages_air":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"dommages_terre":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"dommages_feu":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"dommages_eau":{"base":{"valeur":30 if not maudit else -30,"duree":1}}
 			}
 		3:
 			categorie = "CHANGE_STATS"
 			contenu = {
-				"resistances_air":{"base":{"valeur":30,"duree":1}},
-				"resistances_terre":{"base":{"valeur":30,"duree":1}},
-				"resistances_feu":{"base":{"valeur":30,"duree":1}},
-				"resistances_eau":{"base":{"valeur":30,"duree":1}}
+				"resistances_air":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"resistances_terre":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"resistances_feu":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"resistances_eau":{"base":{"valeur":30 if not maudit else -30,"duree":1}}
 			}
 		4:
-			categorie = "SOIN"
+			categorie = "SOIN" if not maudit else "DOMMAGE_FIXE"
 			contenu = {"base":{"valeur":7}}
 		5:
 			categorie = "CHANGE_STATS"
-			contenu = {"pa":{"base":{"valeur":2,"duree":1}}}
+			contenu = {"pa":{"base":{"valeur":2 if not maudit else -2,"duree":1}}}
 		6:
 			categorie = "CHANGE_STATS"
-			contenu = {"po":{"base":{"valeur":2,"duree":1}}}
+			contenu = {"po":{"base":{"valeur":2 if not maudit else -2,"duree":1}}}
 		7:
 			categorie = "CHANGE_STATS"
-			contenu = {"soins":{"base":{"valeur":25,"duree":1}}}
+			contenu = {"soins":{"base":{"valeur":25 if not maudit else -25,"duree":1}}}
 		8:
 			categorie = "DOMMAGE_POURCENT"
-			contenu = {"base":{"valeur":80}}
+			contenu = {"base":{"valeur":80 if not maudit else 96}}
 		9:
 			categorie = "DOMMAGE_FIXE"
-			contenu = {"base":{"valeur":15}}
+			contenu = {"base":{"valeur":15 if not maudit else 30}}
 	var effet = Effet.new(self, self, categorie, contenu, false, grid_pos, false, null)
 	effet.execute()
+
 
 func debut_tour():
 	retrait_durees()
 	execute_effets()
 	check_case_bonus()
-	var hp = stats.hp
+	var delta_hp = max_stats.hp - stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
-	stats.hp = hp
+	stats.hp -= delta_hp
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
+	if not check_etats(["INVISIBLE"]):
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	combat.check_morts()
 
 
 func fin_tour():
 	retrait_cooldown()
 	stat_ret = Stats.new()
-	var hp = stats.hp
+	var temp_hp = stats.hp
 	stats = init_stats.copy().add(stat_buffs)
-	stats.hp = hp
+	stats.hp = temp_hp
 	combat.check_morts()
 
 
@@ -248,70 +255,84 @@ func joue_action(action: int, tile_pos: Vector2i):
 		if valide:
 			stats.pa -= sort.pa
 			stats_perdu.ajoute(-sort.pa, "pa")
-			combat.stats_select.update(stats, max_stats)
+			for effet in effets:
+				if effet.etat == "DOMMAGE_SI_UTILISE_PA":
+					for i in range(sort.pa):
+						effet.execute()
 			if not is_invocation:
 				combat.sorts.update(self)
+			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+			retire_etats(["INVISIBLE"])
+			if grid_pos != tile_pos:
+				oriente_vers(tile_pos)
 		combat.change_action(7)
+	combat.stats_select.update(stats)
 	combat.check_morts()
 
 
 func affiche_stats_change(valeur, stat):
-	stats_perdu.ajoute()
+	stats_perdu.ajoute(valeur, stat)
 
 
-func check_tacle(chemin: Array) -> Vector2i:
+func check_tacle_unit(case: Vector2i) -> bool:
 	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
-	chemin.push_front(grid_pos)
-	for case in chemin:
-		var blocage_total = 0
-		for combattant in combat.combattants:
-			if combattant.equipe == equipe or combattant.check_etats(["PORTE"]):
-				continue
-			if (combattant.grid_pos - case) in voisins:
-				blocage_total += combattant.stats.blocage
-		var chance_esquive = stats.esquive - blocage_total
-		if randi_range(1, 100) > chance_esquive:
-			return case
-	return chemin[-1]
+	var blocage_total = 0
+	for combattant in combat.combattants:
+		if combattant.equipe == equipe or combattant.check_etats(["PORTE"]):
+			continue
+		if (combattant.grid_pos - case) in voisins:
+			blocage_total += combattant.stats.blocage
+	if randi_range(1, stats.esquive if stats.esquive > 1 else 2) < blocage_total:
+		return true
+	return false
 
 
 func deplace_perso(chemin: Array):
-	var fin = check_tacle(chemin)
-	if fin != grid_pos:
-		chemin.pop_front()
-		var prefin = grid_pos if len(chemin) < 2 else chemin[-2]
-		var tile_pos = fin - combat.offset
-		var old_grid_pos = grid_pos
-		var old_map_pos = grid_pos - combat.offset
-		combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-		combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
-		position = combat.tilemap.map_to_local(tile_pos)
-		grid_pos = fin
-		combat.tilemap.a_star_grid.set_point_solid(fin)
-		combat.tilemap.grid[fin[0]][fin[1]] = -2
-		stats.pm -= len(path_actuel)
-		stats_perdu.ajoute(-len(path_actuel), "pm")
-		combat.stats_select.update(stats, max_stats)
-		combat.tilemap.clear_layer(2)
-		oriente_vers(grid_pos + (fin - prefin))
-		for combattant in combat.combattants:
-			for effet in combattant.effets:
-				if effet.etat == "PORTE" and effet.lanceur.id == id:
-					combattant.position = position + Vector2(0, -90)
-					combattant.grid_pos = grid_pos
-		if check_etats(["PORTE"]):
-			var porteur = null
+	var tacled = check_tacle_unit(grid_pos)
+	var pm_utilise = 0
+	for effet in effets:
+		if effet.etat == "DOMMAGE_SI_BOUGE":
+			effet.execute()
+	if not tacled:
+		for case in chemin:
+			pm_utilise += 1
+			var precedent = grid_pos
+			var tile_pos = case - combat.offset
+			var old_grid_pos = grid_pos
+			var old_map_pos = grid_pos - combat.offset
+			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
+			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
+			position = combat.tilemap.map_to_local(tile_pos)
+			grid_pos = case
+			combat.tilemap.a_star_grid.set_point_solid(case)
+			if not check_etats(["INVISIBLE"]):
+				combat.tilemap.grid[case[0]][case[1]] = -2
+			oriente_vers(grid_pos + (grid_pos - precedent))
 			for combattant in combat.combattants:
 				for effet in combattant.effets:
-					if (effet.etat == "PORTE_ALLIE" or effet.etat == "PORTE_ENNEMI") and effet.cible.id == id:
-						porteur = combattant
-			retire_etats(["PORTE"])
-			porteur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
-			z_index = 0
-			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos)
-			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
-		combat.tilemap.update_glyphes()
-	if fin != chemin[-1]:
+					if effet.etat == "PORTE" and effet.lanceur.id == id:
+						combattant.position = position + Vector2(0, -90)
+						combattant.grid_pos = grid_pos
+			if check_etats(["PORTE"]):
+				var porteur = null
+				for combattant in combat.combattants:
+					for effet in combattant.effets:
+						if (effet.etat == "PORTE_ALLIE" or effet.etat == "PORTE_ENNEMI") and effet.cible.id == id:
+							porteur = combattant
+				retire_etats(["PORTE"])
+				porteur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
+				z_index = 0
+				combat.tilemap.a_star_grid.set_point_solid(old_grid_pos)
+				combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
+			combat.tilemap.update_glyphes()
+			if stats.hp <= 0:
+				break
+			if check_tacle_unit(grid_pos):
+				break
+	stats.pm -= pm_utilise
+	stats_perdu.ajoute(-pm_utilise, "pm")
+	combat.tilemap.clear_layer(2)
+	if grid_pos != chemin[-1]:
 		combat.passe_tour()
 
 
@@ -325,7 +346,7 @@ func place_perso(tile_pos: Vector2i):
 				place_libre = false
 		if place_libre:
 			var old_grid_pos = grid_pos
-			var old_map_pos = grid_pos - combat.offset # combat.tilemap.local_to_map(position)
+			var old_map_pos = grid_pos - combat.offset
 			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
 			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
 			position = combat.tilemap.map_to_local(tile_pos)
@@ -336,7 +357,7 @@ func place_perso(tile_pos: Vector2i):
 
 func bouge_perso(new_pos):
 	var old_grid_pos = grid_pos
-	var old_map_pos = grid_pos - combat.offset # combat.tilemap.local_to_map(position)
+	var old_map_pos = grid_pos - combat.offset
 	combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
 	combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
 	position = combat.tilemap.map_to_local(new_pos - combat.offset)
@@ -388,8 +409,10 @@ func meurt():
 
 func execute_effets():
 	stat_buffs = Stats.new()
+	var triggers = ["DOMMAGE_SI_BOUGE", "DOMMAGE_SI_UTILISE_PA"]
 	for effet in effets:
-		effet.execute()
+		if not effet.etat in triggers:
+			effet.execute()
 
 
 func check_etats(etats: Array) -> bool:
@@ -429,7 +452,13 @@ func retrait_durees():
 			else:
 				new_map_glyphes.append(glyphe)
 	combat.tilemap.glyphes = new_map_glyphes
+	for combattant in combat.combattants:
+		if not combattant.check_etats(["INVISIBLE"]):
+			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 	combat.tilemap.update_glyphes()
+	
+	if combat.tilemap.cases_maudites.has(id):
+		combat.tilemap.cases_maudites.erase(id)
 
 
 func retrait_cooldown():

@@ -1,0 +1,144 @@
+[gd_scene load_steps=24 format=3 uid="uid://c7ng2upg83k4x"]
+
+[ext_resource type="Script" path="res://UI/Scripts/choix_map.gd" id="1_n1jan"]
+[ext_resource type="Texture2D" uid="uid://dkxkir2jodnt3" path="res://Fight/Map/Images/tactic_2.png" id="2_1jwkw"]
+[ext_resource type="Texture2D" uid="uid://vkeq5iki03qr" path="res://Fight/Map/Images/tactic_2_selected.png" id="3_3apv8"]
+[ext_resource type="Texture2D" uid="uid://bir07tdb66dne" path="res://Fight/Map/Images/tactic_15.png" id="4_0k4jr"]
+[ext_resource type="Texture2D" uid="uid://b4khg7q27bacp" path="res://Fight/Map/Images/tactic_15_selected.png" id="5_r7tbe"]
+[ext_resource type="Texture2D" uid="uid://c16b2hki0xd48" path="res://Fight/Map/Images/tactic_16.png" id="6_4kg85"]
+[ext_resource type="Texture2D" uid="uid://uo3heujld4k2" path="res://Fight/Map/Images/tactic_16_selected.png" id="7_oewen"]
+[ext_resource type="Texture2D" uid="uid://dxfnu32x8jab2" path="res://Fight/Map/Images/tactic_19.png" id="8_enktb"]
+[ext_resource type="Texture2D" uid="uid://b00ea4tmidxlc" path="res://Fight/Map/Images/tactic_19_selected.png" id="9_3e8oa"]
+[ext_resource type="Texture2D" uid="uid://vlgu31y5l200" path="res://Fight/Map/Images/tactic_30.png" id="10_w2hn2"]
+[ext_resource type="Texture2D" uid="uid://bxmpbgkq15yxp" path="res://Fight/Map/Images/tactic_30_selected.png" id="11_cadl4"]
+[ext_resource type="Texture2D" uid="uid://h5vo5yov4xwh" path="res://Fight/Map/Images/tactic_56.png" id="12_fyxt1"]
+[ext_resource type="Texture2D" uid="uid://ctmhioqchftdj" path="res://Fight/Map/Images/tactic_56_selected.png" id="13_4n32o"]
+[ext_resource type="Texture2D" uid="uid://dj6bjg3yu1ih7" path="res://Fight/Map/Images/tactic_58.png" id="14_50qaf"]
+[ext_resource type="Texture2D" uid="uid://iqo2pxvr35p0" path="res://Fight/Map/Images/tactic_58_selected.png" id="15_5xquu"]
+[ext_resource type="Texture2D" uid="uid://bijap6pf1pcnv" path="res://Fight/Map/Images/tactic_60.png" id="16_vsen2"]
+[ext_resource type="Texture2D" uid="uid://diefhflkxxhm7" path="res://Fight/Map/Images/tactic_60_selected.png" id="17_qquso"]
+[ext_resource type="Texture2D" uid="uid://bknc5skjp7s4v" path="res://UI/Buttons/retour_base.png" id="18_deorm"]
+[ext_resource type="Texture2D" uid="uid://dd20mihsbd7tw" path="res://UI/Buttons/retour_clicked.png" id="19_1ytsp"]
+[ext_resource type="Texture2D" uid="uid://bsx000i85450y" path="res://UI/Buttons/retour_hovered.png" id="20_pb8g1"]
+[ext_resource type="Texture2D" uid="uid://b5sgblea4yfqw" path="res://UI/Buttons/valider_base.png" id="32_48jq0"]
+[ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="33_xavqd"]
+[ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="34_0hosn"]
+
+[node name="ChoixMap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n1jan")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -80.0
+offset_top = -73.0
+offset_right = 1683.0
+offset_bottom = 965.0
+scale = Vector2(1, 20)
+color = Color(0.529412, 0.478431, 0.317647, 1)
+
+[node name="Maps" type="GridContainer" parent="."]
+offset_left = 107.0
+offset_top = 222.0
+offset_right = 7107.0
+offset_bottom = 2222.0
+scale = Vector2(0.2, 0.2)
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 200
+columns = 4
+
+[node name="map_2" type="TextureButton" parent="Maps"]
+offset_right = 1600.0
+offset_bottom = 900.0
+toggle_mode = true
+texture_normal = ExtResource("2_1jwkw")
+texture_pressed = ExtResource("3_3apv8")
+
+[node name="map_15" type="TextureButton" parent="Maps"]
+offset_left = 1800.0
+offset_right = 3400.0
+offset_bottom = 900.0
+toggle_mode = true
+texture_normal = ExtResource("4_0k4jr")
+texture_pressed = ExtResource("5_r7tbe")
+
+[node name="map_16" type="TextureButton" parent="Maps"]
+offset_left = 3600.0
+offset_right = 5200.0
+offset_bottom = 900.0
+toggle_mode = true
+texture_normal = ExtResource("6_4kg85")
+texture_pressed = ExtResource("7_oewen")
+
+[node name="map_19" type="TextureButton" parent="Maps"]
+offset_left = 5400.0
+offset_right = 7000.0
+offset_bottom = 900.0
+toggle_mode = true
+texture_normal = ExtResource("8_enktb")
+texture_pressed = ExtResource("9_3e8oa")
+
+[node name="map_30" type="TextureButton" parent="Maps"]
+offset_top = 1100.0
+offset_right = 1600.0
+offset_bottom = 2000.0
+toggle_mode = true
+texture_normal = ExtResource("10_w2hn2")
+texture_pressed = ExtResource("11_cadl4")
+
+[node name="map_56" type="TextureButton" parent="Maps"]
+offset_left = 1800.0
+offset_top = 1100.0
+offset_right = 3400.0
+offset_bottom = 2000.0
+toggle_mode = true
+texture_normal = ExtResource("12_fyxt1")
+texture_pressed = ExtResource("13_4n32o")
+
+[node name="map_58" type="TextureButton" parent="Maps"]
+offset_left = 3600.0
+offset_top = 1100.0
+offset_right = 5200.0
+offset_bottom = 2000.0
+toggle_mode = true
+texture_normal = ExtResource("14_50qaf")
+texture_pressed = ExtResource("15_5xquu")
+
+[node name="map_60" type="TextureButton" parent="Maps"]
+offset_left = 5400.0
+offset_top = 1100.0
+offset_right = 7000.0
+offset_bottom = 2000.0
+toggle_mode = true
+texture_normal = ExtResource("16_vsen2")
+texture_pressed = ExtResource("17_qquso")
+
+[node name="GridContainer2" type="GridContainer" parent="."]
+offset_left = 607.0
+offset_top = 845.0
+offset_right = 871.0
+offset_bottom = 885.0
+scale = Vector2(1.5, 1.5)
+columns = 2
+
+[node name="Fermer" type="TextureButton" parent="GridContainer2"]
+offset_right = 130.0
+offset_bottom = 32.0
+texture_normal = ExtResource("18_deorm")
+texture_pressed = ExtResource("19_1ytsp")
+texture_hover = ExtResource("20_pb8g1")
+
+[node name="Valider" type="TextureButton" parent="GridContainer2"]
+offset_left = 134.0
+offset_right = 264.0
+offset_bottom = 32.0
+texture_normal = ExtResource("32_48jq0")
+texture_pressed = ExtResource("33_xavqd")
+texture_hover = ExtResource("34_0hosn")
+
+[connection signal="pressed" from="GridContainer2/Fermer" to="." method="_on_fermer_pressed" flags=18]
+[connection signal="pressed" from="GridContainer2/Valider" to="." method="_on_valider_pressed" flags=18]

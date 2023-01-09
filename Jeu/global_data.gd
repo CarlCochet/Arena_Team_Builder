@@ -59,9 +59,11 @@ var equipements_lookup: Dictionary
 var equipe_actuelle: Equipe
 var equipe_test: Equipe
 var perso_actuel: int
+var map_actuelle: String
 
 
 func _ready():
+	map_actuelle = "map_2"
 	charger_stats_classes()
 	charger_sorts()
 	charger_equipements()

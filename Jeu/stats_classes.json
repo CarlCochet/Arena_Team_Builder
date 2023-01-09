@@ -345,7 +345,7 @@
 		"resistances_eau": 0,
 		"po": 0,
 		"esquive": 100,
-		"blocage": 20,
+		"blocage": 40,
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
@@ -529,7 +529,7 @@
 	},
     "Bombe_A_Eau": {
         "kamas": 0,
-        "pa": 99,
+        "pa": 0,
         "pm": 0,
         "hp": 12,
         "initiative": 50,
@@ -551,7 +551,7 @@
     },
     "Bombe_Incendiaire": {
         "kamas": 0,
-        "pa": 99,
+        "pa": 0,
         "pm": 0,
         "hp": 12,
         "initiative": 50,
