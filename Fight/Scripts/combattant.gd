@@ -278,7 +278,7 @@ func check_tacle_unit(case: Vector2i) -> bool:
 	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	var blocage_total = 0
 	for combattant in combat.combattants:
-		if combattant.equipe == equipe or combattant.check_etats(["PORTE"]):
+		if combattant.equipe == equipe or combattant.check_etats(["PORTE", "PETRIFIE"]):
 			continue
 		if (combattant.grid_pos - case) in voisins:
 			blocage_total += combattant.stats.blocage
@@ -416,6 +416,8 @@ func execute_effets():
 
 
 func check_etats(etats: Array) -> bool:
+	if "VIE_FAIBLE" in etats and stats.hp < max_stats.hp / 4:
+		return true
 	for effet in effets:
 		if effet.etat in etats:
 			return true

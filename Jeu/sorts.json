@@ -2872,7 +2872,7 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
-            "desenvoute_delais": 0,
+            "desenvoute_delais": 1,
             "nombre_lancers": 1,
             "cumul_max": -1,
             "etat_requis": "",
@@ -3306,7 +3306,7 @@
 			"effets": {
 				"SACRIFICE": {
                     "base": {
-                        "duree": 1
+                        "duree": 3
                     }
                 }
 			}

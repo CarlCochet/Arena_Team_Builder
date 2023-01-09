@@ -25,7 +25,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	cible = p_cible
 	centre = p_centre
 	categorie = p_categorie
-	contenu = p_contenu
+	contenu = p_contenu.duplicate(true) if contenu is Dictionary else p_contenu
 	if contenu is Dictionary and contenu.has("cible"):
 		type_cible = contenu["cible"] as GlobalData.Cible
 		contenu.erase("cible")
@@ -273,9 +273,9 @@ func update_sacrifice(p_cible):
 
 
 func applique_dommage(base, stat, resistance, orientation_bonus, type):
-	var dommages = max(calcul_dommage(base, stat, resistance, orientation_bonus), cible.stats.hp - cible.max_stats.hp)
+	var dommages = calcul_dommage(base, stat, resistance, orientation_bonus)
 	if type == "soin":
-		dommages = -dommages
+		dommages = max(-dommages, cible.stats.hp - cible.max_stats.hp)
 	
 	if cible.check_etats(["SACRIFICE"]):
 		cible = update_sacrifice(cible)
@@ -516,17 +516,11 @@ func soin():
 		lanceur.stats.hp = lanceur.max_stats.hp
 
 
-func check_retrait_immunite(stat, valeur):
-	if not cible is Array:
-		if cible.check_etats(["IMMUNISE_RETRAIT_PA"]) and stat == "pa" and valeur < 0:
-			return true
-		if cible.check_etats(["IMMUNISE_RETRAIT_PM"]) and stat == "pm" and valeur < 0:
-			return true
-	else:
-		if lanceur.check_etats(["IMMUNISE_RETRAIT_PA"]) and stat == "pa" and valeur < 0:
-			return true
-		if lanceur.check_etats(["IMMUNISE_RETRAIT_PM"]) and stat == "pm" and valeur < 0:
-			return true
+func check_retrait_immunite(combattant, stat, valeur):
+	if combattant.check_etats(["IMMUNISE_RETRAIT_PA"]) and stat == "pa" and valeur < 0:
+		return true
+	if combattant.check_etats(["IMMUNISE_RETRAIT_PM"]) and stat == "pm" and valeur < 0:
+		return true
 	return false
 
 
@@ -534,7 +528,8 @@ func change_stats():
 	var base_crit = trouve_crit()
 	for stat in contenu.keys():
 		if contenu[stat][base_crit].has("perso") and cible.id == lanceur.id:
-			if check_retrait_immunite(stat, contenu[stat][base_crit]["perso"]):
+			if check_retrait_immunite(lanceur, stat, contenu[stat][base_crit]["perso"]):
+#				contenu.erase(stat)
 				continue
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["perso"]
@@ -548,7 +543,8 @@ func change_stats():
 			if stat in ["pa", "pm", "hp"]:
 				cible.stats_perdu.ajoute(contenu[stat][base_crit]["perso"], stat)
 		if contenu[stat][base_crit].has("valeur"):
-			if check_retrait_immunite(stat, contenu[stat][base_crit]["valeur"]):
+			if check_retrait_immunite(cible, stat, contenu[stat][base_crit]["valeur"]):
+#				contenu.erase(stat)
 				continue
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["valeur"]
@@ -565,7 +561,8 @@ func change_stats():
 			if stat == "hp":
 				instant = false
 		if contenu[stat][base_crit].has("retour"):
-			if check_retrait_immunite(stat, contenu[stat][base_crit]["retour"]):
+			if check_retrait_immunite(lanceur, stat, contenu[stat][base_crit]["retour"]):
+#				contenu.erase(stat)
 				continue
 			if instant:
 				lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
@@ -606,12 +603,14 @@ func vole_stats():
 			lanceur.max_stats[stat] += contenu[stat][base_crit]["valeur"]
 			print(lanceur.classe, "_", str(lanceur.id), " vole ", contenu[stat][base_crit]["valeur"], " ", stat, " à ", cible.classe, "_", str(cible.id), " (", duree, " tours).")
 			if duree > 0:
-				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
+				cible.stat_buffs[stat] -= contenu[stat][base_crit]["valeur"]
 			if stat in ["pa", "pm", "hp"]:
-				cible.stats_perdu.ajoute(contenu[stat][base_crit]["valeur"], stat)
+				cible.stats_perdu.ajoute(-contenu[stat][base_crit]["valeur"], stat)
 
 
 func pousse():
+	if cible.check_etats(["STABILISE"]):
+		return
 	var direction: Vector2i = (cible.grid_pos - lanceur.grid_pos).sign()
 	var grid = combat.tilemap.grid
 	var stopped = false
@@ -655,6 +654,8 @@ func pousse():
 
 
 func attire():
+	if cible.check_etats(["STABILISE"]):
+		return
 	var direction = -(cible.grid_pos - lanceur.grid_pos).sign()
 	var grid = combat.tilemap.grid
 	var stopped = false
@@ -699,6 +700,8 @@ func attire():
 
 
 func recul():
+	if lanceur.check_etats(["STABILISE"]):
+		return
 	var direction: Vector2i = (lanceur.grid_pos - cible.grid_pos).sign()
 	var grid = combat.tilemap.grid
 	var stopped = false
@@ -782,7 +785,7 @@ func devient_invisible():
 func desenvoute():
 	for effet in cible.effets:
 		if effet.sort != null and effet.sort.desenvoute_delais >= 0:
-			effet.sort.cooldown = effet.sort.desenvoute_delais
+			effet.sort.cooldown_actuel = effet.sort.desenvoute_delais
 			effet.sort.compte_lancers = 0
 			effet.sort.compte_cible = {}
 	

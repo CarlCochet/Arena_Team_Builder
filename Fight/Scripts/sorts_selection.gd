@@ -41,7 +41,7 @@ func update(combattant):
 			texture_rect.add_child(carte)
 			
 			texture_rect.connect("mouse_entered", sort_hovered.bind(texture_rect, sort_id))
-			texture_rect.connect("mouse_exited", sort_exited.bind(texture_rect, sort_id))
+			texture_rect.connect("mouse_exited", sort_exited.bind(texture_rect))
 			sort_id += 1
 
 
@@ -50,7 +50,7 @@ func sort_hovered(sort, sort_id):
 	carte_hovered = sort_id
 
 
-func sort_exited(sort, sort_id):
+func sort_exited(sort):
 	sort.get_node("carte").visible = false
 	carte_hovered = -1
 
