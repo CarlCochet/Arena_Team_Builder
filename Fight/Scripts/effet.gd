@@ -310,18 +310,22 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 
 
 func dommage_fixe():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], 0.0, 0.0, not aoe, "normal")
+		applique_dommage(contenu[base_crit]["allies"], 0.0, 0.0, false, "normal")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, not aoe, "normal")
+		applique_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, false, "normal")
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, not aoe, "normal")
+		applique_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, false, "normal")
 	if contenu[base_crit].has("retour"):
 		applique_dommage(contenu[base_crit]["retour"], 0.0, 0.0, false, "retour")
 
 
 func dommage_pourcent():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(cible.stats.hp * (contenu[base_crit]["allies"] / 100.0), 0.0, 0.0, false, "normal")
@@ -336,6 +340,8 @@ func dommage_pourcent():
 
 
 func dommage_par_pa():
+	if cible is Array or cible is Vector2i:
+		return
 	var pa_restants = lanceur.stats.pa - sort.pa
 	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, lanceur.grid_pos, aoe, sort)
 	for i in range(pa_restants):
@@ -345,6 +351,8 @@ func dommage_par_pa():
 
 
 func dommage_par_pm():
+	if cible is Array or cible is Vector2i:
+		return
 	var pm_restants = lanceur.stats.pm
 	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, lanceur.grid_pos, aoe, sort)
 	for i in range(pm_restants):
@@ -358,6 +366,8 @@ func dommage_par_pa_utilise():
 
 
 func dommage_si_bouge():
+	if cible is Array or cible is Vector2i:
+		return
 	etat = "DOMMAGE_SI_BOUGE"
 	if not instant:
 		var new_effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, centre, false, sort)
@@ -369,6 +379,8 @@ func dommage_si_bouge():
 
 
 func dommage_si_utilise_pa():
+	if cible is Array or cible is Vector2i:
+		return
 	etat = "DOMMAGE_SI_UTILISE_PA"
 	if not instant:
 		var new_effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, centre, false, sort)
@@ -379,6 +391,8 @@ func dommage_si_utilise_pa():
 
 
 func dommage_air():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
@@ -391,6 +405,8 @@ func dommage_air():
 
 
 func dommage_terre():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
@@ -403,6 +419,8 @@ func dommage_terre():
 
 
 func dommage_feu():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
@@ -415,6 +433,8 @@ func dommage_feu():
 
 
 func dommage_eau():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
@@ -427,6 +447,8 @@ func dommage_eau():
 
 
 func vole_air():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
@@ -439,6 +461,8 @@ func vole_air():
 
 
 func vole_terre():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
@@ -451,6 +475,8 @@ func vole_terre():
 
 
 func vole_feu():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
@@ -463,6 +489,8 @@ func vole_feu():
 
 
 func vole_eau():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
@@ -475,6 +503,8 @@ func vole_eau():
 
 
 func soin():
+	if cible is Array or cible is Vector2i:
+		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
 		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.soins, 0, false, "soin") 
@@ -526,7 +556,8 @@ func change_stats():
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
 			else:
-				cible.stat_ret[stat] += contenu[stat][base_crit]["valeur"]
+				if not sort.effets.has("GLYPHE"):
+					cible.stat_ret[stat] += contenu[stat][base_crit]["valeur"]
 			if contenu[stat][base_crit]["valeur"] > 0:
 				cible.max_stats[stat] += contenu[stat][base_crit]["valeur"]
 			if stat in ["pa", "pm", "hp"] and instant:
@@ -586,7 +617,7 @@ func pousse():
 	var stopped = false
 	var old_grid_pos = cible.grid_pos
 	for i in range(contenu):
-		var grid_pos = cible.grid_pos + (i + 1) * direction
+		var grid_pos = cible.grid_pos + direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
@@ -595,7 +626,6 @@ func pousse():
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
-					cible.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
@@ -604,16 +634,20 @@ func pousse():
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
-					cible.bouge_perso(grid_pos - direction)
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos and not cible.check_etats(["IMMUNISE"]):
 							combattant.stats.hp -= (contenu - i) * 3
 							combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 							print(combattant.classe, "_", str(combattant.id), " perd ", (contenu - i) * 3, " PdV.")
+			else:
+				if not stopped:
+					if combat.tilemap.check_glyphe_effet(grid_pos, "DOMMAGE_FIXE"):
+						cible.bouge_perso(grid_pos)
+						stopped = true
+						break
+					cible.bouge_perso(grid_pos)
 		else:
 			break
-	if not stopped:
-		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
 	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]) and cible.grid_pos != old_grid_pos:
 		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
 		effet_lance.execute()
@@ -626,7 +660,7 @@ func attire():
 	var stopped = false
 	var old_grid_pos = cible.grid_pos
 	for i in range(contenu):
-		var grid_pos = cible.grid_pos + (i + 1) * direction
+		var grid_pos = cible.grid_pos + direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
@@ -635,7 +669,6 @@ func attire():
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
-					cible.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
@@ -650,11 +683,15 @@ func attire():
 								combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 								print(combattant.classe, "_", str(combattant.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
-					cible.bouge_perso(grid_pos - direction)
+			else:
+				if not stopped:
+					if combat.tilemap.check_glyphe_effet(grid_pos, "DOMMAGE_FIXE"):
+						cible.bouge_perso(grid_pos)
+						stopped = true
+						break
+					cible.bouge_perso(grid_pos)
 		else:
 			break
-	if not stopped:
-		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
 	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]) and cible.grid_pos != old_grid_pos:
 		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
 		effet_lance.execute()
@@ -666,7 +703,7 @@ func recul():
 	var grid = combat.tilemap.grid
 	var stopped = false
 	for i in range(contenu):
-		var grid_pos = lanceur.grid_pos + (i + 1) * direction
+		var grid_pos = lanceur.grid_pos + direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
@@ -675,7 +712,6 @@ func recul():
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
-					lanceur.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
@@ -684,16 +720,20 @@ func recul():
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
-					lanceur.bouge_perso(grid_pos - direction)
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos and not lanceur.check_etats(["IMMUNISE"]):
 							combattant.stats.hp -= (contenu - i) * 3
 							combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 							print(combattant.classe, "_", str(combattant.id), " perd ", (contenu - i) * 3, " PdV.")
+			else:
+				if not stopped:
+					if combat.tilemap.check_glyphe_effet(grid_pos, "DOMMAGE_FIXE"):
+						cible.bouge_perso(grid_pos)
+						stopped = true
+						break
+					lanceur.bouge_perso(grid_pos)
 		else:
 			break
-	if not stopped:
-		lanceur.bouge_perso(Vector2i(lanceur.grid_pos) + Vector2i(contenu * direction))
 	combat.tilemap.update_glyphes()
 
 
@@ -727,9 +767,9 @@ func rate_sort():
 
 
 func revele_invisible():
-#	cible.retire_etats(["INVISIBLE"])
 	for combattant in combat.combattants:
 		combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
+		combattant.retire_etats(["INVISIBLE"])
 	print(cible.classe, "_", str(cible.id), " révèle les invisibles.")
 
 
@@ -827,8 +867,14 @@ func lance():
 				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
 				combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 				combattant.z_index = 0
+				var new_sort = sort.copy()
+				new_sort.pa = 0
+				new_sort.cible = GlobalData.Cible.LIBRE
+				new_sort.effets.erase("LANCE")
 				combattant.retire_etats(["PORTE"])
 				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
+				new_sort.execute_effets(lanceur, [centre], centre)
+				combat.tilemap.update_glyphes()
 				return
 
 

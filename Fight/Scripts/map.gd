@@ -66,8 +66,16 @@ func update_glyphes():
 	clear_layer(4)
 	for glyphe in glyphes:
 		glyphe.active_full()
-		glyphe.affiche()
+		if not glyphe.deleted:
+			glyphe.affiche()
 	get_parent().check_morts()
+
+
+func check_glyphe_effet(pos: Vector2i, effet: String):
+	for glyphe in glyphes:
+		if glyphe.centre == pos and glyphe.effets.has(effet):
+			return true
+	return false
 
 
 func delete_glyphes(glyphes_ids: Array):
@@ -210,11 +218,19 @@ func check_zone(x: int, y: int, target: Vector2i, type_zone: GlobalData.TypeZone
 	return true
 
 
-func affiche_obstacles():
+func affiche_astar_obstacles():
 	clear_layer(5)
 	for x in range(0, 40):
 		for y in range(0, 40):
 			if a_star_grid.is_in_bounds(x, y) and a_star_grid.is_point_solid(Vector2i(x, y)):
+				set_cell(5, Vector2i(x, y) - offset, 3, Vector2i(0, 0))
+
+
+func affiche_ldv_obstacles():
+	clear_layer(5)
+	for x in range(0, 40):
+		for y in range(0, 40):
+			if x < len(grid) and y < len(grid[0]) and grid[x][y] < 1:
 				set_cell(5, Vector2i(x, y) - offset, 3, Vector2i(0, 0))
 
 
