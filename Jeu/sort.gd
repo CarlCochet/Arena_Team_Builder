@@ -28,6 +28,7 @@ var compte_lancers: int
 var compte_lancers_tour: int
 var compte_cible: Dictionary
 var cooldown_actuel: int
+var retour_lock: bool
 
 
 func _init():
@@ -57,6 +58,7 @@ func _init():
 	compte_lancers_tour = 0
 	compte_lancers = 0
 	compte_cible = {}
+	retour_lock = false
 
 
 func execute_effets(lanceur, cases_cibles, centre) -> bool:
@@ -114,9 +116,8 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
 				for combattant_bis in combattants:
-					if combattant_bis.classe == combattant.classe:
-						if aoe or not combattant.check_etats(["PORTE"]):
-							targets.append(combattant)
+					if combattant_bis.classe == combattant.classe and combattant_bis.id != combattant.id:
+						targets.append(combattant_bis)
 	elif effets["cible"] == 10:
 		for combattant in combattants:
 			if not combattant.is_invocation: 
@@ -146,6 +147,7 @@ func update_limite_lancers(lanceur):
 	compte_lancers += 1
 	compte_lancers_tour += 1
 	cooldown_actuel = cooldown
+	retour_lock = false
 	
 	if cooldown_global > 0:
 		for combattant in lanceur.combat.combattants:
@@ -255,6 +257,7 @@ func from_arme(_combattant, arme):
 		po = Vector2(1, 1)
 		type_zone = GlobalData.TypeZone.CERCLE
 		taille_zone = Vector2(0, 0)
+		po_modifiable = 0
 		effets = { "DOMMAGE_FIXE": { "base": { "valeur": 5 }, "critique": { "valeur": 7 } } }
 	nom = "arme"
 	ldv = 1

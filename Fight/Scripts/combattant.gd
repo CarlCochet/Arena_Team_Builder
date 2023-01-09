@@ -171,51 +171,56 @@ func check_case_bonus():
 	var case_id = combat.tilemap.get_cell_atlas_coords(1, grid_pos - combat.offset).x
 	var categorie = ""
 	var contenu = ""
+	var maudit = false
+	for case in combat.tilemap.cases_maudites.values():
+		if case == grid_pos:
+			maudit = true
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
 			contenu = {
-				"dommages_air":{"base":{"valeur":30,"duree":1}},
-				"dommages_terre":{"base":{"valeur":30,"duree":1}},
-				"dommages_feu":{"base":{"valeur":30,"duree":1}},
-				"dommages_eau":{"base":{"valeur":30,"duree":1}}
+				"dommages_air":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"dommages_terre":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"dommages_feu":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"dommages_eau":{"base":{"valeur":30 if not maudit else -30,"duree":1}}
 			}
 		3:
 			categorie = "CHANGE_STATS"
 			contenu = {
-				"resistances_air":{"base":{"valeur":30,"duree":1}},
-				"resistances_terre":{"base":{"valeur":30,"duree":1}},
-				"resistances_feu":{"base":{"valeur":30,"duree":1}},
-				"resistances_eau":{"base":{"valeur":30,"duree":1}}
+				"resistances_air":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"resistances_terre":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"resistances_feu":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
+				"resistances_eau":{"base":{"valeur":30 if not maudit else -30,"duree":1}}
 			}
 		4:
-			categorie = "SOIN"
+			categorie = "SOIN" if not maudit else "DOMMAGE_FIXE"
 			contenu = {"base":{"valeur":7}}
 		5:
 			categorie = "CHANGE_STATS"
-			contenu = {"pa":{"base":{"valeur":2,"duree":1}}}
+			contenu = {"pa":{"base":{"valeur":2 if not maudit else -2,"duree":1}}}
 		6:
 			categorie = "CHANGE_STATS"
-			contenu = {"po":{"base":{"valeur":2,"duree":1}}}
+			contenu = {"po":{"base":{"valeur":2 if not maudit else -2,"duree":1}}}
 		7:
 			categorie = "CHANGE_STATS"
-			contenu = {"soins":{"base":{"valeur":25,"duree":1}}}
+			contenu = {"soins":{"base":{"valeur":25 if not maudit else -25,"duree":1}}}
 		8:
 			categorie = "DOMMAGE_POURCENT"
-			contenu = {"base":{"valeur":80}}
+			contenu = {"base":{"valeur":80 if not maudit else 96}}
 		9:
 			categorie = "DOMMAGE_FIXE"
-			contenu = {"base":{"valeur":15}}
+			contenu = {"base":{"valeur":15 if not maudit else 30}}
 	var effet = Effet.new(self, self, categorie, contenu, false, grid_pos, false, null)
 	effet.execute()
+
 
 func debut_tour():
 	retrait_durees()
 	execute_effets()
 	check_case_bonus()
-	var hp = stats.hp
+	var delta_hp = max_stats.hp - stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
-	stats.hp = hp
+	stats.hp -= delta_hp
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
@@ -269,14 +274,16 @@ func check_tacle(chemin: Array) -> Vector2i:
 				continue
 			if (combattant.grid_pos - case) in voisins:
 				blocage_total += combattant.stats.blocage
-		var chance_esquive = stats.esquive - blocage_total
-		if randi_range(1, 100) > chance_esquive:
+		if randi_range(1, stats.esquive if stats.esquive > 1 else 2) < blocage_total:
 			return case
 	return chemin[-1]
 
 
 func deplace_perso(chemin: Array):
 	var fin = check_tacle(chemin)
+	for effet in effets:
+		if effet.etat == "DOMMAGE_SI_BOUGE":
+			effet.execute()
 	if fin != grid_pos:
 		chemin.pop_front()
 		var prefin = grid_pos if len(chemin) < 2 else chemin[-2]
@@ -389,7 +396,8 @@ func meurt():
 func execute_effets():
 	stat_buffs = Stats.new()
 	for effet in effets:
-		effet.execute()
+		if not effet.etat in ["DOMMAGE_SI_BOUGE"]:
+			effet.execute()
 
 
 func check_etats(etats: Array) -> bool:
@@ -430,6 +438,9 @@ func retrait_durees():
 				new_map_glyphes.append(glyphe)
 	combat.tilemap.glyphes = new_map_glyphes
 	combat.tilemap.update_glyphes()
+	
+	if combat.tilemap.cases_maudites.has(id):
+		combat.tilemap.cases_maudites.erase(id)
 
 
 func retrait_cooldown():

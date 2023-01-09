@@ -12,6 +12,7 @@ var mode = false
 var zonetype = GlobalData.TypeZone.CARRE
 var glyphes: Array
 var glyphes_indexeur: int
+var cases_maudites: Dictionary
 
 @onready var overlay = get_used_cells(2)
 @onready var arena = get_used_cells(1)
@@ -22,6 +23,7 @@ func _ready():
 	y_max = 0
 	offset = Vector2i(0, 8)
 	grid = []
+	cases_maudites = {}
 	
 	for pos in arena:
 		if pos.x > x_max:
@@ -45,6 +47,7 @@ func _ready():
 	glyphes_indexeur = 0
 	get_start()
 	build_astar_grid()
+	get_parent().move_child(self, 0)
 
 
 func get_start():

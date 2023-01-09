@@ -11,15 +11,18 @@ var indexeur_global: int
 var etat: int
 var action: int
 var offset: Vector2i
+var tilemap: TileMap
 
 @onready var sorts: Control = $Sorts
 @onready var timeline: Control = $Timeline
-@onready var tilemap: TileMap = $TileMap
+#@onready var tilemap: TileMap = $TileMap
 @onready var stats_select: TextureRect = $AffichageStatsSelect
 @onready var stats_hover: TextureRect = $AffichageStatsHover
 
 
 func _ready():
+	tilemap = load("res://Fight/Map/" + GlobalData.map_actuelle + ".tscn").instantiate()
+	add_child(tilemap)
 	etat = 0
 	indexeur_global = 0
 	offset = tilemap.offset
@@ -96,8 +99,12 @@ func change_action(new_action: int):
 func check_morts():
 	var new_combattants = []
 	var delete_glyphes = []
+	var new_selection_id = 0
+	var compte_init = len(combattants)
 	combattants[selection_id].unselect()
 	for combattant in combattants:
+		if combattant.id == combattants[selection_id].id:
+			new_selection_id = len(new_combattants)
 		if combattant.stats.hp <= 0:
 			for glyphe in tilemap.glyphes:
 				if glyphe.lanceur.id == combattant.id:
@@ -111,12 +118,15 @@ func check_morts():
 	if len(delete_glyphes) > 0:
 		tilemap.delete_glyphes(delete_glyphes)
 	tilemap.clear_layer(2)
-	if selection_id >= len(combattants):
-		selection_id = 0
+	if new_selection_id >= len(combattants):
+		new_selection_id = 0
+	selection_id = new_selection_id
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
 	change_action(7)
 	timeline.init(combattants, selection_id)
+	if compte_init != len(combattants):
+		check_morts()
 
 
 func _on_perso_clicked(id: int):
@@ -133,7 +143,7 @@ func _input(event):
 		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
 			passe_tour()
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
-			get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")
+			get_tree().change_scene_to_file("res://UI/choix_map.tscn")
 		if event is InputEventMouseMotion:
 			if action == 7:
 				for combattant in combattants:
@@ -170,7 +180,7 @@ func _input(event):
 		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
 			lance_game()
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
-			get_tree().change_scene_to_file("res://UI/choix_ennemis.tscn")
+			get_tree().change_scene_to_file("res://UI/choix_map.tscn")
 		if event is InputEventMouseButton:
 			combattant_selection.place_perso(tilemap.local_to_map(event.position))
 

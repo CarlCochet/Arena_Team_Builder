@@ -1,0 +1,47 @@
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://dnqao0xjnwyy3"]
+
+[ext_resource type="Texture2D" uid="uid://dn515cobe71df" path="res://Fight/Map/Images/tactic_mode.png" id="1_nkmmg"]
+[ext_resource type="Texture2D" uid="uid://de3sovi702eol" path="res://Fight/Map/Images/glyphes.png" id="2_0382h"]
+[ext_resource type="Texture2D" uid="uid://c2tgyt6ovtwf7" path="res://Fight/Map/Images/hole.png" id="3_cichh"]
+[ext_resource type="Texture2D" uid="uid://coyqsww2hpgyx" path="res://Fight/Map/Images/tiles_overlay.png" id="4_445yw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxif1"]
+texture = ExtResource("1_nkmmg")
+texture_region_size = Vector2i(128, 128)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_38768"]
+texture = ExtResource("2_0382h")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j1gd0"]
+texture = ExtResource("3_cichh")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2kyvj"]
+texture = ExtResource("4_445yw")
+texture_region_size = Vector2i(128, 128)
+1:0/0 = 0
+2:0/0 = 0
+0:0/0 = 0
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(128, 64)
+sources/0 = SubResource("TileSetAtlasSource_gxif1")
+sources/2 = SubResource("TileSetAtlasSource_j1gd0")
+sources/3 = SubResource("TileSetAtlasSource_2kyvj")
+sources/1 = SubResource("TileSetAtlasSource_38768")

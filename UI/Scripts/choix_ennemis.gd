@@ -49,4 +49,4 @@ func _on_retour_pressed():
 
 
 func _on_valider_pressed():
-	get_tree().change_scene_to_file("res://Fight/combat.tscn")
+	get_tree().change_scene_to_file("res://UI/choix_map.tscn")

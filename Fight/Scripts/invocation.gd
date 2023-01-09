@@ -141,6 +141,11 @@ func debut_tour():
 	var hp = stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp = hp
+	
+	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
+		stats.hp -= 2
+		stats_perdu.ajoute(-2, "hp")
+
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
@@ -218,6 +223,36 @@ func joue_ia():
 				stats_perdu.ajoute(-sort.pa, "pa")
 				combat.stats_select.update(stats, max_stats)
 			joue_ia()
+
+
+func meurt():
+	if check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
+		var effet_lance = Effet.new(self, grid_pos, "LANCE", 1, false, grid_pos, false, null)
+		effet_lance.execute()
+	
+	for combattant in combat.combattants:
+		var new_effets = []
+		for effet in combattant.effets:
+			if effet.lanceur.id != id:
+				new_effets.append(effet)
+		combattant.effets = new_effets
+	
+	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
+		var sort = sorts[0]
+		zone = combat.tilemap.get_zone(
+			grid_pos,
+			grid_pos,
+			sort.type_zone,
+			sort.taille_zone[0],
+			sort.taille_zone[1]
+		)
+		sort.execute_effets(self, zone, grid_pos)
+	
+	var map_pos = combat.tilemap.local_to_map(position)
+	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
+	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	print(classe, "_", str(id), " est mort.")
+	queue_free()
 
 
 func fin_tour():

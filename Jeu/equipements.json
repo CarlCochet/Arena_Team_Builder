@@ -5,6 +5,7 @@
 			"po": [2, 5],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 250,
@@ -44,6 +45,7 @@
 			"po": [2, 5],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -85,6 +87,7 @@
 			"po": [2, 5],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 1,
 			"cible": 4,
 			"stats": {
 				"kamas": 200,
@@ -122,6 +125,7 @@
 			"po": [1, 1],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -161,6 +165,7 @@
 			"po": [1, 3],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -200,6 +205,7 @@
 			"po": [1, 1],
 			"type_zone": 5,
             "taille_zone": [0, 1],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -239,6 +245,7 @@
 			"po": [1, 1],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -278,6 +285,7 @@
 			"po": [1, 1],
 			"type_zone": 5,
             "taille_zone": [0, 1],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -317,6 +325,7 @@
 			"po": [1, 1],
 			"type_zone": 1,
             "taille_zone": [0, 2],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -356,6 +365,7 @@
 			"po": [1, 1],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -395,6 +405,7 @@
 			"po": [1, 1],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -434,6 +445,7 @@
 			"po": [1, 1],
 			"type_zone": 5,
             "taille_zone": [0, 1],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -473,6 +485,7 @@
 			"po": [1, 1],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -512,6 +525,7 @@
 			"po": [2, 5],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -551,6 +565,7 @@
 			"po": [1, 1],
 			"type_zone": 1,
             "taille_zone": [0, 2],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -590,6 +605,7 @@
 			"po": [2, 5],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -629,6 +645,7 @@
 			"po": [1, 3],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 250,
@@ -668,6 +685,7 @@
 			"po": [1, 1],
 			"type_zone": 5,
             "taille_zone": [0, 1],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -707,6 +725,7 @@
 			"po": [3, 4],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 1,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -746,6 +765,7 @@
 			"po": [1, 1],
 			"type_zone": 1,
             "taille_zone": [0, 2],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -785,6 +805,7 @@
 			"po": [1, 1],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 100,
@@ -824,6 +845,7 @@
 			"po": [1, 1],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
@@ -863,6 +885,7 @@
 			"po": [1, 1],
 			"type_zone": 1,
             "taille_zone": [0, 2],
+            "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
 				"kamas": 200,
