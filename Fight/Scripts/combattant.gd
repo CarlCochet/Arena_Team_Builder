@@ -263,13 +263,15 @@ func joue_action(action: int, tile_pos: Vector2i):
 						effet.execute()
 			if not is_invocation:
 				combat.sorts.update(self)
-			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
-			retire_etats(["INVISIBLE"])
+			if tile_pos != grid_pos or not sort.effets.has("DEVIENT_INVISIBLE"):
+				combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+				retire_etats(["INVISIBLE"])
 			if grid_pos != tile_pos:
 				oriente_vers(tile_pos)
 		combat.change_action(7)
 	combat.stats_select.update(stats)
 	combat.check_morts()
+	combat.tilemap.affiche_ldv_obstacles()
 
 
 func affiche_stats_change(valeur, stat):

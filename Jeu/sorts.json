@@ -1436,12 +1436,12 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-                "DEVIENT_INVISIBLE": {
+                "REVELE_INVISIBLE": {
                     "base": {
                         "duree": 2
                     }
                 },
-                "REVELE_INVISIBLE": {
+                "DEVIENT_INVISIBLE": {
                     "base": {
                         "duree": 2
                     }

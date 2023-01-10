@@ -298,9 +298,9 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	cible.stats_perdu.ajoute(-dommages, "hp")
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
-	lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage / 100)
+	lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage / 100.0)
 	if cible.stats.renvoi_dommage > 0:
-		lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage / 100), "hp")
+		lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage / 100.0), "hp")
 		print(lanceur.classe, "_", str(lanceur.id), " perd ", dommages, " PdV.")
 	
 	if type == "vol":
@@ -764,8 +764,9 @@ func rate_sort():
 
 func revele_invisible():
 	for combattant in combat.combattants:
-		combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
-		combattant.retire_etats(["INVISIBLE"])
+		if combattant.id != lanceur.id:
+			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
+			combattant.retire_etats(["INVISIBLE"])
 	print(cible.classe, "_", str(cible.id), " révèle les invisibles.")
 
 
