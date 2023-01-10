@@ -3479,7 +3479,7 @@
 			"cooldown": 0,
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
-            "lancer_par_cible": -1,
+            "lancer_par_cible": 1,
             "desenvoute_delais": -1,
             "nombre_lancers": -1,
             "cumul_max": -1,
@@ -4472,27 +4472,32 @@
                 "CHANGE_STATS": {
                     "resistances_air": {
                         "base": {
-                            "valeur": 60
+                            "valeur": 60,
+                            "duree": 2
                         }
                     },
                     "resistances_terre": {
                         "base": {
-                            "valeur": 60
+                            "valeur": 60,
+                            "duree": 2
                         }
                     },
                     "resistances_feu": {
                         "base": {
-                            "valeur": 60
+                            "valeur": 60,
+                            "duree": 2
                         }
                     },
                     "resistances_eau": {
                         "base": {
-                            "valeur": 60
+                            "valeur": 60,
+                            "duree": 2
                         }
                     },
                     "resistance_zone": {
                         "base": {
-                            "valeur": -210
+                            "valeur": -210,
+                            "duree": 2
                         }
                     },
                 }

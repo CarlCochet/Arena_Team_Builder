@@ -284,7 +284,9 @@ func check_tacle_unit(case: Vector2i) -> bool:
 			continue
 		if (combattant.grid_pos - case) in voisins:
 			blocage_total += combattant.stats.blocage
-	if randi_range(max(stats.esquive - 99, 1), max(stats.esquive, 2)) < blocage_total:
+	var min_esquive = max(stats.esquive - 99, 1)
+	var max_esquive = max(stats.esquive, 2)
+	if randi_range(min_esquive, max_esquive) < blocage_total:
 		return true
 	return false
 
@@ -418,7 +420,7 @@ func execute_effets():
 
 
 func check_etats(etats: Array) -> bool:
-	if "VIE_FAIBLE" in etats and stats.hp < max_stats.hp / 4:
+	if "VIE_FAIBLE" in etats and stats.hp < int(max_stats.hp / 4):
 		return true
 	for effet in effets:
 		if effet.etat in etats:

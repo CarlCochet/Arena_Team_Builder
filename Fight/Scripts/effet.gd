@@ -25,7 +25,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	cible = p_cible
 	centre = p_centre
 	categorie = p_categorie
-	contenu = p_contenu.duplicate(true) if contenu is Dictionary else p_contenu
+	contenu = p_contenu
 	if contenu is Dictionary and contenu.has("cible"):
 		type_cible = contenu["cible"] as GlobalData.Cible
 		contenu.erase("cible")
@@ -531,7 +531,7 @@ func change_stats():
 	for stat in contenu.keys():
 		if contenu[stat][base_crit].has("perso") and cible.id == lanceur.id:
 			if check_retrait_immunite(lanceur, stat, contenu[stat][base_crit]["perso"]):
-#				contenu.erase(stat)
+				contenu[stat][base_crit]["perso"] = 0
 				continue
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["perso"]
@@ -546,7 +546,7 @@ func change_stats():
 				cible.stats_perdu.ajoute(contenu[stat][base_crit]["perso"], stat)
 		if contenu[stat][base_crit].has("valeur"):
 			if check_retrait_immunite(cible, stat, contenu[stat][base_crit]["valeur"]):
-#				contenu.erase(stat)
+				contenu[stat][base_crit]["valeur"] = 0
 				continue
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["valeur"]
@@ -564,7 +564,7 @@ func change_stats():
 				instant = false
 		if contenu[stat][base_crit].has("retour"):
 			if check_retrait_immunite(lanceur, stat, contenu[stat][base_crit]["retour"]):
-#				contenu.erase(stat)
+				contenu[stat][base_crit]["retour"] = 0
 				continue
 			if instant:
 				lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
@@ -618,7 +618,7 @@ func pousse():
 	var stopped = false
 	var old_grid_pos = cible.grid_pos
 	for i in range(contenu):
-		var grid_pos = cible.grid_pos + direction
+		var grid_pos = cible.grid_pos + (i + 1) * direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
@@ -627,6 +627,7 @@ func pousse():
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
+					cible.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
@@ -635,20 +636,16 @@ func pousse():
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
+					cible.bouge_perso(grid_pos - direction)
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos and not cible.check_etats(["IMMUNISE"]):
 							combattant.stats.hp -= (contenu - i) * 3
 							combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 							print(combattant.classe, "_", str(combattant.id), " perd ", (contenu - i) * 3, " PdV.")
-			else:
-				if not stopped:
-					if combat.tilemap.check_glyphe_effet(grid_pos, "DOMMAGE_FIXE"):
-						cible.bouge_perso(grid_pos)
-						stopped = true
-						break
-					cible.bouge_perso(grid_pos)
 		else:
 			break
+	if not stopped:
+		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
 	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]) and cible.grid_pos != old_grid_pos:
 		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
 		effet_lance.execute()
@@ -663,7 +660,7 @@ func attire():
 	var stopped = false
 	var old_grid_pos = cible.grid_pos
 	for i in range(contenu):
-		var grid_pos = cible.grid_pos + direction
+		var grid_pos = cible.grid_pos + (i + 1) * direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
@@ -672,6 +669,7 @@ func attire():
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
+					cible.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
@@ -686,15 +684,11 @@ func attire():
 								combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 								print(combattant.classe, "_", str(combattant.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
-			else:
-				if not stopped:
-					if combat.tilemap.check_glyphe_effet(grid_pos, "DOMMAGE_FIXE"):
-						cible.bouge_perso(grid_pos)
-						stopped = true
-						break
-					cible.bouge_perso(grid_pos)
+					cible.bouge_perso(grid_pos - direction)
 		else:
 			break
+	if not stopped:
+		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
 	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]) and cible.grid_pos != old_grid_pos:
 		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
 		effet_lance.execute()
@@ -708,7 +702,7 @@ func recul():
 	var grid = combat.tilemap.grid
 	var stopped = false
 	for i in range(contenu):
-		var grid_pos = lanceur.grid_pos + direction
+		var grid_pos = lanceur.grid_pos + (i + 1) * direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
@@ -717,6 +711,7 @@ func recul():
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
+					cible.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
@@ -725,20 +720,16 @@ func recul():
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
+					cible.bouge_perso(grid_pos - direction)
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos and not lanceur.check_etats(["IMMUNISE"]):
 							combattant.stats.hp -= (contenu - i) * 3
 							combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 							print(combattant.classe, "_", str(combattant.id), " perd ", (contenu - i) * 3, " PdV.")
-			else:
-				if not stopped:
-					if combat.tilemap.check_glyphe_effet(grid_pos, "DOMMAGE_FIXE"):
-						cible.bouge_perso(grid_pos)
-						stopped = true
-						break
-					lanceur.bouge_perso(grid_pos)
 		else:
 			break
+	if not stopped:
+		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
 	combat.tilemap.update_glyphes()
 
 

@@ -180,7 +180,8 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 		else:
 			compte_cible[p_cible.id] = 1
 	for effet in p_effets.keys():
-		var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre, aoe, self)
+		var combattant_effet = p_effets.duplicate(true)
+		var new_effet = Effet.new(lanceur, p_cible, effet, combattant_effet[effet], critique, centre, aoe, self)
 		if new_effet.instant:
 			new_effet.execute()
 		if new_effet.duree > 0:
