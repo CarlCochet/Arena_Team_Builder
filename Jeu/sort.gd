@@ -84,7 +84,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 			effets.has("DOMMAGE_FIXE"), 
 			critique, 
 			centre, 
-			aoe,
+			false,
 			self)
 		lanceur.combat.tilemap.glyphes_indexeur += 1
 		lanceur.combat.tilemap.glyphes.append(new_glyphe)
@@ -136,7 +136,10 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 			sort_valide = parse_effets(lanceur, combattant, effets, critique, centre, aoe) or sort_valide
 	if not trouve and cible == 2:
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
-	update_limite_lancers(lanceur)
+	if effets.has("MAUDIT_CASE"):
+		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
+	if sort_valide:
+		update_limite_lancers(lanceur)
 	
 	if not sort_valide:
 		print("Sort invalide, annulation de l'action !")
@@ -380,7 +383,7 @@ class Glyphe:
 				combattant.stats.pa -= delta_pa
 				combattant.stats.pm -= delta_pm
 				for effet in effets:
-					var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, true, sort)
+					var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, aoe, sort)
 					new_effet.instant = true
 					new_effet.execute()
 				triggered = true

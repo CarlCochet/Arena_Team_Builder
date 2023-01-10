@@ -172,9 +172,11 @@ func check_case_bonus():
 	var categorie = ""
 	var contenu = ""
 	var maudit = false
-	for case in combat.tilemap.cases_maudites.values():
-		if case == grid_pos:
-			maudit = true
+	if grid_pos in combat.tilemap.cases_maudites.values():
+		maudit = true
+#	for case in combat.tilemap.cases_maudites.values():
+#		if case == grid_pos:
+#			maudit = true
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
@@ -282,7 +284,7 @@ func check_tacle_unit(case: Vector2i) -> bool:
 			continue
 		if (combattant.grid_pos - case) in voisins:
 			blocage_total += combattant.stats.blocage
-	if randi_range(1, stats.esquive if stats.esquive > 1 else 2) < blocage_total:
+	if randi_range(max(stats.esquive - 99, 1), max(stats.esquive, 2)) < blocage_total:
 		return true
 	return false
 

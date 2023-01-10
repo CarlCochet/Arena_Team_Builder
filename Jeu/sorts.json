@@ -3317,7 +3317,7 @@
 			"po": [0, 0],
             "po_modifiable": 0,
 			"type_zone": 0,
-            "taille_zone": [0, 2],
+            "taille_zone": [1, 2],
 			"cible": 1,
 			"ldv": 1,
 			"type_ldv": 0,
@@ -3940,7 +3940,8 @@
                 },
                 "DOMMAGE_FIXE": {
                     "base": {
-                        "valeur": 80
+                        "valeur": 80,
+                        "maudit": 200
                     }
                 }
 			}
@@ -4555,42 +4556,50 @@
                         "CHANGE_STATS": {
                             "resistances_air": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_terre": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_feu": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_eau": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_air": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_terre": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_feu": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_eau": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             }
                         }
@@ -4599,42 +4608,50 @@
                         "CHANGE_STATS": {
                             "resistances_air": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_terre": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_feu": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_eau": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_air": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_terre": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_feu": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_eau": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             }
                         }

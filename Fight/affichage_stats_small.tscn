@@ -14,6 +14,7 @@ texture = ExtResource("1_i74ii")
 script = ExtResource("2_tkitm")
 
 [node name="Stats" type="HBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 11.0
 offset_right = 48.0
@@ -22,9 +23,7 @@ theme_override_constants/separation = 15
 
 [node name="HP" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(28, 26)
-offset_top = 7.0
-offset_right = 28.0
-offset_bottom = 33.0
+layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_chl8o")
 horizontal_alignment = 1
@@ -32,10 +31,7 @@ vertical_alignment = 1
 
 [node name="PA" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(28, 26)
-offset_left = 43.0
-offset_top = 7.0
-offset_right = 71.0
-offset_bottom = 33.0
+layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_chl8o")
 horizontal_alignment = 1
@@ -43,10 +39,7 @@ vertical_alignment = 1
 
 [node name="PM" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(28, 26)
-offset_left = 86.0
-offset_top = 7.0
-offset_right = 114.0
-offset_bottom = 33.0
+layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_chl8o")
 horizontal_alignment = 1

@@ -317,6 +317,8 @@ func dommage_fixe():
 		applique_dommage(contenu[base_crit]["allies"], 0.0, 0.0, false, "normal")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		applique_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, false, "normal")
+	elif contenu[base_crit].has("maudit") and centre in combat.tilemap.cases_maudites.values():
+		applique_dommage(contenu[base_crit]["maudit"], 0.0, 0.0, false, "normal")
 	elif contenu[base_crit].has("valeur"):
 		applique_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, false, "normal")
 	if contenu[base_crit].has("retour"):
