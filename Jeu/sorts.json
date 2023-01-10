@@ -1436,12 +1436,12 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-                "DEVIENT_INVISIBLE": {
+                "REVELE_INVISIBLE": {
                     "base": {
                         "duree": 2
                     }
                 },
-                "REVELE_INVISIBLE": {
+                "DEVIENT_INVISIBLE": {
                     "base": {
                         "duree": 2
                     }
@@ -2872,7 +2872,7 @@
 			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
-            "desenvoute_delais": 0,
+            "desenvoute_delais": 1,
             "nombre_lancers": 1,
             "cumul_max": -1,
             "etat_requis": "",
@@ -3306,7 +3306,7 @@
 			"effets": {
 				"SACRIFICE": {
                     "base": {
-                        "duree": 1
+                        "duree": 3
                     }
                 }
 			}
@@ -3317,7 +3317,7 @@
 			"po": [0, 0],
             "po_modifiable": 0,
 			"type_zone": 0,
-            "taille_zone": [0, 2],
+            "taille_zone": [1, 2],
 			"cible": 1,
 			"ldv": 1,
 			"type_ldv": 0,
@@ -3479,7 +3479,7 @@
 			"cooldown": 0,
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
-            "lancer_par_cible": -1,
+            "lancer_par_cible": 1,
             "desenvoute_delais": -1,
             "nombre_lancers": -1,
             "cumul_max": -1,
@@ -3940,7 +3940,8 @@
                 },
                 "DOMMAGE_FIXE": {
                     "base": {
-                        "valeur": 80
+                        "valeur": 80,
+                        "maudit": 200
                     }
                 }
 			}
@@ -4471,27 +4472,32 @@
                 "CHANGE_STATS": {
                     "resistances_air": {
                         "base": {
-                            "valeur": 60
+                            "valeur": 60,
+                            "duree": 2
                         }
                     },
                     "resistances_terre": {
                         "base": {
-                            "valeur": 60
+                            "valeur": 60,
+                            "duree": 2
                         }
                     },
                     "resistances_feu": {
                         "base": {
-                            "valeur": 60
+                            "valeur": 60,
+                            "duree": 2
                         }
                     },
                     "resistances_eau": {
                         "base": {
-                            "valeur": 60
+                            "valeur": 60,
+                            "duree": 2
                         }
                     },
                     "resistance_zone": {
                         "base": {
-                            "valeur": -210
+                            "valeur": -210,
+                            "duree": 2
                         }
                     },
                 }
@@ -4555,42 +4561,50 @@
                         "CHANGE_STATS": {
                             "resistances_air": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_terre": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_feu": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_eau": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_air": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_terre": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_feu": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_eau": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             }
                         }
@@ -4599,42 +4613,50 @@
                         "CHANGE_STATS": {
                             "resistances_air": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_terre": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_feu": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "resistances_eau": {
                                 "base": {
-                                    "valeur": 60
+                                    "valeur": 60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_air": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_terre": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_feu": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             },
                             "dommages_eau": {
                                 "base": {
-                                    "valeur": -60
+                                    "valeur": -60,
+                                    "duree": 2
                                 }
                             }
                         }

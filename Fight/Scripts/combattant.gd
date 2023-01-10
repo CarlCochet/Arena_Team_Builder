@@ -172,9 +172,11 @@ func check_case_bonus():
 	var categorie = ""
 	var contenu = ""
 	var maudit = false
-	for case in combat.tilemap.cases_maudites.values():
-		if case == grid_pos:
-			maudit = true
+	if grid_pos in combat.tilemap.cases_maudites.values():
+		maudit = true
+#	for case in combat.tilemap.cases_maudites.values():
+#		if case == grid_pos:
+#			maudit = true
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
@@ -261,13 +263,15 @@ func joue_action(action: int, tile_pos: Vector2i):
 						effet.execute()
 			if not is_invocation:
 				combat.sorts.update(self)
-			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
-			retire_etats(["INVISIBLE"])
+			if tile_pos != grid_pos or not sort.effets.has("DEVIENT_INVISIBLE"):
+				combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+				retire_etats(["INVISIBLE"])
 			if grid_pos != tile_pos:
 				oriente_vers(tile_pos)
 		combat.change_action(7)
 	combat.stats_select.update(stats)
 	combat.check_morts()
+	combat.tilemap.affiche_ldv_obstacles()
 
 
 func affiche_stats_change(valeur, stat):
@@ -278,11 +282,13 @@ func check_tacle_unit(case: Vector2i) -> bool:
 	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	var blocage_total = 0
 	for combattant in combat.combattants:
-		if combattant.equipe == equipe or combattant.check_etats(["PORTE"]):
+		if combattant.equipe == equipe or combattant.check_etats(["PORTE", "PETRIFIE"]):
 			continue
 		if (combattant.grid_pos - case) in voisins:
 			blocage_total += combattant.stats.blocage
-	if randi_range(1, stats.esquive if stats.esquive > 1 else 2) < blocage_total:
+	var min_esquive = max(stats.esquive - 99, 1)
+	var max_esquive = max(stats.esquive, 2)
+	if randi_range(min_esquive, max_esquive) < blocage_total:
 		return true
 	return false
 
@@ -416,6 +422,8 @@ func execute_effets():
 
 
 func check_etats(etats: Array) -> bool:
+	if "VIE_FAIBLE" in etats and stats.hp < int(max_stats.hp / 4):
+		return true
 	for effet in effets:
 		if effet.etat in etats:
 			return true
