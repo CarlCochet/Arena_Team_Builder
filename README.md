@@ -22,8 +22,11 @@ If you do not wish to modify the project, you can just run a release build (reco
 ### And every items
 ![choix_equipements](https://user-images.githubusercontent.com/25507252/211146416-da971d57-269b-428d-bb44-c94a39db7da1.PNG)
 
-### Test your teams in a simulator!
-![test_combat](https://user-images.githubusercontent.com/25507252/211146488-597142fd-9cac-40f8-8b43-20ba0f9b11ff.png)
+### Choose a map...
+![choix_map](https://user-images.githubusercontent.com/25507252/211895153-081164f3-1b9f-4490-ab11-19a412a3e943.PNG)
+
+### ...And test your teams in a simulator!
+![test_combat](https://user-images.githubusercontent.com/25507252/211895211-1b899b83-637c-44c6-a054-61f27d37dc59.png)
 
 
 ## Run the project in Godot
