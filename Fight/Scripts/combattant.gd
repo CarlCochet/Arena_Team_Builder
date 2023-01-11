@@ -174,9 +174,6 @@ func check_case_bonus():
 	var maudit = false
 	if grid_pos in combat.tilemap.cases_maudites.values():
 		maudit = true
-#	for case in combat.tilemap.cases_maudites.values():
-#		if case == grid_pos:
-#			maudit = true
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
@@ -404,6 +401,10 @@ func meurt():
 		for effet in combattant.effets:
 			if effet.lanceur.id != id:
 				new_effets.append(effet)
+			else:
+				if effet.categorie == "CHANGE_STATS" and effet.contenu.has("hp"):
+					combattant.stats.hp -= effet.boost_hp
+					combattant.max_stats.hp -= effet.boost_hp
 		combattant.effets = new_effets
 	
 	var map_pos = combat.tilemap.local_to_map(position)

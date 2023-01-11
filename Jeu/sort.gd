@@ -179,7 +179,13 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 				compte_cible[p_cible.id] += 1
 		else:
 			compte_cible[p_cible.id] = 1
+	
+	var effet_grid_pos = p_cible.grid_pos
 	for effet in p_effets.keys():
+		if p_cible.grid_pos != effet_grid_pos:
+			for combattant in p_cible.combat.combattants:
+				if combattant.grid_pos == effet_grid_pos:
+					p_cible = combattant
 		var combattant_effet = p_effets.duplicate(true)
 		var new_effet = Effet.new(lanceur, p_cible, effet, combattant_effet[effet], critique, centre, aoe, self)
 		if new_effet.instant:
