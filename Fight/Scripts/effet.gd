@@ -305,14 +305,15 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	cible.stats_perdu.ajoute(-dommages, "hp")
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
-	lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage / 100.0)
-	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect):
+	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and type != "soin":
+		lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage / 100.0)
 		lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage / 100.0), "hp")
 		print(lanceur.classe, "_", str(lanceur.id), " perd ", dommages, " PdV.")
 	
 	if type == "vol":
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
+		var soin_vol = min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		lanceur.stats.hp += soin_vol
+		lanceur.stats_perdu.ajoute(soin_vol, "hp")
 		print(lanceur.classe, "_", str(lanceur.id), " gagne ", dommages, " PdV.")
 
 
@@ -494,7 +495,7 @@ func vole_feu():
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 

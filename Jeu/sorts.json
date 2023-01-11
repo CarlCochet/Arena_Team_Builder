@@ -3577,7 +3577,7 @@
             "po_modifiable": 0,
 			"type_zone": 0,
 			"taille_zone": [0, 0],
-			"cible": 7,
+			"cible": 5,
 			"ldv": 1,
 			"type_ldv": 0,
 			"cooldown": 0,
