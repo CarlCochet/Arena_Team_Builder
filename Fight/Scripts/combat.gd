@@ -111,7 +111,7 @@ func check_morts():
 				if glyphe.lanceur.id == combattant.id:
 					delete_glyphes.append(glyphe.id)
 			combattant.meurt()
-		elif combattant is Invocation and combattant.invocateur.stats.hp <= 0:
+		elif combattant.is_invocation and combattant.invocateur.stats.hp <= 0:
 			combattant.meurt()
 		else: 
 			new_combattants.append(combattant)

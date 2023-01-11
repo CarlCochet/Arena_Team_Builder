@@ -837,7 +837,8 @@ func invocation():
 	invoc.position = combat.tilemap.map_to_local(centre - combat.offset)
 	invoc.grid_pos = centre
 	combat.tilemap.a_star_grid.set_point_solid(invoc.grid_pos)
-	combat.tilemap.grid[invoc.grid_pos[0]][invoc.grid_pos[1]] = -2
+	if int(contenu) != 9:
+		combat.tilemap.grid[invoc.grid_pos[0]][invoc.grid_pos[1]] = -2
 	invoc.equipe = lanceur.equipe
 	combat.indexeur_global += 1
 	invoc.id = combat.indexeur_global

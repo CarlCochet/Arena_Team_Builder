@@ -213,10 +213,23 @@ func check_case_bonus():
 	effet.execute()
 
 
+func desactive_cadran():
+	for combattant in combat.combattants:
+		if combattant.is_invocation and combattant.invocateur.id == id:
+			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, combattant.grid_pos - combat.offset).x
+
+
+func active_cadran():
+	for combattant in combat.combattants:
+		if combattant.is_invocation and combattant.invocateur.id == id:
+			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
+
+
 func debut_tour():
 	retrait_durees()
 	execute_effets()
 	check_case_bonus()
+	desactive_cadran()
 	var delta_hp = max_stats.hp - stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp -= delta_hp
@@ -226,9 +239,11 @@ func debut_tour():
 	if not check_etats(["INVISIBLE"]):
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	combat.check_morts()
+	combat.tilemap.affiche_ldv_obstacles()
 
 
 func fin_tour():
+	active_cadran()
 	retrait_cooldown()
 	stat_ret = Stats.new()
 	var temp_hp = stats.hp
