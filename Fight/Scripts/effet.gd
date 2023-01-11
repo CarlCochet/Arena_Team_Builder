@@ -306,15 +306,16 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
 	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and type != "soin":
-		lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage / 100.0)
-		lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage / 100.0), "hp")
-		print(lanceur.classe, "_", str(lanceur.id), " perd ", dommages, " PdV.")
+		var renvoi = dommages * (cible.stats.renvoi_dommage / 100.0)
+		lanceur.stats.hp -= renvoi
+		lanceur.stats_perdu.ajoute(-renvoi, "hp")
+		print(lanceur.classe, "_", str(lanceur.id), " perd ", renvoi, " PdV.")
 	
 	if type == "vol":
 		var soin_vol = min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
 		lanceur.stats.hp += soin_vol
 		lanceur.stats_perdu.ajoute(soin_vol, "hp")
-		print(lanceur.classe, "_", str(lanceur.id), " gagne ", dommages, " PdV.")
+		print(lanceur.classe, "_", str(lanceur.id), " gagne ", soin_vol, " PdV.")
 
 
 func dommage_fixe():
