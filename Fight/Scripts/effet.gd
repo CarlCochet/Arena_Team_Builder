@@ -16,6 +16,8 @@ var aoe: bool
 var combat: Combat
 var sort: Sort
 var type_cible: GlobalData.Cible
+var boost_hp: int
+var indirect: bool
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
 
@@ -32,7 +34,9 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	else:
 		type_cible = GlobalData.Cible.LIBRE
 	duree = 0
+	boost_hp = 0
 	instant = true
+	indirect = false
 	critique = p_critique
 	aoe = p_aoe
 	combat = p_lanceur.get_parent()
@@ -200,7 +204,7 @@ func check_immu(dommages: int) -> bool:
 	for effet in cible.effets:
 		if "IMMUNISE" == effet.etat:
 			return true
-		if "RENVOIE_SORT" == effet.etat and sort.nom != "arme":
+		if "RENVOIE_SORT" == effet.etat and lanceur.id != cible.id and sort.nom != "arme" and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect):
 			for effet_lanceur in lanceur.effets:
 				if "IMMUNISE" == effet_lanceur.etat or "RENVOIE_SORT" == effet_lanceur.etat:
 					return true
@@ -253,6 +257,8 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 	
 	var resistance_zone = cible.stats.resistance_zone / 100.0 if aoe else 0.0
 	var bonus = get_orientation_bonus() if orientation_bonus else 0.0
+	if cible.classe in ["Arbre", "Cadran_De_Xelor", "Bombe_A_Eau", "Bombe_Incendiaire"]:
+		bonus = 0.0
 	var result = float(base * (1.0 + (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone))
 	var proba_roundup = result - int(result)
 	result = int(result) + 1 if randf() < proba_roundup else int(result)
@@ -273,14 +279,17 @@ func update_sacrifice(p_cible):
 
 
 func applique_dommage(base, stat, resistance, orientation_bonus, type):
+	if cible.check_etats(["SACRIFICE"]) and type != "soin":
+		cible = update_sacrifice(cible)
+	
+	if type in ["pourcent", "pourcent_retour"]:
+		base = cible.stats.hp * (base / 100.0)
+	
 	var dommages = calcul_dommage(base, stat, resistance, orientation_bonus)
 	if type == "soin":
 		dommages = max(-dommages, cible.stats.hp - cible.max_stats.hp)
 	
-	if cible.check_etats(["SACRIFICE"]):
-		cible = update_sacrifice(cible)
-	
-	if type == "retour":
+	if type in ["retour", "pourcent_retour"]:
 		if sort.retour_lock:
 			return
 		if lanceur.check_etats(["IMMUNISE"]) and base > 0:
@@ -298,15 +307,17 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	cible.stats_perdu.ajoute(-dommages, "hp")
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
-	lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage / 100.0)
-	if cible.stats.renvoi_dommage > 0:
-		lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage / 100.0), "hp")
-		print(lanceur.classe, "_", str(lanceur.id), " perd ", dommages, " PdV.")
+	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and type != "soin":
+		var renvoi = dommages * (cible.stats.renvoi_dommage / 100.0)
+		lanceur.stats.hp -= renvoi
+		lanceur.stats_perdu.ajoute(-renvoi, "hp")
+		print(lanceur.classe, "_", str(lanceur.id), " perd ", renvoi, " PdV.")
 	
 	if type == "vol":
-		lanceur.stats.hp += min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
-		lanceur.stats_perdu.ajoute(min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp), "hp")
-		print(lanceur.classe, "_", str(lanceur.id), " gagne ", dommages, " PdV.")
+		var soin_vol = min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		lanceur.stats.hp += soin_vol
+		lanceur.stats_perdu.ajoute(soin_vol, "hp")
+		print(lanceur.classe, "_", str(lanceur.id), " gagne ", soin_vol, " PdV.")
 
 
 func dommage_fixe():
@@ -330,13 +341,13 @@ func dommage_pourcent():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(cible.stats.hp * (contenu[base_crit]["allies"] / 100.0), 0.0, 0.0, false, "normal")
+		applique_dommage(contenu[base_crit]["allies"], 0.0, 0.0, false, "pourcent")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:
-		applique_dommage(cible.stats.hp * (contenu[base_crit]["invocations"] / 100.0), 0.0, 0.0, false, "normal") 
+		applique_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, false, "pourcent") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(cible.stats.hp * (contenu[base_crit]["valeur"] / 100.0), 0.0, 0.0, false, "normal") 
+		applique_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, false, "pourcent") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(cible.stats.hp * (contenu[base_crit]["retour"] / 100.0), 0.0, 0.0, false, "retour") 
+		applique_dommage(contenu[base_crit]["retour"], 0.0, 0.0, false, "pourcent_retour") 
 	if cible.stats.hp <= 0:
 		cible.stats.hp = 1
 
@@ -373,6 +384,7 @@ func dommage_si_bouge():
 	etat = "DOMMAGE_SI_BOUGE"
 	if not instant:
 		var new_effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, centre, false, sort)
+		new_effet.indirect = true
 		new_effet.execute()
 		cible.retire_etats(["DOMMAGE_SI_BOUGE"])
 	if instant:
@@ -386,6 +398,7 @@ func dommage_si_utilise_pa():
 	etat = "DOMMAGE_SI_UTILISE_PA"
 	if not instant:
 		var new_effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, centre, false, sort)
+		new_effet.indirect = true
 		new_effet.execute()
 	if instant:
 		duree = 1
@@ -485,7 +498,7 @@ func vole_feu():
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
 		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -535,6 +548,8 @@ func change_stats():
 				continue
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["perso"]
+				if stat == "hp":
+					boost_hp = contenu[stat][base_crit]["perso"]
 				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["perso"] < 0 else " gagne ", contenu[stat][base_crit]["perso"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["perso"]
@@ -550,6 +565,8 @@ func change_stats():
 				continue
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["valeur"]
+				if stat == "hp":
+					boost_hp = contenu[stat][base_crit]["valeur"]
 				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["valeur"] < 0 else " gagne ", contenu[stat][base_crit]["valeur"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
@@ -568,6 +585,8 @@ func change_stats():
 				continue
 			if instant:
 				lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
+				if stat == "hp":
+					boost_hp = contenu[stat][base_crit]["retour"]
 				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["retour"] < 0 else " gagne ", contenu[stat][base_crit]["retour"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				lanceur.stat_buffs[stat] += contenu[stat][base_crit]["retour"]
@@ -711,7 +730,7 @@ func recul():
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
-					cible.bouge_perso(grid_pos - direction)
+					lanceur.bouge_perso(grid_pos - direction)
 				break
 			elif grid[grid_pos.x][grid_pos.y] == -2:
 				if not stopped:
@@ -720,7 +739,7 @@ func recul():
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
 					stopped = true
-					cible.bouge_perso(grid_pos - direction)
+					lanceur.bouge_perso(grid_pos - direction)
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos and not lanceur.check_etats(["IMMUNISE"]):
 							combattant.stats.hp -= (contenu - i) * 3
@@ -729,7 +748,7 @@ func recul():
 		else:
 			break
 	if not stopped:
-		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
+		lanceur.bouge_perso(Vector2i(lanceur.grid_pos) + Vector2i(contenu * direction))
 	combat.tilemap.update_glyphes()
 
 
@@ -823,7 +842,8 @@ func invocation():
 	invoc.position = combat.tilemap.map_to_local(centre - combat.offset)
 	invoc.grid_pos = centre
 	combat.tilemap.a_star_grid.set_point_solid(invoc.grid_pos)
-	combat.tilemap.grid[invoc.grid_pos[0]][invoc.grid_pos[1]] = -2
+	if int(contenu) != 9:
+		combat.tilemap.grid[invoc.grid_pos[0]][invoc.grid_pos[1]] = -2
 	invoc.equipe = lanceur.equipe
 	combat.indexeur_global += 1
 	invoc.id = combat.indexeur_global
@@ -859,6 +879,7 @@ func lance():
 	for combattant in combat.combattants:
 		for effet in combattant.effets:
 			if effet.etat == "PORTE" and lanceur.id == effet.lanceur.id:
+				combattant.oriente_vers(centre)
 				combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
 				combattant.grid_pos = centre
 				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)

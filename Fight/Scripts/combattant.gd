@@ -174,9 +174,6 @@ func check_case_bonus():
 	var maudit = false
 	if grid_pos in combat.tilemap.cases_maudites.values():
 		maudit = true
-#	for case in combat.tilemap.cases_maudites.values():
-#		if case == grid_pos:
-#			maudit = true
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
@@ -216,10 +213,23 @@ func check_case_bonus():
 	effet.execute()
 
 
+func desactive_cadran():
+	for combattant in combat.combattants:
+		if combattant.is_invocation and combattant.invocateur.id == id:
+			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, combattant.grid_pos - combat.offset).x
+
+
+func active_cadran():
+	for combattant in combat.combattants:
+		if combattant.is_invocation and combattant.invocateur.id == id:
+			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
+
+
 func debut_tour():
 	retrait_durees()
 	execute_effets()
 	check_case_bonus()
+	desactive_cadran()
 	var delta_hp = max_stats.hp - stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp -= delta_hp
@@ -232,6 +242,7 @@ func debut_tour():
 
 
 func fin_tour():
+	active_cadran()
 	retrait_cooldown()
 	stat_ret = Stats.new()
 	var temp_hp = stats.hp
@@ -271,7 +282,6 @@ func joue_action(action: int, tile_pos: Vector2i):
 		combat.change_action(7)
 	combat.stats_select.update(stats)
 	combat.check_morts()
-	combat.tilemap.affiche_ldv_obstacles()
 
 
 func affiche_stats_change(valeur, stat):
@@ -404,6 +414,10 @@ func meurt():
 		for effet in combattant.effets:
 			if effet.lanceur.id != id:
 				new_effets.append(effet)
+			else:
+				if effet.categorie == "CHANGE_STATS" and effet.contenu.has("hp"):
+					combattant.stats.hp -= effet.boost_hp
+					combattant.max_stats.hp -= effet.boost_hp
 		combattant.effets = new_effets
 	
 	var map_pos = combat.tilemap.local_to_map(position)

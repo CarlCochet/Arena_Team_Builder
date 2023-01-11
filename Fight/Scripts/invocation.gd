@@ -107,6 +107,7 @@ func update_hitbox():
 			hitbox.position = Vector2(0, -50)
 			hitbox.scale = Vector2(2, 5)
 			hp.position = Vector2(0, -120)
+			fleche.visible = false
 		"Double":
 			classe_sprite.position = Vector2(0, -48)
 			hitbox.position = Vector2(0, -38)
@@ -117,16 +118,19 @@ func update_hitbox():
 			hitbox.position = Vector2(0, -30)
 			hitbox.scale = Vector2(2, 3)
 			hp.position = Vector2(0, -80)
+			fleche.visible = false
 		"Bombe_A_Eau":
 			classe_sprite.position = Vector2(0, -20)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -80)
+			fleche.visible = false
 		"Bombe_Incendiaire":
 			classe_sprite.position = Vector2(0, -20)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -80)
+			fleche.visible = false
 	classe_sprite.texture = load(
 		"res://Classes/Invocations/" + classe.to_lower() + ".png"
 	)
@@ -172,6 +176,8 @@ func choix_cible(p_all_ldv: Array):
 	var min_dist = 9999999
 	var min_hp = 9999999
 	var cible = null
+	if len(p_all_ldv) == 1 and p_all_ldv[0] == grid_pos:
+		return grid_pos
 	for combattant in combat.combattants:
 		if combattant.grid_pos in p_all_ldv and combattant.equipe != equipe:
 			var delta = combattant.grid_pos - grid_pos
