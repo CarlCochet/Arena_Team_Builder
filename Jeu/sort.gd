@@ -261,6 +261,7 @@ func from_arme(_combattant, arme):
 		po = data["po"]
 		type_zone = data["type_zone"] as GlobalData.TypeZone
 		taille_zone = data["taille_zone"]
+		po_modifiable = data["po_modifiable"]
 		effets = data["effets"]
 	else:
 		pa = 3

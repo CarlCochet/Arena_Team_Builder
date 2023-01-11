@@ -10,6 +10,7 @@ var pa: int
 var po: Vector2 
 var type_zone: GlobalData.TypeZone
 var taille_zone: Vector2
+var po_modifiable: int
 var cible: GlobalData.Cible
 var effets: Dictionary
 
@@ -21,6 +22,7 @@ func _init():
 	po = Vector2(0, 0)
 	type_zone = GlobalData.TypeZone.CERCLE
 	taille_zone = Vector2(0, 0)
+	po_modifiable = 1
 	cible = GlobalData.Cible.LIBRE
 	effets = {}
 
@@ -33,6 +35,7 @@ func from_json(data, json_categorie):
 		po = Vector2(data["po"][0], data["po"][1])
 		type_zone = data["type_zone"] as GlobalData.TypeZone
 		taille_zone = Vector2(data["taille_zone"][0], data["taille_zone"][1])
+		po_modifiable = data["po_modifiable"]
 		cible = data["cible"] as GlobalData.Cible
 		effets = data["effets"]
 	return self
@@ -47,6 +50,7 @@ func to_json():
 			"po": po,
 			"type_zone": type_zone,
 			"taille_zone": taille_zone,
+			"po_modifiable": po_modifiable,
 			"cible": cible,
 			"effets": effets
 		}
