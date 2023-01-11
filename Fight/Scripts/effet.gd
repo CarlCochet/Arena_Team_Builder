@@ -257,6 +257,8 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 	
 	var resistance_zone = cible.stats.resistance_zone / 100.0 if aoe else 0.0
 	var bonus = get_orientation_bonus() if orientation_bonus else 0.0
+	if cible.classe in ["Arbre", "Cadran_De_Xelor", "Bombe_A_Eau", "Bombe_Incendiaire"]:
+		bonus = 0.0
 	var result = float(base * (1.0 + (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone))
 	var proba_roundup = result - int(result)
 	result = int(result) + 1 if randf() < proba_roundup else int(result)
@@ -877,6 +879,7 @@ func lance():
 	for combattant in combat.combattants:
 		for effet in combattant.effets:
 			if effet.etat == "PORTE" and lanceur.id == effet.lanceur.id:
+				combattant.oriente_vers(centre)
 				combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
 				combattant.grid_pos = centre
 				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
