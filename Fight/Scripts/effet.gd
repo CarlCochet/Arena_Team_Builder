@@ -282,6 +282,7 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	
 	if type in ["pourcent", "pourcent_retour"]:
 		base = cible.stats.hp * (base / 100.0)
+	
 	var dommages = calcul_dommage(base, stat, resistance, orientation_bonus)
 	if type == "soin":
 		dommages = max(-dommages, cible.stats.hp - cible.max_stats.hp)
@@ -305,7 +306,7 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
 	lanceur.stats.hp -= dommages * (cible.stats.renvoi_dommage / 100.0)
-	if cible.stats.renvoi_dommage > 0:
+	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect):
 		lanceur.stats_perdu.ajoute(-dommages * (cible.stats.renvoi_dommage / 100.0), "hp")
 		print(lanceur.classe, "_", str(lanceur.id), " perd ", dommages, " PdV.")
 	
