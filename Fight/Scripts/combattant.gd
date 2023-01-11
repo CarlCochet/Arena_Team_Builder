@@ -239,7 +239,6 @@ func debut_tour():
 	if not check_etats(["INVISIBLE"]):
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	combat.check_morts()
-	combat.tilemap.affiche_ldv_obstacles()
 
 
 func fin_tour():
@@ -283,7 +282,6 @@ func joue_action(action: int, tile_pos: Vector2i):
 		combat.change_action(7)
 	combat.stats_select.update(stats)
 	combat.check_morts()
-	combat.tilemap.affiche_ldv_obstacles()
 
 
 func affiche_stats_change(valeur, stat):
