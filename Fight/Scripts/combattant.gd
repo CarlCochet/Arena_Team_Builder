@@ -179,38 +179,45 @@ func check_case_bonus():
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
+			var valeur = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
 			contenu = {
-				"dommages_air":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
-				"dommages_terre":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
-				"dommages_feu":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
-				"dommages_eau":{"base":{"valeur":30 if not maudit else -30,"duree":1}}
+				"dommages_air":{"base":{"valeur":valeur,"duree":1}},
+				"dommages_terre":{"base":{"valeur":valeur,"duree":1}},
+				"dommages_feu":{"base":{"valeur":valeur,"duree":1}},
+				"dommages_eau":{"base":{"valeur":valeur,"duree":1}}
 			}
 		3:
 			categorie = "CHANGE_STATS"
+			var valeur = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
 			contenu = {
-				"resistances_air":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
-				"resistances_terre":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
-				"resistances_feu":{"base":{"valeur":30 if not maudit else -30,"duree":1}},
-				"resistances_eau":{"base":{"valeur":30 if not maudit else -30,"duree":1}}
+				"resistances_air":{"base":{"valeur":valeur,"duree":1}},
+				"resistances_terre":{"base":{"valeur":valeur,"duree":1}},
+				"resistances_feu":{"base":{"valeur":valeur,"duree":1}},
+				"resistances_eau":{"base":{"valeur":valeur,"duree":1}}
 			}
 		4:
 			categorie = "SOIN" if not maudit else "DOMMAGE_FIXE"
-			contenu = {"base":{"valeur":7}}
+			var valeur =  7 * (int(combat.tour >= 15) + 1)
+			contenu = {"base":{"valeur":valeur}}
 		5:
 			categorie = "CHANGE_STATS"
-			contenu = {"pa":{"base":{"valeur":2 if not maudit else -2,"duree":1}}}
+			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
+			contenu = {"pa":{"base":{"valeur":valeur,"duree":1}}}
 		6:
 			categorie = "CHANGE_STATS"
-			contenu = {"po":{"base":{"valeur":2 if not maudit else -2,"duree":1}}}
+			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
+			contenu = {"po":{"base":{"valeur":valeur,"duree":1}}}
 		7:
 			categorie = "CHANGE_STATS"
-			contenu = {"soins":{"base":{"valeur":25 if not maudit else -25,"duree":1}}}
+			var valeur = 25 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
+			contenu = {"soins":{"base":{"valeur":valeur,"duree":1}}}
 		8:
 			categorie = "DOMMAGE_POURCENT"
-			contenu = {"base":{"valeur":80 if not maudit else 96}}
+			contenu = {"base":{"valeur":80.0 if combat.tour < 15 and not maudit else (99.84 if combat.tour >= 15 and maudit else 96.0)}}
 		9:
 			categorie = "DOMMAGE_FIXE"
-			contenu = {"base":{"valeur":15 if not maudit else 30}}
+			var valeur = 15 * (int(maudit) + 1) * (int(combat.tour >= 15) + 1)
+			contenu = {"base":{"valeur":valeur}}
 	var effet = Effet.new(self, self, categorie, contenu, false, grid_pos, false, null)
 	effet.execute()
 

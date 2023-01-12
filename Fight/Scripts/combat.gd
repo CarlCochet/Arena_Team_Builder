@@ -13,11 +13,15 @@ var action: int
 var offset: Vector2i
 var tilemap: TileMap
 var spell_pressed: bool
+var tour: int
 
 @onready var sorts: Control = $Sorts
 @onready var timeline: Control = $Timeline
 @onready var stats_select: TextureRect = $AffichageStatsSelect
 @onready var stats_hover: TextureRect = $AffichageStatsHover
+@onready var affichage_fin: Control = $AffichageFin
+@onready var texte_fin: Label = $AffichageFin/TexteFin
+@onready var bouton_retour: TextureButton = $AffichageFin/BoutonRetour
 
 
 func _ready():
@@ -29,6 +33,7 @@ func _ready():
 	offset = tilemap.offset
 	randomize()
 	creer_personnages()
+	tour = 1
 	timeline.init(combattants, selection_id)
 
 
@@ -68,6 +73,9 @@ func passe_tour():
 	selection_id += 1
 	if selection_id >= len(combattants):
 		selection_id = 0
+		tour += 1
+		if tour >= 15:
+			tilemap.update_mort_subite(tour)
 	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
@@ -97,11 +105,18 @@ func change_action(new_action: int):
 		combattant_selection.affiche_path(tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
 
 
+func trigger_victoire(equipe: int):
+	etat = 3
+	texte_fin.text = "VICTOIRE\n" + ("BLEU" if equipe == 0 else "ROUGE")
+	affichage_fin.visible = true
+
+
 func check_morts():
 	var new_combattants = []
 	var delete_glyphes = []
 	var new_selection_id = 0
 	var compte_init = len(combattants)
+	var comptes_equipes = [0, 0]
 	combattants[selection_id].unselect()
 	for combattant in combattants:
 		if combattant.id == combattants[selection_id].id:
@@ -115,12 +130,20 @@ func check_morts():
 			combattant.meurt()
 		else: 
 			new_combattants.append(combattant)
+			comptes_equipes[combattant.equipe] += 1
 	combattants = new_combattants
+	if comptes_equipes[0] == 0:
+		trigger_victoire(1)
+	if comptes_equipes[1] == 0:
+		trigger_victoire(0)
 	if len(delete_glyphes) > 0:
 		tilemap.delete_glyphes(delete_glyphes)
 	tilemap.clear_layer(2)
 	if new_selection_id >= len(combattants):
 		new_selection_id = 0
+		tour += 1
+		if tour >= 15:
+			tilemap.update_mort_subite(tour)
 	selection_id = new_selection_id
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
@@ -210,3 +233,7 @@ func _on_passe_tour_pressed():
 		lance_game()
 	if etat == 1:
 		passe_tour()
+
+
+func _on_bouton_retour_pressed():
+	get_tree().change_scene_to_file("res://UI/choix_map.tscn")

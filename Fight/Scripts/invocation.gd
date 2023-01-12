@@ -3,6 +3,7 @@ class_name Invocation
 
 
 var invocateur
+var is_mort: bool
 @onready var hitbox: Area2D = $Area2D
 
 
@@ -17,6 +18,7 @@ func _ready():
 	is_selected = false
 	is_hovered = false
 	is_invocation = true
+	is_mort = false
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	combat = get_parent()
 	update_hitbox()
@@ -151,7 +153,6 @@ func debut_tour():
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
-	combat.check_morts()
 	joue_ia()
 	combat.passe_tour()
 
@@ -195,6 +196,8 @@ func choix_cible(p_all_ldv: Array):
 
 func joue_ia():
 	combat.check_morts()
+	if is_mort:
+		return
 	var chemin = chemin_vers_proche()
 	if len(chemin) > stats.pm + 1:
 		chemin = chemin.slice(0, stats.pm + 1)
@@ -253,6 +256,7 @@ func meurt():
 	var map_pos = combat.tilemap.local_to_map(position)
 	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
 	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	is_mort = true
 	print(classe, "_", str(id), " est mort.")
 	queue_free()
 

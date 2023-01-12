@@ -13,6 +13,42 @@ var zonetype = GlobalData.TypeZone.CARRE
 var glyphes: Array
 var glyphes_indexeur: int
 var cases_maudites: Dictionary
+var combat: Combat
+
+var ms_data: Dictionary = {
+	"map_2": {
+		"centres": [Vector2(11, 0), Vector2(12, 0), Vector2(12, -1), Vector2(11, -1)],
+		"distance": 8
+	},
+	"map_15": {
+		"centres": [Vector2(11, 0), Vector2(12, 0), Vector2(12, -1), Vector2(11, -1)],
+		"distance": 6
+	},
+	"map_16": {
+		"centres": [Vector2(11, 0), Vector2(12, 0), Vector2(12, -1), Vector2(11, -1)],
+		"distance": 8
+	},
+	"map_19": {
+		"centres": [Vector2(11, 1), Vector2(12, 1), Vector2(12, 0), Vector2(11, 0)],
+		"distance": 7
+	},
+	"map_30": {
+		"centres": [Vector2(11, 1), Vector2(12, 1), Vector2(12, 0), Vector2(11, 0)],
+		"distance": 8
+	},
+	"map_56": {
+		"centres": [Vector2(11, 1), Vector2(12, 1), Vector2(12, 0), Vector2(11, 0)],
+		"distance": 7
+	},
+	"map_58": {
+		"centres": [Vector2(12, 1), Vector2(13, 1), Vector2(13, 0), Vector2(12, 0)],
+		"distance": 7
+	},
+	"map_60": {
+		"centres": [Vector2(15, 1), Vector2(16, 1), Vector2(16, 0), Vector2(15, 0)],
+		"distance": 8
+	}
+}
 
 @onready var overlay = get_used_cells(2)
 @onready var arena = get_used_cells(1)
@@ -22,8 +58,8 @@ func _ready():
 	x_max = 0
 	y_max = 0
 	offset = Vector2i(0, 8)
-	grid = []
 	cases_maudites = {}
+	combat = get_parent()
 	
 	for pos in arena:
 		if pos.x > x_max:
@@ -31,23 +67,10 @@ func _ready():
 		if pos.y > y_max:
 			y_max = pos.y
 	
-	a_star_grid = AStarGrid2D.new()
-	a_star_grid.size = Vector2i(x_max + 1, y_max + 1) + offset
-	a_star_grid.update()
-	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	
-	for x in range(x_max + 1):
-		var col = []
-		col.resize(y_max + 1 + offset.y)
-		col.fill(-1)
-		grid.append(col)
-		for y in range(y_max + 1 + offset.y):
-			a_star_grid.set_point_solid(Vector2i(x, y), true)
-	
 	glyphes_indexeur = 0
 	get_start()
-	build_astar_grid()
-	get_parent().move_child(self, 0)
+	build_grids()
+	combat.move_child(self, 0)
 
 
 func get_start():
@@ -68,7 +91,7 @@ func update_glyphes():
 		glyphe.active_full()
 		if not glyphe.deleted:
 			glyphe.affiche()
-	get_parent().check_morts()
+	combat.check_morts()
 
 
 func check_glyphe_effet(pos: Vector2i, effet: String):
@@ -87,12 +110,48 @@ func delete_glyphes(glyphes_ids: Array):
 	update_glyphes()
 
 
-func build_astar_grid():
+func build_grids():
+	grid = []
+	a_star_grid = AStarGrid2D.new()
+	a_star_grid.size = Vector2i(x_max + 1, y_max + 1) + offset
+	a_star_grid.update()
+	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	
+	for x in range(x_max + 1):
+		var col = []
+		col.resize(y_max + 1 + offset.y)
+		col.fill(-1)
+		grid.append(col)
+		for y in range(y_max + 1 + offset.y):
+			a_star_grid.set_point_solid(Vector2i(x, y), true)
+	
 	for pos in arena:
 		var tile_data = get_cell_atlas_coords(1, pos)
 		grid[pos.x][pos.y + offset.y] = tile_data.x
 		if tile_data.x > 0:
 			a_star_grid.set_point_solid(pos + offset, false)
+
+
+func update_mort_subite(tour: int):
+	if not GlobalData.mort_subite_active:
+		return
+	
+	var distance = ms_data[GlobalData.map_actuelle]["distance"] - (tour - 15)
+	var directions = [Vector2(0, 1), Vector2(1, 0), Vector2(0, -1), Vector2(-1, 0)]
+	for i in range(4):
+		var centre = ms_data[GlobalData.map_actuelle]["centres"][i]
+		for k in range(-distance, distance+1):
+			var cell_pos = centre + directions[i] * distance + k * directions[(i + 1) % 4]
+			erase_cell(1, cell_pos)
+			for combattant in combat.combattants:
+				if combattant.grid_pos == Vector2i(cell_pos) + offset:
+					combattant.stats.hp = 0
+			combat.check_morts()
+	combat.check_morts()
+	build_grids()
+	for combattant in combat.combattants:
+		grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
+		a_star_grid.set_point_solid(combattant.grid_pos)
 
 
 func get_atteignables(pos: Vector2i, pm: int) -> Array:
@@ -230,8 +289,9 @@ func affiche_ldv_obstacles():
 	clear_layer(5)
 	for x in range(0, 40):
 		for y in range(0, 40):
-			if x < len(grid) and y < len(grid[0]) and grid[x][y] < 1:
-				set_cell(5, Vector2i(x, y) - offset, 3, Vector2i(0, 0))
+			if x < len(grid) and y < len(grid[0]):
+				if grid[x][y] == 0 or grid[x][y] == -2:
+					set_cell(5, Vector2i(x, y) - offset, 3, Vector2i(0, 0))
 
 
 func _input(event):

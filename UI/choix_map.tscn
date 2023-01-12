@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c7ng2upg83k4x"]
+[gd_scene load_steps=25 format=3 uid="uid://c7ng2upg83k4x"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_map.gd" id="1_n1jan"]
 [ext_resource type="Texture2D" uid="uid://dkxkir2jodnt3" path="res://Fight/Map/Images/tactic_2.png" id="2_1jwkw"]
@@ -23,6 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://b5sgblea4yfqw" path="res://UI/Buttons/valider_base.png" id="32_48jq0"]
 [ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="33_xavqd"]
 [ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="34_0hosn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2chev"]
+font_size = 24
 
 [node name="ChoixMap" type="Control"]
 layout_mode = 3
@@ -139,6 +142,21 @@ offset_bottom = 32.0
 texture_normal = ExtResource("32_48jq0")
 texture_pressed = ExtResource("33_xavqd")
 texture_hover = ExtResource("34_0hosn")
+
+[node name="MortSubiteCheck" type="CheckBox" parent="."]
+offset_left = 911.0
+offset_top = 720.0
+offset_right = 935.0
+offset_bottom = 744.0
+scale = Vector2(2, 2)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 641.0
+offset_top = 724.0
+offset_right = 890.0
+offset_bottom = 761.0
+text = "Activer la mort subite"
+label_settings = SubResource("LabelSettings_2chev")
 
 [connection signal="pressed" from="GridContainer2/Fermer" to="." method="_on_fermer_pressed" flags=18]
 [connection signal="pressed" from="GridContainer2/Valider" to="." method="_on_valider_pressed" flags=18]

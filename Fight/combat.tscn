@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://egsxhipgew1"]
+[gd_scene load_steps=21 format=3 uid="uid://egsxhipgew1"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
 [ext_resource type="PackedScene" uid="uid://fchxarxrckwc" path="res://Fight/affichage_stats_small.tscn" id="5_jgg7a"]
@@ -12,10 +12,18 @@
 [ext_resource type="Texture2D" uid="uid://cwawriukghosq" path="res://Fight/Images/fleche_UI_2_base.png" id="14_7ic16"]
 [ext_resource type="Texture2D" uid="uid://cdnpto4tcmy1b" path="res://Fight/Images/fleche_UI_2_selected.png" id="15_rvv21"]
 [ext_resource type="Texture2D" uid="uid://cngofkq14ygeh" path="res://Fight/Images/fleche_UI_3_base.png" id="16_gcqp1"]
+[ext_resource type="Texture2D" uid="uid://bknc5skjp7s4v" path="res://UI/Buttons/retour_base.png" id="17_aoxdn"]
 [ext_resource type="Texture2D" uid="uid://b8jfmij81ohx6" path="res://Fight/Images/fleche_UI_3_selected.png" id="17_j3o6q"]
 [ext_resource type="Texture2D" uid="uid://d1xu674o3qbrs" path="res://UI/Buttons/passe_tour_base.png" id="18_ctpdw"]
+[ext_resource type="Texture2D" uid="uid://dd20mihsbd7tw" path="res://UI/Buttons/retour_clicked.png" id="18_qpjp6"]
 [ext_resource type="Texture2D" uid="uid://dsmninkk3w66q" path="res://UI/Buttons/passe_tour_clicked.png" id="19_d7cu6"]
+[ext_resource type="Texture2D" uid="uid://bsx000i85450y" path="res://UI/Buttons/retour_hovered.png" id="19_igho5"]
 [ext_resource type="Texture2D" uid="uid://6qux5yc23gvx" path="res://UI/Buttons/passe_tour_hovered.png" id="20_aeni8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bi0gt"]
+font_size = 72
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Combat" type="Node2D"]
 y_sort_enabled = true
@@ -104,12 +112,39 @@ texture_normal = ExtResource("18_ctpdw")
 texture_pressed = ExtResource("19_d7cu6")
 texture_hover = ExtResource("20_aeni8")
 
-[node name="Button" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="AffichageFin" type="Control" parent="."]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TexteFin" type="Label" parent="AffichageFin"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 228.0
+offset_right = 959.0
+offset_bottom = 432.0
+text = "VICTOIRE
+BLEU"
+label_settings = SubResource("LabelSettings_bi0gt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoutonRetour" type="TextureButton" parent="AffichageFin"]
+layout_mode = 0
+offset_left = 735.0
+offset_top = 501.0
+offset_right = 865.0
+offset_bottom = 541.0
+texture_normal = ExtResource("17_aoxdn")
+texture_pressed = ExtResource("18_qpjp6")
+texture_hover = ExtResource("19_igho5")
 
 [connection signal="pressed" from="OrientationControls/Fleche0" to="." method="_on_fleche_0_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche1" to="." method="_on_fleche_1_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche2" to="." method="_on_fleche_2_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche3" to="." method="_on_fleche_3_pressed"]
 [connection signal="pressed" from="PasseTour" to="." method="_on_passe_tour_pressed"]
+[connection signal="pressed" from="AffichageFin/BoutonRetour" to="." method="_on_bouton_retour_pressed"]

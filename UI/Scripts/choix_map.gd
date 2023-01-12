@@ -5,6 +5,7 @@ var map_initiale: int
 var map_selected: int
 
 @onready var maps: Array = $Maps.get_children()
+@onready var mort_subite_check: CheckBox = $MortSubiteCheck
 
 
 func _ready():
@@ -37,4 +38,5 @@ func _on_fermer_pressed():
 
 
 func _on_valider_pressed():
+	GlobalData.mort_subite_active = mort_subite_check.button_pressed
 	get_tree().change_scene_to_file("res://Fight/combat.tscn")

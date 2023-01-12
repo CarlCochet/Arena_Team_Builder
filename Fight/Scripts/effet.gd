@@ -279,7 +279,7 @@ func update_sacrifice(p_cible, type):
 
 
 func applique_dommage(base, stat, resistance, orientation_bonus, type):
-	if cible.check_etats(["SACRIFICE"]) and type != "soin":
+	if cible.check_etats(["SACRIFICE"]) and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
 	
 	if type in ["pourcent", "pourcent_retour"]:

@@ -60,6 +60,7 @@ var equipe_actuelle: Equipe
 var equipe_test: Equipe
 var perso_actuel: int
 var map_actuelle: String
+var mort_subite_active: bool
 
 
 func _ready():

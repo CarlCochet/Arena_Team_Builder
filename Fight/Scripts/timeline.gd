@@ -26,3 +26,9 @@ func init(combattants, id):
 		combattant_sprite.texture = combattant.classe_sprite.texture
 		fond.add_child(combattant_sprite)
 		i += 1
+	var affichage_tour = Label.new()
+	var label_settings = LabelSettings.new()
+	label_settings.font_size = 40
+	affichage_tour.text = str(get_parent().tour)
+	affichage_tour.label_settings = label_settings
+	add_child(affichage_tour)

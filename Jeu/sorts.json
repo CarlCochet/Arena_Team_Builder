@@ -2228,25 +2228,25 @@
                 "CHANGE_STATS": {
                     "dommages_air": {
                         "base": {
-                            "valeur": 25,
+                            "retour": 25,
                             "duree": 1
                         }
                     },
                     "dommages_terre": {
                         "base": {
-                            "valeur": 25,
+                            "retour": 25,
                             "duree": 1
                         }
                     },
                     "dommages_feu": {
                         "base": {
-                            "valeur": 25,
+                            "retour": 25,
                             "duree": 1
                         }
                     },
                     "dommages_eau": {
                         "base": {
-                            "valeur": 25,
+                            "retour": 25,
                             "duree": 1
                         }
                     }
