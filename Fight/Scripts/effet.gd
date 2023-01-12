@@ -265,22 +265,22 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 	return result
 
 
-func update_sacrifice(p_cible):
+func update_sacrifice(p_cible, type):
 	for effet in p_cible.effets:
-		if effet.etat == "SACRIFICE" and effet.lanceur.id == cible.id:
+		if effet.etat == "SACRIFICE" and effet.lanceur.id == p_cible.id:
 			if (not effet.lanceur.check_etats(["INTRANSPOSABLE"])) and (not p_cible.check_etats(["INTRANSPOSABLE"])):
 				p_cible.echange_positions(effet.lanceur)
 			return p_cible
 		elif effet.etat == "SACRIFICE":
 			if (not effet.lanceur.check_etats(["INTRANSPOSABLE"])) and (not p_cible.check_etats(["INTRANSPOSABLE"])):
 				p_cible.echange_positions(effet.lanceur)
-			return update_sacrifice(effet.lanceur)
+			return update_sacrifice(effet.lanceur, type)
 	return p_cible
 
 
 func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	if cible.check_etats(["SACRIFICE"]) and type != "soin":
-		cible = update_sacrifice(cible)
+		cible = update_sacrifice(cible, type)
 	
 	if type in ["pourcent", "pourcent_retour"]:
 		base = cible.stats.hp * (base / 100.0)
@@ -294,10 +294,13 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 			return
 		if lanceur.check_etats(["IMMUNISE"]) and base > 0:
 			return
-		lanceur.stats.hp -= dommages
-		lanceur.stats_perdu.ajoute(-dommages, "hp")
+		var cible_retour = lanceur
+		if cible_retour.check_etats(["SACRIFICE"]) and type != "soin":
+			cible_retour = update_sacrifice(cible_retour, type)
+		cible_retour.stats.hp -= dommages
+		cible_retour.stats_perdu.ajoute(-dommages, "hp")
 		sort.retour_lock = true
-		print(lanceur.classe, "_", str(lanceur.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
+		print(cible_retour.classe, "_", str(cible_retour.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 		return
 	
 	if check_immu(dommages) and dommages >= 0:
@@ -308,10 +311,13 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
 	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and type != "soin":
+		var cible_renvoi = lanceur
+		if cible_renvoi.check_etats(["SACRIFICE"]):
+			cible_renvoi = update_sacrifice(cible_renvoi, "renvoi")
 		var renvoi = dommages * (cible.stats.renvoi_dommage / 100.0)
-		lanceur.stats.hp -= renvoi
-		lanceur.stats_perdu.ajoute(-renvoi, "hp")
-		print(lanceur.classe, "_", str(lanceur.id), " perd ", renvoi, " PdV.")
+		cible_renvoi.stats.hp -= renvoi
+		cible_renvoi.stats_perdu.ajoute(-renvoi, "hp")
+		print(cible_renvoi.classe, "_", str(cible_renvoi.id), " perd ", renvoi, " PdV.")
 	
 	if type == "vol":
 		var soin_vol = min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)

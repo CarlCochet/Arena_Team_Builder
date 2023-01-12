@@ -129,10 +129,12 @@ func affiche_ldv(action: int):
 		combat.change_action(7)
 		return
 	var bonus_po = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
+	var po_max = sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0]
+	po_max = 1 if sort.po[1] > 0 and po_max <= 0 else po_max
 	all_ldv = combat.tilemap.get_ldv(
 		grid_pos, 
 		sort.po[0],
-		sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0],
+		po_max,
 		sort.type_ldv,
 		sort.ldv
 	)
