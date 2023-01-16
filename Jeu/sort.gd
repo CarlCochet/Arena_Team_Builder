@@ -188,7 +188,7 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 					p_cible = combattant
 		var combattant_effet = p_effets.duplicate(true)
 		var new_effet = Effet.new(lanceur, p_cible, effet, combattant_effet[effet], critique, centre, aoe, self)
-		if new_effet.instant:
+		if new_effet.instant and p_cible.stats.hp > 0:
 			new_effet.execute()
 		if new_effet.duree > 0:
 			p_cible.effets.append(new_effet)
@@ -254,7 +254,37 @@ func check_cible(lanceur, case_cible) -> bool:
 	return true
 
 
-func from_arme(_combattant, arme):
+func from_arme(combattant, arme):
+	var element_principal = "DOMMAGE_FIXE"
+	match combattant.classe:
+		"Cra":
+			element_principal = "DOMMAGE_AIR"
+		"Eca":
+			element_principal = "DOMMAGE_AIR"
+		"Eni":
+			element_principal = "DOMMAGE_FEU"
+		"Enu":
+			element_principal = "DOMMAGE_EAU"
+		"Feca":
+			element_principal = "DOMMAGE_EAU"
+		"Iop":
+			element_principal = "DOMMAGE_TERRE"
+		"Osa":
+			element_principal = "DOMMAGE_FEU"
+		"Panda":
+			element_principal = "DOMMAGE_FEU"
+		"Roublard":
+			element_principal = "DOMMAGE_EAU"
+		"Sacrieur":
+			element_principal = "DOMMAGE_TERRE"
+		"Sadida":
+			element_principal = "DOMMAGE_TERRE"
+		"Sram":
+			element_principal = "DOMMAGE_AIR"
+		"Xelor":
+			element_principal = "DOMMAGE_FEU"
+		"Zobal":
+			element_principal = "DOMMAGE_EAU"
 	if not arme.is_empty():
 		var data = GlobalData.equipements[arme].to_json()
 		pa = data["pa"]
@@ -269,7 +299,7 @@ func from_arme(_combattant, arme):
 		type_zone = GlobalData.TypeZone.CERCLE
 		taille_zone = Vector2(0, 0)
 		po_modifiable = 0
-		effets = { "DOMMAGE_FIXE": { "base": { "valeur": 5 }, "critique": { "valeur": 7 } } }
+		effets = {element_principal:{"base":{"valeur":5},"critique":{"valeur":7}}}
 	nom = "arme"
 	ldv = 1
 	return self

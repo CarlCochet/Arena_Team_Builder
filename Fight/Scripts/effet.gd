@@ -18,6 +18,7 @@ var sort: Sort
 var type_cible: GlobalData.Cible
 var boost_hp: int
 var indirect: bool
+var debuffable: bool
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
 
@@ -43,6 +44,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	sort = p_sort
 	if contenu is Dictionary:
 		duree = trouve_duree(contenu)
+	debuffable = duree > 0
 
 
 func trouve_duree(data):
@@ -320,7 +322,7 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 		print(cible_renvoi.classe, "_", str(cible_renvoi.id), " perd ", renvoi, " PdV.")
 	
 	if type == "vol":
-		var soin_vol = min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		var soin_vol = min(dommages, lanceur.max_stats.hp - lanceur.stats.hp)
 		lanceur.stats.hp += soin_vol
 		lanceur.stats_perdu.ajoute(soin_vol, "hp")
 		print(lanceur.classe, "_", str(lanceur.id), " gagne ", soin_vol, " PdV.")
@@ -577,7 +579,7 @@ func change_stats():
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
 			else:
-				if not sort.effets.has("GLYPHE"):
+				if sort != null and not sort.effets.has("GLYPHE"):
 					cible.stat_ret[stat] += contenu[stat][base_crit]["valeur"]
 			if contenu[stat][base_crit]["valeur"] > 0:
 				cible.max_stats[stat] += contenu[stat][base_crit]["valeur"]
@@ -772,7 +774,7 @@ func teleporte():
 
 
 func transpose():
-	if lanceur.check_etats(["INTRANSPOSABLE"]) or cible.check_etats(["INTRANSPOSABLE", "PORTE"]):
+	if lanceur.check_etats(["INTRANSPOSABLE"]) or cible.check_etats(["INTRANSPOSABLE", "PORTE", "PORTE_ALLIE", "PORTE_ENNEMI"]):
 		return
 	cible.echange_positions(lanceur)
 
@@ -802,14 +804,18 @@ func devient_invisible():
 
 
 func desenvoute():
+	var new_effets = []
 	for effet in cible.effets:
 		if effet.sort != null and effet.sort.desenvoute_delais >= 0:
 			effet.sort.cooldown_actuel = effet.sort.desenvoute_delais
 			effet.sort.compte_lancers = 0
 			effet.sort.compte_cible = {}
+		if not effet.debuffable:
+			new_effets.append(effet)
 	
-	cible.effets = []
+	cible.effets = new_effets
 	cible.stat_buffs = Stats.new()
+	cible.execute_effets()
 	var delta_hp = cible.max_stats.hp - cible.stats.hp
 	cible.stats = cible.init_stats.copy().add(cible.stat_ret).add(cible.stat_buffs)
 	cible.stats.hp -= delta_hp

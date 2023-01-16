@@ -147,6 +147,8 @@ func update_mort_subite(tour: int):
 				if combattant.grid_pos == Vector2i(cell_pos) + offset:
 					combattant.stats.hp = 0
 			combat.check_morts()
+			if combat.etat == 3:
+				return
 	combat.check_morts()
 	build_grids()
 	for combattant in combat.combattants:
