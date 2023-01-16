@@ -425,9 +425,11 @@ func fin_tour():
 
 
 func meurt():
+	var is_porteur = false
 	if check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
 		var effet_lance = Effet.new(self, grid_pos, "LANCE", 1, false, grid_pos, false, null)
 		effet_lance.execute()
+		is_porteur = true
 	
 	for combattant in combat.combattants:
 		var new_effets = []
@@ -440,9 +442,10 @@ func meurt():
 					combattant.max_stats.hp -= effet.boost_hp
 		combattant.effets = new_effets
 	
-	var map_pos = combat.tilemap.local_to_map(position)
-	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
-	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	if not is_porteur:
+		var map_pos = combat.tilemap.local_to_map(position)
+		combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
 	is_mort = true
 	print(classe, "_", str(id), " est mort.")
 	queue_free()

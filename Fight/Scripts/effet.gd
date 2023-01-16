@@ -877,8 +877,10 @@ func porte():
 		var etat_lanceur = "PORTE_ALLIE" if lanceur.equipe == cible.equipe else "PORTE_ENNEMI"
 		var effet_lanceur = Effet.new(lanceur, cible, etat_lanceur, contenu, false, lanceur.grid_pos, false, sort)
 		effet_lanceur.etat = etat_lanceur
+		effet_lanceur.debuffable = false
 		lanceur.effets.append(effet_lanceur)
 		etat = "PORTE"
+		debuffable = false
 		var map_pos = cible.grid_pos - combat.offset
 		cible.combat.tilemap.a_star_grid.set_point_solid(cible.grid_pos, false)
 		cible.combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = cible.combat.tilemap.get_cell_atlas_coords(1, map_pos).x
@@ -897,13 +899,16 @@ func lance():
 				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
 				combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 				combattant.z_index = 0
-				var new_sort = sort.copy()
-				new_sort.pa = 0
-				new_sort.cible = GlobalData.Cible.LIBRE
-				new_sort.effets.erase("LANCE")
+				var new_sort = null
+				if sort != null:
+					new_sort = sort.copy()
+					new_sort.pa = 0
+					new_sort.cible = GlobalData.Cible.LIBRE
+					new_sort.effets.erase("LANCE")
 				combattant.retire_etats(["PORTE"])
 				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
-				new_sort.execute_effets(lanceur, [centre], centre)
+				if new_sort != null:
+					new_sort.execute_effets(lanceur, [centre], centre)
 				combat.tilemap.update_glyphes()
 				return
 
