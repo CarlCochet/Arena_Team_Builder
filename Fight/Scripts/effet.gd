@@ -611,6 +611,7 @@ func change_stats():
 				lanceur.max_stats[stat] += contenu[stat][base_crit]["retour"]
 			if stat in ["pa", "pm", "hp"]:
 				lanceur.stats_perdu.ajoute(contenu[stat][base_crit]["retour"], stat)
+	instant = false
 
 
 func reverse_change_stats():
@@ -773,7 +774,9 @@ func avance():
 
 func immobilise():
 	etat = "IMMOBILISE"
-	print(cible.classe, "_", str(cible.id), " est immobilisé (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est immobilisé (", duree, " tours).")
+	instant = false
 
 
 func teleporte():
@@ -788,7 +791,9 @@ func transpose():
 
 func petrifie():
 	etat = "PETRIFIE"
-	print(cible.classe, "_", str(cible.id), " est pétrifié (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est pétrifié (", duree, " tours).")
+	instant = false
 
 
 func rate_sort():
@@ -832,27 +837,37 @@ func desenvoute():
 
 func non_portable():
 	etat = "NON_PORTABLE"
-	print(cible.classe, "_", str(cible.id), " est non-portable (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est non-portable (", duree, " tours).")
+	instant = false
 
 
 func intransposable():
 	etat = "INTRANSPOSABLE"
-	print(cible.classe, "_", str(cible.id), " est intransposable (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est intransposable (", duree, " tours).")
+	instant = false
 
 
 func immunise():
 	etat = "IMMUNISE"
-	print(cible.classe, "_", str(cible.id), " est immunisé (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est immunisé (", duree, " tours).")
+	instant = false
 
 
 func stabilise():
 	etat = "STABILISE"
-	print(cible.classe, "_", str(cible.id), " est stabilisé (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est stabilisé (", duree, " tours).")
+	instant = false
 
 
 func renvoie_sort():
 	etat = "RENVOIE_SORT"
-	print(cible.classe, "_", str(cible.id), " renvoie les sorts (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " renvoie les sorts (", duree, " tours).")
+	instant = false
 
 
 func invocation():
@@ -922,7 +937,9 @@ func lance():
 
 func picole():
 	etat = "PICOLE"
-	print(lanceur.classe, "_", str(lanceur.id), " entre dans l'état picole.")
+	if instant:
+		print(lanceur.classe, "_", str(lanceur.id), " entre dans l'état picole.")
+	instant = false
 
 
 func sacrifice():
@@ -931,7 +948,9 @@ func sacrifice():
 			cible.retire_etats(["SACRIFICE"])
 			break
 	etat = "SACRIFICE"
-	print(lanceur.classe, "_", str(lanceur.id), " sacrifie ", cible.classe, "_", str(cible.id), " (", duree, " tours).")
+	if instant:
+		print(lanceur.classe, "_", str(lanceur.id), " sacrifie ", cible.classe, "_", str(cible.id), " (", duree, " tours).")
+	instant = false
 
 
 func tourne():
@@ -940,12 +959,16 @@ func tourne():
 
 func immunise_retrait_pa():
 	etat = "IMMUNISE_RETRAIT_PA"
-	print(cible.classe, "_", str(cible.id), " est immunisé au retrait PA (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est immunisé au retrait PA (", duree, " tours).")
+	instant = false
 
 
 func immunise_retrait_pm():
 	etat = "IMMUNISE_RETRAIT_PM"
-	print(cible.classe, "_", str(cible.id), " est immunisé au retrait PM (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est immunisé au retrait PM (", duree, " tours).")
+	instant = false
 
 
 func suicide():

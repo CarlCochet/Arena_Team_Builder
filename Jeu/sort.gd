@@ -99,37 +99,41 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
 	elif effets["cible"] == 4:
-		for combattant in combattants:
-			if combattant.equipe != lanceur.equipe:
-				trouve = true
-				if aoe or not combattant.check_etats(["PORTE"]):
-					targets.append(combattant)
+		for effet in effets.keys():
+			if effet != "cible":
+				for combattant in combattants:
+					if combattant.equipe != lanceur.equipe:
+						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		return true
 	elif effets["cible"] == 8:
-		for combattant in combattants:
-			trouve = true
-			if aoe or not combattant.check_etats(["PORTE"]):
-				targets.append(combattant)
+		for effet in effets.keys():
+			if effet != "cible":
+				for combattant in combattants:
+					parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		return true
 	elif effets["cible"] == 9:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
 				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
-				for combattant_bis in combattants:
-					if combattant_bis.classe == combattant.classe and combattant_bis.id != combattant.id:
-						targets.append(combattant_bis)
+					for combattant_bis in combattants:
+						if combattant_bis.classe == combattant.classe and combattant_bis.id != combattant.id and combattant.equipe == combattant_bis.equipe:
+							targets.append(combattant_bis)
 	elif effets["cible"] == 10:
-		for combattant in combattants:
-			if not combattant.is_invocation: 
-				trouve = true
-				if aoe or not combattant.check_etats(["PORTE"]):
-					targets.append(combattant)
+		for effet in effets.keys():
+			if effet != "cible":
+				for combattant in combattants:
+					if not combattant.is_invocation: 
+						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		return true
 	elif effets["cible"] == 11:
-		for combattant in combattants:
-			if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
-				trouve = true
-				if aoe or not combattant.check_etats(["PORTE"]):
-					targets.append(combattant)
+		for effet in effets.keys():
+			if effet != "cible":
+				for combattant in combattants:
+					if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
+						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		return true
 	
 	if trouve:
 		for combattant in targets:
@@ -167,8 +171,6 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 				new_effet.execute()
 		return true
 	
-	if p_cible.check_etats(["PORTE"]) and not aoe:
-		return false
 	if p_cible.check_etats(etats_cible_interdits):
 		return false
 	if lancer_par_cible > 0 and (not p_cible is Vector2i) and (not p_cible is Array):
@@ -192,6 +194,40 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 			new_effet.execute()
 		if new_effet.duree > 0:
 			p_cible.effets.append(new_effet)
+	return true
+
+
+func parse_effet(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe):
+	if p_cible is Array:
+		for case in p_cible:
+			var new_effet = Effet.new(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe, self)
+			new_effet.execute()
+		return true
+	
+	if p_cible.check_etats(etats_cible_interdits):
+		return false
+	if lancer_par_cible > 0 and (not p_cible is Vector2i) and (not p_cible is Array):
+		if compte_cible.has(p_cible.id):
+			if compte_cible[p_cible.id] >= lancer_par_cible:
+				return false
+			else:
+				compte_cible[p_cible.id] += 1
+		else:
+			compte_cible[p_cible.id] = 1
+	
+	var effet_grid_pos = p_cible.grid_pos
+	if p_cible.grid_pos != effet_grid_pos:
+		for combattant in p_cible.combat.combattants:
+			if combattant.grid_pos == effet_grid_pos:
+				p_cible = combattant
+	var combattant_effet = p_effet
+	if p_effet is Dictionary:
+		combattant_effet = p_effet.duplicate(true)
+	var new_effet = Effet.new(lanceur, p_cible, p_categorie, combattant_effet, critique, centre, aoe, self)
+	if new_effet.instant and p_cible.stats.hp > 0:
+		new_effet.execute()
+	if new_effet.duree > 0:
+		p_cible.effets.append(new_effet)
 	return true
 
 
