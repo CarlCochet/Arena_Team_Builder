@@ -259,7 +259,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 			stats.pa -= sort.pa
 			stats_perdu.ajoute(-sort.pa, "pa")
 			for effet in effets:
-				if effet.etat == "DOMMAGE_SI_UTILISE_PA":
+				if effet.etat == "DOMMAGE_SI_UTILISE_PA" and (effet.sort.nom != sort.nom or effet.lanceur.id != id):
 					for i in range(sort.pa):
 						effet.execute()
 			if not is_invocation:

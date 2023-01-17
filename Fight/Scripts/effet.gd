@@ -280,9 +280,16 @@ func update_sacrifice(p_cible, type):
 	return p_cible
 
 
-func applique_dommage(base, stat, resistance, orientation_bonus, type):
+func applique_dommage(base, stat_element: String, resistance_element: String, orientation_bonus, type):
 	if cible.check_etats(["SACRIFICE"]) and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
+	
+	var stat = 0.0
+	if not stat_element.is_empty():
+		stat = lanceur.stats[stat_element]
+	var resistance = 0.0
+	if not resistance_element.is_empty():
+		resistance = cible.stats[resistance_element]
 	
 	if type in ["pourcent", "pourcent_retour"]:
 		base = cible.stats.hp * (base / 100.0)
@@ -333,15 +340,15 @@ func dommage_fixe():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], 0.0, 0.0, false, "normal")
+		applique_dommage(contenu[base_crit]["allies"], "", "", false, "normal")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, false, "normal")
+		applique_dommage(contenu[base_crit]["invocations"], "", "", false, "normal")
 	elif contenu[base_crit].has("maudit") and centre in combat.tilemap.cases_maudites.values():
-		applique_dommage(contenu[base_crit]["maudit"], 0.0, 0.0, false, "normal")
+		applique_dommage(contenu[base_crit]["maudit"], "", "", false, "normal")
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, false, "normal")
+		applique_dommage(contenu[base_crit]["valeur"], "", "", false, "normal")
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], 0.0, 0.0, false, "retour")
+		applique_dommage(contenu[base_crit]["retour"], "", "", false, "retour")
 
 
 func dommage_pourcent():
@@ -349,13 +356,13 @@ func dommage_pourcent():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], 0.0, 0.0, false, "pourcent")
+		applique_dommage(contenu[base_crit]["allies"], "", "", false, "pourcent")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:
-		applique_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, false, "pourcent") 
+		applique_dommage(contenu[base_crit]["invocations"], "", "", false, "pourcent") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, false, "pourcent") 
+		applique_dommage(contenu[base_crit]["valeur"], "", "", false, "pourcent") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], 0.0, 0.0, false, "pourcent_retour") 
+		applique_dommage(contenu[base_crit]["retour"], "", "", false, "pourcent_retour") 
 	if cible.stats.hp <= 0:
 		cible.stats.hp = 1
 
@@ -418,13 +425,13 @@ func dommage_air():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_air", "resistances_air", not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_air", "resistances_air", not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_air", "resistances_air", not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_air, lanceur.stats.resistances_air, false, "retour") 
+		applique_dommage(contenu[base_crit]["retour"], "dommages_air", "resistances_air", false, "retour") 
 
 
 func dommage_terre():
@@ -432,13 +439,13 @@ func dommage_terre():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_terre", "resistances_terre", not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_terre", "resistances_terre", not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_terre", "resistances_terre", not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_terre, lanceur.stats.resistances_terre, false, "retour") 
+		applique_dommage(contenu[base_crit]["retour"], "dommages_terre", "resistances_terre", false, "retour") 
 
 
 func dommage_feu():
@@ -446,13 +453,13 @@ func dommage_feu():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_feu", "resistances_feu", not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_feu", "resistances_feu", not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_feu", "resistances_feu", not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_feu, lanceur.stats.resistances_feu, false, "retour") 
+		applique_dommage(contenu[base_crit]["retour"], "dommages_feu", "resistances_feu", false, "retour") 
 
 
 func dommage_eau():
@@ -460,13 +467,13 @@ func dommage_eau():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_eau", "resistances_eau", not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_eau", "resistances_eau", not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_eau", "resistances_eau", not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_eau, lanceur.stats.resistances_eau, false, "retour") 
+		applique_dommage(contenu[base_crit]["retour"], "dommages_eau", "resistances_eau", false, "retour") 
 
 
 func vole_air():
@@ -474,11 +481,11 @@ func vole_air():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_air", "resistances_air", not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_air", "resistances_air", not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_air", "resistances_air", not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -488,11 +495,11 @@ func vole_terre():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_terre", "resistances_terre", not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_terre", "resistances_terre", not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_terre", "resistances_terre", not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -502,11 +509,11 @@ func vole_feu():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_feu", "resistances_feu", not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_feu", "resistances_feu", not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_feu", "resistances_feu", not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -516,11 +523,11 @@ func vole_eau():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_eau", "resistances_eau", not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_eau", "resistances_eau", not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_eau", "resistances_eau", not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -530,11 +537,11 @@ func soin():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.soins, 0, false, "soin") 
+		applique_dommage(contenu[base_crit]["allies"], "soins", "", false, "soin") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.soins, 0, false, "soin") 
+		applique_dommage(contenu[base_crit]["invocations"], "soins", "", false, "soin") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.soins, 0, false, "soin") 
+		applique_dommage(contenu[base_crit]["valeur"], "soins", "", false, "soin") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 

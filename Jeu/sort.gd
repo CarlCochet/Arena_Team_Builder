@@ -66,7 +66,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	var aoe = false
 	if len(cases_cibles) == 0:
 		return false
-	if len(cases_cibles) > 1:
+	if len(cases_cibles) > 1 or taille_zone.y > 0:
 		aoe = true
 	print(lanceur.classe, "_", str(lanceur.id), " lance ", nom, ".")
 	var combattants = lanceur.combat.combattants

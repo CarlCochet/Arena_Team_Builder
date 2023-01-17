@@ -67,6 +67,7 @@ offset_right = 129.0
 offset_bottom = 681.0
 
 [node name="Fleche0" type="TextureButton" parent="OrientationControls"]
+layout_mode = 0
 offset_left = 33.0
 offset_right = 142.0
 offset_bottom = 70.0
@@ -75,6 +76,7 @@ texture_normal = ExtResource("10_mc0eu")
 texture_pressed = ExtResource("11_4niei")
 
 [node name="Fleche1" type="TextureButton" parent="OrientationControls"]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 21.0
 offset_right = 142.0
@@ -84,6 +86,7 @@ texture_normal = ExtResource("12_toemx")
 texture_pressed = ExtResource("13_ffdov")
 
 [node name="Fleche2" type="TextureButton" parent="OrientationControls"]
+layout_mode = 0
 offset_top = 21.0
 offset_right = 109.0
 offset_bottom = 91.0
@@ -92,6 +95,7 @@ texture_normal = ExtResource("14_7ic16")
 texture_pressed = ExtResource("15_rvv21")
 
 [node name="Fleche3" type="TextureButton" parent="OrientationControls"]
+layout_mode = 0
 offset_right = 109.0
 offset_bottom = 70.0
 scale = Vector2(0.3, 0.3)
@@ -117,6 +121,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TexteFin" type="Label" parent="AffichageFin"]
+layout_mode = 0
 offset_left = 640.0
 offset_top = 228.0
 offset_right = 959.0
@@ -128,6 +133,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BoutonRetour" type="TextureButton" parent="AffichageFin"]
+layout_mode = 0
 offset_left = 735.0
 offset_top = 501.0
 offset_right = 865.0
