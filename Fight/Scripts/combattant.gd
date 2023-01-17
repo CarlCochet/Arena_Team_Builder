@@ -272,6 +272,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 		combat.change_action(7)
 	combat.stats_select.update(stats)
 	combat.check_morts()
+	combat.tilemap.affiche_astar_obstacles()
 
 
 func affiche_stats_change(valeur, stat):
@@ -296,6 +297,8 @@ func check_tacle_unit(case: Vector2i) -> bool:
 
 
 func deplace_perso(chemin: Array):
+	if stats.pm <= 0:
+		return
 	var tacled = check_tacle_unit(grid_pos)
 	var pm_utilise = 0
 	for effet in effets:
@@ -412,6 +415,7 @@ func debut_tour():
 	if check_etats(["IMMOBILISE"]):
 		stats.pm = 0
 	combat.check_morts()
+	combat.tilemap.affiche_astar_obstacles()
 
 
 func fin_tour():
@@ -446,6 +450,9 @@ func meurt():
 		var map_pos = combat.tilemap.local_to_map(position)
 		combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	else:
+		combat.tilemap.a_star_grid.set_point_solid(grid_pos, true)
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	is_mort = true
 	print(classe, "_", str(id), " est mort.")
 	queue_free()
@@ -460,7 +467,7 @@ func execute_effets():
 
 
 func check_etats(etats: Array) -> bool:
-	if "VIE_FAIBLE" in etats and stats.hp < int(max_stats.hp / 4):
+	if "VIE_FAIBLE" in etats and stats.hp < int(max_stats.hp / 4.0):
 		return true
 	for effet in effets:
 		if effet.etat in etats:

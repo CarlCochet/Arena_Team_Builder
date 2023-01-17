@@ -173,7 +173,7 @@ func chemin_vers_proche() -> Array:
 					min_dist = len(chemin)
 					min_chemin = chemin
 					min_hp = combattant.stats.hp
-				elif len(chemin) == min_dist and len(chemin) > 0:
+				elif len(chemin) == min_dist and len(chemin) > 0 and combattant.stats.hp < min_hp:
 					min_dist = len(chemin)
 					min_chemin = chemin
 					min_hp = combattant.stats.hp
@@ -205,7 +205,7 @@ func joue_ia():
 	combat.check_morts()
 	if is_mort:
 		return
-	if stats.pm > 0:
+	if stats.pm > 0 and init_stats.pm > 0:
 		var chemin = chemin_vers_proche()
 		if len(chemin) > stats.pm + 1:
 			chemin = chemin.slice(0, stats.pm + 1)

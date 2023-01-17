@@ -921,15 +921,14 @@ func lance():
 				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
 				combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 				combattant.z_index = 0
+				combattant.retire_etats(["PORTE"])
+				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
 				var new_sort = null
 				if sort != null:
 					new_sort = sort.copy()
 					new_sort.pa = 0
 					new_sort.cible = GlobalData.Cible.LIBRE
 					new_sort.effets.erase("LANCE")
-				combattant.retire_etats(["PORTE"])
-				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
-				if new_sort != null:
 					new_sort.execute_effets(lanceur, [centre], centre)
 				combat.tilemap.update_glyphes()
 				return
