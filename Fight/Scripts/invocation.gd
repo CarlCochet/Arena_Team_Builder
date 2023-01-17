@@ -3,7 +3,7 @@ class_name Invocation
 
 
 var invocateur
-var is_mort: bool
+
 @onready var hitbox: Area2D = $Area2D
 
 
@@ -154,12 +154,14 @@ func debut_tour():
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
 	joue_ia()
-	combat.passe_tour()
+	if not is_mort:
+		combat.passe_tour()
 
 
 func chemin_vers_proche() -> Array:
 	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	var min_dist = 99999999
+	var min_hp = 9999999
 	var min_chemin = []
 	for combattant in combat.combattants:
 		if combattant.equipe != equipe:
@@ -170,6 +172,11 @@ func chemin_vers_proche() -> Array:
 				if len(chemin) < min_dist and len(chemin) > 0:
 					min_dist = len(chemin)
 					min_chemin = chemin
+					min_hp = combattant.stats.hp
+				elif len(chemin) == min_dist and len(chemin) > 0 and combattant.stats.hp < min_hp:
+					min_dist = len(chemin)
+					min_chemin = chemin
+					min_hp = combattant.stats.hp
 	return min_chemin
 
 
@@ -198,11 +205,12 @@ func joue_ia():
 	combat.check_morts()
 	if is_mort:
 		return
-	var chemin = chemin_vers_proche()
-	if len(chemin) > stats.pm + 1:
-		chemin = chemin.slice(0, stats.pm + 1)
-	if len(chemin) > 0:
-		deplace_perso(chemin)
+	if stats.pm > 0 and init_stats.pm > 0:
+		var chemin = chemin_vers_proche()
+		if len(chemin) > stats.pm + 1:
+			chemin = chemin.slice(0, stats.pm + 1)
+		if len(chemin) > 0:
+			deplace_perso(chemin)
 	for sort in sorts:
 		if not sort.precheck_cast(self):
 			continue
@@ -242,7 +250,7 @@ func meurt():
 				new_effets.append(effet)
 		combattant.effets = new_effets
 	
-	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
+	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"] and stats.hp <= 0:
 		var sort = sorts[0]
 		zone = combat.tilemap.get_zone(
 			grid_pos,

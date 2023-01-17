@@ -28,6 +28,7 @@ var zone: Array
 
 var is_selected: bool
 var is_hovered: bool
+var is_mort: bool
 
 var cercle_bleu = preload("res://Fight/Images/cercle_personnage_bleu.png")
 var cercle_rouge = preload("res://Fight/Images/cercle_personnage_rouge.png")
@@ -179,7 +180,7 @@ func check_case_bonus():
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
-			var valeur = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
+			var valeur = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {
 				"dommages_air":{"base":{"valeur":valeur,"duree":1}},
 				"dommages_terre":{"base":{"valeur":valeur,"duree":1}},
@@ -188,7 +189,7 @@ func check_case_bonus():
 			}
 		3:
 			categorie = "CHANGE_STATS"
-			var valeur = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
+			var valeur = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {
 				"resistances_air":{"base":{"valeur":valeur,"duree":1}},
 				"resistances_terre":{"base":{"valeur":valeur,"duree":1}},
@@ -197,29 +198,35 @@ func check_case_bonus():
 			}
 		4:
 			categorie = "SOIN" if not maudit else "DOMMAGE_FIXE"
-			var valeur =  7 * (int(combat.tour >= 15) + 1)
+			var valeur =  7 * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"base":{"valeur":valeur}}
 		5:
 			categorie = "CHANGE_STATS"
-			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
+			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"pa":{"base":{"valeur":valeur,"duree":1}}}
 		6:
 			categorie = "CHANGE_STATS"
-			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
+			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"po":{"base":{"valeur":valeur,"duree":1}}}
 		7:
 			categorie = "CHANGE_STATS"
-			var valeur = 25 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15) + 1)
+			var valeur = 25 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"soins":{"base":{"valeur":valeur,"duree":1}}}
 		8:
 			categorie = "DOMMAGE_POURCENT"
-			contenu = {"base":{"valeur":80.0 if combat.tour < 15 and not maudit else (99.84 if combat.tour >= 15 and maudit else 96.0)}}
+			contenu = {"base":{"valeur":80.0 if combat.tour < 15 and not maudit else (99.84 if combat.tour >= 15 and GlobalData.mort_subite_active and maudit else 96.0)}}
 		9:
 			categorie = "DOMMAGE_FIXE"
-			var valeur = 15 * (int(maudit) + 1) * (int(combat.tour >= 15) + 1)
+			var valeur = 15 * (int(maudit) + 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"base":{"valeur":valeur}}
 	var effet = Effet.new(self, self, categorie, contenu, false, grid_pos, false, null)
+	effet.debuffable = false
+	var temp_soins = stats.soins
+	stats.soins = 0
 	effet.execute()
+	stats.soins = temp_soins
+	if effet.duree > 0:
+		effets.append(effet)
 
 
 func desactive_cadran():
@@ -232,32 +239,6 @@ func active_cadran():
 	for combattant in combat.combattants:
 		if combattant.is_invocation and combattant.invocateur.id == id:
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
-
-
-func debut_tour():
-	retrait_durees()
-	execute_effets()
-	check_case_bonus()
-	desactive_cadran()
-	var delta_hp = max_stats.hp - stats.hp
-	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
-	stats.hp -= delta_hp
-	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
-	if check_etats(["PETRIFIE"]):
-		combat.passe_tour()
-	if not check_etats(["INVISIBLE"]):
-		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
-	combat.check_morts()
-
-
-func fin_tour():
-	active_cadran()
-	retrait_cooldown()
-	stat_ret = Stats.new()
-	var temp_hp = stats.hp
-	stats = init_stats.copy().add(stat_buffs)
-	stats.hp = temp_hp
-	combat.check_morts()
 
 
 func joue_action(action: int, tile_pos: Vector2i):
@@ -278,7 +259,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 			stats.pa -= sort.pa
 			stats_perdu.ajoute(-sort.pa, "pa")
 			for effet in effets:
-				if effet.etat == "DOMMAGE_SI_UTILISE_PA":
+				if effet.etat == "DOMMAGE_SI_UTILISE_PA" and (effet.sort.nom != sort.nom or effet.lanceur.id != id):
 					for i in range(sort.pa):
 						effet.execute()
 			if not is_invocation:
@@ -298,6 +279,8 @@ func affiche_stats_change(valeur, stat):
 
 
 func check_tacle_unit(case: Vector2i) -> bool:
+	if check_etats(["PORTE"]):
+		return false
 	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	var blocage_total = 0
 	for combattant in combat.combattants:
@@ -313,6 +296,8 @@ func check_tacle_unit(case: Vector2i) -> bool:
 
 
 func deplace_perso(chemin: Array):
+	if stats.pm <= 0:
+		return
 	var tacled = check_tacle_unit(grid_pos)
 	var pm_utilise = 0
 	for effet in effets:
@@ -413,10 +398,40 @@ func oriente_vers(pos: Vector2i):
 	change_orientation(min_vec)
 
 
+func debut_tour():
+	retrait_durees()
+	execute_effets()
+	check_case_bonus()
+	desactive_cadran()
+	var delta_hp = max_stats.hp - stats.hp
+	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
+	stats.hp -= delta_hp
+	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
+	if check_etats(["PETRIFIE"]):
+		combat.passe_tour()
+	if not check_etats(["INVISIBLE"]):
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+	if check_etats(["IMMOBILISE"]):
+		stats.pm = 0
+	combat.check_morts()
+
+
+func fin_tour():
+	active_cadran()
+	retrait_cooldown()
+	stat_ret = Stats.new()
+	var temp_hp = stats.hp
+	stats = init_stats.copy().add(stat_buffs)
+	stats.hp = temp_hp
+	combat.check_morts()
+
+
 func meurt():
+	var is_porteur = false
 	if check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
 		var effet_lance = Effet.new(self, grid_pos, "LANCE", 1, false, grid_pos, false, null)
 		effet_lance.execute()
+		is_porteur = true
 	
 	for combattant in combat.combattants:
 		var new_effets = []
@@ -429,9 +444,14 @@ func meurt():
 					combattant.max_stats.hp -= effet.boost_hp
 		combattant.effets = new_effets
 	
-	var map_pos = combat.tilemap.local_to_map(position)
-	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
-	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	if not is_porteur:
+		var map_pos = combat.tilemap.local_to_map(position)
+		combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	else:
+		combat.tilemap.a_star_grid.set_point_solid(grid_pos, true)
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+	is_mort = true
 	print(classe, "_", str(id), " est mort.")
 	queue_free()
 
@@ -445,7 +465,7 @@ func execute_effets():
 
 
 func check_etats(etats: Array) -> bool:
-	if "VIE_FAIBLE" in etats and stats.hp < int(max_stats.hp / 4):
+	if "VIE_FAIBLE" in etats and stats.hp < int(max_stats.hp / 4.0):
 		return true
 	for effet in effets:
 		if effet.etat in etats:
@@ -472,6 +492,13 @@ func retrait_durees():
 			if effet.duree > 0:
 				new_effets.append(effet)
 		combattant.effets = new_effets
+		combattant.stat_buffs = Stats.new()
+		combattant.max_stats = combattant.init_stats.copy()
+		combattant.execute_effets()
+		var delta_hp = combattant.max_stats.hp - combattant.stats.hp
+		combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs)
+		combattant.stats.hp -= delta_hp
+		
 	
 	var new_map_glyphes = []
 	for glyphe in combat.tilemap.glyphes:

@@ -18,6 +18,7 @@ var sort: Sort
 var type_cible: GlobalData.Cible
 var boost_hp: int
 var indirect: bool
+var debuffable: bool
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
 
@@ -43,6 +44,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	sort = p_sort
 	if contenu is Dictionary:
 		duree = trouve_duree(contenu)
+	debuffable = duree > 0
 
 
 func trouve_duree(data):
@@ -278,9 +280,16 @@ func update_sacrifice(p_cible, type):
 	return p_cible
 
 
-func applique_dommage(base, stat, resistance, orientation_bonus, type):
+func applique_dommage(base, stat_element: String, resistance_element: String, orientation_bonus, type):
 	if cible.check_etats(["SACRIFICE"]) and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
+	
+	var stat = 0.0
+	if not stat_element.is_empty():
+		stat = lanceur.stats[stat_element]
+	var resistance = 0.0
+	if not resistance_element.is_empty():
+		resistance = cible.stats[resistance_element]
 	
 	if type in ["pourcent", "pourcent_retour"]:
 		base = cible.stats.hp * (base / 100.0)
@@ -320,7 +329,7 @@ func applique_dommage(base, stat, resistance, orientation_bonus, type):
 		print(cible_renvoi.classe, "_", str(cible_renvoi.id), " perd ", renvoi, " PdV.")
 	
 	if type == "vol":
-		var soin_vol = min(dommages / 2, lanceur.max_stats.hp - lanceur.stats.hp)
+		var soin_vol = min(dommages, lanceur.max_stats.hp - lanceur.stats.hp)
 		lanceur.stats.hp += soin_vol
 		lanceur.stats_perdu.ajoute(soin_vol, "hp")
 		print(lanceur.classe, "_", str(lanceur.id), " gagne ", soin_vol, " PdV.")
@@ -331,15 +340,15 @@ func dommage_fixe():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], 0.0, 0.0, false, "normal")
+		applique_dommage(contenu[base_crit]["allies"], "", "", false, "normal")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, false, "normal")
+		applique_dommage(contenu[base_crit]["invocations"], "", "", false, "normal")
 	elif contenu[base_crit].has("maudit") and centre in combat.tilemap.cases_maudites.values():
-		applique_dommage(contenu[base_crit]["maudit"], 0.0, 0.0, false, "normal")
+		applique_dommage(contenu[base_crit]["maudit"], "", "", false, "normal")
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, false, "normal")
+		applique_dommage(contenu[base_crit]["valeur"], "", "", false, "normal")
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], 0.0, 0.0, false, "retour")
+		applique_dommage(contenu[base_crit]["retour"], "", "", false, "retour")
 
 
 func dommage_pourcent():
@@ -347,13 +356,13 @@ func dommage_pourcent():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], 0.0, 0.0, false, "pourcent")
+		applique_dommage(contenu[base_crit]["allies"], "", "", false, "pourcent")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:
-		applique_dommage(contenu[base_crit]["invocations"], 0.0, 0.0, false, "pourcent") 
+		applique_dommage(contenu[base_crit]["invocations"], "", "", false, "pourcent") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], 0.0, 0.0, false, "pourcent") 
+		applique_dommage(contenu[base_crit]["valeur"], "", "", false, "pourcent") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], 0.0, 0.0, false, "pourcent_retour") 
+		applique_dommage(contenu[base_crit]["retour"], "", "", false, "pourcent_retour") 
 	if cible.stats.hp <= 0:
 		cible.stats.hp = 1
 
@@ -416,13 +425,13 @@ func dommage_air():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_air", "resistances_air", not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_air", "resistances_air", not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_air", "resistances_air", not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_air, lanceur.stats.resistances_air, false, "retour") 
+		applique_dommage(contenu[base_crit]["retour"], "dommages_air", "resistances_air", false, "retour") 
 
 
 func dommage_terre():
@@ -430,13 +439,13 @@ func dommage_terre():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_terre", "resistances_terre", not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_terre", "resistances_terre", not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_terre", "resistances_terre", not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_terre, lanceur.stats.resistances_terre, false, "retour") 
+		applique_dommage(contenu[base_crit]["retour"], "dommages_terre", "resistances_terre", false, "retour") 
 
 
 func dommage_feu():
@@ -444,13 +453,13 @@ func dommage_feu():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_feu", "resistances_feu", not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_feu", "resistances_feu", not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_feu", "resistances_feu", not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_feu, lanceur.stats.resistances_feu, false, "retour") 
+		applique_dommage(contenu[base_crit]["retour"], "dommages_feu", "resistances_feu", false, "retour") 
 
 
 func dommage_eau():
@@ -458,13 +467,13 @@ func dommage_eau():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_eau", "resistances_eau", not aoe, "normal") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation:  
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_eau", "resistances_eau", not aoe, "normal") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "normal") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_eau", "resistances_eau", not aoe, "normal") 
 	if contenu[base_crit].has("retour"):
-		applique_dommage(contenu[base_crit]["retour"], lanceur.stats.dommages_eau, lanceur.stats.resistances_eau, false, "retour") 
+		applique_dommage(contenu[base_crit]["retour"], "dommages_eau", "resistances_eau", false, "retour") 
 
 
 func vole_air():
@@ -472,11 +481,11 @@ func vole_air():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_air", "resistances_air", not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_air", "resistances_air", not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_air, cible.stats.resistances_air, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_air", "resistances_air", not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -486,11 +495,11 @@ func vole_terre():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_terre", "resistances_terre", not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_terre", "resistances_terre", not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_terre, cible.stats.resistances_terre, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_terre", "resistances_terre", not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -500,11 +509,11 @@ func vole_feu():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_feu", "resistances_feu", not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_feu", "resistances_feu", not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_feu, cible.stats.resistances_feu, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_feu", "resistances_feu", not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -514,11 +523,11 @@ func vole_eau():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["allies"], "dommages_eau", "resistances_eau", not aoe, "vol") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["invocations"], "dommages_eau", "resistances_eau", not aoe, "vol") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.dommages_eau, cible.stats.resistances_eau, not aoe, "vol") 
+		applique_dommage(contenu[base_crit]["valeur"], "dommages_eau", "resistances_eau", not aoe, "vol") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -528,11 +537,11 @@ func soin():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], lanceur.stats.soins, 0, false, "soin") 
+		applique_dommage(contenu[base_crit]["allies"], "soins", "", false, "soin") 
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], lanceur.stats.soins, 0, false, "soin") 
+		applique_dommage(contenu[base_crit]["invocations"], "soins", "", false, "soin") 
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], lanceur.stats.soins, 0, false, "soin") 
+		applique_dommage(contenu[base_crit]["valeur"], "soins", "", false, "soin") 
 	if lanceur.stats.hp > lanceur.max_stats.hp:
 		lanceur.stats.hp = lanceur.max_stats.hp
 
@@ -577,7 +586,7 @@ func change_stats():
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
 			else:
-				if not sort.effets.has("GLYPHE"):
+				if sort != null and not sort.effets.has("GLYPHE"):
 					cible.stat_ret[stat] += contenu[stat][base_crit]["valeur"]
 			if contenu[stat][base_crit]["valeur"] > 0:
 				cible.max_stats[stat] += contenu[stat][base_crit]["valeur"]
@@ -602,6 +611,7 @@ func change_stats():
 				lanceur.max_stats[stat] += contenu[stat][base_crit]["retour"]
 			if stat in ["pa", "pm", "hp"]:
 				lanceur.stats_perdu.ajoute(contenu[stat][base_crit]["retour"], stat)
+	instant = false
 
 
 func reverse_change_stats():
@@ -764,7 +774,9 @@ func avance():
 
 func immobilise():
 	etat = "IMMOBILISE"
-	print(cible.classe, "_", str(cible.id), " est immobilisé (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est immobilisé (", duree, " tours).")
+	instant = false
 
 
 func teleporte():
@@ -772,14 +784,16 @@ func teleporte():
 
 
 func transpose():
-	if lanceur.check_etats(["INTRANSPOSABLE"]) or cible.check_etats(["INTRANSPOSABLE", "PORTE"]):
+	if lanceur.check_etats(["INTRANSPOSABLE"]) or cible.check_etats(["INTRANSPOSABLE", "PORTE", "PORTE_ALLIE", "PORTE_ENNEMI"]):
 		return
 	cible.echange_positions(lanceur)
 
 
 func petrifie():
 	etat = "PETRIFIE"
-	print(cible.classe, "_", str(cible.id), " est pétrifié (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est pétrifié (", duree, " tours).")
+	instant = false
 
 
 func rate_sort():
@@ -802,14 +816,18 @@ func devient_invisible():
 
 
 func desenvoute():
+	var new_effets = []
 	for effet in cible.effets:
 		if effet.sort != null and effet.sort.desenvoute_delais >= 0:
 			effet.sort.cooldown_actuel = effet.sort.desenvoute_delais
 			effet.sort.compte_lancers = 0
 			effet.sort.compte_cible = {}
+		if not effet.debuffable:
+			new_effets.append(effet)
 	
-	cible.effets = []
+	cible.effets = new_effets
 	cible.stat_buffs = Stats.new()
+	cible.execute_effets()
 	var delta_hp = cible.max_stats.hp - cible.stats.hp
 	cible.stats = cible.init_stats.copy().add(cible.stat_ret).add(cible.stat_buffs)
 	cible.stats.hp -= delta_hp
@@ -819,27 +837,37 @@ func desenvoute():
 
 func non_portable():
 	etat = "NON_PORTABLE"
-	print(cible.classe, "_", str(cible.id), " est non-portable (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est non-portable (", duree, " tours).")
+	instant = false
 
 
 func intransposable():
 	etat = "INTRANSPOSABLE"
-	print(cible.classe, "_", str(cible.id), " est intransposable (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est intransposable (", duree, " tours).")
+	instant = false
 
 
 func immunise():
 	etat = "IMMUNISE"
-	print(cible.classe, "_", str(cible.id), " est immunisé (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est immunisé (", duree, " tours).")
+	instant = false
 
 
 func stabilise():
 	etat = "STABILISE"
-	print(cible.classe, "_", str(cible.id), " est stabilisé (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est stabilisé (", duree, " tours).")
+	instant = false
 
 
 func renvoie_sort():
 	etat = "RENVOIE_SORT"
-	print(cible.classe, "_", str(cible.id), " renvoie les sorts (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " renvoie les sorts (", duree, " tours).")
+	instant = false
 
 
 func invocation():
@@ -871,8 +899,10 @@ func porte():
 		var etat_lanceur = "PORTE_ALLIE" if lanceur.equipe == cible.equipe else "PORTE_ENNEMI"
 		var effet_lanceur = Effet.new(lanceur, cible, etat_lanceur, contenu, false, lanceur.grid_pos, false, sort)
 		effet_lanceur.etat = etat_lanceur
+		effet_lanceur.debuffable = false
 		lanceur.effets.append(effet_lanceur)
 		etat = "PORTE"
+		debuffable = false
 		var map_pos = cible.grid_pos - combat.offset
 		cible.combat.tilemap.a_star_grid.set_point_solid(cible.grid_pos, false)
 		cible.combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = cible.combat.tilemap.get_cell_atlas_coords(1, map_pos).x
@@ -891,20 +921,24 @@ func lance():
 				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
 				combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 				combattant.z_index = 0
-				var new_sort = sort.copy()
-				new_sort.pa = 0
-				new_sort.cible = GlobalData.Cible.LIBRE
-				new_sort.effets.erase("LANCE")
 				combattant.retire_etats(["PORTE"])
 				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
-				new_sort.execute_effets(lanceur, [centre], centre)
+				var new_sort = null
+				if sort != null:
+					new_sort = sort.copy()
+					new_sort.pa = 0
+					new_sort.cible = GlobalData.Cible.LIBRE
+					new_sort.effets.erase("LANCE")
+					new_sort.execute_effets(lanceur, [centre], centre)
 				combat.tilemap.update_glyphes()
 				return
 
 
 func picole():
 	etat = "PICOLE"
-	print(lanceur.classe, "_", str(lanceur.id), " entre dans l'état picole.")
+	if instant:
+		print(lanceur.classe, "_", str(lanceur.id), " entre dans l'état picole.")
+	instant = false
 
 
 func sacrifice():
@@ -913,7 +947,9 @@ func sacrifice():
 			cible.retire_etats(["SACRIFICE"])
 			break
 	etat = "SACRIFICE"
-	print(lanceur.classe, "_", str(lanceur.id), " sacrifie ", cible.classe, "_", str(cible.id), " (", duree, " tours).")
+	if instant:
+		print(lanceur.classe, "_", str(lanceur.id), " sacrifie ", cible.classe, "_", str(cible.id), " (", duree, " tours).")
+	instant = false
 
 
 func tourne():
@@ -922,12 +958,16 @@ func tourne():
 
 func immunise_retrait_pa():
 	etat = "IMMUNISE_RETRAIT_PA"
-	print(cible.classe, "_", str(cible.id), " est immunisé au retrait PA (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est immunisé au retrait PA (", duree, " tours).")
+	instant = false
 
 
 func immunise_retrait_pm():
 	etat = "IMMUNISE_RETRAIT_PM"
-	print(cible.classe, "_", str(cible.id), " est immunisé au retrait PM (", duree, " tours).")
+	if instant:
+		print(cible.classe, "_", str(cible.id), " est immunisé au retrait PM (", duree, " tours).")
+	instant = false
 
 
 func suicide():
