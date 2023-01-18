@@ -171,6 +171,8 @@ func affiche_zone(action: int, pos_event: Vector2i):
 
 
 func check_case_bonus():
+	if check_etats(["PORTE"]):
+		return
 	var case_id = combat.tilemap.get_cell_atlas_coords(1, grid_pos - combat.offset).x
 	var categorie = ""
 	var contenu = ""
