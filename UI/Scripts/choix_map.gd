@@ -4,7 +4,7 @@ extends Control
 var map_initiale: int
 var map_selected: int
 
-@onready var maps: Array = $Maps.get_children()
+@onready var maps: Array = $MapScroll/Maps.get_children()
 @onready var mort_subite_check: CheckBox = $MortSubiteCheck
 
 

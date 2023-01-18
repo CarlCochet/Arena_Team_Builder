@@ -15,40 +15,7 @@ var glyphes_indexeur: int
 var cases_maudites: Dictionary
 var combat: Combat
 
-var ms_data: Dictionary = {
-	"map_2": {
-		"centres": [Vector2(11, 0), Vector2(12, 0), Vector2(12, -1), Vector2(11, -1)],
-		"distance": 8
-	},
-	"map_15": {
-		"centres": [Vector2(11, 0), Vector2(12, 0), Vector2(12, -1), Vector2(11, -1)],
-		"distance": 6
-	},
-	"map_16": {
-		"centres": [Vector2(11, 0), Vector2(12, 0), Vector2(12, -1), Vector2(11, -1)],
-		"distance": 8
-	},
-	"map_19": {
-		"centres": [Vector2(11, 1), Vector2(12, 1), Vector2(12, 0), Vector2(11, 0)],
-		"distance": 7
-	},
-	"map_30": {
-		"centres": [Vector2(11, 1), Vector2(12, 1), Vector2(12, 0), Vector2(11, 0)],
-		"distance": 8
-	},
-	"map_56": {
-		"centres": [Vector2(11, 1), Vector2(12, 1), Vector2(12, 0), Vector2(11, 0)],
-		"distance": 7
-	},
-	"map_58": {
-		"centres": [Vector2(12, 1), Vector2(13, 1), Vector2(13, 0), Vector2(12, 0)],
-		"distance": 7
-	},
-	"map_60": {
-		"centres": [Vector2(15, 1), Vector2(16, 1), Vector2(16, 0), Vector2(15, 0)],
-		"distance": 8
-	}
-}
+var ms_data: Dictionary
 
 @onready var overlay = get_used_cells(2)
 @onready var arena = get_used_cells(1)
@@ -70,6 +37,7 @@ func _ready():
 	glyphes_indexeur = 0
 	get_start()
 	build_grids()
+	load_map_data()
 	combat.move_child(self, 0)
 
 
@@ -132,6 +100,12 @@ func build_grids():
 			a_star_grid.set_point_solid(pos + offset, false)
 
 
+func load_map_data():
+	var file = FileAccess.open("res://Jeu/map_data.json", FileAccess.READ)
+	var json_data = JSON.parse_string(file.get_as_text())
+	ms_data = json_data
+
+
 func update_mort_subite(tour: int):
 	if not GlobalData.mort_subite_active:
 		return
@@ -139,7 +113,8 @@ func update_mort_subite(tour: int):
 	var distance = ms_data[GlobalData.map_actuelle]["distance"] - (tour - 15)
 	var directions = [Vector2(0, 1), Vector2(1, 0), Vector2(0, -1), Vector2(-1, 0)]
 	for i in range(4):
-		var centre = ms_data[GlobalData.map_actuelle]["centres"][i]
+		var centre_array = ms_data[GlobalData.map_actuelle]["centres"][i]
+		var centre = Vector2(centre_array[0], centre_array[1])
 		for k in range(-distance, distance+1):
 			var cell_pos = centre + directions[i] * distance + k * directions[(i + 1) % 4]
 			erase_cell(1, cell_pos)
