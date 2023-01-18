@@ -452,7 +452,7 @@ class Glyphe:
 	func active_full():
 		var triggered = false
 		for combattant in lanceur.combat.combattants:
-			if combattant.grid_pos in tiles:
+			if combattant.grid_pos in tiles and not combattant.check_etats(["PORTE"]):
 				var delta_hp = combattant.max_stats.hp - combattant.stats.hp
 				var delta_pa = combattant.max_stats.pa - combattant.stats.pa
 				var delta_pm = combattant.max_stats.pm - combattant.stats.pm
