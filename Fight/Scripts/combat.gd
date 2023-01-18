@@ -92,7 +92,7 @@ func lance_game():
 
 
 func change_action(new_action: int):
-	if new_action > len(combattant_selection.sorts):
+	if new_action >= len(combattant_selection.sorts):
 		new_action = 7
 	if new_action == action:
 		action = 7
@@ -164,7 +164,7 @@ func _on_perso_clicked(id: int):
 
 func _input(event):
 	if etat == 1:
-		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
+		if (Input.is_key_pressed(KEY_F1) or Input.is_key_pressed(KEY_SPACE)) and event is InputEventKey and not event.echo:
 			passe_tour()
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			get_tree().change_scene_to_file("res://UI/choix_map.tscn")
@@ -204,7 +204,7 @@ func _input(event):
 		if Input.is_key_pressed(KEY_LEFT) and event is InputEventKey and not event.echo:
 			combattant_selection.change_orientation(3)
 	if etat == 0:
-		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
+		if (Input.is_key_pressed(KEY_F1) or Input.is_key_pressed(KEY_SPACE)) and event is InputEventKey and not event.echo:
 			lance_game()
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			get_tree().change_scene_to_file("res://UI/choix_map.tscn")
@@ -229,10 +229,10 @@ func _on_fleche_3_pressed():
 
 
 func _on_passe_tour_pressed():
-	if etat == 0:
-		lance_game()
 	if etat == 1:
 		passe_tour()
+	if etat == 0:
+		lance_game()
 
 
 func _on_bouton_retour_pressed():

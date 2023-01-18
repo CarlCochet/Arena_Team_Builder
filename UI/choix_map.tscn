@@ -1,28 +1,68 @@
-[gd_scene load_steps=25 format=3 uid="uid://c7ng2upg83k4x"]
+[gd_scene load_steps=65 format=3 uid="uid://c7ng2upg83k4x"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_map.gd" id="1_n1jan"]
 [ext_resource type="Texture2D" uid="uid://dkxkir2jodnt3" path="res://Fight/Map/Images/tactic_2.png" id="2_1jwkw"]
 [ext_resource type="Texture2D" uid="uid://vkeq5iki03qr" path="res://Fight/Map/Images/tactic_2_selected.png" id="3_3apv8"]
 [ext_resource type="Texture2D" uid="uid://bir07tdb66dne" path="res://Fight/Map/Images/tactic_15.png" id="4_0k4jr"]
+[ext_resource type="Texture2D" uid="uid://by2yvvxx31dj4" path="res://Fight/Map/Images/tactic_3.png" id="4_cmgwq"]
+[ext_resource type="Texture2D" uid="uid://bokb240ubj6d3" path="res://Fight/Map/Images/tactic_3_selected.png" id="5_6joxa"]
 [ext_resource type="Texture2D" uid="uid://b4khg7q27bacp" path="res://Fight/Map/Images/tactic_15_selected.png" id="5_r7tbe"]
 [ext_resource type="Texture2D" uid="uid://c16b2hki0xd48" path="res://Fight/Map/Images/tactic_16.png" id="6_4kg85"]
+[ext_resource type="Texture2D" uid="uid://bwm4l4o3m0o2q" path="res://Fight/Map/Images/tactic_4.png" id="6_bxi3d"]
+[ext_resource type="Texture2D" uid="uid://dhfg43u05v7vt" path="res://Fight/Map/Images/tactic_4_selected.png" id="7_ltle2"]
 [ext_resource type="Texture2D" uid="uid://uo3heujld4k2" path="res://Fight/Map/Images/tactic_16_selected.png" id="7_oewen"]
+[ext_resource type="Texture2D" uid="uid://cwdvr1flrxfoh" path="res://Fight/Map/Images/tactic_5.png" id="8_b3w2c"]
 [ext_resource type="Texture2D" uid="uid://dxfnu32x8jab2" path="res://Fight/Map/Images/tactic_19.png" id="8_enktb"]
 [ext_resource type="Texture2D" uid="uid://b00ea4tmidxlc" path="res://Fight/Map/Images/tactic_19_selected.png" id="9_3e8oa"]
+[ext_resource type="Texture2D" uid="uid://dycimytmyp2wq" path="res://Fight/Map/Images/tactic_5_selected.png" id="9_tvmxo"]
+[ext_resource type="Texture2D" uid="uid://h33iqyp4361h" path="res://Fight/Map/Images/tactic_7.png" id="10_50kya"]
 [ext_resource type="Texture2D" uid="uid://vlgu31y5l200" path="res://Fight/Map/Images/tactic_30.png" id="10_w2hn2"]
 [ext_resource type="Texture2D" uid="uid://bxmpbgkq15yxp" path="res://Fight/Map/Images/tactic_30_selected.png" id="11_cadl4"]
+[ext_resource type="Texture2D" uid="uid://ktumvqfk7vst" path="res://Fight/Map/Images/tactic_7_selected.png" id="11_q5cym"]
 [ext_resource type="Texture2D" uid="uid://h5vo5yov4xwh" path="res://Fight/Map/Images/tactic_56.png" id="12_fyxt1"]
+[ext_resource type="Texture2D" uid="uid://cjiti5g40v1m2" path="res://Fight/Map/Images/tactic_10.png" id="12_mic6l"]
 [ext_resource type="Texture2D" uid="uid://ctmhioqchftdj" path="res://Fight/Map/Images/tactic_56_selected.png" id="13_4n32o"]
+[ext_resource type="Texture2D" uid="uid://71llnl0mo2vv" path="res://Fight/Map/Images/tactic_10_selected.png" id="13_ie6r2"]
 [ext_resource type="Texture2D" uid="uid://dj6bjg3yu1ih7" path="res://Fight/Map/Images/tactic_58.png" id="14_50qaf"]
+[ext_resource type="Texture2D" uid="uid://chpwv01d37k6p" path="res://Fight/Map/Images/tactic_11.png" id="14_e248q"]
 [ext_resource type="Texture2D" uid="uid://iqo2pxvr35p0" path="res://Fight/Map/Images/tactic_58_selected.png" id="15_5xquu"]
+[ext_resource type="Texture2D" uid="uid://c87iwqh4luxcn" path="res://Fight/Map/Images/tactic_11_selected.png" id="15_vy8qb"]
+[ext_resource type="Texture2D" uid="uid://ckj2y42g6gry5" path="res://Fight/Map/Images/tactic_12.png" id="16_5u63b"]
 [ext_resource type="Texture2D" uid="uid://bijap6pf1pcnv" path="res://Fight/Map/Images/tactic_60.png" id="16_vsen2"]
+[ext_resource type="Texture2D" uid="uid://bsq65clwhxvil" path="res://Fight/Map/Images/tactic_12_selected.png" id="17_3lmj0"]
 [ext_resource type="Texture2D" uid="uid://diefhflkxxhm7" path="res://Fight/Map/Images/tactic_60_selected.png" id="17_qquso"]
 [ext_resource type="Texture2D" uid="uid://bknc5skjp7s4v" path="res://UI/Buttons/retour_base.png" id="18_deorm"]
+[ext_resource type="Texture2D" uid="uid://muf3rrq2ra2w" path="res://Fight/Map/Images/tactic_13.png" id="18_yu2ts"]
 [ext_resource type="Texture2D" uid="uid://dd20mihsbd7tw" path="res://UI/Buttons/retour_clicked.png" id="19_1ytsp"]
+[ext_resource type="Texture2D" uid="uid://bikv2os8a4dlw" path="res://Fight/Map/Images/tactic_13_selected.png" id="19_wod31"]
 [ext_resource type="Texture2D" uid="uid://bsx000i85450y" path="res://UI/Buttons/retour_hovered.png" id="20_pb8g1"]
+[ext_resource type="Texture2D" uid="uid://xow4rvqmi8wg" path="res://Fight/Map/Images/tactic_14.png" id="20_ycgt6"]
+[ext_resource type="Texture2D" uid="uid://bfbp5slo7ok2k" path="res://Fight/Map/Images/tactic_14_selected.png" id="21_gjw45"]
+[ext_resource type="Texture2D" uid="uid://c10ofmfk5j7ec" path="res://Fight/Map/Images/tactic_17.png" id="26_rwnb3"]
+[ext_resource type="Texture2D" uid="uid://b1p1g6mpacjld" path="res://Fight/Map/Images/tactic_17_selected.png" id="27_nb7ta"]
+[ext_resource type="Texture2D" uid="uid://bity4bxteux1c" path="res://Fight/Map/Images/tactic_18.png" id="28_pbyp0"]
+[ext_resource type="Texture2D" uid="uid://dkne578v5f6yq" path="res://Fight/Map/Images/tactic_18_selected.png" id="29_vja2q"]
 [ext_resource type="Texture2D" uid="uid://b5sgblea4yfqw" path="res://UI/Buttons/valider_base.png" id="32_48jq0"]
 [ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="33_xavqd"]
 [ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="34_0hosn"]
+[ext_resource type="Texture2D" uid="uid://bbrws8od6ga8p" path="res://Fight/Map/Images/tactic_53.png" id="34_3qg5h"]
+[ext_resource type="Texture2D" uid="uid://c22m5p3roxad6" path="res://Fight/Map/Images/tactic_53_selected.png" id="35_joi0m"]
+[ext_resource type="Texture2D" uid="uid://jiq5rxrtgnn3" path="res://Fight/Map/Images/tactic_54.png" id="36_cagox"]
+[ext_resource type="Texture2D" uid="uid://c08srh0lp62fu" path="res://Fight/Map/Images/tactic_54_selected.png" id="37_oei84"]
+[ext_resource type="Texture2D" uid="uid://c4p0c3vb5w682" path="res://Fight/Map/Images/tactic_59.png" id="42_kpwgn"]
+[ext_resource type="Texture2D" uid="uid://b02s5wsc8wayj" path="res://Fight/Map/Images/tactic_59_selected.png" id="43_1uji0"]
+[ext_resource type="Texture2D" uid="uid://dqt0hpmjn572m" path="res://Fight/Map/Images/tactic_61.png" id="46_lcp2w"]
+[ext_resource type="Texture2D" uid="uid://dfkugh7np886w" path="res://Fight/Map/Images/tactic_61_selected.png" id="47_7hm7v"]
+[ext_resource type="Texture2D" uid="uid://ck0tsn40856wq" path="res://Fight/Map/Images/tactic_77.png" id="48_76msy"]
+[ext_resource type="Texture2D" uid="uid://cb5trwryb6luy" path="res://Fight/Map/Images/tactic_77_selected.png" id="49_8tc4w"]
+[ext_resource type="Texture2D" uid="uid://dxnmy0c2i5w15" path="res://Fight/Map/Images/tactic_81.png" id="50_iu8jr"]
+[ext_resource type="Texture2D" uid="uid://bny32wqcg63um" path="res://Fight/Map/Images/tactic_81_selected.png" id="51_rjgen"]
+[ext_resource type="Texture2D" uid="uid://cuqqjgl0ef03a" path="res://Fight/Map/Images/tactic_82.png" id="52_frwam"]
+[ext_resource type="Texture2D" uid="uid://b6tvnbxehq8rb" path="res://Fight/Map/Images/tactic_82_selected.png" id="53_jxmtg"]
+[ext_resource type="Texture2D" uid="uid://bcyjrr4qy3kl" path="res://Fight/Map/Images/tactic_83.png" id="54_pdc4n"]
+[ext_resource type="Texture2D" uid="uid://64icioaaimbx" path="res://Fight/Map/Images/tactic_83_selected.png" id="55_q57vh"]
+[ext_resource type="Texture2D" uid="uid://d4hpji2yn1xcx" path="res://Fight/Map/Images/tactic_84.png" id="56_452rg"]
+[ext_resource type="Texture2D" uid="uid://bf37x08eysiwr" path="res://Fight/Map/Images/tactic_84_selected.png" id="57_6o1nq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2chev"]
 font_size = 24
@@ -44,81 +84,259 @@ offset_bottom = 965.0
 scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
-[node name="Maps" type="GridContainer" parent="."]
-offset_left = 107.0
-offset_top = 222.0
-offset_right = 7107.0
-offset_bottom = 2222.0
-scale = Vector2(0.2, 0.2)
-theme_override_constants/h_separation = 200
-theme_override_constants/v_separation = 200
+[node name="MapScroll" type="ScrollContainer" parent="."]
+offset_left = 104.0
+offset_top = 64.0
+offset_right = 1523.0
+offset_bottom = 692.0
+
+[node name="Maps" type="GridContainer" parent="MapScroll"]
+offset_right = 1400.0
+offset_bottom = 1500.0
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 40
 columns = 4
 
-[node name="map_2" type="TextureButton" parent="Maps"]
-offset_right = 1600.0
-offset_bottom = 900.0
+[node name="map_2" type="TextureButton" parent="MapScroll/Maps"]
+offset_right = 320.0
+offset_bottom = 180.0
 toggle_mode = true
 texture_normal = ExtResource("2_1jwkw")
 texture_pressed = ExtResource("3_3apv8")
 
-[node name="map_15" type="TextureButton" parent="Maps"]
-offset_left = 1800.0
-offset_right = 3400.0
-offset_bottom = 900.0
+[node name="map_3" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 360.0
+offset_right = 680.0
+offset_bottom = 180.0
+toggle_mode = true
+texture_normal = ExtResource("4_cmgwq")
+texture_pressed = ExtResource("5_6joxa")
+
+[node name="map_4" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 720.0
+offset_right = 1040.0
+offset_bottom = 180.0
+toggle_mode = true
+texture_normal = ExtResource("6_bxi3d")
+texture_pressed = ExtResource("7_ltle2")
+
+[node name="map_5" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 1080.0
+offset_right = 1400.0
+offset_bottom = 180.0
+toggle_mode = true
+texture_normal = ExtResource("8_b3w2c")
+texture_pressed = ExtResource("9_tvmxo")
+
+[node name="map_7" type="TextureButton" parent="MapScroll/Maps"]
+offset_top = 220.0
+offset_right = 320.0
+offset_bottom = 400.0
+toggle_mode = true
+texture_normal = ExtResource("10_50kya")
+texture_pressed = ExtResource("11_q5cym")
+
+[node name="map_10" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 360.0
+offset_top = 220.0
+offset_right = 680.0
+offset_bottom = 400.0
+toggle_mode = true
+texture_normal = ExtResource("12_mic6l")
+texture_pressed = ExtResource("13_ie6r2")
+
+[node name="map_11" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 720.0
+offset_top = 220.0
+offset_right = 1040.0
+offset_bottom = 400.0
+toggle_mode = true
+texture_normal = ExtResource("14_e248q")
+texture_pressed = ExtResource("15_vy8qb")
+
+[node name="map_12" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 1080.0
+offset_top = 220.0
+offset_right = 1400.0
+offset_bottom = 400.0
+toggle_mode = true
+texture_normal = ExtResource("16_5u63b")
+texture_pressed = ExtResource("17_3lmj0")
+
+[node name="map_13" type="TextureButton" parent="MapScroll/Maps"]
+offset_top = 440.0
+offset_right = 320.0
+offset_bottom = 620.0
+toggle_mode = true
+texture_normal = ExtResource("18_yu2ts")
+texture_pressed = ExtResource("19_wod31")
+
+[node name="map_14" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 360.0
+offset_top = 440.0
+offset_right = 680.0
+offset_bottom = 620.0
+toggle_mode = true
+texture_normal = ExtResource("20_ycgt6")
+texture_pressed = ExtResource("21_gjw45")
+
+[node name="map_15" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 720.0
+offset_top = 440.0
+offset_right = 1040.0
+offset_bottom = 620.0
 toggle_mode = true
 texture_normal = ExtResource("4_0k4jr")
 texture_pressed = ExtResource("5_r7tbe")
 
-[node name="map_16" type="TextureButton" parent="Maps"]
-offset_left = 3600.0
-offset_right = 5200.0
-offset_bottom = 900.0
+[node name="map_16" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 1080.0
+offset_top = 440.0
+offset_right = 1400.0
+offset_bottom = 620.0
 toggle_mode = true
 texture_normal = ExtResource("6_4kg85")
 texture_pressed = ExtResource("7_oewen")
 
-[node name="map_19" type="TextureButton" parent="Maps"]
-offset_left = 5400.0
-offset_right = 7000.0
-offset_bottom = 900.0
+[node name="map_17" type="TextureButton" parent="MapScroll/Maps"]
+offset_top = 660.0
+offset_right = 320.0
+offset_bottom = 840.0
+toggle_mode = true
+texture_normal = ExtResource("26_rwnb3")
+texture_pressed = ExtResource("27_nb7ta")
+
+[node name="map_18" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 360.0
+offset_top = 660.0
+offset_right = 680.0
+offset_bottom = 840.0
+toggle_mode = true
+texture_normal = ExtResource("28_pbyp0")
+texture_pressed = ExtResource("29_vja2q")
+
+[node name="map_19" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 720.0
+offset_top = 660.0
+offset_right = 1040.0
+offset_bottom = 840.0
 toggle_mode = true
 texture_normal = ExtResource("8_enktb")
 texture_pressed = ExtResource("9_3e8oa")
 
-[node name="map_30" type="TextureButton" parent="Maps"]
-offset_top = 1100.0
-offset_right = 1600.0
-offset_bottom = 2000.0
+[node name="map_30" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 1080.0
+offset_top = 660.0
+offset_right = 1400.0
+offset_bottom = 840.0
 toggle_mode = true
 texture_normal = ExtResource("10_w2hn2")
 texture_pressed = ExtResource("11_cadl4")
 
-[node name="map_56" type="TextureButton" parent="Maps"]
-offset_left = 1800.0
-offset_top = 1100.0
-offset_right = 3400.0
-offset_bottom = 2000.0
+[node name="map_53" type="TextureButton" parent="MapScroll/Maps"]
+offset_top = 880.0
+offset_right = 320.0
+offset_bottom = 1060.0
+toggle_mode = true
+texture_normal = ExtResource("34_3qg5h")
+texture_pressed = ExtResource("35_joi0m")
+
+[node name="map_54" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 360.0
+offset_top = 880.0
+offset_right = 680.0
+offset_bottom = 1060.0
+toggle_mode = true
+texture_normal = ExtResource("36_cagox")
+texture_pressed = ExtResource("37_oei84")
+
+[node name="map_56" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 720.0
+offset_top = 880.0
+offset_right = 1040.0
+offset_bottom = 1060.0
 toggle_mode = true
 texture_normal = ExtResource("12_fyxt1")
 texture_pressed = ExtResource("13_4n32o")
 
-[node name="map_58" type="TextureButton" parent="Maps"]
-offset_left = 3600.0
-offset_top = 1100.0
-offset_right = 5200.0
-offset_bottom = 2000.0
+[node name="map_58" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 1080.0
+offset_top = 880.0
+offset_right = 1400.0
+offset_bottom = 1060.0
 toggle_mode = true
 texture_normal = ExtResource("14_50qaf")
 texture_pressed = ExtResource("15_5xquu")
 
-[node name="map_60" type="TextureButton" parent="Maps"]
-offset_left = 5400.0
+[node name="map_59" type="TextureButton" parent="MapScroll/Maps"]
 offset_top = 1100.0
-offset_right = 7000.0
-offset_bottom = 2000.0
+offset_right = 320.0
+offset_bottom = 1280.0
+toggle_mode = true
+texture_normal = ExtResource("42_kpwgn")
+texture_pressed = ExtResource("43_1uji0")
+
+[node name="map_60" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 360.0
+offset_top = 1100.0
+offset_right = 680.0
+offset_bottom = 1280.0
 toggle_mode = true
 texture_normal = ExtResource("16_vsen2")
 texture_pressed = ExtResource("17_qquso")
+
+[node name="map_61" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 720.0
+offset_top = 1100.0
+offset_right = 1040.0
+offset_bottom = 1280.0
+toggle_mode = true
+texture_normal = ExtResource("46_lcp2w")
+texture_pressed = ExtResource("47_7hm7v")
+
+[node name="map_77" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 1080.0
+offset_top = 1100.0
+offset_right = 1400.0
+offset_bottom = 1280.0
+toggle_mode = true
+texture_normal = ExtResource("48_76msy")
+texture_pressed = ExtResource("49_8tc4w")
+
+[node name="map_81" type="TextureButton" parent="MapScroll/Maps"]
+offset_top = 1320.0
+offset_right = 320.0
+offset_bottom = 1500.0
+toggle_mode = true
+texture_normal = ExtResource("50_iu8jr")
+texture_pressed = ExtResource("51_rjgen")
+
+[node name="map_82" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 360.0
+offset_top = 1320.0
+offset_right = 680.0
+offset_bottom = 1500.0
+toggle_mode = true
+texture_normal = ExtResource("52_frwam")
+texture_pressed = ExtResource("53_jxmtg")
+
+[node name="map_83" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 720.0
+offset_top = 1320.0
+offset_right = 1040.0
+offset_bottom = 1500.0
+toggle_mode = true
+texture_normal = ExtResource("54_pdc4n")
+texture_pressed = ExtResource("55_q57vh")
+
+[node name="map_84" type="TextureButton" parent="MapScroll/Maps"]
+offset_left = 1080.0
+offset_top = 1320.0
+offset_right = 1400.0
+offset_bottom = 1500.0
+toggle_mode = true
+texture_normal = ExtResource("56_452rg")
+texture_pressed = ExtResource("57_6o1nq")
 
 [node name="GridContainer2" type="GridContainer" parent="."]
 offset_left = 607.0
