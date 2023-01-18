@@ -104,12 +104,14 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 				for combattant in combattants:
 					if combattant.equipe != lanceur.equipe:
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		update_limite_lancers(lanceur)
 		return true
 	elif effets["cible"] == 8:
 		for effet in effets.keys():
 			if effet != "cible":
 				for combattant in combattants:
 					parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		update_limite_lancers(lanceur)
 		return true
 	elif effets["cible"] == 9:
 		for combattant in combattants:
@@ -126,6 +128,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 				for combattant in combattants:
 					if not combattant.is_invocation: 
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		update_limite_lancers(lanceur)
 		return true
 	elif effets["cible"] == 11:
 		for effet in effets.keys():
@@ -133,6 +136,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 				for combattant in combattants:
 					if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		update_limite_lancers(lanceur)
 		return true
 	
 	if trouve:
