@@ -255,7 +255,7 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 		var values = base.replace("+", "d").split("d")
 		base = int(values[2])
 		for i in range(int(values[0])):
-			base += randi_range(1, int(values[1]) + 1)
+			base += GlobalData.rng.randi_range(1, int(values[1]) + 1)
 	
 	var resistance_zone = cible.stats.resistance_zone / 100.0 if aoe else 0.0
 	var bonus = get_orientation_bonus() if orientation_bonus else 0.0
@@ -263,7 +263,7 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 		bonus = 0.0
 	var result = float(base * (1.0 + (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone))
 	var proba_roundup = result - int(result)
-	result = int(result) + 1 if randf() < proba_roundup else int(result)
+	result = int(result) + 1 if GlobalData.rng.randf() < proba_roundup else int(result)
 	return result
 
 
@@ -289,7 +289,10 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 		stat = lanceur.stats[stat_element]
 	var resistance = 0.0
 	if not resistance_element.is_empty():
-		resistance = cible.stats[resistance_element]
+		if type in ["retour", "pourcent_retour"]:
+			resistance = lanceur.stats[resistance_element]
+		else:
+			resistance = cible.stats[resistance_element]
 	
 	if type in ["pourcent", "pourcent_retour"]:
 		base = cible.stats.hp * (base / 100.0)
@@ -533,6 +536,8 @@ func vole_eau():
 
 
 func soin():
+	if cible.stats.hp <= 0:
+		return
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit = trouve_crit()
@@ -784,6 +789,8 @@ func teleporte():
 
 
 func transpose():
+	if cible.stats.hp <= 0:
+		return
 	if lanceur.check_etats(["INTRANSPOSABLE"]) or cible.check_etats(["INTRANSPOSABLE", "PORTE", "PORTE_ALLIE", "PORTE_ENNEMI"]):
 		return
 	cible.echange_positions(lanceur)

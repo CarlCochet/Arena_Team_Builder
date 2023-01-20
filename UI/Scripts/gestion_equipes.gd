@@ -14,7 +14,7 @@ var equipe_selectionnee: int
 func _ready():
 	equipes = []
 	equipe_selectionnee = 0
-	GlobalData.charger_equipes()
+	GlobalData.is_multijoueur = false
 	generer_affichage()
 
 
@@ -67,9 +67,13 @@ func _on_supprimer_pressed():
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		GlobalData.sauver_equipes()
-		get_tree().quit()
+		get_tree().change_scene_to_file("res://UI/menu_principal.tscn")
 	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:
 		_on_editer_pressed()
+
+
+func _on_retour_pressed():
+	get_tree().change_scene_to_file("res://UI/menu_principal.tscn")
 
 
 func _on_editer_pressed():

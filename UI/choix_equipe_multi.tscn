@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxiulh2fjj25q"]
+
+[ext_resource type="Script" path="res://UI/Scripts/choix_equipe_multi.gd" id="1_pn7et"]
+[ext_resource type="PackedScene" uid="uid://rcby27lpo007" path="res://UI/Displays/Scenes/affichage_equipe.tscn" id="2_xq8ja"]
+[ext_resource type="Texture2D" uid="uid://bknc5skjp7s4v" path="res://UI/Buttons/retour_base.png" id="3_xsohc"]
+[ext_resource type="Texture2D" uid="uid://dd20mihsbd7tw" path="res://UI/Buttons/retour_clicked.png" id="4_e5a4p"]
+[ext_resource type="Texture2D" uid="uid://bsx000i85450y" path="res://UI/Buttons/retour_hovered.png" id="5_dks6y"]
+[ext_resource type="Texture2D" uid="uid://b5sgblea4yfqw" path="res://UI/Buttons/valider_base.png" id="6_pblgq"]
+[ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="7_kd2e1"]
+[ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="8_ddkl0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cnibx"]
+font_size = 32
+
+[node name="ChoixEquipeMulti" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pn7et")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -73.0
+offset_right = 1683.0
+offset_bottom = 965.0
+scale = Vector2(1, 20)
+color = Color(0.529412, 0.478431, 0.317647, 1)
+
+[node name="Menu" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AffichageEquipe" parent="Menu" instance=ExtResource("2_xq8ja")]
+layout_mode = 1
+offset_top = 41.0
+offset_bottom = 41.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Menu"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 380.0
+offset_right = 1216.0
+offset_bottom = 730.0
+scale = Vector2(1.3, 1.3)
+
+[node name="Equipes" type="GridContainer" parent="Menu/ScrollContainer"]
+layout_mode = 2
+columns = 99
+
+[node name="Boutons" type="GridContainer" parent="Menu"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 845.0
+offset_right = 1071.0
+offset_bottom = 885.0
+scale = Vector2(1.5, 1.5)
+columns = 8
+
+[node name="Retour" type="TextureButton" parent="Menu/Boutons"]
+layout_mode = 2
+texture_normal = ExtResource("3_xsohc")
+texture_pressed = ExtResource("4_e5a4p")
+texture_hover = ExtResource("5_dks6y")
+
+[node name="VSeparator" type="VSeparator" parent="Menu/Boutons"]
+layout_mode = 2
+theme_override_constants/separation = 625
+
+[node name="Valider" type="TextureButton" parent="Menu/Boutons"]
+layout_mode = 2
+texture_normal = ExtResource("6_pblgq")
+texture_pressed = ExtResource("7_kd2e1")
+texture_hover = ExtResource("8_ddkl0")
+
+[node name="AttenteHote" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 588.0
+offset_top = 427.0
+offset_right = 1023.0
+offset_bottom = 475.0
+text = "En attente de l'hôte..."
+label_settings = SubResource("LabelSettings_cnibx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttenteAdversaire" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 588.0
+offset_top = 427.0
+offset_right = 1023.0
+offset_bottom = 475.0
+text = "En attente de l'adversaire..."
+label_settings = SubResource("LabelSettings_cnibx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Menu/Boutons/Retour" to="." method="_on_retour_pressed"]
+[connection signal="pressed" from="Menu/Boutons/Valider" to="." method="_on_valider_pressed"]

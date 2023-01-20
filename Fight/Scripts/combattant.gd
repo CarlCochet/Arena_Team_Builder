@@ -124,26 +124,7 @@ func affiche_path(pos_event: Vector2i):
 func affiche_ldv(action: int):
 	all_path = []
 	path_actuel = []
-	var sort
-	sort = sorts[action]
-	if not sort.precheck_cast(self):
-		combat.change_action(7)
-		return
-	var bonus_po = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
-	var po_max = sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0]
-	po_max = 1 if sort.po[1] > 0 and po_max <= 0 else po_max
-	all_ldv = combat.tilemap.get_ldv(
-		grid_pos, 
-		sort.po[0],
-		po_max,
-		sort.type_ldv,
-		sort.ldv
-	)
-	var valides = []
-	for tile in all_ldv:
-		if sort.check_cible(self, tile):
-			valides.append(tile)
-	all_ldv = valides
+	calcul_all_ldv(action)
 	combat.tilemap.clear_layer(2)
 	for cell in all_ldv:
 		combat.tilemap.set_cell(2, cell - combat.offset, 3, Vector2i(2, 0))
@@ -168,6 +149,55 @@ func affiche_zone(action: int, pos_event: Vector2i):
 		)
 		for cell in zone:
 			combat.tilemap.set_cell(2, cell - combat.offset, 3, Vector2i(0, 0))
+
+
+func calcul_path_actuel(pos_event: Vector2i):
+	var path = combat.tilemap.get_chemin(grid_pos, pos_event)
+	if check_etats(["IMMOBILISE"]):
+		all_path = []
+		path = []
+	if len(path) > 0 and len(path) <= stats.pm + 1:
+		path.pop_front()
+		path_actuel = path
+	else:
+		path_actuel = []
+
+
+func calcul_all_ldv(action: int):
+	var sort
+	sort = sorts[action]
+	if not sort.precheck_cast(self):
+		combat.change_action(7)
+		return
+	var bonus_po = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
+	var po_max = sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0]
+	po_max = 1 if sort.po[1] > 0 and po_max <= 0 else po_max
+	all_ldv = combat.tilemap.get_ldv(
+		grid_pos, 
+		sort.po[0],
+		po_max,
+		sort.type_ldv,
+		sort.ldv
+	)
+	var valides = []
+	for tile in all_ldv:
+		if sort.check_cible(self, tile):
+			valides.append(tile)
+	all_ldv = valides
+
+
+func calcul_zone(action: int, pos_event: Vector2i):
+	var sort
+	if action < len(sorts):
+		sort = sorts[action]
+	if pos_event in all_ldv:
+		zone = combat.tilemap.get_zone(
+			grid_pos,
+			pos_event,
+			sort.type_zone,
+			sort.taille_zone[0],
+			sort.taille_zone[1]
+		)
 
 
 func check_case_bonus():
@@ -244,9 +274,13 @@ func active_cadran():
 
 
 func joue_action(action: int, tile_pos: Vector2i):
-	if action == 7 and len(path_actuel) > 0:
-		deplace_perso(path_actuel)
+	if action == 7:
+		calcul_path_actuel(tile_pos)
+		if len(path_actuel) > 0:
+			deplace_perso(path_actuel)
 	elif action < len(sorts):
+		calcul_all_ldv(action)
+		calcul_zone(action, tile_pos)
 		if not tile_pos in all_ldv:
 			combat.change_action(7)
 			return
@@ -292,7 +326,7 @@ func check_tacle_unit(case: Vector2i) -> bool:
 			blocage_total += combattant.stats.blocage
 	var min_esquive = max(stats.esquive - 99, 1)
 	var max_esquive = max(stats.esquive, 2)
-	if randi_range(min_esquive, max_esquive) < blocage_total:
+	if GlobalData.rng.randi_range(min_esquive, max_esquive) < blocage_total:
 		return true
 	return false
 
@@ -402,7 +436,7 @@ func oriente_vers(pos: Vector2i):
 
 func debut_tour():
 	retrait_durees()
-	execute_effets()
+	execute_effets(false)
 	check_case_bonus()
 	desactive_cadran()
 	var delta_hp = max_stats.hp - stats.hp
@@ -458,10 +492,12 @@ func meurt():
 	queue_free()
 
 
-func execute_effets():
+func execute_effets(desactive_degats=true):
 	stat_buffs = Stats.new()
 	var triggers = ["DOMMAGE_SI_BOUGE", "DOMMAGE_SI_UTILISE_PA"]
 	for effet in effets:
+		if effet.categorie in ["DOMMAGE_FIXE"] and (id != combat.combattant_selection.id or desactive_degats):
+			continue
 		if not effet.etat in triggers:
 			effet.execute()
 
@@ -557,5 +593,5 @@ func _on_area_2d_mouse_exited():
 			classe_sprite.material.set_shader_parameter("width", 2.0)
 		combat.stats_hover.visible = false
 		hp.visible = false
-		if combat.action == 7:
-			combat.change_action(7)
+#		if combat.action == 7:
+#			combat.change_action(7)

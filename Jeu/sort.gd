@@ -71,7 +71,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	print(lanceur.classe, "_", str(lanceur.id), " lance ", nom, ".")
 	var combattants = lanceur.combat.combattants
 	var trouve = false
-	var critique = randi_range(1, 100) <= lanceur.stats.cc
+	var critique = GlobalData.rng.randi_range(1, 100) <= lanceur.stats.cc
 	if critique:
 		print("Coup critique!")
 	var targets = []
@@ -194,7 +194,7 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 					p_cible = combattant
 		var combattant_effet = p_effets.duplicate(true)
 		var new_effet = Effet.new(lanceur, p_cible, effet, combattant_effet[effet], critique, centre, aoe, self)
-		if new_effet.instant and p_cible.stats.hp > 0:
+		if new_effet.instant:
 			new_effet.execute()
 		if new_effet.duree > 0:
 			p_cible.effets.append(new_effet)

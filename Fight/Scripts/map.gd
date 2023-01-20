@@ -48,8 +48,6 @@ func get_start():
 			start_rouge.append(pos)
 		if tile_data.x == 2:
 			start_bleu.append(pos)
-	start_bleu.shuffle()
-	start_rouge.shuffle()
 
 
 func update_glyphes():

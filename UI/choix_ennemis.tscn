@@ -19,6 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_x3kko")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
@@ -27,10 +28,12 @@ scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="AffichageEquipe" parent="." instance=ExtResource("2_ma482")]
+layout_mode = 1
 offset_top = 41.0
 offset_bottom = 41.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 380.0
 offset_right = 1216.0
@@ -38,9 +41,11 @@ offset_bottom = 730.0
 scale = Vector2(1.3, 1.3)
 
 [node name="Equipes" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
 columns = 99
 
 [node name="BoutonsPrincipaux" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 597.0
 offset_top = 845.0
 offset_right = 896.0
@@ -49,16 +54,13 @@ scale = Vector2(1.5, 1.5)
 columns = 2
 
 [node name="Retour" type="TextureButton" parent="BoutonsPrincipaux"]
-offset_right = 130.0
-offset_bottom = 32.0
+layout_mode = 2
 texture_normal = ExtResource("3_2m24t")
 texture_pressed = ExtResource("4_qfmv3")
 texture_hover = ExtResource("5_o81pt")
 
 [node name="Valider" type="TextureButton" parent="BoutonsPrincipaux"]
-offset_left = 134.0
-offset_right = 264.0
-offset_bottom = 32.0
+layout_mode = 2
 texture_normal = ExtResource("6_iwg1m")
 texture_pressed = ExtResource("7_p35ea")
 texture_hover = ExtResource("8_j2y1k")

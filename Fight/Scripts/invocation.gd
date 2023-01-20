@@ -159,12 +159,12 @@ func debut_tour():
 
 
 func chemin_vers_proche() -> Array:
-	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
+	var voisins = [Vector2i(0, 1), Vector2i(0, -1), Vector2i(-1, 0), Vector2i(1, 0)]
 	var min_dist = 99999999
 	var min_hp = 9999999
 	var min_chemin = []
 	for combattant in combat.combattants:
-		if combattant.equipe != equipe:
+		if combattant.equipe != equipe and not combattant.check_etats(["PORTE"]):
 			for voisin in voisins:
 				if combattant.grid_pos == (grid_pos + voisin):
 					return []
@@ -187,7 +187,7 @@ func choix_cible(p_all_ldv: Array):
 	if len(p_all_ldv) == 1 and p_all_ldv[0] == grid_pos:
 		return grid_pos
 	for combattant in combat.combattants:
-		if combattant.grid_pos in p_all_ldv and combattant.equipe != equipe:
+		if combattant.grid_pos in p_all_ldv and combattant.equipe != equipe and not combattant.check_etats(["PORTE"]):
 			var delta = combattant.grid_pos - grid_pos
 			var dist = abs(delta.x) + abs(delta.y)
 			if dist < min_dist:

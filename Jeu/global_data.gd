@@ -61,10 +61,14 @@ var equipe_test: Equipe
 var perso_actuel: int
 var map_actuelle: String
 var mort_subite_active: bool
+var is_multijoueur: bool
+var rng: RandomNumberGenerator
 
 
 func _ready():
 	map_actuelle = "map_2"
+	rng = RandomNumberGenerator.new()
+	rng.randomize()
 	charger_stats_classes()
 	charger_sorts()
 	charger_equipements()
@@ -114,9 +118,7 @@ func charger_stats_classes():
 func charger_equipes():
 	var file_access = FileAccess.open("user://save.json", FileAccess.READ)
 	if not file_access:
-		equipes = []
-		for i in range(10):
-			equipes.append(Equipe.new())
+		equipes = [Equipe.new()]
 	else:
 		var json_content = JSON.parse_string(file_access.get_as_text())
 		equipes = []

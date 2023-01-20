@@ -14,6 +14,7 @@ texture = ExtResource("1_x2tj2")
 script = ExtResource("1_q6wx5")
 
 [node name="Stats" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 26.0
 offset_top = 9.0
 offset_right = 350.0
@@ -24,26 +25,21 @@ columns = 5
 
 [node name="HP" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_right = 48.0
-offset_bottom = 20.0
+layout_mode = 2
 text = "0/0"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="PA" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 69.0
-offset_right = 117.0
-offset_bottom = 20.0
+layout_mode = 2
 text = "6"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="PM" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 138.0
-offset_right = 186.0
-offset_bottom = 20.0
+layout_mode = 2
 text = "3
 "
 label_settings = SubResource("LabelSettings_1gmjt")
@@ -51,116 +47,84 @@ vertical_alignment = 1
 
 [node name="Ini" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 207.0
-offset_right = 255.0
-offset_bottom = 20.0
+layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="PO" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 276.0
-offset_right = 324.0
-offset_bottom = 20.0
+layout_mode = 2
 text = "+0"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="DommageAir" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_top = 29.0
-offset_right = 48.0
-offset_bottom = 49.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="DommageTerre" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 69.0
-offset_top = 29.0
-offset_right = 117.0
-offset_bottom = 49.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="DommageFeu" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 138.0
-offset_top = 29.0
-offset_right = 186.0
-offset_bottom = 49.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="DommageEau" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 207.0
-offset_top = 29.0
-offset_right = 255.0
-offset_bottom = 49.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="Blocage" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 276.0
-offset_top = 29.0
-offset_right = 324.0
-offset_bottom = 49.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="ResitanceAir" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_top = 58.0
-offset_right = 48.0
-offset_bottom = 78.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="ResistanceTerre" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 69.0
-offset_top = 58.0
-offset_right = 117.0
-offset_bottom = 78.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="ResistanceFeu" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 138.0
-offset_top = 58.0
-offset_right = 186.0
-offset_bottom = 78.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="ResistanceEau" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 207.0
-offset_top = 58.0
-offset_right = 255.0
-offset_bottom = 78.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="Esquive" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
-offset_left = 276.0
-offset_top = 58.0
-offset_right = 324.0
-offset_bottom = 78.0
+layout_mode = 2
 text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
