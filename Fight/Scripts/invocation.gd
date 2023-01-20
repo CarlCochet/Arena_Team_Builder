@@ -159,7 +159,7 @@ func debut_tour():
 
 
 func chemin_vers_proche() -> Array:
-	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
+	var voisins = [Vector2i(0, 1), Vector2i(0, -1), Vector2i(-1, 0), Vector2i(1, 0)]
 	var min_dist = 99999999
 	var min_hp = 9999999
 	var min_chemin = []
