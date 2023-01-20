@@ -17,16 +17,16 @@ func _on_heberger_pressed():
 	Client.multiplayer.multiplayer_peer = Client.multiplayer_peer
 	Client.multiplayer_peer.peer_connected.connect(func(id): Client.ajouter_peer(id))
 	Client.is_host = true
-	Client.ajouter_peer(0)
+	Client.ajouter_peer(1)
 	menu.visible = false
 	texte_attente.visible = true
 
 
 func _on_rejoindre_pressed():
-	Client.multiplayer_peer.create_client("ws://" + adresse.text + ":" + str(PORT))
-	Client.multiplayer.multiplayer_peer = Client.multiplayer_peer
-	Client.other_peer = Client.multiplayer_peer.get_peer(1)
-	get_tree().change_scene_to_file("res://UI/choix_equipe_multi.tscn")
+	if Client.peer_count < 2:
+		Client.multiplayer_peer.create_client("ws://" + adresse.text + ":" + str(PORT))
+		Client.multiplayer.multiplayer_peer = Client.multiplayer_peer
+		get_tree().change_scene_to_file("res://UI/choix_equipe_multi.tscn")
 
 
 func _on_retour_pressed():

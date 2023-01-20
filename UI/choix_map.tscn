@@ -306,3 +306,4 @@ label_settings = SubResource("LabelSettings_2chev")
 
 [connection signal="pressed" from="GridContainer2/Fermer" to="." method="_on_fermer_pressed" flags=18]
 [connection signal="pressed" from="GridContainer2/Valider" to="." method="_on_valider_pressed" flags=18]
+[connection signal="pressed" from="MortSubiteCheck" to="." method="_on_mort_subite_check_pressed"]

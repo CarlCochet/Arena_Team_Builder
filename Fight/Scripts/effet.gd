@@ -255,7 +255,7 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 		var values = base.replace("+", "d").split("d")
 		base = int(values[2])
 		for i in range(int(values[0])):
-			base += randi_range(1, int(values[1]) + 1)
+			base += GlobalData.rng.randi_range(1, int(values[1]) + 1)
 	
 	var resistance_zone = cible.stats.resistance_zone / 100.0 if aoe else 0.0
 	var bonus = get_orientation_bonus() if orientation_bonus else 0.0
@@ -263,7 +263,7 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 		bonus = 0.0
 	var result = float(base * (1.0 + (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone))
 	var proba_roundup = result - int(result)
-	result = int(result) + 1 if randf() < proba_roundup else int(result)
+	result = int(result) + 1 if GlobalData.rng.randf() < proba_roundup else int(result)
 	return result
 
 

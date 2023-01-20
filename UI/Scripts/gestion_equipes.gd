@@ -14,6 +14,7 @@ var equipe_selectionnee: int
 func _ready():
 	equipes = []
 	equipe_selectionnee = 0
+	GlobalData.is_multijoueur = false
 	generer_affichage()
 
 

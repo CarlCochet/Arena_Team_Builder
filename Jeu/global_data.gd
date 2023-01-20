@@ -61,10 +61,14 @@ var equipe_test: Equipe
 var perso_actuel: int
 var map_actuelle: String
 var mort_subite_active: bool
+var is_multijoueur: bool
+var rng: RandomNumberGenerator
 
 
 func _ready():
 	map_actuelle = "map_2"
+	rng = RandomNumberGenerator.new()
+	rng.randomize()
 	charger_stats_classes()
 	charger_sorts()
 	charger_equipements()

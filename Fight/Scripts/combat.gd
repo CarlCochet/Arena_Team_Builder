@@ -31,7 +31,6 @@ func _ready():
 	spell_pressed = false
 	indexeur_global = 0
 	offset = tilemap.offset
-	randomize()
 	creer_personnages()
 	tour = 1
 	timeline.init(combattants, selection_id)
@@ -66,6 +65,7 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe):
 			nouveau_combattant.update_visuel()
 
 
+@rpc(any_peer, call_local)
 func passe_tour():
 	combattant_selection.fin_tour()
 	tilemap.clear_layer(2)
@@ -83,6 +83,7 @@ func passe_tour():
 	combattant_selection.debut_tour()
 
 
+@rpc(any_peer, call_local)
 func lance_game():
 	_on_perso_clicked(0)
 	etat = 1
@@ -91,6 +92,7 @@ func lance_game():
 	combattant_selection.debut_tour()
 
 
+@rpc(any_peer, call_local)
 func change_action(new_action: int):
 	if new_action >= len(combattant_selection.sorts):
 		new_action = 7
@@ -103,6 +105,30 @@ func change_action(new_action: int):
 		combattant_selection.affiche_zone(action, tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
 	else:
 		combattant_selection.affiche_path(tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
+
+
+@rpc(any_peer, call_local)
+func joue_action(action_id, grid_pos):
+	combattant_selection.joue_action(action_id, grid_pos)
+
+
+@rpc(any_peer, call_local)
+func change_orientation(orientation_id, combattant_id):
+	combattants[combattant_id].change_orientation(orientation_id)
+
+@rpc(any_peer, call_local)
+func place_perso(map_pos, combattant_id):
+	combattants[combattant_id].place_perso(map_pos)
+
+
+@rpc(any_peer, call_local)
+func affiche_path(grid_pos):
+	combattant_selection.affiche_path(grid_pos)
+
+
+@rpc(any_peer, call_local)
+func affiche_zone(action_id, grid_pos):
+	combattant_selection.affiche_zone(action_id, grid_pos)
 
 
 func trigger_victoire(equipe: int):
@@ -168,9 +194,10 @@ func _on_perso_clicked(id: int):
 func _input(event):
 	if etat == 1:
 		if (Input.is_key_pressed(KEY_F1) or Input.is_key_pressed(KEY_SPACE)) and event is InputEventKey and not event.echo:
-			passe_tour()
+#			passe_tour()
+			rpc("passe_tour")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
-			get_tree().change_scene_to_file("res://UI/choix_map.tscn")
+			rpc("retour_pressed")
 		if event is InputEventMouseMotion:
 			if action == 7:
 				for combattant in combattants:
@@ -183,60 +210,85 @@ func _input(event):
 			if spell_pressed:
 				spell_pressed = false
 				return
-			combattant_selection.joue_action(action, tilemap.local_to_map(event.position) + offset)
+#			combattant_selection.joue_action(action, tilemap.local_to_map(event.position) + offset)
+			rpc("joue_action", action, tilemap.local_to_map(event.position) + offset)
 		if Input.is_key_pressed(KEY_APOSTROPHE) and event is InputEventKey and not event.echo:
-			change_action(0)
+#			change_action(0)
+			rpc("change_action", 0)
 		if Input.is_key_pressed(KEY_1) and event is InputEventKey and not event.echo:
-			change_action(1)
+#			change_action(1)
+			rpc("change_action", 1)
 		if Input.is_key_pressed(KEY_2) and event is InputEventKey and not event.echo:
-			change_action(2)
+#			change_action(2)
+			rpc("change_action", 2)
 		if Input.is_key_pressed(KEY_3) and event is InputEventKey and not event.echo:
-			change_action(3)
+#			change_action(3)
+			rpc("change_action", 3)
 		if Input.is_key_pressed(KEY_4) and event is InputEventKey and not event.echo:
-			change_action(4)
+#			change_action(4)
+			rpc("change_action", 4)
 		if Input.is_key_pressed(KEY_5) and event is InputEventKey and not event.echo:
-			change_action(5)
+#			change_action(5)
+			rpc("change_action", 5)
 		if Input.is_key_pressed(KEY_6) and event is InputEventKey and not event.echo:
-			change_action(6)
+#			change_action(6)
+			rpc("change_action", 6)
 		if Input.is_key_pressed(KEY_UP) and event is InputEventKey and not event.echo:
-			combattant_selection.change_orientation(0)
+#			combattant_selection.change_orientation(0)
+			rpc("change_orientation", 0, selection_id)
 		if Input.is_key_pressed(KEY_RIGHT) and event is InputEventKey and not event.echo:
-			combattant_selection.change_orientation(1)
+#			combattant_selection.change_orientation(1)
+			rpc("change_orientation", 1, selection_id)
 		if Input.is_key_pressed(KEY_DOWN) and event is InputEventKey and not event.echo:
-			combattant_selection.change_orientation(2)
+#			combattant_selection.change_orientation(2)
+			rpc("change_orientation", 2, selection_id)
 		if Input.is_key_pressed(KEY_LEFT) and event is InputEventKey and not event.echo:
-			combattant_selection.change_orientation(3)
+#			combattant_selection.change_orientation(3)
+			rpc("change_orientation", 3, selection_id)
 	if etat == 0:
 		if (Input.is_key_pressed(KEY_F1) or Input.is_key_pressed(KEY_SPACE)) and event is InputEventKey and not event.echo:
-			lance_game()
+#			lance_game()
+			rpc("lance_game")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
-			get_tree().change_scene_to_file("res://UI/choix_map.tscn")
+			rpc("retour_pressed")
 		if event is InputEventMouseButton:
-			combattant_selection.place_perso(tilemap.local_to_map(event.position))
+#			combattant_selection.place_perso(tilemap.local_to_map(event.position))
+			rpc("place_perso", tilemap.local_to_map(event.position), selection_id)
 
 
 func _on_fleche_0_pressed():
-	combattant_selection.change_orientation(0)
+#	combattant_selection.change_orientation(0)
+	rpc("change_orientation", 0, selection_id)
 
 
 func _on_fleche_1_pressed():
-	combattant_selection.change_orientation(1)
+#	combattant_selection.change_orientation(1)
+	rpc("change_orientation", 1, selection_id)
 
 
 func _on_fleche_2_pressed():
-	combattant_selection.change_orientation(2)
+#	combattant_selection.change_orientation(2)
+	rpc("change_orientation", 2, selection_id)
 
 
 func _on_fleche_3_pressed():
-	combattant_selection.change_orientation(3)
+#	combattant_selection.change_orientation(3)
+	rpc("change_orientation", 3, selection_id)
 
 
 func _on_passe_tour_pressed():
 	if etat == 1:
-		passe_tour()
+		rpc("passe_tour")
+#		passe_tour()
 	if etat == 0:
-		lance_game()
+		rpc("lance_game")
+#		lance_game()
 
 
 func _on_bouton_retour_pressed():
+	rpc("retour_pressed")
+
+
+@rpc(any_peer, call_local)
+func retour_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_map.tscn")

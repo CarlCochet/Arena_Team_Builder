@@ -71,7 +71,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	print(lanceur.classe, "_", str(lanceur.id), " lance ", nom, ".")
 	var combattants = lanceur.combat.combattants
 	var trouve = false
-	var critique = randi_range(1, 100) <= lanceur.stats.cc
+	var critique = GlobalData.rng.randi_range(1, 100) <= lanceur.stats.cc
 	if critique:
 		print("Coup critique!")
 	var targets = []

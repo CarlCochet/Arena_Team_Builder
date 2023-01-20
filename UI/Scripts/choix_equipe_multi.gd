@@ -6,14 +6,18 @@ var equipes: Array
 var equipe_selectionnee: int
 var adversaire_pret: bool
 
-@onready var equipes_grid: GridContainer = $ScrollContainer/Equipes
-@onready var affichage_personnages: Control = $AffichageEquipe
+@onready var menu: Control = $Menu
+@onready var equipes_grid: GridContainer = $Menu/ScrollContainer/Equipes
+@onready var affichage_personnages: Control = $Menu/AffichageEquipe
+@onready var attente_hote: Label = $AttenteHote
+@onready var attente_adversaire: Label = $AttenteAdversaire
 
 
 func _ready():
 	equipes = []
 	equipe_selectionnee = 0
 	adversaire_pret = false
+	GlobalData.is_multijoueur = true
 	generer_affichage()
 
 
@@ -53,4 +57,34 @@ func _on_retour_pressed():
 
 
 func _on_valider_pressed():
-	pass # Replace with function body.
+	var change_scene_check = adversaire_pret
+	if Client.is_host:
+		rpc("transfert_equipe", GlobalData.equipe_actuelle.to_json())
+		attente_adversaire.visible = true
+	else:
+		rpc("transfert_equipe", GlobalData.equipe_test.to_json())
+		attente_hote.visible = true
+	menu.visible = false
+	if change_scene_check:
+		rpc("change_scene")
+
+
+@rpc(any_peer)
+func transfert_equipe(equipe: Array):
+	if multiplayer.get_remote_sender_id() == 1:
+		GlobalData.equipe_actuelle = Equipe.new().from_json(equipe)
+	else:
+		GlobalData.equipe_test = Equipe.new().from_json(equipe)
+	adversaire_pret = true
+
+
+@rpc(any_peer, call_local)
+func change_scene():
+	get_tree().change_scene_to_file("res://UI/choix_map.tscn")
+
+
+func _input(event):
+	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
+		_on_retour_pressed()
+	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:
+		_on_valider_pressed()
