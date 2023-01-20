@@ -289,7 +289,10 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 		stat = lanceur.stats[stat_element]
 	var resistance = 0.0
 	if not resistance_element.is_empty():
-		resistance = cible.stats[resistance_element]
+		if type in ["retour", "pourcent_retour"]:
+			resistance = lanceur.stats[resistance_element]
+		else:
+			resistance = cible.stats[resistance_element]
 	
 	if type in ["pourcent", "pourcent_retour"]:
 		base = cible.stats.hp * (base / 100.0)
@@ -533,6 +536,8 @@ func vole_eau():
 
 
 func soin():
+	if cible.stats.hp <= 0:
+		return
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit = trouve_crit()
@@ -784,6 +789,8 @@ func teleporte():
 
 
 func transpose():
+	if cible.stats.hp <= 0:
+		return
 	if lanceur.check_etats(["INTRANSPOSABLE"]) or cible.check_etats(["INTRANSPOSABLE", "PORTE", "PORTE_ALLIE", "PORTE_ENNEMI"]):
 		return
 	cible.echange_positions(lanceur)

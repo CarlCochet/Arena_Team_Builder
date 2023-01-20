@@ -402,7 +402,7 @@ func oriente_vers(pos: Vector2i):
 
 func debut_tour():
 	retrait_durees()
-	execute_effets()
+	execute_effets(false)
 	check_case_bonus()
 	desactive_cadran()
 	var delta_hp = max_stats.hp - stats.hp
@@ -458,10 +458,12 @@ func meurt():
 	queue_free()
 
 
-func execute_effets():
+func execute_effets(desactive_degats=true):
 	stat_buffs = Stats.new()
 	var triggers = ["DOMMAGE_SI_BOUGE", "DOMMAGE_SI_UTILISE_PA"]
 	for effet in effets:
+		if effet.categorie in ["DOMMAGE_FIXE"] and (id != combat.combattant_selection.id or desactive_degats):
+			continue
 		if not effet.etat in triggers:
 			effet.execute()
 

@@ -8,74 +8,17 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "Node2D",
-"class": &"Combat",
-"language": &"GDScript",
-"path": "res://Fight/Scripts/combat.gd"
-}, {
-"base": "Node2D",
-"class": &"Combattant",
-"language": &"GDScript",
-"path": "res://Fight/Scripts/combattant.gd"
-}, {
-"base": "Node",
-"class": &"Effet",
-"language": &"GDScript",
-"path": "res://Fight/Scripts/effet.gd"
-}, {
-"base": "Node2D",
-"class": &"Equipe",
-"language": &"GDScript",
-"path": "res://Jeu/equipe.gd"
-}, {
-"base": "Node2D",
-"class": &"Equipement",
-"language": &"GDScript",
-"path": "res://Jeu/equipement.gd"
-}, {
-"base": "Combattant",
-"class": &"Invocation",
-"language": &"GDScript",
-"path": "res://Fight/Scripts/invocation.gd"
-}, {
-"base": "Node2D",
-"class": &"Personnage",
-"language": &"GDScript",
-"path": "res://Jeu/personnage.gd"
-}, {
-"base": "Node2D",
-"class": &"Sort",
-"language": &"GDScript",
-"path": "res://Jeu/sort.gd"
-}, {
-"base": "Node2D",
-"class": &"Stats",
-"language": &"GDScript",
-"path": "res://Jeu/stats.gd"
-}]
-_global_script_class_icons={
-"Combat": "",
-"Combattant": "",
-"Effet": "",
-"Equipe": "",
-"Equipement": "",
-"Invocation": "",
-"Personnage": "",
-"Sort": "",
-"Stats": ""
-}
-
 [application]
 
 config/name="Arena_Team_Builder"
-run/main_scene="res://UI/gestion_equipes.tscn"
+run/main_scene="res://UI/menu_principal.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GlobalData="*res://Jeu/global_data.gd"
+Client="*res://Jeu/client.gd"
 
 [display]
 
@@ -87,3 +30,7 @@ window/stretch/aspect="keep_width"
 [dotnet]
 
 project/assembly_name="Arena_Team_Builder"
+
+[editor]
+
+export/convert_text_resources_to_binary=true

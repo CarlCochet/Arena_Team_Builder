@@ -117,6 +117,7 @@ func check_morts():
 	var new_selection_id = 0
 	var compte_init = len(combattants)
 	var comptes_equipes = [0, 0]
+	var old_id = combattant_selection.id
 	combattants[selection_id].unselect()
 	for combattant in combattants:
 		if combattant.id == combattants[selection_id].id:
@@ -148,6 +149,8 @@ func check_morts():
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
 	change_action(7)
+	if old_id != combattant_selection.id:
+		combattant_selection.debut_tour()
 	timeline.init(combattants, selection_id)
 	if compte_init != len(combattants):
 		check_morts()

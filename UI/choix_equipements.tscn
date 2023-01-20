@@ -31,6 +31,7 @@ grow_vertical = 2
 script = ExtResource("1_541q8")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
@@ -39,6 +40,7 @@ scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="Personnage" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 93.0
 offset_top = 7.0
 offset_right = 163.0
@@ -46,16 +48,19 @@ offset_bottom = 135.0
 texture = ExtResource("1_rmd4o")
 
 [node name="StatsPrimaires" parent="." instance=ExtResource("2_ntw62")]
+layout_mode = 0
 offset_top = 66.0
 offset_right = 250.0
 offset_bottom = 177.0
 
 [node name="StatsSecondaires" parent="." instance=ExtResource("3_b8gg0")]
+layout_mode = 0
 offset_top = 177.0
 offset_right = 248.0
 offset_bottom = 630.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 693.0
 offset_right = 160.0
@@ -63,29 +68,25 @@ offset_bottom = 797.0
 scale = Vector2(1.5, 1.5)
 
 [node name="Valider" type="TextureButton" parent="GridContainer"]
-offset_right = 130.0
-offset_bottom = 32.0
+layout_mode = 2
 texture_normal = ExtResource("5_bjxlm")
 texture_pressed = ExtResource("6_sd62s")
 texture_hover = ExtResource("7_i3dim")
 
 [node name="Sorts" type="TextureButton" parent="GridContainer"]
-offset_top = 36.0
-offset_right = 130.0
-offset_bottom = 68.0
+layout_mode = 2
 texture_normal = ExtResource("5_yxd6q")
 texture_pressed = ExtResource("6_lrtfq")
 texture_hover = ExtResource("7_8ayq0")
 
 [node name="Retour" type="TextureButton" parent="GridContainer"]
-offset_top = 72.0
-offset_right = 130.0
-offset_bottom = 104.0
+layout_mode = 2
 texture_normal = ExtResource("7_x31ic")
 texture_pressed = ExtResource("8_ns3p0")
 texture_hover = ExtResource("9_7hgve")
 
 [node name="GridEquipementsFond" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 750.0
 offset_top = 50.0
 offset_right = 1100.0
@@ -94,35 +95,27 @@ theme_override_constants/h_separation = 20
 columns = 5
 
 [node name="Arme" type="TextureButton" parent="GridEquipementsFond"]
-offset_right = 54.0
-offset_bottom = 54.0
+layout_mode = 2
 texture_normal = ExtResource("10_76v4w")
 
 [node name="Familier" type="TextureButton" parent="GridEquipementsFond"]
-offset_left = 74.0
-offset_right = 128.0
-offset_bottom = 54.0
+layout_mode = 2
 texture_normal = ExtResource("11_h64ke")
 
 [node name="Coiffe" type="TextureButton" parent="GridEquipementsFond"]
-offset_left = 148.0
-offset_right = 202.0
-offset_bottom = 54.0
+layout_mode = 2
 texture_normal = ExtResource("12_2rfh5")
 
 [node name="Cape" type="TextureButton" parent="GridEquipementsFond"]
-offset_left = 222.0
-offset_right = 276.0
-offset_bottom = 54.0
+layout_mode = 2
 texture_normal = ExtResource("13_0nfer")
 
 [node name="Dofus" type="TextureButton" parent="GridEquipementsFond"]
-offset_left = 296.0
-offset_right = 350.0
-offset_bottom = 54.0
+layout_mode = 2
 texture_normal = ExtResource("14_raq4t")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
 offset_left = 380.0
 offset_top = 150.0
 offset_right = 1749.0
@@ -130,13 +123,16 @@ offset_bottom = 898.0
 scale = Vector2(0.8, 0.8)
 
 [node name="Cartes" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
 columns = 5
 
 [node name="AffichageBudget" parent="." instance=ExtResource("2_0eq0q")]
+layout_mode = 0
 offset_left = 826.0
 offset_right = 1023.0
 
 [node name="GridLogos" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 757.0
 offset_top = 57.0
 offset_right = 1952.0
@@ -147,36 +143,27 @@ theme_override_constants/h_separation = 120
 columns = 5
 
 [node name="Armes" type="TextureRect" parent="GridLogos"]
-offset_right = 143.0
-offset_bottom = 143.0
+layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("17_e2hod")
 
 [node name="Familiers" type="TextureRect" parent="GridLogos"]
-offset_left = 263.0
-offset_right = 406.0
-offset_bottom = 143.0
+layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("17_e2hod")
 
 [node name="Coiffes" type="TextureRect" parent="GridLogos"]
-offset_left = 526.0
-offset_right = 669.0
-offset_bottom = 143.0
+layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("17_e2hod")
 
 [node name="Capes" type="TextureRect" parent="GridLogos"]
-offset_left = 789.0
-offset_right = 932.0
-offset_bottom = 143.0
+layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("17_e2hod")
 
 [node name="Dofus" type="TextureRect" parent="GridLogos"]
-offset_left = 1052.0
-offset_right = 1195.0
-offset_bottom = 143.0
+layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("17_e2hod")
 

@@ -77,6 +77,7 @@ grow_vertical = 2
 script = ExtResource("1_n1jan")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
@@ -85,260 +86,188 @@ scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="MapScroll" type="ScrollContainer" parent="."]
+layout_mode = 0
 offset_left = 104.0
 offset_top = 64.0
 offset_right = 1523.0
 offset_bottom = 692.0
 
 [node name="Maps" type="GridContainer" parent="MapScroll"]
-offset_right = 1400.0
-offset_bottom = 1500.0
+layout_mode = 2
 theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 40
 columns = 4
 
 [node name="map_2" type="TextureButton" parent="MapScroll/Maps"]
-offset_right = 320.0
-offset_bottom = 180.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("2_1jwkw")
 texture_pressed = ExtResource("3_3apv8")
 
 [node name="map_3" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 360.0
-offset_right = 680.0
-offset_bottom = 180.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("4_cmgwq")
 texture_pressed = ExtResource("5_6joxa")
 
 [node name="map_4" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 720.0
-offset_right = 1040.0
-offset_bottom = 180.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("6_bxi3d")
 texture_pressed = ExtResource("7_ltle2")
 
 [node name="map_5" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 1080.0
-offset_right = 1400.0
-offset_bottom = 180.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("8_b3w2c")
 texture_pressed = ExtResource("9_tvmxo")
 
 [node name="map_7" type="TextureButton" parent="MapScroll/Maps"]
-offset_top = 220.0
-offset_right = 320.0
-offset_bottom = 400.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("10_50kya")
 texture_pressed = ExtResource("11_q5cym")
 
 [node name="map_10" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 360.0
-offset_top = 220.0
-offset_right = 680.0
-offset_bottom = 400.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("12_mic6l")
 texture_pressed = ExtResource("13_ie6r2")
 
 [node name="map_11" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 720.0
-offset_top = 220.0
-offset_right = 1040.0
-offset_bottom = 400.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("14_e248q")
 texture_pressed = ExtResource("15_vy8qb")
 
 [node name="map_12" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 1080.0
-offset_top = 220.0
-offset_right = 1400.0
-offset_bottom = 400.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("16_5u63b")
 texture_pressed = ExtResource("17_3lmj0")
 
 [node name="map_13" type="TextureButton" parent="MapScroll/Maps"]
-offset_top = 440.0
-offset_right = 320.0
-offset_bottom = 620.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("18_yu2ts")
 texture_pressed = ExtResource("19_wod31")
 
 [node name="map_14" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 360.0
-offset_top = 440.0
-offset_right = 680.0
-offset_bottom = 620.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("20_ycgt6")
 texture_pressed = ExtResource("21_gjw45")
 
 [node name="map_15" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 720.0
-offset_top = 440.0
-offset_right = 1040.0
-offset_bottom = 620.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("4_0k4jr")
 texture_pressed = ExtResource("5_r7tbe")
 
 [node name="map_16" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 1080.0
-offset_top = 440.0
-offset_right = 1400.0
-offset_bottom = 620.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("6_4kg85")
 texture_pressed = ExtResource("7_oewen")
 
 [node name="map_17" type="TextureButton" parent="MapScroll/Maps"]
-offset_top = 660.0
-offset_right = 320.0
-offset_bottom = 840.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("26_rwnb3")
 texture_pressed = ExtResource("27_nb7ta")
 
 [node name="map_18" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 360.0
-offset_top = 660.0
-offset_right = 680.0
-offset_bottom = 840.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("28_pbyp0")
 texture_pressed = ExtResource("29_vja2q")
 
 [node name="map_19" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 720.0
-offset_top = 660.0
-offset_right = 1040.0
-offset_bottom = 840.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("8_enktb")
 texture_pressed = ExtResource("9_3e8oa")
 
 [node name="map_30" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 1080.0
-offset_top = 660.0
-offset_right = 1400.0
-offset_bottom = 840.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("10_w2hn2")
 texture_pressed = ExtResource("11_cadl4")
 
 [node name="map_53" type="TextureButton" parent="MapScroll/Maps"]
-offset_top = 880.0
-offset_right = 320.0
-offset_bottom = 1060.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("34_3qg5h")
 texture_pressed = ExtResource("35_joi0m")
 
 [node name="map_54" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 360.0
-offset_top = 880.0
-offset_right = 680.0
-offset_bottom = 1060.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("36_cagox")
 texture_pressed = ExtResource("37_oei84")
 
 [node name="map_56" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 720.0
-offset_top = 880.0
-offset_right = 1040.0
-offset_bottom = 1060.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("12_fyxt1")
 texture_pressed = ExtResource("13_4n32o")
 
 [node name="map_58" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 1080.0
-offset_top = 880.0
-offset_right = 1400.0
-offset_bottom = 1060.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("14_50qaf")
 texture_pressed = ExtResource("15_5xquu")
 
 [node name="map_59" type="TextureButton" parent="MapScroll/Maps"]
-offset_top = 1100.0
-offset_right = 320.0
-offset_bottom = 1280.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("42_kpwgn")
 texture_pressed = ExtResource("43_1uji0")
 
 [node name="map_60" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 360.0
-offset_top = 1100.0
-offset_right = 680.0
-offset_bottom = 1280.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("16_vsen2")
 texture_pressed = ExtResource("17_qquso")
 
 [node name="map_61" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 720.0
-offset_top = 1100.0
-offset_right = 1040.0
-offset_bottom = 1280.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("46_lcp2w")
 texture_pressed = ExtResource("47_7hm7v")
 
 [node name="map_77" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 1080.0
-offset_top = 1100.0
-offset_right = 1400.0
-offset_bottom = 1280.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("48_76msy")
 texture_pressed = ExtResource("49_8tc4w")
 
 [node name="map_81" type="TextureButton" parent="MapScroll/Maps"]
-offset_top = 1320.0
-offset_right = 320.0
-offset_bottom = 1500.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("50_iu8jr")
 texture_pressed = ExtResource("51_rjgen")
 
 [node name="map_82" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 360.0
-offset_top = 1320.0
-offset_right = 680.0
-offset_bottom = 1500.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("52_frwam")
 texture_pressed = ExtResource("53_jxmtg")
 
 [node name="map_83" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 720.0
-offset_top = 1320.0
-offset_right = 1040.0
-offset_bottom = 1500.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("54_pdc4n")
 texture_pressed = ExtResource("55_q57vh")
 
 [node name="map_84" type="TextureButton" parent="MapScroll/Maps"]
-offset_left = 1080.0
-offset_top = 1320.0
-offset_right = 1400.0
-offset_bottom = 1500.0
+layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("56_452rg")
 texture_pressed = ExtResource("57_6o1nq")
 
 [node name="GridContainer2" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 607.0
 offset_top = 845.0
 offset_right = 871.0
@@ -347,21 +276,19 @@ scale = Vector2(1.5, 1.5)
 columns = 2
 
 [node name="Fermer" type="TextureButton" parent="GridContainer2"]
-offset_right = 130.0
-offset_bottom = 32.0
+layout_mode = 2
 texture_normal = ExtResource("18_deorm")
 texture_pressed = ExtResource("19_1ytsp")
 texture_hover = ExtResource("20_pb8g1")
 
 [node name="Valider" type="TextureButton" parent="GridContainer2"]
-offset_left = 134.0
-offset_right = 264.0
-offset_bottom = 32.0
+layout_mode = 2
 texture_normal = ExtResource("32_48jq0")
 texture_pressed = ExtResource("33_xavqd")
 texture_hover = ExtResource("34_0hosn")
 
 [node name="MortSubiteCheck" type="CheckBox" parent="."]
+layout_mode = 0
 offset_left = 911.0
 offset_top = 720.0
 offset_right = 935.0
@@ -369,6 +296,7 @@ offset_bottom = 744.0
 scale = Vector2(2, 2)
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 641.0
 offset_top = 724.0
 offset_right = 890.0

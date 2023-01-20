@@ -1,9 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://box1ypk4dtvni"]
+[gd_scene load_steps=21 format=3 uid="uid://box1ypk4dtvni"]
 
 [ext_resource type="Script" path="res://UI/Scripts/gestion_equipes.gd" id="1_4qtop"]
 [ext_resource type="PackedScene" uid="uid://rcby27lpo007" path="res://UI/Displays/Scenes/affichage_equipe.tscn" id="1_pq5c6"]
 [ext_resource type="Texture2D" uid="uid://cj00tojaj188p" path="res://UI/Buttons/supprimer_base.png" id="3_b6ngn"]
+[ext_resource type="Texture2D" uid="uid://bknc5skjp7s4v" path="res://UI/Buttons/retour_base.png" id="3_ep4hl"]
 [ext_resource type="Texture2D" uid="uid://bntvfyl8ucfvp" path="res://UI/Buttons/supprimer_clicked.png" id="4_44dll"]
+[ext_resource type="Texture2D" uid="uid://dd20mihsbd7tw" path="res://UI/Buttons/retour_clicked.png" id="4_y2iyd"]
+[ext_resource type="Texture2D" uid="uid://bsx000i85450y" path="res://UI/Buttons/retour_hovered.png" id="5_thhhu"]
 [ext_resource type="Texture2D" uid="uid://5xqkcvgvqcp3" path="res://UI/Buttons/supprimer_hovered.png" id="5_u65qg"]
 [ext_resource type="Texture2D" uid="uid://ynsewpoi05mt" path="res://UI/Buttons/editer_base.png" id="6_oeuip"]
 [ext_resource type="Texture2D" uid="uid://dsyqby7qkyxpw" path="res://UI/Buttons/editer_clicked.png" id="7_xv1xv"]
@@ -28,6 +31,7 @@ grow_vertical = 2
 script = ExtResource("1_4qtop")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
@@ -36,10 +40,12 @@ scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="AffichageEquipe" parent="." instance=ExtResource("1_pq5c6")]
+layout_mode = 1
 offset_top = 41.0
 offset_bottom = 41.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 380.0
 offset_right = 1216.0
@@ -47,40 +53,58 @@ offset_bottom = 730.0
 scale = Vector2(1.3, 1.3)
 
 [node name="Equipes" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
 columns = 99
 
 [node name="Boutons" type="GridContainer" parent="."]
-offset_left = 100.0
+layout_mode = 0
+offset_left = 125.0
 offset_top = 845.0
-offset_right = 1046.0
+offset_right = 1071.0
 offset_bottom = 885.0
 scale = Vector2(1.5, 1.5)
-columns = 6
+columns = 8
+
+[node name="Retour" type="TextureButton" parent="Boutons"]
+layout_mode = 2
+texture_normal = ExtResource("3_ep4hl")
+texture_pressed = ExtResource("4_y2iyd")
+texture_hover = ExtResource("5_thhhu")
+
+[node name="VSeparator2" type="VSeparator" parent="Boutons"]
+layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="Supprimer" type="TextureButton" parent="Boutons"]
+layout_mode = 2
 texture_normal = ExtResource("3_b6ngn")
 texture_pressed = ExtResource("4_44dll")
 texture_hover = ExtResource("5_u65qg")
 
 [node name="Editer" type="TextureButton" parent="Boutons"]
+layout_mode = 2
 texture_normal = ExtResource("6_oeuip")
 texture_pressed = ExtResource("7_xv1xv")
 texture_hover = ExtResource("8_6clad")
 
 [node name="Creer" type="TextureButton" parent="Boutons"]
+layout_mode = 2
 texture_normal = ExtResource("9_0ucjf")
 texture_pressed = ExtResource("10_0whlk")
 texture_hover = ExtResource("11_bu8cj")
 
 [node name="VSeparator" type="VSeparator" parent="Boutons"]
-theme_override_constants/separation = 276
+layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="Exporter" type="TextureButton" parent="Boutons"]
+layout_mode = 2
 texture_normal = ExtResource("12_3vtv8")
 texture_pressed = ExtResource("13_u8ei4")
 texture_hover = ExtResource("14_flckn")
 
 [node name="Importer" type="TextureButton" parent="Boutons"]
+layout_mode = 2
 texture_normal = ExtResource("15_fhykk")
 texture_pressed = ExtResource("16_q82ej")
 texture_hover = ExtResource("17_durn8")
@@ -100,6 +124,7 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.json ; JSON Files")
 
+[connection signal="pressed" from="Boutons/Retour" to="." method="_on_retour_pressed"]
 [connection signal="pressed" from="Boutons/Supprimer" to="." method="_on_supprimer_pressed"]
 [connection signal="pressed" from="Boutons/Editer" to="." method="_on_editer_pressed"]
 [connection signal="pressed" from="Boutons/Creer" to="." method="_on_creer_pressed"]
