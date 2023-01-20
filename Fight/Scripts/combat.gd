@@ -85,7 +85,11 @@ func passe_tour():
 
 @rpc(any_peer, call_local)
 func lance_game():
-	_on_perso_clicked(0)
+	combattants[0].unselect()
+	selection_id = 0
+	timeline.init(combattants, selection_id)
+	combattants[selection_id].select()
+	combattant_selection = combattants[selection_id]
 	etat = 1
 	tilemap.clear_layer(2)
 	change_action(7)
@@ -105,6 +109,8 @@ func change_action(new_action: int):
 		combattant_selection.affiche_zone(action, tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
 	else:
 		combattant_selection.affiche_path(tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
+	if combattant_selection.equipe == int(Client.is_host):
+		tilemap.clear_layer(2)
 
 
 @rpc(any_peer, call_local)
@@ -183,7 +189,7 @@ func check_morts():
 
 
 func _on_perso_clicked(id: int):
-	if etat == 0:
+	if etat == 0 and combattants[id].equipe != int(Client.is_host):
 		combattants[selection_id].unselect()
 		selection_id = id
 		timeline.init(combattants, selection_id)
@@ -194,95 +200,90 @@ func _on_perso_clicked(id: int):
 func _input(event):
 	if etat == 1:
 		if (Input.is_key_pressed(KEY_F1) or Input.is_key_pressed(KEY_SPACE)) and event is InputEventKey and not event.echo:
-#			passe_tour()
-			rpc("passe_tour")
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("passe_tour")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			rpc("retour_pressed")
 		if event is InputEventMouseMotion:
-			if action == 7:
-				for combattant in combattants:
-					if combattant.is_hovered:
-						return
-				combattant_selection.affiche_path(tilemap.local_to_map(event.position) + offset)
-			else:
-				combattant_selection.affiche_zone(action, tilemap.local_to_map(event.position) + offset)
+			if combattant_selection.equipe != int(Client.is_host):
+				if action == 7:
+					for combattant in combattants:
+						if combattant.is_hovered:
+							return
+					combattant_selection.affiche_path(tilemap.local_to_map(event.position) + offset)
+				else:
+					combattant_selection.affiche_zone(action, tilemap.local_to_map(event.position) + offset)
 		if event is InputEventMouseButton and event.pressed:
-			if spell_pressed:
-				spell_pressed = false
-				return
-#			combattant_selection.joue_action(action, tilemap.local_to_map(event.position) + offset)
-			rpc("joue_action", action, tilemap.local_to_map(event.position) + offset)
+			if combattant_selection.equipe != int(Client.is_host):
+				if spell_pressed:
+					spell_pressed = false
+					return
+				sorts.carte_hovered = -1
+				rpc("joue_action", action, tilemap.local_to_map(event.position) + offset)
 		if Input.is_key_pressed(KEY_APOSTROPHE) and event is InputEventKey and not event.echo:
-#			change_action(0)
-			rpc("change_action", 0)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_action", 0)
 		if Input.is_key_pressed(KEY_1) and event is InputEventKey and not event.echo:
-#			change_action(1)
-			rpc("change_action", 1)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_action", 1)
 		if Input.is_key_pressed(KEY_2) and event is InputEventKey and not event.echo:
-#			change_action(2)
-			rpc("change_action", 2)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_action", 2)
 		if Input.is_key_pressed(KEY_3) and event is InputEventKey and not event.echo:
-#			change_action(3)
-			rpc("change_action", 3)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_action", 3)
 		if Input.is_key_pressed(KEY_4) and event is InputEventKey and not event.echo:
-#			change_action(4)
-			rpc("change_action", 4)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_action", 4)
 		if Input.is_key_pressed(KEY_5) and event is InputEventKey and not event.echo:
-#			change_action(5)
-			rpc("change_action", 5)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_action", 5)
 		if Input.is_key_pressed(KEY_6) and event is InputEventKey and not event.echo:
-#			change_action(6)
-			rpc("change_action", 6)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_action", 6)
 		if Input.is_key_pressed(KEY_UP) and event is InputEventKey and not event.echo:
-#			combattant_selection.change_orientation(0)
-			rpc("change_orientation", 0, selection_id)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_orientation", 0, selection_id)
 		if Input.is_key_pressed(KEY_RIGHT) and event is InputEventKey and not event.echo:
-#			combattant_selection.change_orientation(1)
-			rpc("change_orientation", 1, selection_id)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_orientation", 1, selection_id)
 		if Input.is_key_pressed(KEY_DOWN) and event is InputEventKey and not event.echo:
-#			combattant_selection.change_orientation(2)
-			rpc("change_orientation", 2, selection_id)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_orientation", 2, selection_id)
 		if Input.is_key_pressed(KEY_LEFT) and event is InputEventKey and not event.echo:
-#			combattant_selection.change_orientation(3)
-			rpc("change_orientation", 3, selection_id)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("change_orientation", 3, selection_id)
 	if etat == 0:
 		if (Input.is_key_pressed(KEY_F1) or Input.is_key_pressed(KEY_SPACE)) and event is InputEventKey and not event.echo:
-#			lance_game()
 			rpc("lance_game")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			rpc("retour_pressed")
 		if event is InputEventMouseButton:
-#			combattant_selection.place_perso(tilemap.local_to_map(event.position))
-			rpc("place_perso", tilemap.local_to_map(event.position), selection_id)
+			if combattant_selection.equipe != int(Client.is_host):
+				rpc("place_perso", tilemap.local_to_map(event.position), selection_id)
 
 
 func _on_fleche_0_pressed():
-#	combattant_selection.change_orientation(0)
 	rpc("change_orientation", 0, selection_id)
 
 
 func _on_fleche_1_pressed():
-#	combattant_selection.change_orientation(1)
 	rpc("change_orientation", 1, selection_id)
 
 
 func _on_fleche_2_pressed():
-#	combattant_selection.change_orientation(2)
 	rpc("change_orientation", 2, selection_id)
 
 
 func _on_fleche_3_pressed():
-#	combattant_selection.change_orientation(3)
 	rpc("change_orientation", 3, selection_id)
 
 
 func _on_passe_tour_pressed():
 	if etat == 1:
 		rpc("passe_tour")
-#		passe_tour()
 	if etat == 0:
 		rpc("lance_game")
-#		lance_game()
 
 
 func _on_bouton_retour_pressed():

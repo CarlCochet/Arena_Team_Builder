@@ -118,9 +118,7 @@ func charger_stats_classes():
 func charger_equipes():
 	var file_access = FileAccess.open("user://save.json", FileAccess.READ)
 	if not file_access:
-		equipes = []
-		for i in range(10):
-			equipes.append(Equipe.new())
+		equipes = [Equipe.new()]
 	else:
 		var json_content = JSON.parse_string(file_access.get_as_text())
 		equipes = []
