@@ -173,6 +173,8 @@ func chemin_vers_proche() -> Array:
 	var min_chemin = []
 	for combattant in combat.combattants:
 		if combattant.equipe != equipe and not combattant.check_etats(["PORTE"]):
+			if not combattant.is_visible:
+				continue
 			for voisin in voisins:
 				if check_etats(["PORTE"]) and combattant.grid_pos + voisin == grid_pos:
 					continue
@@ -197,6 +199,8 @@ func choix_cible(p_all_ldv: Array):
 	if len(p_all_ldv) == 1 and p_all_ldv[0] == grid_pos:
 		return grid_pos
 	for combattant in combat.combattants:
+		if not combattant.is_visible:
+			continue
 		if combattant.grid_pos in p_all_ldv and combattant.equipe != equipe and not combattant.check_etats(["PORTE"]):
 			var delta = combattant.grid_pos - grid_pos
 			var dist = abs(delta.x) + abs(delta.y)

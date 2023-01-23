@@ -53,6 +53,9 @@ func get_start():
 func update_glyphes():
 	clear_layer(3)
 	clear_layer(4)
+	for combattant in combat.combattants:
+		combattant.visible = true
+		combattant.is_visible = true
 	for glyphe in glyphes:
 		glyphe.active_full()
 		if not glyphe.deleted:

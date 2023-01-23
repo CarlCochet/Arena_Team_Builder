@@ -14,22 +14,17 @@ func init(combattants, id):
 	var i = 0
 	for combattant in combattants:
 		var fond = TextureButton.new()
-		fond.name = str(combattant.equipe)
-		fond.toggle_mode = true
 		if i != id:
 			fond.texture_normal = fond_rouge if combattant.equipe else fond_bleu
 		else:
 			fond.texture_normal = fond_rouge_selected if combattant.equipe else fond_bleu_selected
-		fond.connect("pressed", _on_tile_pressed.bind(i))
+		print(fond.name + " " + str(i))
+		fond.connect("pressed", _on_tile_pressed.bind(combattant))
 		add_child(fond)
 		var combattant_sprite = Sprite2D.new()
 		combattant_sprite.position = Vector2(38, 60)
 		combattant_sprite.texture = combattant.classe_sprite.texture
 		fond.add_child(combattant_sprite)
-#		var bouton_transparent = TextureButton.new()
-#		bouton_transparent.texture_normal = combattant.classe_sprite.texture
-#		bouton_transparent.connect("pressed", _on_tile_pressed.bind(i))
-#		fond.add_child(bouton_transparent)
 		i += 1
 	var affichage_tour = Label.new()
 	var label_settings = LabelSettings.new()
@@ -39,5 +34,5 @@ func init(combattants, id):
 	add_child(affichage_tour)
 
 
-func _on_tile_pressed(id_combattant):
-	print(id_combattant)
+func _on_tile_pressed(combattant):
+	print(combattant.id)

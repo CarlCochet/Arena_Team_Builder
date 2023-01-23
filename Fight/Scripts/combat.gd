@@ -272,6 +272,18 @@ func _input(event):
 		if event is InputEventMouseButton:
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				rpc("place_perso", tilemap.local_to_map(event.position), selection_id)
+		if Input.is_key_pressed(KEY_UP) and event is InputEventKey and not event.echo:
+			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
+				rpc("change_orientation", 0, selection_id)
+		if Input.is_key_pressed(KEY_RIGHT) and event is InputEventKey and not event.echo:
+			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
+				rpc("change_orientation", 1, selection_id)
+		if Input.is_key_pressed(KEY_DOWN) and event is InputEventKey and not event.echo:
+			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
+				rpc("change_orientation", 2, selection_id)
+		if Input.is_key_pressed(KEY_LEFT) and event is InputEventKey and not event.echo:
+			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
+				rpc("change_orientation", 3, selection_id)
 
 
 func _on_fleche_0_pressed():
