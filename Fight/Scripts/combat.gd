@@ -45,7 +45,7 @@ func creer_personnages():
 		indexeur_global = k
 		combattants[k].id = indexeur_global
 		combattants[k].connect("clicked", _on_perso_clicked.bind(k))
-		if Client.is_host and combattants[k].equipe == 1 or not Client.is_host and combattants[k].equipe == 0:
+		if GlobalData.is_multijoueur and (Client.is_host and combattants[k].equipe == 1 or not Client.is_host and combattants[k].equipe == 0):
 			combattants[k].visible = false
 	selection_id = 0
 	combattants[selection_id].select()
@@ -145,6 +145,13 @@ func trigger_victoire(equipe: int):
 	etat = 3
 	texte_fin.text = "VICTOIRE\n" + ("BLEU" if equipe == 0 else "ROUGE")
 	affichage_fin.visible = true
+
+
+func check_perso(grid_pos: Vector2i) -> bool:
+	for combattant in combattants:
+		if combattant.grid_pos == grid_pos:
+			return true
+	return false
 
 
 func check_morts():

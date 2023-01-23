@@ -687,7 +687,7 @@
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
             "desenvoute_delais": 3,
-            "nombre_lancers": -1,
+            "nombre_lancers": 1,
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
@@ -893,16 +893,14 @@
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
                 "cible": 11,
-				"CHANGE_STATS": {
-                    "hp": {
-                        "base": {
-                            "valeur": 10,
-                            "duree": 999
-                        },
-                        "critique": {
-                            "valeur": 12,
-                            "duree": 999
-                        }
+                "BOOST_VIE": {
+                    "base": {
+                        "valeur": 10,
+                        "duree": 999
+                    },
+                    "critique": {
+                        "valeur": 12,
+                        "duree": 999
                     }
                 },
                 "DOMMAGE_FEU": {
@@ -2305,17 +2303,17 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"CHANGE_STATS": {
-                    "hp": {
-                        "base": {
-                            "valeur": 25,
-                            "duree": 999
-                        },
-                        "critique": {
-                            "valeur": 35,
-                            "duree": 999
-                        }
+                "BOOST_VIE": {
+                    "base": {
+                        "valeur": 25,
+                        "duree": 999
                     },
+                    "critique": {
+                        "valeur": 35,
+                        "duree": 999
+                    }
+                },
+				"CHANGE_STATS": {
                     "resistances_air": {
                         "base": {
                             "valeur": 10,
@@ -4885,12 +4883,10 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
             "effets": {
-                "CHANGE_STATS": {
-                    "hp": {
-                        "base": {
-                            "valeur": 6,
-                            "duree": 1
-                        }
+                "BOOST_VIE": {
+                    "base": {
+                        "valeur": 6,
+                        "duree": 1
                     }
                 }
             }
@@ -5865,7 +5861,7 @@
             "effets": {
                 "RENVOIE_SORT": {
                     "base": {
-                        "duree": 999
+                        "duree": 1
                     }
                 }
             }

@@ -265,7 +265,8 @@ func check_cible(lanceur, case_cible) -> bool:
 	for combattant in lanceur.get_parent().combattants:
 		if combattant.grid_pos == case_cible:
 			target = combattant
-	
+	if effets.has("LANCE") and lanceur.combat.check_perso(case_cible):
+		return false
 	if cible == GlobalData.Cible.VIDE and target != null:
 		return false
 	

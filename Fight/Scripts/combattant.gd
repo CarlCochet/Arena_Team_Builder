@@ -12,6 +12,7 @@ var max_stats: Stats
 var init_stats: Stats
 var stat_buffs: Stats
 var stat_ret: Stats
+var buffs_hp: Array
 var equipements: Dictionary
 var sorts: Array
 var equipe: int
@@ -29,6 +30,7 @@ var zone: Array
 var is_selected: bool
 var is_hovered: bool
 var is_mort: bool
+var is_visible: bool
 
 var cercle_bleu = preload("res://Fight/Images/cercle_personnage_bleu.png")
 var cercle_rouge = preload("res://Fight/Images/cercle_personnage_rouge.png")
@@ -304,6 +306,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 				combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 				retire_etats(["INVISIBLE"])
 				visible = true
+				is_visible = true
 			if grid_pos != tile_pos:
 				oriente_vers(tile_pos)
 		combat.change_action(7)
@@ -316,12 +319,12 @@ func affiche_stats_change(valeur, stat):
 
 
 func check_tacle_unit(case: Vector2i) -> bool:
-	if check_etats(["PORTE"]):
+	if check_etats(["PORTE"]) or not is_visible:
 		return false
 	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	var blocage_total = 0
 	for combattant in combat.combattants:
-		if combattant.equipe == equipe or combattant.check_etats(["PORTE", "PETRIFIE"]):
+		if combattant.equipe == equipe or combattant.check_etats(["PORTE", "PETRIFIE"]) or not combattant.is_visible:
 			continue
 		if (combattant.grid_pos - case) in voisins:
 			blocage_total += combattant.stats.blocage
@@ -373,6 +376,7 @@ func deplace_perso(chemin: Array):
 				combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
 			if not check_etats(["INVISIBLE"]):
 				visible = true
+				is_visible = true
 			combat.tilemap.update_glyphes()
 			if stats.hp <= 0:
 				break
@@ -438,13 +442,18 @@ func oriente_vers(pos: Vector2i):
 
 
 func debut_tour():
+	visible = true
+	is_visible = true
+	var delta_hp = max_stats.hp - stats.hp
+	var start_hp = stats.hp
 	retrait_durees()
 	execute_effets(false)
 	check_case_bonus()
+	var effets_hp = start_hp - stats.hp
 	desactive_cadran()
-	var delta_hp = max_stats.hp - stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
-	stats.hp -= delta_hp
+	stats.hp -= delta_hp + effets_hp
+	execute_buffs_hp(false)
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
@@ -459,9 +468,10 @@ func fin_tour():
 	active_cadran()
 	retrait_cooldown()
 	stat_ret = Stats.new()
-	var temp_hp = stats.hp
+	var delta_hp = max_stats.hp - stats.hp
 	stats = init_stats.copy().add(stat_buffs)
-	stats.hp = temp_hp
+	stats.hp -= delta_hp
+	execute_buffs_hp(false)
 	combat.check_morts()
 
 
@@ -477,11 +487,15 @@ func meurt():
 		for effet in combattant.effets:
 			if effet.lanceur.id != id:
 				new_effets.append(effet)
+		var new_buffs_hp = []
+		for buff_hp in combattant.buffs_hp:
+			if buff_hp["lanceur"] == id:
+				combattant.stats.hp -= buff_hp["valeur"]
+				combattant.max_stats.hp -= buff_hp["valeur"]
 			else:
-				if effet.categorie == "CHANGE_STATS" and effet.contenu.has("hp"):
-					combattant.stats.hp -= effet.boost_hp
-					combattant.max_stats.hp -= effet.boost_hp
+				new_buffs_hp.append(buff_hp)
 		combattant.effets = new_effets
+		combattant.buffs_hp = new_buffs_hp
 	
 	if not is_porteur:
 		var map_pos = combat.tilemap.local_to_map(position)
@@ -493,6 +507,15 @@ func meurt():
 	is_mort = true
 	print(classe, "_", str(id), " est mort.")
 	queue_free()
+
+
+func execute_buffs_hp(update_max=true):
+	for buff_hp in buffs_hp:
+		stats.hp += buff_hp["valeur"]
+		if update_max:
+			max_stats.hp += buff_hp["valeur"]
+#	if stats.hp > max_stats.hp:
+#		stats.hp = max_stats.hp
 
 
 func execute_effets(desactive_degats=true):
@@ -523,8 +546,6 @@ func retire_etats(etats: Array):
 
 
 func retrait_durees():
-	stat_buffs = Stats.new()
-	max_stats = init_stats.copy()
 	for combattant in combat.combattants:
 		var new_effets = []
 		for effet in combattant.effets:
@@ -532,14 +553,21 @@ func retrait_durees():
 				effet.duree -= 1
 			if effet.duree > 0:
 				new_effets.append(effet)
+		var new_buffs_hp = []
+		for buff_hp in combattant.buffs_hp:
+			if buff_hp["lanceur"] == id:
+				buff_hp["duree"] -= 1
+			if buff_hp["duree"] > 0:
+				new_buffs_hp.append(buff_hp)
+		combattant.buffs_hp = new_buffs_hp
 		combattant.effets = new_effets
 		combattant.stat_buffs = Stats.new()
+		var delta_hp = combattant.max_stats.hp - combattant.stats.hp
 		combattant.max_stats = combattant.init_stats.copy()
 		combattant.execute_effets()
-		var delta_hp = combattant.max_stats.hp - combattant.stats.hp
 		combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs)
 		combattant.stats.hp -= delta_hp
-		
+		combattant.execute_buffs_hp()
 	
 	var new_map_glyphes = []
 	for glyphe in combat.tilemap.glyphes:
