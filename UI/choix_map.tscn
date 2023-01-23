@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://c7ng2upg83k4x"]
+[gd_scene load_steps=68 format=3 uid="uid://c7ng2upg83k4x"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_map.gd" id="1_n1jan"]
 [ext_resource type="Texture2D" uid="uid://dkxkir2jodnt3" path="res://Fight/Map/Images/tactic_2.png" id="2_1jwkw"]
@@ -63,6 +63,9 @@
 [ext_resource type="Texture2D" uid="uid://64icioaaimbx" path="res://Fight/Map/Images/tactic_83_selected.png" id="55_q57vh"]
 [ext_resource type="Texture2D" uid="uid://d4hpji2yn1xcx" path="res://Fight/Map/Images/tactic_84.png" id="56_452rg"]
 [ext_resource type="Texture2D" uid="uid://bf37x08eysiwr" path="res://Fight/Map/Images/tactic_84_selected.png" id="57_6o1nq"]
+[ext_resource type="Texture2D" uid="uid://dr5xys38w2b5y" path="res://UI/Buttons/aleatoire_base.png" id="61_t0hge"]
+[ext_resource type="Texture2D" uid="uid://b0hayffk857cf" path="res://UI/Buttons/aleatoire_clicked.png" id="62_1boug"]
+[ext_resource type="Texture2D" uid="uid://f08cftcsa2oy" path="res://UI/Buttons/aleatoire_hovered.png" id="63_mx6wb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2chev"]
 font_size = 24
@@ -268,18 +271,24 @@ texture_pressed = ExtResource("57_6o1nq")
 
 [node name="GridContainer2" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 607.0
+offset_left = 504.0
 offset_top = 845.0
-offset_right = 871.0
+offset_right = 902.0
 offset_bottom = 885.0
 scale = Vector2(1.5, 1.5)
-columns = 2
+columns = 3
 
 [node name="Fermer" type="TextureButton" parent="GridContainer2"]
 layout_mode = 2
 texture_normal = ExtResource("18_deorm")
 texture_pressed = ExtResource("19_1ytsp")
 texture_hover = ExtResource("20_pb8g1")
+
+[node name="Aleatoire" type="TextureButton" parent="GridContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("61_t0hge")
+texture_pressed = ExtResource("62_1boug")
+texture_hover = ExtResource("63_mx6wb")
 
 [node name="Valider" type="TextureButton" parent="GridContainer2"]
 layout_mode = 2
@@ -305,5 +314,6 @@ text = "Activer la mort subite"
 label_settings = SubResource("LabelSettings_2chev")
 
 [connection signal="pressed" from="GridContainer2/Fermer" to="." method="_on_fermer_pressed" flags=18]
+[connection signal="pressed" from="GridContainer2/Aleatoire" to="." method="_on_aleatoire_pressed"]
 [connection signal="pressed" from="GridContainer2/Valider" to="." method="_on_valider_pressed" flags=18]
 [connection signal="pressed" from="MortSubiteCheck" to="." method="_on_mort_subite_check_pressed"]

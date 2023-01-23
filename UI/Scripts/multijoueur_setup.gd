@@ -7,19 +7,16 @@ var PORT: int = 55001
 @onready var texte_attente: Label = $TexteAttente
 
 
-func _ready():
-	Client.reset()
-	Client.multiplayer_peer.create_server(PORT)
-	Client.multiplayer.multiplayer_peer = Client.multiplayer_peer
-	Client.multiplayer_peer.peer_connected.connect(func(id): Client.ajouter_peer(id))
-
-
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		get_tree().change_scene_to_file("res://UI/menu_principal.tscn")
 
 
 func _on_heberger_pressed():
+	Client.reset()
+	Client.multiplayer_peer.create_server(PORT)
+	Client.multiplayer.multiplayer_peer = Client.multiplayer_peer
+	Client.multiplayer_peer.peer_connected.connect(func(id): Client.ajouter_peer(id))
 	Client.is_host = true
 	Client.ajouter_peer(1)
 	menu.visible = false

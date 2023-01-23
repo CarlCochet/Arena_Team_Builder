@@ -45,6 +45,8 @@ func creer_personnages():
 		indexeur_global = k
 		combattants[k].id = indexeur_global
 		combattants[k].connect("clicked", _on_perso_clicked.bind(k))
+		if Client.is_host and combattants[k].equipe == 1 or not Client.is_host and combattants[k].equipe == 0:
+			combattants[k].visible = false
 	selection_id = 0
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
@@ -85,6 +87,8 @@ func passe_tour():
 
 @rpc(any_peer, call_local)
 func lance_game():
+	for combattant in combattants:
+		combattant.visible = true
 	combattants[0].unselect()
 	selection_id = 0
 	timeline.init(combattants, selection_id)

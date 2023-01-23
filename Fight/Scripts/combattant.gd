@@ -303,6 +303,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 			if tile_pos != grid_pos or not sort.effets.has("DEVIENT_INVISIBLE"):
 				combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 				retire_etats(["INVISIBLE"])
+				visible = true
 			if grid_pos != tile_pos:
 				oriente_vers(tile_pos)
 		combat.change_action(7)
@@ -370,6 +371,8 @@ func deplace_perso(chemin: Array):
 				z_index = 0
 				combat.tilemap.a_star_grid.set_point_solid(old_grid_pos)
 				combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
+			if not check_etats(["INVISIBLE"]):
+				visible = true
 			combat.tilemap.update_glyphes()
 			if stats.hp <= 0:
 				break

@@ -607,7 +607,7 @@ func change_stats():
 				lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
 				if stat == "hp":
 					boost_hp = contenu[stat][base_crit]["retour"]
-				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["retour"] < 0 else " gagne ", contenu[stat][base_crit]["retour"], " ", stat, " (", duree, " tours).")
+				print(lanceur.classe, "_", str(lanceur.id), " perd " if contenu[stat][base_crit]["retour"] < 0 else " gagne ", contenu[stat][base_crit]["retour"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				lanceur.stat_buffs[stat] += contenu[stat][base_crit]["retour"]
 			else:
@@ -813,11 +813,14 @@ func revele_invisible():
 		if combattant.id != lanceur.id:
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 			combattant.retire_etats(["INVISIBLE"])
+			combattant.visible = true
 	print(cible.classe, "_", str(cible.id), " révèle les invisibles.")
 
 
 func devient_invisible():
 	etat = "INVISIBLE"
+	if Client.is_host and cible.equipe == 1 or not Client.is_host and cible.equipe == 0:
+			cible.visible = false
 	combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, cible.grid_pos - combat.offset).x
 	print(cible.classe, "_", str(cible.id), " devient invisible (", duree, " tours).")
 

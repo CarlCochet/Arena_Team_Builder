@@ -9,6 +9,7 @@ var map_selected: int
 
 
 func _ready():
+	GlobalData.rng.randomize()
 	for i in range(len(maps)):
 		maps[i].connect("pressed", _on_map_pressed.bind(i))
 	map_initiale = 0
@@ -32,9 +33,13 @@ func _on_fermer_pressed():
 
 
 func _on_valider_pressed():
-	if Client.is_host:
-		rpc("setup_seed", GlobalData.rng.seed)
+	rpc("setup_seed", GlobalData.rng.seed)
 	rpc("valider_pressed")
+
+
+func _on_aleatoire_pressed():
+	rpc("setup_seed", GlobalData.rng.seed)
+	rpc("aleatoire_pressed")
 
 
 @rpc(any_peer, call_local)
@@ -64,7 +69,14 @@ func valider_pressed():
 	get_tree().change_scene_to_file("res://Fight/combat.tscn")
 
 
-@rpc(any_peer)
+@rpc(any_peer, call_local)
+func aleatoire_pressed():
+	var random_map = GlobalData.rng.randi_range(0, len(maps) - 1)
+	GlobalData.map_actuelle = maps[random_map].name
+	get_tree().change_scene_to_file("res://Fight/combat.tscn")
+
+
+@rpc(any_peer, call_local)
 func setup_seed(server_seed):
 	GlobalData.rng.seed = server_seed
 
@@ -74,8 +86,3 @@ func _input(event):
 		_on_fermer_pressed()
 	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:
 		_on_valider_pressed()
-
-
-
-
-
