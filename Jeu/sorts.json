@@ -401,7 +401,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE", "IMMOBILISE"],
+            "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
 				"TELEPORTE": 1
 			}
@@ -1983,7 +1983,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE", "IMMOBILISE"],
+            "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
 				"TELEPORTE": 1
 			}
@@ -2071,7 +2071,7 @@
             "taille_zone": [0, 1],
 			"cible": 0,
 			"ldv": 1,
-			"type_ldv": 0,
+			"type_ldv": 1,
 			"cooldown": 0,
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
@@ -4136,7 +4136,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE", "IMMOBILISE"],
+            "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
                 "TELEPORTE": 1,
                 "CHANGE_STATS": {
