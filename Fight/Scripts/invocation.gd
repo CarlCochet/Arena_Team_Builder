@@ -139,12 +139,16 @@ func update_hitbox():
 
 
 func debut_tour():
+	visible = true
+	var delta_hp = max_stats.hp - stats.hp
+	var start_hp = stats.hp
 	retrait_durees()
-	execute_effets()
+	execute_effets(false)
+	var effets_hp = start_hp - stats.hp
 	check_case_bonus()
-	var temp_hp = stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
-	stats.hp = temp_hp
+	stats.hp -= delta_hp + effets_hp
+	execute_buffs_hp(false)
 	
 	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
 		stats.hp -= 2
@@ -153,6 +157,10 @@ func debut_tour():
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
+	if not check_etats(["INVISIBLE"]):
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+	if check_etats(["IMMOBILISE"]):
+		stats.pm = 0
 	joue_ia()
 	if not is_mort:
 		combat.passe_tour()
@@ -166,7 +174,9 @@ func chemin_vers_proche() -> Array:
 	for combattant in combat.combattants:
 		if combattant.equipe != equipe and not combattant.check_etats(["PORTE"]):
 			for voisin in voisins:
-				if combattant.grid_pos == (grid_pos + voisin):
+				if check_etats(["PORTE"]) and combattant.grid_pos + voisin == grid_pos:
+					continue
+				if combattant.grid_pos + voisin == grid_pos:
 					return []
 				var chemin = combat.tilemap.get_chemin(grid_pos, combattant.grid_pos + voisin)
 				if len(chemin) < min_dist and len(chemin) > 0:
@@ -248,7 +258,15 @@ func meurt():
 		for effet in combattant.effets:
 			if effet.lanceur.id != id:
 				new_effets.append(effet)
+		var new_buffs_hp = []
+		for buff_hp in combattant.buffs_hp:
+			if buff_hp["lanceur"] == id:
+				combattant.stats.hp -= buff_hp["valeur"]
+				combattant.max_stats.hp -= buff_hp["valeur"]
+			else:
+				new_buffs_hp.append(buff_hp)
 		combattant.effets = new_effets
+		combattant.buffs_hp = new_buffs_hp
 	
 	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"] and stats.hp <= 0:
 		var sort = sorts[0]
@@ -270,9 +288,10 @@ func meurt():
 
 
 func fin_tour():
+	combat.check_morts()
 	retrait_cooldown()
 	stat_ret = Stats.new()
-	var temp_hp = stats.hp
+	var delta_hp = max_stats.hp - stats.hp
 	stats = init_stats.copy().add(stat_buffs)
-	stats.hp = temp_hp
-	combat.check_morts()
+	stats.hp -= delta_hp
+	execute_buffs_hp(false)

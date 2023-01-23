@@ -54,6 +54,7 @@ func previsu_pressed(id):
 func _on_retour_pressed():
 	Client.reset()
 	get_tree().change_scene_to_file("res://UI/multijoueur_setup.tscn")
+	rpc("retour_pressed")
 
 
 func _on_valider_pressed():
@@ -67,6 +68,12 @@ func _on_valider_pressed():
 	menu.visible = false
 	if change_scene_check:
 		rpc("change_scene")
+
+
+@rpc(any_peer)
+func retour_pressed():
+	Client.reset()
+	get_tree().change_scene_to_file("res://UI/multijoueur_setup.tscn")
 
 
 @rpc(any_peer)

@@ -13,6 +13,7 @@ func _input(event):
 
 
 func _on_heberger_pressed():
+	Client.reset()
 	Client.multiplayer_peer.create_server(PORT)
 	Client.multiplayer.multiplayer_peer = Client.multiplayer_peer
 	Client.multiplayer_peer.peer_connected.connect(func(id): Client.ajouter_peer(id))
@@ -23,8 +24,9 @@ func _on_heberger_pressed():
 
 
 func _on_rejoindre_pressed():
-	if Client.peer_count < 2:
-		Client.multiplayer_peer.create_client("ws://" + adresse.text + ":" + str(PORT))
+	Client.reset()
+	var error = Client.multiplayer_peer.create_client("ws://" + adresse.text + ":" + str(PORT))
+	if error == OK:
 		Client.multiplayer.multiplayer_peer = Client.multiplayer_peer
 		get_tree().change_scene_to_file("res://UI/choix_equipe_multi.tscn")
 
