@@ -55,6 +55,7 @@ var stats_classes: Dictionary
 var equipes: Array
 var sorts_lookup: Dictionary
 var equipements_lookup: Dictionary
+var cartes_combat: Dictionary
 
 var equipe_actuelle: Equipe
 var equipe_test: Equipe
@@ -73,6 +74,12 @@ func _ready():
 	charger_sorts()
 	charger_equipements()
 	charger_equipes()
+	charger_cartes_combat()
+
+
+func charger_cartes_combat():
+	var file = FileAccess.open("res://Jeu/cartes_combat.json", FileAccess.READ)
+	cartes_combat = JSON.parse_string(file.get_as_text())
 
 
 func charger_sorts():

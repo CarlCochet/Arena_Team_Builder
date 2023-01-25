@@ -14,9 +14,11 @@ var offset: Vector2i
 var tilemap: TileMap
 var spell_pressed: bool
 var tour: int
+var noms_cartes_combat: Array
 
 @onready var sorts: Control = $Sorts
 @onready var sorts_bonus: Control = $SortsBonus
+@onready var cartes_combat: Control = $CartesCombat
 @onready var timeline: Control = $Timeline
 @onready var stats_select: TextureRect = $AffichageStatsSelect
 @onready var stats_hover: TextureRect = $AffichageStatsHover
@@ -40,15 +42,7 @@ func _ready():
 func creer_personnages():
 	ajoute_equipe(GlobalData.equipe_actuelle, tilemap.start_bleu, 0)
 	ajoute_equipe(GlobalData.equipe_test, tilemap.start_rouge, 1)
-	
-	if Client.is_host:
-		var nombre_sort_bonus = GlobalData.rng.randi_range(1, 3)
-		var noms_sorts_bonus = GlobalData.sorts_lookup["Bonus"].duplicate(true)
-		noms_sorts_bonus.shuffle()
-		var sorts_bonus_select = []
-		for i in range(nombre_sort_bonus):
-			sorts_bonus_select.append(noms_sorts_bonus[i])
-		rpc("ajoute_sorts_bonus", sorts_bonus_select)
+	init_cartes()
 	
 	combattants.sort_custom(func(a, b): return a.stats.initiative > b.stats.initiative)
 	for k in range(len(combattants)):
@@ -77,11 +71,34 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe):
 			nouveau_combattant.update_visuel()
 
 
+func init_cartes():
+	if Client.is_host:
+		var nombre_sort_bonus = GlobalData.rng.randi_range(1, 3)
+		var noms_sorts_bonus = GlobalData.sorts_lookup["Bonus"].duplicate(true)
+		noms_sorts_bonus.shuffle()
+		var sorts_bonus_select = []
+		for i in range(nombre_sort_bonus):
+			sorts_bonus_select.append(noms_sorts_bonus[i])
+		rpc("ajoute_sorts_bonus", sorts_bonus_select)
+		
+		noms_cartes_combat = []
+		var nom_cartes = GlobalData.cartes_combat.keys()
+		for i in range(3):
+			var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
+			noms_cartes_combat.append(nom_cartes[id_carte])
+		rpc("init_noms_cartes", noms_cartes_combat)
+
+
 @rpc(any_peer, call_local)
 func ajoute_sorts_bonus(noms_sorts_bonus: Array):
 	for combattant in combattants:
 		for nom_sort in noms_sorts_bonus:
 			combattant.sorts.append(GlobalData.sorts[nom_sort].copy())
+
+
+@rpc(any_peer)
+func init_noms_cartes(noms: Array):
+	noms_cartes_combat = noms
 
 
 @rpc(any_peer, call_local)
@@ -113,6 +130,7 @@ func lance_game():
 	combattant_selection = combattants[selection_id]
 	etat = 1
 	tilemap.clear_layer(2)
+	cartes_combat.update(noms_cartes_combat)
 	change_action(10)
 	combattant_selection.debut_tour()
 
