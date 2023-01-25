@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://egsxhipgew1"]
+[gd_scene load_steps=22 format=3 uid="uid://egsxhipgew1"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
+[ext_resource type="Script" path="res://Fight/Scripts/sorts_bonus_selection.gd" id="3_e0j6u"]
 [ext_resource type="PackedScene" uid="uid://fchxarxrckwc" path="res://Fight/affichage_stats_small.tscn" id="5_jgg7a"]
 [ext_resource type="PackedScene" uid="uid://cyuev8xs7ffv8" path="res://Fight/sorts.tscn" id="7_0vhv3"]
 [ext_resource type="PackedScene" uid="uid://dkum5bskrgt8k" path="res://Fight/affichage_stats.tscn" id="8_mm5mb"]
@@ -32,9 +33,19 @@ script = ExtResource("1_2kr3w")
 [node name="Sorts" parent="." instance=ExtResource("7_0vhv3")]
 z_index = 1
 offset_left = 50.0
+offset_top = 845.0
+offset_right = 298.0
+offset_bottom = 885.0
+scale = Vector2(1, 1)
+
+[node name="SortsBonus" parent="." instance=ExtResource("7_0vhv3")]
+z_index = 1
+offset_left = 50.0
 offset_top = 800.0
 offset_right = 298.0
 offset_bottom = 840.0
+scale = Vector2(1, 1)
+script = ExtResource("3_e0j6u")
 
 [node name="Timeline" parent="." instance=ExtResource("8_rq6ft")]
 z_index = 1

@@ -18,7 +18,6 @@ func init(combattants, id):
 			fond.texture_normal = fond_rouge if combattant.equipe else fond_bleu
 		else:
 			fond.texture_normal = fond_rouge_selected if combattant.equipe else fond_bleu_selected
-		print(fond.name + " " + str(i))
 		fond.connect("pressed", _on_tile_pressed.bind(combattant))
 		add_child(fond)
 		var combattant_sprite = Sprite2D.new()

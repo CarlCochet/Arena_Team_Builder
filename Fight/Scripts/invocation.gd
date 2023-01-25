@@ -144,8 +144,8 @@ func debut_tour():
 	var start_hp = stats.hp
 	retrait_durees()
 	execute_effets(false)
-	var effets_hp = start_hp - stats.hp
 	check_case_bonus()
+	var effets_hp = start_hp - stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp -= delta_hp + effets_hp
 	execute_buffs_hp(false)

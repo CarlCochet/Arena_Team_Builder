@@ -3534,6 +3534,21 @@
                     "base": {
                         "duree": 1
                     }
+                },
+                "STABILISE": {
+                    "base": {
+                        "duree": 1
+                    }
+                },
+                "INTRANSPOSABLE": {
+                    "base": {
+                        "duree": 1
+                    }
+                },
+                "NON_PORTABLE": {
+                    "base": {
+                        "duree": 1
+                    }
                 }
 			}
 		},
@@ -5431,12 +5446,12 @@
             "effets": {
                 "DOMMAGE_TERRE": {
                     "base": {
-                        "valeur": "1d12"
+                        "valeur": "1d12+0"
                     }
                 },
                 "SOIN": {
                     "base": {
-                        "valeur": "1d12"
+                        "valeur": "1d12+0"
                     }
                 }
             }

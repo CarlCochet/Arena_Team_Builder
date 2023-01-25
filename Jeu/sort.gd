@@ -146,11 +146,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
 	if effets.has("MAUDIT_CASE"):
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
-	if sort_valide:
-		update_limite_lancers(lanceur)
-	
-	if not sort_valide:
-		print("Sort invalide, annulation de l'action !")
+	update_limite_lancers(lanceur)
 	return sort_valide
 
 

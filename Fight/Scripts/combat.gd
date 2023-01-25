@@ -16,6 +16,7 @@ var spell_pressed: bool
 var tour: int
 
 @onready var sorts: Control = $Sorts
+@onready var sorts_bonus: Control = $SortsBonus
 @onready var timeline: Control = $Timeline
 @onready var stats_select: TextureRect = $AffichageStatsSelect
 @onready var stats_hover: TextureRect = $AffichageStatsHover
@@ -39,7 +40,16 @@ func _ready():
 func creer_personnages():
 	ajoute_equipe(GlobalData.equipe_actuelle, tilemap.start_bleu, 0)
 	ajoute_equipe(GlobalData.equipe_test, tilemap.start_rouge, 1)
-
+	
+	if Client.is_host:
+		var nombre_sort_bonus = GlobalData.rng.randi_range(1, 3)
+		var noms_sorts_bonus = GlobalData.sorts_lookup["Bonus"].duplicate(true)
+		noms_sorts_bonus.shuffle()
+		var sorts_bonus_select = []
+		for i in range(nombre_sort_bonus):
+			sorts_bonus_select.append(noms_sorts_bonus[i])
+		rpc("ajoute_sorts_bonus", sorts_bonus_select)
+	
 	combattants.sort_custom(func(a, b): return a.stats.initiative > b.stats.initiative)
 	for k in range(len(combattants)):
 		indexeur_global = k
@@ -68,6 +78,13 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe):
 
 
 @rpc(any_peer, call_local)
+func ajoute_sorts_bonus(noms_sorts_bonus: Array):
+	for combattant in combattants:
+		for nom_sort in noms_sorts_bonus:
+			combattant.sorts.append(GlobalData.sorts[nom_sort].copy())
+
+
+@rpc(any_peer, call_local)
 func passe_tour():
 	combattant_selection.fin_tour()
 	tilemap.clear_layer(2)
@@ -81,7 +98,7 @@ func passe_tour():
 	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
-	change_action(7)
+	change_action(10)
 	combattant_selection.debut_tour()
 
 
@@ -96,16 +113,16 @@ func lance_game():
 	combattant_selection = combattants[selection_id]
 	etat = 1
 	tilemap.clear_layer(2)
-	change_action(7)
+	change_action(10)
 	combattant_selection.debut_tour()
 
 
 @rpc(any_peer, call_local)
 func change_action(new_action: int):
 	if new_action >= len(combattant_selection.sorts):
-		new_action = 7
+		new_action = 10
 	if new_action == action:
-		action = 7
+		action = 10
 	else:
 		action = new_action
 	if 0 <= action and action < len(combattant_selection.sorts):
@@ -191,7 +208,7 @@ func check_morts():
 	selection_id = new_selection_id
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
-	change_action(7)
+	change_action(10)
 	if old_id != combattant_selection.id:
 		combattant_selection.debut_tour()
 	timeline.init(combattants, selection_id)
@@ -210,14 +227,14 @@ func _on_perso_clicked(id: int):
 
 func _input(event):
 	if etat == 1:
-		if (Input.is_key_pressed(KEY_F1) or Input.is_key_pressed(KEY_SPACE)) and event is InputEventKey and not event.echo:
+		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				rpc("passe_tour")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			rpc("retour_pressed")
 		if event is InputEventMouseMotion:
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
-				if action == 7:
+				if action == 10:
 					for combattant in combattants:
 						if combattant.is_hovered:
 							return
@@ -265,7 +282,7 @@ func _input(event):
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				rpc("change_orientation", 3, selection_id)
 	if etat == 0:
-		if (Input.is_key_pressed(KEY_F1) or Input.is_key_pressed(KEY_SPACE)) and event is InputEventKey and not event.echo:
+		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
 			rpc("lance_game")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			rpc("retour_pressed")
@@ -304,9 +321,35 @@ func _on_fleche_3_pressed():
 
 func _on_passe_tour_pressed():
 	if etat == 1:
-		rpc("passe_tour")
+		if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
+			rpc("passe_tour")
 	if etat == 0:
 		rpc("lance_game")
+
+
+func _on_choix_clicked(i, block, contenu, lanceur_id, cible_id, critique, nom_sort):
+	rpc("choix_clicked", i, contenu, lanceur_id, cible_id, critique, nom_sort)
+	block.queue_free()
+
+
+@rpc(any_peer, call_local)
+func choix_clicked(i, contenu, lanceur_id, cible_id, critique, nom_sort):
+	var lanceur
+	var cible
+	for combattant in combattants:
+		if combattant.id == lanceur_id:
+			lanceur = combattant
+		if combattant.id == cible_id:
+			cible = combattant
+	var sort = GlobalData.sorts[nom_sort].copy()
+	
+	etat = 1
+	var new_categorie = contenu[contenu.keys()[i]].keys()[0]
+	var new_contenu = contenu[contenu.keys()[i]][contenu[contenu.keys()[i]].keys()[0]]
+	var new_effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, sort)
+	new_effet.execute()
+	if new_effet.duree > 0:
+		cible.effets.append(new_effet)
 
 
 func _on_bouton_retour_pressed():

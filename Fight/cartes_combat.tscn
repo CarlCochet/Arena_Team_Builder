@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm7uaxf12cq58"]
+
+[ext_resource type="Script" path="res://Fight/Scripts/cartes_combat.gd" id="1_pxyor"]
+
+[node name="CartesCombat" type="HBoxContainer"]
+z_index = 1
+offset_left = 50.0
+offset_top = 800.0
+offset_right = 298.0
+offset_bottom = 840.0
+script = ExtResource("1_pxyor")

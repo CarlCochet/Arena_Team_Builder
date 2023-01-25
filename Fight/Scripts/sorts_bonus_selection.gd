@@ -7,21 +7,21 @@ var carte_hovered = -1
 func update(combattant):
 	for sort in get_children():
 		sort.queue_free()
-	var sort_id = 1
+	var sort_id = 0
 	for sort in combattant.sorts:
-		if sort.nom != "arme" and sort_id < combattant.compte_sorts:
+		if sort_id >= combattant.compte_sorts:
 			var texture_rect = TextureRect.new()
 			var sprite = Sprite2D.new()
 			var carte = Sprite2D.new()
 			var label = Label.new()
 			
-			texture_rect.texture = load("res://UI/Logos/Spells/" + combattant.classe + "/" + sort.nom + ".png")
+			texture_rect.texture = load("res://UI/Logos/Spells/Bonus/" + sort.nom + ".png")
 			
 			sprite.texture = load("res://Fight/Images/logo_cover.png")
 			sprite.position = Vector2(19, 20)
 			sprite.scale = Vector2(1.05, 1.05)
 			
-			carte.texture = load("res://Classes/" + combattant.classe + "/Sorts/" + sort.nom + ".png")
+			carte.texture = load("res://Classes/Bonus/Sorts/" + sort.nom + ".png")
 			carte.position = Vector2(90, -200)
 			carte.scale = Vector2(1, 1)
 			carte.name = "carte"
@@ -42,7 +42,7 @@ func update(combattant):
 			
 			texture_rect.connect("mouse_entered", sort_hovered.bind(texture_rect, sort_id))
 			texture_rect.connect("mouse_exited", sort_exited.bind(texture_rect))
-			sort_id += 1
+		sort_id += 1
 
 
 func sort_hovered(sort, sort_id):
