@@ -5383,6 +5383,7 @@
             "etats_lanceur_interdits": ["PORTE"],
             "effets": {
                 "DOMMAGE_FIXE": {
+                    "instant": 0,
                     "base": {
                         "valeur": 5,
                         "duree": 3
@@ -5593,7 +5594,7 @@
         },
         "vision_amelioree": {
             "kamas": 0,
-            "pa": 0,
+            "pa": 1,
             "po": [0, 8],
             "po_modifiable": 1,
             "type_zone": 0,

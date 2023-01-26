@@ -47,14 +47,14 @@
             "dommages_terre": -15
         }
     },
-    "coeur_des_vents": {
+    "creux_des_vents": {
         "tous": {
             "dommages_air": -15
         }
     },
     "deesse_cra": {
         "Cra": {
-            "po": -1,
+            "po": 1,
             "cc": 25
         }
     },

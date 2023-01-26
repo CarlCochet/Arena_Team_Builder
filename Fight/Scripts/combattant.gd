@@ -316,7 +316,6 @@ func joue_action(action: int, tile_pos: Vector2i):
 		combat.change_action(10)
 	combat.stats_select.update(stats)
 	combat.check_morts()
-	combat.tilemap.affiche_astar_obstacles()
 
 
 func affiche_stats_change(valeur, stat):
@@ -467,7 +466,6 @@ func debut_tour():
 	if check_etats(["IMMOBILISE"]):
 		stats.pm = 0
 	combat.check_morts()
-	combat.tilemap.affiche_astar_obstacles()
 
 
 func fin_tour():

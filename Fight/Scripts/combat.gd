@@ -137,11 +137,12 @@ func init_nouveau_tour():
 func applique_carte_combat():
 	var effets_carte = GlobalData.cartes_combat[noms_cartes_combat[0]]
 	var classes_target = []
+	for combattant in combattants:
+		combattant.stat_cartes_combat = Stats.new()
 	for cible in effets_carte:
 		if cible in GlobalData.classes:
 			classes_target.append(cible)
 		for combattant in combattants:
-			combattant.stat_cartes_combat = Stats.new()
 			if cible == "tous" or cible == combattant.classe or (cible == "autres" and not combattant.classe in classes_target):
 				for effet in effets_carte[cible].keys():
 					if effet == "SOIN":
@@ -155,6 +156,7 @@ func applique_carte_combat():
 						combattant.stats.soins = temp_soins
 					else:
 						combattant.stat_cartes_combat[effet] += effets_carte[cible][effet]
+						print(combattant.classe, "_", str(combattant.id), " perd " if effets_carte[cible][effet] < 0 else " gagne ", effets_carte[cible][effet], " ", effet, " (", 1, " tours).")
 
 
 @rpc(any_peer, call_local)
