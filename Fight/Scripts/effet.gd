@@ -888,7 +888,7 @@ func desenvoute():
 	cible.stat_buffs = Stats.new()
 	cible.execute_effets()
 	var delta_hp = cible.max_stats.hp - cible.stats.hp
-	cible.stats = cible.init_stats.copy().add(cible.stat_ret).add(cible.stat_buffs)
+	cible.stats = cible.init_stats.copy().add(cible.stat_ret).add(cible.stat_buffs).add(cible.stat_cartes_combat)
 	cible.stats.hp -= delta_hp
 	cible.buffs_hp = []
 	cible.max_stats = cible.init_stats.copy()

@@ -31,10 +31,6 @@ window/stretch/aspect="keep_width"
 
 project/assembly_name="Arena_Team_Builder"
 
-[editor]
-
-export/convert_text_resources_to_binary=true
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

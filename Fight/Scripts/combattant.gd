@@ -12,6 +12,7 @@ var max_stats: Stats
 var init_stats: Stats
 var stat_buffs: Stats
 var stat_ret: Stats
+var stat_cartes_combat: Stats
 var buffs_hp: Array
 var equipements: Dictionary
 var sorts: Array
@@ -53,6 +54,7 @@ func _ready():
 	orientation = 1
 	stat_buffs = Stats.new()
 	stat_ret = Stats.new()
+	stat_cartes_combat = Stats.new()
 	is_selected = false
 	is_hovered = false
 	is_invocation = false
@@ -314,7 +316,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 		combat.change_action(10)
 	combat.stats_select.update(stats)
 	combat.check_morts()
-	combat.tilemap.affiche_ldv_obstacles()
+	combat.tilemap.affiche_astar_obstacles()
 
 
 func affiche_stats_change(valeur, stat):
@@ -454,7 +456,7 @@ func debut_tour():
 	check_case_bonus()
 	var effets_hp = start_hp - stats.hp
 	desactive_cadran()
-	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
+	stats = init_stats.copy().add(stat_ret).add(stat_buffs).add(stat_cartes_combat)
 	stats.hp -= delta_hp + effets_hp
 	execute_buffs_hp(false)
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
@@ -465,7 +467,7 @@ func debut_tour():
 	if check_etats(["IMMOBILISE"]):
 		stats.pm = 0
 	combat.check_morts()
-	combat.tilemap.affiche_ldv_obstacles()
+	combat.tilemap.affiche_astar_obstacles()
 
 
 func fin_tour():
@@ -473,7 +475,7 @@ func fin_tour():
 	retrait_cooldown()
 	stat_ret = Stats.new()
 	var delta_hp = max_stats.hp - stats.hp
-	stats = init_stats.copy().add(stat_buffs)
+	stats = init_stats.copy().add(stat_buffs).add(stat_cartes_combat)
 	stats.hp -= delta_hp
 	execute_buffs_hp(false)
 	combat.check_morts()
@@ -576,7 +578,7 @@ func retrait_durees():
 		var delta_hp = combattant.max_stats.hp - combattant.stats.hp
 		combattant.max_stats = combattant.init_stats.copy()
 		combattant.execute_effets()
-		combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs)
+		combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
 		combattant.stats.hp -= delta_hp
 		combattant.execute_buffs_hp()
 	

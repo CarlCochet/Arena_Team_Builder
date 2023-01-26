@@ -15,6 +15,7 @@ func _ready():
 	orientation = 1
 	stat_buffs = Stats.new()
 	stat_ret = Stats.new()
+	stat_cartes_combat = Stats.new()
 	is_selected = false
 	is_hovered = false
 	is_invocation = true
@@ -217,14 +218,19 @@ func choix_cible(p_all_ldv: Array):
 
 func joue_ia():
 	combat.check_morts()
+	var grid_pos_start = grid_pos
+	var grid_state = combat.tilemap.a_star_grid.is_point_solid(grid_pos_start)
 	if is_mort:
 		return
 	if stats.pm > 0 and init_stats.pm > 0:
 		var chemin = chemin_vers_proche()
 		if len(chemin) > stats.pm + 1:
 			chemin = chemin.slice(0, stats.pm + 1)
+		grid_state = combat.tilemap.a_star_grid.is_point_solid(grid_pos_start)
 		if len(chemin) > 0:
+			chemin.pop_front()
 			deplace_perso(chemin)
+	grid_state = combat.tilemap.a_star_grid.is_point_solid(grid_pos_start)
 	for sort in sorts:
 		if not sort.precheck_cast(self):
 			continue

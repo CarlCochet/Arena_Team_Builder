@@ -73,20 +73,25 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe):
 
 func init_cartes():
 	if Client.is_host:
-		var nombre_sort_bonus = GlobalData.rng.randi_range(1, 3)
+		var nombre_sort_bonus = randi_range(1, 3)
 		var noms_sorts_bonus = GlobalData.sorts_lookup["Bonus"].duplicate(true)
 		noms_sorts_bonus.shuffle()
 		var sorts_bonus_select = []
 		for i in range(nombre_sort_bonus):
 			sorts_bonus_select.append(noms_sorts_bonus[i])
 		rpc("ajoute_sorts_bonus", sorts_bonus_select)
+		rpc("init_cartes_combat")
 		
-		noms_cartes_combat = []
-		var nom_cartes = GlobalData.cartes_combat.keys()
-		for i in range(3):
-			var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
-			noms_cartes_combat.append(nom_cartes[id_carte])
-		rpc("init_noms_cartes", noms_cartes_combat)
+#		rpc("init_noms_cartes", noms_cartes_combat)
+
+
+@rpc(any_peer, call_local)
+func init_cartes_combat():
+	noms_cartes_combat = []
+	var nom_cartes = GlobalData.cartes_combat.keys()
+	for i in range(3):
+		var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
+		noms_cartes_combat.append(nom_cartes[id_carte])
 
 
 @rpc(any_peer, call_local)
@@ -108,15 +113,48 @@ func passe_tour():
 	combattants[selection_id].unselect()
 	selection_id += 1
 	if selection_id >= len(combattants):
-		selection_id = 0
-		tour += 1
-		if tour >= 15:
-			tilemap.update_mort_subite(tour)
+		init_nouveau_tour()
 	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
 	change_action(10)
 	combattant_selection.debut_tour()
+
+
+func init_nouveau_tour():
+	selection_id = 0
+	tour += 1
+	noms_cartes_combat.pop_front()
+	var nom_cartes = GlobalData.cartes_combat.keys()
+	var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
+	noms_cartes_combat.append(nom_cartes[id_carte])
+	cartes_combat.update(noms_cartes_combat)
+	if tour >= 15:
+		tilemap.update_mort_subite(tour)
+	applique_carte_combat()
+
+
+func applique_carte_combat():
+	var effets_carte = GlobalData.cartes_combat[noms_cartes_combat[0]]
+	var classes_target = []
+	for cible in effets_carte:
+		if cible in GlobalData.classes:
+			classes_target.append(cible)
+		for combattant in combattants:
+			combattant.stat_cartes_combat = Stats.new()
+			if cible == "tous" or cible == combattant.classe or (cible == "autres" and not combattant.classe in classes_target):
+				for effet in effets_carte[cible].keys():
+					if effet == "SOIN":
+						var effet_exec = Effet.new(
+							combattant, combattant, effet, 
+							{"base":{"valeur":effets_carte[cible][effet]}}, 
+							false, combattant.grid_pos, false, null)
+						var temp_soins = combattant.stats.soins
+						combattant.stats.soins = 0
+						effet_exec.execute()
+						combattant.stats.soins = temp_soins
+					else:
+						combattant.stat_cartes_combat[effet] += effets_carte[cible][effet]
 
 
 @rpc(any_peer, call_local)
@@ -131,6 +169,7 @@ func lance_game():
 	etat = 1
 	tilemap.clear_layer(2)
 	cartes_combat.update(noms_cartes_combat)
+	applique_carte_combat()
 	change_action(10)
 	combattant_selection.debut_tour()
 

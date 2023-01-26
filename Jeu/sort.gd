@@ -453,7 +453,7 @@ class Glyphe:
 				var temp_hp = combattant.stats.hp
 				var temp_pa = combattant.stats.pa
 				var temp_pm = combattant.stats.pm
-				combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs)
+				combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
 				combattant.stats.hp = temp_hp
 				combattant.stats.pa = temp_pa
 				combattant.stats.pm = temp_pm

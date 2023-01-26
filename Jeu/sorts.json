@@ -937,7 +937,7 @@
 				"SOIN": {
                     "base": {
                         "valeur": 6,
-                        "duree": 6
+                        "duree": 2
                     }
                 },
                 "DEVIENT_INVISIBLE": {

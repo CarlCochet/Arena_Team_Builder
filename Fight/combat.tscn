@@ -52,7 +52,7 @@ script = ExtResource("3_e0j6u")
 [node name="CartesCombat" parent="." instance=ExtResource("4_u8rsj")]
 
 [node name="FlecheCarteCombat" type="Sprite2D" parent="."]
-position = Vector2(1392, 3)
+position = Vector2(1390, 6)
 scale = Vector2(0.28125, 0.3)
 texture = ExtResource("22_niame")
 
