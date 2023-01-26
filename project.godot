@@ -30,7 +30,3 @@ window/stretch/aspect="keep_width"
 [dotnet]
 
 project/assembly_name="Arena_Team_Builder"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"

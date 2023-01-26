@@ -19,6 +19,7 @@ var noms_cartes_combat: Array
 @onready var sorts: Control = $Sorts
 @onready var sorts_bonus: Control = $SortsBonus
 @onready var cartes_combat: Control = $CartesCombat
+@onready var fleche_carte_combat: Sprite2D = $FlecheCarteCombat
 @onready var timeline: Control = $Timeline
 @onready var stats_select: TextureRect = $AffichageStatsSelect
 @onready var stats_hover: TextureRect = $AffichageStatsHover
@@ -34,6 +35,8 @@ func _ready():
 	spell_pressed = false
 	indexeur_global = 0
 	offset = tilemap.offset
+	if not GlobalData.is_multijoueur:
+		fleche_carte_combat.visible = false
 	creer_personnages()
 	tour = 1
 	timeline.init(combattants, selection_id)
@@ -81,8 +84,6 @@ func init_cartes():
 			sorts_bonus_select.append(noms_sorts_bonus[i])
 		rpc("ajoute_sorts_bonus", sorts_bonus_select)
 		rpc("init_cartes_combat")
-		
-#		rpc("init_noms_cartes", noms_cartes_combat)
 
 
 @rpc(any_peer, call_local)
@@ -124,14 +125,16 @@ func passe_tour():
 func init_nouveau_tour():
 	selection_id = 0
 	tour += 1
-	noms_cartes_combat.pop_front()
-	var nom_cartes = GlobalData.cartes_combat.keys()
-	var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
-	noms_cartes_combat.append(nom_cartes[id_carte])
-	cartes_combat.update(noms_cartes_combat)
 	if tour >= 15:
 		tilemap.update_mort_subite(tour)
-	applique_carte_combat()
+	
+	if GlobalData.is_multijoueur:
+		noms_cartes_combat.pop_front()
+		var nom_cartes = GlobalData.cartes_combat.keys()
+		var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
+		noms_cartes_combat.append(nom_cartes[id_carte])
+		cartes_combat.update(noms_cartes_combat)
+		applique_carte_combat()
 
 
 func applique_carte_combat():
@@ -170,8 +173,9 @@ func lance_game():
 	combattant_selection = combattants[selection_id]
 	etat = 1
 	tilemap.clear_layer(2)
-	cartes_combat.update(noms_cartes_combat)
-	applique_carte_combat()
+	if GlobalData.is_multijoueur:
+		cartes_combat.update(noms_cartes_combat)
+		applique_carte_combat()
 	change_action(10)
 	combattant_selection.debut_tour()
 

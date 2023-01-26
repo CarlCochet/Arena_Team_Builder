@@ -15,6 +15,7 @@ func _ready():
 	map_initiale = 0
 	map_selected = map_initiale
 	maps[map_initiale].button_pressed = true
+	mort_subite_check.button_pressed = true
 
 
 func _on_map_pressed(id):
