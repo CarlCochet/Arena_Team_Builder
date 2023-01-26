@@ -30,3 +30,7 @@ window/stretch/aspect="keep_width"
 [dotnet]
 
 project/assembly_name="Arena_Team_Builder"
+
+[editor]
+
+export/convert_text_resources_to_binary=true

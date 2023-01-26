@@ -5511,7 +5511,7 @@
             "effets": {
                 "SOIN": {
                     "base": {
-                        "valeur": "20"
+                        "valeur": 20
                     }
                 }
             }
