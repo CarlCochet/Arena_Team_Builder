@@ -401,7 +401,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE", "IMMOBILISE"],
+            "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
 				"TELEPORTE": 1
 			}
@@ -937,7 +937,7 @@
 				"SOIN": {
                     "base": {
                         "valeur": 6,
-                        "duree": 6
+                        "duree": 2
                     }
                 },
                 "DEVIENT_INVISIBLE": {
@@ -1983,7 +1983,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE", "IMMOBILISE"],
+            "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
 				"TELEPORTE": 1
 			}
@@ -2071,7 +2071,7 @@
             "taille_zone": [0, 1],
 			"cible": 0,
 			"ldv": 1,
-			"type_ldv": 0,
+			"type_ldv": 1,
 			"cooldown": 0,
 			"cooldown_global": 0,
             "lancer_par_tour": -1,
@@ -3534,6 +3534,21 @@
                     "base": {
                         "duree": 1
                     }
+                },
+                "STABILISE": {
+                    "base": {
+                        "duree": 1
+                    }
+                },
+                "INTRANSPOSABLE": {
+                    "base": {
+                        "duree": 1
+                    }
+                },
+                "NON_PORTABLE": {
+                    "base": {
+                        "duree": 1
+                    }
                 }
 			}
 		},
@@ -4136,7 +4151,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE", "IMMOBILISE"],
+            "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
                 "TELEPORTE": 1,
                 "CHANGE_STATS": {
@@ -5368,6 +5383,7 @@
             "etats_lanceur_interdits": ["PORTE"],
             "effets": {
                 "DOMMAGE_FIXE": {
+                    "instant": 0,
                     "base": {
                         "valeur": 5,
                         "duree": 3
@@ -5431,12 +5447,12 @@
             "effets": {
                 "DOMMAGE_TERRE": {
                     "base": {
-                        "valeur": "1d12"
+                        "valeur": "1d12+0"
                     }
                 },
                 "SOIN": {
                     "base": {
-                        "valeur": "1d12"
+                        "valeur": "1d12+0"
                     }
                 }
             }
@@ -5495,7 +5511,7 @@
             "effets": {
                 "SOIN": {
                     "base": {
-                        "valeur": "20"
+                        "valeur": 20
                     }
                 }
             }
@@ -5578,7 +5594,7 @@
         },
         "vision_amelioree": {
             "kamas": 0,
-            "pa": 0,
+            "pa": 1,
             "po": [0, 8],
             "po_modifiable": 1,
             "type_zone": 0,

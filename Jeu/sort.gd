@@ -146,11 +146,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
 	if effets.has("MAUDIT_CASE"):
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
-	if sort_valide:
-		update_limite_lancers(lanceur)
-	
-	if not sort_valide:
-		print("Sort invalide, annulation de l'action !")
+	update_limite_lancers(lanceur)
 	return sort_valide
 
 
@@ -453,18 +449,19 @@ class Glyphe:
 	func active_full():
 		var triggered = false
 		for combattant in lanceur.combat.combattants:
-			if combattant.grid_pos in tiles and not combattant.check_etats(["PORTE"]):
-				var delta_hp = combattant.max_stats.hp - combattant.stats.hp
-				var delta_pa = combattant.max_stats.pa - combattant.stats.pa
-				var delta_pm = combattant.max_stats.pm - combattant.stats.pm
-				combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs)
-				combattant.stats.hp -= delta_hp
-				combattant.stats.pa -= delta_pa
-				combattant.stats.pm -= delta_pm
+			if combattant.grid_pos in tiles:
+				var temp_hp = combattant.stats.hp
+				var temp_pa = combattant.stats.pa
+				var temp_pm = combattant.stats.pm
+				combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
+				combattant.stats.hp = temp_hp
+				combattant.stats.pa = temp_pa
+				combattant.stats.pm = temp_pm
 				for effet in effets:
-					var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, aoe, sort)
-					new_effet.instant = true
-					new_effet.execute()
+					if effet == "DEVIENT_INVISIBLE" or not combattant.check_etats(["PORTE"]):
+						var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, aoe, sort)
+						new_effet.instant = true
+						new_effet.execute()
 				triggered = true
 		if triggered and effets.has("DOMMAGE_FIXE"):
 			lanceur.combat.tilemap.delete_glyphes([id])

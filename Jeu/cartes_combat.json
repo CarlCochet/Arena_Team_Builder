@@ -1,531 +1,175 @@
 {
     "bifidous_activous": {
         "tous": {
-            "CHANGE_STATS": {
-                "resistances_air": {
-                    "base": {
-                        "valeur": 30,
-                        "duree": 1
-                    }
-                },
-                "resistances_terre": {
-                    "base": {
-                        "valeur": 30,
-                        "duree": 1
-                    }
-                },
-                "resistances_feu": {
-                    "base": {
-                        "valeur": 30,
-                        "duree": 1
-                    }
-                },
-                "resistances_eau": {
-                    "base": {
-                        "valeur": 30,
-                        "duree": 1
-                    }
-                }
-            }
+            "resistances_air": 30,
+            "resistances_terre": 30,
+            "resistances_feu": 30,
+            "resistances_eau": 30
         }
     },
     "coeur_de_flamme": {
         "tous": {
-            "CHANGE_STATS": {
-                "dommages_feu": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_feu": 10
         }
     },
     "coeur_de_pierre": {
         "tous": {
-            "CHANGE_STATS": {
-                "dommages_terre": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_terre": 10
         }
     },
     "coeur_des_vagues": {
         "tous": {
-            "CHANGE_STATS": {
-                "dommages_eau": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_eau": 10
         }
     },
     "coeur_des_vents": {
         "tous": {
-            "CHANGE_STATS": {
-                "dommages_air": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_air": 10
         }
     },
     "couverture": {
         "tous": {
-            "CHANGE_STATS": {
-                "po": {
-                    "base": {
-                        "valeur": -1,
-                        "duree": 1
-                    }
-                }
-            }
+            "po": -1
         }
     },
     "creux_de_la_vague": {
         "tous": {
-            "CHANGE_STATS": {
-                "dommages_eau": {
-                    "base": {
-                        "valeur": -15,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_eau": -15
         }
     },
     "creux_des_flammes": {
         "tous": {
-            "CHANGE_STATS": {
-                "dommages_feu": {
-                    "base": {
-                        "valeur": -15,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_feu": -15
         }
     },
     "creux_des_pierres": {
         "tous": {
-            "CHANGE_STATS": {
-                "dommages_terre": {
-                    "base": {
-                        "valeur": -15,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_terre": -15
         }
     },
-    "coeur_des_vents": {
+    "creux_des_vents": {
         "tous": {
-            "CHANGE_STATS": {
-                "dommages_air": {
-                    "base": {
-                        "valeur": -15,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_air": -15
         }
     },
     "deesse_cra": {
         "Cra": {
-            "CHANGE_STATS": {
-                "po": {
-                    "base": {
-                        "valeur": -1,
-                        "duree": 1
-                    }
-                },
-                "cc": {
-                    "base": {
-                        "valeur": 25,
-                        "duree": 1
-                    }
-                }
-            }
+            "po": 1,
+            "cc": 25
         }
     },
     "deesse_eniripsa": {
         "Eni": {
-            "CHANGE_STATS": {
-                "soins": {
-                    "base": {
-                        "valeur": 50,
-                        "duree": 1
-                    }
-                }
-            }
+            "soins": 50
         }
     },
     "deesse_feca": {
         "Feca": {
-            "CHANGE_STATS": {
-                "resistances_air": {
-                    "base": {
-                        "valeur": 40,
-                        "duree": 1
-                    }
-                },
-                "resistances_terre": {
-                    "base": {
-                        "valeur": 40,
-                        "duree": 1
-                    }
-                },
-                "resistances_feu": {
-                    "base": {
-                        "valeur": 40,
-                        "duree": 1
-                    }
-                },
-                "resistances_eau": {
-                    "base": {
-                        "valeur": 40,
-                        "duree": 1
-                    }
-                },
-                "blocage": {
-                    "base": {
-                        "valeur": 40,
-                        "duree": 1
-                    }
-                }
-            }
+            "resistances_air": 40,
+            "resistances_terre": 40,
+            "resistances_feu": 40,
+            "resistances_eau": 40,
+            "blocage": 40
         }
     },
     "deesse_pandawa": {
         "Panda": {
-            "SOIN": {
-                "base": {
-                    "valeur": 10
-                }
-            },
-            "CHANGE_STATS": {
-                "pa": {
-                    "base": {
-                        "valeur": 1,
-                        "duree": 1
-                    }
-                },
-                "esquive": {
-                    "base": {
-                        "valeur": 20,
-                        "duree": 1
-                    }
-                }
-            }
+            "SOIN": 10,
+            "pa": 1,
+            "esquive": 20
         },
         "autres": {
-            "CHANGE_STATS": {
-                "esquive": {
-                    "base": {
-                        "valeur": -20,
-                        "duree": 1
-                    }
-                }
-            }
+            "esquive": -20
         }
     },
     "deesse_sacrieur": {
         "Sacrieur": {
-            "CHANGE_STATS": {
-                "dommages_air": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                },
-                "dommages_terre": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                },
-                "dommages_feu": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                },
-                "dommages_eau": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                },
-                "pm": {
-                    "base": {
-                        "valeur": 2,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_air": 10,
+            "dommages_terre": 10,
+            "dommages_feu": 10,
+            "dommages_eau": 10,
+            "pm": 2
         }
     },
     "dieu_ecaflip": {
         "Eca": {
-            "CHANGE_STATS": {
-                "cc": {
-                    "base": {
-                        "valeur": 50,
-                        "duree": 1
-                    }
-                },
-                "esquive": {
-                    "base" : {
-                        "valeur": 20,
-                        "duree": 1
-                    }
-                }
-            }
+            "cc": 50,
+            "esquive": 20
         }
     },
     "dieu_enutrof": {
         "Enu": {
-            "CHANGE_STATS": {
-                "pm": {
-                    "base": {
-                        "valeur": 2,
-                        "duree": 1
-                    }
-                }
-            }
+            "pm": 2
         },
         "autres": {
-            "CHANGE_STATS": {
-                "pm": {
-                    "base": {
-                        "valeur": -1,
-                        "duree": 1
-                    }
-                }
-            }
+            "pm": -1
         }
     },
     "dieu_iop": {
         "Iop": {
-            "CHANGE_STATS": {
-                "dommages_air": {
-                    "base": {
-                        "valeur": 30,
-                        "duree": 1
-                    }
-                },
-                "dommages_terre": {
-                    "base": {
-                        "valeur": 30,
-                        "duree": 1
-                    }
-                },
-                "dommages_feu": {
-                    "base": {
-                        "valeur": 30,
-                        "duree": 1
-                    }
-                },
-                "dommages_eau": {
-                    "base": {
-                        "valeur": 30,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_air": 30,
+            "dommages_terre": 30,
+            "dommages_feu": 30,
+            "dommages_eau": 30
         },
         "tous": {
-            "CHANGE_STATS": {
-                "soins": {
-                    "base": {
-                        "valeur": -30,
-                        "duree": 1
-                    }
-                }
-            }
+            "soins": -30
         }
     },
     "dieu_osamodas": {
         "Osa": {
-            "CHANGE_STATS": {
-                "invocations": {
-                    "base": {
-                        "valeur": 1,
-                        "duree": 1
-                    }
-                },
-                "pa": {
-                    "base": {
-                        "valeur": 2,
-                        "duree": 1
-                    }
-                }
-            }
+            "invocations": 1,
+            "pa": 2
         }
     },
     "dieu_sadida": {
         "Sadida": {
-            "CHANGE_STATS": {
-                "invocations": {
-                    "base": {
-                        "valeur": 1,
-                        "duree": 1
-                    }
-                },
-                "pa": {
-                    "base": {
-                        "valeur": 2,
-                        "duree": 1
-                    }
-                }
-            }
+            "invocations": 1,
+            "pa": 2,
         }
     },
     "dieu_sram": {
         "Roublard": {
-            "CHANGE_STATS": {
-                "dommages_air": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                },
-                "dommages_terre": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                },
-                "dommages_feu": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                },
-                "dommages_eau": {
-                    "base": {
-                        "valeur": 10,
-                        "duree": 1
-                    }
-                },
-                "pm": {
-                    "base": {
-                        "valeur": 1,
-                        "duree": 1
-                    }
-                },
-                "esquive": {
-                    "base": {
-                        "valeur": 100,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_air": 10,
+            "dommages_terre": 10,
+            "dommages_feu": 10,
+            "dommages_eau": 10,
+            "pm": 1,
+            "esquive": 100
         },
         "Sram": {
-            "CHANGE_STATS": {
-                "esquive": {
-                    "base": {
-                        "valeur": 100,
-                        "duree": 1
-                    }
-                }
-            }
+            "esquive": 100
         }
     },
     "dieu_xelor": {
         "Xelor": {
-            "CHANGE_STATS": {
-                "pa": {
-                    "base": {
-                        "valeur": 2,
-                        "duree": 1
-                    }
-                }
-            }
+            "pa": 2
         },
         "autres": {
-            "CHANGE_STATS": {
-                "pa": {
-                    "base": {
-                        "valeur": -1,
-                        "duree": 1
-                    }
-                }
-            }
+            "pa": -1
         }
     },
     "mauvaise_passe": {
         "tous": {
-            "CHANGE_STATS": {
-                "soins": {
-                    "base": {
-                        "valeur": -25,
-                        "duree": 1
-                    }
-                }
-            }
+            "soins": -25
         }
     },
     "place_a_laction": {
         "tous": {
-            "CHANGE_STATS": {
-                "pa": {
-                    "base": {
-                        "valeur": 1,
-                        "duree": 1
-                    }
-                }
-            }
+            "pa": 1
         }
     },
     "precision": {
         "tous": {
-            "CHANGE_STATS": {
-                "cc": {
-                    "base": {
-                        "valeur": 25,
-                        "duree": 1
-                    }
-                }
-            }
+            "cc": 25
         }
     },
     "rage_guerriere": {
         "tous": {
-            "CHANGE_STATS": {
-                "dommages_air": {
-                    "base": {
-                        "valeur": 15,
-                        "duree": 1
-                    }
-                },
-                "dommages_terre": {
-                    "base": {
-                        "valeur": 15,
-                        "duree": 1
-                    }
-                },
-                "dommages_feu": {
-                    "base": {
-                        "valeur": 15,
-                        "duree": 1
-                    }
-                },
-                "dommages_eau": {
-                    "base": {
-                        "valeur": 15,
-                        "duree": 1
-                    }
-                }
-            }
+            "dommages_air": 15,
+            "dommages_terre": 15,
+            "dommages_feu": 15,
+            "dommages_eau": 15,
         }
     }
 }

@@ -55,7 +55,6 @@ texture_hover = ExtResource("6_kjitl")
 [node name="Adresse" type="TextEdit" parent="Menu"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-text = "127.0.0.1"
 placeholder_text = "Adresse IP"
 
 [node name="Retour" type="TextureButton" parent="."]

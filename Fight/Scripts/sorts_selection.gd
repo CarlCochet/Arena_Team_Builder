@@ -9,7 +9,7 @@ func update(combattant):
 		sort.queue_free()
 	var sort_id = 1
 	for sort in combattant.sorts:
-		if sort.nom != "arme":
+		if sort.nom != "arme" and sort_id < combattant.compte_sorts:
 			var texture_rect = TextureRect.new()
 			var sprite = Sprite2D.new()
 			var carte = Sprite2D.new()
@@ -22,8 +22,8 @@ func update(combattant):
 			sprite.scale = Vector2(1.05, 1.05)
 			
 			carte.texture = load("res://Classes/" + combattant.classe + "/Sorts/" + sort.nom + ".png")
-			carte.position = Vector2(82, -106)
-			carte.scale = Vector2(0.5, 0.5)
+			carte.position = Vector2(90, -200)
+			carte.scale = Vector2(1, 1)
 			carte.name = "carte"
 			
 			label.text = str(sort.cooldown_actuel)
@@ -57,6 +57,6 @@ func sort_exited(sort):
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
-		if carte_hovered > 0:
+		if carte_hovered > 0 and get_parent().etat == 1:
 			get_parent().spell_pressed = true
 			get_parent().change_action(carte_hovered)

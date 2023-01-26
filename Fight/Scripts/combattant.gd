@@ -12,6 +12,7 @@ var max_stats: Stats
 var init_stats: Stats
 var stat_buffs: Stats
 var stat_ret: Stats
+var stat_cartes_combat: Stats
 var buffs_hp: Array
 var equipements: Dictionary
 var sorts: Array
@@ -22,6 +23,7 @@ var combat: Combat
 var grid_pos: Vector2i
 var id: int
 var orientation: int
+var compte_sorts: int
 var all_path: Array
 var path_actuel: Array
 var all_ldv: Array
@@ -52,6 +54,7 @@ func _ready():
 	orientation = 1
 	stat_buffs = Stats.new()
 	stat_ret = Stats.new()
+	stat_cartes_combat = Stats.new()
 	is_selected = false
 	is_hovered = false
 	is_invocation = false
@@ -75,6 +78,7 @@ func select():
 	is_selected = true
 	if not is_invocation:
 		combat.sorts.update(self)
+		combat.sorts_bonus.update(self)
 
 
 func unselect():
@@ -93,6 +97,7 @@ func from_personnage(personnage: Personnage, equipe_id: int):
 		var new_sort = GlobalData.sorts[sort].copy()
 		new_sort.nom = sort
 		sorts.append(new_sort)
+	compte_sorts = len(sorts)
 	equipe = equipe_id
 	return self
 
@@ -169,7 +174,7 @@ func calcul_all_ldv(action: int):
 	var sort
 	sort = sorts[action]
 	if not sort.precheck_cast(self):
-		combat.change_action(7)
+		combat.change_action(10)
 		return
 	var bonus_po = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
 	var po_max = sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0]
@@ -276,7 +281,7 @@ func active_cadran():
 
 
 func joue_action(action: int, tile_pos: Vector2i):
-	if action == 7:
+	if action == 10:
 		calcul_path_actuel(tile_pos)
 		if len(path_actuel) > 0:
 			deplace_perso(path_actuel)
@@ -284,32 +289,31 @@ func joue_action(action: int, tile_pos: Vector2i):
 		calcul_all_ldv(action)
 		calcul_zone(action, tile_pos)
 		if not tile_pos in all_ldv:
-			combat.change_action(7)
+			combat.change_action(10)
 			return
 		var sort: Sort = sorts[action]
-		var valide = false
+		var _valide = false
 		if check_etats(["RATE_SORT"]):
-			valide = true
+			_valide = true
 			retire_etats(["RATE_SORT"])
 		else:
-			valide = sort.execute_effets(self, zone, tile_pos)
-		if valide:
-			stats.pa -= sort.pa
-			stats_perdu.ajoute(-sort.pa, "pa")
-			for effet in effets:
-				if effet.etat == "DOMMAGE_SI_UTILISE_PA" and (effet.sort.nom != sort.nom or effet.lanceur.id != id):
-					for i in range(sort.pa):
-						effet.execute()
-			if not is_invocation:
-				combat.sorts.update(self)
-			if tile_pos != grid_pos or not sort.effets.has("DEVIENT_INVISIBLE"):
-				combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
-				retire_etats(["INVISIBLE"])
-				visible = true
-				is_visible = true
-			if grid_pos != tile_pos:
-				oriente_vers(tile_pos)
-		combat.change_action(7)
+			_valide = sort.execute_effets(self, zone, tile_pos)
+		stats.pa -= sort.pa
+		stats_perdu.ajoute(-sort.pa, "pa")
+		for effet in effets:
+			if effet.etat == "DOMMAGE_SI_UTILISE_PA" and (effet.sort.nom != sort.nom or effet.lanceur.id != id):
+				for i in range(sort.pa):
+					effet.execute()
+		if not is_invocation:
+			combat.sorts.update(self)
+		if tile_pos != grid_pos or not sort.effets.has("DEVIENT_INVISIBLE"):
+			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+			retire_etats(["INVISIBLE"])
+			visible = true
+			is_visible = true
+		if grid_pos != tile_pos:
+			oriente_vers(tile_pos)
+		combat.change_action(10)
 	combat.stats_select.update(stats)
 	combat.check_morts()
 
@@ -451,7 +455,7 @@ func debut_tour():
 	check_case_bonus()
 	var effets_hp = start_hp - stats.hp
 	desactive_cadran()
-	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
+	stats = init_stats.copy().add(stat_ret).add(stat_buffs).add(stat_cartes_combat)
 	stats.hp -= delta_hp + effets_hp
 	execute_buffs_hp(false)
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
@@ -469,7 +473,7 @@ func fin_tour():
 	retrait_cooldown()
 	stat_ret = Stats.new()
 	var delta_hp = max_stats.hp - stats.hp
-	stats = init_stats.copy().add(stat_buffs)
+	stats = init_stats.copy().add(stat_buffs).add(stat_cartes_combat)
 	stats.hp -= delta_hp
 	execute_buffs_hp(false)
 	combat.check_morts()
@@ -477,10 +481,17 @@ func fin_tour():
 
 func meurt():
 	var is_porteur = false
+	var is_porte = false
 	if check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
 		var effet_lance = Effet.new(self, grid_pos, "LANCE", 1, false, grid_pos, false, null)
 		effet_lance.execute()
 		is_porteur = true
+	for effet in effets:
+		if effet.etat == "PORTE":
+			is_porte = true
+			for combattant in combat.combattants:
+				if combattant.id == effet.lanceur.id:
+					combattant.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
 	
 	for combattant in combat.combattants:
 		var new_effets = []
@@ -497,7 +508,7 @@ func meurt():
 		combattant.effets = new_effets
 		combattant.buffs_hp = new_buffs_hp
 	
-	if not is_porteur:
+	if (not is_porteur) and (not is_porte):
 		var map_pos = combat.tilemap.local_to_map(position)
 		combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
@@ -565,7 +576,7 @@ func retrait_durees():
 		var delta_hp = combattant.max_stats.hp - combattant.stats.hp
 		combattant.max_stats = combattant.init_stats.copy()
 		combattant.execute_effets()
-		combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs)
+		combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
 		combattant.stats.hp -= delta_hp
 		combattant.execute_buffs_hp()
 	
@@ -612,7 +623,7 @@ func _on_area_2d_mouse_entered():
 	combat.stats_hover.visible = true
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	hp.visible = true
-	if combat.action == 7:
+	if combat.action == 10:
 		affiche_path(Vector2i(99, 99))
 
 

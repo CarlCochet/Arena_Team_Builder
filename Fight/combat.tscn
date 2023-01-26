@@ -1,6 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://egsxhipgew1"]
+[gd_scene load_steps=24 format=3 uid="uid://egsxhipgew1"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
+[ext_resource type="Script" path="res://Fight/Scripts/sorts_bonus_selection.gd" id="3_e0j6u"]
+[ext_resource type="PackedScene" uid="uid://dm7uaxf12cq58" path="res://Fight/cartes_combat.tscn" id="4_u8rsj"]
 [ext_resource type="PackedScene" uid="uid://fchxarxrckwc" path="res://Fight/affichage_stats_small.tscn" id="5_jgg7a"]
 [ext_resource type="PackedScene" uid="uid://cyuev8xs7ffv8" path="res://Fight/sorts.tscn" id="7_0vhv3"]
 [ext_resource type="PackedScene" uid="uid://dkum5bskrgt8k" path="res://Fight/affichage_stats.tscn" id="8_mm5mb"]
@@ -19,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://dsmninkk3w66q" path="res://UI/Buttons/passe_tour_clicked.png" id="19_d7cu6"]
 [ext_resource type="Texture2D" uid="uid://bsx000i85450y" path="res://UI/Buttons/retour_hovered.png" id="19_igho5"]
 [ext_resource type="Texture2D" uid="uid://6qux5yc23gvx" path="res://UI/Buttons/passe_tour_hovered.png" id="20_aeni8"]
+[ext_resource type="Texture2D" uid="uid://c13funwn7bgli" path="res://Fight/Images/fleche_timeline.png" id="22_niame"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bi0gt"]
 font_size = 72
@@ -32,16 +35,33 @@ script = ExtResource("1_2kr3w")
 [node name="Sorts" parent="." instance=ExtResource("7_0vhv3")]
 z_index = 1
 offset_left = 50.0
+offset_top = 845.0
+offset_right = 298.0
+offset_bottom = 885.0
+scale = Vector2(1, 1)
+
+[node name="SortsBonus" parent="." instance=ExtResource("7_0vhv3")]
+z_index = 1
+offset_left = 50.0
 offset_top = 800.0
 offset_right = 298.0
 offset_bottom = 840.0
+scale = Vector2(1, 1)
+script = ExtResource("3_e0j6u")
+
+[node name="CartesCombat" parent="." instance=ExtResource("4_u8rsj")]
+
+[node name="FlecheCarteCombat" type="Sprite2D" parent="."]
+position = Vector2(1390, 6)
+scale = Vector2(0.28125, 0.3)
+texture = ExtResource("22_niame")
 
 [node name="Timeline" parent="." instance=ExtResource("8_rq6ft")]
 z_index = 1
-offset_left = 30.0
-offset_top = 20.0
-offset_right = 70.0
-offset_bottom = 60.0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 60.0
+offset_bottom = 50.0
 
 [node name="AffichageStatsHover" parent="." instance=ExtResource("8_mm5mb")]
 z_index = 1

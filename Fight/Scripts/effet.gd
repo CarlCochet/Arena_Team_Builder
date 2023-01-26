@@ -53,6 +53,8 @@ func trouve_duree(data):
 			if data[key].has("duree"):
 				if data.has("instant"):
 					instant = false
+				if data.has("critique") and critique:
+					return data["critique"]["duree"]
 				return data[key]["duree"]
 			else:
 				return trouve_duree(data[key])
@@ -269,7 +271,9 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 	var bonus = get_orientation_bonus() if orientation_bonus else 0.0
 	if cible.classe in ["Arbre", "Cadran_De_Xelor", "Bombe_A_Eau", "Bombe_Incendiaire"]:
 		bonus = 0.0
-	var result = float(base * (1.0 + (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone))
+	var bonus_global = (stat / 100.0) - (resistance / 100.0) + bonus - resistance_zone
+	bonus_global = bonus_global if bonus_global > -1.0 else -1.0
+	var result = float(base * (1.0 + bonus_global))
 	var proba_roundup = result - int(result)
 	result = int(result) + 1 if GlobalData.rng.randf() < proba_roundup else int(result)
 	return result
@@ -278,11 +282,11 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 func update_sacrifice(p_cible, type):
 	for effet in p_cible.effets:
 		if effet.etat == "SACRIFICE" and effet.lanceur.id == p_cible.id:
-			if (not effet.lanceur.check_etats(["INTRANSPOSABLE", "PORTE"])) and (not p_cible.check_etats(["INTRANSPOSABLE", "PORTE"])):
+			if (not effet.lanceur.check_etats(["INTRANSPOSABLE", "PORTE"])) and (not p_cible.check_etats(["INTRANSPOSABLE", "PORTE"])) and cible.classe != "Arbre":
 				p_cible.echange_positions(effet.lanceur)
 			return p_cible
 		elif effet.etat == "SACRIFICE":
-			if (not effet.lanceur.check_etats(["INTRANSPOSABLE", "PORTE"])) and (not p_cible.check_etats(["INTRANSPOSABLE", "PORTE"])):
+			if (not effet.lanceur.check_etats(["INTRANSPOSABLE", "PORTE"])) and (not p_cible.check_etats(["INTRANSPOSABLE", "PORTE"])) and cible.classe != "Arbre":
 				p_cible.echange_positions(effet.lanceur)
 			return update_sacrifice(effet.lanceur, type)
 	return p_cible
@@ -666,6 +670,8 @@ func vole_stats():
 
 
 func pousse():
+	if cible.classe == "Arbre":
+		return
 	if cible.check_etats(["STABILISE"]):
 		return
 	var direction: Vector2i = (cible.grid_pos - lanceur.grid_pos).sign()
@@ -715,6 +721,8 @@ func pousse():
 
 
 func attire():
+	if cible.classe == "Arbre":
+		return
 	if cible.check_etats(["STABILISE"]):
 		return
 	var direction = -(cible.grid_pos - lanceur.grid_pos).sign()
@@ -765,6 +773,8 @@ func attire():
 
 
 func recul():
+	if lanceur.classe == "Arbre":
+		return
 	if lanceur.check_etats(["STABILISE"]):
 		return
 	var direction: Vector2i = (lanceur.grid_pos - cible.grid_pos).sign()
@@ -827,6 +837,8 @@ func teleporte():
 func transpose():
 	if cible.stats.hp <= 0:
 		return
+	if cible.classe == "Arbre":
+		return
 	if lanceur.check_etats(["INTRANSPOSABLE"]) or cible.check_etats(["INTRANSPOSABLE", "PORTE", "PORTE_ALLIE", "PORTE_ENNEMI"]):
 		return
 	cible.echange_positions(lanceur)
@@ -876,7 +888,7 @@ func desenvoute():
 	cible.stat_buffs = Stats.new()
 	cible.execute_effets()
 	var delta_hp = cible.max_stats.hp - cible.stats.hp
-	cible.stats = cible.init_stats.copy().add(cible.stat_ret).add(cible.stat_buffs)
+	cible.stats = cible.init_stats.copy().add(cible.stat_ret).add(cible.stat_buffs).add(cible.stat_cartes_combat)
 	cible.stats.hp -= delta_hp
 	cible.buffs_hp = []
 	cible.max_stats = cible.init_stats.copy()
@@ -943,6 +955,8 @@ func invocation():
 
 
 func porte():
+	if cible.classe == "Arbre":
+		return
 	if etat != "PORTE":
 		var etat_lanceur = "PORTE_ALLIE" if lanceur.equipe == cible.equipe else "PORTE_ENNEMI"
 		var effet_lanceur = Effet.new(lanceur, cible, etat_lanceur, contenu, false, lanceur.grid_pos, false, sort)
@@ -1026,31 +1040,21 @@ func suicide():
 
 
 func choix():
-	if not instant:
-		return
-	combat.etat = 2
-	var block = Control.new()
-	block.position = combat.tilemap.map_to_local(centre - combat.offset)
-	combat.add_child(block)
-	for i in range(len(contenu.keys())):
-		var bouton = Button.new()
-		bouton.text = contenu.keys()[i]
-		bouton.position = Vector2(i * 300 - 220, -25)
-		bouton.connect("pressed", _on_choix_clicked.bind(i, block))
-		bouton.z_index = 1
-		block.add_child(bouton)
-	instant = false
-
-
-func _on_choix_clicked(i, block):
-	combat.etat = 1
-	var new_categorie = contenu[contenu.keys()[i]].keys()[0]
-	var new_contenu = contenu[contenu.keys()[i]][contenu[contenu.keys()[i]].keys()[0]]
-	var new_effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, sort)
-	new_effet.execute()
-	if new_effet.duree > 0:
-		cible.effets.append(new_effet)
-	block.queue_free()
+	if lanceur.equipe == 0 and Client.is_host or lanceur.equipe == 1 and not Client.is_host:
+		if not instant:
+			return
+		combat.etat = 2
+		var block = Control.new()
+		block.position = combat.tilemap.map_to_local(centre - combat.offset)
+		combat.add_child(block)
+		for i in range(len(contenu.keys())):
+			var bouton = Button.new()
+			bouton.text = contenu.keys()[i]
+			bouton.position = Vector2(i * 300 - 220, -25)
+			bouton.connect("pressed", combat._on_choix_clicked.bind(i, block, contenu, lanceur.id, cible.id, critique, sort.nom))
+			bouton.z_index = 1
+			block.add_child(bouton)
+		instant = false
 
 
 func swap():

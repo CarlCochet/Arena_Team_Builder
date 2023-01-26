@@ -15,6 +15,7 @@ func _ready():
 	orientation = 1
 	stat_buffs = Stats.new()
 	stat_ret = Stats.new()
+	stat_cartes_combat = Stats.new()
 	is_selected = false
 	is_hovered = false
 	is_invocation = true
@@ -144,8 +145,8 @@ func debut_tour():
 	var start_hp = stats.hp
 	retrait_durees()
 	execute_effets(false)
-	var effets_hp = start_hp - stats.hp
 	check_case_bonus()
+	var effets_hp = start_hp - stats.hp
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
 	stats.hp -= delta_hp + effets_hp
 	execute_buffs_hp(false)
@@ -173,6 +174,8 @@ func chemin_vers_proche() -> Array:
 	var min_chemin = []
 	for combattant in combat.combattants:
 		if combattant.equipe != equipe and not combattant.check_etats(["PORTE"]):
+			if not combattant.is_visible:
+				continue
 			for voisin in voisins:
 				if check_etats(["PORTE"]) and combattant.grid_pos + voisin == grid_pos:
 					continue
@@ -197,6 +200,8 @@ func choix_cible(p_all_ldv: Array):
 	if len(p_all_ldv) == 1 and p_all_ldv[0] == grid_pos:
 		return grid_pos
 	for combattant in combat.combattants:
+		if not combattant.is_visible:
+			continue
 		if combattant.grid_pos in p_all_ldv and combattant.equipe != equipe and not combattant.check_etats(["PORTE"]):
 			var delta = combattant.grid_pos - grid_pos
 			var dist = abs(delta.x) + abs(delta.y)
@@ -220,6 +225,7 @@ func joue_ia():
 		if len(chemin) > stats.pm + 1:
 			chemin = chemin.slice(0, stats.pm + 1)
 		if len(chemin) > 0:
+			chemin.pop_front()
 			deplace_perso(chemin)
 	for sort in sorts:
 		if not sort.precheck_cast(self):
