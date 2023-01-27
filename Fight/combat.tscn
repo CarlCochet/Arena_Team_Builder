@@ -41,7 +41,6 @@ offset_bottom = 885.0
 scale = Vector2(1, 1)
 
 [node name="SortsBonus" parent="." instance=ExtResource("7_0vhv3")]
-visible = false
 z_index = 1
 offset_left = 50.0
 offset_top = 800.0
@@ -51,10 +50,8 @@ scale = Vector2(1, 1)
 script = ExtResource("3_e0j6u")
 
 [node name="CartesCombat" parent="." instance=ExtResource("4_u8rsj")]
-visible = false
 
 [node name="FlecheCarteCombat" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(1390, 6)
 scale = Vector2(0.28125, 0.3)
 texture = ExtResource("22_niame")
