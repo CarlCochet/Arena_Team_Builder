@@ -45,7 +45,7 @@ func _ready():
 func creer_personnages():
 	ajoute_equipe(GlobalData.equipe_actuelle, tilemap.start_bleu, 0)
 	ajoute_equipe(GlobalData.equipe_test, tilemap.start_rouge, 1)
-#	init_cartes()
+	init_cartes()
 	
 	combattants.sort_custom(func(a, b): return a.stats.initiative > b.stats.initiative)
 	for k in range(len(combattants)):
@@ -75,18 +75,19 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe):
 
 
 func init_cartes():
-	if Client.is_host:
-		var nombre_sort_bonus = randi_range(1, 3)
-		var noms_sorts_bonus = GlobalData.sorts_lookup["Bonus"].duplicate(true)
-		noms_sorts_bonus.shuffle()
-		var sorts_bonus_select = []
-		for i in range(nombre_sort_bonus):
-			sorts_bonus_select.append(noms_sorts_bonus[i])
-		rpc("ajoute_sorts_bonus", sorts_bonus_select)
-		rpc("init_cartes_combat")
+	var nombre_sort_bonus = GlobalData.rng.randi_range(1, 3)
+	var noms_sorts_bonus = GlobalData.sorts_lookup["Bonus"].duplicate(true)
+	var sorts_bonus_select = []
+	while len(sorts_bonus_select) < nombre_sort_bonus:
+		var rnd_index = GlobalData.rng.randi_range(0, len(noms_sorts_bonus) - 1)
+		if not noms_sorts_bonus[rnd_index] in sorts_bonus_select:
+			sorts_bonus_select.append(noms_sorts_bonus[rnd_index])
+#	for i in range(nombre_sort_bonus):
+#		sorts_bonus_select.append(noms_sorts_bonus[i])
+	ajoute_sorts_bonus(sorts_bonus_select)
+	init_cartes_combat()
 
 
-@rpc(any_peer, call_local)
 func init_cartes_combat():
 	noms_cartes_combat = []
 	var nom_cartes = GlobalData.cartes_combat.keys()
@@ -95,7 +96,6 @@ func init_cartes_combat():
 		noms_cartes_combat.append(nom_cartes[id_carte])
 
 
-@rpc(any_peer, call_local)
 func ajoute_sorts_bonus(noms_sorts_bonus: Array):
 	for combattant in combattants:
 		for nom_sort in noms_sorts_bonus:
@@ -128,13 +128,13 @@ func init_nouveau_tour():
 	if tour >= 15:
 		tilemap.update_mort_subite(tour)
 	
-#	if GlobalData.is_multijoueur:
-#		noms_cartes_combat.pop_front()
-#		var nom_cartes = GlobalData.cartes_combat.keys()
-#		var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
-#		noms_cartes_combat.append(nom_cartes[id_carte])
-#		cartes_combat.update(noms_cartes_combat)
-#		applique_carte_combat()
+	if GlobalData.is_multijoueur:
+		noms_cartes_combat.pop_front()
+		var nom_cartes = GlobalData.cartes_combat.keys()
+		var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
+		noms_cartes_combat.append(nom_cartes[id_carte])
+		cartes_combat.update(noms_cartes_combat)
+		applique_carte_combat()
 
 
 func applique_carte_combat():
@@ -173,9 +173,9 @@ func lance_game():
 	combattant_selection = combattants[selection_id]
 	etat = 1
 	tilemap.clear_layer(2)
-#	if GlobalData.is_multijoueur:
-#		cartes_combat.update(noms_cartes_combat)
-#		applique_carte_combat()
+	if GlobalData.is_multijoueur:
+		cartes_combat.update(noms_cartes_combat)
+		applique_carte_combat()
 	change_action(10)
 	combattant_selection.debut_tour()
 
