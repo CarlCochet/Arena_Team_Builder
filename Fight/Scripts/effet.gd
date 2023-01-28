@@ -386,7 +386,7 @@ func dommage_par_pa():
 	if cible is Array or cible is Vector2i:
 		return
 	var pa_restants = lanceur.stats.pa - sort.pa
-	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, lanceur.grid_pos, aoe, sort)
+	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, cible.grid_pos, aoe, sort)
 	for i in range(pa_restants):
 		effet.execute()
 	lanceur.stats.pa -= pa_restants
@@ -397,7 +397,7 @@ func dommage_par_pm():
 	if cible is Array or cible is Vector2i:
 		return
 	var pm_restants = lanceur.stats.pm
-	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, lanceur.grid_pos, aoe, sort)
+	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, cible.grid_pos, aoe, sort)
 	for i in range(pm_restants):
 		effet.execute()
 	lanceur.stats.pm -= pm_restants
@@ -1040,7 +1040,7 @@ func suicide():
 
 
 func choix():
-	if lanceur.equipe == 0 and Client.is_host or lanceur.equipe == 1 and not Client.is_host:
+	if lanceur.equipe == 0 and Client.is_host or lanceur.equipe == 1 and (not Client.is_host) or not GlobalData.is_multijoueur:
 		if not instant:
 			return
 		combat.etat = 2
