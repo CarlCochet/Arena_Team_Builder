@@ -33,14 +33,6 @@ offset_right = 1000.0
 offset_bottom = 500.0
 color = Color(0.305882, 0.270588, 0.168627, 1)
 
-[node name="AffichagePersonnage" parent="UI" instance=ExtResource("1_qslj8")]
-layout_mode = 0
-offset_left = 100.0
-offset_top = 30.0
-offset_right = 234.0
-offset_bottom = 169.0
-scale = Vector2(1.5, 1.5)
-
 [node name="AffichageStats" parent="UI" instance=ExtResource("4_h2kkk")]
 layout_mode = 0
 offset_top = 250.0
@@ -56,6 +48,14 @@ offset_bottom = 500.0
 [node name="Etats" type="Label" parent="UI/Scroll"]
 layout_mode = 2
 
+[node name="AffichagePersonnage" parent="UI" instance=ExtResource("1_qslj8")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 30.0
+offset_right = 234.0
+offset_bottom = 169.0
+scale = Vector2(1.5, 1.5)
+
 [node name="ContainerSorts" type="Control" parent="UI"]
 anchors_preset = 0
 offset_left = 75.0
@@ -68,3 +68,4 @@ layout_mode = 2
 offset_right = 248.0
 scale = Vector2(1, 1)
 alignment = 1
+is_popup = true

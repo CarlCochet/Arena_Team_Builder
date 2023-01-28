@@ -20,6 +20,10 @@ offset_right = 134.0
 offset_bottom = 2.0
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
+[node name="SpriteClasse" type="Sprite2D" parent="."]
+position = Vector2(70, 55)
+texture = ExtResource("5_f737c")
+
 [node name="GridSortsFond" type="GridContainer" parent="."]
 layout_mode = 0
 offset_left = 11.0
@@ -101,7 +105,3 @@ offset_bottom = 127.0
 scale = Vector2(0.093, 0.093)
 theme_override_constants/h_separation = 68
 columns = 5
-
-[node name="SpriteClasse" type="Sprite2D" parent="."]
-position = Vector2(70, 55)
-texture = ExtResource("5_f737c")

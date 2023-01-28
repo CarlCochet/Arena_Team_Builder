@@ -9,6 +9,7 @@ extends Popup
 
 func update(combattant_id: int):
 	var combattant = get_parent().combattants[combattant_id]
+	
 	affichage_personnage.from_combattant(combattant)
 	affichage_stats.update(combattant.stats, combattant.max_stats)
 	sorts.update(combattant)
@@ -16,6 +17,14 @@ func update(combattant_id: int):
 
 
 func update_etats(combattant):
+	etats.text = ""
+	var nom_sort = ""
+	var id_lanceur = -1
 	for effet in combattant.effets:
-		pass
+		if effet.sort.nom != nom_sort or effet.lanceur.id != id_lanceur:
+			etats.text += "\n-----------------------------------------------------------------------------------------------------\n"
+			etats.text += effet.sort.nom + " - Lanceur : " + effet.lanceur.classe + "_" + str(effet.lanceur.id)
+			nom_sort = effet.sort.nom
+			id_lanceur = effet.lanceur.id
+		
 
