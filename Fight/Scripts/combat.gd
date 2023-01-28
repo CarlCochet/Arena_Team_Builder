@@ -82,8 +82,6 @@ func init_cartes():
 		var rnd_index = GlobalData.rng.randi_range(0, len(noms_sorts_bonus) - 1)
 		if not noms_sorts_bonus[rnd_index] in sorts_bonus_select:
 			sorts_bonus_select.append(noms_sorts_bonus[rnd_index])
-#	for i in range(nombre_sort_bonus):
-#		sorts_bonus_select.append(noms_sorts_bonus[i])
 	ajoute_sorts_bonus(sorts_bonus_select)
 	init_cartes_combat()
 
