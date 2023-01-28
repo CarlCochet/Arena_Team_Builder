@@ -6,6 +6,7 @@ signal clicked
 
 
 var classe: String
+var personnage_ref: Personnage
 var is_invocation: bool
 var stats: Stats
 var max_stats: Stats
@@ -88,6 +89,7 @@ func unselect():
 
 func from_personnage(personnage: Personnage, equipe_id: int):
 	classe = personnage.classe
+	personnage_ref = personnage
 	stats = personnage.stats.copy()
 	max_stats = stats.copy()
 	init_stats = stats.copy()
