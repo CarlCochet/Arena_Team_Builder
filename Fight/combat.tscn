@@ -66,9 +66,9 @@ offset_bottom = 50.0
 
 [node name="AffichageStatsHover" parent="." instance=ExtResource("8_mm5mb")]
 z_index = 1
-offset_left = 1234.0
+offset_left = 1193.0
 offset_top = 802.0
-offset_right = 1600.0
+offset_right = 1559.0
 offset_bottom = 900.0
 
 [node name="AffichageStatsSelect" parent="." instance=ExtResource("5_jgg7a")]

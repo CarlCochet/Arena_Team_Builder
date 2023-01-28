@@ -21,44 +21,52 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"VOLE_STATS": {
+				"CHANGE_STATS": {
 					"dommages_air": {
 						"base": {
-							"valeur": 25,
+							"valeur": -25,
+							"retour": 25,
 							"duree": 1
 						},
 						"critique": {
-							"valeur": 40,
+							"valeur": -40,
+							"retour": 40,
 							"duree": 1
 						}
 					},
 					"dommages_terre": {
 						"base": {
-							"valeur": 25,
+							"valeur": -25,
+							"retour": 25,
 							"duree": 1
 						},
 						"critique": {
-							"valeur": 40,
+							"valeur": -40,
+							"retour": 40,
 							"duree": 1
 						}
 					},
 					"dommages_feu": {
 						"base": {
-							"valeur": 25,
+							"valeur": -25,
+							"retour": 25,
 							"duree": 1
 						},
 						"critique": {
-							"valeur": 40,
+							"valeur": -40,
+							"retour": 40,
 							"duree": 1
 						}
 					},
 					"dommages_eau": {
 						"base": {
-							"valeur": 25,
+							"valeur": -25,
+							"retour": 25,
 							"duree": 1
 						},
 						"critique": {
-							"valeur": 40,
+							"valeur": -40,
+							"retour": 40,
 							"duree": 1
 						}
 					}
@@ -1216,13 +1224,15 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"VOLE_STATS": {
+				"CHANGE_STATS": {
                     "pm": {
                         "base": {
-                            "valeur": 1
+                            "valeur": -1,
+                            "retour": 1
                         },
                         "critique": {
-                            "valeur": 2
+                            "valeur": -2,
+                            "retour": 2
                         }
                     }
                 },
@@ -4331,14 +4341,16 @@
                         "valeur": 10
                     }
                 },
-                "VOLE_STATS": {
+                "CHANGE_STATS": {
                     "pa": {
                         "base": {
-                            "valeur": 1,
+                            "valeur": -1,
+                            "retour": 1,
                             "duree": 1
                         },
                         "critique": {
-                            "valeur": 1,
+                            "valeur": -1,
+                            "retour": 1,
                             "duree": 1
                         }
                     }

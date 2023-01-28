@@ -10,6 +10,8 @@ var categorie: String
 var contenu
 var etat: String
 var duree: int
+var valeur: int
+var stats_change: Stats
 var instant: bool
 var critique: bool
 var aoe: bool
@@ -36,6 +38,8 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 		type_cible = GlobalData.Cible.LIBRE
 	duree = 0
 	boost_hp = 0
+	valeur = 0
+	stats_change = Stats.new()
 	instant = true
 	indirect = false
 	critique = p_critique
@@ -137,8 +141,6 @@ func execute():
 			boost_vie()
 		"CHANGE_STATS":
 			change_stats()
-		"VOLE_STATS":
-			vole_stats()
 		"POUSSE":
 			pousse()
 		"ATTIRE":
@@ -296,6 +298,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	if cible.check_etats(["SACRIFICE"]) and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
 	
+	valeur = base
 	var stat = 0.0
 	if not stat_element.is_empty():
 		stat = lanceur.stats[stat_element]
@@ -579,10 +582,12 @@ func boost_vie():
 		cible.buffs_hp.append({"lanceur":lanceur.id,"duree":duree,"valeur":contenu[base_crit]["valeur"]})
 		cible.stats.hp += contenu[base_crit]["valeur"]
 		cible.max_stats.hp += contenu[base_crit]["valeur"]
+		stats_change.hp += contenu[base_crit]["valeur"]
 	if contenu[base_crit].has("retour"):
 		lanceur.buffs_hp.append({"lanceur":lanceur.id,"duree":duree,"valeur":contenu[base_crit]["retour"]})
-		lanceur.stats.hp += contenu[base_crit]["valeur"]
-		lanceur.max_stats.hp += contenu[base_crit]["valeur"]
+		lanceur.stats.hp += contenu[base_crit]["retour"]
+		lanceur.max_stats.hp += contenu[base_crit]["retour"]
+		stats_change.hp += contenu[base_crit]["retour"]
 	instant = false
 
 
@@ -595,6 +600,7 @@ func change_stats():
 				continue
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["perso"]
+				stats_change[stat] += contenu[stat][base_crit]["perso"]
 				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["perso"] < 0 else " gagne ", contenu[stat][base_crit]["perso"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["perso"]
@@ -610,6 +616,7 @@ func change_stats():
 				continue
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["valeur"]
+				stats_change[stat] += contenu[stat][base_crit]["valeur"]
 				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["valeur"] < 0 else " gagne ", contenu[stat][base_crit]["valeur"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
@@ -626,6 +633,7 @@ func change_stats():
 				continue
 			if instant:
 				lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
+				stats_change[stat] += contenu[stat][base_crit]["retour"]
 				print(lanceur.classe, "_", str(lanceur.id), " perd " if contenu[stat][base_crit]["retour"] < 0 else " gagne ", contenu[stat][base_crit]["retour"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				lanceur.stat_buffs[stat] += contenu[stat][base_crit]["retour"]
@@ -636,37 +644,6 @@ func change_stats():
 			if stat in ["pa", "pm", "hp"]:
 				lanceur.stats_perdu.ajoute(contenu[stat][base_crit]["retour"], stat)
 	instant = false
-
-
-func reverse_change_stats():
-	var base_crit = trouve_crit()
-	for stat in contenu.keys():
-		if contenu[stat][base_crit].has("perso") and cible.id == lanceur.id:
-			cible.stats[stat] -= contenu[stat][base_crit]["perso"]
-			if contenu[stat][base_crit]["perso"] > 0:
-				cible.max_stats[stat] += contenu[stat][base_crit]["perso"]
-		if contenu[stat][base_crit].has("valeur"):
-			cible.stats[stat] -= contenu[stat][base_crit]["valeur"]
-			if contenu[stat][base_crit]["valeur"] > 0:
-				cible.max_stats[stat] += contenu[stat][base_crit]["valeur"]
-		if contenu[stat][base_crit].has("retour"):
-			lanceur.stats[stat] -= contenu[stat][base_crit]["retour"]
-			if contenu[stat][base_crit]["retour"] > 0:
-				lanceur.max_stats[stat] += contenu[stat][base_crit]["retour"]
-
-
-func vole_stats():
-	var base_crit = trouve_crit()
-	for stat in contenu.keys():
-		if contenu[stat][base_crit].has("valeur"):
-			cible.stats[stat] -= contenu[stat][base_crit]["valeur"]
-			lanceur.stats[stat] += contenu[stat][base_crit]["valeur"]
-			lanceur.max_stats[stat] += contenu[stat][base_crit]["valeur"]
-			print(lanceur.classe, "_", str(lanceur.id), " vole ", contenu[stat][base_crit]["valeur"], " ", stat, " à ", cible.classe, "_", str(cible.id), " (", duree, " tours).")
-			if duree > 0:
-				cible.stat_buffs[stat] -= contenu[stat][base_crit]["valeur"]
-			if stat in ["pa", "pm", "hp"]:
-				cible.stats_perdu.ajoute(-contenu[stat][base_crit]["valeur"], stat)
 
 
 func pousse():
