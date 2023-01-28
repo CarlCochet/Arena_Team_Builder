@@ -1,11 +1,17 @@
-[gd_scene format=3 uid="uid://d3c3cbr7us28b"]
+[gd_scene load_steps=5 format=3 uid="uid://d3c3cbr7us28b"]
 
-[node name="Popup" type="Popup"]
+[ext_resource type="PackedScene" uid="uid://b16xwr8mihgir" path="res://UI/Displays/Scenes/affichage_personnage.tscn" id="1_qslj8"]
+[ext_resource type="PackedScene" uid="uid://cyuev8xs7ffv8" path="res://Fight/sorts.tscn" id="2_2quvi"]
+[ext_resource type="Texture2D" uid="uid://dvj1nsuq5mkiy" path="res://UI/Logos/Spells/Cra/fleche_absorbante.png" id="3_mxof2"]
+[ext_resource type="PackedScene" uid="uid://dkum5bskrgt8k" path="res://Fight/affichage_stats.tscn" id="4_h2kkk"]
+
+[node name="AffichageCombattant" type="Popup"]
 position = Vector2i(20, 90)
 size = Vector2i(1000, 500)
 visible = true
 
-[node name="AffichageCombattant" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
+z_index = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,9 +19,72 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="ColorRect" parent="AffichageCombattant"]
-z_index = 2
+[node name="Background" type="ColorRect" parent="UI"]
 layout_mode = 0
 offset_right = 1000.0
 offset_bottom = 500.0
 color = Color(0.529412, 0.478431, 0.317647, 1)
+
+[node name="Background2" type="ColorRect" parent="UI"]
+offset_left = 430.0
+offset_right = 1000.0
+offset_bottom = 500.0
+color = Color(0.305882, 0.270588, 0.168627, 1)
+
+[node name="AffichagePersonnage" parent="UI" instance=ExtResource("1_qslj8")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 30.0
+offset_right = 234.0
+offset_bottom = 169.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Container" type="Container" parent="UI"]
+layout_mode = 2
+offset_left = 327.0
+offset_top = 250.0
+offset_right = 577.0
+offset_bottom = 290.0
+
+[node name="Sorts" parent="UI/Container" instance=ExtResource("2_2quvi")]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Container/Sorts"]
+layout_mode = 2
+texture = ExtResource("3_mxof2")
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Container/Sorts"]
+layout_mode = 2
+texture = ExtResource("3_mxof2")
+
+[node name="TextureRect3" type="TextureRect" parent="UI/Container/Sorts"]
+layout_mode = 2
+texture = ExtResource("3_mxof2")
+
+[node name="TextureRect4" type="TextureRect" parent="UI/Container/Sorts"]
+layout_mode = 2
+texture = ExtResource("3_mxof2")
+
+[node name="TextureRect5" type="TextureRect" parent="UI/Container/Sorts"]
+layout_mode = 2
+texture = ExtResource("3_mxof2")
+
+[node name="TextureRect6" type="TextureRect" parent="UI/Container/Sorts"]
+layout_mode = 2
+texture = ExtResource("3_mxof2")
+
+[node name="AffichageStats" parent="UI" instance=ExtResource("4_h2kkk")]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 366.0
+offset_bottom = 398.0
+
+[node name="Scroll" type="ScrollContainer" parent="UI"]
+layout_mode = 0
+offset_left = 450.0
+offset_right = 1000.0
+offset_bottom = 500.0
+
+[node name="Etats" type="Label" parent="UI/Scroll"]
+layout_mode = 2
