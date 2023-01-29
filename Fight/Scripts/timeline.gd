@@ -28,6 +28,12 @@ func init(combattants: Array, select_id):
 		
 		texture_rect.connect("gui_input", input_received.bind(combattant_id))
 		combattant_id += 1
+	var affichage_tour = Label.new()
+	var label_settings = LabelSettings.new()
+	label_settings.font_size = 40
+	affichage_tour.text = str(get_parent().tour)
+	affichage_tour.label_settings = label_settings
+	add_child(affichage_tour)
 
 
 func input_received(event, combattant_id):

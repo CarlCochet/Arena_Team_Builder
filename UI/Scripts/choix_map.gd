@@ -74,6 +74,7 @@ func valider_pressed():
 func aleatoire_pressed():
 	var random_map = GlobalData.rng.randi_range(0, len(maps) - 1)
 	GlobalData.map_actuelle = maps[random_map].name
+	GlobalData.mort_subite_active = mort_subite_check.button_pressed
 	get_tree().change_scene_to_file("res://Fight/combat.tscn")
 
 
