@@ -36,8 +36,9 @@ color = Color(0.305882, 0.270588, 0.168627, 1)
 [node name="AffichageStats" parent="UI" instance=ExtResource("4_h2kkk")]
 layout_mode = 0
 offset_top = 250.0
-offset_right = 366.0
+offset_right = 412.0
 offset_bottom = 348.0
+scale = Vector2(1.043, 1.043)
 
 [node name="Scroll" type="ScrollContainer" parent="UI"]
 layout_mode = 0

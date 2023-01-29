@@ -25,6 +25,14 @@ var resistance_zone: int
 var invocations: int
 
 
+var nom_stats = [
+	"hp", "pa", "pm", "initiative", "po", "cc", "invocations",
+	"dommages_air", "dommages_terre", "dommages_feu", "dommages_eau", "blocage", "soins",
+	"resistances_air", "resistances_terre", "resistances_feu", "resistances_eau", 
+	"esquive", "renvoi_dommage", "resistance_zone"
+]
+
+
 func _init():
 	kamas = 0
 	pa = 0

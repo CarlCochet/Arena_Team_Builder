@@ -10,7 +10,7 @@ var categorie: String
 var contenu
 var etat: String
 var duree: int
-var valeur: int
+var valeur_dommage: int
 var stats_change: Stats
 var instant: bool
 var critique: bool
@@ -38,7 +38,9 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 		type_cible = GlobalData.Cible.LIBRE
 	duree = 0
 	boost_hp = 0
-	valeur = 0
+	valeur_dommage = 0
+	etat = ""
+	stats_change = Stats.new()
 	instant = true
 	indirect = false
 	critique = p_critique
@@ -297,7 +299,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	if cible.check_etats(["SACRIFICE"]) and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
 	
-	valeur = base
+	valeur_dommage = base
 	var stat = 0.0
 	if not stat_element.is_empty():
 		stat = lanceur.stats[stat_element]
@@ -593,7 +595,6 @@ func boost_vie():
 
 func change_stats():
 	var base_crit = trouve_crit()
-	stats_change = Stats.new()
 	for stat in contenu.keys():
 		if contenu[stat][base_crit].has("perso") and cible.id == lanceur.id:
 			if check_retrait_immunite(lanceur, stat, contenu[stat][base_crit]["perso"]):

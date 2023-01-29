@@ -38,6 +38,5 @@ func init(combattants: Array, select_id):
 
 func input_received(event, combattant_id):
 	if not event is InputEventMouseMotion and event.pressed:
-		print(combattant_id)
 		get_parent().get_node("AffichageCombattant").visible = true
 		get_parent().get_node("AffichageCombattant").update(combattant_id)
