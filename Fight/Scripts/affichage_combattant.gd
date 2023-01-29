@@ -23,8 +23,14 @@ func update_etats(combattant):
 	for effet in combattant.effets:
 		if effet.sort.nom != nom_sort or effet.lanceur.id != id_lanceur:
 			etats.text += "\n-----------------------------------------------------------------------------------------------------\n"
-			etats.text += effet.sort.nom + " - Lanceur : " + effet.lanceur.classe + "_" + str(effet.lanceur.id)
+			etats.text += effet.sort.nom + " - Lanceur : " + effet.lanceur.classe + "_" + str(effet.lanceur.id) + "\n"
 			nom_sort = effet.sort.nom
 			id_lanceur = effet.lanceur.id
+		if effet.etat:
+			etats.text += effet.etat + " (" + str(effet.duree) + ")\n"
+		if effet.change_stats:
+			pass
+		if effet.valeur != 0:
+			pass
 		
 

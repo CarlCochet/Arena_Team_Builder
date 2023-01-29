@@ -39,7 +39,6 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	duree = 0
 	boost_hp = 0
 	valeur = 0
-	stats_change = Stats.new()
 	instant = true
 	indirect = false
 	critique = p_critique
@@ -578,6 +577,7 @@ func boost_vie():
 	if not instant:
 		return
 	var base_crit = trouve_crit()
+	stats_change = Stats.new()
 	if contenu[base_crit].has("valeur"):
 		cible.buffs_hp.append({"lanceur":lanceur.id,"duree":duree,"valeur":contenu[base_crit]["valeur"]})
 		cible.stats.hp += contenu[base_crit]["valeur"]
@@ -593,6 +593,7 @@ func boost_vie():
 
 func change_stats():
 	var base_crit = trouve_crit()
+	stats_change = Stats.new()
 	for stat in contenu.keys():
 		if contenu[stat][base_crit].has("perso") and cible.id == lanceur.id:
 			if check_retrait_immunite(lanceur, stat, contenu[stat][base_crit]["perso"]):
@@ -633,7 +634,6 @@ func change_stats():
 				continue
 			if instant:
 				lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
-				stats_change[stat] += contenu[stat][base_crit]["retour"]
 				print(lanceur.classe, "_", str(lanceur.id), " perd " if contenu[stat][base_crit]["retour"] < 0 else " gagne ", contenu[stat][base_crit]["retour"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				lanceur.stat_buffs[stat] += contenu[stat][base_crit]["retour"]
