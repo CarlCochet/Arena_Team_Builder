@@ -34,6 +34,4 @@ func update_etats(combattant):
 			if valeur != 0:
 				etats.text += ("+" if valeur > 0 else "") + str(valeur) + " " + stat + " (" + str(effet.duree) + " tours)\n"
 		if effet.valeur_dommage != 0:
-			etats.text += str(effet.valeur_dommage) + " " + effet.categorie
-		
-
+			etats.text += str(effet.valeur_dommage) + " " + effet.categorie + " (" + str(effet.duree) + " tours)\n"

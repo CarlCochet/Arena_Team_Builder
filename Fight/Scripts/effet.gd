@@ -835,13 +835,20 @@ func rate_sort():
 
 
 func revele_invisible():
+	if aoe:
+		combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = -2
+		cible.retire_etats(["INVISIBLE"])
+		cible.visible = true
+		cible.is_visible = true
+		print(cible.classe, "_", str(cible.id), " est révélé.")
+		return
 	for combattant in combat.combattants:
 		if combattant.id != lanceur.id:
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 			combattant.retire_etats(["INVISIBLE"])
 			combattant.visible = true
 			combattant.is_visible = true
-	print(cible.classe, "_", str(cible.id), " révèle les invisibles.")
+			print(combattant.classe, "_", str(combattant.id), " est révélé.")
 
 
 func devient_invisible():

@@ -546,7 +546,7 @@
 			"po": [1, 4],
             "po_modifiable": 1,
 			"type_zone": 0,
-			"taille_zone": [0, 0],
+			"taille_zone": [0, 2],
 			"cible": 0,
 			"ldv": 1,
 			"type_ldv": 0,
@@ -564,8 +564,7 @@
 				"CHANGE_STATS": {
 					"po": {
 						"base": {
-							"valeur": 1,
-							"duree": 1
+							"retour": 1
 						}
 					}
 				},
@@ -5439,8 +5438,8 @@
         "la_patte_decaflip": {
             "kamas": 0,
             "pa": 0,
-            "po": [0, 8],
-            "po_modifiable": 1,
+            "po": [0, 0],
+            "po_modifiable": 0,
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
@@ -5457,6 +5456,7 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
             "effets": {
+                "cible": 10,
                 "DOMMAGE_TERRE": {
                     "base": {
                         "valeur": "1d12+0"

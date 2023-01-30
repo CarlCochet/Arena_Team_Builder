@@ -331,7 +331,7 @@ func from_arme(combattant, arme):
 		po_modifiable = data["po_modifiable"]
 		effets = data["effets"]
 	else:
-		pa = 3
+		pa = 5
 		po = Vector2(1, 1)
 		type_zone = GlobalData.TypeZone.CERCLE
 		taille_zone = Vector2(0, 0)
