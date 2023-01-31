@@ -171,7 +171,6 @@ func lance_game():
 		combattant.visible = true
 	combattants[0].unselect()
 	selection_id = 0
-	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
 	etat = 1

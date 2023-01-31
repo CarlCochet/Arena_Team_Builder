@@ -287,6 +287,8 @@ func joue_action(action: int, tile_pos: Vector2i):
 		calcul_path_actuel(tile_pos)
 		if len(path_actuel) > 0:
 			deplace_perso(path_actuel)
+			combat.stats_select.update(stats)
+			combat.check_morts()
 	elif action < len(sorts):
 		calcul_all_ldv(action)
 		calcul_zone(action, tile_pos)
@@ -316,8 +318,8 @@ func joue_action(action: int, tile_pos: Vector2i):
 		if grid_pos != tile_pos:
 			oriente_vers(tile_pos)
 		combat.change_action(10)
-	combat.stats_select.update(stats)
-	combat.check_morts()
+		combat.stats_select.update(stats)
+		combat.check_morts()
 
 
 func affiche_stats_change(valeur, stat):
