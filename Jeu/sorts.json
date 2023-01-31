@@ -2692,7 +2692,7 @@
 			"ldv": 1,
 			"type_ldv": 0,
 			"cooldown": 0,
-			"cooldown_global": 1,
+			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": 1,
             "desenvoute_delais": -1,

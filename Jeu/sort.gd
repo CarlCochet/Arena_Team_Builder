@@ -153,7 +153,6 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 func update_limite_lancers(lanceur):
 	compte_lancers += 1
 	compte_lancers_tour += 1
-	cooldown_actuel = cooldown
 	retour_lock = false
 	
 	if cooldown_global > 0:
@@ -161,6 +160,7 @@ func update_limite_lancers(lanceur):
 			for sort in combattant.sorts:
 				if sort.nom == nom and sort.cooldown_actuel < cooldown_global and combattant.equipe == lanceur.equipe:
 					sort.cooldown_actuel = cooldown_global
+	cooldown_actuel = cooldown
 
 
 func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):

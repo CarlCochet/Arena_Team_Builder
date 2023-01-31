@@ -218,6 +218,7 @@ func check_case_bonus():
 	var maudit = false
 	if grid_pos in combat.tilemap.cases_maudites.values():
 		maudit = true
+	var sort_temp = Sort.new()
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
@@ -228,6 +229,7 @@ func check_case_bonus():
 				"dommages_feu":{"base":{"valeur":valeur,"duree":1}},
 				"dommages_eau":{"base":{"valeur":valeur,"duree":1}}
 			}
+			sort_temp.nom = "case_ardeur"
 		3:
 			categorie = "CHANGE_STATS"
 			var valeur = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
@@ -237,30 +239,38 @@ func check_case_bonus():
 				"resistances_feu":{"base":{"valeur":valeur,"duree":1}},
 				"resistances_eau":{"base":{"valeur":valeur,"duree":1}}
 			}
+			sort_temp.nom = "case_bouclier"
 		4:
 			categorie = "SOIN" if not maudit else "DOMMAGE_FIXE"
 			var valeur =  7 * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"base":{"valeur":valeur}}
+			sort_temp.nom = "case_coeur_soignant"
 		5:
 			categorie = "CHANGE_STATS"
 			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"pa":{"base":{"valeur":valeur,"duree":1}}}
+			sort_temp.nom = "case_motivation"
 		6:
 			categorie = "CHANGE_STATS"
 			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"po":{"base":{"valeur":valeur,"duree":1}}}
+			sort_temp.nom = "case_oeil_de_lynx"
 		7:
 			categorie = "CHANGE_STATS"
 			var valeur = 25 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"soins":{"base":{"valeur":valeur,"duree":1}}}
+			sort_temp.nom = "case_panacee"
 		8:
 			categorie = "DOMMAGE_POURCENT"
 			contenu = {"base":{"valeur":80.0 if combat.tour < 15 and not maudit else (99.84 if combat.tour >= 15 and GlobalData.mort_subite_active and maudit else 96.0)}}
+			sort_temp.nom = "case_tueuse"
 		9:
 			categorie = "DOMMAGE_FIXE"
 			var valeur = 15 * (int(maudit) + 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"base":{"valeur":valeur}}
-	var effet = Effet.new(self, self, categorie, contenu, false, grid_pos, false, null)
+			sort_temp.nom = "case_piegee"
+	
+	var effet = Effet.new(self, self, categorie, contenu, false, grid_pos, false, sort_temp)
 	effet.debuffable = false
 	var temp_soins = stats.soins
 	stats.soins = 0

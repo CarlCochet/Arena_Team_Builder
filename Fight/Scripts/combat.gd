@@ -88,10 +88,8 @@ func init_cartes():
 
 func init_cartes_combat():
 	noms_cartes_combat = ["cloue_au_lit"]
-	var nom_cartes = GlobalData.cartes_combat.keys()
 	for i in range(2):
-		var id_carte = GlobalData.rng.randi_range(1, len(nom_cartes) - 1)
-		noms_cartes_combat.append(nom_cartes[id_carte])
+		ajoute_carte_combat()
 
 
 func ajoute_sorts_bonus(noms_sorts_bonus: Array):
@@ -123,11 +121,19 @@ func init_nouveau_tour():
 	
 	if GlobalData.is_multijoueur:
 		noms_cartes_combat.pop_front()
-		var nom_cartes = GlobalData.cartes_combat.keys()
-		var id_carte = GlobalData.rng.randi_range(1, len(nom_cartes) - 1)
-		noms_cartes_combat.append(nom_cartes[id_carte])
+		ajoute_carte_combat()
 		cartes_combat.update(noms_cartes_combat)
 		applique_carte_combat()
+
+
+func ajoute_carte_combat():
+	var nom_cartes = GlobalData.cartes_combat.keys()
+	var derniere_carte = len(noms_cartes_combat) - 1
+	var nouvelle_carte = noms_cartes_combat[derniere_carte]
+	while nouvelle_carte == noms_cartes_combat[derniere_carte]:
+		var id_carte = GlobalData.rng.randi_range(1, len(nom_cartes) - 1)
+		nouvelle_carte = nom_cartes[id_carte]
+	noms_cartes_combat.append(nouvelle_carte)
 
 
 func applique_carte_combat():
@@ -150,7 +156,7 @@ func applique_carte_combat():
 						combattant.stats.soins = 0
 						effet_exec.execute()
 						combattant.stats.soins = temp_soins
-					if effet in ["STABILISE", "NON_PORTABLE", "INTRANSPOSABLE"]:
+					elif effet in ["STABILISE", "NON_PORTABLE", "INTRANSPOSABLE"]:
 						var sort_temp = Sort.new()
 						sort_temp.nom = noms_cartes_combat[0]
 						var effet_exec = Effet.new(
