@@ -145,6 +145,11 @@ func applique_carte_combat():
 		if cible in GlobalData.classes:
 			classes_target.append(cible)
 		for combattant in combattants:
+			var new_effets = []
+			for effet in combattant.effets:
+				if not effet.is_carte:
+					new_effets.append(effet)
+			combattant.effets = new_effets
 			if cible == "tous" or cible == combattant.classe or (cible == "autres" and not combattant.classe in classes_target):
 				for effet in effets_carte[cible].keys():
 					if effet == "SOIN":
@@ -164,6 +169,7 @@ func applique_carte_combat():
 							{"base":{"duree":1}}, 
 							false, combattant.grid_pos, false, sort_temp)
 						effet_exec.debuffable = false
+						effet_exec.is_carte = true
 						effet_exec.execute()
 						combattant.effets.append(effet_exec)
 					else:

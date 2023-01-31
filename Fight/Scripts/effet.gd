@@ -21,6 +21,7 @@ var type_cible: GlobalData.Cible
 var boost_hp: int
 var indirect: bool
 var debuffable: bool
+var is_carte: bool
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
 
@@ -43,6 +44,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	stats_change = Stats.new()
 	instant = true
 	indirect = false
+	is_carte = false
 	critique = p_critique
 	aoe = p_aoe
 	combat = p_lanceur.get_parent()

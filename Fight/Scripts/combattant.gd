@@ -574,7 +574,7 @@ func retrait_durees():
 	for combattant in combat.combattants:
 		var new_effets = []
 		for effet in combattant.effets:
-			if effet.lanceur.id == id:
+			if effet.lanceur.id == id and not effet.is_carte:
 				effet.duree -= 1
 			if effet.duree > 0:
 				new_effets.append(effet)

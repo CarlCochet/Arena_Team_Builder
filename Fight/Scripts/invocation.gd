@@ -227,7 +227,6 @@ func joue_ia():
 		if len(chemin) > 0:
 			chemin.pop_front()
 			deplace_perso(chemin)
-	var compte_action = 0
 	for sort in sorts:
 		if not sort.precheck_cast(self):
 			continue
