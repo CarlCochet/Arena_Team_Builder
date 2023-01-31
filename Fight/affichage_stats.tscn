@@ -21,7 +21,7 @@ offset_right = 350.0
 offset_bottom = 87.0
 theme_override_constants/h_separation = 21
 theme_override_constants/v_separation = 9
-columns = 5
+columns = 6
 
 [node name="HP" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
@@ -56,6 +56,13 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "+0"
+label_settings = SubResource("LabelSettings_1gmjt")
+vertical_alignment = 1
+
+[node name="CC" type="Label" parent="Stats"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
@@ -94,6 +101,13 @@ text = "0%"
 label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
+[node name="Soins" type="Label" parent="Stats"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "0%"
+label_settings = SubResource("LabelSettings_1gmjt")
+vertical_alignment = 1
+
 [node name="ResitanceAir" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
@@ -123,6 +137,13 @@ label_settings = SubResource("LabelSettings_1gmjt")
 vertical_alignment = 1
 
 [node name="Esquive" type="Label" parent="Stats"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "0%"
+label_settings = SubResource("LabelSettings_1gmjt")
+vertical_alignment = 1
+
+[node name="Renvoi" type="Label" parent="Stats"]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "0%"

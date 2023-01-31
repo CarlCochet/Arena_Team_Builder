@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3c3cbr7us28b"]
+
+[ext_resource type="Script" path="res://Fight/Scripts/affichage_combattant.gd" id="1_edquh"]
+[ext_resource type="PackedScene" uid="uid://b16xwr8mihgir" path="res://UI/Displays/Scenes/affichage_personnage.tscn" id="1_qslj8"]
+[ext_resource type="PackedScene" uid="uid://cyuev8xs7ffv8" path="res://Fight/sorts.tscn" id="2_2quvi"]
+[ext_resource type="PackedScene" uid="uid://dkum5bskrgt8k" path="res://Fight/affichage_stats.tscn" id="4_h2kkk"]
+
+[node name="AffichageCombattant" type="Popup"]
+position = Vector2i(20, 90)
+size = Vector2i(1000, 500)
+visible = true
+script = ExtResource("1_edquh")
+
+[node name="UI" type="Control" parent="."]
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="UI"]
+layout_mode = 0
+offset_right = 1000.0
+offset_bottom = 500.0
+color = Color(0.529412, 0.478431, 0.317647, 1)
+
+[node name="Background2" type="ColorRect" parent="UI"]
+layout_mode = 0
+offset_left = 430.0
+offset_right = 1000.0
+offset_bottom = 500.0
+color = Color(0.305882, 0.270588, 0.168627, 1)
+
+[node name="AffichageStats" parent="UI" instance=ExtResource("4_h2kkk")]
+layout_mode = 0
+offset_top = 250.0
+offset_right = 412.0
+offset_bottom = 348.0
+scale = Vector2(1.043, 1.043)
+
+[node name="Scroll" type="ScrollContainer" parent="UI"]
+layout_mode = 0
+offset_left = 450.0
+offset_right = 1000.0
+offset_bottom = 500.0
+
+[node name="Etats" type="Label" parent="UI/Scroll"]
+layout_mode = 2
+
+[node name="AffichagePersonnage" parent="UI" instance=ExtResource("1_qslj8")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 30.0
+offset_right = 234.0
+offset_bottom = 169.0
+scale = Vector2(1.5, 1.5)
+
+[node name="ContainerSorts" type="Control" parent="UI"]
+anchors_preset = 0
+offset_left = 75.0
+offset_top = 400.0
+offset_right = 325.0
+offset_bottom = 440.0
+
+[node name="Sorts" parent="UI/ContainerSorts" instance=ExtResource("2_2quvi")]
+layout_mode = 2
+offset_right = 248.0
+scale = Vector2(1, 1)
+alignment = 1
+is_popup = true

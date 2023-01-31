@@ -1,4 +1,11 @@
 {
+    "cloue_au_lit": {
+        "tous": {
+            "STABILISE": 1,
+            "NON_PORTABLE": 1,
+            "INTRANSPOSABLE": 1
+        }
+    },
     "bifidous_activous": {
         "tous": {
             "resistances_air": 30,

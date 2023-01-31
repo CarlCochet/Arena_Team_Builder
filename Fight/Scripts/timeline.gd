@@ -7,24 +7,27 @@ var fond_rouge_selected = preload("res://Fight/Images/timeline_rouge_selected.pn
 var fond_bleu_selected = preload("res://Fight/Images/timeline_bleu_selected.png")
 
 
-func init(combattants, id):
-	for child in get_children():
-		remove_child(child)
-		child.queue_free()
-	var i = 0
+func init(combattants: Array, select_id):
+	for combattant in get_children():
+		combattant.queue_free()
+	var combattant_id = 0
 	for combattant in combattants:
-		var fond = TextureButton.new()
-		if i != id:
-			fond.texture_normal = fond_rouge if combattant.equipe else fond_bleu
+		var texture_rect = TextureRect.new()
+		var sprite = Sprite2D.new()
+		texture_rect.name = "timeline_" + str(combattant_id)
+		if combattant_id != select_id:
+			texture_rect.texture = fond_rouge if combattant.equipe else fond_bleu
 		else:
-			fond.texture_normal = fond_rouge_selected if combattant.equipe else fond_bleu_selected
-		fond.connect("pressed", _on_tile_pressed.bind(combattant))
-		add_child(fond)
-		var combattant_sprite = Sprite2D.new()
-		combattant_sprite.position = Vector2(38, 60)
-		combattant_sprite.texture = combattant.classe_sprite.texture
-		fond.add_child(combattant_sprite)
-		i += 1
+			texture_rect.texture = fond_rouge_selected if combattant.equipe else fond_bleu_selected
+		
+		sprite.texture = combattant.classe_sprite.texture
+		sprite.position = Vector2(38, 60)
+		
+		add_child(texture_rect)
+		texture_rect.connect("gui_input", input_received.bind(combattant_id))
+		
+		texture_rect.add_child(sprite)
+		combattant_id += 1
 	var affichage_tour = Label.new()
 	var label_settings = LabelSettings.new()
 	label_settings.font_size = 40
@@ -33,5 +36,7 @@ func init(combattants, id):
 	add_child(affichage_tour)
 
 
-func _on_tile_pressed(combattant):
-	print(combattant.id)
+func input_received(event, combattant_id):
+	if not event is InputEventMouseMotion and event.pressed:
+		get_parent().get_node("AffichageCombattant").visible = true
+		get_parent().get_node("AffichageCombattant").update(combattant_id)

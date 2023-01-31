@@ -21,44 +21,52 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"VOLE_STATS": {
+				"CHANGE_STATS": {
 					"dommages_air": {
 						"base": {
-							"valeur": 25,
+							"valeur": -25,
+							"retour": 25,
 							"duree": 1
 						},
 						"critique": {
-							"valeur": 40,
+							"valeur": -40,
+							"retour": 40,
 							"duree": 1
 						}
 					},
 					"dommages_terre": {
 						"base": {
-							"valeur": 25,
+							"valeur": -25,
+							"retour": 25,
 							"duree": 1
 						},
 						"critique": {
-							"valeur": 40,
+							"valeur": -40,
+							"retour": 40,
 							"duree": 1
 						}
 					},
 					"dommages_feu": {
 						"base": {
-							"valeur": 25,
+							"valeur": -25,
+							"retour": 25,
 							"duree": 1
 						},
 						"critique": {
-							"valeur": 40,
+							"valeur": -40,
+							"retour": 40,
 							"duree": 1
 						}
 					},
 					"dommages_eau": {
 						"base": {
-							"valeur": 25,
+							"valeur": -25,
+							"retour": 25,
 							"duree": 1
 						},
 						"critique": {
-							"valeur": 40,
+							"valeur": -40,
+							"retour": 40,
 							"duree": 1
 						}
 					}
@@ -538,7 +546,7 @@
 			"po": [1, 4],
             "po_modifiable": 1,
 			"type_zone": 0,
-			"taille_zone": [0, 0],
+			"taille_zone": [0, 2],
 			"cible": 0,
 			"ldv": 1,
 			"type_ldv": 0,
@@ -556,8 +564,7 @@
 				"CHANGE_STATS": {
 					"po": {
 						"base": {
-							"valeur": 1,
-							"duree": 1
+							"retour": 1
 						}
 					}
 				},
@@ -892,7 +899,7 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-                "cible": 11,
+                "cible": 8,
                 "BOOST_VIE": {
                     "base": {
                         "valeur": 10,
@@ -1216,13 +1223,15 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"VOLE_STATS": {
+				"CHANGE_STATS": {
                     "pm": {
                         "base": {
-                            "valeur": 1
+                            "valeur": -1,
+                            "retour": 1
                         },
                         "critique": {
-                            "valeur": 2
+                            "valeur": -2,
+                            "retour": 2
                         }
                     }
                 },
@@ -2683,7 +2692,7 @@
 			"ldv": 1,
 			"type_ldv": 0,
 			"cooldown": 0,
-			"cooldown_global": 1,
+			"cooldown_global": -1,
             "lancer_par_tour": -1,
             "lancer_par_cible": 1,
             "desenvoute_delais": -1,
@@ -4331,14 +4340,16 @@
                         "valeur": 10
                     }
                 },
-                "VOLE_STATS": {
+                "CHANGE_STATS": {
                     "pa": {
                         "base": {
-                            "valeur": 1,
+                            "valeur": -1,
+                            "retour": 1,
                             "duree": 1
                         },
                         "critique": {
-                            "valeur": 1,
+                            "valeur": -1,
+                            "retour": 1,
                             "duree": 1
                         }
                     }
@@ -5169,7 +5180,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5200,7 +5211,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5255,7 +5266,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5304,7 +5315,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5369,7 +5380,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5399,7 +5410,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5427,12 +5438,12 @@
         "la_patte_decaflip": {
             "kamas": 0,
             "pa": 0,
-            "po": [0, 8],
-            "po_modifiable": 1,
+            "po": [0, 0],
+            "po_modifiable": 0,
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5445,6 +5456,7 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
             "effets": {
+                "cible": 10,
                 "DOMMAGE_TERRE": {
                     "base": {
                         "valeur": "1d12+0"
@@ -5465,7 +5477,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5496,7 +5508,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5524,7 +5536,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 3,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,
@@ -5553,7 +5565,7 @@
             "taille_zone": [0, 0],
             "cible": 0,
             "ldv": 1,
-            "type_ldv": 0,
+            "type_ldv": 1,
             "cooldown": 99,
             "cooldown_global": 99,
             "lancer_par_tour": -1,
@@ -5577,7 +5589,7 @@
             "taille_zone": [0, 0],
             "cible": 0,
             "ldv": 1,
-            "type_ldv": 0,
+            "type_ldv": 1,
             "cooldown": 99,
             "cooldown_global": 99,
             "lancer_par_tour": -1,
@@ -5600,7 +5612,7 @@
             "type_zone": 0,
             "taille_zone": [0, 0],
             "cible": 0,
-            "ldv": 1,
+            "ldv": 0,
             "type_ldv": 0,
             "cooldown": 99,
             "cooldown_global": 99,

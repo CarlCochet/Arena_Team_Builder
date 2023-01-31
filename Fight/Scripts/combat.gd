@@ -82,29 +82,20 @@ func init_cartes():
 		var rnd_index = GlobalData.rng.randi_range(0, len(noms_sorts_bonus) - 1)
 		if not noms_sorts_bonus[rnd_index] in sorts_bonus_select:
 			sorts_bonus_select.append(noms_sorts_bonus[rnd_index])
-#	for i in range(nombre_sort_bonus):
-#		sorts_bonus_select.append(noms_sorts_bonus[i])
 	ajoute_sorts_bonus(sorts_bonus_select)
 	init_cartes_combat()
 
 
 func init_cartes_combat():
-	noms_cartes_combat = []
-	var nom_cartes = GlobalData.cartes_combat.keys()
-	for i in range(3):
-		var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
-		noms_cartes_combat.append(nom_cartes[id_carte])
+	noms_cartes_combat = ["cloue_au_lit"]
+	for i in range(2):
+		ajoute_carte_combat()
 
 
 func ajoute_sorts_bonus(noms_sorts_bonus: Array):
 	for combattant in combattants:
 		for nom_sort in noms_sorts_bonus:
 			combattant.sorts.append(GlobalData.sorts[nom_sort].copy())
-
-
-@rpc(any_peer)
-func init_noms_cartes(noms: Array):
-	noms_cartes_combat = noms
 
 
 @rpc(any_peer, call_local)
@@ -130,11 +121,19 @@ func init_nouveau_tour():
 	
 	if GlobalData.is_multijoueur:
 		noms_cartes_combat.pop_front()
-		var nom_cartes = GlobalData.cartes_combat.keys()
-		var id_carte = GlobalData.rng.randi_range(0, len(nom_cartes) - 1)
-		noms_cartes_combat.append(nom_cartes[id_carte])
+		ajoute_carte_combat()
 		cartes_combat.update(noms_cartes_combat)
 		applique_carte_combat()
+
+
+func ajoute_carte_combat():
+	var nom_cartes = GlobalData.cartes_combat.keys()
+	var derniere_carte = len(noms_cartes_combat) - 1
+	var nouvelle_carte = noms_cartes_combat[derniere_carte]
+	while nouvelle_carte == noms_cartes_combat[derniere_carte]:
+		var id_carte = GlobalData.rng.randi_range(1, len(nom_cartes) - 1)
+		nouvelle_carte = nom_cartes[id_carte]
+	noms_cartes_combat.append(nouvelle_carte)
 
 
 func applique_carte_combat():
@@ -157,6 +156,16 @@ func applique_carte_combat():
 						combattant.stats.soins = 0
 						effet_exec.execute()
 						combattant.stats.soins = temp_soins
+					elif effet in ["STABILISE", "NON_PORTABLE", "INTRANSPOSABLE"]:
+						var sort_temp = Sort.new()
+						sort_temp.nom = noms_cartes_combat[0]
+						var effet_exec = Effet.new(
+							combattant, combattant, effet, 
+							{"base":{"duree":1}}, 
+							false, combattant.grid_pos, false, sort_temp)
+						effet_exec.debuffable = false
+						effet_exec.execute()
+						combattant.effets.append(effet_exec)
 					else:
 						combattant.stat_cartes_combat[effet] += effets_carte[cible][effet]
 						print(combattant.classe, "_", str(combattant.id), " perd " if effets_carte[cible][effet] < 0 else " gagne ", effets_carte[cible][effet], " ", effet, " (", 1, " tours).")
@@ -168,7 +177,6 @@ func lance_game():
 		combattant.visible = true
 	combattants[0].unselect()
 	selection_id = 0
-	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
 	etat = 1

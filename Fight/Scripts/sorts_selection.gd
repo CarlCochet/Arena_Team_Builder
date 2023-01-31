@@ -2,6 +2,7 @@ extends HBoxContainer
 
 
 var carte_hovered = -1
+@export var is_popup: bool
 
 
 func update(combattant):
@@ -57,6 +58,6 @@ func sort_exited(sort):
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
-		if carte_hovered > 0 and get_parent().etat == 1:
+		if (not is_popup) and carte_hovered > 0 and get_parent().etat == 1:
 			get_parent().spell_pressed = true
 			get_parent().change_action(carte_hovered)

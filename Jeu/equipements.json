@@ -324,7 +324,7 @@
 			"pa": 4,
 			"po": [1, 1],
 			"type_zone": 1,
-            "taille_zone": [0, 2],
+            "taille_zone": [0, 1],
             "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
@@ -564,7 +564,7 @@
 			"pa": 4,
 			"po": [1, 1],
 			"type_zone": 1,
-            "taille_zone": [0, 2],
+            "taille_zone": [0, 1],
             "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
@@ -764,7 +764,7 @@
 			"pa": 4,
 			"po": [1, 1],
 			"type_zone": 1,
-            "taille_zone": [0, 2],
+            "taille_zone": [0, 1],
             "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
@@ -884,7 +884,7 @@
 			"pa": 4,
 			"po": [1, 1],
 			"type_zone": 1,
-            "taille_zone": [0, 2],
+            "taille_zone": [0, 1],
             "po_modifiable": 0,
 			"cible": 0,
 			"stats": {
