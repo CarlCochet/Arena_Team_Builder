@@ -227,6 +227,7 @@ func joue_ia():
 		if len(chemin) > 0:
 			chemin.pop_front()
 			deplace_perso(chemin)
+	var compte_action = 0
 	for sort in sorts:
 		if not sort.precheck_cast(self):
 			continue
@@ -241,16 +242,26 @@ func joue_ia():
 		if cible == null:
 			continue
 		if sort.pa <= stats.pa:
-			var valide = false
+			var _valide = false
 			if check_etats(["RATE_SORT"]):
-				valide = true
+				_valide = true
 				retire_etats(["RATE_SORT"])
 			else:
-				valide = sort.execute_effets(self, [cible], cible)
-			if valide:
-				stats.pa -= sort.pa
-				stats_perdu.ajoute(-sort.pa, "pa")
-				combat.stats_select.update(stats)
+				_valide = sort.execute_effets(self, [cible], cible)
+			stats.pa -= sort.pa
+			stats_perdu.ajoute(-sort.pa, "pa")
+			combat.stats_select.update(stats)
+			for effet in effets:
+				if effet.etat == "DOMMAGE_SI_UTILISE_PA" and (effet.sort.nom != sort.nom or effet.lanceur.id != id):
+					for i in range(sort.pa):
+						effet.execute()
+			if cible != grid_pos or not sort.effets.has("DEVIENT_INVISIBLE"):
+				combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+				retire_etats(["INVISIBLE"])
+				visible = true
+				is_visible = true
+			if grid_pos != cible:
+				oriente_vers(cible)
 			joue_ia()
 
 
