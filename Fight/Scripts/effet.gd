@@ -299,7 +299,8 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	if cible.check_etats(["SACRIFICE"]) and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
 	
-	valeur_dommage = base
+	if base is int:
+		valeur_dommage = base
 	var stat = 0.0
 	if not stat_element.is_empty():
 		stat = lanceur.stats[stat_element]
