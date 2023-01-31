@@ -1059,6 +1059,7 @@ func maudit_classe():
 
 func maudit_case():
 	combat.tilemap.cases_maudites[lanceur.id] = centre
+	combat.tilemap.update_effets_map()
 
 
 func glyphe():

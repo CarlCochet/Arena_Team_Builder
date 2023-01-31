@@ -611,6 +611,7 @@ func retrait_durees():
 	
 	if combat.tilemap.cases_maudites.has(id):
 		combat.tilemap.cases_maudites.erase(id)
+	combat.tilemap.update_effets_map()
 
 
 func retrait_cooldown():
