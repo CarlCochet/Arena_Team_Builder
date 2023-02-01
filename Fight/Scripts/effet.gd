@@ -298,7 +298,7 @@ func update_sacrifice(p_cible, type):
 
 
 func applique_dommage(base, stat_element: String, resistance_element: String, orientation_bonus, type):
-	if cible.check_etats(["SACRIFICE"]) and not type in ["soin", "retour", "pourcent_retour"]:
+	if cible.check_etats(["SACRIFICE"]) and duree < 1 and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
 	
 	if base is int:
@@ -337,6 +337,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	if check_immu(dommages, type) and dommages >= 0:
 		return
 	
+	var cible_hp = cible.stats.hp
 	cible.stats.hp -= dommages
 	cible.stats_perdu.ajoute(-dommages, "hp")
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
@@ -351,7 +352,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 		print(cible_renvoi.classe, "_", str(cible_renvoi.id), " perd ", renvoi, " PdV.")
 	
 	if type == "vol":
-		var soin_vol = min(dommages, lanceur.max_stats.hp - lanceur.stats.hp)
+		var soin_vol = min(dommages, lanceur.max_stats.hp - lanceur.stats.hp, cible_hp)
 		lanceur.stats.hp += soin_vol
 		lanceur.stats_perdu.ajoute(soin_vol, "hp")
 		print(lanceur.classe, "_", str(lanceur.id), " gagne ", soin_vol, " PdV.")
