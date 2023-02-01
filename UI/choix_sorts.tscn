@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://cmf2n8n1bp6an"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_sorts.gd" id="1_f5eif"]
-[ext_resource type="Texture2D" uid="uid://b02mrbqksygw4" path="res://Classes/Cra/cra.png" id="1_txvm2"]
 [ext_resource type="PackedScene" uid="uid://drtgbjheuymi7" path="res://UI/Displays/Scenes/affichage_stats_primaires.tscn" id="2_g4v8w"]
+[ext_resource type="Texture2D" uid="uid://bx5n3oshvmiay" path="res://Classes/empty.png" id="2_qwo6t"]
 [ext_resource type="PackedScene" uid="uid://5i2iaiitef1b" path="res://UI/Displays/Scenes/affichage_stats_secondaires.tscn" id="3_6q5fj"]
 [ext_resource type="Texture2D" uid="uid://bd73pmdft7ibe" path="res://UI/Buttons/equipements_base.png" id="4_ruewy"]
 [ext_resource type="Texture2D" uid="uid://darrvw5h2erch" path="res://UI/Buttons/equipements_clicked.png" id="5_nq0h2"]
@@ -34,13 +34,28 @@ offset_bottom = 965.0
 scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
-[node name="Personnage" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="Personnage" type="Control" parent="."]
+anchors_preset = 0
 offset_left = 93.0
 offset_top = 7.0
-offset_right = 163.0
-offset_bottom = 135.0
-texture = ExtResource("1_txvm2")
+offset_right = 133.0
+offset_bottom = 47.0
+
+[node name="Cape" type="TextureRect" parent="Personnage"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_qwo6t")
+
+[node name="Classe" type="TextureRect" parent="Personnage"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_qwo6t")
+
+[node name="Coiffe" type="TextureRect" parent="Personnage"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_qwo6t")
 
 [node name="StatsPrimaires" parent="." instance=ExtResource("2_g4v8w")]
 layout_mode = 0

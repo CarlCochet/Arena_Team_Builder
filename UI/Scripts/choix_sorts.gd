@@ -1,7 +1,7 @@
 extends Control
 
 
-@onready var personnage: TextureRect = $Personnage
+@onready var personnage: Control = $Personnage
 @onready var grid_sorts: GridContainer = $GridSortsCartes
 @onready var grid_logos: GridContainer = $GridSortsLogos
 @onready var affichage_budget: TextureRect = $AffichageBudget
@@ -10,14 +10,34 @@ extends Control
 
 
 func _ready():
-	if GlobalData.get_perso_actuel().classe:
-		personnage.texture = load(
-			"res://Classes/" + GlobalData.get_perso_actuel().classe + 
-			"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
-		)
+	update_personnage()
 	update_cartes()
 	update_affichage()
 	update_logos()
+
+
+func update_personnage():
+	if GlobalData.get_perso_actuel().classe:
+		personnage.get_node("Classe").texture = load(
+			"res://Classes/" + GlobalData.get_perso_actuel().classe + 
+			"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
+		)
+	else:
+		personnage.get_node("Classe").texture = load("res://Classes/empty.png")
+	if GlobalData.get_perso_actuel().equipements["Capes"]:
+		personnage.get_node("Cape").texture = load(
+			"res://Equipements/Capes/Sprites/" + 
+			GlobalData.get_perso_actuel().equipements["Capes"].to_lower() + ".png"
+		)
+	else:
+		personnage.get_node("Cape").texture = load("res://Classes/empty.png")
+	if GlobalData.get_perso_actuel().equipements["Coiffes"]:
+		personnage.get_node("Coiffe").texture = load(
+			"res://Equipements/Coiffes/Sprites/" + 
+			GlobalData.get_perso_actuel().equipements["Coiffes"].to_lower() + ".png"
+		)
+	else:
+		personnage.get_node("Coiffe").texture = load("res://Classes/empty.png")
 
 
 func update_affichage():
