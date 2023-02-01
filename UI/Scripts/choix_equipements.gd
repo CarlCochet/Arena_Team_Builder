@@ -3,7 +3,7 @@ extends Control
 
 var categorie_lookup: Dictionary
 
-@onready var personnage: TextureRect = $Personnage
+@onready var personnage: Control = $Personnage
 @onready var grid_equipements: GridContainer = $ScrollContainer/Cartes
 @onready var grid_logos: GridContainer = $GridLogos
 @onready var affichage_budget: TextureRect = $AffichageBudget
@@ -19,13 +19,34 @@ func _ready():
 		"Dofus": "DOFUS",
 		"Familiers": "FAMILIER"
 	}
-	personnage.texture = load(
-		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
-		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
-	)
+	update_personnage()
 	update_cartes("Armes")
 	update_affichage()
 	update_logos()
+
+
+func update_personnage():
+	if GlobalData.get_perso_actuel().classe:
+		personnage.get_node("Classe").texture = load(
+			"res://Classes/" + GlobalData.get_perso_actuel().classe + 
+			"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
+		)
+	else:
+		personnage.get_node("Classe").texture = load("res://Classes/empty.png")
+	if GlobalData.get_perso_actuel().equipements["Capes"]:
+		personnage.get_node("Cape").texture = load(
+			"res://Equipements/Capes/Sprites/" + 
+			GlobalData.get_perso_actuel().equipements["Capes"].to_lower() + ".png"
+		)
+	else:
+		personnage.get_node("Cape").texture = load("res://Classes/empty.png")
+	if GlobalData.get_perso_actuel().equipements["Coiffes"]:
+		personnage.get_node("Coiffe").texture = load(
+			"res://Equipements/Coiffes/Sprites/" + 
+			GlobalData.get_perso_actuel().equipements["Coiffes"].to_lower() + ".png"
+		)
+	else:
+		personnage.get_node("Coiffe").texture = load("res://Classes/empty.png")
 
 
 func update_affichage():
@@ -60,6 +81,7 @@ func _on_card_clicked(nom_equipement, categorie):
 	else:
 		GlobalData.get_perso_actuel().equipements[categorie] = nom_equipement
 	GlobalData.get_perso_actuel().calcul_stats()
+	update_personnage()
 	update_affichage()
 	update_logos()
 

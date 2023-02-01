@@ -63,6 +63,12 @@ func update_glyphes():
 	combat.check_morts()
 
 
+func update_effets_map():
+	clear_layer(6)
+	for case in cases_maudites:
+		set_cell(6, cases_maudites[case] - offset, 5, Vector2i(0, 0))
+
+
 func check_glyphe_effet(pos: Vector2i, effet: String):
 	for glyphe in glyphes:
 		if glyphe.centre == pos and glyphe.effets.has(effet):

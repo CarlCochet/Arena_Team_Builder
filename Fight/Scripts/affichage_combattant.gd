@@ -9,7 +9,6 @@ extends Popup
 
 func update(combattant_id: int):
 	var combattant = get_parent().combattants[combattant_id]
-	
 	affichage_personnage.from_combattant(combattant)
 	affichage_stats.update(combattant.stats, combattant.max_stats)
 	sorts.update(combattant)

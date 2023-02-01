@@ -21,6 +21,7 @@ grow_vertical = 2
 script = ExtResource("1_cmb6d")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0

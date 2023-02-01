@@ -21,6 +21,7 @@ var type_cible: GlobalData.Cible
 var boost_hp: int
 var indirect: bool
 var debuffable: bool
+var is_carte: bool
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
 
@@ -43,6 +44,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	stats_change = Stats.new()
 	instant = true
 	indirect = false
+	is_carte = false
 	critique = p_critique
 	aoe = p_aoe
 	combat = p_lanceur.get_parent()
@@ -296,10 +298,11 @@ func update_sacrifice(p_cible, type):
 
 
 func applique_dommage(base, stat_element: String, resistance_element: String, orientation_bonus, type):
-	if cible.check_etats(["SACRIFICE"]) and not type in ["soin", "retour", "pourcent_retour"]:
+	if cible.check_etats(["SACRIFICE"]) and duree < 1 and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
 	
-	valeur_dommage = base
+	if base is int:
+		valeur_dommage = base
 	var stat = 0.0
 	if not stat_element.is_empty():
 		stat = lanceur.stats[stat_element]
@@ -334,6 +337,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	if check_immu(dommages, type) and dommages >= 0:
 		return
 	
+	var cible_hp = cible.stats.hp
 	cible.stats.hp -= dommages
 	cible.stats_perdu.ajoute(-dommages, "hp")
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
@@ -348,7 +352,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 		print(cible_renvoi.classe, "_", str(cible_renvoi.id), " perd ", renvoi, " PdV.")
 	
 	if type == "vol":
-		var soin_vol = min(dommages, lanceur.max_stats.hp - lanceur.stats.hp)
+		var soin_vol = min(dommages, lanceur.max_stats.hp - lanceur.stats.hp, cible_hp)
 		lanceur.stats.hp += soin_vol
 		lanceur.stats_perdu.ajoute(soin_vol, "hp")
 		print(lanceur.classe, "_", str(lanceur.id), " gagne ", soin_vol, " PdV.")
@@ -1056,6 +1060,7 @@ func maudit_classe():
 
 func maudit_case():
 	combat.tilemap.cases_maudites[lanceur.id] = centre
+	combat.tilemap.update_effets_map()
 
 
 func glyphe():
