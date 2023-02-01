@@ -247,6 +247,9 @@ func joue_ia():
 				retire_etats(["RATE_SORT"])
 			else:
 				_valide = sort.execute_effets(self, [cible], cible)
+				combat.check_morts()
+				if is_mort:
+					return
 			stats.pa -= sort.pa
 			stats_perdu.ajoute(-sort.pa, "pa")
 			combat.stats_select.update(stats)

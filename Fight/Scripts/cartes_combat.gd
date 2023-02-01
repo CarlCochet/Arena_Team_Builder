@@ -4,7 +4,6 @@ extends HBoxContainer
 func update(cartes_combat: Array):
 	for carte in get_children():
 		carte.queue_free()
-	
 	for carte_combat in cartes_combat:
 		var texture_rect = TextureRect.new()
 		var carte = Sprite2D.new()

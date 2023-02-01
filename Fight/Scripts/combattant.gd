@@ -114,7 +114,7 @@ func from_personnage(p_personnage: Personnage, equipe_id: int):
 
 
 func change_orientation(new_orientation: int):
-	fleche.texture = load("res://Fight/Images/fleche_" + str(new_orientation) + ".png")
+	fleche.texture = load("res://Fight/Images/fleche_" + str(new_orientation) + "_filled.png")
 	orientation = new_orientation
 
 
