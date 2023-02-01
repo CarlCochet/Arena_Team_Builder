@@ -28,7 +28,7 @@ If you do not wish to modify the project, you can just run a release build (reco
 ### And test your teams in a simulator
 ![test_combat](https://user-images.githubusercontent.com/25507252/216190660-b8ae0439-017f-4622-affd-348dc2b0dc0b.png)
 
-### Or challenge a friend in multiplayer game!
+### Or challenge a friend in a multiplayer game!
 ![multijoueur](https://user-images.githubusercontent.com/25507252/216190739-d19215ac-e73a-4103-a3e1-36414c5cf5c6.png)
 
 ## Run the project in Godot
