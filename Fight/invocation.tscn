@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Fight/Scripts/invocation.gd" id="1_rnnus"]
 [ext_resource type="Texture2D" uid="uid://cjolxj4e25lwg" path="res://Fight/Images/cercle_personnage_bleu.png" id="2_fjxoj"]
 [ext_resource type="Texture2D" uid="uid://8mv5o8k6p084" path="res://Fight/Images/fleche_1.png" id="3_qegsi"]
-[ext_resource type="Texture2D" uid="uid://bv3bj3sa87d6s" path="res://Classes/Invocations/bombe_a_eau.png" id="4_wy2l5"]
+[ext_resource type="Texture2D" uid="uid://bx5n3oshvmiay" path="res://Classes/empty.png" id="4_1uher"]
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_eb3vf"]
 [ext_resource type="PackedScene" uid="uid://wjqjfqvfle7s" path="res://Fight/stats_perdu.tscn" id="6_aopma"]
 
@@ -21,9 +21,19 @@ texture = ExtResource("2_fjxoj")
 [node name="Fleche" type="Sprite2D" parent="."]
 texture = ExtResource("3_qegsi")
 
-[node name="Classe" type="Sprite2D" parent="."]
+[node name="Personnage" type="Sprite2D" parent="."]
+
+[node name="Cape" type="Sprite2D" parent="Personnage"]
 position = Vector2(0, -20)
-texture = ExtResource("4_wy2l5")
+texture = ExtResource("4_1uher")
+
+[node name="Classe" type="Sprite2D" parent="Personnage"]
+position = Vector2(0, -20)
+texture = ExtResource("4_1uher")
+
+[node name="Coiffe" type="Sprite2D" parent="Personnage"]
+position = Vector2(0, -20)
+texture = ExtResource("4_1uher")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -10)

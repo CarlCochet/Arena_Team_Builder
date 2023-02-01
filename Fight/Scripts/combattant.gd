@@ -41,7 +41,8 @@ var outline_shader = preload("res://Fight/Shaders/combattant_outline.gdshader")
 
 @onready var cercle: Sprite2D = $Cercle
 @onready var fleche: Sprite2D = $Fleche
-@onready var classe_sprite: Sprite2D = $Classe
+@onready var classe_sprite: Sprite2D = $Personnage/Classe
+@onready var personnage: Sprite2D = $Personnage
 @onready var hp: Sprite2D = $HP
 @onready var hp_label: Label = $HP/Label
 @onready var stats_perdu: Label = $StatsPerdu
@@ -71,6 +72,14 @@ func update_visuel():
 	classe_sprite.texture = load(
 		"res://Classes/" + classe + "/" + classe.to_lower() + ".png"
 	)
+	if equipements["Capes"]:
+		personnage.get_node("Cape").texture = load(
+			"res://Equipements/Capes/Sprites/" + equipements["Capes"].to_lower() + ".png"
+		)
+	if equipements["Coiffes"]:
+		personnage.get_node("Coiffe").texture = load(
+			"res://Equipements/Coiffes/Sprites/" + equipements["Coiffes"].to_lower() + ".png"
+		)
 
 
 func select():
@@ -87,15 +96,15 @@ func unselect():
 	is_selected = false
 
 
-func from_personnage(personnage: Personnage, equipe_id: int):
-	classe = personnage.classe
-	personnage_ref = personnage
-	stats = personnage.stats.copy()
+func from_personnage(p_personnage: Personnage, equipe_id: int):
+	classe = p_personnage.classe
+	personnage_ref = p_personnage
+	stats = p_personnage.stats.copy()
 	max_stats = stats.copy()
 	init_stats = stats.copy()
-	equipements = personnage.equipements
+	equipements = p_personnage.equipements
 	sorts = [Sort.new().from_arme(self, equipements["Armes"])]
-	for sort in personnage.sorts:
+	for sort in p_personnage.sorts:
 		var new_sort = GlobalData.sorts[sort].copy()
 		new_sort.nom = sort
 		sorts.append(new_sort)

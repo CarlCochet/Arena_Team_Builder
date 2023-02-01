@@ -1,7 +1,7 @@
 extends TextureRect
 
 
-@onready var sprite_classe: Sprite2D = $SpriteClasse
+@onready var personnage: Node2D = $Personnage
 @onready var grid_sorts: GridContainer = $GridSorts
 @onready var grid_equipements: GridContainer = $GridEquipements
 
@@ -31,7 +31,9 @@ func from_combattant(combattant: Combattant):
 		sort.queue_free()
 	for equipement in grid_equipements.get_children():
 		equipement.queue_free()
-	sprite_classe.texture = combattant.classe_sprite.texture
+	personnage.get_node("Cape").texture = combattant.personnage.get_node("Cape").texture
+	personnage.get_node("Classe").texture = combattant.classe_sprite.texture
+	personnage.get_node("Coiffe").texture = combattant.personnage.get_node("Coiffe").texture
 	for equipement in combattant.equipements:
 		if combattant.equipements[equipement]:
 			var path = "res://UI/Logos/Equipements/" + equipement + "/" + combattant.equipements[equipement] + ".png"
