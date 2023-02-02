@@ -345,7 +345,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	cible.stats_perdu.ajoute(-dommages, "hp")
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
-	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and type != "soin":
+	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and not type in ["soin", "pourcent", "neutre"]:
 		var cible_renvoi = lanceur
 		if cible_renvoi.check_etats(["SACRIFICE"]):
 			cible_renvoi = update_sacrifice(cible_renvoi, "renvoi")
@@ -366,13 +366,13 @@ func dommage_fixe():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], "", "", false, "normal")
+		applique_dommage(contenu[base_crit]["allies"], "", "", false, "neutre")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], "", "", false, "normal")
+		applique_dommage(contenu[base_crit]["invocations"], "", "", false, "neutre")
 	elif contenu[base_crit].has("maudit") and centre in combat.tilemap.cases_maudites.values():
-		applique_dommage(contenu[base_crit]["maudit"], "", "", false, "normal")
+		applique_dommage(contenu[base_crit]["maudit"], "", "", false, "neutre")
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], "", "", false, "normal")
+		applique_dommage(contenu[base_crit]["valeur"], "", "", false, "neutre")
 	if contenu[base_crit].has("retour"):
 		applique_dommage(contenu[base_crit]["retour"], "", "", false, "retour")
 
