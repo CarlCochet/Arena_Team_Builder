@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://Fight/Scripts/invocation.gd" id="1_rnnus"]
 [ext_resource type="Texture2D" uid="uid://cjolxj4e25lwg" path="res://Fight/Images/cercle_personnage_bleu.png" id="2_fjxoj"]
-[ext_resource type="Texture2D" uid="uid://8mv5o8k6p084" path="res://Fight/Images/fleche_1.png" id="3_qegsi"]
+[ext_resource type="Texture2D" uid="uid://co3j3d85r6s8t" path="res://Fight/Images/fleche_1_filled.png" id="3_db61f"]
 [ext_resource type="Texture2D" uid="uid://bx5n3oshvmiay" path="res://Classes/empty.png" id="4_1uher"]
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_eb3vf"]
 [ext_resource type="PackedScene" uid="uid://wjqjfqvfle7s" path="res://Fight/stats_perdu.tscn" id="6_aopma"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5tt7"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr3kl"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_j0mym"]
+[sub_resource type="LabelSettings" id="LabelSettings_4nwps"]
 font_size = 25
 
 [node name="Invocation" type="Node2D"]
@@ -19,7 +19,7 @@ script = ExtResource("1_rnnus")
 texture = ExtResource("2_fjxoj")
 
 [node name="Fleche" type="Sprite2D" parent="."]
-texture = ExtResource("3_qegsi")
+texture = ExtResource("3_db61f")
 
 [node name="Personnage" type="Sprite2D" parent="."]
 
@@ -40,7 +40,7 @@ position = Vector2(0, -10)
 scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_a5tt7")
+shape = SubResource("RectangleShape2D_pr3kl")
 
 [node name="HP" type="Sprite2D" parent="."]
 visible = false
@@ -56,7 +56,7 @@ offset_top = -18.0
 offset_right = 49.0
 offset_bottom = 5.0
 text = "40/40"
-label_settings = SubResource("LabelSettings_j0mym")
+label_settings = SubResource("LabelSettings_4nwps")
 horizontal_alignment = 1
 vertical_alignment = 1
 

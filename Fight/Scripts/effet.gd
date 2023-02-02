@@ -291,6 +291,9 @@ func update_sacrifice(p_cible, type):
 				p_cible.echange_positions(effet.lanceur)
 			return p_cible
 		elif effet.etat == "SACRIFICE":
+			for effet_lanceur in effet.lanceur.effets:
+				if effet_lanceur.etat == "SACRIFICE" and effet_lanceur.lanceur.id == p_cible.id:
+					return p_cible
 			if (not effet.lanceur.check_etats(["INTRANSPOSABLE", "PORTE"])) and (not p_cible.check_etats(["INTRANSPOSABLE", "PORTE"])) and cible.classe != "Arbre":
 				p_cible.echange_positions(effet.lanceur)
 			return update_sacrifice(effet.lanceur, type)
@@ -665,34 +668,46 @@ func pousse():
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
+					stopped = true
+					cible.bouge_perso(grid_pos - direction)
+					if cible.check_etats(["SACRIFICE"]):
+						cible = update_sacrifice(cible, "normal")
 					if not cible.check_etats(["IMMUNISE"]):
 						cible.stats.hp -= (contenu - i) * 3
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
-					stopped = true
-					cible.bouge_perso(grid_pos - direction)
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
+					stopped = true
+					cible.bouge_perso(grid_pos - direction)
+					if cible.check_etats(["SACRIFICE"]):
+						cible = update_sacrifice(cible, "normal")
 					if not cible.check_etats(["IMMUNISE"]):
 						cible.stats.hp -= (contenu - i) * 3
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
-					stopped = true
-					cible.bouge_perso(grid_pos - direction)
+					var combattant_block = null
 					for combattant in combat.combattants:
-						if combattant.grid_pos == grid_pos and not cible.check_etats(["IMMUNISE"]):
-							combattant.stats.hp -= (contenu - i) * 3
-							combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-							print(combattant.classe, "_", str(combattant.id), " perd ", (contenu - i) * 3, " PdV.")
+						if combattant.grid_pos == grid_pos:
+							combattant_block = combattant
+					if combattant_block != null:
+						if combattant_block.check_etats(["SACRIFICE"]):
+							combattant_block = update_sacrifice(combattant_block, "normal")
+						if not combattant_block.check_etats(["IMMUNISE"]):
+							combattant_block.stats.hp -= (contenu - i) * 3
+							combattant_block.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+							print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (contenu - i) * 3, " PdV.")
 		else:
 			if not stopped:
+				stopped = true
+				cible.bouge_perso(grid_pos - direction)
+				if cible.check_etats(["SACRIFICE"]):
+					cible = update_sacrifice(cible, "normal")
 				if not cible.check_etats(["IMMUNISE"]):
 					cible.stats.hp -= (contenu - i) * 3
 					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
-				stopped = true
-				cible.bouge_perso(grid_pos - direction)
 			break
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
@@ -716,35 +731,47 @@ func attire():
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
+					stopped = true
+					cible.bouge_perso(grid_pos - direction)
+					if cible.check_etats(["SACRIFICE"]):
+						cible = update_sacrifice(cible, "normal")
 					if not cible.check_etats(["IMMUNISE"]):
 						cible.stats.hp -= (contenu - i) * 3
 						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
-					stopped = true
-					cible.bouge_perso(grid_pos - direction)
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
+					stopped = true
+					cible.bouge_perso(grid_pos - direction)
 					if grid_pos != lanceur.grid_pos:
+						if cible.check_etats(["SACRIFICE"]):
+							cible = update_sacrifice(cible, "normal")
 						if not cible.check_etats(["IMMUNISE"]):
 							cible.stats.hp -= (contenu - i) * 3
 							cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 							print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+						var combattant_block = null
 						for combattant in combat.combattants:
-							if combattant.grid_pos == grid_pos and not combattant.check_etats(["IMMUNISE"]):
-								combattant.stats.hp -= (contenu - i) * 3
-								combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-								print(combattant.classe, "_", str(combattant.id), " perd ", (contenu - i) * 3, " PdV.")
-					stopped = true
-					cible.bouge_perso(grid_pos - direction)
+							if combattant.grid_pos == grid_pos:
+								combattant_block = combattant
+						if combattant_block != null:
+							if combattant_block.check_etats(["SACRIFICE"]):
+								combattant_block = update_sacrifice(combattant_block, "normal")
+							if not combattant_block.check_etats(["IMMUNISE"]):
+								combattant_block.stats.hp -= (contenu - i) * 3
+								combattant_block.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+								print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (contenu - i) * 3, " PdV.")
 		else:
 			if not stopped:
+				stopped = true
+				cible.bouge_perso(grid_pos - direction)
+				if cible.check_etats(["SACRIFICE"]):
+					cible = update_sacrifice(cible, "normal")
 				if not cible.check_etats(["IMMUNISE"]):
 					cible.stats.hp -= (contenu - i) * 3
 					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
-				stopped = true
-				cible.bouge_perso(grid_pos - direction)
 			break
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
@@ -767,34 +794,46 @@ func recul():
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
 				if not stopped:
+					stopped = true
+					lanceur.bouge_perso(grid_pos - direction)
+					if lanceur.check_etats(["SACRIFICE"]):
+						lanceur = update_sacrifice(lanceur, "normal")
 					if not lanceur.check_etats(["IMMUNISE"]):
 						lanceur.stats.hp -= (contenu - i) * 3
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
-					stopped = true
-					lanceur.bouge_perso(grid_pos - direction)
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
+					stopped = true
+					lanceur.bouge_perso(grid_pos - direction)
+					if lanceur.check_etats(["SACRIFICE"]):
+						lanceur = update_sacrifice(lanceur, "normal")
 					if not lanceur.check_etats(["IMMUNISE"]):
 						lanceur.stats.hp -= (contenu - i) * 3
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
-					stopped = true
-					lanceur.bouge_perso(grid_pos - direction)
+					var combattant_block = null
 					for combattant in combat.combattants:
-						if combattant.grid_pos == grid_pos and not lanceur.check_etats(["IMMUNISE"]):
-							combattant.stats.hp -= (contenu - i) * 3
-							combattant.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-							print(combattant.classe, "_", str(combattant.id), " perd ", (contenu - i) * 3, " PdV.")
+						if combattant.grid_pos == grid_pos:
+							combattant_block = combattant
+					if combattant_block != null:
+						if combattant_block.check_etats(["SACRIFICE"]):
+							combattant_block = update_sacrifice(combattant_block, "normal")
+						if not combattant_block.check_etats(["IMMUNISE"]):
+							combattant_block.stats.hp -= (contenu - i) * 3
+							combattant_block.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+							print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (contenu - i) * 3, " PdV.")
 		else:
 			if not stopped:
+				stopped = true
+				lanceur.bouge_perso(grid_pos - direction)
+				if lanceur.check_etats(["SACRIFICE"]):
+					lanceur = update_sacrifice(lanceur, "normal")
 				if not lanceur.check_etats(["IMMUNISE"]):
 					lanceur.stats.hp -= (contenu - i) * 3
 					lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
-				stopped = true
-				lanceur.bouge_perso(grid_pos - direction)
 			break
 	if not stopped:
 		lanceur.bouge_perso(Vector2i(lanceur.grid_pos) + Vector2i(contenu * direction))

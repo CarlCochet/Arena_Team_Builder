@@ -114,7 +114,7 @@ func from_personnage(p_personnage: Personnage, equipe_id: int):
 
 
 func change_orientation(new_orientation: int):
-	fleche.texture = load("res://Fight/Images/fleche_" + str(new_orientation) + ".png")
+	fleche.texture = load("res://Fight/Images/fleche_" + str(new_orientation) + "_filled.png")
 	orientation = new_orientation
 
 
@@ -339,6 +339,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 		combat.change_action(10)
 		combat.stats_select.update(stats)
 		combat.check_morts()
+	combat.tilemap.affiche_ldv_obstacles()
 
 
 func affiche_stats_change(valeur, stat):
@@ -489,6 +490,7 @@ func debut_tour():
 	if check_etats(["IMMOBILISE"]):
 		stats.pm = 0
 	combat.check_morts()
+	combat.tilemap.affiche_ldv_obstacles()
 
 
 func fin_tour():
