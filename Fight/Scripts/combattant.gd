@@ -121,8 +121,14 @@ func change_orientation(new_orientation: int):
 func affiche_path(pos_event: Vector2i):
 	all_ldv = []
 	zone = []
+	for combattant in combat.combattants:
+		if GlobalData.is_multijoueur and (Client.is_host and combattant.equipe == 1 or not Client.is_host and combattant.equipe == 0):
+			if not combattant.is_visible:
+				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos, false)
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	var path = combat.tilemap.get_chemin(grid_pos, pos_event)
+	for combattant in combat.combattants:
+		combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
 	if check_etats(["IMMOBILISE"]):
 		all_path = []
 		path = []
@@ -339,7 +345,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 		combat.change_action(10)
 		combat.stats_select.update(stats)
 		combat.check_morts()
-	combat.tilemap.affiche_ldv_obstacles()
+#	combat.tilemap.affiche_ldv_obstacles()
 
 
 func affiche_stats_change(valeur, stat):
@@ -490,7 +496,7 @@ func debut_tour():
 	if check_etats(["IMMOBILISE"]):
 		stats.pm = 0
 	combat.check_morts()
-	combat.tilemap.affiche_ldv_obstacles()
+#	combat.tilemap.affiche_ldv_obstacles()
 
 
 func fin_tour():

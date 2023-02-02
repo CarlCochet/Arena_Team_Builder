@@ -98,7 +98,15 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 				trouve = true
 				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
-	elif effets["cible"] == 4:
+	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.ALLIES:
+		for effet in effets.keys():
+			if effet != "cible":
+				for combattant in combattants:
+					if combattant.equipe == lanceur.equipe:
+						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+		update_limite_lancers(lanceur)
+		return true
+	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.ENNEMIS:
 		for effet in effets.keys():
 			if effet != "cible":
 				for combattant in combattants:
@@ -106,14 +114,14 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
 		update_limite_lancers(lanceur)
 		return true
-	elif effets["cible"] == 8:
+	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.TOUT:
 		for effet in effets.keys():
 			if effet != "cible":
 				for combattant in combattants:
 					parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
 		update_limite_lancers(lanceur)
 		return true
-	elif effets["cible"] == 9:
+	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.CLASSE:
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
@@ -122,7 +130,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 					for combattant_bis in combattants:
 						if combattant_bis.classe == combattant.classe and combattant_bis.id != combattant.id and combattant.equipe == combattant_bis.equipe:
 							targets.append(combattant_bis)
-	elif effets["cible"] == 10:
+	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.PERSONNAGES:
 		for effet in effets.keys():
 			if effet != "cible":
 				for combattant in combattants:
@@ -130,7 +138,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
 		update_limite_lancers(lanceur)
 		return true
-	elif effets["cible"] == 11:
+	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.PERSONNAGES_ALLIES:
 		for effet in effets.keys():
 			if effet != "cible":
 				for combattant in combattants:
@@ -142,7 +150,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	if trouve:
 		for combattant in targets:
 			sort_valide = parse_effets(lanceur, combattant, effets, critique, centre, aoe) or sort_valide
-	if not trouve and cible == 2:
+	if not trouve and cible == GlobalData.Cible.VIDE:
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
 	if effets.has("MAUDIT_CASE"):
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide

@@ -13,20 +13,28 @@ func init(combattants: Array, select_id):
 	var combattant_id = 0
 	for combattant in combattants:
 		var texture_rect = TextureRect.new()
-		var sprite = Sprite2D.new()
+		var cape_sprite = Sprite2D.new()
+		var classe_sprite = Sprite2D.new()
+		var coiffe_sprite = Sprite2D.new()
 		texture_rect.name = "timeline_" + str(combattant_id)
 		if combattant_id != select_id:
 			texture_rect.texture = fond_rouge if combattant.equipe else fond_bleu
 		else:
 			texture_rect.texture = fond_rouge_selected if combattant.equipe else fond_bleu_selected
 		
-		sprite.texture = combattant.classe_sprite.texture
-		sprite.position = Vector2(38, 60)
+		cape_sprite.texture = combattant.personnage.get_node("Cape").texture
+		cape_sprite.position = Vector2(38, 60)
+		classe_sprite.texture = combattant.classe_sprite.texture
+		classe_sprite.position = Vector2(38, 60)
+		coiffe_sprite.texture = combattant.personnage.get_node("Coiffe").texture
+		coiffe_sprite.position = Vector2(38, 60)
 		
 		add_child(texture_rect)
 		texture_rect.connect("gui_input", input_received.bind(combattant_id))
 		
-		texture_rect.add_child(sprite)
+		texture_rect.add_child(cape_sprite)
+		texture_rect.add_child(classe_sprite)
+		texture_rect.add_child(coiffe_sprite)
 		combattant_id += 1
 	var affichage_tour = Label.new()
 	var label_settings = LabelSettings.new()
