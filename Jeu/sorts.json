@@ -902,7 +902,7 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-                "cible": 8,
+                "cible": 3,
                 "BOOST_VIE": {
                     "base": {
                         "valeur": 10,
