@@ -652,6 +652,10 @@ func change_stats():
 			if stat in ["pa", "pm", "hp"]:
 				lanceur.stats_perdu.ajoute(contenu[stat][base_crit]["retour"], stat)
 	instant = false
+	lanceur.stats.pa = 0 if lanceur.stats.pa < 0 else lanceur.stats.pa
+	lanceur.stats.pm = 0 if lanceur.stats.pm < 0 else lanceur.stats.pm
+	cible.stats.pa = 0 if cible.stats.pa < 0 else cible.stats.pa
+	cible.stats.pm = 0 if cible.stats.pm < 0 else cible.stats.pm
 
 
 func pousse():

@@ -321,18 +321,18 @@ func joue_action(action: int, tile_pos: Vector2i):
 			combat.change_action(10)
 			return
 		var sort: Sort = sorts[action]
-		var _valide = false
-		if check_etats(["RATE_SORT"]):
-			_valide = true
-			retire_etats(["RATE_SORT"])
-		else:
-			_valide = sort.execute_effets(self, zone, tile_pos)
 		stats.pa -= sort.pa
 		stats_perdu.ajoute(-sort.pa, "pa")
 		for effet in effets:
 			if effet.etat == "DOMMAGE_SI_UTILISE_PA" and (effet.sort.nom != sort.nom or effet.lanceur.id != id):
 				for i in range(sort.pa):
 					effet.execute()
+		var _valide = false
+		if check_etats(["RATE_SORT"]):
+			_valide = true
+			retire_etats(["RATE_SORT"])
+		else:
+			_valide = sort.execute_effets(self, zone, tile_pos)
 		if not is_invocation:
 			combat.sorts.update(self)
 		if tile_pos != grid_pos or not sort.effets.has("DEVIENT_INVISIBLE"):
@@ -496,6 +496,8 @@ func debut_tour():
 	if check_etats(["IMMOBILISE"]):
 		stats.pm = 0
 	combat.check_morts()
+	stats.pa = 0 if stats.pa < 0 else stats.pa
+	stats.pm = 0 if stats.pm < 0 else stats.pm
 #	combat.tilemap.affiche_ldv_obstacles()
 
 
