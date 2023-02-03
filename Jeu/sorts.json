@@ -669,7 +669,7 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-                "cible": 10,
+                "cible": 8,
 				"DOMMAGE_POURCENT": {
 					"base": {
 						"valeur": 20
