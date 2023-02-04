@@ -328,7 +328,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 				for i in range(sort.pa):
 					effet.execute()
 		var _valide = false
-		if check_etats(["RATE_SORT"]):
+		if check_etats(["RATE_SORT"]) and action < compte_sorts:
 			_valide = true
 			retire_etats(["RATE_SORT"])
 		else:
