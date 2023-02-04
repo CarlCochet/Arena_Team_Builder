@@ -47,7 +47,7 @@ func creer_personnages():
 	ajoute_equipe(GlobalData.equipe_test, tilemap.start_rouge, 1)
 	init_cartes()
 	
-	combattants.sort_custom(func(a, b): return a.stats.initiative > b.stats.initiative)
+	combattants.sort_custom(func(a, b): return a.initiative_random > b.initiative_random)
 	for k in range(len(combattants)):
 		indexeur_global = k
 		combattants[k].id = indexeur_global

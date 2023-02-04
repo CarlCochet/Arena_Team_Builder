@@ -602,7 +602,7 @@
 		},
 		"lyoda_da": {
 			"pa": 3,
-			"po": [2, 5],
+			"po": [1, 1],
 			"type_zone": 0,
 			"taille_zone": [0, 0],
             "po_modifiable": 1,

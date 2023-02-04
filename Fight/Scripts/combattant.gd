@@ -15,6 +15,7 @@ var stat_buffs: Stats
 var stat_ret: Stats
 var stat_cartes_combat: Stats
 var buffs_hp: Array
+var initiative_random: float
 var equipements: Dictionary
 var sorts: Array
 var equipe: int
@@ -100,6 +101,7 @@ func from_personnage(p_personnage: Personnage, equipe_id: int):
 	classe = p_personnage.classe
 	personnage_ref = p_personnage
 	stats = p_personnage.stats.copy()
+	initiative_random = float(stats.initiative) + GlobalData.rng.randf()
 	max_stats = stats.copy()
 	init_stats = stats.copy()
 	equipements = p_personnage.equipements
