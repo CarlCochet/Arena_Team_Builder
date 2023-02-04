@@ -1006,8 +1006,6 @@ func porte():
 
 
 func lance():
-	if combat.check_perso(centre):
-		return false
 	for combattant in combat.combattants:
 		for effet in combattant.effets:
 			if effet.etat == "PORTE" and lanceur.id == effet.lanceur.id:
@@ -1028,6 +1026,8 @@ func lance():
 					new_sort.execute_effets(lanceur, [centre], centre)
 				combat.tilemap.update_glyphes()
 				return true
+		if combattant.grid_pos == centre:
+			return false
 
 
 func picole():
