@@ -13,6 +13,7 @@
 font_size = 25
 
 [node name="Invocation" type="Node2D"]
+z_index = 1
 script = ExtResource("1_rnnus")
 
 [node name="Cercle" type="Sprite2D" parent="."]
