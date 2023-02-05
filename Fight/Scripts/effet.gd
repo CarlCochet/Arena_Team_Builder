@@ -902,6 +902,9 @@ func devient_invisible():
 	etat = "INVISIBLE"
 	if GlobalData.is_multijoueur and (Client.is_host and cible.equipe == 1 or not Client.is_host and cible.equipe == 0):
 		cible.visible = false
+	else:
+		cible.personnage.modulate = Color(1, 1, 1, 0.5)
+		cible.classe_sprite.material.set_shader_parameter("alpha", 0.5)
 	cible.is_visible = false
 	combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, cible.grid_pos - combat.offset).x
 	print(cible.classe, "_", str(cible.id), " devient invisible (", duree, " tours).")

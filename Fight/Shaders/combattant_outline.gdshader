@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 uniform vec4 color: source_color = vec4(1.0);
 uniform float width : hint_range(0, 10) = 2.0;
+uniform float alpha : hint_range(0, 1) = 1.0;
 uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
 uniform bool inside = false;
 uniform bool add_margins = true; // only useful when inside is false
@@ -50,6 +51,7 @@ void fragment() {
 			COLOR.a = 0.0;
 		} else {
 			COLOR = texture(TEXTURE, uv);
+			COLOR.a *= alpha;
 		}
 	} else {
 		COLOR = texture(TEXTURE, uv);

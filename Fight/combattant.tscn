@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://vpghqnd2tb2v"]
+[gd_scene load_steps=10 format=3 uid="uid://vpghqnd2tb2v"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/combattant.gd" id="1_8jfsj"]
 [ext_resource type="Texture2D" uid="uid://cjolxj4e25lwg" path="res://Fight/Images/cercle_personnage_bleu.png" id="2_rlfn0"]
 [ext_resource type="Texture2D" uid="uid://co3j3d85r6s8t" path="res://Fight/Images/fleche_1_filled.png" id="3_jjh8n"]
 [ext_resource type="Texture2D" uid="uid://bx5n3oshvmiay" path="res://Classes/empty.png" id="4_88edx"]
+[ext_resource type="Texture2D" uid="uid://b02mrbqksygw4" path="res://Classes/Cra/cra.png" id="5_4klyf"]
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_o5476"]
 [ext_resource type="PackedScene" uid="uid://wjqjfqvfle7s" path="res://Fight/stats_perdu.tscn" id="6_xhp4k"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xqk0h"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltcba"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_c7i7g"]
+[sub_resource type="LabelSettings" id="LabelSettings_3inhn"]
 font_size = 25
 
 [node name="Combattant" type="Node2D"]
@@ -31,7 +32,7 @@ texture = ExtResource("4_88edx")
 
 [node name="Classe" type="Sprite2D" parent="Personnage"]
 position = Vector2(0, -48)
-texture = ExtResource("4_88edx")
+texture = ExtResource("5_4klyf")
 
 [node name="Coiffe" type="Sprite2D" parent="Personnage"]
 position = Vector2(0, -48)
@@ -42,7 +43,7 @@ position = Vector2(0, -38)
 scale = Vector2(2, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_xqk0h")
+shape = SubResource("RectangleShape2D_ltcba")
 
 [node name="HP" type="Sprite2D" parent="."]
 visible = false
@@ -58,7 +59,7 @@ offset_top = -18.0
 offset_right = 49.0
 offset_bottom = 20.0
 text = "0/0"
-label_settings = SubResource("LabelSettings_c7i7g")
+label_settings = SubResource("LabelSettings_3inhn")
 horizontal_alignment = 1
 vertical_alignment = 1
 

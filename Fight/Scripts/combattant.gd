@@ -341,6 +341,8 @@ func joue_action(action: int, tile_pos: Vector2i):
 			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 			retire_etats(["INVISIBLE"])
 			visible = true
+			personnage.modulate = Color(1, 1, 1, 1)
+			classe_sprite.material.set_shader_parameter("alpha", 1.0)
 			is_visible = true
 		if grid_pos != tile_pos:
 			oriente_vers(tile_pos)
@@ -412,6 +414,8 @@ func deplace_perso(chemin: Array):
 				combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
 			if not check_etats(["INVISIBLE"]):
 				visible = true
+				personnage.modulate = Color(1, 1, 1, 1)
+				classe_sprite.material.set_shader_parameter("alpha", 1.0)
 				is_visible = true
 			combat.tilemap.update_glyphes()
 			if stats.hp <= 0:
@@ -479,6 +483,8 @@ func oriente_vers(pos: Vector2i):
 
 func debut_tour():
 	visible = true
+	personnage.modulate = Color(1, 1, 1, 1)
+	classe_sprite.material.set_shader_parameter("alpha", 1.0)
 	is_visible = true
 	var delta_hp = max_stats.hp - stats.hp
 	var start_hp = stats.hp
