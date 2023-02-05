@@ -19,6 +19,7 @@ var ms_data: Dictionary
 
 @onready var overlay = get_used_cells(2)
 @onready var arena = get_used_cells(1)
+@onready var obstacles = get_used_cells(7)
 
 
 func _ready():
@@ -106,6 +107,9 @@ func build_grids():
 		grid[pos.x][pos.y + offset.y] = tile_data.x
 		if tile_data.x > 0:
 			a_star_grid.set_point_solid(pos + offset, false)
+	
+	for pos in obstacles:
+		grid[pos.x][pos.y + offset.y] = 0
 
 
 func load_map_data():

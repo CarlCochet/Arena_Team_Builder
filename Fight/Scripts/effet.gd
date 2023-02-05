@@ -1005,32 +1005,58 @@ func porte():
 		cible.combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = cible.combat.tilemap.get_cell_atlas_coords(1, map_pos).x
 		cible.position = lanceur.position + Vector2(0, -90)
 		cible.grid_pos = lanceur.grid_pos
-		cible.z_index = 1
+		cible.z_index = 2
+		cible.porteur = lanceur
+		lanceur.porte = cible
 
 
 func lance():
 	for combattant in combat.combattants:
-		for effet in combattant.effets:
-			if effet.etat == "PORTE" and lanceur.id == effet.lanceur.id:
-				combattant.oriente_vers(centre)
-				combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
-				combattant.grid_pos = centre
-				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
-				combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
-				combattant.z_index = 0
-				combattant.retire_etats(["PORTE"])
-				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
-				var new_sort = null
-				if sort != null:
-					new_sort = sort.copy()
-					new_sort.pa = 0
-					new_sort.cible = GlobalData.Cible.LIBRE
-					new_sort.effets.erase("LANCE")
-					new_sort.execute_effets(lanceur, [centre], centre)
-				combat.tilemap.update_glyphes()
-				return true
-		if combattant.grid_pos == centre:
+		if combattant.grid_pos == centre and combattant.id != lanceur.id and combattant.id != lanceur.porte.id:
+			print("Cette case n'est pas libre...")
 			return false
+	var combattant = lanceur.porte
+	combattant.oriente_vers(centre)
+	combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
+	combattant.grid_pos = centre
+	combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
+	combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
+	combattant.z_index = 1
+	combattant.retire_etats(["PORTE"])
+	lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
+	var new_sort = null
+	if sort != null:
+		new_sort = sort.copy()
+		new_sort.pa = 0
+		new_sort.cible = GlobalData.Cible.LIBRE
+		new_sort.effets.erase("LANCE")
+		new_sort.execute_effets(lanceur, [centre], centre)
+	combat.tilemap.update_glyphes()
+	lanceur.porte.porteur = null
+	lanceur.porte = null
+	
+#	for combattant in combat.combattants:
+#		for effet in combattant.effets:
+#			if effet.etat == "PORTE" and lanceur.id == effet.lanceur.id:
+#				combattant.oriente_vers(centre)
+#				combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
+#				combattant.grid_pos = centre
+#				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
+#				combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
+#				combattant.z_index = 1
+#				combattant.retire_etats(["PORTE"])
+#				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
+#				var new_sort = null
+#				if sort != null:
+#					new_sort = sort.copy()
+#					new_sort.pa = 0
+#					new_sort.cible = GlobalData.Cible.LIBRE
+#					new_sort.effets.erase("LANCE")
+#					new_sort.execute_effets(lanceur, [centre], centre)
+#				combat.tilemap.update_glyphes()
+#				return true
+#		if combattant.grid_pos == centre:
+#			return false
 
 
 func picole():
@@ -1087,7 +1113,7 @@ func choix():
 			bouton.text = contenu.keys()[i]
 			bouton.position = Vector2(i * 300 - 220, -25)
 			bouton.connect("pressed", combat._on_choix_clicked.bind(i, block, contenu, lanceur.id, cible.id, critique, sort.nom))
-			bouton.z_index = 1
+			bouton.z_index = 3
 			block.add_child(bouton)
 		instant = false
 
