@@ -667,7 +667,9 @@ func pousse():
 	var grid = combat.tilemap.grid
 	var stopped = false
 	var old_grid_pos = cible.grid_pos
-	for i in range(contenu):
+	var base_crit = trouve_crit()
+	var valeur = contenu[base_crit]["valeur"]
+	for i in range(valeur):
 		var grid_pos = cible.grid_pos + (i + 1) * direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
@@ -677,9 +679,9 @@ func pousse():
 					if cible.check_etats(["SACRIFICE"]):
 						cible = update_sacrifice(cible, "normal")
 					if not cible.check_etats(["IMMUNISE"]):
-						cible.stats.hp -= (contenu - i) * 3
-						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+						cible.stats.hp -= (valeur - i) * 3
+						cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+						print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
@@ -688,9 +690,9 @@ func pousse():
 					if cible.check_etats(["SACRIFICE"]):
 						cible = update_sacrifice(cible, "normal")
 					if not cible.check_etats(["IMMUNISE"]):
-						cible.stats.hp -= (contenu - i) * 3
-						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+						cible.stats.hp -= (valeur - i) * 3
+						cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+						print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 					var combattant_block = null
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos:
@@ -699,9 +701,9 @@ func pousse():
 						if combattant_block.check_etats(["SACRIFICE"]):
 							combattant_block = update_sacrifice(combattant_block, "normal")
 						if not combattant_block.check_etats(["IMMUNISE"]):
-							combattant_block.stats.hp -= (contenu - i) * 3
-							combattant_block.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-							print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (contenu - i) * 3, " PdV.")
+							combattant_block.stats.hp -= (valeur - i) * 3
+							combattant_block.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+							print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (valeur - i) * 3, " PdV.")
 		else:
 			if not stopped:
 				stopped = true
@@ -709,12 +711,12 @@ func pousse():
 				if cible.check_etats(["SACRIFICE"]):
 					cible = update_sacrifice(cible, "normal")
 				if not cible.check_etats(["IMMUNISE"]):
-					cible.stats.hp -= (contenu - i) * 3
-					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-					print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+					cible.stats.hp -= (valeur - i) * 3
+					cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+					print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 			break
 	if not stopped:
-		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
+		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(valeur * direction))
 	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]) and cible.grid_pos != old_grid_pos:
 		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, null)
 		effet_lance.execute()
@@ -730,7 +732,9 @@ func attire():
 	var grid = combat.tilemap.grid
 	var stopped = false
 	var old_grid_pos = cible.grid_pos
-	for i in range(contenu):
+	var base_crit = trouve_crit()
+	var valeur = contenu[base_crit]["valeur"]
+	for i in range(valeur):
 		var grid_pos = cible.grid_pos + (i + 1) * direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
@@ -740,9 +744,9 @@ func attire():
 					if cible.check_etats(["SACRIFICE"]):
 						cible = update_sacrifice(cible, "normal")
 					if not cible.check_etats(["IMMUNISE"]):
-						cible.stats.hp -= (contenu - i) * 3
-						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+						cible.stats.hp -= (valeur - i) * 3
+						cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+						print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
@@ -752,9 +756,9 @@ func attire():
 						if cible.check_etats(["SACRIFICE"]):
 							cible = update_sacrifice(cible, "normal")
 						if not cible.check_etats(["IMMUNISE"]):
-							cible.stats.hp -= (contenu - i) * 3
-							cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-							print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+							cible.stats.hp -= (valeur - i) * 3
+							cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+							print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 						var combattant_block = null
 						for combattant in combat.combattants:
 							if combattant.grid_pos == grid_pos:
@@ -763,9 +767,9 @@ func attire():
 							if combattant_block.check_etats(["SACRIFICE"]):
 								combattant_block = update_sacrifice(combattant_block, "normal")
 							if not combattant_block.check_etats(["IMMUNISE"]):
-								combattant_block.stats.hp -= (contenu - i) * 3
-								combattant_block.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-								print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (contenu - i) * 3, " PdV.")
+								combattant_block.stats.hp -= (valeur - i) * 3
+								combattant_block.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+								print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (valeur - i) * 3, " PdV.")
 		else:
 			if not stopped:
 				stopped = true
@@ -773,12 +777,12 @@ func attire():
 				if cible.check_etats(["SACRIFICE"]):
 					cible = update_sacrifice(cible, "normal")
 				if not cible.check_etats(["IMMUNISE"]):
-					cible.stats.hp -= (contenu - i) * 3
-					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-					print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+					cible.stats.hp -= (valeur - i) * 3
+					cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+					print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 			break
 	if not stopped:
-		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
+		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(valeur * direction))
 	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]) and cible.grid_pos != old_grid_pos:
 		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, null)
 		effet_lance.execute()
