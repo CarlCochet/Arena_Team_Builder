@@ -2549,7 +2549,8 @@
                     "cible": 6,
                     "cc": {
                         "base": {
-                            "valeur": 100
+                            "valeur": 100,
+                            "duree": 1
                         }
                     }
                 }

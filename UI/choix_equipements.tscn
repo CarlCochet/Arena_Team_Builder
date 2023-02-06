@@ -54,11 +54,13 @@ offset_bottom = 40.0
 texture = ExtResource("2_265m7")
 
 [node name="Classe" type="TextureRect" parent="Personnage"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_265m7")
 
 [node name="Coiffe" type="TextureRect" parent="Personnage"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_265m7")
