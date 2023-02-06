@@ -3,6 +3,7 @@ class_name Combattant
 
 
 signal clicked
+signal movement_finished
 
 
 var classe: String
@@ -76,6 +77,7 @@ func _process(delta):
 			positions_chemin.pop_front()
 			if len(positions_chemin) == 0:
 				combat.etat = 1
+				emit_signal("movement_finished")
 		else:
 			var direction = position.direction_to(positions_chemin[0])
 			position += direction * delta * 300.0
