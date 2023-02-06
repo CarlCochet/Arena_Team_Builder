@@ -1034,29 +1034,6 @@ func lance():
 	combat.tilemap.update_glyphes()
 	lanceur.porte.porteur = null
 	lanceur.porte = null
-	
-#	for combattant in combat.combattants:
-#		for effet in combattant.effets:
-#			if effet.etat == "PORTE" and lanceur.id == effet.lanceur.id:
-#				combattant.oriente_vers(centre)
-#				combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
-#				combattant.grid_pos = centre
-#				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
-#				combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
-#				combattant.z_index = 1
-#				combattant.retire_etats(["PORTE"])
-#				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
-#				var new_sort = null
-#				if sort != null:
-#					new_sort = sort.copy()
-#					new_sort.pa = 0
-#					new_sort.cible = GlobalData.Cible.LIBRE
-#					new_sort.effets.erase("LANCE")
-#					new_sort.execute_effets(lanceur, [centre], centre)
-#				combat.tilemap.update_glyphes()
-#				return true
-#		if combattant.grid_pos == centre:
-#			return false
 
 
 func picole():
