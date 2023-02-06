@@ -3,6 +3,7 @@ class_name Invocation
 
 
 var invocateur
+var trigger_finish: bool
 
 @onready var hitbox: Area2D = $Area2D
 
@@ -20,9 +21,28 @@ func _ready():
 	is_hovered = false
 	is_invocation = true
 	is_mort = false
+	trigger_finish = false
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	combat = get_parent()
 	update_hitbox()
+
+
+func _process(delta):
+	if len(positions_chemin) > 0:
+		if position.distance_to(positions_chemin[0]) < 10.0:
+			position = positions_chemin[0]
+			positions_chemin.pop_front()
+			if len(positions_chemin) == 0:
+				combat.etat = 1
+				emit_signal("movement_finished")
+		else:
+			var direction = position.direction_to(positions_chemin[0])
+			position += direction * delta * 300.0
+		if porte != null:
+			porte.position = position + Vector2(0, -90)
+	if trigger_finish:
+		trigger_finish = false
+		emit_signal("movement_finished")
 
 
 func init(classe_int: int):
@@ -220,6 +240,7 @@ func joue_ia():
 	combat.check_morts()
 	if is_mort:
 		return
+	var old_grid_pos = grid_pos
 	if stats.pm > 0 and init_stats.pm > 0:
 		var chemin = chemin_vers_proche()
 		if len(chemin) > stats.pm + 1:
@@ -227,6 +248,8 @@ func joue_ia():
 		if len(chemin) > 0:
 			chemin.pop_front()
 			deplace_perso(chemin)
+	trigger_finish = old_grid_pos == grid_pos
+	await movement_finished
 	for sort in sorts:
 		if not sort.precheck_cast(self):
 			continue

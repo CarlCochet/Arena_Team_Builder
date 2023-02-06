@@ -171,6 +171,28 @@ func update_limite_lancers(lanceur):
 	cooldown_actuel = cooldown
 
 
+func retrait_cumul_max(p_cible):
+	if cumul_max > 0:
+		var new_effets = []
+		var compte_sort = 0
+		for i in range(len(p_cible.effets)-1, -1, -1):
+			var effet = p_cible.effets[i]
+			if effet.sort.nom == nom:
+				compte_sort += 1
+				if compte_sort <= cumul_max:
+					new_effets.append(effet)
+			else:
+				new_effets.append(effet)
+		p_cible.effets = new_effets
+		p_cible.stat_buffs = Stats.new()
+		var delta_hp = p_cible.max_stats.hp - p_cible.stats.hp
+		p_cible.max_stats = p_cible.init_stats.copy()
+		p_cible.execute_effets()
+		p_cible.stats = p_cible.init_stats.copy().add(p_cible.stat_ret).add(p_cible.stat_buffs).add(p_cible.stat_cartes_combat)
+		p_cible.stats.hp -= delta_hp
+		p_cible.execute_buffs_hp()
+
+
 func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 	if p_cible is Array:
 		for case in p_cible:
@@ -202,6 +224,8 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 			new_effet.execute()
 		if new_effet.duree > 0:
 			p_cible.effets.append(new_effet)
+	
+	retrait_cumul_max(p_cible)
 	return true
 
 

@@ -7,12 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_eb3vf"]
 [ext_resource type="PackedScene" uid="uid://wjqjfqvfle7s" path="res://Fight/stats_perdu.tscn" id="6_aopma"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pwky"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i65j8"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_2wj76"]
+[sub_resource type="LabelSettings" id="LabelSettings_d0lu1"]
 font_size = 25
 
 [node name="Invocation" type="Node2D"]
+z_index = 1
 script = ExtResource("1_rnnus")
 
 [node name="Cercle" type="Sprite2D" parent="."]
@@ -40,7 +41,7 @@ position = Vector2(0, -10)
 scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_2pwky")
+shape = SubResource("RectangleShape2D_i65j8")
 
 [node name="HP" type="Sprite2D" parent="."]
 visible = false
@@ -56,7 +57,7 @@ offset_top = -18.0
 offset_right = 49.0
 offset_bottom = 5.0
 text = "40/40"
-label_settings = SubResource("LabelSettings_2wj76")
+label_settings = SubResource("LabelSettings_d0lu1")
 horizontal_alignment = 1
 vertical_alignment = 1
 

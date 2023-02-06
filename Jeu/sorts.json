@@ -133,7 +133,14 @@
 						"valeur": 7
 					}
 				},
-				"POUSSE": 3
+				"POUSSE": {
+                    "base": {
+                        "valeur": 2
+                    },
+                    "critique": {
+                        "valeur": 3
+                    }
+                }
 			}
 		},
 		"fleche_enflamme": {
@@ -669,7 +676,7 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-                "cible": 10,
+                "cible": 8,
 				"DOMMAGE_POURCENT": {
 					"base": {
 						"valeur": 20
@@ -3069,7 +3076,11 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"ATTIRE": 3
+                "ATTIRE": {
+                    "base": {
+                        "valeur": 3
+                    }
+                }
 			}
 		},
 		"demence": {
@@ -3812,7 +3823,11 @@
                         "valeur": 14
                     }
                 },
-                "POUSSE": 3
+                "POUSSE": {
+                    "base": {
+                        "valeur": 3
+                    }
+                }
 			}
 		},
 		"diversion": {
@@ -3940,7 +3955,11 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
 			"effets": {
-				"POUSSE": 1
+                "POUSSE": {
+                    "base": {
+                        "valeur": 1
+                    }
+                }
 			}
 		},
 		"piege_mortel": {
@@ -5580,7 +5599,11 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
             "effets": {
-                "ATTIRE": 4
+                "ATTIRE": {
+                    "base": {
+                        "valeur": 4
+                    }
+                }
             }
         },
         "vent_repoussant": {
@@ -5604,7 +5627,11 @@
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
             "effets": {
-                "POUSSE": 4
+                "POUSSE": {
+                    "base": {
+                        "valeur": 4
+                    }
+                }
             }
         },
         "vision_amelioree": {

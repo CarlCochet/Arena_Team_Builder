@@ -345,7 +345,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	cible.stats_perdu.ajoute(-dommages, "hp")
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
-	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and type != "soin":
+	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and not type in ["soin", "pourcent", "neutre"]:
 		var cible_renvoi = lanceur
 		if cible_renvoi.check_etats(["SACRIFICE"]):
 			cible_renvoi = update_sacrifice(cible_renvoi, "renvoi")
@@ -366,13 +366,13 @@ func dommage_fixe():
 		return
 	var base_crit = trouve_crit()
 	if contenu[base_crit].has("allies") and lanceur.equipe == cible.equipe:
-		applique_dommage(contenu[base_crit]["allies"], "", "", false, "normal")
+		applique_dommage(contenu[base_crit]["allies"], "", "", false, "neutre")
 	elif contenu[base_crit].has("invocations") and cible.is_invocation: 
-		applique_dommage(contenu[base_crit]["invocations"], "", "", false, "normal")
+		applique_dommage(contenu[base_crit]["invocations"], "", "", false, "neutre")
 	elif contenu[base_crit].has("maudit") and centre in combat.tilemap.cases_maudites.values():
-		applique_dommage(contenu[base_crit]["maudit"], "", "", false, "normal")
+		applique_dommage(contenu[base_crit]["maudit"], "", "", false, "neutre")
 	elif contenu[base_crit].has("valeur"):
-		applique_dommage(contenu[base_crit]["valeur"], "", "", false, "normal")
+		applique_dommage(contenu[base_crit]["valeur"], "", "", false, "neutre")
 	if contenu[base_crit].has("retour"):
 		applique_dommage(contenu[base_crit]["retour"], "", "", false, "retour")
 
@@ -652,6 +652,10 @@ func change_stats():
 			if stat in ["pa", "pm", "hp"]:
 				lanceur.stats_perdu.ajoute(contenu[stat][base_crit]["retour"], stat)
 	instant = false
+	lanceur.stats.pa = 0 if lanceur.stats.pa < 0 else lanceur.stats.pa
+	lanceur.stats.pm = 0 if lanceur.stats.pm < 0 else lanceur.stats.pm
+	cible.stats.pa = 0 if cible.stats.pa < 0 else cible.stats.pa
+	cible.stats.pm = 0 if cible.stats.pm < 0 else cible.stats.pm
 
 
 func pousse():
@@ -663,7 +667,9 @@ func pousse():
 	var grid = combat.tilemap.grid
 	var stopped = false
 	var old_grid_pos = cible.grid_pos
-	for i in range(contenu):
+	var base_crit = trouve_crit()
+	var valeur = contenu[base_crit]["valeur"]
+	for i in range(valeur):
 		var grid_pos = cible.grid_pos + (i + 1) * direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
@@ -673,9 +679,9 @@ func pousse():
 					if cible.check_etats(["SACRIFICE"]):
 						cible = update_sacrifice(cible, "normal")
 					if not cible.check_etats(["IMMUNISE"]):
-						cible.stats.hp -= (contenu - i) * 3
-						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+						cible.stats.hp -= (valeur - i) * 3
+						cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+						print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
@@ -684,9 +690,9 @@ func pousse():
 					if cible.check_etats(["SACRIFICE"]):
 						cible = update_sacrifice(cible, "normal")
 					if not cible.check_etats(["IMMUNISE"]):
-						cible.stats.hp -= (contenu - i) * 3
-						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+						cible.stats.hp -= (valeur - i) * 3
+						cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+						print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 					var combattant_block = null
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos:
@@ -695,9 +701,9 @@ func pousse():
 						if combattant_block.check_etats(["SACRIFICE"]):
 							combattant_block = update_sacrifice(combattant_block, "normal")
 						if not combattant_block.check_etats(["IMMUNISE"]):
-							combattant_block.stats.hp -= (contenu - i) * 3
-							combattant_block.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-							print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (contenu - i) * 3, " PdV.")
+							combattant_block.stats.hp -= (valeur - i) * 3
+							combattant_block.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+							print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (valeur - i) * 3, " PdV.")
 		else:
 			if not stopped:
 				stopped = true
@@ -705,14 +711,14 @@ func pousse():
 				if cible.check_etats(["SACRIFICE"]):
 					cible = update_sacrifice(cible, "normal")
 				if not cible.check_etats(["IMMUNISE"]):
-					cible.stats.hp -= (contenu - i) * 3
-					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-					print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+					cible.stats.hp -= (valeur - i) * 3
+					cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+					print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 			break
 	if not stopped:
-		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
+		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(valeur * direction))
 	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]) and cible.grid_pos != old_grid_pos:
-		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
+		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, null)
 		effet_lance.execute()
 	combat.tilemap.update_glyphes()
 
@@ -726,7 +732,9 @@ func attire():
 	var grid = combat.tilemap.grid
 	var stopped = false
 	var old_grid_pos = cible.grid_pos
-	for i in range(contenu):
+	var base_crit = trouve_crit()
+	var valeur = contenu[base_crit]["valeur"]
+	for i in range(valeur):
 		var grid_pos = cible.grid_pos + (i + 1) * direction
 		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
 			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
@@ -736,9 +744,9 @@ func attire():
 					if cible.check_etats(["SACRIFICE"]):
 						cible = update_sacrifice(cible, "normal")
 					if not cible.check_etats(["IMMUNISE"]):
-						cible.stats.hp -= (contenu - i) * 3
-						cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-						print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+						cible.stats.hp -= (valeur - i) * 3
+						cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+						print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
@@ -748,9 +756,9 @@ func attire():
 						if cible.check_etats(["SACRIFICE"]):
 							cible = update_sacrifice(cible, "normal")
 						if not cible.check_etats(["IMMUNISE"]):
-							cible.stats.hp -= (contenu - i) * 3
-							cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-							print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+							cible.stats.hp -= (valeur - i) * 3
+							cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+							print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 						var combattant_block = null
 						for combattant in combat.combattants:
 							if combattant.grid_pos == grid_pos:
@@ -759,9 +767,9 @@ func attire():
 							if combattant_block.check_etats(["SACRIFICE"]):
 								combattant_block = update_sacrifice(combattant_block, "normal")
 							if not combattant_block.check_etats(["IMMUNISE"]):
-								combattant_block.stats.hp -= (contenu - i) * 3
-								combattant_block.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-								print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (contenu - i) * 3, " PdV.")
+								combattant_block.stats.hp -= (valeur - i) * 3
+								combattant_block.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+								print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (valeur - i) * 3, " PdV.")
 		else:
 			if not stopped:
 				stopped = true
@@ -769,14 +777,14 @@ func attire():
 				if cible.check_etats(["SACRIFICE"]):
 					cible = update_sacrifice(cible, "normal")
 				if not cible.check_etats(["IMMUNISE"]):
-					cible.stats.hp -= (contenu - i) * 3
-					cible.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
-					print(cible.classe, "_", str(cible.id), " perd ", (contenu - i) * 3, " PdV.")
+					cible.stats.hp -= (valeur - i) * 3
+					cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
+					print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 			break
 	if not stopped:
-		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(contenu * direction))
+		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(valeur * direction))
 	if cible.check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]) and cible.grid_pos != old_grid_pos:
-		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, sort)
+		var effet_lance = Effet.new(cible, old_grid_pos, "LANCE", 1, false, old_grid_pos, false, null)
 		effet_lance.execute()
 	combat.tilemap.update_glyphes()
 
@@ -898,6 +906,9 @@ func devient_invisible():
 	etat = "INVISIBLE"
 	if GlobalData.is_multijoueur and (Client.is_host and cible.equipe == 1 or not Client.is_host and cible.equipe == 0):
 		cible.visible = false
+	else:
+		cible.personnage.modulate = Color(1, 1, 1, 0.5)
+		cible.classe_sprite.material.set_shader_parameter("alpha", 0.5)
 	cible.is_visible = false
 	combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, cible.grid_pos - combat.offset).x
 	print(cible.classe, "_", str(cible.id), " devient invisible (", duree, " tours).")
@@ -998,32 +1009,35 @@ func porte():
 		cible.combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = cible.combat.tilemap.get_cell_atlas_coords(1, map_pos).x
 		cible.position = lanceur.position + Vector2(0, -90)
 		cible.grid_pos = lanceur.grid_pos
-		cible.z_index = 1
+		cible.z_index = 2
+		cible.porteur = lanceur
+		lanceur.porte = cible
 
 
 func lance():
-	if combat.check_perso(centre):
-		return false
 	for combattant in combat.combattants:
-		for effet in combattant.effets:
-			if effet.etat == "PORTE" and lanceur.id == effet.lanceur.id:
-				combattant.oriente_vers(centre)
-				combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
-				combattant.grid_pos = centre
-				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
-				combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
-				combattant.z_index = 0
-				combattant.retire_etats(["PORTE"])
-				lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
-				var new_sort = null
-				if sort != null:
-					new_sort = sort.copy()
-					new_sort.pa = 0
-					new_sort.cible = GlobalData.Cible.LIBRE
-					new_sort.effets.erase("LANCE")
-					new_sort.execute_effets(lanceur, [centre], centre)
-				combat.tilemap.update_glyphes()
-				return true
+		if combattant.grid_pos == centre and combattant.id != lanceur.id and combattant.id != lanceur.porte.id:
+			print("Cette case n'est pas libre...")
+			return false
+	var combattant = lanceur.porte
+	combattant.oriente_vers(centre)
+	combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
+	combattant.grid_pos = centre
+	combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
+	combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
+	combattant.z_index = 1
+	combattant.retire_etats(["PORTE"])
+	lanceur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
+	var new_sort = null
+	if sort != null:
+		new_sort = sort.copy()
+		new_sort.pa = 0
+		new_sort.cible = GlobalData.Cible.LIBRE
+		new_sort.effets.erase("LANCE")
+		new_sort.execute_effets(lanceur, [centre], centre)
+	combat.tilemap.update_glyphes()
+	lanceur.porte.porteur = null
+	lanceur.porte = null
 
 
 func picole():
@@ -1080,7 +1094,7 @@ func choix():
 			bouton.text = contenu.keys()[i]
 			bouton.position = Vector2(i * 300 - 220, -25)
 			bouton.connect("pressed", combat._on_choix_clicked.bind(i, block, contenu, lanceur.id, cible.id, critique, sort.nom))
-			bouton.z_index = 1
+			bouton.z_index = 3
 			block.add_child(bouton)
 		instant = false
 

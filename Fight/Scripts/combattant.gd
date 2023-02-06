@@ -3,6 +3,7 @@ class_name Combattant
 
 
 signal clicked
+signal movement_finished
 
 
 var classe: String
@@ -15,6 +16,7 @@ var stat_buffs: Stats
 var stat_ret: Stats
 var stat_cartes_combat: Stats
 var buffs_hp: Array
+var initiative_random: float
 var equipements: Dictionary
 var sorts: Array
 var equipe: int
@@ -29,6 +31,9 @@ var all_path: Array
 var path_actuel: Array
 var all_ldv: Array
 var zone: Array
+var positions_chemin: Array
+var porte
+var porteur
 
 var is_selected: bool
 var is_hovered: bool
@@ -50,6 +55,7 @@ var outline_shader = preload("res://Fight/Shaders/combattant_outline.gdshader")
 
 func _ready():
 	effets = []
+	positions_chemin = []
 	classe_sprite.material = ShaderMaterial.new()
 	classe_sprite.material.shader = outline_shader
 	classe_sprite.material.set_shader_parameter("width", 0.0)
@@ -62,6 +68,21 @@ func _ready():
 	is_invocation = false
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	combat = get_parent()
+
+
+func _process(delta):
+	if len(positions_chemin) > 0:
+		if position.distance_to(positions_chemin[0]) < 10.0:
+			position = positions_chemin[0]
+			positions_chemin.pop_front()
+			if len(positions_chemin) == 0:
+				combat.etat = 1
+				emit_signal("movement_finished")
+		else:
+			var direction = position.direction_to(positions_chemin[0])
+			position += direction * delta * 300.0
+		if porte != null:
+			porte.position = position + Vector2(0, -90)
 
 
 func update_visuel():
@@ -100,6 +121,7 @@ func from_personnage(p_personnage: Personnage, equipe_id: int):
 	classe = p_personnage.classe
 	personnage_ref = p_personnage
 	stats = p_personnage.stats.copy()
+	initiative_random = float(stats.initiative) + GlobalData.rng.randf()
 	max_stats = stats.copy()
 	init_stats = stats.copy()
 	equipements = p_personnage.equipements
@@ -321,24 +343,26 @@ func joue_action(action: int, tile_pos: Vector2i):
 			combat.change_action(10)
 			return
 		var sort: Sort = sorts[action]
-		var _valide = false
-		if check_etats(["RATE_SORT"]):
-			_valide = true
-			retire_etats(["RATE_SORT"])
-		else:
-			_valide = sort.execute_effets(self, zone, tile_pos)
 		stats.pa -= sort.pa
 		stats_perdu.ajoute(-sort.pa, "pa")
 		for effet in effets:
 			if effet.etat == "DOMMAGE_SI_UTILISE_PA" and (effet.sort.nom != sort.nom or effet.lanceur.id != id):
 				for i in range(sort.pa):
 					effet.execute()
+		var _valide = false
+		if check_etats(["RATE_SORT"]) and action < compte_sorts:
+			_valide = true
+			retire_etats(["RATE_SORT"])
+		else:
+			_valide = sort.execute_effets(self, zone, tile_pos)
 		if not is_invocation:
 			combat.sorts.update(self)
 		if tile_pos != grid_pos or not sort.effets.has("DEVIENT_INVISIBLE"):
 			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 			retire_etats(["INVISIBLE"])
 			visible = true
+			personnage.modulate = Color(1, 1, 1, 1)
+			classe_sprite.material.set_shader_parameter("alpha", 1.0)
 			is_visible = true
 		if grid_pos != tile_pos:
 			oriente_vers(tile_pos)
@@ -377,6 +401,7 @@ func deplace_perso(chemin: Array):
 	for effet in effets:
 		if effet.etat == "DOMMAGE_SI_BOUGE":
 			effet.execute()
+	positions_chemin = []
 	if not tacled:
 		for case in chemin:
 			pm_utilise += 1
@@ -386,30 +411,26 @@ func deplace_perso(chemin: Array):
 			var old_map_pos = grid_pos - combat.offset
 			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
 			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
-			position = combat.tilemap.map_to_local(tile_pos)
+			positions_chemin.append(combat.tilemap.map_to_local(tile_pos))
 			grid_pos = case
 			combat.tilemap.a_star_grid.set_point_solid(case)
 			if not check_etats(["INVISIBLE"]):
 				combat.tilemap.grid[case[0]][case[1]] = -2
 			oriente_vers(grid_pos + (grid_pos - precedent))
-			for combattant in combat.combattants:
-				for effet in combattant.effets:
-					if effet.etat == "PORTE" and effet.lanceur.id == id:
-						combattant.position = position + Vector2(0, -90)
-						combattant.grid_pos = grid_pos
-			if check_etats(["PORTE"]):
-				var porteur = null
-				for combattant in combat.combattants:
-					for effet in combattant.effets:
-						if (effet.etat == "PORTE_ALLIE" or effet.etat == "PORTE_ENNEMI") and effet.cible.id == id:
-							porteur = combattant
+			if porte != null:
+				porte.grid_pos = grid_pos
+			if porteur != null:
 				retire_etats(["PORTE"])
 				porteur.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
-				z_index = 0
+				z_index = 1
 				combat.tilemap.a_star_grid.set_point_solid(old_grid_pos)
 				combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = -2
+				porteur.porte = null
+				porteur = null
 			if not check_etats(["INVISIBLE"]):
 				visible = true
+				personnage.modulate = Color(1, 1, 1, 1)
+				classe_sprite.material.set_shader_parameter("alpha", 1.0)
 				is_visible = true
 			combat.tilemap.update_glyphes()
 			if stats.hp <= 0:
@@ -477,6 +498,8 @@ func oriente_vers(pos: Vector2i):
 
 func debut_tour():
 	visible = true
+	personnage.modulate = Color(1, 1, 1, 1)
+	classe_sprite.material.set_shader_parameter("alpha", 1.0)
 	is_visible = true
 	var delta_hp = max_stats.hp - stats.hp
 	var start_hp = stats.hp
@@ -496,6 +519,8 @@ func debut_tour():
 	if check_etats(["IMMOBILISE"]):
 		stats.pm = 0
 	combat.check_morts()
+	stats.pa = 0 if stats.pa < 0 else stats.pa
+	stats.pm = 0 if stats.pm < 0 else stats.pm
 #	combat.tilemap.affiche_ldv_obstacles()
 
 
@@ -556,8 +581,6 @@ func execute_buffs_hp(update_max=true):
 		stats.hp += buff_hp["valeur"]
 		if update_max:
 			max_stats.hp += buff_hp["valeur"]
-#	if stats.hp > max_stats.hp:
-#		stats.hp = max_stats.hp
 
 
 func execute_effets(desactive_degats=true):
@@ -667,5 +690,3 @@ func _on_area_2d_mouse_exited():
 			classe_sprite.material.set_shader_parameter("width", 2.0)
 		combat.stats_hover.visible = false
 		hp.visible = false
-#		if combat.action == 7:
-#			combat.change_action(7)
