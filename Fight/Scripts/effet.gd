@@ -361,6 +361,14 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 		print(lanceur.classe, "_", str(lanceur.id), " gagne ", soin_vol, " PdV.")
 
 
+func lance_particules(target: String = "", type: String = "", direction: int = -1):
+	var pos: Vector2i
+	if target.is_empty():
+		pos = centre
+	else:
+		pos = lanceur.grid_pos if target in ["retour", "pourcent_retour"] else cible.grid_pos
+
+
 func dommage_fixe():
 	if cible is Array or cible is Vector2i:
 		return
