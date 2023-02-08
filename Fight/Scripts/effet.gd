@@ -396,11 +396,11 @@ func dommage_pourcent():
 func dommage_par_pa():
 	if cible is Array or cible is Vector2i:
 		return
-	var pa_restants = lanceur.stats.pa - sort.pa
+	var pa_restants = lanceur.stats.pa
 	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, cible.grid_pos, aoe, sort)
 	for i in range(pa_restants):
 		effet.execute()
-	lanceur.stats.pa -= pa_restants
+	lanceur.stats.pa = 0
 	lanceur.stats_perdu.ajoute(-pa_restants, "pa")
 
 
@@ -411,7 +411,7 @@ func dommage_par_pm():
 	var effet = Effet.new(lanceur, cible, contenu.keys()[0], contenu[contenu.keys()[0]], critique, cible.grid_pos, aoe, sort)
 	for i in range(pm_restants):
 		effet.execute()
-	lanceur.stats.pm -= pm_restants
+	lanceur.stats.pm = 0
 	lanceur.stats_perdu.ajoute(-pm_restants, "pm")
 
 

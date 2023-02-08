@@ -174,14 +174,15 @@ func debut_tour():
 	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
 		stats.hp -= 2
 		stats_perdu.ajoute(-2, "hp")
-
+	
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
-	if check_etats(["PETRIFIE"]):
-		combat.passe_tour()
 	if not check_etats(["INVISIBLE"]):
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	if check_etats(["IMMOBILISE"]):
 		stats.pm = 0
+	if check_etats(["PETRIFIE"]):
+		combat.passe_tour()
+		return
 	joue_ia()
 	if not is_mort:
 		combat.passe_tour()
