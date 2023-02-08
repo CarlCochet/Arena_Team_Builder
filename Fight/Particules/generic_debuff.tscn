@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnyc1tn7b05rs"]
+
+[ext_resource type="Texture2D" uid="uid://cpbydyux0h6fb" path="res://Fight/Particules/Sprites/malus.png" id="1_12stc"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qvcul"]
+emission_shape = 1
+emission_sphere_radius = 20.0
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 60.0
+gravity = Vector3(-1000, 0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+scale_min = 0.8
+scale_max = 0.8
+color = Color(1, 1, 0.698039, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_qvcul")
+texture = ExtResource("1_12stc")
+one_shot = true
+fixed_fps = 360

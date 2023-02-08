@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2dcbiupua46g"]
+
+[ext_resource type="Texture2D" uid="uid://f4rtqlhff5ub" path="res://Fight/Particules/Sprites/kamas.png" id="1_njfri"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dnbly"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qh30w"]
+lifetime_randomness = 0.21
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 100.0
+damping_max = 100.0
+angle_min = -720.0
+angle_max = 720.0
+scale_min = 0.2
+scale_max = 0.2
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_dnbly")
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_qh30w")
+texture = ExtResource("1_njfri")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.92
+randomness = 0.25

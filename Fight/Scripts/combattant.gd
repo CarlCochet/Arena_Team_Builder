@@ -319,7 +319,7 @@ func check_case_bonus():
 
 func desactive_cadran():
 	for combattant in combat.combattants:
-		if combattant.is_invocation and combattant.invocateur.id == id:
+		if combattant.is_invocation and combattant.invocateur.id == id and combattant.classe == "Cadran_De_Xelor":
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, combattant.grid_pos - combat.offset).x
 
 
