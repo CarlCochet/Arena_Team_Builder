@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_o5476"]
 [ext_resource type="PackedScene" uid="uid://wjqjfqvfle7s" path="res://Fight/stats_perdu.tscn" id="6_xhp4k"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6o50"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrl3w"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_xlkfb"]
+[sub_resource type="LabelSettings" id="LabelSettings_2crmd"]
 font_size = 25
 
 [node name="Combattant" type="Node2D"]
@@ -44,7 +44,7 @@ position = Vector2(0, -38)
 scale = Vector2(2, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_i6o50")
+shape = SubResource("RectangleShape2D_jrl3w")
 
 [node name="HP" type="Sprite2D" parent="."]
 visible = false
@@ -60,7 +60,7 @@ offset_top = -18.0
 offset_right = 49.0
 offset_bottom = 20.0
 text = "0/0"
-label_settings = SubResource("LabelSettings_xlkfb")
+label_settings = SubResource("LabelSettings_2crmd")
 horizontal_alignment = 1
 vertical_alignment = 1
 

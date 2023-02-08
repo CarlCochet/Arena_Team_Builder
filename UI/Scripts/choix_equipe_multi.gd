@@ -70,13 +70,13 @@ func _on_valider_pressed():
 		rpc("change_scene")
 
 
-@rpc(any_peer)
+@rpc("any_peer")
 func retour_pressed():
 	Client.reset()
 	get_tree().change_scene_to_file("res://UI/multijoueur_setup.tscn")
 
 
-@rpc(any_peer)
+@rpc("any_peer")
 func transfert_equipe(equipe: Array):
 	if multiplayer.get_remote_sender_id() == 1:
 		GlobalData.equipe_actuelle = Equipe.new().from_json(equipe)
@@ -85,7 +85,7 @@ func transfert_equipe(equipe: Array):
 	adversaire_pret = true
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func change_scene():
 	get_tree().change_scene_to_file("res://UI/choix_map.tscn")
 

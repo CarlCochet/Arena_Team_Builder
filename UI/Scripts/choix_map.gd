@@ -43,7 +43,7 @@ func _on_aleatoire_pressed():
 	rpc("aleatoire_pressed")
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func map_pressed(id):
 	map_selected = id
 	for i in range(len(maps)):
@@ -54,23 +54,23 @@ func map_pressed(id):
 			GlobalData.map_actuelle = maps[i].name
 
 
-@rpc(any_peer)
+@rpc("any_peer")
 func ms_pressed(button_pressed: bool):
 	mort_subite_check.button_pressed = button_pressed
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func fermer_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_equipe_multi.tscn")
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func valider_pressed():
 	GlobalData.mort_subite_active = mort_subite_check.button_pressed
 	get_tree().change_scene_to_file("res://Fight/combat.tscn")
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func aleatoire_pressed():
 	var random_map = GlobalData.rng.randi_range(0, len(maps) - 1)
 	GlobalData.map_actuelle = maps[random_map].name
@@ -78,7 +78,7 @@ func aleatoire_pressed():
 	get_tree().change_scene_to_file("res://Fight/combat.tscn")
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func setup_seed(server_seed):
 	GlobalData.rng.seed = server_seed
 
