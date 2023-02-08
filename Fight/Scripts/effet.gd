@@ -333,6 +333,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 			cible_retour = update_sacrifice(cible_retour, type)
 		cible_retour.stats.hp -= dommages
 		cible_retour.stats_perdu.ajoute(-dommages, "hp")
+		lance_particules("retour")
 		sort.retour_lock = true
 		print(cible_retour.classe, "_", str(cible_retour.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 		return
@@ -343,6 +344,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	var cible_hp = cible.stats.hp
 	cible.stats.hp -= dommages
 	cible.stats_perdu.ajoute(-dommages, "hp")
+	lance_particules("normal")
 	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
 	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and not type in ["soin", "pourcent", "neutre"]:
@@ -367,6 +369,11 @@ func lance_particules(target: String = "", type: String = "", direction: int = -
 		pos = centre
 	else:
 		pos = lanceur.grid_pos if target in ["retour", "pourcent_retour"] else cible.grid_pos
+	var particule = load("res://Fight/Particules/generic_fire.tscn").instantiate()
+	particule.position = combat.tilemap.map_to_local(pos - combat.offset)
+	particule.z_index = 3
+	combat.add_child(particule)
+	particule.emitting = true
 
 
 func dommage_fixe():

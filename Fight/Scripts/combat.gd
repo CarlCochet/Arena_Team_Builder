@@ -106,11 +106,18 @@ func passe_tour():
 	selection_id += 1
 	if selection_id >= len(combattants):
 		init_nouveau_tour()
+	clean_particules()
 	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
 	change_action(10)
 	combattant_selection.debut_tour()
+
+
+func clean_particules():
+	for child in get_children():
+		if child is GPUParticles2D:
+			child.queue_free()
 
 
 func init_nouveau_tour():
