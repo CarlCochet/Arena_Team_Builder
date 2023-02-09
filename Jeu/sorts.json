@@ -20,6 +20,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "generic_debuff",
+            "particules_retour": "generic_buff",
 			"effets": {
 				"CHANGE_STATS": {
 					"dommages_air": {
@@ -93,6 +95,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -124,6 +128,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -163,6 +169,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {
 					"base": {
@@ -194,6 +202,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_eau",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_EAU": {
 					"base": {
@@ -243,6 +253,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {
 					"base": {
@@ -274,6 +286,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
 					"po": {
@@ -305,6 +319,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_debuff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
 					"po": {
@@ -340,6 +356,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -379,6 +397,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_debuff",
+            "particules_retour": "",
 			"effets": {
                 "cible": 4,
 				"CHANGE_STATS": {
@@ -417,6 +437,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"TELEPORTE": 1
 			}
@@ -441,6 +463,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "generic_eau",
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -480,6 +504,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"PETRIFIE": {
                     "base": {
@@ -508,6 +534,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"RATE_SORT": {
                     "base": {
@@ -536,6 +564,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -567,6 +597,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "generic_buff",
 			"effets": {
 				"CHANGE_STATS": {
 					"po": {
@@ -602,6 +634,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -641,6 +675,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_neutre",
+            "particules_retour": "",
 			"effets": {
                 "cible": 8,
 				"DOMMAGE_SI_UTILISE_PA": {
@@ -675,6 +711,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_neutre",
+            "particules_retour": "",
 			"effets": {
                 "cible": 8,
 				"DOMMAGE_POURCENT": {
@@ -709,6 +747,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "generic_buff",
 			"effets": {
 				"CHANGE_STATS": {
 					"cc": {
@@ -748,6 +788,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_soin",
+            "particules_retour": "",
 			"effets": {
                 "cible": 8,
 				"SOIN": {
@@ -780,6 +822,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "generic_soin",
+            "particules_retour": "",
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -811,6 +855,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
                 "DESENVOUTE": 1
 			}
@@ -835,6 +881,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "mot_de_regeneration",
+            "particules_retour": "",
 			"effets": {
 				"SOIN": {
                     "instant": 0,
@@ -869,6 +917,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_soin",
+            "particules_retour": "generic_feu",
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -908,6 +958,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "hp_buff",
+            "particules_retour": "generic_feu",
 			"effets": {
                 "cible": 3,
                 "BOOST_VIE": {
@@ -950,6 +1002,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -984,6 +1038,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_soin",
+            "particules_retour": "",
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -1015,6 +1071,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "generic_soin",
+            "particules_retour": "",
 			"effets": {
                 "SOIN": {
                     "base": {
@@ -1046,6 +1104,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "pa_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "pa": {
@@ -1079,6 +1139,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "pm_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "pm": {
@@ -1124,6 +1186,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
                 "IMMOBILISE": {
                     "base": {
@@ -1172,6 +1236,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "dommages_air": {
@@ -1232,6 +1298,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "pm_buff",
 			"effets": {
 				"CHANGE_STATS": {
                     "pm": {
@@ -1275,6 +1343,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "lancer_de_piece",
+            "particules_retour": "",
 			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
@@ -1306,6 +1376,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "pm_debuff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "pm": {
@@ -1349,6 +1421,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "pm_debuff",
+            "particules_retour": "",
 			"effets": {
                 "cible": 8,
 				"CHANGE_STATS": {
@@ -1381,6 +1455,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_eau",
+            "particules_retour": "",
 			"effets": {
 				"DESENVOUTE": 1,
                 "DOMMAGE_EAU": {
@@ -1413,6 +1489,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_eau",
+            "particules_retour": "",
 			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
@@ -1452,6 +1530,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
                 "REVELE_INVISIBLE": {
                     "base": {
@@ -1487,6 +1567,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "armure_avalanche",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "resistances_eau": {
@@ -1529,6 +1611,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "armure_orageuse",
+            "particules_retour": "",
 			"effets": {
                 "CHANGE_STATS": {
                     "resistances_air": {
@@ -1571,6 +1655,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_eau",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_EAU": {
                     "base": {
@@ -1610,6 +1696,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "bouclier_feca",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "resistances_air": {
@@ -1671,6 +1759,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_eau",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_EAU": {
                     "base": {
@@ -1702,6 +1792,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_debuff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "dommages_air": {
@@ -1817,6 +1909,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "immunite",
+            "particules_retour": "",
 			"effets": {
                 "IMMUNISE": {
                     "base": {
@@ -1850,6 +1944,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "rebond",
+            "particules_retour": "",
 			"effets": {
 				"RENVOIE_SORT": {
                     "base": {
@@ -1878,6 +1974,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "poof",
 			"effets": {
 				"TELEPORTE": 1
 			}
@@ -1902,6 +2000,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "immunite",
+            "particules_retour": "",
 			"effets": {
                 "cible": 8,
 				"IMMUNISE": {
@@ -1938,6 +2038,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
                 "CHANGE_STATS": {
                     "dommages_air": {
@@ -2003,6 +2105,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "poof",
 			"effets": {
 				"TELEPORTE": 1
 			}
@@ -2027,6 +2131,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -2070,6 +2176,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_neutre",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_POURCENT": {
                     "base": {
@@ -2101,6 +2209,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2132,6 +2242,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "",
 			"effets": {
                 "DOMMAGE_AIR": {
                     "base": {
@@ -2171,6 +2283,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "dommages_air": {
@@ -2236,6 +2350,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "generic_buff",
 			"effets": {
 				"DOMMAGE_AIR": {
                     "base": {
@@ -2290,6 +2406,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2321,6 +2439,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "hp_buff",
+            "particules_retour": "",
 			"effets": {
                 "BOOST_VIE": {
                     "base": {
@@ -2398,6 +2518,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "invocations": {
@@ -2429,6 +2551,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 0
 			}
@@ -2453,6 +2577,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "immunite",
+            "particules_retour": "",
 			"effets": {
                 "IMMUNISE": {
                     "base": {
@@ -2489,6 +2615,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -2520,6 +2648,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 1
 			}
@@ -2544,6 +2674,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "cible": 6,
@@ -2576,6 +2708,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2607,6 +2741,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "pa_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "pa": {
@@ -2638,6 +2774,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 2
 			}
@@ -2662,6 +2800,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 3
 			}
@@ -2688,6 +2828,8 @@
             "etat_requis": "PORTE_ALLIE",
             "etats_cible_interdits": ["PORTE_ALLIE", "PORTE_ENNEMI"],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"LANCE": 3
 			}
@@ -2712,6 +2854,8 @@
             "etat_requis": "",
             "etats_cible_interdits": ["PORTE"],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+			"particules_cible": "generic_debuff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "resistances_air": {
@@ -2777,6 +2921,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -2808,6 +2954,8 @@
             "etat_requis": "",
             "etats_cible_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE", "NON_PORTABLE"],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"PORTE": {
                     "base": {
@@ -2836,6 +2984,8 @@
             "etat_requis": "PORTE_ENNEMI",
             "etats_cible_interdits": ["PORTE_ALLIE", "PORTE_ENNEMI"],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
                 "LANCE": 4,
                 "DOMMAGE_FIXE": {
@@ -2865,6 +3015,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -2896,6 +3048,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
 				"PICOLE": {
 					"base": {
@@ -2938,6 +3092,8 @@
             "etat_requis": "PICOLE",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "",
 			"effets": {
                 "DOMMAGE_FEU": {
                     "base": {
@@ -2969,6 +3125,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
                 "STABILISE": {
                     "base": {
@@ -3005,6 +3163,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
                 "cible": 11,
                 "STABILISE": {
@@ -3044,6 +3204,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "poof",
 			"effets": {
                 "DOMMAGE_AIR": {
                     "base": {
@@ -3076,6 +3238,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
                 "ATTIRE": {
                     "base": {
@@ -3104,6 +3268,8 @@
             "etat_requis": "VIE_FAIBLE",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_AIR": {
                     "base": {
@@ -3137,6 +3303,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "",
 			"effets": {
 				"VOLE_TERRE": {
                     "base": {
@@ -3170,6 +3338,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "generic_buff",
 			"effets": {
 				"DOMMAGE_AIR": {
                     "base": {
@@ -3213,6 +3383,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -3286,6 +3458,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "generic_eau",
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -3325,6 +3499,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"SACRIFICE": {
                     "base": {
@@ -3353,6 +3529,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_soin",
+            "particules_retour": "generic_feu",
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -3386,6 +3564,8 @@
             "etat_requis": "",
             "etats_cible_interdits": ["INTRANSPOSABLE"],
             "etats_lanceur_interdits": ["PORTE", "INTRANSPOSABLE"],
+			"particules_cible": "poof",
+            "particules_retour": "poof",
 			"effets": {
 				"TRANSPOSE": 3
 			}
@@ -3412,6 +3592,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 4
 			}
@@ -3436,6 +3618,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 5
 			}
@@ -3460,6 +3644,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+            "particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 6
 			}
@@ -3484,6 +3670,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+            "particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 7
 			}
@@ -3508,6 +3696,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+			"particules_cible": "generic_neutre",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FIXE": {
                     "instant": 0,
@@ -3542,6 +3732,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+			"particules_cible": "poof",
+            "particules_retour": "generic_soin",
 			"effets": {
                 "ARBRE": 1,
 				"SOIN": {
@@ -3596,6 +3788,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -3627,6 +3821,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "",
 			"effets": {
                 "DOMMAGE_FEU": {
                     "cible": 7,
@@ -3662,6 +3858,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "invocations": {
@@ -3693,6 +3891,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE", "ARBRE"],
+			"particules_cible": "generic_terre",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_TERRE": {
                     "base": {
@@ -3723,6 +3923,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_eau",
+            "particules_retour": "",
 			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
@@ -3762,6 +3964,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
                 "GLYPHE": {
                     "base": {
@@ -3815,6 +4019,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_air",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_AIR": {
                     "base": {
@@ -3851,6 +4057,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"TOURNE": 0
 			}
@@ -3875,6 +4083,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 8
 			}
@@ -3899,6 +4109,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"DEVIENT_INVISIBLE": {
                     "base": {
@@ -3927,6 +4139,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
                 "DEVIENT_INVISIBLE": {
                     "base": {
@@ -3955,6 +4169,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
                 "POUSSE": {
                     "base": {
@@ -3983,6 +4199,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
                 "GLYPHE": {
                     "base": {
@@ -4017,6 +4235,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_eau",
+            "particules_retour": "",
 			"effets": {
 				"VOLE_EAU": {
                     "base": {
@@ -4052,6 +4272,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -4085,6 +4307,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
 				"INVOCATION": 9
 			}
@@ -4109,6 +4333,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "generic_buff",
 			"effets": {
 				"CHANGE_STATS": {
                     "renvoi_dommage": {
@@ -4149,6 +4375,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "pa_buff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "pa": {
@@ -4184,6 +4412,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+            "particules_cible": "pa_buff",
+            "particules_retour": "poof",
 			"effets": {
                 "TELEPORTE": 1,
                 "CHANGE_STATS": {
@@ -4218,6 +4448,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_eau",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_EAU": {
                     "base": {
@@ -4249,6 +4481,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_buff",
+            "particules_retour": "",
 			"effets": {
                 "IMMUNISE_RETRAIT_PA": {
                     "base": {
@@ -4290,6 +4524,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -4321,6 +4557,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "pa_debuff",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "pa": {
@@ -4354,6 +4592,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
+			"particules_cible": "generic_feu",
+            "particules_retour": "pa_buff",
 			"effets": {
 				"DOMMAGE_FEU": {
                     "base": {
@@ -4401,7 +4641,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "invocations": {
                         "base": {
@@ -4432,7 +4674,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "poof",
+            "particules_retour": "",
+			"effets": {
                 "INVOCATION": 10
             }
         },
@@ -4456,7 +4700,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "poof",
+            "particules_retour": "",
+			"effets": {
                 "INVOCATION": 11
             }
         },
@@ -4480,7 +4726,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_eau",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
                         "valeur": 5
@@ -4521,7 +4769,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "resistances_air": {
                         "base": {
@@ -4576,7 +4826,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_air",
+            "particules_retour": "poof",
+			"effets": {
                 "DOMMAGE_AIR": {
                     "base": {
                         "valeur": 4
@@ -4608,7 +4860,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHOIX": {
                     "feinte_offensive": {
                         "CHANGE_STATS": {
@@ -4737,7 +4991,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_eau",
+            "particules_retour": "",
+			"effets": {
                 "VOLE_EAU": {
                     "base": {
                         "valeur": 5
@@ -4768,7 +5024,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "poof",
+            "particules_retour": "",
+			"effets": {
                 "MAUDIT_CASE": {
                     "base": {
                         "duree": 1
@@ -4796,7 +5054,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_feu",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_FEU": {
                     "base": {
                         "valeur": 6
@@ -4849,7 +5109,9 @@
             "etat_requis": "PLEUTRE",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_eau",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
                         "valeur": 4
@@ -4890,7 +5152,9 @@
             "etat_requis": "PLEUTRE",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_feu",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_FEU": {
                     "base": {
                         "valeur": 4
@@ -4931,7 +5195,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "hp_buff",
+            "particules_retour": "",
+			"effets": {
                 "BOOST_VIE": {
                     "base": {
                         "valeur": 6,
@@ -4960,7 +5226,9 @@
             "etat_requis": "PSYCHOPATHE",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_terre",
+            "particules_retour": "poof",
+			"effets": {
                 "DOMMAGE_TERRE": {
                     "base": {
                         "valeur": 18
@@ -4989,7 +5257,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "poof",
+            "particules_retour": "",
+			"effets": {
                 "SWAP": {
                     "PLEUTRE": {
                         "base": {
@@ -5024,7 +5294,9 @@
             "etat_requis": "PSYCHOPATHE",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_debuff",
+            "particules_retour": "generic_buff",
+			"effets": {
                 "IMMOBILISE": {
                     "base": {
                         "duree": 1
@@ -5060,7 +5332,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_eau",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
                         "valeur": 5
@@ -5096,7 +5370,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "poof",
+            "particules_retour": "",
+			"effets": {
                 "ACTIVE_AURA": {
                     "base": {
                         "duree": 2
@@ -5124,7 +5400,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "pm": {
                         "base": {
@@ -5185,7 +5463,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "poof",
+            "particules_retour": "",
+			"effets": {
                 "MAUDIT_CLASSE": {
                     "base": {
                         "duree": 999
@@ -5215,7 +5495,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "pa_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "pa": {
                         "base": {
@@ -5246,7 +5528,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "resistances_air": {
                         "base": {
@@ -5301,7 +5585,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "dommages_air": {
                         "base": {
@@ -5350,7 +5636,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "pm_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "pm": {
                         "base": {
@@ -5387,7 +5675,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_air",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_AIR": {
                     "base": {
                         "valeur": 10
@@ -5415,7 +5705,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_neutre",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_FIXE": {
                     "instant": 0,
                     "base": {
@@ -5445,7 +5737,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_debuff",
+            "particules_retour": "",
+			"effets": {
                 "IMMOBILISE": {
                     "base": {
                         "duree": 1
@@ -5478,7 +5772,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_terre",
+            "particules_retour": "",
+			"effets": {
                 "cible": 10,
                 "DOMMAGE_TERRE": {
                     "base": {
@@ -5512,7 +5808,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "soins": {
                         "base": {
@@ -5543,7 +5841,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_soin",
+            "particules_retour": "",
+			"effets": {
                 "SOIN": {
                     "base": {
                         "valeur": 20
@@ -5571,7 +5871,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "poof",
+            "particules_retour": "",
+			"effets": {
                 "SACRIFICE": {
                     "base": {
                         "duree": 1
@@ -5599,7 +5901,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "poof",
+            "particules_retour": "",
+			"effets": {
                 "ATTIRE": {
                     "base": {
                         "valeur": 4
@@ -5627,7 +5931,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "poof",
+            "particules_retour": "",
+			"effets": {
                 "POUSSE": {
                     "base": {
                         "valeur": 4
@@ -5655,7 +5961,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_buff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "po": {
                         "base": {
@@ -5688,7 +5996,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_terre",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_TERRE": {
                     "base": {
                         "valeur": 8
@@ -5721,7 +6031,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_terre",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_TERRE": {
                     "base": {
                         "valeur": 8
@@ -5764,7 +6076,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_eau",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
                         "valeur": 3
@@ -5807,7 +6121,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_air",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_AIR": {
                     "base": {
                         "valeur": 4
@@ -5840,7 +6156,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_debuff",
+            "particules_retour": "",
+			"effets": {
                 "CHANGE_STATS": {
                     "pa": {
                         "base": {
@@ -5883,7 +6201,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_feu",
+            "particules_retour": "poof",
+			"effets": {
                 "DOMMAGE_FEU": {
                     "base": {
                         "valeur": 26
@@ -5917,7 +6237,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "rebond",
+            "particules_retour": "",
+			"effets": {
                 "RENVOIE_SORT": {
                     "base": {
                         "duree": 1
@@ -5947,7 +6269,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "effets": {
+            "particules_cible": "generic_eau",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_EAU": {
                     "base": {
                         "valeur": 4
@@ -5989,7 +6313,9 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": [],
-            "effets": {
+            "particules_cible": "generic_feu",
+            "particules_retour": "",
+			"effets": {
                 "DOMMAGE_FEU": {
                     "base": {
                         "valeur": 15

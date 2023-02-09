@@ -23,7 +23,7 @@ scale_max = 0.2
 [node name="GPUParticles2D" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_dnbly")
 emitting = false
-amount = 100
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_qh30w")
 texture = ExtResource("1_njfri")
 lifetime = 0.5

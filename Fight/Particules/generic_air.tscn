@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://bmsajcvlevlxw"]
 
-[ext_resource type="Texture2D" uid="uid://pu22ndofpy3j" path="res://Fight/Particules/Sprites/particule.png" id="1_rsdvj"]
+[ext_resource type="Texture2D" uid="uid://pu22ndofpy3j" path="res://Fight/Particules/Sprites/particule.png" id="1_di68e"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n64lv"]
 blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_c57vt"]
-offsets = PackedFloat32Array(0, 0.16388, 0.742475, 0.795987, 0.889632, 1)
+offsets = PackedFloat32Array(0, 0.0721649, 0.742475, 0.795987, 0.889632, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.768836, 0.730816, 0.640177, 1, 0.566177, 0.531791, 0.464944, 1, 0.567182, 0.527218, 0.500356, 0.501961, 0.56176, 0.53059, 0.48602, 0.0796763, 1, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_u0mjb"]
@@ -44,7 +44,7 @@ material = SubResource("CanvasItemMaterial_n64lv")
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_mcn7u")
-texture = ExtResource("1_rsdvj")
+texture = ExtResource("1_di68e")
 lifetime = 0.3
 one_shot = true
 explosiveness = 0.78

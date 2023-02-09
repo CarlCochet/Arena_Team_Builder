@@ -2,6 +2,8 @@ extends Combattant
 class_name Invocation
 
 
+signal tour_fini
+
 var invocateur
 var trigger_finish: bool
 
@@ -184,6 +186,7 @@ func debut_tour():
 		combat.passe_tour()
 		return
 	joue_ia()
+	await tour_fini
 	if not is_mort:
 		combat.passe_tour()
 
@@ -250,7 +253,9 @@ func joue_ia():
 			chemin.pop_front()
 			deplace_perso(chemin)
 	trigger_finish = old_grid_pos == grid_pos
+	var lock_stats = stats.copy()
 	await movement_finished
+	stats = lock_stats.copy()
 	for sort in sorts:
 		if not sort.precheck_cast(self):
 			continue
@@ -263,7 +268,7 @@ func joue_ia():
 		)
 		var cible = choix_cible(all_ldv)
 		if cible == null:
-			continue
+			continue 
 		if sort.pa <= stats.pa:
 			var _valide = false
 			if check_etats(["RATE_SORT"]):
@@ -289,6 +294,7 @@ func joue_ia():
 			if grid_pos != cible:
 				oriente_vers(cible)
 			joue_ia()
+	emit_signal("tour_fini")
 
 
 func meurt():

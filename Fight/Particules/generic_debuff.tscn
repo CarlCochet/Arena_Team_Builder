@@ -18,6 +18,7 @@ scale_max = 0.8
 color = Color(1, 1, 0.698039, 1)
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
+position = Vector2(0, -100)
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_qvcul")

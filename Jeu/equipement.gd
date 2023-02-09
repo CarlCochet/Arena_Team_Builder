@@ -12,6 +12,8 @@ var type_zone: GlobalData.TypeZone
 var taille_zone: Vector2
 var po_modifiable: int
 var cible: GlobalData.Cible
+var particules_cible: String
+var particules_retour: String
 var effets: Dictionary
 
 
@@ -24,6 +26,8 @@ func _init():
 	taille_zone = Vector2(0, 0)
 	po_modifiable = 1
 	cible = GlobalData.Cible.LIBRE
+	particules_cible = ""
+	particules_cible = ""
 	effets = {}
 
 
@@ -37,6 +41,8 @@ func from_json(data, json_categorie):
 		taille_zone = Vector2(data["taille_zone"][0], data["taille_zone"][1])
 		po_modifiable = data["po_modifiable"]
 		cible = data["cible"] as GlobalData.Cible
+		particules_cible = data["particules_cible"]
+		particules_retour = data["particules_retour"]
 		effets = data["effets"]
 	return self
 
@@ -52,6 +58,8 @@ func to_json():
 			"taille_zone": taille_zone,
 			"po_modifiable": po_modifiable,
 			"cible": cible,
+			"particules_cible": particules_cible,
+			"particules_retour": particules_retour,
 			"effets": effets
 		}
 	else:
