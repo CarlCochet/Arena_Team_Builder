@@ -80,6 +80,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		print("Coup critique!")
 	var targets = []
 	if effets.has("GLYPHE"):
+		lance_particules(lanceur, cases_cibles)
 		var new_glyphe = Glyphe.new(
 			lanceur.combat.tilemap.glyphes_indexeur, 
 			lanceur, 
