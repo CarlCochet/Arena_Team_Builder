@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvlmqdl60cean"]
+
+[ext_resource type="Texture2D" uid="uid://pu22ndofpy3j" path="res://Fight/Particules/Sprites/particule.png" id="1_ucshc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_21x70"]
+
+[sub_resource type="Gradient" id="Gradient_5gln5"]
+offsets = PackedFloat32Array(0, 0.16388, 0.541806, 0.735786, 0.889632, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.388235, 0.517647, 0, 1, 0.170194, 0.292721, 0, 1, 0.378299, 0.290841, 0, 0.501961, 0.612489, 0.527153, 0.291579, 0.0796763, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f5xw8"]
+gradient = SubResource("Gradient_5gln5")
+
+[sub_resource type="Curve" id="Curve_3e4dx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dk1dy"]
+curve = SubResource("Curve_3e4dx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2cy1q"]
+lifetime_randomness = 0.21
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 400.0
+initial_velocity_max = 500.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 300.0
+damping_max = 300.0
+angle_min = -720.0
+angle_max = 720.0
+scale_curve = SubResource("CurveTexture_dk1dy")
+color_ramp = SubResource("GradientTexture1D_f5xw8")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_21x70")
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_2cy1q")
+texture = ExtResource("1_ucshc")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.78
+randomness = 0.25

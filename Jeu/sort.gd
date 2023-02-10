@@ -22,6 +22,10 @@ var cumul_max: int
 var etat_requis: String
 var etats_cible_interdits: Array
 var etats_lanceur_interdits: Array
+var particules_cible: String
+var particules_retour: String
+var particules_cible_scene: PackedScene
+var particules_retour_scene: PackedScene
 var effets: Dictionary
 
 var compte_lancers: int
@@ -52,6 +56,8 @@ func _init():
 	etat_requis = ""
 	etats_cible_interdits = []
 	etats_lanceur_interdits = []
+	particules_cible = ""
+	particules_retour = ""
 	effets = {}
 	
 	cooldown_actuel = 0
@@ -76,6 +82,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		print("Coup critique!")
 	var targets = []
 	if effets.has("GLYPHE"):
+		lance_particules(lanceur, cases_cibles)
 		var new_glyphe = Glyphe.new(
 			lanceur.combat.tilemap.glyphes_indexeur, 
 			lanceur, 
@@ -93,6 +100,7 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 		return true
 	
 	if not effets.has("cible"):
+		lance_particules(lanceur, cases_cibles)
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
@@ -101,49 +109,68 @@ func execute_effets(lanceur, cases_cibles, centre) -> bool:
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.ALLIES:
 		for effet in effets.keys():
 			if effet != "cible":
+				var cases_particules = []
 				for combattant in combattants:
 					if combattant.equipe == lanceur.equipe:
+						cases_particules.append(combattant.grid_pos)
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.ENNEMIS:
 		for effet in effets.keys():
 			if effet != "cible":
+				var cases_particules = []
 				for combattant in combattants:
 					if combattant.equipe != lanceur.equipe:
+						cases_particules.append(combattant.grid_pos)
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.TOUT:
 		for effet in effets.keys():
 			if effet != "cible":
+				var cases_particules = []
 				for combattant in combattants:
+					cases_particules.append(combattant.grid_pos)
 					parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.CLASSE:
+		var cases_particules = []
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
 				if aoe or not combattant.check_etats(["PORTE"]):
+					cases_particules.append(combattant.grid_pos)
 					targets.append(combattant)
 					for combattant_bis in combattants:
 						if combattant_bis.classe == combattant.classe and combattant_bis.id != combattant.id and combattant.equipe == combattant_bis.equipe:
+							cases_particules.append(combattant_bis.grid_pos)
 							targets.append(combattant_bis)
+		lance_particules(lanceur, cases_particules)
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.PERSONNAGES:
 		for effet in effets.keys():
 			if effet != "cible":
+				var cases_particules = []
 				for combattant in combattants:
-					if not combattant.is_invocation: 
+					if not combattant.is_invocation:
+						cases_particules.append(combattant.grid_pos)
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.PERSONNAGES_ALLIES:
 		for effet in effets.keys():
 			if effet != "cible":
+				var cases_particules = []
 				for combattant in combattants:
 					if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
+						cases_particules.append(combattant.grid_pos)
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe)
+				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
 	
@@ -175,6 +202,8 @@ func retrait_cumul_max(p_cible):
 	if cumul_max > 0:
 		var new_effets = []
 		var compte_sort = 0
+		var delta_pa = p_cible.init_stats.pa + p_cible.stat_ret.pa + p_cible.stat_buffs.pa + p_cible.stat_cartes_combat.pa - p_cible.stats.pa
+		var delta_pm = p_cible.init_stats.pm + p_cible.stat_ret.pm + p_cible.stat_buffs.pm + p_cible.stat_cartes_combat.pm - p_cible.stats.pm
 		for i in range(len(p_cible.effets)-1, -1, -1):
 			var effet = p_cible.effets[i]
 			if effet.sort.nom == nom:
@@ -190,6 +219,8 @@ func retrait_cumul_max(p_cible):
 		p_cible.execute_effets()
 		p_cible.stats = p_cible.init_stats.copy().add(p_cible.stat_ret).add(p_cible.stat_buffs).add(p_cible.stat_cartes_combat)
 		p_cible.stats.hp -= delta_hp
+		p_cible.stats.pa -= delta_pa
+		p_cible.stats.pm -= delta_pm
 		p_cible.execute_buffs_hp()
 
 
@@ -323,6 +354,21 @@ func check_cible(lanceur, case_cible) -> bool:
 	return true
 
 
+func lance_particules(lanceur, cases: Array):
+	if not particules_retour.is_empty():
+		var particule = particules_retour_scene.instantiate()
+		particule.position = lanceur.combat.tilemap.map_to_local(lanceur.grid_pos - lanceur.combat.offset)
+		particule.z_index = 3
+		lanceur.combat.add_child(particule)
+		particule.emitting = true
+	for case in cases:
+		var particule = particules_cible_scene.instantiate()
+		particule.position = lanceur.combat.tilemap.map_to_local(case - lanceur.combat.offset) + particule.position
+		particule.z_index = 3
+		lanceur.combat.add_child(particule)
+		particule.emitting = true
+
+
 func from_arme(combattant, arme):
 	var element_principal = "DOMMAGE_FIXE"
 	match combattant.classe:
@@ -361,6 +407,11 @@ func from_arme(combattant, arme):
 		type_zone = data["type_zone"] as GlobalData.TypeZone
 		taille_zone = data["taille_zone"]
 		po_modifiable = data["po_modifiable"]
+		particules_cible = data["particules_cible"]
+		particules_retour = data["particules_retour"]
+		particules_cible_scene = load("res://Fight/Particules/" + particules_cible + ".tscn")
+		if not particules_retour.is_empty():
+			particules_retour_scene = load("res://Fight/Particules/" + particules_retour + ".tscn")
 		effets = data["effets"]
 	else:
 		pa = 5
@@ -368,6 +419,8 @@ func from_arme(combattant, arme):
 		type_zone = GlobalData.TypeZone.CERCLE
 		taille_zone = Vector2(0, 0)
 		po_modifiable = 0
+		particules_cible = "generic_" + element_principal.split("_")[1].to_lower()
+		particules_cible_scene = load("res://Fight/Particules/" + particules_cible + ".tscn")
 		effets = {element_principal:{"base":{"valeur":5},"critique":{"valeur":7}}}
 	nom = "arme"
 	ldv = 1
@@ -396,6 +449,11 @@ func copy():
 	new_sort.etat_requis = etat_requis
 	new_sort.etats_cible_interdits = etats_cible_interdits
 	new_sort.etats_lanceur_interdits = etats_lanceur_interdits
+	new_sort.particules_cible = particules_cible
+	new_sort.particules_retour = particules_retour
+	new_sort.particules_cible_scene = load("res://Fight/Particules/" + new_sort.particules_cible + ".tscn")
+	if not new_sort.particules_retour.is_empty():
+		new_sort.particules_retour_scene = load("res://Fight/Particules/" + new_sort.particules_retour + ".tscn")
 	new_sort.effets = effets.duplicate(true)
 	return new_sort
 
@@ -420,6 +478,11 @@ func from_json(data):
 	etat_requis = data["etat_requis"]
 	etats_cible_interdits = data["etats_cible_interdits"]
 	etats_lanceur_interdits = data["etats_lanceur_interdits"]
+	particules_cible = data["particules_cible"]
+	particules_retour = data["particules_retour"]
+	particules_cible_scene = load("res://Fight/Particules/" + particules_cible + ".tscn")
+	if not particules_retour.is_empty():
+		particules_retour_scene = load("res://Fight/Particules/" + particules_retour + ".tscn")
 	effets = data["effets"]
 	return self
 
@@ -445,6 +508,8 @@ func to_json():
 		"etat_requis": etat_requis,
 		"etats_cible_interdits": etats_cible_interdits,
 		"etats_lanceur_interdits": etats_lanceur_interdits,
+		"particules_cible": particules_cible,
+		"particules_retour": particules_retour,
 		"effets": effets
 	}
 

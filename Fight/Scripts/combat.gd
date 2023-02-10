@@ -98,7 +98,7 @@ func ajoute_sorts_bonus(noms_sorts_bonus: Array):
 			combattant.sorts.append(GlobalData.sorts[nom_sort].copy())
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func passe_tour():
 	combattant_selection.fin_tour()
 	tilemap.clear_layer(2)
@@ -106,11 +106,18 @@ func passe_tour():
 	selection_id += 1
 	if selection_id >= len(combattants):
 		init_nouveau_tour()
+	clean_particules()
 	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
 	change_action(10)
 	combattant_selection.debut_tour()
+
+
+func clean_particules():
+	for child in get_children():
+		if child is GPUParticles2D:
+			child.queue_free()
 
 
 func init_nouveau_tour():
@@ -177,7 +184,7 @@ func applique_carte_combat():
 						print(combattant.classe, "_", str(combattant.id), " perd " if effets_carte[cible][effet] < 0 else " gagne ", effets_carte[cible][effet], " ", effet, " (", 1, " tours).")
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func lance_game():
 	for combattant in combattants:
 		combattant.visible = true
@@ -194,7 +201,7 @@ func lance_game():
 	combattant_selection.debut_tour()
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func change_action(new_action: int):
 	if new_action >= len(combattant_selection.sorts):
 		new_action = 10
@@ -211,26 +218,26 @@ func change_action(new_action: int):
 		tilemap.clear_layer(2)
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func joue_action(action_id, grid_pos):
 	combattant_selection.joue_action(action_id, grid_pos)
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func change_orientation(orientation_id, combattant_id):
 	combattants[combattant_id].change_orientation(orientation_id)
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func place_perso(map_pos, combattant_id):
 	combattants[combattant_id].place_perso(map_pos)
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func affiche_path(grid_pos):
 	combattant_selection.affiche_path(grid_pos)
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func affiche_zone(action_id, grid_pos):
 	combattant_selection.affiche_zone(action_id, grid_pos)
 
@@ -409,7 +416,7 @@ func _on_choix_clicked(i, block, contenu, lanceur_id, cible_id, critique, nom_so
 	block.queue_free()
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func choix_clicked(i, contenu, lanceur_id, cible_id, critique, nom_sort):
 	var lanceur
 	var cible
@@ -433,6 +440,6 @@ func _on_bouton_retour_pressed():
 	rpc("retour_pressed")
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func retour_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_map.tscn")

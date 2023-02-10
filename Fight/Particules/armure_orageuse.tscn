@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://daxavkr8w5omv"]
+
+[ext_resource type="Texture2D" uid="uid://bvjd5lk7lxngj" path="res://Fight/Particules/Sprites/hex.png" id="1_bwhr6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6qkbf"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 50.0
+emission_ring_inner_radius = 10.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color = Color(0.72549, 0.847059, 0.921569, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_6qkbf")
+texture = ExtResource("1_bwhr6")
+lifetime = 0.5
+one_shot = true

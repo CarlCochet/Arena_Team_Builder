@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfben3dnagiu0"]
+
+[ext_resource type="Texture2D" uid="uid://b0prglqvqfyit" path="res://Fight/Particules/Sprites/coeur.png" id="1_6jvuu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n64lv"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_x7pw6"]
+offsets = PackedFloat32Array(0, 0.103679, 0.742475, 0.795987, 0.889632, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.695279, 0.795361, 1, 0.984483, 0, 0.336302, 1, 0.987495, 0, 0.309516, 0.501961, 0.989936, 0, 0.269533, 0.0796763, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l0447"]
+gradient = SubResource("Gradient_x7pw6")
+
+[sub_resource type="Curve" id="Curve_8r2rb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.503106, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0r88i"]
+curve = SubResource("Curve_8r2rb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_st4eu"]
+lifetime_randomness = 0.21
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 300.0
+damping_max = 300.0
+angle_min = -720.0
+angle_max = 720.0
+scale_curve = SubResource("CurveTexture_0r88i")
+color_ramp = SubResource("GradientTexture1D_l0447")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_n64lv")
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_st4eu")
+texture = ExtResource("1_6jvuu")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.78
+randomness = 0.25

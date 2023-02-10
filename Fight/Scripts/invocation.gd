@@ -2,6 +2,8 @@ extends Combattant
 class_name Invocation
 
 
+signal tour_fini
+
 var invocateur
 var trigger_finish: bool
 
@@ -80,7 +82,9 @@ func init(classe_int: int):
 	if GlobalData.sorts_lookup.has(classe):
 		var nom_sorts = GlobalData.sorts_lookup[classe]
 		for sort in nom_sorts:
-			sorts.append(GlobalData.sorts[sort])
+			var new_sort = GlobalData.sorts[sort].copy()
+			new_sort.nom = sort
+			sorts.append(new_sort)
 
 
 func update_hitbox():
@@ -174,15 +178,17 @@ func debut_tour():
 	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
 		stats.hp -= 2
 		stats_perdu.ajoute(-2, "hp")
-
+	
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
-	if check_etats(["PETRIFIE"]):
-		combat.passe_tour()
 	if not check_etats(["INVISIBLE"]):
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	if check_etats(["IMMOBILISE"]):
 		stats.pm = 0
+	if check_etats(["PETRIFIE"]):
+		combat.passe_tour()
+		return
 	joue_ia()
+	await tour_fini
 	if not is_mort:
 		combat.passe_tour()
 
@@ -249,7 +255,9 @@ func joue_ia():
 			chemin.pop_front()
 			deplace_perso(chemin)
 	trigger_finish = old_grid_pos == grid_pos
+	var lock_stats = stats.copy()
 	await movement_finished
+	stats = lock_stats.copy()
 	for sort in sorts:
 		if not sort.precheck_cast(self):
 			continue
@@ -262,7 +270,7 @@ func joue_ia():
 		)
 		var cible = choix_cible(all_ldv)
 		if cible == null:
-			continue
+			continue 
 		if sort.pa <= stats.pa:
 			var _valide = false
 			if check_etats(["RATE_SORT"]):
@@ -288,6 +296,7 @@ func joue_ia():
 			if grid_pos != cible:
 				oriente_vers(cible)
 			joue_ia()
+	emit_signal("tour_fini")
 
 
 func meurt():

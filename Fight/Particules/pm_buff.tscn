@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dewhlynx86w3r"]
+
+[ext_resource type="Texture2D" uid="uid://dlkf8ld03mptc" path="res://Fight/Particules/Sprites/bonus.png" id="1_5r63i"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_00bck"]
+emission_shape = 1
+emission_sphere_radius = 20.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 60.0
+gravity = Vector3(1000, 0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+color = Color(0.615686, 1, 0.619608, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_00bck")
+texture = ExtResource("1_5r63i")
+lifetime = 0.7
+one_shot = true
+fixed_fps = 360
