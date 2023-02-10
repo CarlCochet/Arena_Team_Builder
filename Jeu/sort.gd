@@ -24,6 +24,8 @@ var etats_cible_interdits: Array
 var etats_lanceur_interdits: Array
 var particules_cible: String
 var particules_retour: String
+var particules_cible_scene: PackedScene
+var particules_retour_scene: PackedScene
 var effets: Dictionary
 
 var compte_lancers: int
@@ -354,14 +356,13 @@ func check_cible(lanceur, case_cible) -> bool:
 
 func lance_particules(lanceur, cases: Array):
 	if not particules_retour.is_empty():
-		var particule = load("res://Fight/Particules/" + particules_retour + ".tscn").instantiate()
+		var particule = particules_retour_scene.instantiate()
 		particule.position = lanceur.combat.tilemap.map_to_local(lanceur.grid_pos - lanceur.combat.offset)
 		particule.z_index = 3
 		lanceur.combat.add_child(particule)
 		particule.emitting = true
-	var particule_scene = load("res://Fight/Particules/" + particules_cible + ".tscn")
 	for case in cases:
-		var particule = particule_scene.instantiate()
+		var particule = particules_cible_scene.instantiate()
 		particule.position = lanceur.combat.tilemap.map_to_local(case - lanceur.combat.offset) + particule.position
 		particule.z_index = 3
 		lanceur.combat.add_child(particule)
@@ -408,6 +409,9 @@ func from_arme(combattant, arme):
 		po_modifiable = data["po_modifiable"]
 		particules_cible = data["particules_cible"]
 		particules_retour = data["particules_retour"]
+		particules_cible_scene = load("res://Fight/Particules/" + particules_cible + ".tscn")
+		if not particules_retour.is_empty():
+			particules_retour_scene = load("res://Fight/Particules/" + particules_retour + ".tscn")
 		effets = data["effets"]
 	else:
 		pa = 5
@@ -416,6 +420,7 @@ func from_arme(combattant, arme):
 		taille_zone = Vector2(0, 0)
 		po_modifiable = 0
 		particules_cible = "generic_" + element_principal.split("_")[1].to_lower()
+		particules_cible_scene = load("res://Fight/Particules/" + particules_cible + ".tscn")
 		effets = {element_principal:{"base":{"valeur":5},"critique":{"valeur":7}}}
 	nom = "arme"
 	ldv = 1
@@ -446,6 +451,9 @@ func copy():
 	new_sort.etats_lanceur_interdits = etats_lanceur_interdits
 	new_sort.particules_cible = particules_cible
 	new_sort.particules_retour = particules_retour
+	new_sort.particules_cible_scene = load("res://Fight/Particules/" + new_sort.particules_cible + ".tscn")
+	if not new_sort.particules_retour.is_empty():
+		new_sort.particules_retour_scene = load("res://Fight/Particules/" + new_sort.particules_retour + ".tscn")
 	new_sort.effets = effets.duplicate(true)
 	return new_sort
 
@@ -472,6 +480,9 @@ func from_json(data):
 	etats_lanceur_interdits = data["etats_lanceur_interdits"]
 	particules_cible = data["particules_cible"]
 	particules_retour = data["particules_retour"]
+	particules_cible_scene = load("res://Fight/Particules/" + particules_cible + ".tscn")
+	if not particules_retour.is_empty():
+		particules_retour_scene = load("res://Fight/Particules/" + particules_retour + ".tscn")
 	effets = data["effets"]
 	return self
 

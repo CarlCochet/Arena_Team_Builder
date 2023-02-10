@@ -656,8 +656,9 @@ func change_stats():
 	instant = false
 	lanceur.stats.pa = 0 if lanceur.stats.pa < 0 else lanceur.stats.pa
 	lanceur.stats.pm = 0 if lanceur.stats.pm < 0 else lanceur.stats.pm
-	cible.stats.pa = 0 if cible.stats.pa < 0 else cible.stats.pa
-	cible.stats.pm = 0 if cible.stats.pm < 0 else cible.stats.pm
+	if not cible is Array:
+		cible.stats.pa = 0 if cible.stats.pa < 0 else cible.stats.pa
+		cible.stats.pm = 0 if cible.stats.pm < 0 else cible.stats.pm
 
 
 func pousse():

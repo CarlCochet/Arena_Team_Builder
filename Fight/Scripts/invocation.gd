@@ -82,7 +82,9 @@ func init(classe_int: int):
 	if GlobalData.sorts_lookup.has(classe):
 		var nom_sorts = GlobalData.sorts_lookup[classe]
 		for sort in nom_sorts:
-			sorts.append(GlobalData.sorts[sort])
+			var new_sort = GlobalData.sorts[sort].copy()
+			new_sort.nom = sort
+			sorts.append(new_sort)
 
 
 func update_hitbox():
