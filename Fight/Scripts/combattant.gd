@@ -72,6 +72,7 @@ func _ready():
 
 func _process(delta):
 	if len(positions_chemin) > 0:
+		combat.etat = 2
 		if position.distance_to(positions_chemin[0]) < 10.0:
 			position = positions_chemin[0]
 			positions_chemin.pop_front()
