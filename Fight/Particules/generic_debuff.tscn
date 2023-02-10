@@ -20,8 +20,9 @@ color = Color(1, 1, 0.698039, 1)
 [node name="GPUParticles2D" type="GPUParticles2D"]
 position = Vector2(0, -100)
 emitting = false
-amount = 20
+amount = 10
 process_material = SubResource("ParticleProcessMaterial_qvcul")
 texture = ExtResource("1_12stc")
+lifetime = 0.7
 one_shot = true
 fixed_fps = 360

@@ -199,6 +199,8 @@ func retrait_cumul_max(p_cible):
 	if cumul_max > 0:
 		var new_effets = []
 		var compte_sort = 0
+		var delta_pa = p_cible.init_stats.pa + p_cible.stat_ret.pa + p_cible.stat_buffs.pa + p_cible.stat_cartes_combat.pa - p_cible.stats.pa
+		var delta_pm = p_cible.init_stats.pm + p_cible.stat_ret.pm + p_cible.stat_buffs.pm + p_cible.stat_cartes_combat.pm - p_cible.stats.pm
 		for i in range(len(p_cible.effets)-1, -1, -1):
 			var effet = p_cible.effets[i]
 			if effet.sort.nom == nom:
@@ -214,6 +216,8 @@ func retrait_cumul_max(p_cible):
 		p_cible.execute_effets()
 		p_cible.stats = p_cible.init_stats.copy().add(p_cible.stat_ret).add(p_cible.stat_buffs).add(p_cible.stat_cartes_combat)
 		p_cible.stats.hp -= delta_hp
+		p_cible.stats.pa -= delta_pa
+		p_cible.stats.pm -= delta_pm
 		p_cible.execute_buffs_hp()
 
 
@@ -354,9 +358,10 @@ func lance_particules(lanceur, cases: Array):
 		particule.z_index = 3
 		lanceur.combat.add_child(particule)
 		particule.emitting = true
-	var particule = load("res://Fight/Particules/" + particules_cible + ".tscn").instantiate()
+	var particule_scene = load("res://Fight/Particules/" + particules_cible + ".tscn")
 	for case in cases:
-		particule.position = lanceur.combat.tilemap.map_to_local(case - lanceur.combat.offset)
+		var particule = particule_scene.instantiate()
+		particule.position = lanceur.combat.tilemap.map_to_local(case - lanceur.combat.offset) + particule.position
 		particule.z_index = 3
 		lanceur.combat.add_child(particule)
 		particule.emitting = true

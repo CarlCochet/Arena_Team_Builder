@@ -20,5 +20,6 @@ emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_haath")
 texture = ExtResource("1_jpf42")
+lifetime = 0.7
 one_shot = true
 fixed_fps = 360
