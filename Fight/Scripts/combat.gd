@@ -248,17 +248,17 @@ func change_orientation(orientation_id, combattant_id):
 	combattants[combattant_id].change_orientation(orientation_id)
 
 @rpc("any_peer", "call_local")
-func place_perso(map_pos, combattant_id):
-	combattants[combattant_id].place_perso(map_pos)
+func place_perso(map_pos: Vector2i, combattant_id: int, swap: bool):
+	combattants[combattant_id].place_perso(map_pos, swap)
 
 
 @rpc("any_peer", "call_local")
-func affiche_path(grid_pos):
+func affiche_path(grid_pos: Vector2i):
 	combattant_selection.affiche_path(grid_pos)
 
 
 @rpc("any_peer", "call_local")
-func affiche_zone(action_id, grid_pos):
+func affiche_zone(action_id: int, grid_pos: Vector2i):
 	combattant_selection.affiche_zone(action_id, grid_pos)
 
 
@@ -394,8 +394,12 @@ func _input(event):
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			rpc("retour_pressed")
 		if event is InputEventMouseButton:
-			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
-				rpc("place_perso", tilemap.local_to_map(event.position), selection_id)
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
+					rpc("place_perso", tilemap.local_to_map(event.position), selection_id, false)
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
+					rpc("place_perso", tilemap.local_to_map(event.position), selection_id, true)
 		if Input.is_key_pressed(KEY_UP) and event is InputEventKey and not event.echo:
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				rpc("change_orientation", 0, selection_id)
