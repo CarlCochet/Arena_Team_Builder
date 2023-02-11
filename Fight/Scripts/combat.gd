@@ -336,7 +336,7 @@ func _input(event):
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				rpc("passe_tour")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
-			rpc("retour_pressed")
+			affiche_quitter()
 		if event is InputEventMouseMotion:
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				if action == 10:
@@ -393,7 +393,7 @@ func _input(event):
 				rpc("lance_game")
 			rpc("set_pret")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
-			rpc("retour_pressed")
+			affiche_quitter()
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
@@ -471,6 +471,10 @@ func _on_bouton_retour_pressed():
 	rpc("retour_pressed")
 
 
+func affiche_quitter():
+	get_node("MenuRetour").visible = true
+
+
 @rpc("any_peer", "call_local")
 func retour_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_map.tscn")
@@ -481,3 +485,7 @@ func _on_timer_timeout():
 		rpc("passe_tour")
 	if etat == 0 and Client.is_host:
 		rpc("lance_game")
+
+
+func _on_quitter_pressed():
+	rpc("retour_pressed")
