@@ -373,7 +373,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 #	combat.tilemap.affiche_ldv_obstacles()
 
 
-func affiche_stats_change(valeur, stat):
+func affiche_stats_change(valeur: int, stat: String):
 	stats_perdu.ajoute(valeur, stat)
 
 
@@ -473,7 +473,7 @@ func place_perso(tile_pos: Vector2i, swap: bool):
 			target.position = old_position
 
 
-func bouge_perso(new_pos):
+func bouge_perso(new_pos: Vector2i):
 	var old_grid_pos = grid_pos
 	var old_map_pos = grid_pos - combat.offset
 	combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)

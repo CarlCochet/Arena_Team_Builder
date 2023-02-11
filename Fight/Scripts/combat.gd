@@ -70,7 +70,7 @@ func creer_personnages():
 	combattant_selection = combattants[selection_id]
 
 
-func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe):
+func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe: int):
 	var i = 0
 	for personnage in equipe.personnages:
 		if not personnage.classe.is_empty():
@@ -239,13 +239,14 @@ func change_action(new_action: int):
 
 
 @rpc("any_peer", "call_local")
-func joue_action(action_id, grid_pos):
+func joue_action(action_id: int, grid_pos: Vector2i):
 	combattant_selection.joue_action(action_id, grid_pos)
 
 
 @rpc("any_peer", "call_local")
-func change_orientation(orientation_id, combattant_id):
+func change_orientation(orientation_id: int, combattant_id: int):
 	combattants[combattant_id].change_orientation(orientation_id)
+
 
 @rpc("any_peer", "call_local")
 func place_perso(map_pos: Vector2i, combattant_id: int, swap: bool):

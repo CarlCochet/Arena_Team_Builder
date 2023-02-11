@@ -54,7 +54,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	debuffable = duree > 0
 
 
-func trouve_duree(data):
+func trouve_duree(data: Dictionary):
 	for key in data.keys():
 		if data[key] is Dictionary:
 			if data[key].has("duree"):
@@ -265,7 +265,7 @@ func update_widgets():
 			combattant.hp_label.text = str(combattant.stats.hp) + "/" + str(combattant.max_stats.hp)
 
 
-func calcul_dommage(base, stat, resistance, orientation_bonus):
+func calcul_dommage(base, stat: float, resistance: float, orientation_bonus: bool):
 	if base is String:
 		var values = base.replace("+", "d").split("d")
 		base = int(values[2])
@@ -284,7 +284,7 @@ func calcul_dommage(base, stat, resistance, orientation_bonus):
 	return result
 
 
-func update_sacrifice(p_cible, type):
+func update_sacrifice(p_cible, type: String):
 	for effet in p_cible.effets:
 		if effet.etat == "SACRIFICE" and effet.lanceur.id == p_cible.id:
 			if (not effet.lanceur.check_etats(["INTRANSPOSABLE", "PORTE"])) and (not p_cible.check_etats(["INTRANSPOSABLE", "PORTE"])) and cible.classe != "Arbre":
