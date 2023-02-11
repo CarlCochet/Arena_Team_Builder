@@ -26,6 +26,8 @@ var noms_cartes_combat: Array
 @onready var affichage_fin: Control = $AffichageFin
 @onready var texte_fin: Label = $AffichageFin/TexteFin
 @onready var bouton_retour: TextureButton = $AffichageFin/BoutonRetour
+@onready var timer: Timer = $Timer
+@onready var timer_label: Label = $TimerLabel
 
 
 func _ready():
@@ -39,7 +41,13 @@ func _ready():
 		fleche_carte_combat.visible = false
 	creer_personnages()
 	tour = 1
+	if GlobalData.is_multijoueur:
+		timer.start(60)
 	timeline.init(combattants, selection_id)
+
+
+func _process(_delta):
+	timer_label.text = str(int(timer.time_left))
 
 
 func creer_personnages():
@@ -107,6 +115,8 @@ func passe_tour():
 	if selection_id >= len(combattants):
 		init_nouveau_tour()
 	clean_particules()
+	if GlobalData.is_multijoueur:
+		timer.start(25)
 	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
@@ -197,6 +207,7 @@ func lance_game():
 	if GlobalData.is_multijoueur:
 		cartes_combat.update(noms_cartes_combat)
 		applique_carte_combat()
+		timer.start(25)
 	change_action(10)
 	combattant_selection.debut_tour()
 
@@ -443,3 +454,10 @@ func _on_bouton_retour_pressed():
 @rpc("any_peer", "call_local")
 func retour_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_map.tscn")
+
+
+func _on_timer_timeout():
+	if etat == 1 and combattant_selection.equipe != int(Client.is_host):
+		rpc("passe_tour")
+	if etat == 0 and Client.is_host:
+		rpc("lance_game")

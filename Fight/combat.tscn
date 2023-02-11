@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://egsxhipgew1"]
+[gd_scene load_steps=26 format=3 uid="uid://egsxhipgew1"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
 [ext_resource type="Script" path="res://Fight/Scripts/sorts_bonus_selection.gd" id="3_e0j6u"]
@@ -28,6 +28,9 @@
 font_size = 72
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k41so"]
+font_size = 24
 
 [node name="Combat" type="Node2D"]
 y_sort_enabled = true
@@ -168,9 +171,23 @@ texture_hover = ExtResource("19_igho5")
 [node name="AffichageCombattant" parent="." instance=ExtResource("23_ybnar")]
 visible = false
 
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TimerLabel" type="Label" parent="."]
+z_index = 3
+offset_left = 10.0
+offset_top = 688.0
+offset_right = 50.0
+offset_bottom = 725.0
+text = "25"
+label_settings = SubResource("LabelSettings_k41so")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="OrientationControls/Fleche0" to="." method="_on_fleche_0_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche1" to="." method="_on_fleche_1_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche2" to="." method="_on_fleche_2_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche3" to="." method="_on_fleche_3_pressed"]
 [connection signal="pressed" from="PasseTour" to="." method="_on_passe_tour_pressed"]
 [connection signal="pressed" from="AffichageFin/BoutonRetour" to="." method="_on_bouton_retour_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
