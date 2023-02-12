@@ -6,6 +6,7 @@ var classe_selected: int
 
 @onready var personnage: TextureRect = $Personnage
 @onready var classes: Array = $Classes.get_children()
+@onready var nom: TextEdit = $ChoixNom/TextEdit
 
 
 func _ready():
@@ -18,6 +19,7 @@ func _ready():
 		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
 		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
 	)
+	nom.text == GlobalData.get_perso_actuel().nom
 	classe_initiale = GlobalData.classes.find(GlobalData.get_perso_actuel().classe)
 	classe_selected = classe_initiale
 	classes[classe_initiale].button_pressed = true
@@ -50,9 +52,12 @@ func _on_fermer_pressed():
 
 
 func _on_valider_pressed():
+	if nom.text.is_empty():
+		return
 	if classe_selected != classe_initiale:
 		var nouveau_personnage = Personnage.new()
 		nouveau_personnage.classe = GlobalData.classes[classe_selected]
 		nouveau_personnage.calcul_stats()
 		GlobalData.set_perso_actuel(nouveau_personnage)
+	GlobalData.get_perso_actuel().nom = nom
 	get_tree().change_scene_to_file("res://UI/choix_sorts.tscn")

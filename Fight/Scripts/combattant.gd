@@ -7,6 +7,7 @@ signal movement_finished
 
 
 var classe: String
+var nom: String
 var personnage_ref: Personnage
 var is_invocation: bool
 var stats: Stats
@@ -120,6 +121,7 @@ func unselect():
 
 func from_personnage(p_personnage: Personnage, equipe_id: int):
 	classe = p_personnage.classe
+	nom = p_personnage.nom
 	personnage_ref = p_personnage
 	stats = p_personnage.stats.copy()
 	initiative_random = float(stats.initiative) + GlobalData.rng.randf()

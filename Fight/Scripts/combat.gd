@@ -30,6 +30,7 @@ var adversaire_pret: bool
 @onready var timer: Timer = $Timer
 @onready var timer_label: Label = $TimerLabel
 @onready var attente_adversaire: Label = $AttenteAdversaire
+@onready var chat_log: Control = $ChatLog
 
 
 func _ready():
