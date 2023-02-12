@@ -67,9 +67,9 @@ texture = ExtResource("2_265m7")
 
 [node name="StatsPrimaires" parent="." instance=ExtResource("2_ntw62")]
 layout_mode = 0
-offset_top = 66.0
+offset_top = 120.0
 offset_right = 250.0
-offset_bottom = 177.0
+offset_bottom = 231.0
 
 [node name="StatsSecondaires" parent="." instance=ExtResource("3_b8gg0")]
 layout_mode = 0

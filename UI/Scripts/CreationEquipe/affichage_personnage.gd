@@ -25,7 +25,7 @@ func update(id, equipe):
 			var texture_rect = TextureRect.new()
 			texture_rect.texture = load(path)
 			grid_equipements.add_child(texture_rect)
-	nom.text = equipe.personnages[id].nom
+	nom.text = "[center]" + equipe.personnages[id].nom
 
 
 func from_combattant(combattant: Combattant):
@@ -36,7 +36,7 @@ func from_combattant(combattant: Combattant):
 	personnage.get_node("Cape").texture = combattant.personnage.get_node("Cape").texture
 	personnage.get_node("Classe").texture = combattant.classe_sprite.texture
 	personnage.get_node("Coiffe").texture = combattant.personnage.get_node("Coiffe").texture
-	nom.text = combattant.nom
+	nom.text = "[center]" + combattant.nom
 	for equipement in combattant.equipements:
 		if combattant.equipements[equipement]:
 			var path = "res://UI/Logos/Equipements/" + equipement + "/" + combattant.equipements[equipement] + ".png"

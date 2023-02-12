@@ -19,7 +19,7 @@ func _ready():
 		"res://Classes/" + GlobalData.get_perso_actuel().classe + 
 		"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
 	)
-	nom.text == GlobalData.get_perso_actuel().nom
+	nom.text = GlobalData.get_perso_actuel().nom
 	classe_initiale = GlobalData.classes.find(GlobalData.get_perso_actuel().classe)
 	classe_selected = classe_initiale
 	classes[classe_initiale].button_pressed = true
@@ -59,5 +59,5 @@ func _on_valider_pressed():
 		nouveau_personnage.classe = GlobalData.classes[classe_selected]
 		nouveau_personnage.calcul_stats()
 		GlobalData.set_perso_actuel(nouveau_personnage)
-	GlobalData.get_perso_actuel().nom = nom
+	GlobalData.get_perso_actuel().nom = nom.text
 	get_tree().change_scene_to_file("res://UI/choix_sorts.tscn")

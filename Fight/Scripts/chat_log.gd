@@ -6,9 +6,10 @@ var VERT: String = "[color=#58B539]"
 var JAUNE: String = "[color=yellow]"
 var AIR: String = "[color=#53E050]"
 var TERRE: String = "[color=#A37649]"
-var FEU: String = "color=#D33434]"
+var FEU: String = "[color=#D33434]"
 var EAU: String = "[color=#428FB5]"
 var NEUTRE: String = "[color=white]"
+var SOIN: String = "[color=pink]"
 
 
 @onready var chat: RichTextLabel = $ChatText
@@ -20,7 +21,26 @@ func _ready():
 
 
 func stats(cible: Combattant, valeur: int, stat: String, duree: int):
-	pass
+	var text = VERT + "[b]" + cible.nom + "[/b] " + VERT
+	text += "perd " if valeur < 0 else "gagne "
+	if stat in ["dommages_air", "resistances_air"]:
+		text += AIR
+	if stat in ["dommages_terre", "resistances_terre"]:
+		text += TERRE
+	if stat in ["dommages_feu", "resistances_feu"]:
+		text += FEU
+	if stat in ["dommages_eau", "resistances_eau"]:
+		text += EAU
+	text += str(abs(valeur))
+	if not stat in ["pa", "pm", "hp", "po", "invocations"]:
+		text += "%"
+	if stat in ["pa", "pm", "hp", "po", "cc"]:
+		stat = stat.to_upper()
+	text += VERT + " " + stat.replace("_", " ")
+	if duree > 0:
+		text += " (" + str(duree) + " tours)"
+	text += "."
+	ajoute_text(text)
 
 
 func critique():
@@ -28,15 +48,37 @@ func critique():
 
 
 func dommages(cible: Combattant, valeur: int, element: String):
-	pass
+	var text = VERT + "[b]" + cible.nom + "[/b] " + VERT
+	text += "perd " if valeur < 0 else "gagne "
+	if element == "dommages_air":
+		text += AIR
+	if element == "dommages_terre":
+		text += TERRE
+	if element == "dommages_feu":
+		text += FEU
+	if element == "dommages_eau":
+		text += EAU
+	if element == "soin":
+		text += SOIN
+	if element.is_empty():
+		text += NEUTRE
+	text += str(abs(valeur)) + VERT + " PV."
+	ajoute_text(text)
 
 
 func sort(lanceur: Combattant, nom_sort: String):
-	pass
+	ajoute_text(VERT + "[b]" + lanceur.nom + "[/b] lance [b]" + nom_sort.replace("_", " ") + "[/b].")
 
 
 func etat(cible: Combattant, etat: String, duree: int):
-	pass
+	ajoute_text(VERT + "[b]" + cible.nom + "[/b] entre dans l'état [b]" + etat + "[/b] (" + str(duree) + " tours).")
+
+
+func generic(cible: Combattant, text: String):
+	if cible == null:
+		ajoute_text(VERT + text + ".")
+	else:
+		ajoute_text(VERT + "[b]" + cible.nom + "[/b] " + text + ".")
 
 
 func ajoute_text(text: String):

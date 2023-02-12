@@ -40,15 +40,6 @@ offset_right = 412.0
 offset_bottom = 348.0
 scale = Vector2(1.043, 1.043)
 
-[node name="Scroll" type="ScrollContainer" parent="UI"]
-layout_mode = 0
-offset_left = 450.0
-offset_right = 1000.0
-offset_bottom = 500.0
-
-[node name="Etats" type="Label" parent="UI/Scroll"]
-layout_mode = 2
-
 [node name="AffichagePersonnage" parent="UI" instance=ExtResource("1_qslj8")]
 layout_mode = 0
 offset_left = 100.0
@@ -70,3 +61,10 @@ offset_right = 248.0
 scale = Vector2(1, 1)
 alignment = 1
 is_popup = true
+
+[node name="Etats" type="RichTextLabel" parent="UI"]
+layout_mode = 2
+offset_left = 450.0
+offset_top = 10.0
+offset_right = 1000.0
+offset_bottom = 490.0

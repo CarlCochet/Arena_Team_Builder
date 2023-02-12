@@ -16,27 +16,20 @@ offset_bottom = 740.0
 script = ExtResource("1_esfgk")
 
 [node name="Background" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 500.0
 offset_bottom = 200.0
 color = Color(0.145098, 0.145098, 0.145098, 1)
 
 [node name="ChatText" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 495.0
 offset_bottom = 195.0
 bbcode_enabled = true
-text = "[color=#58B539][b]Iop_1[/b] lance [b]Amplification[/b].
-[color=yellow]Coup critique !
-[color=#58B539][b]Iop_1[/b] gagne [color=#53E050]15% [color=#58B539]dommages air.
-[color=#58B539][b]Iop_1[/b] gagne [color=#A37649]15% [color=#58B539]dommages terre.
-[color=#58B539][b]Iop_1[/b] gagne [color=#D33434]15% [color=#58B539]dommages feu.
-[color=#58B539][b]Iop_1[/b] gagne [color=#428FB5]15% [color=#58B539]dommages eau.
-[b]Iop_1[/b] lance [b]Couper[/b].
-[b]Xelor_2[/b] perd [color=white]16 [color=#58B539]PV.
-"
 scroll_following = true
 
 [node name="ChatButton" type="TextureButton" parent="."]

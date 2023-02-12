@@ -195,6 +195,7 @@ func applique_carte_combat():
 						combattant.effets.append(effet_exec)
 					else:
 						combattant.stat_cartes_combat[effet] += effets_carte[cible][effet]
+						chat_log.stats(combattant, effets_carte[cible][effet], effet, 1)
 						print(combattant.classe, "_", str(combattant.id), " perd " if effets_carte[cible][effet] < 0 else " gagne ", effets_carte[cible][effet], " ", effet, " (", 1, " tours).")
 
 

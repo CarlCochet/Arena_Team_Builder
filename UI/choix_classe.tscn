@@ -189,7 +189,7 @@ offset_bottom = 818.0
 [node name="TextEdit" type="TextEdit" parent="ChoixNom"]
 layout_mode = 0
 offset_right = 200.0
-offset_bottom = 35.0
+offset_bottom = 39.0
 placeholder_text = "Entrer nom"
 
 [node name="Label" type="Label" parent="ChoixNom"]

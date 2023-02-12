@@ -74,11 +74,13 @@ func execute_effets(lanceur, cases_cibles: Array, centre: Vector2i) -> bool:
 		return false
 	if len(cases_cibles) > 1 or taille_zone.y > 0:
 		aoe = true
+	lanceur.combat.chat_log.sort(lanceur, nom)
 	print(lanceur.classe, "_", str(lanceur.id), " lance ", nom, ".")
 	var combattants = lanceur.combat.combattants
 	var trouve = false
 	var critique = GlobalData.rng.randi_range(1, 100) <= lanceur.stats.cc
 	if critique:
+		lanceur.combat.chat_log.critique()
 		print("Coup critique!")
 	var targets = []
 	if effets.has("GLYPHE"):
