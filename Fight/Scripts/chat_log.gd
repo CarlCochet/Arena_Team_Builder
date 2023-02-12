@@ -83,10 +83,8 @@ func generic(cible: Combattant, text: String):
 
 func ajoute_text(text: String):
 	lignes.append(text)
-	
 	if len(lignes) > 100:
 		lignes.pop_front()
-	
 	chat.text = ""
 	for ligne in lignes:
 		chat.text += ligne + "\n"

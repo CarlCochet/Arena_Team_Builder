@@ -1024,7 +1024,7 @@ func invocation():
 			else:
 				combat.combattants.append(invoc)
 				break
-	combat.chat_log.generic(lanceur, " invoque un " + sort.nom)
+	combat.chat_log.generic(lanceur, " invoque un " + sort.nom.replace("_", " "))
 	print(lanceur.classe, "_", str(lanceur.id), " invoque un ", sort.nom ,".")
 
 
