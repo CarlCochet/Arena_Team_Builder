@@ -7,6 +7,7 @@ signal movement_finished
 
 
 var classe: String
+var nom: String
 var personnage_ref: Personnage
 var is_invocation: bool
 var stats: Stats
@@ -120,6 +121,7 @@ func unselect():
 
 func from_personnage(p_personnage: Personnage, equipe_id: int):
 	classe = p_personnage.classe
+	nom = p_personnage.nom
 	personnage_ref = p_personnage
 	stats = p_personnage.stats.copy()
 	initiative_random = float(stats.initiative) + GlobalData.rng.randf()
@@ -373,7 +375,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 #	combat.tilemap.affiche_ldv_obstacles()
 
 
-func affiche_stats_change(valeur, stat):
+func affiche_stats_change(valeur: int, stat: String):
 	stats_perdu.ajoute(valeur, stat)
 
 
@@ -445,14 +447,16 @@ func deplace_perso(chemin: Array):
 		combat.passe_tour()
 
 
-func place_perso(tile_pos: Vector2i):
+func place_perso(tile_pos: Vector2i, swap: bool):
 	var tile_data = combat.tilemap.get_cell_atlas_coords(2, tile_pos)
 	if (tile_data.x == 0 and equipe == 1) or (tile_data.x == 2 and equipe == 0):
 		var new_grid_pos = tile_pos + combat.offset
 		var place_libre = true
+		var target
 		for combattant in combat.combattants:
 			if combattant.grid_pos == new_grid_pos:
 				place_libre = false
+				target = combattant
 		if place_libre:
 			var old_grid_pos = grid_pos
 			var old_map_pos = grid_pos - combat.offset
@@ -462,9 +466,16 @@ func place_perso(tile_pos: Vector2i):
 			grid_pos = new_grid_pos
 			combat.tilemap.a_star_grid.set_point_solid(grid_pos)
 			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
+		elif swap:
+			var old_grid_pos = grid_pos
+			var old_position = position
+			grid_pos = target.grid_pos
+			position = target.position
+			target.grid_pos = old_grid_pos
+			target.position = old_position
 
 
-func bouge_perso(new_pos):
+func bouge_perso(new_pos: Vector2i):
 	var old_grid_pos = grid_pos
 	var old_map_pos = grid_pos - combat.offset
 	combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
@@ -573,6 +584,7 @@ func meurt():
 		combat.tilemap.a_star_grid.set_point_solid(grid_pos, true)
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	is_mort = true
+	combat.chat_log.generic(self, "est mort")
 	print(classe, "_", str(id), " est mort.")
 	queue_free()
 
@@ -664,7 +676,7 @@ func retrait_cooldown():
 
 
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if is_hovered:
 			emit_signal("clicked")
 

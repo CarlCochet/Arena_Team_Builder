@@ -3,6 +3,7 @@ class_name Personnage
 
 
 var classe: String
+var nom: String
 var stats: Stats
 var equipements: Dictionary
 var sorts: Array
@@ -10,6 +11,7 @@ var sorts: Array
 
 func _ready():
 	classe = ""
+	nom = ""
 	stats = Stats.new()
 	equipements = {
 		"Armes": "",
@@ -24,6 +26,7 @@ func _ready():
 
 func _init():
 	classe = ""
+	nom = ""
 	stats = Stats.new()
 	equipements = {
 		"Armes": "",
@@ -56,6 +59,7 @@ func ajoute_sort(nom_sort):
 
 func copy(personnage: Personnage):
 	classe = personnage.classe
+	nom = personnage.nom
 	stats =  personnage.stats.copy()
 	equipements = {}
 	sorts = []
@@ -80,6 +84,10 @@ func from_json(personnage_json):
 	classe = personnage_json["classe"]
 	equipements = personnage_json["equipements"]
 	sorts = personnage_json["sorts"]
+	if personnage_json.has("nom"):
+		nom = personnage_json["nom"]
+	else:
+		nom = ""
 	calcul_stats()
 	return self
 
@@ -87,6 +95,7 @@ func from_json(personnage_json):
 func to_json():
 	return {
 		"classe": classe,
+		"nom": nom,
 		"equipements": equipements,
 		"sorts": sorts
 	}

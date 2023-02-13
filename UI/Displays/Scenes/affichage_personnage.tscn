@@ -115,3 +115,15 @@ texture = ExtResource("5_f737c")
 [node name="Coiffe" type="Sprite2D" parent="Personnage"]
 position = Vector2(70, 55)
 texture = ExtResource("5_f737c")
+
+[node name="Nom" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 116.0
+offset_right = 242.0
+offset_bottom = 140.0
+scale = Vector2(0.5, 0.5)
+bbcode_enabled = true
+text = "[center]"
+scroll_active = false
+autowrap_mode = 1

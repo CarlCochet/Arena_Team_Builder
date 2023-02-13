@@ -48,20 +48,22 @@ offset_bottom = 40.0
 texture = ExtResource("2_qwo6t")
 
 [node name="Classe" type="TextureRect" parent="Personnage"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_qwo6t")
 
 [node name="Coiffe" type="TextureRect" parent="Personnage"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_qwo6t")
 
 [node name="StatsPrimaires" parent="." instance=ExtResource("2_g4v8w")]
 layout_mode = 0
-offset_top = 66.0
+offset_top = 120.0
 offset_right = 250.0
-offset_bottom = 177.0
+offset_bottom = 231.0
 
 [node name="StatsSecondaires" parent="." instance=ExtResource("3_6q5fj")]
 layout_mode = 0

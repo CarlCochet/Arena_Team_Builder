@@ -5,16 +5,15 @@ var a_star_grid: AStarGrid2D
 var grid: Array
 var start_bleu: Array
 var start_rouge: Array
-var x_max
-var y_max
-var offset
+var x_max: int
+var y_max: int
+var offset: Vector2i
 var mode = false
 var zonetype = GlobalData.TypeZone.CARRE
 var glyphes: Array
 var glyphes_indexeur: int
 var cases_maudites: Dictionary
 var combat: Combat
-
 var ms_data: Dictionary
 
 @onready var overlay = get_used_cells(2)
@@ -71,7 +70,7 @@ func update_effets_map():
 		set_cell(6, cases_maudites[case] - offset, 5, Vector2i(0, 0))
 
 
-func check_glyphe_effet(pos: Vector2i, effet: String):
+func check_glyphe_effet(pos: Vector2i, effet: String) -> bool:
 	for glyphe in glyphes:
 		if glyphe.centre == pos and glyphe.effets.has(effet):
 			return true

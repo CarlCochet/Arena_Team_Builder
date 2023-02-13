@@ -78,6 +78,7 @@ func init(classe_int: int):
 	stats = GlobalData.stats_classes[classe].copy()
 	max_stats = GlobalData.stats_classes[classe].copy()
 	init_stats = GlobalData.stats_classes[classe].copy()
+	nom = classe.replace("_", " ") + str(id)
 	sorts = []
 	if GlobalData.sorts_lookup.has(classe):
 		var nom_sorts = GlobalData.sorts_lookup[classe]

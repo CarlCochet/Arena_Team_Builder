@@ -67,18 +67,20 @@ func _init():
 	retour_lock = false
 
 
-func execute_effets(lanceur, cases_cibles, centre) -> bool:
+func execute_effets(lanceur, cases_cibles: Array, centre: Vector2i) -> bool:
 	var sort_valide = false
 	var aoe = false
 	if len(cases_cibles) == 0:
 		return false
 	if len(cases_cibles) > 1 or taille_zone.y > 0:
 		aoe = true
+	lanceur.combat.chat_log.sort(lanceur, nom)
 	print(lanceur.classe, "_", str(lanceur.id), " lance ", nom, ".")
 	var combattants = lanceur.combat.combattants
 	var trouve = false
 	var critique = GlobalData.rng.randi_range(1, 100) <= lanceur.stats.cc
 	if critique:
+		lanceur.combat.chat_log.critique()
 		print("Coup critique!")
 	var targets = []
 	if effets.has("GLYPHE"):
@@ -224,7 +226,7 @@ func retrait_cumul_max(p_cible):
 		p_cible.execute_buffs_hp()
 
 
-func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
+func parse_effets(lanceur, p_cible, p_effets: Dictionary, critique: bool, centre: Vector2i, aoe: bool):
 	if p_cible is Array:
 		for case in p_cible:
 			for effet in p_effets:
@@ -260,7 +262,7 @@ func parse_effets(lanceur, p_cible, p_effets, critique, centre, aoe):
 	return true
 
 
-func parse_effet(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe):
+func parse_effet(lanceur, p_cible, p_categorie: String, p_effet: Dictionary, critique: bool, centre: Vector2i, aoe: bool):
 	if p_cible is Array:
 		for case in p_cible:
 			var new_effet = Effet.new(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe, self)
@@ -319,7 +321,7 @@ func precheck_cast(lanceur) -> bool:
 	return true
 
 
-func check_cible(lanceur, case_cible) -> bool:
+func check_cible(lanceur, case_cible: Vector2i) -> bool:
 	var target
 	for combattant in lanceur.get_parent().combattants:
 		if combattant.grid_pos == case_cible:
@@ -369,7 +371,7 @@ func lance_particules(lanceur, cases: Array):
 		particule.emitting = true
 
 
-func from_arme(combattant, arme):
+func from_arme(combattant, arme: String):
 	var element_principal = "DOMMAGE_FIXE"
 	match combattant.classe:
 		"Cra":
@@ -458,7 +460,7 @@ func copy():
 	return new_sort
 
 
-func from_json(data):
+func from_json(data: Dictionary):
 	kamas = data["kamas"]
 	pa = data["pa"]
 	po = Vector2(data["po"][0], data["po"][1])
@@ -527,7 +529,7 @@ class Glyphe:
 	var sort
 	var deleted
 	
-	func _init(p_id, p_lanceur, p_tiles, p_effets, p_bloqueur, p_critique, p_centre, p_aoe, p_sort):
+	func _init(p_id: int, p_lanceur: Combattant, p_tiles: Array, p_effets: Dictionary, p_bloqueur: bool, p_critique: bool, p_centre: Vector2i, p_aoe: bool, p_sort: Sort):
 		id = p_id
 		lanceur = p_lanceur
 		tiles = p_tiles

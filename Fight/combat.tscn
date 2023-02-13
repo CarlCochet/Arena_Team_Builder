@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://egsxhipgew1"]
+[gd_scene load_steps=31 format=3 uid="uid://egsxhipgew1"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
 [ext_resource type="Script" path="res://Fight/Scripts/sorts_bonus_selection.gd" id="3_e0j6u"]
@@ -23,10 +23,22 @@
 [ext_resource type="Texture2D" uid="uid://6qux5yc23gvx" path="res://UI/Buttons/passe_tour_hovered.png" id="20_aeni8"]
 [ext_resource type="Texture2D" uid="uid://c13funwn7bgli" path="res://Fight/Images/fleche_timeline.png" id="22_niame"]
 [ext_resource type="PackedScene" uid="uid://d3c3cbr7us28b" path="res://Fight/affichage_combattant.tscn" id="23_ybnar"]
+[ext_resource type="Texture2D" uid="uid://ckjad3evdt6ka" path="res://UI/Buttons/quitter_base.png" id="24_vm5up"]
+[ext_resource type="Texture2D" uid="uid://drayiume7pthv" path="res://UI/Buttons/quitter_clicked.png" id="25_vwne5"]
+[ext_resource type="Texture2D" uid="uid://cv34br03srve7" path="res://UI/Buttons/quitter_hovered.png" id="26_f4qhe"]
+[ext_resource type="PackedScene" uid="uid://d4g0k403igov1" path="res://Fight/chat_log.tscn" id="27_6acv5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bi0gt"]
 font_size = 72
 outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k41so"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_gqcff"]
+font_size = 32
+outline_size = 7
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Combat" type="Node2D"]
@@ -168,9 +180,68 @@ texture_hover = ExtResource("19_igho5")
 [node name="AffichageCombattant" parent="." instance=ExtResource("23_ybnar")]
 visible = false
 
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TimerLabel" type="Label" parent="."]
+z_index = 3
+offset_left = 10.0
+offset_top = 688.0
+offset_right = 50.0
+offset_bottom = 725.0
+text = "25"
+label_settings = SubResource("LabelSettings_k41so")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttenteAdversaire" type="Label" parent="."]
+visible = false
+z_index = 3
+offset_left = 588.0
+offset_top = 427.0
+offset_right = 1023.0
+offset_bottom = 475.0
+text = "En attente de l'adversaire..."
+label_settings = SubResource("LabelSettings_gqcff")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuRetour" type="Popup" parent="."]
+position = Vector2i(650, 350)
+size = Vector2i(300, 200)
+borderless = false
+
+[node name="Control" type="Control" parent="MenuRetour"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="MenuRetour/Control"]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -73.0
+offset_right = 1683.0
+offset_bottom = 965.0
+scale = Vector2(1, 20)
+color = Color(0.262745, 0.278431, 0.282353, 1)
+
+[node name="Quitter" type="TextureButton" parent="MenuRetour/Control"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 278.0
+offset_bottom = 128.0
+texture_normal = ExtResource("24_vm5up")
+texture_pressed = ExtResource("25_vwne5")
+texture_hover = ExtResource("26_f4qhe")
+
+[node name="ChatLog" parent="." instance=ExtResource("27_6acv5")]
+
 [connection signal="pressed" from="OrientationControls/Fleche0" to="." method="_on_fleche_0_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche1" to="." method="_on_fleche_1_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche2" to="." method="_on_fleche_2_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche3" to="." method="_on_fleche_3_pressed"]
 [connection signal="pressed" from="PasseTour" to="." method="_on_passe_tour_pressed"]
 [connection signal="pressed" from="AffichageFin/BoutonRetour" to="." method="_on_bouton_retour_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="MenuRetour/Control/Quitter" to="." method="_on_quitter_pressed"]

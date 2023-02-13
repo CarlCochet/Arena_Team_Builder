@@ -15,6 +15,7 @@ var tilemap: TileMap
 var spell_pressed: bool
 var tour: int
 var noms_cartes_combat: Array
+var adversaire_pret: bool
 
 @onready var sorts: Control = $Sorts
 @onready var sorts_bonus: Control = $SortsBonus
@@ -26,6 +27,10 @@ var noms_cartes_combat: Array
 @onready var affichage_fin: Control = $AffichageFin
 @onready var texte_fin: Label = $AffichageFin/TexteFin
 @onready var bouton_retour: TextureButton = $AffichageFin/BoutonRetour
+@onready var timer: Timer = $Timer
+@onready var timer_label: Label = $TimerLabel
+@onready var attente_adversaire: Label = $AttenteAdversaire
+@onready var chat_log: Control = $ChatLog
 
 
 func _ready():
@@ -33,13 +38,20 @@ func _ready():
 	add_child(tilemap)
 	etat = 0
 	spell_pressed = false
+	adversaire_pret = not GlobalData.is_multijoueur
 	indexeur_global = 0
 	offset = tilemap.offset
 	if not GlobalData.is_multijoueur:
 		fleche_carte_combat.visible = false
 	creer_personnages()
 	tour = 1
+	if GlobalData.is_multijoueur:
+		timer.start(60)
 	timeline.init(combattants, selection_id)
+
+
+func _process(_delta):
+	timer_label.text = str(int(timer.time_left))
 
 
 func creer_personnages():
@@ -59,7 +71,7 @@ func creer_personnages():
 	combattant_selection = combattants[selection_id]
 
 
-func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe):
+func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe: int):
 	var i = 0
 	for personnage in equipe.personnages:
 		if not personnage.classe.is_empty():
@@ -107,6 +119,8 @@ func passe_tour():
 	if selection_id >= len(combattants):
 		init_nouveau_tour()
 	clean_particules()
+	if GlobalData.is_multijoueur:
+		timer.start(25)
 	timeline.init(combattants, selection_id)
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
@@ -181,11 +195,18 @@ func applique_carte_combat():
 						combattant.effets.append(effet_exec)
 					else:
 						combattant.stat_cartes_combat[effet] += effets_carte[cible][effet]
+						chat_log.stats(combattant, effets_carte[cible][effet], effet, 1)
 						print(combattant.classe, "_", str(combattant.id), " perd " if effets_carte[cible][effet] < 0 else " gagne ", effets_carte[cible][effet], " ", effet, " (", 1, " tours).")
+
+
+@rpc("any_peer")
+func set_pret():
+	adversaire_pret = true
 
 
 @rpc("any_peer", "call_local")
 func lance_game():
+	attente_adversaire.visible = false
 	for combattant in combattants:
 		combattant.visible = true
 	combattants[0].unselect()
@@ -197,6 +218,7 @@ func lance_game():
 	if GlobalData.is_multijoueur:
 		cartes_combat.update(noms_cartes_combat)
 		applique_carte_combat()
+		timer.start(25)
 	change_action(10)
 	combattant_selection.debut_tour()
 
@@ -219,26 +241,27 @@ func change_action(new_action: int):
 
 
 @rpc("any_peer", "call_local")
-func joue_action(action_id, grid_pos):
+func joue_action(action_id: int, grid_pos: Vector2i):
 	combattant_selection.joue_action(action_id, grid_pos)
 
 
 @rpc("any_peer", "call_local")
-func change_orientation(orientation_id, combattant_id):
+func change_orientation(orientation_id: int, combattant_id: int):
 	combattants[combattant_id].change_orientation(orientation_id)
 
+
 @rpc("any_peer", "call_local")
-func place_perso(map_pos, combattant_id):
-	combattants[combattant_id].place_perso(map_pos)
+func place_perso(map_pos: Vector2i, combattant_id: int, swap: bool):
+	combattants[combattant_id].place_perso(map_pos, swap)
 
 
 @rpc("any_peer", "call_local")
-func affiche_path(grid_pos):
+func affiche_path(grid_pos: Vector2i):
 	combattant_selection.affiche_path(grid_pos)
 
 
 @rpc("any_peer", "call_local")
-func affiche_zone(action_id, grid_pos):
+func affiche_zone(action_id: int, grid_pos: Vector2i):
 	combattant_selection.affiche_zone(action_id, grid_pos)
 
 
@@ -315,7 +338,7 @@ func _input(event):
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				rpc("passe_tour")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
-			rpc("retour_pressed")
+			affiche_quitter()
 		if event is InputEventMouseMotion:
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				if action == 10:
@@ -367,12 +390,19 @@ func _input(event):
 				rpc("change_orientation", 3, selection_id)
 	if etat == 0:
 		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
-			rpc("lance_game")
+			attente_adversaire.visible = true
+			if adversaire_pret:
+				rpc("lance_game")
+			rpc("set_pret")
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
-			rpc("retour_pressed")
+			affiche_quitter()
 		if event is InputEventMouseButton:
-			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
-				rpc("place_perso", tilemap.local_to_map(event.position), selection_id)
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
+					rpc("place_perso", tilemap.local_to_map(event.position), selection_id, false)
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
+					rpc("place_perso", tilemap.local_to_map(event.position), selection_id, true)
 		if Input.is_key_pressed(KEY_UP) and event is InputEventKey and not event.echo:
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				rpc("change_orientation", 0, selection_id)
@@ -408,7 +438,10 @@ func _on_passe_tour_pressed():
 		if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 			rpc("passe_tour")
 	if etat == 0:
-		rpc("lance_game")
+		attente_adversaire.visible = true
+		if adversaire_pret:
+			rpc("lance_game")
+		rpc("set_pret")
 
 
 func _on_choix_clicked(i, block, contenu, lanceur_id, cible_id, critique, nom_sort):
@@ -440,6 +473,21 @@ func _on_bouton_retour_pressed():
 	rpc("retour_pressed")
 
 
+func affiche_quitter():
+	get_node("MenuRetour").visible = true
+
+
 @rpc("any_peer", "call_local")
 func retour_pressed():
 	get_tree().change_scene_to_file("res://UI/choix_map.tscn")
+
+
+func _on_timer_timeout():
+	if etat == 1 and combattant_selection.equipe != int(Client.is_host):
+		rpc("passe_tour")
+	if etat == 0 and Client.is_host:
+		rpc("lance_game")
+
+
+func _on_quitter_pressed():
+	rpc("retour_pressed")

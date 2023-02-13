@@ -3,7 +3,7 @@ extends Popup
 
 @onready var affichage_personnage = $UI/AffichagePersonnage
 @onready var affichage_stats = $UI/AffichageStats
-@onready var etats: Label = $UI/Scroll/Etats
+@onready var etats: RichTextLabel = $UI/Etats
 @onready var sorts = $UI/ContainerSorts/Sorts
 
 
@@ -23,8 +23,8 @@ func update_etats(combattant):
 	var stats = Stats.new().nom_stats
 	for effet in combattant.effets:
 		if effet.sort.nom != nom_sort or effet.lanceur.id != id_lanceur:
-			text += "-----------------------------------------------------------------------------------------------------\n"
-			text += effet.sort.nom + " - Lanceur : " + effet.lanceur.classe + "_" + str(effet.lanceur.id) + "\n"
+			text += "---------------------------------------------------------------------------------------------------------\n"
+			text += effet.sort.nom + " - Lanceur : " + effet.lanceur.nom + "\n"
 			nom_sort = effet.sort.nom
 			id_lanceur = effet.lanceur.id
 		if effet.etat != "":

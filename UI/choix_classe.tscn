@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://byrls820tvsdn"]
+[gd_scene load_steps=37 format=3 uid="uid://byrls820tvsdn"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_classe.gd" id="1_e1xo3"]
 [ext_resource type="Texture2D" uid="uid://cnfldddiljcbc" path="res://UI/Logos/Classes/cra_unselected.png" id="1_v4byf"]
@@ -35,6 +35,9 @@
 [ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="29_0max7"]
 [ext_resource type="Texture2D" uid="uid://36o83i7iq234" path="res://UI/Logos/Classes/zobal_selected.png" id="29_0tcq4"]
 [ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="30_f8pnp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ehp7s"]
+font_size = 18
 
 [node name="ChoixClasse" type="Control"]
 layout_mode = 3
@@ -149,9 +152,9 @@ texture_pressed = ExtResource("29_0tcq4")
 
 [node name="GridContainer2" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 607.0
+offset_left = 603.0
 offset_top = 845.0
-offset_right = 871.0
+offset_right = 867.0
 offset_bottom = 885.0
 scale = Vector2(1.5, 1.5)
 columns = 2
@@ -175,6 +178,27 @@ offset_top = 3.0
 offset_right = 816.0
 offset_bottom = 131.0
 scale = Vector2(2, 2)
+
+[node name="ChoixNom" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 700.0
+offset_top = 778.0
+offset_right = 740.0
+offset_bottom = 818.0
+
+[node name="TextEdit" type="TextEdit" parent="ChoixNom"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 39.0
+placeholder_text = "Entrer nom"
+
+[node name="Label" type="Label" parent="ChoixNom"]
+layout_mode = 0
+offset_top = -30.0
+offset_right = 47.0
+offset_bottom = -4.0
+text = "Nom :"
+label_settings = SubResource("LabelSettings_ehp7s")
 
 [connection signal="pressed" from="GridContainer2/Fermer" to="." method="_on_fermer_pressed"]
 [connection signal="pressed" from="GridContainer2/Valider" to="." method="_on_valider_pressed"]

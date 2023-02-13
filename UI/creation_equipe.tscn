@@ -138,9 +138,9 @@ layout_mode = 2
 [node name="GridStatsPrimaires" type="GridContainer" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 258.0
+offset_top = 276.0
 offset_right = 1593.0
-offset_bottom = 369.008
+offset_bottom = 387.008
 theme_override_constants/h_separation = 17
 columns = 6
 
