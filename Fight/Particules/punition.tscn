@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://m1m7b7nlfo5t"]
+
+[ext_resource type="Texture2D" uid="uid://b405ianu7lcc5" path="res://Fight/Particules/Sprites/KennyPack/slash_02.png" id="1_guxxh"]
+
+[sub_resource type="Gradient" id="Gradient_e7otu"]
+offsets = PackedFloat32Array(0, 0.278539, 0.534247, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.498039, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nw1g3"]
+gradient = SubResource("Gradient_e7otu")
+
+[sub_resource type="Curve" id="Curve_ssvog"]
+_data = [Vector2(0.0165289, 1), 0.0, 0.0, 0, 0, Vector2(0.276859, 0.481818), 0.0, 0.0, 0, 0, Vector2(0.53719, 0.972727), 0.0, 0.0, 0, 0, Vector2(0.797521, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_v2mri"]
+curve = SubResource("Curve_ssvog")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_777ql"]
+emission_shape = 1
+emission_sphere_radius = 50.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = -700.0
+angular_velocity_max = 700.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.05
+scale_max = 0.05
+scale_curve = SubResource("CurveTexture_v2mri")
+color_ramp = SubResource("GradientTexture1D_nw1g3")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -50)
+emitting = false
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_777ql")
+texture = ExtResource("1_guxxh")
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.7
