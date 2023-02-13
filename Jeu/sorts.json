@@ -463,8 +463,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_air",
-            "particules_retour": "generic_eau",
+            "particules_cible": "esprit_felin",
+            "particules_retour": "esprit_felin",
 			"effets": {
 				"DOMMAGE_AIR": {
 					"base": {
@@ -634,7 +634,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_air",
+			"particules_cible": "cartes",
             "particules_retour": "",
 			"effets": {
 				"DOMMAGE_AIR": {
@@ -675,7 +675,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_neutre",
+            "particules_cible": "cartes",
             "particules_retour": "",
 			"effets": {
                 "cible": 8,
@@ -711,7 +711,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_neutre",
+            "particules_cible": "cartes",
             "particules_retour": "",
 			"effets": {
                 "cible": 8,
@@ -5772,7 +5772,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "particules_cible": "generic_terre",
+            "particules_cible": "cartes",
             "particules_retour": "",
 			"effets": {
                 "cible": 10,

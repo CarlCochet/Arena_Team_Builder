@@ -1,7 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8u44dnn2hjjd"]
+[gd_scene load_steps=15 format=3 uid="uid://c8u44dnn2hjjd"]
 
 [ext_resource type="Texture2D" uid="uid://dhj6iw3v34wqe" path="res://Fight/Particules/Sprites/cross.png" id="1_tl5y6"]
 [ext_resource type="Texture2D" uid="uid://c5chnbjxlrhce" path="res://Fight/Particules/Sprites/great_beam.png" id="2_abohg"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g011m"]
+blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_7kuge"]
 offsets = PackedFloat32Array(0, 0.208531, 0.668246, 1)
@@ -37,8 +40,8 @@ _data = [Vector2(0.00413223, 0.136364), 0.0, 0.0, 0, 0, Vector2(1, 0.345455), 0.
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_r56t6"]
-_data = [Vector2(0, 0.154545), 0.0, 0.0, 0, 0, Vector2(1, 0.518182), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.157025, 0), 0.0, 0.0, 0, 0, Vector2(0.297521, 0.518182), 0.0, 0.0, 0, 0, Vector2(1, 0.518182), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_llypw"]
 curve_x = SubResource("Curve_47ok1")
@@ -57,6 +60,7 @@ color_ramp = SubResource("GradientTexture1D_mu53m")
 [node name="Node2D" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_g011m")
 position = Vector2(0, -50)
 emitting = false
 amount = 1
