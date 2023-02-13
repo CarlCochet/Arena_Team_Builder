@@ -35,7 +35,9 @@ angle_max = 720.0
 scale_curve = SubResource("CurveTexture_513gb")
 color_ramp = SubResource("GradientTexture1D_mk1sm")
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_n64lv")
 emitting = false
 amount = 20

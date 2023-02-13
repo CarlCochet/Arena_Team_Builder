@@ -362,13 +362,15 @@ func lance_particules(lanceur, cases: Array):
 		particule.position = lanceur.combat.tilemap.map_to_local(lanceur.grid_pos - lanceur.combat.offset)
 		particule.z_index = 3
 		lanceur.combat.add_child(particule)
-		particule.emitting = true
+		for child in particule.get_children():
+			child.emitting = true
 	for case in cases:
 		var particule = particules_cible_scene.instantiate()
 		particule.position = lanceur.combat.tilemap.map_to_local(case - lanceur.combat.offset) + particule.position
 		particule.z_index = 3
 		lanceur.combat.add_child(particule)
-		particule.emitting = true
+		for child in particule.get_children():
+			child.emitting = true
 
 
 func from_arme(combattant, arme: String):

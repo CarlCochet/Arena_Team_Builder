@@ -17,7 +17,9 @@ scale_min = 0.8
 scale_max = 0.8
 color = Color(0.556863, 0.756863, 1, 1)
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(0, -100)
 scale = Vector2(1.01754, 1.5)
 emitting = false

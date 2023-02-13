@@ -2406,7 +2406,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_terre",
+            "particules_cible": "pression",
             "particules_retour": "",
 			"effets": {
 				"DOMMAGE_TERRE": {
@@ -4272,7 +4272,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_feu",
+            "particules_cible": "aiguille",
             "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {

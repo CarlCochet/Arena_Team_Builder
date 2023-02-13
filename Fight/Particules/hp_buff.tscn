@@ -15,7 +15,9 @@ orbit_velocity_min = 1.0
 orbit_velocity_max = 1.0
 color = Color(0.992157, 0.560784, 0.505882, 1)
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_jiqd2")

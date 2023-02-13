@@ -877,7 +877,7 @@ func avance():
 func immobilise():
 	etat = "IMMOBILISE"
 	if instant:
-		combat.chat_log.generic(cible, " est immobilisé (" + str(duree) + " tours)")
+		combat.chat_log.generic(cible, "est immobilisé (" + str(duree) + " tours)")
 		print(cible.classe, "_", str(cible.id), " est immobilisé (", duree, " tours).")
 	instant = false
 
@@ -899,14 +899,14 @@ func transpose():
 func petrifie():
 	etat = "PETRIFIE"
 	if instant:
-		combat.chat_log.generic(cible, " est pétrifié (" + str(duree) + " tours)")
+		combat.chat_log.generic(cible, "est pétrifié (" + str(duree) + " tours)")
 		print(cible.classe, "_", str(cible.id), " est pétrifié (", duree, " tours).")
 	instant = false
 
 
 func rate_sort():
 	etat = "RATE_SORT"
-	combat.chat_log.generic(cible, " ratera son prochain sort")
+	combat.chat_log.generic(cible, "ratera son prochain sort")
 	print(cible.classe, "_", str(cible.id), " ratera son prochain sort.")
 
 
@@ -916,7 +916,7 @@ func revele_invisible():
 		cible.retire_etats(["INVISIBLE"])
 		cible.visible = true
 		cible.is_visible = true
-		combat.chat_log.generic(cible, " est révélé")
+		combat.chat_log.generic(cible, "est révélé")
 		print(cible.classe, "_", str(cible.id), " est révélé.")
 		return
 	for combattant in combat.combattants:
@@ -925,7 +925,7 @@ func revele_invisible():
 			combattant.retire_etats(["INVISIBLE"])
 			combattant.visible = true
 			combattant.is_visible = true
-			combat.chat_log.generic(combattant, " est révélé")
+			combat.chat_log.generic(combattant, "est révélé")
 			print(combattant.classe, "_", str(combattant.id), " est révélé.")
 
 
@@ -938,7 +938,7 @@ func devient_invisible():
 		cible.classe_sprite.material.set_shader_parameter("alpha", 0.5)
 	cible.is_visible = false
 	combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, cible.grid_pos - combat.offset).x
-	combat.chat_log.generic(cible, " devient invisible (" + str(duree) + " tours)")
+	combat.chat_log.generic(cible, "devient invisible (" + str(duree) + " tours)")
 	print(cible.classe, "_", str(cible.id), " devient invisible (", duree, " tours).")
 
 
@@ -959,14 +959,14 @@ func desenvoute():
 	cible.stats.hp -= delta_hp
 	cible.buffs_hp = []
 	cible.max_stats = cible.init_stats.copy()
-	combat.chat_log.generic(cible, " est désenvouté")
+	combat.chat_log.generic(cible, "est désenvouté")
 	print(cible.classe, "_", str(cible.id), " est désenvouté.")
 
 
 func non_portable():
 	etat = "NON_PORTABLE"
 	if instant:
-		combat.chat_log.generic(cible, " est non-portable (" + str(duree) + " tours)")
+		combat.chat_log.generic(cible, "est non-portable (" + str(duree) + " tours)")
 		print(cible.classe, "_", str(cible.id), " est non-portable (", duree, " tours).")
 	instant = false
 
@@ -974,7 +974,7 @@ func non_portable():
 func intransposable():
 	etat = "INTRANSPOSABLE"
 	if instant:
-		combat.chat_log.generic(cible, " est intransposable (" + str(duree) + " tours)")
+		combat.chat_log.generic(cible, "est intransposable (" + str(duree) + " tours)")
 		print(cible.classe, "_", str(cible.id), " est intransposable (", duree, " tours).")
 	instant = false
 
@@ -982,7 +982,7 @@ func intransposable():
 func immunise():
 	etat = "IMMUNISE"
 	if instant:
-		combat.chat_log.generic(cible, " est immunisé (" + str(duree) + " tours)")
+		combat.chat_log.generic(cible, "est immunisé (" + str(duree) + " tours)")
 		print(cible.classe, "_", str(cible.id), " est immunisé (", duree, " tours).")
 	instant = false
 
@@ -998,7 +998,7 @@ func stabilise():
 func renvoie_sort():
 	etat = "RENVOIE_SORT"
 	if instant:
-		combat.chat_log.generic(cible, " renvoie les sorts (" + str(duree) + " tours)")
+		combat.chat_log.generic(cible, "renvoie les sorts (" + str(duree) + " tours)")
 		print(cible.classe, "_", str(cible.id), " renvoie les sorts (", duree, " tours).")
 	instant = false
 
@@ -1024,7 +1024,7 @@ func invocation():
 			else:
 				combat.combattants.append(invoc)
 				break
-	combat.chat_log.generic(lanceur, " invoque un " + sort.nom.replace("_", " "))
+	combat.chat_log.generic(lanceur, "invoque un " + sort.nom.replace("_", " "))
 	print(lanceur.classe, "_", str(lanceur.id), " invoque un ", sort.nom ,".")
 
 
@@ -1079,7 +1079,7 @@ func lance():
 func picole():
 	etat = "PICOLE"
 	if instant:
-		combat.chat_log.generic(lanceur, " entre dans l'état picole")
+		combat.chat_log.generic(lanceur, "entre dans l'état picole")
 		print(lanceur.classe, "_", str(lanceur.id), " entre dans l'état picole.")
 	instant = false
 
@@ -1091,7 +1091,7 @@ func sacrifice():
 			break
 	etat = "SACRIFICE"
 	if instant:
-		combat.chat_log.generic(lanceur, " sacrifie " + cible.nom + " (" + str(duree) + " tours)")
+		combat.chat_log.generic(lanceur, "sacrifie " + cible.nom + " (" + str(duree) + " tours)")
 		print(lanceur.classe, "_", str(lanceur.id), " sacrifie ", cible.classe, "_", str(cible.id), " (", duree, " tours).")
 	instant = false
 
@@ -1103,7 +1103,7 @@ func tourne():
 func immunise_retrait_pa():
 	etat = "IMMUNISE_RETRAIT_PA"
 	if instant:
-		combat.chat_log.generic(lanceur, " est immunisé au retrait PA (" + str(duree) + " tours)")
+		combat.chat_log.generic(lanceur, "est immunisé au retrait PA (" + str(duree) + " tours)")
 		print(cible.classe, "_", str(cible.id), " est immunisé au retrait PA (", duree, " tours).")
 	instant = false
 
@@ -1111,7 +1111,7 @@ func immunise_retrait_pa():
 func immunise_retrait_pm():
 	etat = "IMMUNISE_RETRAIT_PM"
 	if instant:
-		combat.chat_log.generic(lanceur, " est immunisé au retrait PM (" + str(duree) + " tours)")
+		combat.chat_log.generic(lanceur, "est immunisé au retrait PM (" + str(duree) + " tours)")
 		print(cible.classe, "_", str(cible.id), " est immunisé au retrait PM (", duree, " tours).")
 	instant = false
 

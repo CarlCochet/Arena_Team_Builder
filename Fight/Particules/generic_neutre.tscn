@@ -39,7 +39,9 @@ turbulence_noise_scale = 8.32
 turbulence_influence_min = 0.11
 turbulence_influence_max = 0.3
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_n64lv")
 emitting = false
 amount = 100
