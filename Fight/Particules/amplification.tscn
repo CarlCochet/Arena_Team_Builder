@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8u44dnn2hjjd"]
+[gd_scene load_steps=17 format=3 uid="uid://c8u44dnn2hjjd"]
 
 [ext_resource type="Texture2D" uid="uid://dhj6iw3v34wqe" path="res://Fight/Particules/Sprites/cross.png" id="1_tl5y6"]
 [ext_resource type="Texture2D" uid="uid://c5chnbjxlrhce" path="res://Fight/Particules/Sprites/great_beam.png" id="2_abohg"]
@@ -27,6 +27,9 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 scale_curve = SubResource("CurveTexture_n5hce")
 color_ramp = SubResource("GradientTexture1D_duacg")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m0ghb"]
+blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_8r4j0"]
 offsets = PackedFloat32Array(0, 0.232227, 0.810427, 1)
@@ -57,6 +60,9 @@ scale_max = 10.0
 scale_curve = SubResource("CurveXYZTexture_llypw")
 color_ramp = SubResource("GradientTexture1D_mu53m")
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dkhci"]
+blend_mode = 1
+
 [node name="Node2D" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -69,6 +75,7 @@ texture = ExtResource("1_tl5y6")
 one_shot = true
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_m0ghb")
 position = Vector2(-40, -50)
 emitting = false
 amount = 1
@@ -77,6 +84,7 @@ texture = ExtResource("2_abohg")
 one_shot = true
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_dkhci")
 position = Vector2(40, -50)
 emitting = false
 amount = 1
