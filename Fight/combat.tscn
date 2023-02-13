@@ -208,6 +208,7 @@ vertical_alignment = 1
 [node name="MenuRetour" type="Popup" parent="."]
 position = Vector2i(650, 350)
 size = Vector2i(300, 200)
+borderless = false
 
 [node name="Control" type="Control" parent="MenuRetour"]
 layout_mode = 3
@@ -222,7 +223,7 @@ offset_top = -73.0
 offset_right = 1683.0
 offset_bottom = 965.0
 scale = Vector2(1, 20)
-color = Color(0.529412, 0.478431, 0.317647, 1)
+color = Color(0.262745, 0.278431, 0.282353, 1)
 
 [node name="Quitter" type="TextureButton" parent="MenuRetour/Control"]
 layout_mode = 0

@@ -70,10 +70,6 @@ func sort(lanceur: Combattant, nom_sort: String):
 	ajoute_text(VERT + "[b]" + lanceur.nom + "[/b] lance [b]" + nom_sort.replace("_", " ") + "[/b].")
 
 
-func etat(cible: Combattant, etat: String, duree: int):
-	ajoute_text(VERT + "[b]" + cible.nom + "[/b] entre dans l'état [b]" + etat + "[/b] (" + str(duree) + " tours).")
-
-
 func generic(cible: Combattant, text: String):
 	if cible == null:
 		ajoute_text(VERT + text + ".")

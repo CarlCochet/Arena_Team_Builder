@@ -584,7 +584,7 @@ func meurt():
 		combat.tilemap.a_star_grid.set_point_solid(grid_pos, true)
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	is_mort = true
-	combat.chat_log.generic(self, " est mort.")
+	combat.chat_log.generic(self, "est mort")
 	print(classe, "_", str(id), " est mort.")
 	queue_free()
 

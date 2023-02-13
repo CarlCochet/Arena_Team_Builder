@@ -18,6 +18,7 @@ script = ExtResource("1_esfgk")
 [node name="Background" type="ColorRect" parent="."]
 visible = false
 layout_mode = 0
+offset_top = -100.0
 offset_right = 500.0
 offset_bottom = 200.0
 color = Color(0.145098, 0.145098, 0.145098, 1)
@@ -26,7 +27,7 @@ color = Color(0.145098, 0.145098, 0.145098, 1)
 visible = false
 layout_mode = 2
 offset_left = 5.0
-offset_top = 5.0
+offset_top = -95.0
 offset_right = 495.0
 offset_bottom = 195.0
 bbcode_enabled = true
