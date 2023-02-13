@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://diu0k61frpjeq"]
+
+[ext_resource type="Texture2D" uid="uid://p7d5vom00lbl" path="res://Fight/Particules/Sprites/trefle.png" id="1_x1qit"]
+
+[sub_resource type="Gradient" id="Gradient_x1n2f"]
+offsets = PackedFloat32Array(0, 0.57346, 1)
+colors = PackedColorArray(0, 0.832885, 1.92523e-06, 1, 0.440168, 0.738651, 0.439541, 0.482353, 0.0932023, 0.776505, 1.54018e-06, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rs2oc"]
+gradient = SubResource("Gradient_x1n2f")
+
+[sub_resource type="Curve" id="Curve_costl"]
+max_value = 100.0
+_data = [Vector2(0, 7.27273), 0.0, 0.0, 0, 0, Vector2(0.995868, 31.8182), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u88qa"]
+curve = SubResource("Curve_costl")
+
+[sub_resource type="Curve" id="Curve_4h60w"]
+_data = [Vector2(0, 0.636364), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5havk"]
+curve = SubResource("Curve_4h60w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fqicd"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 400.0
+initial_velocity_max = 400.0
+angular_velocity_min = -500.0
+angular_velocity_max = 500.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 100.0
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_u88qa")
+scale_curve = SubResource("CurveTexture_5havk")
+color_ramp = SubResource("GradientTexture1D_rs2oc")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -50)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_fqicd")
+texture = ExtResource("1_x1qit")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8

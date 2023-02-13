@@ -319,7 +319,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_debuff",
+            "particules_cible": "oeil_de_taupe",
             "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
@@ -747,8 +747,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_buff",
-            "particules_retour": "generic_buff",
+            "particules_cible": "trefle",
+            "particules_retour": "trefle",
 			"effets": {
 				"CHANGE_STATS": {
 					"cc": {
@@ -2038,7 +2038,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_buff",
+            "particules_cible": "amplification",
             "particules_retour": "",
 			"effets": {
                 "CHANGE_STATS": {
@@ -2615,7 +2615,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_feu",
+            "particules_cible": "corbeau",
             "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {
