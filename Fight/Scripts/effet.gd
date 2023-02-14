@@ -22,6 +22,7 @@ var boost_hp: int
 var indirect: bool
 var debuffable: bool
 var is_carte: bool
+var affiche_log: bool
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
 
@@ -45,6 +46,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	instant = true
 	indirect = false
 	is_carte = false
+	affiche_log = true
 	critique = p_critique
 	aoe = p_aoe
 	combat = p_lanceur.get_parent()
@@ -633,7 +635,8 @@ func change_stats():
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["valeur"]
 				stats_change[stat] += contenu[stat][base_crit]["valeur"]
-				combat.chat_log.stats(cible, contenu[stat][base_crit]["valeur"], stat, duree)
+				if affiche_log:
+					combat.chat_log.stats(cible, contenu[stat][base_crit]["valeur"], stat, duree)
 				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["valeur"] < 0 else " gagne ", contenu[stat][base_crit]["valeur"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
@@ -938,7 +941,8 @@ func devient_invisible():
 		cible.classe_sprite.material.set_shader_parameter("alpha", 0.5)
 	cible.is_visible = false
 	combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, cible.grid_pos - combat.offset).x
-	combat.chat_log.generic(cible, "devient invisible (" + str(duree) + " tours)")
+	if affiche_log:
+		combat.chat_log.generic(cible, "devient invisible (" + str(duree) + " tours)")
 	print(cible.classe, "_", str(cible.id), " devient invisible (", duree, " tours).")
 
 

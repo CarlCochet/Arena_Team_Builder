@@ -530,6 +530,7 @@ class Glyphe:
 	var aoe
 	var sort
 	var deleted
+	var combattants_id: Array
 	
 	func _init(p_id: int, p_lanceur: Combattant, p_tiles: Array, p_effets: Dictionary, p_bloqueur: bool, p_critique: bool, p_centre: Vector2i, p_aoe: bool, p_sort: Sort):
 		id = p_id
@@ -546,11 +547,16 @@ class Glyphe:
 		aoe = p_aoe
 		sort = p_sort
 		deleted = false
+		combattants_id = []
 	
 	func active_full():
 		var triggered = false
 		for combattant in lanceur.combat.combattants:
+			var log = true
 			if combattant.grid_pos in tiles:
+				if combattant.id in combattants_id:
+					log = false
+				combattants_id.append(combattant.id)
 				var temp_hp = combattant.stats.hp
 				var temp_pa = combattant.stats.pa
 				var temp_pm = combattant.stats.pm
@@ -562,8 +568,11 @@ class Glyphe:
 					if effet == "DEVIENT_INVISIBLE" or not combattant.check_etats(["PORTE"]):
 						var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, aoe, sort)
 						new_effet.instant = true
+						new_effet.affiche_log = log
 						new_effet.execute()
 				triggered = true
+			else:
+				combattants_id.erase(combattant.id)
 		if triggered and effets.has("DOMMAGE_FIXE"):
 			lanceur.combat.tilemap.delete_glyphes([id])
 			deleted = true

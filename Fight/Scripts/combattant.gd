@@ -513,6 +513,8 @@ func debut_tour():
 	personnage.modulate = Color(1, 1, 1, 1)
 	classe_sprite.material.set_shader_parameter("alpha", 1.0)
 	is_visible = true
+	var old_pa = stats.pa
+	var old_pm = stats.pm
 	var delta_hp = max_stats.hp - stats.hp
 	var start_hp = stats.hp
 	retrait_durees()
@@ -520,7 +522,10 @@ func debut_tour():
 	check_case_bonus()
 	var effets_hp = start_hp - stats.hp
 	desactive_cadran()
+	var temp_stats = init_stats.copy().add(stat_buffs).add(stat_cartes_combat)
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs).add(stat_cartes_combat)
+	stats.pa = temp_stats.pa if old_pa >= temp_stats.pa else stats.pa
+	stats.pm = temp_stats.pm if old_pm >= temp_stats.pm else stats.pm
 	stats.hp -= delta_hp + effets_hp
 	execute_buffs_hp(false)
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
@@ -637,13 +642,18 @@ func retrait_durees():
 				buff_hp["duree"] -= 1
 			if buff_hp["duree"] > 0:
 				new_buffs_hp.append(buff_hp)
+		var old_pa = combattant.stats.pa
+		var old_pm = combattant.stats.pm
 		combattant.buffs_hp = new_buffs_hp
 		combattant.effets = new_effets
 		combattant.stat_buffs = Stats.new()
 		var delta_hp = combattant.max_stats.hp - combattant.stats.hp
 		combattant.max_stats = combattant.init_stats.copy()
 		combattant.execute_effets()
+		var temp_stats = combattant.init_stats.copy().add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
 		combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
+		combattant.stats.pa = temp_stats.pa if old_pa >= temp_stats.pa else combattant.stats.pa
+		combattant.stats.pm = temp_stats.pm if old_pm >= temp_stats.pm else combattant.stats.pm
 		combattant.stats.hp -= delta_hp
 		combattant.execute_buffs_hp()
 	
