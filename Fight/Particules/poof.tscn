@@ -1,9 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bc3la4qkx0rw"]
 
+[ext_resource type="Material" uid="uid://drrebp5cy8p6h" path="res://Fight/Particules/canvas_add.tres" id="1_bcptt"]
 [ext_resource type="Texture2D" uid="uid://27o61np5yv01" path="res://Fight/Particules/Sprites/smoke.png" id="1_h2iam"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n64lv"]
-blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_j6mqa"]
 offsets = PackedFloat32Array(0, 0.47079, 0.993127)
@@ -38,7 +36,7 @@ color_ramp = SubResource("GradientTexture1D_mk1sm")
 [node name="Node2D" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_n64lv")
+material = ExtResource("1_bcptt")
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_ia3dd")

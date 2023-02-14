@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://l4uh2vqdydiv"]
+[gd_scene load_steps=5 format=3 uid="uid://l4uh2vqdydiv"]
 
 [ext_resource type="Texture2D" uid="uid://c5chnbjxlrhce" path="res://Fight/Particules/Sprites/great_beam.png" id="1_6jagl"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_78rdg"]
 
 [sub_resource type="Gradient" id="Gradient_d4bbj"]
 offsets = PackedFloat32Array(0, 0.0805687, 0.421801, 0.853081, 1)
@@ -23,7 +21,6 @@ color_ramp = SubResource("GradientTexture1D_kb7q1")
 [node name="Node2D" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_78rdg")
 position = Vector2(0, -60)
 emitting = false
 amount = 30

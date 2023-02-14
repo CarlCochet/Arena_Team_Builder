@@ -2,7 +2,7 @@ extends Node
 class_name Effet
 
 
-var lanceur
+var lanceur: Combattant
 var cible
 var centre: Vector2i
 var nom_sort: String
@@ -284,7 +284,7 @@ func calcul_dommage(base, stat: float, resistance: float, orientation_bonus: boo
 	return result
 
 
-func update_sacrifice(p_cible, type: String):
+func update_sacrifice(p_cible: Combattant, type: String):
 	for effet in p_cible.effets:
 		if effet.etat == "SACRIFICE" and effet.lanceur.id == p_cible.id:
 			if (not effet.lanceur.check_etats(["INTRANSPOSABLE", "PORTE"])) and (not p_cible.check_etats(["INTRANSPOSABLE", "PORTE"])) and cible.classe != "Arbre":

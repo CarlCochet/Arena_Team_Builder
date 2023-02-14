@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvlmqdl60cean"]
+[gd_scene load_steps=7 format=3 uid="uid://bvlmqdl60cean"]
 
 [ext_resource type="Texture2D" uid="uid://pu22ndofpy3j" path="res://Fight/Particules/Sprites/particule.png" id="1_ucshc"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_21x70"]
 
 [sub_resource type="Gradient" id="Gradient_5gln5"]
 offsets = PackedFloat32Array(0, 0.16388, 0.541806, 0.735786, 0.889632, 1)
@@ -37,7 +35,6 @@ color_ramp = SubResource("GradientTexture1D_f5xw8")
 [node name="Node2D" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_21x70")
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_2cy1q")

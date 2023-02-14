@@ -67,7 +67,7 @@ func _init():
 	retour_lock = false
 
 
-func execute_effets(lanceur, cases_cibles: Array, centre: Vector2i) -> bool:
+func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) -> bool:
 	var sort_valide = false
 	var aoe = false
 	if len(cases_cibles) == 0:
@@ -187,7 +187,7 @@ func execute_effets(lanceur, cases_cibles: Array, centre: Vector2i) -> bool:
 	return sort_valide
 
 
-func update_limite_lancers(lanceur):
+func update_limite_lancers(lanceur: Combattant):
 	compte_lancers += 1
 	compte_lancers_tour += 1
 	retour_lock = false
@@ -200,7 +200,7 @@ func update_limite_lancers(lanceur):
 	cooldown_actuel = cooldown
 
 
-func retrait_cumul_max(p_cible):
+func retrait_cumul_max(p_cible: Combattant):
 	if cumul_max > 0:
 		var new_effets = []
 		var compte_sort = 0
@@ -226,7 +226,7 @@ func retrait_cumul_max(p_cible):
 		p_cible.execute_buffs_hp()
 
 
-func parse_effets(lanceur, p_cible, p_effets: Dictionary, critique: bool, centre: Vector2i, aoe: bool):
+func parse_effets(lanceur: Combattant, p_cible, p_effets: Dictionary, critique: bool, centre: Vector2i, aoe: bool):
 	if p_cible is Array:
 		for case in p_cible:
 			for effet in p_effets:
@@ -262,7 +262,7 @@ func parse_effets(lanceur, p_cible, p_effets: Dictionary, critique: bool, centre
 	return true
 
 
-func parse_effet(lanceur, p_cible, p_categorie: String, p_effet: Dictionary, critique: bool, centre: Vector2i, aoe: bool):
+func parse_effet(lanceur: Combattant, p_cible, p_categorie: String, p_effet: Dictionary, critique: bool, centre: Vector2i, aoe: bool):
 	if p_cible is Array:
 		for case in p_cible:
 			var new_effet = Effet.new(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe, self)
@@ -296,7 +296,7 @@ func parse_effet(lanceur, p_cible, p_categorie: String, p_effet: Dictionary, cri
 	return true
 
 
-func precheck_cast(lanceur) -> bool:
+func precheck_cast(lanceur: Combattant) -> bool:
 	if pa > lanceur.stats.pa:
 		return false
 	if cooldown_actuel > 0:
@@ -321,7 +321,7 @@ func precheck_cast(lanceur) -> bool:
 	return true
 
 
-func check_cible(lanceur, case_cible: Vector2i) -> bool:
+func check_cible(lanceur: Combattant, case_cible: Vector2i) -> bool:
 	var target
 	for combattant in lanceur.get_parent().combattants:
 		if combattant.grid_pos == case_cible:
@@ -356,7 +356,7 @@ func check_cible(lanceur, case_cible: Vector2i) -> bool:
 	return true
 
 
-func lance_particules(lanceur, cases: Array):
+func lance_particules(lanceur: Combattant, cases: Array):
 	if not particules_retour.is_empty():
 		var particule = particules_retour_scene.instantiate()
 		particule.position = lanceur.combat.tilemap.map_to_local(lanceur.grid_pos - lanceur.combat.offset)
@@ -373,7 +373,7 @@ func lance_particules(lanceur, cases: Array):
 			child.emitting = true
 
 
-func from_arme(combattant, arme: String):
+func from_arme(combattant: Combattant, arme: String):
 	var element_principal = "DOMMAGE_FIXE"
 	match combattant.classe:
 		"Cra":
@@ -568,7 +568,7 @@ class Glyphe:
 			lanceur.combat.tilemap.delete_glyphes([id])
 			deleted = true
 	
-	func active_mono(combattant):
+	func active_mono(combattant: Combattant):
 		for tile in tiles:
 			if combattant.grid_pos == tile:
 				for effet in effets:
