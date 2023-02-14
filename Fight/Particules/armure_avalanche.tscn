@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1tioviyi7pdt"]
+[gd_scene load_steps=4 format=3 uid="uid://b1tioviyi7pdt"]
 
 [ext_resource type="Texture2D" uid="uid://bvjd5lk7lxngj" path="res://Fight/Particules/Sprites/hex.png" id="1_1t6fi"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eca2t"]
+blend_mode = 1
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ou37s"]
 emission_shape = 6
@@ -15,8 +18,10 @@ orbit_velocity_max = 0.0
 color = Color(0.811765, 0.67451, 0.603922, 1)
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(0, -30)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_eca2t")
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_ou37s")

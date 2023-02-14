@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://8o8u10wtlnj8"]
+[gd_scene load_steps=4 format=3 uid="uid://8o8u10wtlnj8"]
 
 [ext_resource type="Texture2D" uid="uid://cpbydyux0h6fb" path="res://Fight/Particules/Sprites/malus.png" id="1_s676v"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lf6y8"]
+blend_mode = 1
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ekc3j"]
 emission_shape = 1
@@ -20,6 +23,7 @@ color = Color(0.615686, 1, 0.619608, 1)
 [node name="Node2D" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_lf6y8")
 position = Vector2(0, -100)
 emitting = false
 amount = 10

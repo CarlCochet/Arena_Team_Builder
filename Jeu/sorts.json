@@ -917,8 +917,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_soin",
-            "particules_retour": "generic_feu",
+            "particules_cible": "mot_de_sacrifice",
+            "particules_retour": "mot_de_sacrifice",
 			"effets": {
 				"SOIN": {
                     "base": {
@@ -1298,8 +1298,8 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_terre",
-            "particules_retour": "pm_buff",
+            "particules_cible": "fossilisation",
+            "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
                     "pm": {
@@ -1655,7 +1655,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_eau",
+			"particules_cible": "eclair",
             "particules_retour": "",
 			"effets": {
 				"DOMMAGE_EAU": {
@@ -2000,7 +2000,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "immunite",
+			"particules_cible": "treve",
             "particules_retour": "",
 			"effets": {
                 "cible": 8,
@@ -2131,7 +2131,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_feu",
+			"particules_cible": "eclair",
             "particules_retour": "",
 			"effets": {
 				"DOMMAGE_FEU": {
@@ -2854,7 +2854,7 @@
             "etat_requis": "",
             "etats_cible_interdits": ["PORTE"],
             "etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
-			"particules_cible": "generic_debuff",
+            "particules_cible": "coup_de_bambou",
             "particules_retour": "",
 			"effets": {
 				"CHANGE_STATS": {
@@ -5675,7 +5675,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "particules_cible": "generic_air",
+            "particules_cible": "eclair",
             "particules_retour": "",
 			"effets": {
                 "DOMMAGE_AIR": {

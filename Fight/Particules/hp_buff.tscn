@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5e6av3abyb05"]
+[gd_scene load_steps=4 format=3 uid="uid://b5e6av3abyb05"]
 
 [ext_resource type="Texture2D" uid="uid://dlkf8ld03mptc" path="res://Fight/Particules/Sprites/bonus.png" id="1_87dh3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ks2wg"]
+blend_mode = 1
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jiqd2"]
 emission_shape = 1
@@ -18,6 +21,7 @@ color = Color(0.992157, 0.560784, 0.505882, 1)
 [node name="Node2D" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_ks2wg")
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_jiqd2")

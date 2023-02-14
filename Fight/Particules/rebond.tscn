@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://4ohm2ldobngk"]
+[gd_scene load_steps=4 format=3 uid="uid://4ohm2ldobngk"]
 
 [ext_resource type="Texture2D" uid="uid://bvjd5lk7lxngj" path="res://Fight/Particules/Sprites/hex.png" id="1_xxaeg"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gygi4"]
+blend_mode = 1
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7excm"]
 emission_shape = 6
@@ -12,11 +15,13 @@ particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-color = Color(1, 1, 0.815686, 1)
+color = Color(1, 0.980392, 0.443137, 1)
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(0, -30)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_gygi4")
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_7excm")
