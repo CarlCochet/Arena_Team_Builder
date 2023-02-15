@@ -552,10 +552,10 @@ class Glyphe:
 	func active_full():
 		var triggered = false
 		for combattant in lanceur.combat.combattants:
-			var log = true
+			var affiche_log = true
 			if combattant.grid_pos in tiles:
 				if combattant.id in combattants_id:
-					log = false
+					affiche_log = false
 				combattants_id.append(combattant.id)
 				var temp_hp = combattant.stats.hp
 				var temp_pa = combattant.stats.pa
@@ -568,7 +568,7 @@ class Glyphe:
 					if effet == "DEVIENT_INVISIBLE" or not combattant.check_etats(["PORTE"]):
 						var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, aoe, sort)
 						new_effet.instant = true
-						new_effet.affiche_log = log
+						new_effet.affiche_log = affiche_log
 						new_effet.execute()
 				triggered = true
 			else:

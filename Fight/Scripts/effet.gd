@@ -23,6 +23,7 @@ var indirect: bool
 var debuffable: bool
 var is_carte: bool
 var affiche_log: bool
+var tag_cible: String
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
 
@@ -51,6 +52,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	aoe = p_aoe
 	combat = p_lanceur.get_parent()
 	sort = p_sort
+	tag_cible = ""
 	if contenu is Dictionary:
 		duree = trouve_duree(contenu)
 	debuffable = duree > 0
