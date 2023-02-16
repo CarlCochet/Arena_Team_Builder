@@ -606,7 +606,7 @@ func execute_effets(desactive_degats=true):
 	stat_buffs = Stats.new()
 	var triggers = ["DOMMAGE_SI_BOUGE", "DOMMAGE_SI_UTILISE_PA"]
 	for effet in effets:
-		if effet.categorie in ["DOMMAGE_FIXE"] and (id != combat.combattant_selection.id or desactive_degats):
+		if effet.categorie in ["DOMMAGE_FIXE", "SOIN"] and (id != combat.combattant_selection.id or desactive_degats):
 			continue
 		if not effet.etat in triggers:
 			effet.execute()
