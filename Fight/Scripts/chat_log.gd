@@ -21,8 +21,7 @@ func _ready():
 
 
 func stats(cible: Combattant, valeur: int, stat: String, duree: int):
-	var nom = (cible.classe + "_" + str(cible.id)) if cible.nom.is_empty() else cible.nom
-	var text = VERT + "[b]" + nom + "[/b] " + VERT
+	var text = VERT + "[b]" + cible.nom + "[/b] " + VERT
 	text += "perd " if valeur < 0 else "gagne "
 	if stat in ["dommages_air", "resistances_air"]:
 		text += AIR
@@ -49,8 +48,7 @@ func critique():
 
 
 func dommages(cible: Combattant, valeur: int, element: String):
-	var nom = (cible.classe + "_" + str(cible.id)) if cible.nom.is_empty() else cible.nom
-	var text = VERT + "[b]" + nom + "[/b] " + VERT
+	var text = VERT + "[b]" + cible.nom + "[/b] " + VERT
 	text += "perd " if valeur < 0 else "gagne "
 	if element == "dommages_air":
 		text += AIR
@@ -69,16 +67,14 @@ func dommages(cible: Combattant, valeur: int, element: String):
 
 
 func sort(lanceur: Combattant, nom_sort: String):
-	var nom = (lanceur.classe + "_" + str(lanceur.id)) if lanceur.nom.is_empty() else lanceur.nom
-	ajoute_text(VERT + "[b]" + nom + "[/b]" + VERT + " lance [b]" + nom_sort.replace("_", " ") + "[/b].")
+	ajoute_text(VERT + "[b]" + lanceur.nom + "[/b]" + VERT + " lance [b]" + nom_sort.replace("_", " ") + "[/b].")
 
 
 func generic(cible: Combattant, text: String):
 	if cible == null:
 		ajoute_text(VERT + text + ".")
 	else:
-		var nom = (cible.classe + "_" + str(cible.id)) if cible.nom.is_empty() else cible.nom
-		ajoute_text(VERT + "[b]" + nom + "[/b] " + VERT + text + ".")
+		ajoute_text(VERT + "[b]" + cible.nom + "[/b] " + VERT + text + ".")
 
 
 func ajoute_text(text: String):

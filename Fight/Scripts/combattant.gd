@@ -51,6 +51,7 @@ var outline_shader = preload("res://Fight/Shaders/combattant_outline.gdshader")
 @onready var personnage: Sprite2D = $Personnage
 @onready var hp: Sprite2D = $HP
 @onready var hp_label: Label = $HP/Label
+@onready var nom_label: RichTextLabel = $HP/Nom
 @onready var stats_perdu: Label = $StatsPerdu
 
 
@@ -700,6 +701,7 @@ func _on_area_2d_mouse_entered():
 	combat.stats_hover.update(stats, max_stats)
 	combat.stats_hover.visible = true
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
+	nom_label.text = "[center]" + nom
 	hp.visible = true
 	if combat.action == 10:
 		affiche_path(Vector2i(99, 99))

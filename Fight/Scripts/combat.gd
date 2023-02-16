@@ -63,6 +63,7 @@ func creer_personnages():
 	for k in range(len(combattants)):
 		indexeur_global = k
 		combattants[k].id = indexeur_global
+		combattants[k].nom = combattants[k].classe + "_" + str(combattants[k].id) if combattants[k].nom.is_empty() else combattants[k].nom
 		combattants[k].connect("clicked", _on_perso_clicked.bind(k))
 		if GlobalData.is_multijoueur and (Client.is_host and combattants[k].equipe == 1 or not Client.is_host and combattants[k].equipe == 0):
 			combattants[k].visible = false

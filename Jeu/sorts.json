@@ -3268,7 +3268,7 @@
             "etat_requis": "VIE_FAIBLE",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_air",
+            "particules_cible": "demence",
             "particules_retour": "",
 			"effets": {
 				"DOMMAGE_AIR": {
