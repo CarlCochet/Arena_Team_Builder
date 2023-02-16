@@ -9,7 +9,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tk0v0"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_hu7vk"]
+[sub_resource type="LabelSettings" id="LabelSettings_ruxm0"]
 font_size = 25
 
 [node name="Invocation" type="Node2D"]
@@ -46,20 +46,30 @@ shape = SubResource("RectangleShape2D_tk0v0")
 [node name="HP" type="Sprite2D" parent="."]
 visible = false
 z_index = 2
-position = Vector2(0, -60)
-scale = Vector2(0.5, 0.5)
+position = Vector2(0, -111.5)
+scale = Vector2(0.5, 0.66)
 texture = ExtResource("5_eb3vf")
 
 [node name="Label" type="Label" parent="HP"]
 custom_minimum_size = Vector2(95, 0)
-offset_left = -46.0
-offset_top = -18.0
-offset_right = 49.0
-offset_bottom = 5.0
-text = "40/40"
-label_settings = SubResource("LabelSettings_hu7vk")
+offset_left = -48.0
+offset_top = -4.54546
+offset_right = 47.0
+offset_bottom = 33.4545
+scale = Vector2(1, 0.66)
+text = "0/0"
+label_settings = SubResource("LabelSettings_ruxm0")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Nom" type="RichTextLabel" parent="HP"]
+offset_left = -206.0
+offset_top = -23.4848
+offset_right = 206.0
+offset_bottom = -0.484848
+bbcode_enabled = true
+text = "[center]"
+scroll_active = false
 
 [node name="StatsPerdu" parent="." instance=ExtResource("6_aopma")]
 z_index = 3

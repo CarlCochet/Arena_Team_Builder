@@ -339,7 +339,6 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 		cible_retour.stats_perdu.ajoute(-dommages, "hp")
 		sort.retour_lock = true
 		combat.chat_log.dommages(cible_retour, -dommages, stat_element)
-		print(cible_retour.classe, "_", str(cible_retour.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 		return
 	
 	if check_immu(dommages, type) and dommages >= 0:
@@ -349,7 +348,6 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	cible.stats.hp -= dommages
 	cible.stats_perdu.ajoute(-dommages, "hp")
 	combat.chat_log.dommages(cible, -dommages, stat_element)
-	print(cible.classe, "_", str(cible.id), " perd " if dommages >= 0 else " gagne ", dommages, " PdV.")
 	
 	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and not type in ["soin", "pourcent", "neutre"]:
 		var cible_renvoi = lanceur
@@ -359,14 +357,12 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 		cible_renvoi.stats.hp -= renvoi
 		cible_renvoi.stats_perdu.ajoute(-renvoi, "hp")
 		combat.chat_log.dommages(cible, -renvoi, stat_element)
-		print(cible_renvoi.classe, "_", str(cible_renvoi.id), " perd ", renvoi, " PdV.")
 	
 	if type == "vol":
 		var soin_vol = min(dommages, lanceur.max_stats.hp - lanceur.stats.hp, cible_hp)
 		lanceur.stats.hp += soin_vol
 		lanceur.stats_perdu.ajoute(soin_vol, "hp")
 		combat.chat_log.dommages(lanceur, soin_vol, stat_element)
-		print(lanceur.classe, "_", str(lanceur.id), " gagne ", soin_vol, " PdV.")
 
 
 func dommage_fixe():
@@ -602,6 +598,8 @@ func boost_vie():
 		cible.stats.hp += contenu[base_crit]["valeur"]
 		cible.max_stats.hp += contenu[base_crit]["valeur"]
 		stats_change.hp += contenu[base_crit]["valeur"]
+		if affiche_log:
+			combat.chat_log.stats(cible, contenu[base_crit]["valeur"], "hp", duree, tag_cible)
 	if contenu[base_crit].has("retour"):
 		lanceur.buffs_hp.append({"lanceur":lanceur.id,"duree":duree,"valeur":contenu[base_crit]["retour"]})
 		lanceur.stats.hp += contenu[base_crit]["retour"]
@@ -621,7 +619,6 @@ func change_stats():
 				cible.stats[stat] += contenu[stat][base_crit]["perso"]
 				stats_change[stat] += contenu[stat][base_crit]["perso"]
 				combat.chat_log.stats(cible, contenu[stat][base_crit]["perso"], stat, duree, "")
-				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["perso"] < 0 else " gagne ", contenu[stat][base_crit]["perso"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["perso"]
 			else:
@@ -639,7 +636,6 @@ func change_stats():
 				stats_change[stat] += contenu[stat][base_crit]["valeur"]
 				if affiche_log:
 					combat.chat_log.stats(cible, contenu[stat][base_crit]["valeur"], stat, duree, tag_cible)
-				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["valeur"] < 0 else " gagne ", contenu[stat][base_crit]["valeur"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
 			else:
@@ -656,7 +652,6 @@ func change_stats():
 			if instant:
 				lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
 				combat.chat_log.stats(lanceur, contenu[stat][base_crit]["retour"], stat, duree, "")
-				print(lanceur.classe, "_", str(lanceur.id), " perd " if contenu[stat][base_crit]["retour"] < 0 else " gagne ", contenu[stat][base_crit]["retour"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				lanceur.stat_buffs[stat] += contenu[stat][base_crit]["retour"]
 			else:
@@ -697,7 +692,6 @@ func pousse():
 						cible.stats.hp -= (valeur - i) * 3
 						cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
 						combat.chat_log.dommages(cible, -(valeur - i) * 3, "")
-						print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
@@ -709,7 +703,6 @@ func pousse():
 						cible.stats.hp -= (valeur - i) * 3
 						cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
 						combat.chat_log.dommages(cible, -(valeur - i) * 3, "")
-						print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 					var combattant_block = null
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos:
@@ -721,7 +714,6 @@ func pousse():
 							combattant_block.stats.hp -= (valeur - i) * 3
 							combattant_block.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
 							combat.chat_log.dommages(combattant_block, -(valeur - i) * 3, "")
-							print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (valeur - i) * 3, " PdV.")
 		else:
 			if not stopped:
 				stopped = true
@@ -732,7 +724,6 @@ func pousse():
 					cible.stats.hp -= (valeur - i) * 3
 					cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
 					combat.chat_log.dommages(cible, -(valeur - i) * 3, "")
-					print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 			break
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(valeur * direction))
@@ -766,7 +757,6 @@ func attire():
 						cible.stats.hp -= (valeur - i) * 3
 						cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
 						combat.chat_log.dommages(cible, -(valeur - i) * 3, "")
-						print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
@@ -779,7 +769,6 @@ func attire():
 							cible.stats.hp -= (valeur - i) * 3
 							cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
 							combat.chat_log.dommages(cible, -(valeur - i) * 3, "")
-							print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 						var combattant_block = null
 						for combattant in combat.combattants:
 							if combattant.grid_pos == grid_pos:
@@ -791,7 +780,6 @@ func attire():
 								combattant_block.stats.hp -= (valeur - i) * 3
 								combattant_block.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
 								combat.chat_log.dommages(combattant_block, -(valeur - i) * 3, "")
-								print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (valeur - i) * 3, " PdV.")
 		else:
 			if not stopped:
 				stopped = true
@@ -802,7 +790,6 @@ func attire():
 					cible.stats.hp -= (valeur - i) * 3
 					cible.stats_perdu.ajoute(-(valeur - i) * 3, "hp")
 					combat.chat_log.dommages(cible, -(valeur - i) * 3, "")
-					print(cible.classe, "_", str(cible.id), " perd ", (valeur - i) * 3, " PdV.")
 			break
 	if not stopped:
 		cible.bouge_perso(Vector2i(cible.grid_pos) + Vector2i(valeur * direction))
@@ -833,7 +820,6 @@ func recul():
 						lanceur.stats.hp -= (contenu - i) * 3
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						combat.chat_log.dommages(lanceur, -(contenu - i) * 3, "")
-						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
 				break
 			elif combat.check_perso(grid_pos):
 				if not stopped:
@@ -845,7 +831,6 @@ func recul():
 						lanceur.stats.hp -= (contenu - i) * 3
 						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 						combat.chat_log.dommages(lanceur, -(contenu - i) * 3, "")
-						print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
 					var combattant_block = null
 					for combattant in combat.combattants:
 						if combattant.grid_pos == grid_pos:
@@ -857,7 +842,6 @@ func recul():
 							combattant_block.stats.hp -= (contenu - i) * 3
 							combattant_block.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 							combat.chat_log.dommages(combattant_block, -(contenu - i) * 3, "")
-							print(combattant_block.classe, "_", str(combattant_block.id), " perd ", (contenu - i) * 3, " PdV.")
 		else:
 			if not stopped:
 				stopped = true
@@ -868,7 +852,6 @@ func recul():
 					lanceur.stats.hp -= (contenu - i) * 3
 					lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
 					combat.chat_log.dommages(lanceur, -(contenu - i) * 3, "")
-					print(lanceur.classe, "_", str(lanceur.id), " perd ", (contenu - i) * 3, " PdV.")
 			break
 	if not stopped:
 		lanceur.bouge_perso(Vector2i(lanceur.grid_pos) + Vector2i(contenu * direction))
@@ -881,9 +864,8 @@ func avance():
 
 func immobilise():
 	etat = "IMMOBILISE"
-	if instant:
-		combat.chat_log.generic(cible, "est immobilisé (" + str(duree) + " tours)")
-		print(cible.classe, "_", str(cible.id), " est immobilisé (", duree, " tours).")
+	if instant and affiche_log:
+		combat.chat_log.generic(cible, "est immobilisé (" + str(duree) + " tours)", tag_cible)
 	instant = false
 
 
@@ -905,14 +887,12 @@ func petrifie():
 	etat = "PETRIFIE"
 	if instant:
 		combat.chat_log.generic(cible, "est pétrifié (" + str(duree) + " tours)")
-		print(cible.classe, "_", str(cible.id), " est pétrifié (", duree, " tours).")
 	instant = false
 
 
 func rate_sort():
 	etat = "RATE_SORT"
 	combat.chat_log.generic(cible, "ratera son prochain sort")
-	print(cible.classe, "_", str(cible.id), " ratera son prochain sort.")
 
 
 func revele_invisible():
@@ -922,16 +902,17 @@ func revele_invisible():
 		cible.visible = true
 		cible.is_visible = true
 		combat.chat_log.generic(cible, "est révélé")
-		print(cible.classe, "_", str(cible.id), " est révélé.")
 		return
+	affiche_log = true
 	for combattant in combat.combattants:
 		if combattant.id != lanceur.id:
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 			combattant.retire_etats(["INVISIBLE"])
 			combattant.visible = true
 			combattant.is_visible = true
-			combat.chat_log.generic(combattant, "est révélé")
-			print(combattant.classe, "_", str(combattant.id), " est révélé.")
+			if affiche_log:
+				combat.chat_log.generic(cible, "est révélé", "Tout le monde")
+			affiche_log = false
 
 
 func devient_invisible():
@@ -945,7 +926,6 @@ func devient_invisible():
 	combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, cible.grid_pos - combat.offset).x
 	if affiche_log:
 		combat.chat_log.generic(cible, "devient invisible (" + str(duree) + " tours)")
-	print(cible.classe, "_", str(cible.id), " devient invisible (", duree, " tours).")
 
 
 func desenvoute():
@@ -966,38 +946,33 @@ func desenvoute():
 	cible.buffs_hp = []
 	cible.max_stats = cible.init_stats.copy()
 	combat.chat_log.generic(cible, "est désenvouté")
-	print(cible.classe, "_", str(cible.id), " est désenvouté.")
 
 
 func non_portable():
 	etat = "NON_PORTABLE"
-	if instant:
-		combat.chat_log.generic(cible, "est non-portable (" + str(duree) + " tours)")
-		print(cible.classe, "_", str(cible.id), " est non-portable (", duree, " tours).")
+	if instant and affiche_log:
+		combat.chat_log.generic(cible, "est non-portable (" + str(duree) + " tours)", tag_cible)
 	instant = false
 
 
 func intransposable():
 	etat = "INTRANSPOSABLE"
-	if instant:
-		combat.chat_log.generic(cible, "est intransposable (" + str(duree) + " tours)")
-		print(cible.classe, "_", str(cible.id), " est intransposable (", duree, " tours).")
+	if instant and affiche_log:
+		combat.chat_log.generic(cible, "est intransposable (" + str(duree) + " tours)", tag_cible)
 	instant = false
 
 
 func immunise():
 	etat = "IMMUNISE"
-	if instant:
-		combat.chat_log.generic(cible, "est immunisé (" + str(duree) + " tours)")
-		print(cible.classe, "_", str(cible.id), " est immunisé (", duree, " tours).")
+	if instant and affiche_log:
+		combat.chat_log.generic(cible, "est immunisé (" + str(duree) + " tours)", tag_cible)
 	instant = false
 
 
 func stabilise():
 	etat = "STABILISE"
-	if instant:
-		combat.chat_log.generic(cible, " est stabilisé (" + str(duree) + " tours)")
-		print(cible.classe, "_", str(cible.id), " est stabilisé (", duree, " tours).")
+	if instant and affiche_log:
+		combat.chat_log.generic(cible, "est stabilisé (" + str(duree) + " tours)", tag_cible)
 	instant = false
 
 
@@ -1005,7 +980,6 @@ func renvoie_sort():
 	etat = "RENVOIE_SORT"
 	if instant:
 		combat.chat_log.generic(cible, "renvoie les sorts (" + str(duree) + " tours)")
-		print(cible.classe, "_", str(cible.id), " renvoie les sorts (", duree, " tours).")
 	instant = false
 
 
@@ -1031,7 +1005,6 @@ func invocation():
 				combat.combattants.append(invoc)
 				break
 	combat.chat_log.generic(lanceur, "invoque un " + sort.nom.replace("_", " "))
-	print(lanceur.classe, "_", str(lanceur.id), " invoque un ", sort.nom ,".")
 
 
 func porte():
@@ -1059,7 +1032,6 @@ func lance():
 	for combattant in combat.combattants:
 		if combattant.grid_pos == centre and combattant.id != lanceur.id and combattant.id != lanceur.porte.id:
 			combat.chat_log.generic(null, "Cette case n'est pas libre..")
-			print("Cette case n'est pas libre...")
 			return false
 	var combattant = lanceur.porte
 	combattant.oriente_vers(centre)
@@ -1086,7 +1058,6 @@ func picole():
 	etat = "PICOLE"
 	if instant:
 		combat.chat_log.generic(lanceur, "entre dans l'état picole")
-		print(lanceur.classe, "_", str(lanceur.id), " entre dans l'état picole.")
 	instant = false
 
 
@@ -1098,7 +1069,6 @@ func sacrifice():
 	etat = "SACRIFICE"
 	if instant:
 		combat.chat_log.generic(lanceur, "sacrifie " + cible.nom + " (" + str(duree) + " tours)")
-		print(lanceur.classe, "_", str(lanceur.id), " sacrifie ", cible.classe, "_", str(cible.id), " (", duree, " tours).")
 	instant = false
 
 
@@ -1110,7 +1080,6 @@ func immunise_retrait_pa():
 	etat = "IMMUNISE_RETRAIT_PA"
 	if instant:
 		combat.chat_log.generic(lanceur, "est immunisé au retrait PA (" + str(duree) + " tours)")
-		print(cible.classe, "_", str(cible.id), " est immunisé au retrait PA (", duree, " tours).")
 	instant = false
 
 
@@ -1118,7 +1087,6 @@ func immunise_retrait_pm():
 	etat = "IMMUNISE_RETRAIT_PM"
 	if instant:
 		combat.chat_log.generic(lanceur, "est immunisé au retrait PM (" + str(duree) + " tours)")
-		print(cible.classe, "_", str(cible.id), " est immunisé au retrait PM (", duree, " tours).")
 	instant = false
 
 

@@ -48,6 +48,22 @@ enum Invocations {
 }
 
 var classes = ["Cra", "Eca", "Eni", "Enu", "Feca", "Iop", "Osa", "Panda", "Sacrieur", "Sadida", "Sram", "Xelor", "Roublard", "Zobal"]
+var classes_mapping = {
+	"Cra": "Cra",
+	"Eca": "Ecaflip",
+	"Eni": "Eniripsa",
+	"Enu": "Enutrof",
+	"Feca": "Feca",
+	"Iop": "Iop",
+	"Osa": "Osamodas",
+	"Panda": "Pandawa",
+	"Sacrieur": "Sacrieur",
+	"Sadida": "Sadida",
+	"Sram": "Sram",
+	"Xelor": "Xelor",
+	"Roublard": "Roublard",
+	"Zobal": "Zobal",
+}
 
 var sorts: Dictionary
 var equipements: Dictionary

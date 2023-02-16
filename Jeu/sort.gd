@@ -75,13 +75,11 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 	if len(cases_cibles) > 1 or taille_zone.y > 0:
 		aoe = true
 	lanceur.combat.chat_log.sort(lanceur, nom)
-	print(lanceur.classe, "_", str(lanceur.id), " lance ", nom, ".")
 	var combattants = lanceur.combat.combattants
 	var trouve = false
 	var critique = GlobalData.rng.randi_range(1, 100) <= lanceur.stats.cc
 	if critique:
 		lanceur.combat.chat_log.critique()
-		print("Coup critique!")
 	var targets = []
 	if effets.has("GLYPHE"):
 		lance_particules(lanceur, cases_cibles)
@@ -112,11 +110,13 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules = []
+				var affiche_log = true
 				for combattant in combattants:
 					if combattant.equipe == lanceur.equipe:
 						cases_particules.append(combattant.grid_pos)
 						var tag_cible = "Toute l'equipe " + ("bleu " if lanceur.equipe == 0 else "rouge ")
-						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible)
+						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
+						affiche_log = false
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
@@ -124,11 +124,13 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules = []
+				var affiche_log = true
 				for combattant in combattants:
 					if combattant.equipe != lanceur.equipe:
 						cases_particules.append(combattant.grid_pos)
 						var tag_cible = "Toute l'equipe " + ("bleu " if lanceur.equipe == 1 else "rouge ")
-						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible)
+						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
+						affiche_log = false
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
@@ -136,10 +138,12 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules = []
+				var affiche_log = true
 				for combattant in combattants:
 					cases_particules.append(combattant.grid_pos)
 					var tag_cible = "Tout le monde "
-					parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible)
+					parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
+					affiche_log = false
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
@@ -160,11 +164,13 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules = []
+				var affiche_log = true
 				for combattant in combattants:
 					if not combattant.is_invocation:
 						cases_particules.append(combattant.grid_pos)
 						var tag_cible = "Tous les personnages "
-						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible)
+						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
+						affiche_log = false
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
@@ -172,11 +178,13 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules = []
+				var affiche_log = true
 				for combattant in combattants:
 					if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
 						cases_particules.append(combattant.grid_pos)
 						var tag_cible = "Tous les personnages de l'equipe " + ("bleu " if lanceur.equipe == 0 else "rouge ")
-						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible)
+						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
+						affiche_log = false
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
@@ -267,7 +275,7 @@ func parse_effets(lanceur: Combattant, p_cible, p_effets: Dictionary, critique: 
 	return true
 
 
-func parse_effet(lanceur: Combattant, p_cible, p_categorie: String, p_effet: Dictionary, critique: bool, centre: Vector2i, aoe: bool, tag_cible: String):
+func parse_effet(lanceur: Combattant, p_cible, p_categorie: String, p_effet: Dictionary, critique: bool, centre: Vector2i, aoe: bool, tag_cible: String, affiche_log: bool):
 	if p_cible is Array:
 		for case in p_cible:
 			var new_effet = Effet.new(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe, self)
@@ -295,6 +303,7 @@ func parse_effet(lanceur: Combattant, p_cible, p_categorie: String, p_effet: Dic
 		combattant_effet = p_effet.duplicate(true)
 	var new_effet = Effet.new(lanceur, p_cible, p_categorie, combattant_effet, critique, centre, aoe, self)
 	new_effet.tag_cible = tag_cible
+	new_effet.affiche_log = affiche_log
 	if new_effet.instant and p_cible.stats.hp > 0:
 		new_effet.execute()
 	if new_effet.duree > 0:

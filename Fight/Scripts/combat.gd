@@ -63,7 +63,7 @@ func creer_personnages():
 	for k in range(len(combattants)):
 		indexeur_global = k
 		combattants[k].id = indexeur_global
-		combattants[k].nom = combattants[k].classe + "_" + str(combattants[k].id) if combattants[k].nom.is_empty() else combattants[k].nom
+		combattants[k].nom = (GlobalData.classes_mapping[combattants[k].classe] + "_" + str(combattants[k].id)) if combattants[k].nom.is_empty() else combattants[k].nom
 		combattants[k].connect("clicked", _on_perso_clicked.bind(k))
 		if GlobalData.is_multijoueur and (Client.is_host and combattants[k].equipe == 1 or not Client.is_host and combattants[k].equipe == 0):
 			combattants[k].visible = false
@@ -166,12 +166,22 @@ func applique_carte_combat():
 	for cible in effets_carte:
 		if cible in GlobalData.classes:
 			classes_target.append(cible)
+		var affiche_log = true
+		var tag_cible = ""
+		match cible:
+			"tous":
+				tag_cible = "Tout le monde"
+			"autres":
+				tag_cible = "Les non-" + GlobalData.classes_mapping[cible]
+			_:
+				tag_cible = "Les " + GlobalData.classes_mapping[cible]
 		for combattant in combattants:
 			var new_effets = []
 			for effet in combattant.effets:
 				if not effet.is_carte:
 					new_effets.append(effet)
 			combattant.effets = new_effets
+			
 			if cible == "tous" or cible == combattant.classe or (cible == "autres" and not combattant.classe in classes_target):
 				for effet in effets_carte[cible].keys():
 					if effet == "SOIN":
@@ -192,12 +202,15 @@ func applique_carte_combat():
 							false, combattant.grid_pos, false, sort_temp)
 						effet_exec.debuffable = false
 						effet_exec.is_carte = true
+						effet_exec.tag_cible = tag_cible
+						effet_exec.affiche_log = affiche_log
 						effet_exec.execute()
 						combattant.effets.append(effet_exec)
 					else:
 						combattant.stat_cartes_combat[effet] += effets_carte[cible][effet]
-						chat_log.stats(combattant, effets_carte[cible][effet], effet, 1)
-						print(combattant.classe, "_", str(combattant.id), " perd " if effets_carte[cible][effet] < 0 else " gagne ", effets_carte[cible][effet], " ", effet, " (", 1, " tours).")
+						if affiche_log:
+							chat_log.stats(combattant, effets_carte[cible][effet], effet, 1, tag_cible)
+			affiche_log = false
 
 
 @rpc("any_peer")
