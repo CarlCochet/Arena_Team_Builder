@@ -620,7 +620,7 @@ func change_stats():
 			if instant:
 				cible.stats[stat] += contenu[stat][base_crit]["perso"]
 				stats_change[stat] += contenu[stat][base_crit]["perso"]
-				combat.chat_log.stats(cible, contenu[stat][base_crit]["perso"], stat, duree)
+				combat.chat_log.stats(cible, contenu[stat][base_crit]["perso"], stat, duree, "")
 				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["perso"] < 0 else " gagne ", contenu[stat][base_crit]["perso"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["perso"]
@@ -638,7 +638,7 @@ func change_stats():
 				cible.stats[stat] += contenu[stat][base_crit]["valeur"]
 				stats_change[stat] += contenu[stat][base_crit]["valeur"]
 				if affiche_log:
-					combat.chat_log.stats(cible, contenu[stat][base_crit]["valeur"], stat, duree)
+					combat.chat_log.stats(cible, contenu[stat][base_crit]["valeur"], stat, duree, tag_cible)
 				print(cible.classe, "_", str(cible.id), " perd " if contenu[stat][base_crit]["valeur"] < 0 else " gagne ", contenu[stat][base_crit]["valeur"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				cible.stat_buffs[stat] += contenu[stat][base_crit]["valeur"]
@@ -655,7 +655,7 @@ func change_stats():
 				continue
 			if instant:
 				lanceur.stats[stat] += contenu[stat][base_crit]["retour"]
-				combat.chat_log.stats(lanceur, contenu[stat][base_crit]["retour"], stat, duree)
+				combat.chat_log.stats(lanceur, contenu[stat][base_crit]["retour"], stat, duree, "")
 				print(lanceur.classe, "_", str(lanceur.id), " perd " if contenu[stat][base_crit]["retour"] < 0 else " gagne ", contenu[stat][base_crit]["retour"], " ", stat, " (", duree, " tours).")
 			if duree > 0:
 				lanceur.stat_buffs[stat] += contenu[stat][base_crit]["retour"]

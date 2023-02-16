@@ -20,8 +20,9 @@ func _ready():
 	lignes = []
 
 
-func stats(cible: Combattant, valeur: int, stat: String, duree: int):
-	var text = VERT + "[b]" + cible.nom + "[/b] " + VERT
+func stats(cible: Combattant, valeur: int, stat: String, duree: int, tag_cible: String):
+	var nom = cible.nom if tag_cible.is_empty() else tag_cible
+	var text = VERT + "[b]" + nom + "[/b] " + VERT
 	text += "perd " if valeur < 0 else "gagne "
 	if stat in ["dommages_air", "resistances_air"]:
 		text += AIR
