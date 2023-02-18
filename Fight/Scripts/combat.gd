@@ -172,7 +172,10 @@ func applique_carte_combat():
 			"tous":
 				tag_cible = "Tout le monde"
 			"autres":
-				tag_cible = "Les non-" + GlobalData.classes_mapping[cible]
+				if len(classes_target) > 0:
+					tag_cible = "Les non-" + GlobalData.classes_mapping[classes_target[0]]
+				else:
+					tag_cible = "Tout le monde"
 			_:
 				tag_cible = "Les " + GlobalData.classes_mapping[cible]
 		for combattant in combattants:
