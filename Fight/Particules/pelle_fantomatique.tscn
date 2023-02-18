@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfntsim636u8i"]
+
+[ext_resource type="Texture2D" uid="uid://dvuan3qysqe4i" path="res://Fight/Particules/Sprites/pelle_fantomatique.png" id="1_lu4tc"]
+
+[sub_resource type="Gradient" id="Gradient_4fqva"]
+offsets = PackedFloat32Array(0, 0.137441, 0.620853, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.745098, 1, 1, 1, 0.733333, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0t8ds"]
+gradient = SubResource("Gradient_4fqva")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_faxhp"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color_ramp = SubResource("GradientTexture1D_0t8ds")
+turbulence_enabled = true
+turbulence_noise_speed = Vector3(1, 1, 11)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_faxhp")
+texture = ExtResource("1_lu4tc")
+one_shot = true

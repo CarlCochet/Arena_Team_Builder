@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://5eykse3lpf14"]
+
+[ext_resource type="Texture2D" uid="uid://dqkp1836vj8f2" path="res://Fight/Particules/Sprites/KennyPack/circle_05.png" id="1_gmif6"]
+[ext_resource type="Material" uid="uid://drrebp5cy8p6h" path="res://Fight/Particules/canvas_add.tres" id="1_v15d8"]
+
+[sub_resource type="Gradient" id="Gradient_p8mel"]
+offsets = PackedFloat32Array(0, 0.165877, 0.597156, 1)
+colors = PackedColorArray(0.392157, 0.584314, 1, 0, 0.619608, 0.737255, 1, 1, 0.6, 0.733333, 1, 1, 0.588235, 0.729412, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sloiq"]
+gradient = SubResource("Gradient_p8mel")
+
+[sub_resource type="Curve" id="Curve_oucub"]
+min_value = -500.0
+max_value = 500.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7xtlh"]
+curve = SubResource("Curve_oucub")
+
+[sub_resource type="Curve" id="Curve_ejc5k"]
+_data = [Vector2(0, 0.572727), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u0p6p"]
+curve = SubResource("Curve_ejc5k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7bkui"]
+emission_shape = 1
+emission_sphere_radius = 300.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+orbit_velocity_curve = SubResource("CurveTexture_7xtlh")
+radial_accel_min = -500.0
+radial_accel_max = -500.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_u0p6p")
+color_ramp = SubResource("GradientTexture1D_sloiq")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = ExtResource("1_v15d8")
+position = Vector2(0, -50)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_7bkui")
+texture = ExtResource("1_gmif6")
+one_shot = true

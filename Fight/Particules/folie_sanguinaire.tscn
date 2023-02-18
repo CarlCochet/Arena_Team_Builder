@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvhcnkpihomin"]
+
+[ext_resource type="Texture2D" uid="uid://cfm2pr15ta32a" path="res://Fight/Particules/Sprites/KennyPack/dirt_01.png" id="1_txa7j"]
+
+[sub_resource type="Gradient" id="Gradient_8wmv5"]
+offsets = PackedFloat32Array(0, 0.146119, 0.557078, 0.986301)
+colors = PackedColorArray(0.752941, 0, 0, 0, 0.442533, 0, 0.00207383, 1, 0.52549, 0, 0.00784314, 0.482353, 0.478431, 0, 0.0627451, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ajtcx"]
+gradient = SubResource("Gradient_8wmv5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wm6nt"]
+emission_shape = 1
+emission_sphere_radius = 70.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -180.0
+angle_max = 180.0
+scale_min = 0.2
+scale_max = 0.2
+color_ramp = SubResource("GradientTexture1D_ajtcx")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -50)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_wm6nt")
+texture = ExtResource("1_txa7j")
+one_shot = true
+explosiveness = 0.7

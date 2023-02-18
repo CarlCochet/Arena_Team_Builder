@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://8o8u10wtlnj8"]
+[gd_scene load_steps=4 format=3 uid="uid://8o8u10wtlnj8"]
 
+[ext_resource type="Material" uid="uid://drrebp5cy8p6h" path="res://Fight/Particules/canvas_add.tres" id="1_64lfb"]
 [ext_resource type="Texture2D" uid="uid://cpbydyux0h6fb" path="res://Fight/Particules/Sprites/malus.png" id="1_s676v"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ekc3j"]
@@ -17,7 +18,10 @@ scale_min = 0.8
 scale_max = 0.8
 color = Color(0.615686, 1, 0.619608, 1)
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = ExtResource("1_64lfb")
 position = Vector2(0, -100)
 emitting = false
 amount = 10

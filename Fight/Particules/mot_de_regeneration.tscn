@@ -17,7 +17,9 @@ color = Color(1, 0.733333, 0.843137, 1)
 hue_variation_min = -0.02
 hue_variation_max = 0.02
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_s3r1c")

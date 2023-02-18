@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bokm3eo5mev3m"]
+
+[ext_resource type="Texture2D" uid="uid://w6a01kh5yrh8" path="res://Fight/Particules/Sprites/aiguille.png" id="1_5pfjv"]
+
+[sub_resource type="Curve" id="Curve_fepgw"]
+max_value = 100.0
+_data = [Vector2(0, 60.9091), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gmfxx"]
+curve = SubResource("Curve_fepgw")
+
+[sub_resource type="Curve" id="Curve_gx4kc"]
+_data = [Vector2(0, 0.527273), 0.0, 0.0, 0, 0, Vector2(1, 0.190909), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6kikj"]
+curve = SubResource("Curve_gx4kc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nt6ul"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+radial_accel_max = 100.0
+damping_min = 3.0
+damping_max = 3.0
+damping_curve = SubResource("CurveTexture_gmfxx")
+scale_curve = SubResource("CurveTexture_6kikj")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_nt6ul")
+texture = ExtResource("1_5pfjv")
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.8

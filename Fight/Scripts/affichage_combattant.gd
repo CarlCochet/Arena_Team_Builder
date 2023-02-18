@@ -15,7 +15,7 @@ func update(combattant_id: int):
 	sorts.update(combattant)
 
 
-func update_etats(combattant):
+func update_etats(combattant: Combattant):
 	var text = ""
 	etats.text = ""
 	var nom_sort = ""

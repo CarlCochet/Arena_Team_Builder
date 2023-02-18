@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://xwsalbcfuh1c"]
+
+[ext_resource type="Texture2D" uid="uid://c83hyyi25mwtm" path="res://Fight/Particules/Sprites/halo.png" id="1_24npl"]
+[ext_resource type="Material" uid="uid://drrebp5cy8p6h" path="res://Fight/Particules/canvas_add.tres" id="1_334bt"]
+
+[sub_resource type="Gradient" id="Gradient_rwxei"]
+offsets = PackedFloat32Array(0, 0.265403, 0.563981, 0.947867, 1)
+colors = PackedColorArray(1, 0.992157, 0.494118, 0.117647, 1, 0.992157, 0.494118, 1, 1, 0.992157, 0.494118, 1, 1, 0.992157, 0.494118, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j72ic"]
+gradient = SubResource("Gradient_rwxei")
+
+[sub_resource type="Curve" id="Curve_wprys"]
+_data = [Vector2(0, 0.127273), 0.0, 0.0, 0, 0, Vector2(0.334711, 0.445455), 0.0, 0.0, 0, 0, Vector2(0.681818, 0.536364), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_1xllu"]
+curve = SubResource("Curve_wprys")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wia3o"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_1xllu")
+color_ramp = SubResource("GradientTexture1D_j72ic")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = ExtResource("1_334bt")
+position = Vector2(0, -50)
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_wia3o")
+texture = ExtResource("1_24npl")
+one_shot = true

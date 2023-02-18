@@ -20,7 +20,9 @@ angle_max = 720.0
 scale_min = 0.2
 scale_max = 0.2
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_dnbly")
 emitting = false
 amount = 50

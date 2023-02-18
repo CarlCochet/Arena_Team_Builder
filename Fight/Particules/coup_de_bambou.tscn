@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwqv6auxh8e8r"]
+
+[ext_resource type="Texture2D" uid="uid://dsv1a7lxtpb3m" path="res://Fight/Particules/Sprites/bambou.png" id="1_n5eaa"]
+
+[sub_resource type="Gradient" id="Gradient_lxovk"]
+offsets = PackedFloat32Array(0, 0.308057, 0.563981, 0.777251, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.0980392, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t0i1n"]
+gradient = SubResource("Gradient_lxovk")
+
+[sub_resource type="Curve" id="Curve_ieisq"]
+max_value = 100.0
+_data = [Vector2(0, 39.0909), 0.0, 0.0, 0, 0, Vector2(1, 86.3636), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_52h4q"]
+curve = SubResource("Curve_ieisq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6qb22"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 400.0
+initial_velocity_max = 400.0
+angular_velocity_min = -500.0
+angular_velocity_max = 500.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 10.0
+damping_max = 10.0
+damping_curve = SubResource("CurveTexture_52h4q")
+scale_min = 0.3
+scale_max = 0.3
+color_ramp = SubResource("GradientTexture1D_t0i1n")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_6qb22")
+texture = ExtResource("1_n5eaa")
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.8

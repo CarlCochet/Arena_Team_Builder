@@ -20,8 +20,9 @@ func _ready():
 	lignes = []
 
 
-func stats(cible: Combattant, valeur: int, stat: String, duree: int):
-	var text = VERT + "[b]" + cible.nom + "[/b] " + VERT
+func stats(cible: Combattant, valeur: int, stat: String, duree: int, tag_cible: String):
+	var nom = cible.nom if tag_cible.is_empty() else tag_cible
+	var text = VERT + "[b]" + nom + "[/b] " + VERT
 	text += "perd " if valeur < 0 else "gagne "
 	if stat in ["dommages_air", "resistances_air"]:
 		text += AIR
@@ -67,14 +68,15 @@ func dommages(cible: Combattant, valeur: int, element: String):
 
 
 func sort(lanceur: Combattant, nom_sort: String):
-	ajoute_text(VERT + "[b]" + lanceur.nom + "[/b] lance [b]" + nom_sort.replace("_", " ") + "[/b].")
+	ajoute_text(VERT + "[b]" + lanceur.nom + "[/b]" + VERT + " lance [b]" + nom_sort.replace("_", " ") + "[/b].")
 
 
-func generic(cible: Combattant, text: String):
+func generic(cible: Combattant, text: String, tag_cible=""):
 	if cible == null:
 		ajoute_text(VERT + text + ".")
 	else:
-		ajoute_text(VERT + "[b]" + cible.nom + "[/b] " + text + ".")
+		var nom = cible.nom if tag_cible.is_empty() else tag_cible
+		ajoute_text(VERT + "[b]" + nom + "[/b] " + VERT + text + ".")
 
 
 func ajoute_text(text: String):

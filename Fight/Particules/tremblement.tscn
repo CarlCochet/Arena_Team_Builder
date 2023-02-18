@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckr3hvxcuet4n"]
+
+[ext_resource type="Texture2D" uid="uid://70rys8dyxycc" path="res://Fight/Particules/Sprites/particule_simple.png" id="1_nxlpp"]
+
+[sub_resource type="Gradient" id="Gradient_qd5re"]
+offsets = PackedFloat32Array(0, 0.630137, 1)
+colors = PackedColorArray(0.348123, 0.307002, 0.261843, 1, 0.523609, 0.501844, 0.477907, 1, 0.259294, 0.259294, 0.259294, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nve7r"]
+gradient = SubResource("Gradient_qd5re")
+
+[sub_resource type="Curve" id="Curve_fu74n"]
+_data = [Vector2(0, 0.190909), 0.0, 0.0, 0, 0, Vector2(1, 0.0454545), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1vmn4"]
+curve = SubResource("Curve_fu74n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7xp45"]
+emission_shape = 1
+emission_sphere_radius = 20.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 30.0
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_1vmn4")
+color_ramp = SubResource("GradientTexture1D_nve7r")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_7xp45")
+texture = ExtResource("1_nxlpp")
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.2
