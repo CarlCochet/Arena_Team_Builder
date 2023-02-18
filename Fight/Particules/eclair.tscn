@@ -1,11 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://cncie6btuqtd2"]
 
-[ext_resource type="Material" uid="uid://drrebp5cy8p6h" path="res://Fight/Particules/canvas_add.tres" id="1_4u0om"]
 [ext_resource type="Texture2D" uid="uid://dq280u5vxnm2h" path="res://Fight/Particules/Sprites/lightning_spritesheet.png" id="1_b4wfp"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_htiro"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="Gradient" id="Gradient_hrv8n"]
-offsets = PackedFloat32Array(0, 0.767772, 1)
-colors = PackedColorArray(0.615686, 1, 0.996078, 1, 0.729412, 1, 1, 0.815686, 0.831373, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.260664, 0.50237, 1)
+colors = PackedColorArray(0.615686, 1, 0.996078, 1, 0.729412, 1, 1, 0.847059, 0.768627, 1, 1, 0.12549, 0.831373, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6jihr"]
 gradient = SubResource("Gradient_hrv8n")
@@ -26,7 +32,7 @@ anim_speed_max = 2.0
 [node name="Node2D" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-material = ExtResource("1_4u0om")
+material = SubResource("CanvasItemMaterial_htiro")
 position = Vector2(0, -135)
 emitting = false
 amount = 4
