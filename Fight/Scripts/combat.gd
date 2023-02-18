@@ -131,7 +131,7 @@ func passe_tour():
 
 func clean_particules():
 	for child in get_children():
-		if child is GPUParticles2D:
+		if "Node2D" in child.name:
 			child.queue_free()
 
 
