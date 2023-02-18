@@ -755,12 +755,12 @@
 						"base": {
 							"valeur": 15,
 							"duree": 999,
-							"retour": 15
+							"retour_instance": 15
 						},
 						"critique": {
 							"valeur": 20,
 							"duree": 999,
-							"retour": 20
+                            "retour_instance": 20
 						}
 					}
 				}

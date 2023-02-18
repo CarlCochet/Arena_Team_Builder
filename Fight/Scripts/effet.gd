@@ -274,7 +274,7 @@ func calcul_dommage(base, stat: float, resistance: float, orientation_bonus: boo
 		var values = base.replace("+", "d").split("d")
 		base = int(values[2])
 		for i in range(int(values[0])):
-			base += GlobalData.rng.randi_range(1, int(values[1]) + 1)
+			base += GlobalData.rng.randi_range(1, int(values[1]))
 	
 	var resistance_zone = cible.stats.resistance_zone / 100.0 if aoe else 0.0
 	var bonus = get_orientation_bonus() if orientation_bonus else 0.0
@@ -660,6 +660,17 @@ func change_stats():
 				lanceur.max_stats[stat] += contenu[stat][base_crit]["retour"]
 			if stat in ["pa", "pm", "hp"]:
 				lanceur.stats_perdu.ajoute(contenu[stat][base_crit]["retour"], stat)
+		if contenu[stat][base_crit].has("retour_instance"):
+			if instant:
+				var sort_retour: Sort = sort.copy()
+				sort_retour.desenvoute_delais = -1
+				sort_retour.effets["CHANGE_STATS"][stat]["base"].erase("retour_instance")
+				sort_retour.effets["CHANGE_STATS"][stat]["base"]["valeur"] = contenu[stat][base_crit]["retour_instance"]
+				if sort_retour.effets["CHANGE_STATS"][stat].has("critique"):
+					sort_retour.effets["CHANGE_STATS"][stat]["critique"].erase("retour_instance")
+					sort_retour.effets["CHANGE_STATS"][stat]["critique"]["valeur"] = contenu[stat][base_crit]["retour_instance"]
+				sort_retour.execute_effets(lanceur, [lanceur.grid_pos], lanceur.grid_pos)
+			
 	instant = false
 	lanceur.stats.pa = 0 if lanceur.stats.pa < 0 else lanceur.stats.pa
 	lanceur.stats.pm = 0 if lanceur.stats.pm < 0 else lanceur.stats.pm
