@@ -1059,7 +1059,8 @@ func lance():
 		new_sort.pa = 0
 		new_sort.cible = GlobalData.Cible.LIBRE
 		new_sort.effets.erase("LANCE")
-		new_sort.execute_effets(lanceur, [centre], centre)
+		if len(new_sort.effets.keys()) > 0:
+			new_sort.execute_effets(lanceur, [centre], centre)
 	combat.tilemap.update_glyphes()
 	lanceur.porte.porteur = null
 	lanceur.porte = null

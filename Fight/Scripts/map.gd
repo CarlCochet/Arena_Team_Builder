@@ -72,7 +72,7 @@ func update_effets_map():
 
 func check_glyphe_effet(pos: Vector2i, effet: String) -> bool:
 	for glyphe in glyphes:
-		if glyphe.centre == pos and glyphe.effets.has(effet):
+		if pos in glyphe.tiles and glyphe.effets.has(effet):
 			return true
 	return false
 
