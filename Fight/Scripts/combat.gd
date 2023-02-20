@@ -329,6 +329,11 @@ func check_morts():
 		tour += 1
 		if tour >= 15:
 			tilemap.update_mort_subite(tour)
+		if GlobalData.is_multijoueur:
+			noms_cartes_combat.pop_front()
+			ajoute_carte_combat()
+			cartes_combat.update(noms_cartes_combat)
+			applique_carte_combat()
 	selection_id = new_selection_id
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
