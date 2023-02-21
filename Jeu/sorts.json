@@ -1455,7 +1455,7 @@
             "etat_requis": "",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-			"particules_cible": "generic_eau",
+            "particules_cible": "pelle_fantomatique",
             "particules_retour": "",
 			"effets": {
 				"DESENVOUTE": 1,

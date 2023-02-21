@@ -100,7 +100,11 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 		return true
 	
 	if not effets.has("cible"):
-		lance_particules(lanceur, cases_cibles)
+		if len(effets.keys()) > 0 and effets.keys()[0] in ["LANCE", "TELEPORTE"]:
+			if not lanceur.combat.tilemap.check_glyphe_effet(centre, "DEVIENT_INVISIBLE"):
+				lance_particules(lanceur, cases_cibles)
+		else:
+			lance_particules(lanceur, cases_cibles)
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true

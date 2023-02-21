@@ -56,6 +56,8 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	if contenu is Dictionary:
 		duree = trouve_duree(contenu)
 	debuffable = duree > 0
+	if duree > 0 and categorie in ["DOMMAGE_FIXE", "SOIN"]:
+		valeur_dommage = contenu[trouve_crit()]["valeur"]
 
 
 func trouve_duree(data: Dictionary):
@@ -1059,7 +1061,8 @@ func lance():
 		new_sort.pa = 0
 		new_sort.cible = GlobalData.Cible.LIBRE
 		new_sort.effets.erase("LANCE")
-		new_sort.execute_effets(lanceur, [centre], centre)
+		if len(new_sort.effets.keys()) > 0:
+			new_sort.execute_effets(lanceur, [centre], centre)
 	combat.tilemap.update_glyphes()
 	lanceur.porte.porteur = null
 	lanceur.porte = null

@@ -131,7 +131,7 @@ func passe_tour():
 
 func clean_particules():
 	for child in get_children():
-		if child is GPUParticles2D:
+		if "Node2D" in child.name:
 			child.queue_free()
 
 
@@ -172,7 +172,10 @@ func applique_carte_combat():
 			"tous":
 				tag_cible = "Tout le monde"
 			"autres":
-				tag_cible = "Les non-" + GlobalData.classes_mapping[cible]
+				if len(classes_target) > 0:
+					tag_cible = "Les non-" + GlobalData.classes_mapping[classes_target[0]]
+				else:
+					tag_cible = "Tout le monde"
 			_:
 				tag_cible = "Les " + GlobalData.classes_mapping[cible]
 		for combattant in combattants:
@@ -326,6 +329,11 @@ func check_morts():
 		tour += 1
 		if tour >= 15:
 			tilemap.update_mort_subite(tour)
+		if GlobalData.is_multijoueur:
+			noms_cartes_combat.pop_front()
+			ajoute_carte_combat()
+			cartes_combat.update(noms_cartes_combat)
+			applique_carte_combat()
 	selection_id = new_selection_id
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]

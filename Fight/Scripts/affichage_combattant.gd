@@ -9,6 +9,9 @@ extends Popup
 
 func update(combattant_id: int):
 	var combattant = get_parent().combattants[combattant_id]
+	if GlobalData.is_multijoueur and int(Client.is_host) == combattant.equipe and not combattant.is_visible:
+		visible = false
+		return
 	update_etats(combattant)
 	affichage_personnage.from_combattant(combattant)
 	affichage_stats.update(combattant.stats, combattant.max_stats)
@@ -21,6 +24,13 @@ func update_etats(combattant: Combattant):
 	var nom_sort = ""
 	var id_lanceur = -1
 	var stats = Stats.new().nom_stats
+	if GlobalData.is_multijoueur and combattant.combat.tour > 1:
+		text += "---------------------------------------------------------------------------------------------------------\n"
+		text += "Carte du tour : " + combattant.combat.noms_cartes_combat[0] + "\n"
+		for stat in stats:
+			var valeur = combattant.stat_cartes_combat[stat]
+			if valeur != 0:
+				text += ("+" if valeur > 0 else "") + str(valeur) + " " + stat + " (1 tours)\n"
 	for effet in combattant.effets:
 		if effet.sort.nom != nom_sort or effet.lanceur.id != id_lanceur:
 			text += "---------------------------------------------------------------------------------------------------------\n"

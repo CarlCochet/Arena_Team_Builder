@@ -27,13 +27,13 @@ func _ready():
 	offset = Vector2i(0, 8)
 	cases_maudites = {}
 	combat = get_parent()
-	
+
 	for pos in arena:
 		if pos.x > x_max:
 			x_max = pos.x
 		if pos.y > y_max:
 			y_max = pos.y
-	
+
 	glyphes_indexeur = 0
 	get_start()
 	build_grids()
@@ -72,7 +72,7 @@ func update_effets_map():
 
 func check_glyphe_effet(pos: Vector2i, effet: String) -> bool:
 	for glyphe in glyphes:
-		if glyphe.centre == pos and glyphe.effets.has(effet):
+		if pos in glyphe.tiles and glyphe.effets.has(effet):
 			return true
 	return false
 
