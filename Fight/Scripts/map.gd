@@ -27,13 +27,13 @@ func _ready():
 	offset = Vector2i(0, 8)
 	cases_maudites = {}
 	combat = get_parent()
-	
+
 	for pos in arena:
 		if pos.x > x_max:
 			x_max = pos.x
 		if pos.y > y_max:
 			y_max = pos.y
-	
+
 	glyphes_indexeur = 0
 	get_start()
 	build_grids()
