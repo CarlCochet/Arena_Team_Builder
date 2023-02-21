@@ -9,6 +9,9 @@ extends Popup
 
 func update(combattant_id: int):
 	var combattant = get_parent().combattants[combattant_id]
+	if GlobalData.is_multijoueur and int(Client.is_host) == combattant.equipe and not combattant.is_visible:
+		visible = false
+		return
 	update_etats(combattant)
 	affichage_personnage.from_combattant(combattant)
 	affichage_stats.update(combattant.stats, combattant.max_stats)
