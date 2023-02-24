@@ -68,6 +68,7 @@ func _ready():
 	is_selected = false
 	is_hovered = false
 	is_invocation = false
+	is_visible = true
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	combat = get_parent()
 

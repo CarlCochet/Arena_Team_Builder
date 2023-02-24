@@ -1,4 +1,4 @@
-﻿# Tutoriel Multijoueur
+# Tutoriel Multijoueur
 
 ## Prérequis
 
