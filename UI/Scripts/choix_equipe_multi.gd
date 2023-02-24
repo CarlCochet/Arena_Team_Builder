@@ -60,9 +60,13 @@ func _on_retour_pressed():
 func _on_valider_pressed():
 	var change_scene_check = adversaire_pret
 	if Client.is_host:
+		if GlobalData.equipe_actuelle.calcul_budget() > 6000:
+			return
 		rpc("transfert_equipe", GlobalData.equipe_actuelle.to_json())
 		attente_adversaire.visible = true
 	else:
+		if GlobalData.equipe_test.calcul_budget() > 6000:
+			return
 		rpc("transfert_equipe", GlobalData.equipe_test.to_json())
 		attente_hote.visible = true
 	menu.visible = false
