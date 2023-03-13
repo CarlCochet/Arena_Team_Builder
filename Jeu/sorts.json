@@ -1726,7 +1726,7 @@
                     },
                     "resistance_zone": {
                         "base": {
-                            "valeur": 20,
+                            "valeur": 30,
                             "duree": 5
                         }
                     },
