@@ -5775,7 +5775,7 @@
             "particules_cible": "cartes",
             "particules_retour": "",
 			"effets": {
-                "cible": 10,
+                "cible": 8,
                 "DOMMAGE_TERRE": {
                     "base": {
                         "valeur": "1d12+0"
