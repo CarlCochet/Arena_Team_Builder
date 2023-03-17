@@ -221,7 +221,7 @@ func calcul_all_ldv(action: int):
 		combat.change_action(10)
 		return
 	var bonus_po: int = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
-	var po_max: int = sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0]
+	var po_max: int = int(sort.po[1]) + bonus_po if int(sort.po[1]) + bonus_po >= int(sort.po[0]) else int(sort.po[0])
 	po_max = 1 if sort.po[1] > 0 and po_max <= 0 else po_max
 	all_ldv = combat.tilemap.get_ldv(
 		grid_pos, 

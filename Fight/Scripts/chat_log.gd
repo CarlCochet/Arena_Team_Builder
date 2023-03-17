@@ -21,6 +21,8 @@ func _ready():
 
 
 func stats(cible: Combattant, valeur: int, stat: String, duree: int, tag_cible: String):
+	if valeur == 0:
+		return
 	var nom = cible.nom if tag_cible.is_empty() else tag_cible
 	var text = VERT + "[b]" + nom + "[/b] " + VERT
 	text += "perd " if valeur < 0 else "gagne "
@@ -49,6 +51,8 @@ func critique():
 
 
 func dommages(cible: Combattant, valeur: int, element: String):
+	if valeur == 0:
+		return
 	var text = VERT + "[b]" + cible.nom + "[/b] " + VERT
 	text += "perd " if valeur < 0 else "gagne "
 	if element == "dommages_air":
