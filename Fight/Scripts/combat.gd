@@ -14,7 +14,8 @@ var offset: Vector2i
 var tilemap: TileMap
 var spell_pressed: bool
 var tour: int
-var noms_cartes_combat: Array
+var noms_cartes_combat: Array[String]
+var cartes_queue: Array[String]
 var adversaire_pret: bool
 
 @onready var sorts: Control = $Sorts
@@ -90,7 +91,7 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe: int):
 func init_cartes():
 	var nombre_sort_bonus = GlobalData.rng.randi_range(1, 3)
 	var noms_sorts_bonus = GlobalData.sorts_lookup["Bonus"].duplicate(true)
-	var sorts_bonus_select = []
+	var sorts_bonus_select: Array[String] = []
 	while len(sorts_bonus_select) < nombre_sort_bonus:
 		var rnd_index = GlobalData.rng.randi_range(0, len(noms_sorts_bonus) - 1)
 		if not noms_sorts_bonus[rnd_index] in sorts_bonus_select:
@@ -105,7 +106,16 @@ func init_cartes_combat():
 		ajoute_carte_combat()
 
 
-func ajoute_sorts_bonus(noms_sorts_bonus: Array):
+func genere_cartes_queue():
+	var temp_cartes: Array = GlobalData.cartes_combat.keys().duplicate()
+	cartes_queue = []
+	while len(temp_cartes) > 0:
+		var element: int = GlobalData.rng.randi_range(0, len(temp_cartes) - 1)
+		cartes_queue.append(temp_cartes[element])
+		temp_cartes.remove_at(element)
+
+
+func ajoute_sorts_bonus(noms_sorts_bonus: Array[String]):
 	for combattant in combattants:
 		for nom_sort in noms_sorts_bonus:
 			combattant.sorts.append(GlobalData.sorts[nom_sort].copy())
@@ -149,25 +159,28 @@ func init_nouveau_tour():
 
 
 func ajoute_carte_combat():
-	var nom_cartes = GlobalData.cartes_combat.keys()
-	var derniere_carte = len(noms_cartes_combat) - 1
-	var nouvelle_carte = noms_cartes_combat[derniere_carte]
-	while nouvelle_carte == noms_cartes_combat[derniere_carte]:
-		var id_carte = GlobalData.rng.randi_range(1, len(nom_cartes) - 1)
-		nouvelle_carte = nom_cartes[id_carte]
-	noms_cartes_combat.append(nouvelle_carte)
+	if len(cartes_queue) == 0:
+		genere_cartes_queue()
+	noms_cartes_combat.append(cartes_queue.pop_back())
+#	var nom_cartes = GlobalData.cartes_combat.keys()
+#	var derniere_carte = len(noms_cartes_combat) - 1
+#	var nouvelle_carte = noms_cartes_combat[derniere_carte]
+#	while nouvelle_carte == noms_cartes_combat[derniere_carte]:
+#		var id_carte = GlobalData.rng.randi_range(1, len(nom_cartes) - 1)
+#		nouvelle_carte = nom_cartes[id_carte]
+#	noms_cartes_combat.append(nouvelle_carte)
 
 
 func applique_carte_combat():
-	var effets_carte = GlobalData.cartes_combat[noms_cartes_combat[0]]
-	var classes_target = []
+	var effets_carte: Dictionary = GlobalData.cartes_combat[noms_cartes_combat[0]]
+	var classes_target: Array[String] = []
 	for combattant in combattants:
 		combattant.stat_cartes_combat = Stats.new()
 	for cible in effets_carte:
 		if cible in GlobalData.classes:
 			classes_target.append(cible)
-		var affiche_log = true
-		var tag_cible = ""
+		var affiche_log: bool = true
+		var tag_cible: String = ""
 		match cible:
 			"tous":
 				tag_cible = "Tout le monde"
@@ -179,7 +192,7 @@ func applique_carte_combat():
 			_:
 				tag_cible = "Les " + GlobalData.classes_mapping[cible]
 		for combattant in combattants:
-			var new_effets = []
+			var new_effets: Array[Effet] = []
 			for effet in combattant.effets:
 				if not effet.is_carte:
 					new_effets.append(effet)

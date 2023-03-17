@@ -3,8 +3,8 @@ extends TileMap
 
 var a_star_grid: AStarGrid2D
 var grid: Array
-var start_bleu: Array
-var start_rouge: Array
+var start_bleu: Array[Vector2i]
+var start_rouge: Array[Vector2i]
 var x_max: int
 var y_max: int
 var offset: Vector2i
@@ -16,9 +16,9 @@ var cases_maudites: Dictionary
 var combat: Combat
 var ms_data: Dictionary
 
-@onready var overlay = get_used_cells(2)
-@onready var arena = get_used_cells(1)
-@onready var obstacles = get_used_cells(7)
+@onready var overlay: Array[Vector2i] = get_used_cells(2)
+@onready var arena: Array[Vector2i] = get_used_cells(1)
+@onready var obstacles: Array[Vector2i] = get_used_cells(7)
 
 
 func _ready():
@@ -43,7 +43,7 @@ func _ready():
 
 func get_start():
 	for pos in overlay:
-		var tile_data = get_cell_atlas_coords(2, pos)
+		var tile_data: Vector2i = get_cell_atlas_coords(2, pos)
 		if tile_data.x == 0:
 			start_rouge.append(pos)
 		if tile_data.x == 2:
@@ -78,7 +78,7 @@ func check_glyphe_effet(pos: Vector2i, effet: String) -> bool:
 
 
 func delete_glyphes(glyphes_ids: Array):
-	var new_glyphes = []
+	var new_glyphes: Array = []
 	for glyphe in glyphes:
 		if not glyphe.id in glyphes_ids:
 			new_glyphes.append(glyphe)
@@ -94,7 +94,7 @@ func build_grids():
 	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	
 	for x in range(x_max + 1):
-		var col = []
+		var col: Array[int] = []
 		col.resize(y_max + 1 + offset.y)
 		col.fill(-1)
 		grid.append(col)
@@ -102,7 +102,7 @@ func build_grids():
 			a_star_grid.set_point_solid(Vector2i(x, y), true)
 	
 	for pos in arena:
-		var tile_data = get_cell_atlas_coords(1, pos)
+		var tile_data: Vector2i = get_cell_atlas_coords(1, pos)
 		grid[pos.x][pos.y + offset.y] = tile_data.x
 		if tile_data.x > 0:
 			a_star_grid.set_point_solid(pos + offset, false)
@@ -112,7 +112,7 @@ func build_grids():
 
 
 func load_map_data():
-	var file = FileAccess.open("res://Jeu/map_data.json", FileAccess.READ)
+	var file: FileAccess = FileAccess.open("res://Jeu/map_data.json", FileAccess.READ)
 	var json_data = JSON.parse_string(file.get_as_text())
 	ms_data = json_data
 
@@ -121,11 +121,11 @@ func update_mort_subite(tour: int):
 	if not GlobalData.mort_subite_active:
 		return
 	
-	var distance = ms_data[GlobalData.map_actuelle]["distance"] - (tour - 15)
-	var directions = [Vector2(0, 1), Vector2(1, 0), Vector2(0, -1), Vector2(-1, 0)]
+	var distance: int = ms_data[GlobalData.map_actuelle]["distance"] - (tour - 15)
+	var directions: Array[Vector2] = [Vector2(0, 1), Vector2(1, 0), Vector2(0, -1), Vector2(-1, 0)]
 	for i in range(4):
-		var centre_array = ms_data[GlobalData.map_actuelle]["centres"][i]
-		var centre = Vector2(centre_array[0], centre_array[1])
+		var centre_array: Array = ms_data[GlobalData.map_actuelle]["centres"][i]
+		var centre: Vector2 = Vector2(centre_array[0], centre_array[1])
 		for k in range(-distance, distance+1):
 			var cell_pos = centre + directions[i] * distance + k * directions[(i + 1) % 4]
 			erase_cell(1, cell_pos)
@@ -142,12 +142,12 @@ func update_mort_subite(tour: int):
 		a_star_grid.set_point_solid(combattant.grid_pos)
 
 
-func get_atteignables(pos: Vector2i, pm: int) -> Array:
-	var atteignables: Array = []
+func get_atteignables(pos: Vector2i, pm: int) -> Array[Vector2i]:
+	var atteignables: Array[Vector2i] = []
 	for x in range(pos.x - pm, pos.x + pm + 1):
 		for y in range(pos.y - pm, pos.y + pm + 1):
 			if a_star_grid.is_in_bounds(pos.x, pos.y) and a_star_grid.is_in_bounds(x, y) and (x != pos.x or y != pos.y):
-				var path = a_star_grid.get_id_path(pos, Vector2i(x,y))
+				var path: Array[Vector2i] = a_star_grid.get_id_path(pos, Vector2i(x,y))
 				if len(path) <= pm + 1:
 					for cell in path:
 						if cell not in atteignables:
@@ -156,15 +156,15 @@ func get_atteignables(pos: Vector2i, pm: int) -> Array:
 	return atteignables
 
 
-func get_chemin(debut: Vector2i, fin: Vector2i) -> Array:
-	var path = []
+func get_chemin(debut: Vector2i, fin: Vector2i) -> Array[Vector2i]:
+	var path: Array[Vector2i] = []
 	if a_star_grid.is_in_bounds(debut.x, debut.y) and a_star_grid.is_in_bounds(fin.x, fin.y) and (debut.x != fin.x or debut.y != fin.y):
 		path = a_star_grid.get_id_path(debut, fin)
 	return path
 
 
-func get_ldv(pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, doit_check_ldv: int) -> Array:
-	var atteignables: Array = []
+func get_ldv(pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, doit_check_ldv: int) -> Array[Vector2i]:
+	var atteignables: Array[Vector2i] = []
 	for x in range(pos.x - po_max, pos.x + po_max + 1):
 		for y in range(pos.y - po_max, pos.y + po_max + 1):
 			if check_ldv(x, y, pos, po_min, po_max, type_ldv, doit_check_ldv):
@@ -198,11 +198,11 @@ func calcul_ldv(debut: Vector2i, fin: Vector2i) -> bool:
 	if grid[fin.x][fin.y] == 0 or grid[fin.x][fin.y] == -1:
 		return false
 	
-	var delta = Vector2i(abs(debut.x - fin.x), abs(debut.y - fin.y))
-	var pos = Vector2i(debut.x, debut.y)
-	var n = delta.x + delta.y
-	var vector = Vector2i(1 if fin.x > debut.x else -1, 1 if fin.y > debut.y else -1)
-	var error = delta.x - delta.y
+	var delta: Vector2i = Vector2i(abs(debut.x - fin.x), abs(debut.y - fin.y))
+	var pos: Vector2i = Vector2i(debut.x, debut.y)
+	var n: int = delta.x + delta.y
+	var vector: Vector2i = Vector2i(1 if fin.x > debut.x else -1, 1 if fin.y > debut.y else -1)
+	var error: int = delta.x - delta.y
 	delta *= Vector2i(2, 2)
 	
 	while n > 0:
@@ -222,9 +222,9 @@ func calcul_ldv(debut: Vector2i, fin: Vector2i) -> bool:
 	return pos.x == fin.x and pos.y == fin.y
 
 
-func get_zone(source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_min: int, taille_max: int) -> Array:
-	var zone = []
-	var orientation = source - target
+func get_zone(source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_min: int, taille_max: int) -> Array[Vector2i]:
+	var zone: Array[Vector2i] = []
+	var orientation: Vector2i = source - target
 	for x in range(target.x - taille_max, target.x + taille_max + 1):
 		for y in range(target.y - taille_max, target.y + taille_max + 1):
 			if check_zone(x, y, target, type_zone, taille_min, taille_max, orientation):

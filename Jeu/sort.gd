@@ -68,19 +68,19 @@ func _init():
 
 
 func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) -> bool:
-	var sort_valide = false
-	var aoe = false
+	var sort_valide: bool = false
+	var aoe: bool = false
 	if len(cases_cibles) == 0:
 		return false
 	if len(cases_cibles) > 1 or taille_zone.y > 0:
 		aoe = true
 	lanceur.combat.chat_log.sort(lanceur, nom)
-	var combattants = lanceur.combat.combattants
-	var trouve = false
-	var critique = GlobalData.rng.randi_range(1, 100) <= lanceur.stats.cc
+	var combattants: Array = lanceur.combat.combattants
+	var trouve: bool = false
+	var critique: bool = GlobalData.rng.randi_range(1, 100) <= lanceur.stats.cc
 	if critique:
 		lanceur.combat.chat_log.critique()
-	var targets = []
+	var targets: Array = []
 	if effets.has("GLYPHE"):
 		lance_particules(lanceur, cases_cibles)
 		var new_glyphe = Glyphe.new(
@@ -113,12 +113,12 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.ALLIES:
 		for effet in effets.keys():
 			if effet != "cible":
-				var cases_particules = []
-				var affiche_log = true
+				var cases_particules: Array[Vector2i] = []
+				var affiche_log: bool = true
 				for combattant in combattants:
 					if combattant.equipe == lanceur.equipe:
 						cases_particules.append(combattant.grid_pos)
-						var tag_cible = "Toute l'equipe " + ("bleu " if lanceur.equipe == 0 else "rouge ")
+						var tag_cible: String = "Toute l'equipe " + ("bleu " if lanceur.equipe == 0 else "rouge ")
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
 						affiche_log = false
 				lance_particules(lanceur, cases_particules)
@@ -127,12 +127,12 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.ENNEMIS:
 		for effet in effets.keys():
 			if effet != "cible":
-				var cases_particules = []
-				var affiche_log = true
+				var cases_particules: Array[Vector2i] = []
+				var affiche_log: bool = true
 				for combattant in combattants:
 					if combattant.equipe != lanceur.equipe:
 						cases_particules.append(combattant.grid_pos)
-						var tag_cible = "Toute l'equipe " + ("bleu " if lanceur.equipe == 1 else "rouge ")
+						var tag_cible: String = "Toute l'equipe " + ("bleu " if lanceur.equipe == 1 else "rouge ")
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
 						affiche_log = false
 				lance_particules(lanceur, cases_particules)
@@ -141,18 +141,18 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.TOUT:
 		for effet in effets.keys():
 			if effet != "cible":
-				var cases_particules = []
-				var affiche_log = true
+				var cases_particules: Array[Vector2i] = []
+				var affiche_log: bool = true
 				for combattant in combattants:
 					cases_particules.append(combattant.grid_pos)
-					var tag_cible = "Tout le monde "
+					var tag_cible: String = "Tout le monde "
 					parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
 					affiche_log = false
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.CLASSE:
-		var cases_particules = []
+		var cases_particules: Array[Vector2i] = []
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
 				trouve = true
@@ -167,12 +167,12 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.PERSONNAGES:
 		for effet in effets.keys():
 			if effet != "cible":
-				var cases_particules = []
-				var affiche_log = true
+				var cases_particules: Array[Vector2i] = []
+				var affiche_log: bool = true
 				for combattant in combattants:
 					if not combattant.is_invocation:
 						cases_particules.append(combattant.grid_pos)
-						var tag_cible = "Tous les personnages "
+						var tag_cible: String = "Tous les personnages "
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
 						affiche_log = false
 				lance_particules(lanceur, cases_particules)
@@ -181,12 +181,12 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.PERSONNAGES_ALLIES:
 		for effet in effets.keys():
 			if effet != "cible":
-				var cases_particules = []
-				var affiche_log = true
+				var cases_particules: Array[Vector2i] = []
+				var affiche_log: bool = true
 				for combattant in combattants:
 					if combattant.equipe == lanceur.equipe and not combattant.is_invocation:
 						cases_particules.append(combattant.grid_pos)
-						var tag_cible = "Tous les personnages de l'equipe " + ("bleu " if lanceur.equipe == 0 else "rouge ")
+						var tag_cible: String = "Tous les personnages de l'equipe " + ("bleu " if lanceur.equipe == 0 else "rouge ")
 						parse_effet(lanceur, combattant, effet, effets[effet], critique, centre, aoe, tag_cible, affiche_log)
 						affiche_log = false
 				lance_particules(lanceur, cases_particules)
@@ -219,12 +219,12 @@ func update_limite_lancers(lanceur: Combattant):
 
 func retrait_cumul_max(p_cible: Combattant):
 	if cumul_max > 0:
-		var new_effets = []
-		var compte_sort = 0
-		var delta_pa = p_cible.init_stats.pa + p_cible.stat_ret.pa + p_cible.stat_buffs.pa + p_cible.stat_cartes_combat.pa - p_cible.stats.pa
-		var delta_pm = p_cible.init_stats.pm + p_cible.stat_ret.pm + p_cible.stat_buffs.pm + p_cible.stat_cartes_combat.pm - p_cible.stats.pm
+		var new_effets: Array[Effet] = []
+		var compte_sort: int = 0
+		var delta_pa: int = p_cible.init_stats.pa + p_cible.stat_ret.pa + p_cible.stat_buffs.pa + p_cible.stat_cartes_combat.pa - p_cible.stats.pa
+		var delta_pm: int = p_cible.init_stats.pm + p_cible.stat_ret.pm + p_cible.stat_buffs.pm + p_cible.stat_cartes_combat.pm - p_cible.stats.pm
 		for i in range(len(p_cible.effets)-1, -1, -1):
-			var effet = p_cible.effets[i]
+			var effet: Effet = p_cible.effets[i]
 			if effet.sort.nom == nom:
 				compte_sort += 1
 				if compte_sort <= cumul_max:
@@ -233,7 +233,7 @@ func retrait_cumul_max(p_cible: Combattant):
 				new_effets.append(effet)
 		p_cible.effets = new_effets
 		p_cible.stat_buffs = Stats.new()
-		var delta_hp = p_cible.max_stats.hp - p_cible.stats.hp
+		var delta_hp: int = p_cible.max_stats.hp - p_cible.stats.hp
 		p_cible.max_stats = p_cible.init_stats.copy()
 		p_cible.execute_effets()
 		p_cible.stats = p_cible.init_stats.copy().add(p_cible.stat_ret).add(p_cible.stat_buffs).add(p_cible.stat_cartes_combat)
@@ -243,11 +243,11 @@ func retrait_cumul_max(p_cible: Combattant):
 		p_cible.execute_buffs_hp()
 
 
-func parse_effets(lanceur: Combattant, p_cible, p_effets: Dictionary, critique: bool, centre: Vector2i, aoe: bool):
+func parse_effets(lanceur: Combattant, p_cible, p_effets: Dictionary, critique: bool, centre: Vector2i, aoe: bool) -> bool:
 	if p_cible is Array:
 		for case in p_cible:
 			for effet in p_effets:
-				var new_effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre, aoe, self)
+				var new_effet: Effet = Effet.new(lanceur, p_cible, effet, p_effets[effet], critique, centre, aoe, self)
 				new_effet.execute()
 		return true
 	
@@ -262,14 +262,14 @@ func parse_effets(lanceur: Combattant, p_cible, p_effets: Dictionary, critique: 
 		else:
 			compte_cible[p_cible.id] = 1
 	
-	var effet_grid_pos = p_cible.grid_pos
+	var effet_grid_pos: Vector2i = p_cible.grid_pos
 	for effet in p_effets.keys():
 		if p_cible.grid_pos != effet_grid_pos:
 			for combattant in p_cible.combat.combattants:
 				if combattant.grid_pos == effet_grid_pos:
 					p_cible = combattant
-		var combattant_effet = p_effets.duplicate(true)
-		var new_effet = Effet.new(lanceur, p_cible, effet, combattant_effet[effet], critique, centre, aoe, self)
+		var combattant_effet: Dictionary = p_effets.duplicate(true)
+		var new_effet: Effet = Effet.new(lanceur, p_cible, effet, combattant_effet[effet], critique, centre, aoe, self)
 		if new_effet.instant:
 			new_effet.execute()
 		if new_effet.duree > 0:
@@ -279,10 +279,10 @@ func parse_effets(lanceur: Combattant, p_cible, p_effets: Dictionary, critique: 
 	return true
 
 
-func parse_effet(lanceur: Combattant, p_cible, p_categorie: String, p_effet: Dictionary, critique: bool, centre: Vector2i, aoe: bool, tag_cible: String, affiche_log: bool):
+func parse_effet(lanceur: Combattant, p_cible, p_categorie: String, p_effet: Dictionary, critique: bool, centre: Vector2i, aoe: bool, tag_cible: String, affiche_log: bool) -> bool:
 	if p_cible is Array:
 		for case in p_cible:
-			var new_effet = Effet.new(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe, self)
+			var new_effet: Effet = Effet.new(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe, self)
 			new_effet.execute()
 		return true
 	
@@ -297,15 +297,15 @@ func parse_effet(lanceur: Combattant, p_cible, p_categorie: String, p_effet: Dic
 		else:
 			compte_cible[p_cible.id] = 1
 	
-	var effet_grid_pos = p_cible.grid_pos
+	var effet_grid_pos: Vector2i = p_cible.grid_pos
 	if p_cible.grid_pos != effet_grid_pos:
 		for combattant in p_cible.combat.combattants:
 			if combattant.grid_pos == effet_grid_pos:
 				p_cible = combattant
-	var combattant_effet = p_effet
+	var combattant_effet: Dictionary = p_effet
 	if p_effet is Dictionary:
 		combattant_effet = p_effet.duplicate(true)
-	var new_effet = Effet.new(lanceur, p_cible, p_categorie, combattant_effet, critique, centre, aoe, self)
+	var new_effet: Effet = Effet.new(lanceur, p_cible, p_categorie, combattant_effet, critique, centre, aoe, self)
 	new_effet.tag_cible = tag_cible
 	new_effet.affiche_log = affiche_log
 	if new_effet.instant and p_cible.stats.hp > 0:
@@ -331,7 +331,7 @@ func precheck_cast(lanceur: Combattant) -> bool:
 	if not etat_requis.is_empty() and not lanceur.check_etats([etat_requis]):
 		return false
 	if effets.has("INVOCATION"):
-		var invoc_count = 0
+		var invoc_count: int = 0
 		for combattant in lanceur.combat.combattants:
 			if combattant.is_invocation and combattant.invocateur.id == lanceur.id:
 				invoc_count += 1
@@ -393,7 +393,7 @@ func lance_particules(lanceur: Combattant, cases: Array):
 
 
 func from_arme(combattant: Combattant, arme: String):
-	var element_principal = "DOMMAGE_FIXE"
+	var element_principal: String = "DOMMAGE_FIXE"
 	match combattant.classe:
 		"Cra":
 			element_principal = "DOMMAGE_AIR"
@@ -424,7 +424,7 @@ func from_arme(combattant: Combattant, arme: String):
 		"Zobal":
 			element_principal = "DOMMAGE_EAU"
 	if not arme.is_empty():
-		var data = GlobalData.equipements[arme].to_json()
+		var data: Dictionary = GlobalData.equipements[arme].to_json()
 		pa = data["pa"]
 		po = data["po"]
 		type_zone = data["type_zone"] as GlobalData.TypeZone
@@ -451,7 +451,7 @@ func from_arme(combattant: Combattant, arme: String):
 
 
 func copy():
-	var new_sort = Sort.new()
+	var new_sort: Sort = Sort.new()
 	new_sort.nom = nom
 	new_sort.kamas = kamas
 	new_sort.pa = pa
@@ -538,20 +538,20 @@ func to_json():
 
 
 class Glyphe:
-	var id
-	var lanceur
-	var tiles
-	var effets
-	var critique
-	var bloqueur
-	var duree
-	var centre
-	var aoe
-	var sort
-	var deleted
-	var combattants_id: Array
+	var id: int
+	var lanceur: Combattant
+	var tiles: Array[Vector2i]
+	var effets: Dictionary
+	var critique: bool
+	var bloqueur: bool
+	var duree: int
+	var centre: Vector2i
+	var aoe: bool
+	var sort: Sort
+	var deleted: bool
+	var combattants_id: Array[int]
 	
-	func _init(p_id: int, p_lanceur: Combattant, p_tiles: Array, p_effets: Dictionary, p_bloqueur: bool, p_critique: bool, p_centre: Vector2i, p_aoe: bool, p_sort: Sort):
+	func _init(p_id: int, p_lanceur: Combattant, p_tiles: Array[Vector2i], p_effets: Dictionary, p_bloqueur: bool, p_critique: bool, p_centre: Vector2i, p_aoe: bool, p_sort: Sort):
 		id = p_id
 		lanceur = p_lanceur
 		tiles = p_tiles
@@ -569,23 +569,23 @@ class Glyphe:
 		combattants_id = []
 	
 	func active_full():
-		var triggered = false
+		var triggered: bool = false
 		for combattant in lanceur.combat.combattants:
-			var affiche_log = true
+			var affiche_log: bool = true
 			if combattant.grid_pos in tiles:
 				if combattant.id in combattants_id:
 					affiche_log = false
 				combattants_id.append(combattant.id)
-				var temp_hp = combattant.stats.hp
-				var temp_pa = combattant.stats.pa
-				var temp_pm = combattant.stats.pm
+				var temp_hp: int = combattant.stats.hp
+				var temp_pa: int = combattant.stats.pa
+				var temp_pm: int = combattant.stats.pm
 				combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
 				combattant.stats.hp = temp_hp
 				combattant.stats.pa = temp_pa
 				combattant.stats.pm = temp_pm
 				for effet in effets:
 					if effet == "DEVIENT_INVISIBLE" or not combattant.check_etats(["PORTE"]):
-						var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, aoe, sort)
+						var new_effet: Effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, aoe, sort)
 						new_effet.instant = true
 						new_effet.affiche_log = affiche_log
 						new_effet.execute()
