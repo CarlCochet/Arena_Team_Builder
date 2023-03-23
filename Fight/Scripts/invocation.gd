@@ -165,16 +165,7 @@ func update_hitbox():
 
 
 func debut_tour():
-	visible = true
-	var delta_hp: int = max_stats.hp - stats.hp
-	var start_hp: int = stats.hp
-	retrait_durees()
-	execute_effets(false)
-	check_case_bonus()
-	var effets_hp: int = start_hp - stats.hp
-	stats = init_stats.copy().add(stat_ret).add(stat_buffs)
-	stats.hp -= delta_hp + effets_hp
-	execute_buffs_hp(false)
+	update_stats_tour()
 	
 	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
 		stats.hp -= 2
@@ -188,6 +179,7 @@ func debut_tour():
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
 		return
+	
 	joue_ia()
 	await tour_fini
 	if not is_mort:

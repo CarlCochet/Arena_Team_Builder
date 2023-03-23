@@ -510,7 +510,7 @@ func oriente_vers(pos: Vector2i):
 	change_orientation(min_vec)
 
 
-func debut_tour():
+func update_stats_tour():
 	visible = true
 	personnage.modulate = Color(1, 1, 1, 1)
 	classe_sprite.material.set_shader_parameter("alpha", 1.0)
@@ -530,6 +530,10 @@ func debut_tour():
 	stats.pm = temp_stats.pm if old_pm >= temp_stats.pm else stats.pm
 	stats.hp -= delta_hp + effets_hp
 	execute_buffs_hp(false)
+
+
+func debut_tour():
+	update_stats_tour()
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
