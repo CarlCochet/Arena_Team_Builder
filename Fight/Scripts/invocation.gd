@@ -293,9 +293,18 @@ func joue_ia():
 
 
 func meurt():
+	var is_porteur: bool = false
+	var is_porte: bool = false
 	if check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
 		var effet_lance: Effet = Effet.new(self, grid_pos, "LANCE", 1, false, grid_pos, false, null)
 		effet_lance.execute()
+		is_porteur = true
+	for effet in effets:
+		if effet.etat == "PORTE":
+			is_porte = true
+			for combattant in combat.combattants:
+				if combattant.id == effet.lanceur.id:
+					combattant.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
 	
 	for combattant in combat.combattants:
 		var new_effets: Array[Effet] = []
@@ -323,11 +332,15 @@ func meurt():
 		)
 		sort.execute_effets(self, zone, grid_pos)
 	
-	var map_pos: Vector2i = combat.tilemap.local_to_map(position)
-	combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
-	combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	if (not is_porteur) and (not is_porte):
+		var map_pos: Vector2i = combat.tilemap.local_to_map(position)
+		combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+	else:
+		combat.tilemap.a_star_grid.set_point_solid(grid_pos, true)
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	is_mort = true
-	print(classe, "_", str(id), " est mort.")
+	combat.chat_log.generic(self, "est mort")
 	queue_free()
 
 
