@@ -617,7 +617,7 @@ func execute_effets(desactive_degats=true):
 
 
 func check_etats(etats: Array) -> bool:
-	if "VIE_FAIBLE" in etats and stats.hp < int(max_stats.hp / 4.0):
+	if "VIE_FAIBLE" in etats and stats.hp <= int(max_stats.hp / 4.0):
 		return true
 	for effet in effets:
 		if effet.etat in etats:
