@@ -370,7 +370,7 @@ func check_cible(lanceur: Combattant, case_cible: Vector2i) -> bool:
 		if cible == GlobalData.Cible.PERSONNAGES_ENNEMIS and (target.is_invocation or lanceur.equipe == target.equipe): 
 			return false
 	else:
-		if cible != GlobalData.Cible.LIBRE and cible != GlobalData.Cible.TOUT and cible != GlobalData.Cible.VIDE:
+		if cible != GlobalData.Cible.LIBRE and cible != GlobalData.Cible.TOUT and cible != GlobalData.Cible.VIDE and cible != GlobalData.Cible.ENNEMIS:
 			return false
 	return true
 
