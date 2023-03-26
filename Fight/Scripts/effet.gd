@@ -23,6 +23,7 @@ var indirect: bool
 var debuffable: bool
 var is_carte: bool
 var affiche_log: bool
+var is_redirection: bool
 var tag_cible: String
 
 var scene_invocation = preload("res://Fight/invocation.tscn")
@@ -48,6 +49,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	indirect = false
 	is_carte = false
 	affiche_log = true
+	is_redirection = false
 	critique = p_critique
 	aoe = p_aoe
 	combat = p_lanceur.get_parent()
@@ -214,8 +216,8 @@ func execute():
 			choix()
 		"CONDITION_ETAT": 
 			condition_etat()
-		"MAUDIT_CLASSE":
-			maudit_classe()
+		"MAUDIT_COMBATTANT":
+			maudit_combattant()
 		"MAUDIT_CASE":
 			maudit_case()
 		"GLYPHE":
@@ -315,6 +317,18 @@ func update_sacrifice(p_cible: Combattant, type: String):
 func applique_dommage(base, stat_element: String, resistance_element: String, orientation_bonus: bool, type: String):
 	if cible.check_etats(["SACRIFICE"]) and duree < 1 and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
+	
+	if cible.check_etats(["MAUDIT"]) and (not type in ["soin"]) and (not is_redirection):
+		var reference = cible if not type in ["retour", "pourcent_retour"] else lanceur
+		var maudit = reference
+		for combattant in combat.combattants:
+			if combattant.check_etats(["MAUDIT"]) and combattant.id != reference.id and combattant.equipe == reference.equipe:
+				maudit = combattant
+				break
+		if maudit.id != reference.id:
+			var effet_maudit = Effet.new(lanceur, maudit, categorie, contenu, critique, centre, aoe, sort)
+			effet_maudit.is_redirection = true
+			effet_maudit.execute()
 	
 	if base is int:
 		valeur_dommage = base
@@ -1237,8 +1251,11 @@ func condition_etat():
 	instant = false
 
 
-func maudit_classe():
-	pass
+func maudit_combattant():
+	etat = "MAUDIT"
+	if instant and affiche_log:
+		combat.chat_log.generic(cible, "est maudit (" + str(duree) + " tours)", tag_cible)
+	instant = false
 
 
 func maudit_case():

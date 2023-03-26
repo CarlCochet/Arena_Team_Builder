@@ -5504,7 +5504,7 @@
             "cible": 0,
             "ldv": 1,
             "type_ldv": 0,
-            "cooldown": 0,
+            "cooldown": 1,
             "cooldown_global": 1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
@@ -5517,9 +5517,9 @@
             "particules_cible": "poof",
             "particules_retour": "",
 			"effets": {
-                "MAUDIT_CLASSE": {
+				"MAUDIT_COMBATTANT": {
                     "base": {
-                        "duree": 999
+                        "duree": 2
                     }
                 }
             }
