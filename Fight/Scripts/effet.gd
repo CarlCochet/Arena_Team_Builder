@@ -688,30 +688,32 @@ func change_stats():
 func vol_pa():
 	var base_crit: String = trouve_crit()
 	var stat = "pa"
-	if cible.stats[stat] <= 0:
+	var compense_negatif = min(0, cible.stats[stat] - contenu[base_crit]["valeur"])
+	var valeur = contenu[base_crit]["valeur"] + compense_negatif
+	if valeur <= 0:
 		return
-	if check_retrait_immunite(cible, stat, -contenu[base_crit]["valeur"]):
+	if check_retrait_immunite(cible, stat, -valeur):
 		contenu[base_crit]["valeur"] = 0
 		return
 	if instant:
-		cible.stats[stat] -= contenu[base_crit]["valeur"]
-		lanceur.stats[stat] += contenu[base_crit]["valeur"]
-		stats_change[stat] -= contenu[base_crit]["valeur"]
+		cible.stats[stat] -= valeur
+		lanceur.stats[stat] += valeur
+		stats_change[stat] -= valeur
 		if affiche_log:
-			combat.chat_log.stats(cible, -contenu[base_crit]["valeur"], stat, duree, tag_cible)
-			combat.chat_log.stats(lanceur, contenu[base_crit]["valeur"], stat, 0, tag_cible)
+			combat.chat_log.stats(cible, -valeur, stat, duree, tag_cible)
+			combat.chat_log.stats(lanceur, valeur, stat, 0, tag_cible)
 	if duree > 0:
-		cible.stat_buffs[stat] -= contenu[base_crit]["valeur"]
-		lanceur.stat_ret[stat] += contenu[base_crit]["valeur"]
+		cible.stat_buffs[stat] -= valeur
+		lanceur.stat_ret[stat] += valeur
 	else:
 		if sort != null and not sort.effets.has("GLYPHE"):
-			cible.stat_ret[stat] -= contenu[base_crit]["valeur"]
-			lanceur.stat_ret[stat] += contenu[base_crit]["valeur"]
-	if contenu[base_crit]["valeur"] > 0:
-		lanceur.max_stats[stat] += contenu[base_crit]["valeur"]
+			cible.stat_ret[stat] -= valeur
+			lanceur.stat_ret[stat] += valeur
+	if valeur > 0:
+		lanceur.max_stats[stat] += valeur
 	if instant:
-		cible.stats_perdu.ajoute(-contenu[base_crit]["valeur"], stat)
-		lanceur.stats_perdu.ajoute(contenu[base_crit]["valeur"], stat)
+		cible.stats_perdu.ajoute(-valeur, stat)
+		lanceur.stats_perdu.ajoute(valeur, stat)
 	
 	instant = false
 	lanceur.stats[stat] = 0 if lanceur.stats[stat] < 0 else lanceur.stats[stat]
@@ -722,32 +724,32 @@ func vol_pa():
 func vol_pm():
 	var base_crit: String = trouve_crit()
 	var stat = "pm"
-	var compense_negatif = 0 if cible.stats[stat] >= contenu[base_crit]["valeur"] else cible.stats[stat] - contenu[base_crit]["valeur"]
-	var valeur = contenu[base_crit]["valeur"] - compense_negatif
+	var compense_negatif = min(0, cible.stats[stat] - contenu[base_crit]["valeur"])
+	var valeur = contenu[base_crit]["valeur"] + compense_negatif
 	if valeur <= 0:
 		return
-	if check_retrait_immunite(cible, stat, -contenu[base_crit]["valeur"]):
+	if check_retrait_immunite(cible, stat, -valeur):
 		contenu[base_crit]["valeur"] = 0
 		return
 	if instant:
-		cible.stats[stat] -= contenu[base_crit]["valeur"]
-		lanceur.stats[stat] += contenu[base_crit]["valeur"]
-		stats_change[stat] -= contenu[base_crit]["valeur"]
+		cible.stats[stat] -= valeur
+		lanceur.stats[stat] += valeur
+		stats_change[stat] -= valeur
 		if affiche_log:
-			combat.chat_log.stats(cible, -contenu[base_crit]["valeur"], stat, duree, tag_cible)
-			combat.chat_log.stats(lanceur, contenu[base_crit]["valeur"], stat, 0, tag_cible)
+			combat.chat_log.stats(cible, -valeur, stat, duree, tag_cible)
+			combat.chat_log.stats(lanceur, valeur, stat, 0, tag_cible)
 	if duree > 0:
-		cible.stat_buffs[stat] -= contenu[base_crit]["valeur"]
-		lanceur.stat_ret[stat] += contenu[base_crit]["valeur"]
+		cible.stat_buffs[stat] -= valeur
+		lanceur.stat_ret[stat] += valeur
 	else:
 		if sort != null and not sort.effets.has("GLYPHE"):
-			cible.stat_ret[stat] -= contenu[base_crit]["valeur"]
-			lanceur.stat_ret[stat] += contenu[base_crit]["valeur"]
-	if contenu[base_crit]["valeur"] > 0:
-		lanceur.max_stats[stat] += contenu[base_crit]["valeur"]
+			cible.stat_ret[stat] -= valeur
+			lanceur.stat_ret[stat] += valeur
+	if valeur > 0:
+		lanceur.max_stats[stat] += valeur
 	if instant:
-		cible.stats_perdu.ajoute(-contenu[base_crit]["valeur"], stat)
-		lanceur.stats_perdu.ajoute(contenu[base_crit]["valeur"], stat)
+		cible.stats_perdu.ajoute(-valeur, stat)
+		lanceur.stats_perdu.ajoute(valeur, stat)
 	
 	instant = false
 	lanceur.stats[stat] = 0 if lanceur.stats[stat] < 0 else lanceur.stats[stat]
