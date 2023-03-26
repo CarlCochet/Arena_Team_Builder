@@ -496,12 +496,14 @@ func choix_clicked(i, contenu, lanceur_id, cible_id, critique, nom_sort):
 	var sort = GlobalData.sorts[nom_sort].copy()
 	
 	etat = 1
-	var new_categorie = contenu[contenu.keys()[i]].keys()[0]
-	var new_contenu = contenu[contenu.keys()[i]][contenu[contenu.keys()[i]].keys()[0]]
-	var new_effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, sort)
-	new_effet.execute()
-	if new_effet.duree > 0:
-		cible.effets.append(new_effet)
+	var choix = contenu[contenu.keys()[i]]
+	for effet in choix.keys():
+		var new_categorie = effet
+		var new_contenu = choix[effet]
+		var new_effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, sort)
+		new_effet.execute()
+		if new_effet.duree > 0:
+			cible.effets.append(new_effet)
 
 
 func _on_bouton_retour_pressed():

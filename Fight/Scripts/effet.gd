@@ -204,14 +204,16 @@ func execute():
 			immunise_retrait_pa()
 		"IMMUNISE_RETRAIT_PM":
 			immunise_retrait_pm()
+		"PLEUTRE":
+			pleutre()
+		"PSYCHOPATHE":
+			psychopathe()
 		"SUICIDE":
 			suicide()
 		"CHOIX":
 			choix()
-		"SWAP":
-			swap()
-		"ACTIVE_AURA":
-			active_aura()
+		"CONDITION_ETAT": 
+			condition_etat()
 		"MAUDIT_CLASSE":
 			maudit_classe()
 		"MAUDIT_CASE":
@@ -1180,6 +1182,20 @@ func immunise_retrait_pm():
 	instant = false
 
 
+func pleutre():
+	etat = "PLEUTRE"
+	if instant and affiche_log:
+		combat.chat_log.generic(cible, "met le mask du Pleutre (" + str(duree) + " tours)", tag_cible)
+	instant = false
+
+
+func psychopathe():
+	etat = "PSYCHOPATHE"
+	if instant and affiche_log:
+		combat.chat_log.generic(cible, "met le mask du Psychopathe (" + str(duree) + " tours)", tag_cible)
+	instant = false
+
+
 func suicide():
 	lanceur.stats.hp = 0
 	combat.check_morts()
@@ -1203,12 +1219,17 @@ func choix():
 		instant = false
 
 
-func swap():
-	pass
-
-
-func active_aura():
-	pass
+func condition_etat():
+	var conditions = contenu.keys()
+	for condition in conditions:
+		if lanceur.check_etats(condition):
+			var sort = GlobalData.sorts[nom_sort].copy()
+			var new_categorie = contenu[condition].keys()[0]
+			var new_contenu = contenu[condition][contenu[condition].keys()[0]]
+			var new_effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, sort)
+			new_effet.execute()
+			if new_effet.duree > 0:
+				cible.effets.append(new_effet)
 
 
 func maudit_classe():

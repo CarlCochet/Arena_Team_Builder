@@ -5229,7 +5229,7 @@
             "po": [0, 0],
             "po_modifiable": 0,
             "type_zone": 0,
-            "taille_zone": [0, 2],
+            "taille_zone": [0, 0],
             "cible": 0,
             "ldv": 1,
             "type_ldv": 0,
@@ -5269,7 +5269,7 @@
 							}
 						},
 						"CHANGE_STATS": {
-							"tacle": {
+							"blocage": {
 								"base": {
 									"valeur": 20,
 									"duree": 2
