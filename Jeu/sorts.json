@@ -5082,7 +5082,7 @@
     },
     "Zobal": {
         "dard_irritant": {
-            "kamas": 100,
+            "kamas": 200,
             "pa": 3,
             "po": [4, 8],
             "po_modifiable": 1,
@@ -5125,7 +5125,7 @@
             }
         },
         "dard_kelectrik": {
-            "kamas": 200,
+            "kamas": 150,
             "pa": 4,
             "po": [2, 14],
             "po_modifiable": 1,
@@ -5158,7 +5158,7 @@
             }
         },
         "endurcissement": {
-            "kamas": 200,
+            "kamas": 250,
             "pa": 5,
             "po": [0, 0],
             "po_modifiable": 0,
@@ -5193,7 +5193,7 @@
             }
         },
         "furia": {
-            "kamas": 150,
+            "kamas": 200,
             "pa": 4,
             "po": [1, 3],
             "po_modifiable": 0,
@@ -5311,7 +5311,7 @@
             }
         },
         "pointera": {
-            "kamas": 100,
+            "kamas": 200,
             "pa": 3,
             "po": [0, 0],
             "po_modifiable": 0,
@@ -5333,9 +5333,9 @@
             "particules_cible": "generic_eau",
             "particules_retour": "",
 			"effets": {
-                "DOMMAGE_EAU": {
+                "VOLE_EAU": {
                     "base": {
-                        "valeur": 7
+                        "valeur": 6
                     }
                 },
                 "CHANGE_STATS": {
@@ -5495,7 +5495,7 @@
             }
         },
         "vaudou": {
-            "kamas": 100,
+            "kamas": 150,
             "pa": 2,
             "po": [1, 2],
             "po_modifiable": 1,
