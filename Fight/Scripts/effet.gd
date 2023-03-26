@@ -1220,16 +1220,21 @@ func choix():
 
 
 func condition_etat():
+	if not instant:
+		return
 	var conditions = contenu.keys()
 	for condition in conditions:
-		if lanceur.check_etats(condition):
-			var sort = GlobalData.sorts[nom_sort].copy()
-			var new_categorie = contenu[condition].keys()[0]
-			var new_contenu = contenu[condition][contenu[condition].keys()[0]]
-			var new_effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, sort)
-			new_effet.execute()
-			if new_effet.duree > 0:
-				cible.effets.append(new_effet)
+		if lanceur.check_etats([condition]):
+			var new_sort = sort.copy()
+			var choix = contenu[condition]
+			for effet in choix:
+				var new_categorie = effet
+				var new_contenu = choix[effet]
+				var new_effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, new_sort)
+				new_effet.execute()
+				if new_effet.duree > 0:
+					cible.effets.append(new_effet)
+	instant = false
 
 
 func maudit_classe():

@@ -162,13 +162,6 @@ func ajoute_carte_combat():
 	if len(cartes_queue) == 0:
 		genere_cartes_queue()
 	noms_cartes_combat.append(cartes_queue.pop_back())
-#	var nom_cartes = GlobalData.cartes_combat.keys()
-#	var derniere_carte = len(noms_cartes_combat) - 1
-#	var nouvelle_carte = noms_cartes_combat[derniere_carte]
-#	while nouvelle_carte == noms_cartes_combat[derniere_carte]:
-#		var id_carte = GlobalData.rng.randi_range(1, len(nom_cartes) - 1)
-#		nouvelle_carte = nom_cartes[id_carte]
-#	noms_cartes_combat.append(nouvelle_carte)
 
 
 func applique_carte_combat():
@@ -504,6 +497,7 @@ func choix_clicked(i, contenu, lanceur_id, cible_id, critique, nom_sort):
 		new_effet.execute()
 		if new_effet.duree > 0:
 			cible.effets.append(new_effet)
+	sorts.update(lanceur)
 
 
 func _on_bouton_retour_pressed():
