@@ -964,7 +964,62 @@ func recul():
 
 
 func avance():
-	pass
+	if lanceur.classe == "Arbre":
+		return
+	if lanceur.check_etats(["STABILISE"]):
+		return
+	var direction: Vector2i = (cible.grid_pos - lanceur.grid_pos).sign()
+	var grid: Array = combat.tilemap.grid
+	var stopped: bool = false
+	for i in range(contenu):
+		var grid_pos: Vector2i = lanceur.grid_pos + (i + 1) * direction
+		if grid_pos.x >= 0 and grid_pos.x < len(grid) and grid_pos.y >= 0 and grid_pos.y < len(grid[0]):
+			if grid[grid_pos.x][grid_pos.y] == 0 or grid[grid_pos.x][grid_pos.y] == -1:
+				if not stopped:
+					stopped = true
+					lanceur.bouge_perso(grid_pos - direction)
+					if lanceur.check_etats(["SACRIFICE"]):
+						lanceur = update_sacrifice(lanceur, "normal")
+					if not lanceur.check_etats(["IMMUNISE"]):
+						lanceur.stats.hp -= (contenu - i) * 3
+						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+						combat.chat_log.dommages(lanceur, -(contenu - i) * 3, "")
+				break
+			elif combat.check_perso(grid_pos):
+				if not stopped:
+					stopped = true
+					lanceur.bouge_perso(grid_pos - direction)
+					if lanceur.check_etats(["SACRIFICE"]):
+						lanceur = update_sacrifice(lanceur, "normal")
+					if not lanceur.check_etats(["IMMUNISE"]):
+						lanceur.stats.hp -= (contenu - i) * 3
+						lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+						combat.chat_log.dommages(lanceur, -(contenu - i) * 3, "")
+					var combattant_block = null
+					for combattant in combat.combattants:
+						if combattant.grid_pos == grid_pos:
+							combattant_block = combattant
+					if combattant_block != null:
+						if combattant_block.check_etats(["SACRIFICE"]):
+							combattant_block = update_sacrifice(combattant_block, "normal")
+						if not combattant_block.check_etats(["IMMUNISE"]):
+							combattant_block.stats.hp -= (contenu - i) * 3
+							combattant_block.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+							combat.chat_log.dommages(combattant_block, -(contenu - i) * 3, "")
+		else:
+			if not stopped:
+				stopped = true
+				lanceur.bouge_perso(grid_pos - direction)
+				if lanceur.check_etats(["SACRIFICE"]):
+					lanceur = update_sacrifice(lanceur, "normal")
+				if not lanceur.check_etats(["IMMUNISE"]):
+					lanceur.stats.hp -= (contenu - i) * 3
+					lanceur.stats_perdu.ajoute(-(contenu - i) * 3, "hp")
+					combat.chat_log.dommages(lanceur, -(contenu - i) * 3, "")
+			break
+	if not stopped:
+		lanceur.bouge_perso(Vector2i(lanceur.grid_pos) + Vector2i(contenu * direction))
+	combat.tilemap.update_glyphes()
 
 
 func immobilise():
