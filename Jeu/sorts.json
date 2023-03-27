@@ -1173,7 +1173,7 @@
             "po_modifiable": 1,
 			"type_zone": 0,
 			"taille_zone": [0, 0],
-			"cible": 0,
+			"cible": 4,
 			"ldv": 1,
 			"type_ldv": 0,
 			"cooldown": 1,
@@ -1301,18 +1301,14 @@
             "particules_cible": "fossilisation",
             "particules_retour": "",
 			"effets": {
-				"CHANGE_STATS": {
-                    "pm": {
-                        "base": {
-                            "valeur": -1,
-                            "retour": 1
-                        },
-                        "critique": {
-                            "valeur": -2,
-                            "retour": 2
-                        }
-                    }
-                },
+				"VOL_PM": {
+					"base": {
+						"valeur": 1
+					},
+					"critique": {
+						"valeur": 2
+					}
+				},
                 "DOMMAGE_TERRE": {
                     "base": {
                         "valeur": 16
@@ -1726,7 +1722,7 @@
                     },
                     "resistance_zone": {
                         "base": {
-                            "valeur": 20,
+                            "valeur": 30,
                             "duree": 5
                         }
                     },
@@ -4603,20 +4599,16 @@
                         "valeur": 10
                     }
                 },
-                "CHANGE_STATS": {
-                    "pa": {
-                        "base": {
-                            "valeur": -1,
-                            "retour": 1,
-                            "duree": 1
-                        },
-                        "critique": {
-                            "valeur": -1,
-                            "retour": 1,
-                            "duree": 1
-                        }
-                    }
-                }
+				"VOL_PA": {
+					"base": {
+						"valeur": 1,
+						"duree": 1
+					},
+					"critique": {
+						"valeur": 1,
+						"duree": 1
+					}
+				}
 			}
 		}
 	},
@@ -5090,8 +5082,8 @@
     },
     "Zobal": {
         "dard_irritant": {
-            "kamas": 100,
-            "pa": 5,
+            "kamas": 200,
+            "pa": 3,
             "po": [4, 8],
             "po_modifiable": 1,
             "type_zone": 0,
@@ -5133,7 +5125,7 @@
             }
         },
         "dard_kelectrik": {
-            "kamas": 200,
+            "kamas": 150,
             "pa": 4,
             "po": [2, 14],
             "po_modifiable": 1,
@@ -5157,31 +5149,21 @@
 			"effets": {
                 "DOMMAGE_FEU": {
                     "base": {
-                        "valeur": 4
+                        "valeur": 3
                     },
                     "critique": {
-                        "valeur": 6
-                    }
-                },
-                "CHANGE_STATS": {
-                    "pm": {
-                        "base": {
-                            "valeur": -1
-                        },
-                        "critique": {
-                            "valeur": -1
-                        }
+                        "valeur": 4
                     }
                 }
             }
         },
         "endurcissement": {
-            "kamas": 100,
-            "pa": 2,
+            "kamas": 250,
+            "pa": 5,
             "po": [0, 0],
             "po_modifiable": 0,
             "type_zone": 0,
-            "taille_zone": [0, 0],
+            "taille_zone": [0, 1],
             "cible": 0,
             "ldv": 1,
             "type_ldv": 0,
@@ -5190,7 +5172,7 @@
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
             "desenvoute_delais": -1,
-            "nombre_lancers": -1,
+            "nombre_lancers": 1,
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
@@ -5200,16 +5182,20 @@
 			"effets": {
                 "BOOST_VIE": {
                     "base": {
-                        "valeur": 6,
-                        "duree": 1
-                    }
+                        "valeur": 10,
+                        "duree": 999
+                    },
+					"critique": {
+						"valeur": 15,
+						"duree": 999
+					}
                 }
             }
         },
         "furia": {
-            "kamas": 150,
+            "kamas": 200,
             "pa": 4,
-            "po": [1, 2],
+            "po": [1, 3],
             "po_modifiable": 0,
             "type_zone": 0,
             "taille_zone": [0, 0],
@@ -5231,10 +5217,10 @@
 			"effets": {
                 "DOMMAGE_TERRE": {
                     "base": {
-                        "valeur": 18
+                        "valeur": 14
                     }
                 },
-                "AVANCE": 1
+                "AVANCE": 2
             }
         },
         "mask": {
@@ -5243,7 +5229,7 @@
             "po": [0, 0],
             "po_modifiable": 0,
             "type_zone": 0,
-            "taille_zone": [0, 2],
+            "taille_zone": [0, 0],
             "cible": 0,
             "ldv": 1,
             "type_ldv": 0,
@@ -5260,17 +5246,37 @@
             "particules_cible": "poof",
             "particules_retour": "",
 			"effets": {
-                "SWAP": {
-                    "PLEUTRE": {
-                        "base": {
-                            "duree": 999
-                        }
-                    },
-                    "PSYCHOPATHE": {
-                        "base": {
-                            "duree": 999
-                        }
-                    }
+                "CHOIX": {
+					"mask_pleutre": {
+						"PLEUTRE": {
+							"base": {
+								"duree": 2
+							}
+						},
+						"CHANGE_STATS": {
+							"esquive": {
+								"base": {
+									"valeur": 20,
+									"duree": 2
+								}
+							}
+						}
+					},
+					"mask_psychopathe": {
+						"PSYCHOPATHE": {
+							"base": {
+								"duree": 2
+							}
+						},
+						"CHANGE_STATS": {
+							"blocage": {
+								"base": {
+									"valeur": 20,
+									"duree": 2
+								}
+							}
+						}
+					}
                 }
             }
         },
@@ -5284,8 +5290,8 @@
             "cible": 0,
             "ldv": 1,
             "type_ldv": 0,
-            "cooldown": 5,
-            "cooldown_global": 5,
+            "cooldown": 3,
+            "cooldown_global": 3,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
             "desenvoute_delais": -1,
@@ -5294,26 +5300,18 @@
             "etat_requis": "PSYCHOPATHE",
             "etats_cible_interdits": [],
             "etats_lanceur_interdits": ["PORTE"],
-            "particules_cible": "generic_debuff",
-            "particules_retour": "generic_buff",
+            "particules_cible": "poof",
+            "particules_retour": "",
 			"effets": {
-                "IMMOBILISE": {
-                    "base": {
-                        "duree": 1
-                    }
-                },
-                "CHANGE_STATS": {
-                    "renvoi_dommage": {
-                        "base": {
-                            "valeur": 50,
-                            "duree": 2
-                        }
-                    }
-                }
+                "PETRIFIE": {
+					"base": {
+						"duree": 1
+					}
+				}
             }
         },
         "pointera": {
-            "kamas": 100,
+            "kamas": 200,
             "pa": 3,
             "po": [0, 0],
             "po_modifiable": 0,
@@ -5335,9 +5333,9 @@
             "particules_cible": "generic_eau",
             "particules_retour": "",
 			"effets": {
-                "DOMMAGE_EAU": {
+                "VOLE_EAU": {
                     "base": {
-                        "valeur": 5
+                        "valeur": 6
                     }
                 },
                 "CHANGE_STATS": {
@@ -5356,7 +5354,7 @@
             "po": [0, 0],
             "po_modifiable": 0,
             "type_zone": 0,
-            "taille_zone": [0, 0],
+            "taille_zone": [1, 2],
             "cible": 0,
             "ldv": 1,
             "type_ldv": 0,
@@ -5373,10 +5371,63 @@
             "particules_cible": "poof",
             "particules_retour": "",
 			"effets": {
-                "ACTIVE_AURA": {
-                    "base": {
-                        "duree": 2
-                    }
+                "CONDITION_ETAT": {
+                    "PLEUTRE": {
+						"CHANGE_STATS": {
+							"dommages_air": {
+								"base": {
+									"valeur": 15,
+									"duree": 1
+								}
+							},
+							"dommages_terre": {
+								"base": {
+									"valeur": 15,
+									"duree": 1
+								}
+							},
+							"dommages_feu": {
+								"base": {
+									"valeur": 15,
+									"duree": 1
+								}
+							},
+							"dommages_eau": {
+								"base": {
+									"valeur": 15,
+									"duree": 1
+								}
+							}
+						}
+					},
+					"PSYCHOPATHE": {
+						"CHANGE_STATS": {
+							"resistances_air": {
+								"base": {
+									"valeur": -15,
+									"duree": 1
+								}
+							},
+							"resistances_terre": {
+								"base": {
+									"valeur": -15,
+									"duree": 1
+								}
+							},
+							"resistances_feu": {
+								"base": {
+									"valeur": -15,
+									"duree": 1
+								}
+							},
+							"resistances_eau": {
+								"base": {
+									"valeur": -15,
+									"duree": 1
+								}
+							}
+						}
+					}
                 }
             }
         },
@@ -5390,7 +5441,7 @@
             "cible": 0,
             "ldv": 1,
             "type_ldv": 0,
-            "cooldown": 2,
+            "cooldown": 3,
             "cooldown_global": 0,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
@@ -5444,7 +5495,7 @@
             }
         },
         "vaudou": {
-            "kamas": 100,
+            "kamas": 150,
             "pa": 2,
             "po": [1, 2],
             "po_modifiable": 1,
@@ -5453,7 +5504,7 @@
             "cible": 0,
             "ldv": 1,
             "type_ldv": 0,
-            "cooldown": 0,
+            "cooldown": 1,
             "cooldown_global": 1,
             "lancer_par_tour": -1,
             "lancer_par_cible": -1,
@@ -5466,9 +5517,9 @@
             "particules_cible": "poof",
             "particules_retour": "",
 			"effets": {
-                "MAUDIT_CLASSE": {
+				"MAUDIT_COMBATTANT": {
                     "base": {
-                        "duree": 999
+                        "duree": 2
                     }
                 }
             }
@@ -5775,7 +5826,7 @@
             "particules_cible": "cartes",
             "particules_retour": "",
 			"effets": {
-                "cible": 10,
+                "cible": 8,
                 "DOMMAGE_TERRE": {
                     "base": {
                         "valeur": "1d12+0"

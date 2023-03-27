@@ -19,22 +19,22 @@ var stat_cartes_combat: Stats
 var buffs_hp: Array
 var initiative_random: float
 var equipements: Dictionary
-var sorts: Array
+var sorts: Array[Sort]
 var equipe: int
-var effets: Array
+var effets: Array[Effet]
 var combat: Combat
 
 var grid_pos: Vector2i
 var id: int
 var orientation: int
 var compte_sorts: int
-var all_path: Array
-var path_actuel: Array
-var all_ldv: Array
-var zone: Array
-var positions_chemin: Array
-var porte
-var porteur
+var all_path: Array[Vector2i]
+var path_actuel: Array[Vector2i]
+var all_ldv: Array[Vector2i]
+var zone: Array[Vector2i]
+var positions_chemin: Array[Vector2]
+var porte: Combattant
+var porteur: Combattant
 
 var is_selected: bool
 var is_hovered: bool
@@ -83,7 +83,7 @@ func _process(delta):
 				combat.etat = 1
 				emit_signal("movement_finished")
 		else:
-			var direction = position.direction_to(positions_chemin[0])
+			var direction: Vector2 = position.direction_to(positions_chemin[0])
 			position += direction * delta * 300.0
 		if porte != null:
 			porte.position = position + Vector2(0, -90)
@@ -132,7 +132,7 @@ func from_personnage(p_personnage: Personnage, equipe_id: int):
 	equipements = p_personnage.equipements
 	sorts = [Sort.new().from_arme(self, equipements["Armes"])]
 	for sort in p_personnage.sorts:
-		var new_sort = GlobalData.sorts[sort].copy()
+		var new_sort: Sort = GlobalData.sorts[sort].copy()
 		new_sort.nom = sort
 		sorts.append(new_sort)
 	compte_sorts = len(sorts)
@@ -153,7 +153,7 @@ func affiche_path(pos_event: Vector2i):
 			if not combattant.is_visible:
 				combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos, false)
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
-	var path = combat.tilemap.get_chemin(grid_pos, pos_event)
+	var path: Array[Vector2i] = combat.tilemap.get_chemin(grid_pos, pos_event)
 	for combattant in combat.combattants:
 		combat.tilemap.a_star_grid.set_point_solid(combattant.grid_pos)
 	if check_etats(["IMMOBILISE"]):
@@ -184,7 +184,7 @@ func affiche_ldv(action: int):
 func affiche_zone(action: int, pos_event: Vector2i):
 	all_path = []
 	path_actuel = []
-	var sort
+	var sort: Sort
 	if action < len(sorts):
 		sort = sorts[action]
 	combat.tilemap.clear_layer(2)
@@ -203,7 +203,7 @@ func affiche_zone(action: int, pos_event: Vector2i):
 
 
 func calcul_path_actuel(pos_event: Vector2i):
-	var path = combat.tilemap.get_chemin(grid_pos, pos_event)
+	var path: Array[Vector2i] = combat.tilemap.get_chemin(grid_pos, pos_event)
 	if check_etats(["IMMOBILISE"]):
 		all_path = []
 		path = []
@@ -215,13 +215,13 @@ func calcul_path_actuel(pos_event: Vector2i):
 
 
 func calcul_all_ldv(action: int):
-	var sort
+	var sort: Sort
 	sort = sorts[action]
 	if not sort.precheck_cast(self):
 		combat.change_action(10)
 		return
-	var bonus_po = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
-	var po_max = sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0]
+	var bonus_po: int = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
+	var po_max: int = int(sort.po[1]) + bonus_po if int(sort.po[1]) + bonus_po >= int(sort.po[0]) else int(sort.po[0])
 	po_max = 1 if sort.po[1] > 0 and po_max <= 0 else po_max
 	all_ldv = combat.tilemap.get_ldv(
 		grid_pos, 
@@ -230,7 +230,7 @@ func calcul_all_ldv(action: int):
 		sort.type_ldv,
 		sort.ldv
 	)
-	var valides = []
+	var valides: Array[Vector2i] = []
 	for tile in all_ldv:
 		if sort.check_cible(self, tile):
 			valides.append(tile)
@@ -238,7 +238,7 @@ func calcul_all_ldv(action: int):
 
 
 func calcul_zone(action: int, pos_event: Vector2i):
-	var sort
+	var sort: Sort
 	if action < len(sorts):
 		sort = sorts[action]
 	if pos_event in all_ldv:
@@ -254,17 +254,17 @@ func calcul_zone(action: int, pos_event: Vector2i):
 func check_case_bonus():
 	if check_etats(["PORTE"]):
 		return
-	var case_id = combat.tilemap.get_cell_atlas_coords(1, grid_pos - combat.offset).x
-	var categorie = ""
+	var case_id: int = combat.tilemap.get_cell_atlas_coords(1, grid_pos - combat.offset).x
+	var categorie: String = ""
 	var contenu = ""
-	var maudit = false
+	var maudit: bool = false
 	if grid_pos in combat.tilemap.cases_maudites.values():
 		maudit = true
-	var sort_temp = Sort.new()
+	var sort_temp: Sort = Sort.new()
 	match case_id:
 		2:
 			categorie = "CHANGE_STATS"
-			var valeur = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
+			var valeur: int = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {
 				"dommages_air":{"base":{"valeur":valeur,"duree":1}},
 				"dommages_terre":{"base":{"valeur":valeur,"duree":1}},
@@ -274,7 +274,7 @@ func check_case_bonus():
 			sort_temp.nom = "case_ardeur"
 		3:
 			categorie = "CHANGE_STATS"
-			var valeur = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
+			var valeur: int = 30 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {
 				"resistances_air":{"base":{"valeur":valeur,"duree":1}},
 				"resistances_terre":{"base":{"valeur":valeur,"duree":1}},
@@ -284,22 +284,22 @@ func check_case_bonus():
 			sort_temp.nom = "case_bouclier"
 		4:
 			categorie = "SOIN" if not maudit else "DOMMAGE_FIXE"
-			var valeur =  7 * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
+			var valeur: int =  7 * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"base":{"valeur":valeur}}
 			sort_temp.nom = "case_coeur_soignant"
 		5:
 			categorie = "CHANGE_STATS"
-			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
+			var valeur: int = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"pa":{"base":{"valeur":valeur,"duree":1}}}
 			sort_temp.nom = "case_motivation"
 		6:
 			categorie = "CHANGE_STATS"
-			var valeur = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
+			var valeur: int = 2 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"po":{"base":{"valeur":valeur,"duree":1}}}
 			sort_temp.nom = "case_oeil_de_lynx"
 		7:
 			categorie = "CHANGE_STATS"
-			var valeur = 25 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
+			var valeur: int = 25 * -(int(maudit) * 2 - 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"soins":{"base":{"valeur":valeur,"duree":1}}}
 			sort_temp.nom = "case_panacee"
 		8:
@@ -308,13 +308,13 @@ func check_case_bonus():
 			sort_temp.nom = "case_tueuse"
 		9:
 			categorie = "DOMMAGE_FIXE"
-			var valeur = 15 * (int(maudit) + 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
+			var valeur: int = 15 * (int(maudit) + 1) * (int(combat.tour >= 15 and GlobalData.mort_subite_active) + 1)
 			contenu = {"base":{"valeur":valeur}}
 			sort_temp.nom = "case_piegee"
 	
-	var effet = Effet.new(self, self, categorie, contenu, false, grid_pos, false, sort_temp)
+	var effet: Effet = Effet.new(self, self, categorie, contenu, false, grid_pos, false, sort_temp)
 	effet.debuffable = false
-	var temp_soins = stats.soins
+	var temp_soins: int = stats.soins
 	stats.soins = 0
 	effet.execute()
 	stats.soins = temp_soins
@@ -354,7 +354,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 			if effet.etat == "DOMMAGE_SI_UTILISE_PA" and (effet.sort.nom != sort.nom or effet.lanceur.id != id):
 				for i in range(sort.pa):
 					effet.execute()
-		var _valide = false
+		var _valide: bool = false
 		if check_etats(["RATE_SORT"]) and action < compte_sorts:
 			_valide = true
 			retire_etats(["RATE_SORT"])
@@ -384,15 +384,15 @@ func affiche_stats_change(valeur: int, stat: String):
 func check_tacle_unit(case: Vector2i) -> bool:
 	if check_etats(["PORTE"]) or not is_visible:
 		return false
-	var voisins = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
-	var blocage_total = 0
+	var voisins: Array[Vector2i] = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
+	var blocage_total: int = 0
 	for combattant in combat.combattants:
 		if combattant.equipe == equipe or combattant.check_etats(["PORTE", "PETRIFIE"]) or not combattant.is_visible:
 			continue
 		if (combattant.grid_pos - case) in voisins:
 			blocage_total += combattant.stats.blocage
-	var min_esquive = max(stats.esquive - 99, 1)
-	var max_esquive = max(stats.esquive, 2)
+	var min_esquive: int = max(stats.esquive - 99, 1)
+	var max_esquive: int = max(stats.esquive, 2)
 	if GlobalData.rng.randi_range(min_esquive, max_esquive) < blocage_total:
 		return true
 	return false
@@ -401,8 +401,8 @@ func check_tacle_unit(case: Vector2i) -> bool:
 func deplace_perso(chemin: Array):
 	if stats.pm <= 0:
 		return
-	var tacled = check_tacle_unit(grid_pos)
-	var pm_utilise = 0
+	var tacled: bool = check_tacle_unit(grid_pos)
+	var pm_utilise: int = 0
 	for effet in effets:
 		if effet.etat == "DOMMAGE_SI_BOUGE":
 			effet.execute()
@@ -410,10 +410,10 @@ func deplace_perso(chemin: Array):
 	if not tacled:
 		for case in chemin:
 			pm_utilise += 1
-			var precedent = grid_pos
-			var tile_pos = case - combat.offset
-			var old_grid_pos = grid_pos
-			var old_map_pos = grid_pos - combat.offset
+			var precedent: Vector2i = grid_pos
+			var tile_pos: Vector2i = case - combat.offset
+			var old_grid_pos: Vector2i = grid_pos
+			var old_map_pos: Vector2i = grid_pos - combat.offset
 			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
 			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
 			positions_chemin.append(combat.tilemap.map_to_local(tile_pos))
@@ -452,16 +452,16 @@ func deplace_perso(chemin: Array):
 func place_perso(tile_pos: Vector2i, swap: bool):
 	var tile_data = combat.tilemap.get_cell_atlas_coords(2, tile_pos)
 	if (tile_data.x == 0 and equipe == 1) or (tile_data.x == 2 and equipe == 0):
-		var new_grid_pos = tile_pos + combat.offset
-		var place_libre = true
+		var new_grid_pos: Vector2i = tile_pos + combat.offset
+		var place_libre: bool = true
 		var target
 		for combattant in combat.combattants:
 			if combattant.grid_pos == new_grid_pos:
 				place_libre = false
 				target = combattant
 		if place_libre:
-			var old_grid_pos = grid_pos
-			var old_map_pos = grid_pos - combat.offset
+			var old_grid_pos: Vector2i = grid_pos
+			var old_map_pos: Vector2i = grid_pos - combat.offset
 			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
 			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
 			position = combat.tilemap.map_to_local(tile_pos)
@@ -469,8 +469,8 @@ func place_perso(tile_pos: Vector2i, swap: bool):
 			combat.tilemap.a_star_grid.set_point_solid(grid_pos)
 			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 		elif swap:
-			var old_grid_pos = grid_pos
-			var old_position = position
+			var old_grid_pos: Vector2i = grid_pos
+			var old_position: Vector2i = position
 			grid_pos = target.grid_pos
 			position = target.position
 			target.grid_pos = old_grid_pos
@@ -478,8 +478,8 @@ func place_perso(tile_pos: Vector2i, swap: bool):
 
 
 func bouge_perso(new_pos: Vector2i):
-	var old_grid_pos = grid_pos
-	var old_map_pos = grid_pos - combat.offset
+	var old_grid_pos: Vector2i = grid_pos
+	var old_map_pos: Vector2i = grid_pos - combat.offset
 	combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
 	combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
 	position = combat.tilemap.map_to_local(new_pos - combat.offset)
@@ -490,8 +490,8 @@ func bouge_perso(new_pos: Vector2i):
 
 
 func echange_positions(combattant):
-	var old_grid_pos = grid_pos
-	var old_position = position
+	var old_grid_pos: Vector2i = grid_pos
+	var old_position: Vector2 = position
 	grid_pos = combattant.grid_pos
 	position = combattant.position
 	combattant.grid_pos = old_grid_pos
@@ -499,37 +499,41 @@ func echange_positions(combattant):
 
 
 func oriente_vers(pos: Vector2i):
-	var ref_vectors = [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
-	var min_dist = 999999999.0
-	var min_vec = 0
+	var ref_vectors: Array[Vector2] = [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
+	var min_dist: float = 999999999.0
+	var min_vec: int = 0
 	for i in range(len(ref_vectors)):
-		var new_dist = Vector2(pos).distance_to(Vector2(grid_pos) + ref_vectors[i])
+		var new_dist: float = Vector2(pos).distance_to(Vector2(grid_pos) + ref_vectors[i])
 		if new_dist < min_dist:
 			min_dist = new_dist
 			min_vec = i
 	change_orientation(min_vec)
 
 
-func debut_tour():
+func update_stats_tour():
 	visible = true
 	personnage.modulate = Color(1, 1, 1, 1)
 	classe_sprite.material.set_shader_parameter("alpha", 1.0)
 	is_visible = true
-	var old_pa = stats.pa
-	var old_pm = stats.pm
-	var delta_hp = max_stats.hp - stats.hp
-	var start_hp = stats.hp
+	var old_pa: int = stats.pa
+	var old_pm: int = stats.pm
+	var delta_hp: int = max_stats.hp - stats.hp
+	var start_hp: int = stats.hp
 	retrait_durees()
 	execute_effets(false)
 	check_case_bonus()
-	var effets_hp = start_hp - stats.hp
+	var effets_hp: int = start_hp - stats.hp
 	desactive_cadran()
-	var temp_stats = init_stats.copy().add(stat_buffs).add(stat_cartes_combat)
+	var temp_stats: Stats = init_stats.copy().add(stat_buffs).add(stat_cartes_combat)
 	stats = init_stats.copy().add(stat_ret).add(stat_buffs).add(stat_cartes_combat)
 	stats.pa = temp_stats.pa if old_pa >= temp_stats.pa else stats.pa
 	stats.pm = temp_stats.pm if old_pm >= temp_stats.pm else stats.pm
 	stats.hp -= delta_hp + effets_hp
 	execute_buffs_hp(false)
+
+
+func debut_tour():
+	update_stats_tour()
 	all_path = combat.tilemap.get_atteignables(grid_pos, stats.pm)
 	if check_etats(["PETRIFIE"]):
 		combat.passe_tour()
@@ -547,7 +551,7 @@ func fin_tour():
 	active_cadran()
 	retrait_cooldown()
 	stat_ret = Stats.new()
-	var delta_hp = max_stats.hp - stats.hp
+	var delta_hp: int = max_stats.hp - stats.hp
 	stats = init_stats.copy().add(stat_buffs).add(stat_cartes_combat)
 	stats.hp -= delta_hp
 	execute_buffs_hp(false)
@@ -555,8 +559,8 @@ func fin_tour():
 
 
 func meurt():
-	var is_porteur = false
-	var is_porte = false
+	var is_porteur: bool = false
+	var is_porte: bool = false
 	if check_etats(["PORTE_ALLIE", "PORTE_ENNEMI"]):
 		var effet_lance = Effet.new(self, grid_pos, "LANCE", 1, false, grid_pos, false, null)
 		effet_lance.execute()
@@ -569,11 +573,11 @@ func meurt():
 					combattant.retire_etats(["PORTE_ALLIE", "PORTE_ENNEMI"])
 	
 	for combattant in combat.combattants:
-		var new_effets = []
+		var new_effets: Array[Effet] = []
 		for effet in combattant.effets:
 			if effet.lanceur.id != id:
 				new_effets.append(effet)
-		var new_buffs_hp = []
+		var new_buffs_hp: Array = []
 		for buff_hp in combattant.buffs_hp:
 			if buff_hp["lanceur"] == id:
 				combattant.stats.hp -= buff_hp["valeur"]
@@ -584,7 +588,7 @@ func meurt():
 		combattant.buffs_hp = new_buffs_hp
 	
 	if (not is_porteur) and (not is_porte):
-		var map_pos = combat.tilemap.local_to_map(position)
+		var map_pos: Vector2i = combat.tilemap.local_to_map(position)
 		combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
 	else:
@@ -592,7 +596,6 @@ func meurt():
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	is_mort = true
 	combat.chat_log.generic(self, "est mort")
-	print(classe, "_", str(id), " est mort.")
 	queue_free()
 
 
@@ -605,7 +608,7 @@ func execute_buffs_hp(update_max=true):
 
 func execute_effets(desactive_degats=true):
 	stat_buffs = Stats.new()
-	var triggers = ["DOMMAGE_SI_BOUGE", "DOMMAGE_SI_UTILISE_PA"]
+	var triggers: Array[String] = ["DOMMAGE_SI_BOUGE", "DOMMAGE_SI_UTILISE_PA"]
 	for effet in effets:
 		if effet.categorie in ["DOMMAGE_FIXE", "SOIN"] and (id != combat.combattant_selection.id or desactive_degats):
 			continue
@@ -614,7 +617,7 @@ func execute_effets(desactive_degats=true):
 
 
 func check_etats(etats: Array) -> bool:
-	if "VIE_FAIBLE" in etats and stats.hp < int(max_stats.hp / 4.0):
+	if "VIE_FAIBLE" in etats and stats.hp <= int(max_stats.hp / 4.0):
 		return true
 	for effet in effets:
 		if effet.etat in etats:
@@ -623,7 +626,7 @@ func check_etats(etats: Array) -> bool:
 
 
 func retire_etats(etats: Array):
-	var new_effets = []
+	var new_effets: Array[Effet] = []
 	for effet in effets:
 		if effet.etat not in etats:
 			new_effets.append(effet)
@@ -632,34 +635,34 @@ func retire_etats(etats: Array):
 
 func retrait_durees():
 	for combattant in combat.combattants:
-		var new_effets = []
+		var new_effets: Array[Effet] = []
 		for effet in combattant.effets:
 			if effet.lanceur.id == id and not effet.is_carte:
 				effet.duree -= 1
 			if effet.duree > 0:
 				new_effets.append(effet)
-		var new_buffs_hp = []
+		var new_buffs_hp: Array = []
 		for buff_hp in combattant.buffs_hp:
 			if buff_hp["lanceur"] == id:
 				buff_hp["duree"] -= 1
 			if buff_hp["duree"] > 0:
 				new_buffs_hp.append(buff_hp)
-		var old_pa = combattant.stats.pa
-		var old_pm = combattant.stats.pm
+		var old_pa: int = combattant.stats.pa
+		var old_pm: int = combattant.stats.pm
 		combattant.buffs_hp = new_buffs_hp
 		combattant.effets = new_effets
 		combattant.stat_buffs = Stats.new()
-		var delta_hp = combattant.max_stats.hp - combattant.stats.hp
+		var delta_hp: int = combattant.max_stats.hp - combattant.stats.hp
 		combattant.max_stats = combattant.init_stats.copy()
 		combattant.execute_effets()
-		var temp_stats = combattant.init_stats.copy().add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
+		var temp_stats: Stats = combattant.init_stats.copy().add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
 		combattant.stats = combattant.init_stats.copy().add(combattant.stat_ret).add(combattant.stat_buffs).add(combattant.stat_cartes_combat)
 		combattant.stats.pa = temp_stats.pa if old_pa >= temp_stats.pa else combattant.stats.pa
 		combattant.stats.pm = temp_stats.pm if old_pm >= temp_stats.pm else combattant.stats.pm
 		combattant.stats.hp -= delta_hp
 		combattant.execute_buffs_hp()
 	
-	var new_map_glyphes = []
+	var new_map_glyphes: Array = []
 	for glyphe in combat.tilemap.glyphes:
 		if glyphe.lanceur.id == id:
 			glyphe.duree -= 1

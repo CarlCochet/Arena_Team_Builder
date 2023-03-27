@@ -68,7 +68,7 @@ var classes_mapping = {
 var sorts: Dictionary
 var equipements: Dictionary
 var stats_classes: Dictionary
-var equipes: Array
+var equipes: Array[Equipe]
 var sorts_lookup: Dictionary
 var equipements_lookup: Dictionary
 var cartes_combat: Dictionary
@@ -94,12 +94,12 @@ func _ready():
 
 
 func charger_cartes_combat():
-	var file = FileAccess.open("res://Jeu/cartes_combat.json", FileAccess.READ)
+	var file: FileAccess = FileAccess.open("res://Jeu/cartes_combat.json", FileAccess.READ)
 	cartes_combat = JSON.parse_string(file.get_as_text())
 
 
 func charger_sorts():
-	var file = FileAccess.open("res://Jeu/sorts.json", FileAccess.READ)
+	var file: FileAccess = FileAccess.open("res://Jeu/sorts.json", FileAccess.READ)
 	var json_data = JSON.parse_string(file.get_as_text())
 	var sort: Sort
 	
@@ -115,7 +115,7 @@ func charger_sorts():
 
 
 func charger_equipements():
-	var file = FileAccess.open("res://Jeu/equipements.json", FileAccess.READ)
+	var file: FileAccess = FileAccess.open("res://Jeu/equipements.json", FileAccess.READ)
 	var json_data = JSON.parse_string(file.get_as_text())
 	var equipement: Equipement
 	
@@ -129,7 +129,7 @@ func charger_equipements():
 
 
 func charger_stats_classes():
-	var file = FileAccess.open("res://Jeu/stats_classes.json", FileAccess.READ)
+	var file: FileAccess = FileAccess.open("res://Jeu/stats_classes.json", FileAccess.READ)
 	var json_data = JSON.parse_string(file.get_as_text())
 	var stats: Stats
 	
@@ -139,7 +139,7 @@ func charger_stats_classes():
 
 
 func charger_equipes():
-	var file_access = FileAccess.open("user://save.json", FileAccess.READ)
+	var file_access: FileAccess = FileAccess.open("user://save.json", FileAccess.READ)
 	if not file_access:
 		equipes = [Equipe.new()]
 	else:
@@ -161,9 +161,9 @@ func sauver_equipes():
 	file_access.store_string(json_string)
 
 
-func get_perso_actuel():
+func get_perso_actuel() -> Personnage:
 	return equipe_actuelle.personnages[perso_actuel]
 
 
-func set_perso_actuel(personnage):
+func set_perso_actuel(personnage: Personnage):
 	equipe_actuelle.personnages[perso_actuel] = personnage
