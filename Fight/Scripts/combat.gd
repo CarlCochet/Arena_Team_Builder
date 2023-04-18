@@ -108,6 +108,7 @@ func init_cartes_combat():
 
 func genere_cartes_queue():
 	var temp_cartes: Array = GlobalData.cartes_combat.keys().duplicate()
+	temp_cartes.erase("cloue_au_lit")
 	cartes_queue = []
 	while len(temp_cartes) > 0:
 		var element: int = GlobalData.rng.randi_range(0, len(temp_cartes) - 1)

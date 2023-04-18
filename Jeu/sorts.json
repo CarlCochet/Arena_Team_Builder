@@ -603,7 +603,8 @@
 				"CHANGE_STATS": {
 					"po": {
 						"base": {
-							"retour": 1
+							"retour": 1,
+							"monoproc": 1
 						}
 					}
 				},
