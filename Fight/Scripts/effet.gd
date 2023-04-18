@@ -667,7 +667,7 @@ func change_stats():
 				cible.max_stats[stat] += contenu[stat][base_crit]["valeur"]
 			if stat in ["pa", "pm", "hp"] and instant:
 				cible.stats_perdu.ajoute(contenu[stat][base_crit]["valeur"], stat)
-		if contenu[stat][base_crit].has("retour"):
+		if contenu[stat][base_crit].has("retour") and not sort.proc:
 			if check_retrait_immunite(lanceur, stat, contenu[stat][base_crit]["retour"]):
 				contenu[stat][base_crit]["retour"] = 0
 				continue
@@ -692,7 +692,8 @@ func change_stats():
 					sort_retour.effets["CHANGE_STATS"][stat]["critique"].erase("retour_instance")
 					sort_retour.effets["CHANGE_STATS"][stat]["critique"]["valeur"] = contenu[stat][base_crit]["retour_instance"]
 				sort_retour.execute_effets(lanceur, [lanceur.grid_pos], lanceur.grid_pos)
-			
+		if contenu[stat][base_crit].has("monoproc"):
+			sort.proc = true
 	instant = false
 	lanceur.stats.pa = 0 if lanceur.stats.pa < 0 else lanceur.stats.pa
 	lanceur.stats.pm = 0 if lanceur.stats.pm < 0 else lanceur.stats.pm

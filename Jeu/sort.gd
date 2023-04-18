@@ -33,6 +33,7 @@ var compte_lancers_tour: int
 var compte_cible: Dictionary
 var cooldown_actuel: int
 var retour_lock: bool
+var proc: bool
 
 
 func _init():
@@ -64,6 +65,7 @@ func _init():
 	compte_lancers_tour = 0
 	compte_lancers = 0
 	compte_cible = {}
+	proc = false
 	retour_lock = false
 
 
@@ -201,6 +203,7 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 	if effets.has("MAUDIT_CASE"):
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
 	update_limite_lancers(lanceur)
+	proc = false
 	return sort_valide
 
 
