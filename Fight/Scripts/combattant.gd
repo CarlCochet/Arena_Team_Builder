@@ -385,16 +385,19 @@ func check_tacle_unit(case: Vector2i) -> bool:
 	if check_etats(["PORTE"]) or not is_visible:
 		return false
 	var voisins: Array[Vector2i] = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
-	var blocage_total: int = 0
+	var seul: bool = true
+	for combattant in combat.combattants:
+		if (combattant.grid_pos - case) in voisins:
+			seul = false
+	if seul:
+		return false
 	for combattant in combat.combattants:
 		if combattant.equipe == equipe or combattant.check_etats(["PORTE", "PETRIFIE"]) or not combattant.is_visible:
 			continue
 		if (combattant.grid_pos - case) in voisins:
-			blocage_total += combattant.stats.blocage
-	var min_esquive: int = max(stats.esquive - 99, 1)
-	var max_esquive: int = max(stats.esquive, 2)
-	if GlobalData.rng.randi_range(min_esquive, max_esquive) < blocage_total:
-		return true
+			var chance_esquive: int = stats.esquive - combattant.stats.blocage
+			if GlobalData.rng.randi_range(0, 99) < chance_esquive:
+				return true
 	return false
 
 
