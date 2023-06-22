@@ -396,7 +396,7 @@ func check_tacle_unit(case: Vector2i) -> bool:
 			continue
 		if (combattant.grid_pos - case) in voisins:
 			var chance_esquive: int = stats.esquive - combattant.stats.blocage
-			if GlobalData.rng.randi_range(0, 99) < chance_esquive:
+			if GlobalData.rng.randi_range(0, 99) >= chance_esquive:
 				return true
 	return false
 
