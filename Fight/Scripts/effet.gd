@@ -1049,7 +1049,7 @@ func revele_invisible():
 		return
 	affiche_log = true
 	for combattant in combat.combattants:
-		if combattant.id != lanceur.id:
+		if combattant.equipe != lanceur.equipe:
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 			combattant.retire_etats(["INVISIBLE"])
 			combattant.visible = true
