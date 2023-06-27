@@ -54,7 +54,27 @@ enum Invocations {
 	LANCE_DU_FORGELANCE = 17
 }
 
-var classes = ["Cra", "Eca", "Eni", "Enu", "Feca", "Iop", "Osa", "Panda", "Sacrieur", "Sadida", "Sram", "Xelor", "Roublard", "Zobal"]
+var classes = [
+	"Cra", 
+	"Eca", 
+	"Eni", 
+	"Enu", 
+	"Feca", 
+	"Iop", 
+	"Osa", 
+	"Panda", 
+	"Sacrieur", 
+	"Sadida", 
+	"Sram", 
+	"Xelor", 
+	"Roublard", 
+	"Zobal", 
+	"Steamer", 
+	"Elio", 
+	"Hupper", 
+	"Ouginak", 
+	"Forgelance",
+]
 var classes_mapping = {
 	"Cra": "Cra",
 	"Eca": "Ecaflip",
@@ -70,6 +90,11 @@ var classes_mapping = {
 	"Xelor": "Xelor",
 	"Roublard": "Roublard",
 	"Zobal": "Zobal",
+	"Steamer": "Steamer", 
+	"Elio": "Eliotrope", 
+	"Hupper": "Huppermage", 
+	"Ouginak": "Ouginak", 
+	"Forgelance": "Forgelance",
 }
 
 var sorts: Dictionary

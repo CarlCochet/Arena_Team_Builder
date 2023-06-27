@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://byrls820tvsdn"]
+[gd_scene load_steps=47 format=3 uid="uid://byrls820tvsdn"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_classe.gd" id="1_e1xo3"]
 [ext_resource type="Texture2D" uid="uid://cnfldddiljcbc" path="res://UI/Logos/Classes/cra_unselected.png" id="1_v4byf"]
@@ -35,6 +35,16 @@
 [ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="29_0max7"]
 [ext_resource type="Texture2D" uid="uid://36o83i7iq234" path="res://UI/Logos/Classes/zobal_selected.png" id="29_0tcq4"]
 [ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="30_f8pnp"]
+[ext_resource type="Texture2D" uid="uid://c7aivltvmbm53" path="res://UI/Logos/Classes/steamer_unselected.png" id="30_x71bi"]
+[ext_resource type="Texture2D" uid="uid://b6qcqn804tfqe" path="res://UI/Logos/Classes/steamer_selected.png" id="31_loahw"]
+[ext_resource type="Texture2D" uid="uid://wrgq4wkq0p1x" path="res://UI/Logos/Classes/elio_unselected.png" id="32_g05jt"]
+[ext_resource type="Texture2D" uid="uid://rw4mqpbg6lvs" path="res://UI/Logos/Classes/elio_selected.png" id="33_kvowp"]
+[ext_resource type="Texture2D" uid="uid://c47i4ahf3adqo" path="res://UI/Logos/Classes/hupper_unselected.png" id="34_7ux64"]
+[ext_resource type="Texture2D" uid="uid://bvi4erlsxjeae" path="res://UI/Logos/Classes/hupper_selected.png" id="35_ljtf6"]
+[ext_resource type="Texture2D" uid="uid://ct3df8aqbyfh0" path="res://UI/Logos/Classes/ouginak_unselected.png" id="36_yd4j4"]
+[ext_resource type="Texture2D" uid="uid://by0hvmsc4rrm7" path="res://UI/Logos/Classes/ouginak_selected.png" id="37_gx2hi"]
+[ext_resource type="Texture2D" uid="uid://bgj5ax7pwcvcw" path="res://UI/Logos/Classes/forgelance_unselected.png" id="38_wxejx"]
+[ext_resource type="Texture2D" uid="uid://cqottv4w8nqo0" path="res://UI/Logos/Classes/forgelance_selected.png" id="39_1keeo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ehp7s"]
 font_size = 18
@@ -59,11 +69,11 @@ color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="Classes" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 35.0
-offset_top = 266.0
-offset_right = 801.0
-offset_bottom = 482.0
-scale = Vector2(2, 2)
+offset_left = 228.0
+offset_top = 249.0
+offset_right = 994.0
+offset_bottom = 575.0
+scale = Vector2(1.5, 1.5)
 columns = 7
 
 [node name="Cra" type="TextureButton" parent="Classes"]
@@ -149,6 +159,36 @@ layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("28_v0bfk")
 texture_pressed = ExtResource("29_0tcq4")
+
+[node name="Steamer" type="TextureButton" parent="Classes"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("30_x71bi")
+texture_pressed = ExtResource("31_loahw")
+
+[node name="Elio" type="TextureButton" parent="Classes"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("32_g05jt")
+texture_pressed = ExtResource("33_kvowp")
+
+[node name="Hupper" type="TextureButton" parent="Classes"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("34_7ux64")
+texture_pressed = ExtResource("35_ljtf6")
+
+[node name="Ouginak" type="TextureButton" parent="Classes"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("36_yd4j4")
+texture_pressed = ExtResource("37_gx2hi")
+
+[node name="Forgelance" type="TextureButton" parent="Classes"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("38_wxejx")
+texture_pressed = ExtResource("39_1keeo")
 
 [node name="GridContainer2" type="GridContainer" parent="."]
 layout_mode = 0
