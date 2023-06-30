@@ -7500,7 +7500,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "pa_buff",
             "particules_retour": "",
 			"effets": {
@@ -7533,7 +7533,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "generic_buff",
             "particules_retour": "",
 			"effets": {
@@ -7590,7 +7590,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "generic_buff",
             "particules_retour": "",
 			"effets": {
@@ -7641,7 +7641,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "pm_buff",
             "particules_retour": "",
 			"effets": {
@@ -7680,7 +7680,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "eclair",
             "particules_retour": "",
 			"effets": {
@@ -7710,7 +7710,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "generic_neutre",
             "particules_retour": "",
 			"effets": {
@@ -7742,7 +7742,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "generic_debuff",
             "particules_retour": "",
 			"effets": {
@@ -7777,7 +7777,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "cartes",
             "particules_retour": "",
 			"effets": {
@@ -7813,7 +7813,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "generic_buff",
             "particules_retour": "",
 			"effets": {
@@ -7846,7 +7846,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "generic_soin",
             "particules_retour": "",
 			"effets": {
@@ -7876,7 +7876,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "poof",
             "particules_retour": "",
 			"effets": {
@@ -7906,7 +7906,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "poof",
             "particules_retour": "",
 			"effets": {
@@ -7937,7 +7937,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "poof",
             "particules_retour": "",
 			"effets": {
@@ -7968,7 +7968,7 @@
             "cumul_max": -1,
             "etat_requis": "",
             "etats_cible_interdits": [],
-            "etats_lanceur_interdits": ["PORTE"],
+			"etats_lanceur_interdits": ["PORTE", "PORTE_ENNEMI", "PORTE_ALLIE"],
             "particules_cible": "generic_buff",
             "particules_retour": "",
 			"effets": {
