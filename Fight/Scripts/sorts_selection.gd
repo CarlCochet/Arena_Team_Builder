@@ -23,7 +23,7 @@ func update(combattant):
 			sprite.scale = Vector2(1.05, 1.05)
 			
 			carte.texture = load("res://Classes/" + combattant.classe + "/Sorts/" + sort.nom + ".png")
-			carte.position = Vector2(90, -200)
+			carte.position = Vector2(130, -200)
 			carte.scale = Vector2(1, 1)
 			carte.name = "carte"
 			

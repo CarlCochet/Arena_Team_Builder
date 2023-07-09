@@ -114,6 +114,7 @@ func select():
 	if not is_invocation:
 		combat.sorts.update(self)
 		combat.sorts_bonus.update(self)
+		combat.arme.update(self)
 
 
 func unselect():
