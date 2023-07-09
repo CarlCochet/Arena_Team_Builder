@@ -11,6 +11,8 @@ var equipe: Equipe
 
 
 func _ready():
+	discord_sdk.state = "Dans les menus"
+	discord_sdk.refresh()
 	for i in range(len(boutons_recruter)):
 		if i < 6:
 			boutons_recruter[i].connect("pressed", _on_recruter_pressed.bind(i))

@@ -3,6 +3,10 @@ extends Control
 
 func _ready():
 	GlobalData.charger_equipes()
+	discord_sdk.app_id = 1127716790978486363
+	discord_sdk.state = "Dans les menus"
+	discord_sdk.small_image = "logo"
+	discord_sdk.refresh()
 
 
 func _input(event):

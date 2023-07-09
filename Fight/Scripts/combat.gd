@@ -43,6 +43,9 @@ func _ready():
 	adversaire_pret = not GlobalData.is_multijoueur
 	indexeur_global = 0
 	offset = tilemap.offset
+	discord_sdk.state = "En combat"
+	discord_sdk.start_timestamp = int(Time.get_unix_time_from_system())
+	discord_sdk.refresh()
 	if not GlobalData.is_multijoueur:
 		fleche_carte_combat.visible = false
 	creer_personnages()
@@ -512,6 +515,9 @@ func affiche_quitter():
 
 @rpc("any_peer", "call_local")
 func retour_pressed():
+	discord_sdk.state = "Choix de carte"
+	discord_sdk.start_timestamp = -1
+	discord_sdk.refresh()
 	get_tree().change_scene_to_file("res://UI/choix_map.tscn")
 
 

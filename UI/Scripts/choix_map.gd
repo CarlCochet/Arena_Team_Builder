@@ -10,6 +10,9 @@ var map_selected: int
 
 func _ready():
 	GlobalData.rng.randomize()
+	GlobalData.is_multijoueur = true
+	discord_sdk.state = "Dans les menus"
+	discord_sdk.refresh()
 	for i in range(len(maps)):
 		maps[i].connect("pressed", _on_map_pressed.bind(i))
 	map_initiale = 0
