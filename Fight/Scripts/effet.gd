@@ -1049,7 +1049,7 @@ func revele_invisible():
 		return
 	affiche_log = true
 	for combattant in combat.combattants:
-		if combattant.id != lanceur.id:
+		if combattant.equipe != lanceur.equipe:
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 			combattant.retire_etats(["INVISIBLE"])
 			combattant.visible = true
@@ -1279,10 +1279,10 @@ func condition_etat():
 	for condition in conditions:
 		if lanceur.check_etats([condition]):
 			var new_sort = sort.copy()
-			var choix = contenu[condition]
-			for effet in choix:
+			var choix_effet = contenu[condition]
+			for effet in choix_effet:
 				var new_categorie = effet
-				var new_contenu = choix[effet]
+				var new_contenu = choix_effet[effet]
 				var new_effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, new_sort)
 				new_effet.execute()
 				if new_effet.duree > 0:

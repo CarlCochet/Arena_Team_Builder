@@ -23,7 +23,8 @@ enum Cible {
 	CLASSE = 9, 
 	PERSONNAGES = 10, 
 	PERSONNAGES_ALLIES = 11, 
-	PERSONNAGES_ENNEMIS = 12
+	PERSONNAGES_ENNEMIS = 12,
+	MA_LANCE = 13
 }
 
 enum TypeLDV {
@@ -44,10 +45,36 @@ enum Invocations {
 	DOUBLE = 8,
 	CADRAN_DE_XELOR = 9,
 	BOMBE_A_EAU = 10,
-	BOMBE_INCENDIAIRE = 11
+	BOMBE_INCENDIAIRE = 11,
+	HARPONNEUSE = 12,
+	GARDIENNE = 13,
+	TACTIRELLE = 14,
+	GARDIEN_ELEMENTAIRE = 15,
+	ROQUET = 16,
+	LANCE_DU_FORGELANCE = 17
 }
 
-var classes = ["Cra", "Eca", "Eni", "Enu", "Feca", "Iop", "Osa", "Panda", "Sacrieur", "Sadida", "Sram", "Xelor", "Roublard", "Zobal"]
+var classes = [
+	"Cra", 
+	"Eca", 
+	"Eni", 
+	"Enu", 
+	"Feca", 
+	"Iop", 
+	"Osa", 
+	"Panda", 
+	"Sacrieur", 
+	"Sadida", 
+	"Sram", 
+	"Xelor", 
+	"Roublard", 
+	"Zobal", 
+	"Steamer", 
+	"Elio", 
+	"Hupper", 
+	"Ouginak", 
+	"Forgelance",
+]
 var classes_mapping = {
 	"Cra": "Cra",
 	"Eca": "Ecaflip",
@@ -63,6 +90,11 @@ var classes_mapping = {
 	"Xelor": "Xelor",
 	"Roublard": "Roublard",
 	"Zobal": "Zobal",
+	"Steamer": "Steamer", 
+	"Elio": "Eliotrope", 
+	"Hupper": "Huppermage", 
+	"Ouginak": "Ouginak", 
+	"Forgelance": "Forgelance",
 }
 
 var sorts: Dictionary

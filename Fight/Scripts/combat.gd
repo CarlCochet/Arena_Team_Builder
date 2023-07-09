@@ -19,6 +19,7 @@ var cartes_queue: Array[String]
 var adversaire_pret: bool
 
 @onready var sorts: Control = $Sorts
+@onready var arme: TextureRect = $Arme
 @onready var sorts_bonus: Control = $SortsBonus
 @onready var cartes_combat: Control = $CartesCombat
 @onready var fleche_carte_combat: Sprite2D = $FlecheCarteCombat

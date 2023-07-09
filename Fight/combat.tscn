@@ -1,8 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://egsxhipgew1"]
+[gd_scene load_steps=33 format=3 uid="uid://egsxhipgew1"]
 
 [ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
 [ext_resource type="Script" path="res://Fight/Scripts/sorts_bonus_selection.gd" id="3_e0j6u"]
+[ext_resource type="Texture2D" uid="uid://c7kierg32v4ip" path="res://UI/Logos/Spells/arme.png" id="4_11pnh"]
 [ext_resource type="PackedScene" uid="uid://dm7uaxf12cq58" path="res://Fight/cartes_combat.tscn" id="4_u8rsj"]
+[ext_resource type="Script" path="res://Fight/Scripts/arme_selection.gd" id="5_7xdon"]
 [ext_resource type="PackedScene" uid="uid://fchxarxrckwc" path="res://Fight/affichage_stats_small.tscn" id="5_jgg7a"]
 [ext_resource type="PackedScene" uid="uid://cyuev8xs7ffv8" path="res://Fight/sorts.tscn" id="7_0vhv3"]
 [ext_resource type="PackedScene" uid="uid://dkum5bskrgt8k" path="res://Fight/affichage_stats.tscn" id="8_mm5mb"]
@@ -47,20 +49,31 @@ script = ExtResource("1_2kr3w")
 
 [node name="Sorts" parent="." instance=ExtResource("7_0vhv3")]
 z_index = 3
-offset_left = 50.0
+offset_left = 60.0
 offset_top = 845.0
-offset_right = 298.0
+offset_right = 308.0
 offset_bottom = 885.0
 scale = Vector2(1, 1)
 
 [node name="SortsBonus" parent="." instance=ExtResource("7_0vhv3")]
 z_index = 3
-offset_left = 50.0
+offset_left = 60.0
 offset_top = 800.0
-offset_right = 298.0
+offset_right = 308.0
 offset_bottom = 840.0
 scale = Vector2(1, 1)
 script = ExtResource("3_e0j6u")
+
+[node name="Arme" type="TextureRect" parent="."]
+z_index = 3
+offset_left = 10.0
+offset_top = 845.0
+offset_right = 50.0
+offset_bottom = 885.0
+texture = ExtResource("4_11pnh")
+script = ExtResource("5_7xdon")
+
+[node name="carte" type="Sprite2D" parent="Arme"]
 
 [node name="CartesCombat" parent="." instance=ExtResource("4_u8rsj")]
 z_index = 3
@@ -237,6 +250,8 @@ texture_hover = ExtResource("26_f4qhe")
 
 [node name="ChatLog" parent="." instance=ExtResource("27_6acv5")]
 
+[connection signal="mouse_entered" from="Arme" to="Arme" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Arme" to="Arme" method="_on_mouse_exited"]
 [connection signal="pressed" from="OrientationControls/Fleche0" to="." method="_on_fleche_0_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche1" to="." method="_on_fleche_1_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche2" to="." method="_on_fleche_2_pressed"]
