@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalData="*res://Jeu/global_data.gd"
 Client="*res://Jeu/client.gd"
+DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 
 [display]
 
@@ -30,3 +31,7 @@ window/stretch/aspect="keep_width"
 [dotnet]
 
 project/assembly_name="Arena_Team_Builder"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg", "res://addons/sprite_painter/plugin.cfg")
