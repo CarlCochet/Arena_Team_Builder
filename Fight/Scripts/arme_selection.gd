@@ -1,13 +1,13 @@
 extends TextureRect
 
 
-var carte_hovered = -1
-@onready var carte = $carte
+var carte_hovered: int = -1
+@onready var carte: Sprite2D = $carte
 @export var is_popup: bool
 
 
 func update(combattant: Combattant):
-	var nom_arme = combattant.equipements["Armes"]
+	var nom_arme: String = combattant.equipements["Armes"] if not combattant.equipements["Armes"].is_empty() else "poing"
 	carte.texture = load("res://Equipements/Armes/" + nom_arme + ".png")
 	carte.position = Vector2(130, -200)
 	carte.scale = Vector2(1, 1)
