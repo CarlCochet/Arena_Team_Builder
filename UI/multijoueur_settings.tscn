@@ -1,4 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt5lwbr78ayee"]
+[gd_scene load_steps=12 format=3 uid="uid://bt5lwbr78ayee"]
+
+[ext_resource type="Script" path="res://UI/Scripts/multijoueur_settings.gd" id="1_t0o3m"]
+[ext_resource type="Texture2D" uid="uid://bknc5skjp7s4v" path="res://UI/Buttons/retour_base.png" id="2_c4mo0"]
+[ext_resource type="Texture2D" uid="uid://dd20mihsbd7tw" path="res://UI/Buttons/retour_clicked.png" id="3_3ckl8"]
+[ext_resource type="Texture2D" uid="uid://bsx000i85450y" path="res://UI/Buttons/retour_hovered.png" id="4_wlj0v"]
+[ext_resource type="Texture2D" uid="uid://b5sgblea4yfqw" path="res://UI/Buttons/valider_base.png" id="5_5c1g2"]
+[ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="6_fq10m"]
+[ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="7_6m71x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cetag"]
 font_size = 18
@@ -24,8 +32,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_t0o3m")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -73.0
 offset_right = 1683.0
@@ -34,6 +44,7 @@ scale = Vector2(1, 20)
 color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="Background2" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = 265.0
 offset_top = 34.0
 offset_right = 1338.0
@@ -45,7 +56,7 @@ color = Color(0, 0, 0, 0.0823529)
 layout_mode = 0
 offset_left = 355.0
 offset_top = 60.0
-offset_right = 1095.0
+offset_right = 1153.0
 offset_bottom = 691.0
 scale = Vector2(1.2, 1.2)
 
@@ -73,13 +84,14 @@ popup/item_7/id = 7
 
 [node name="Label" type="Label" parent="Settings/ModeJeu"]
 layout_mode = 0
-offset_left = 146.667
-offset_right = 319.667
+offset_left = 20.0
+offset_right = 193.0
 offset_bottom = 29.0
 text = "Choisir mode de jeu"
 label_settings = SubResource("LabelSettings_cetag")
 
 [node name="Background3" type="ColorRect" parent="Settings/ModeJeu/Label"]
+layout_mode = 0
 offset_left = -15.8333
 offset_top = -6.66666
 offset_right = 190.167
@@ -87,6 +99,9 @@ offset_bottom = -4.66666
 scale = Vector2(1, 20)
 mouse_filter = 2
 color = Color(0, 0, 0, 0.176471)
+
+[node name="HSeparator" type="HSeparator" parent="Settings"]
+layout_mode = 2
 
 [node name="Conditions" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
@@ -106,97 +121,97 @@ layout_mode = 2
 [node name="Labels" type="VBoxContainer" parent="Settings/Conditions/ChoixClasses/Classes"]
 layout_mode = 2
 
-[node name="Label1" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Cra" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Cra"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label2" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Eca" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Ecaflip"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label3" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Eni" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Eniripsa"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label4" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Enu" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Enutrof"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label5" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Feca" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Feca"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label6" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Iop" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Iop"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label7" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Osa" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Osamodas"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label8" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Panda" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Pandawa"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label9" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Sacri" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Sacrieur"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label10" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Sadi" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Sadida"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label11" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Sram" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Sram"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label12" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Xelor" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Xelor"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label13" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Roublard" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Roublard"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label14" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Zobal" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Zobal"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label15" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Steamer" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Steamer"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label16" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Elio" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Eliotrope"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label17" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Hupper" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Huppermage"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label18" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Ougi" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Ouginak"
 label_settings = SubResource("LabelSettings_key27")
 
-[node name="Label19" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+[node name="Forgelance" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
 layout_mode = 2
 text = "Forgelance"
 label_settings = SubResource("LabelSettings_key27")
@@ -205,74 +220,74 @@ label_settings = SubResource("LabelSettings_key27")
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="CheckBox1" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Cra" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox2" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Eca" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox3" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Eni" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox4" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Enu" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox5" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Feca" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox6" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Iop" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox7" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Osa" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox8" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Panda" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox9" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Sacri" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox10" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Sadi" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox11" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Sram" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox12" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Xelor" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox13" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Roublard" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 button_pressed = true
 
-[node name="CheckBox14" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Zobal" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 
-[node name="CheckBox15" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Steamer" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 
-[node name="CheckBox16" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Elio" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 
-[node name="CheckBox17" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Hupper" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 
-[node name="CheckBox18" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Ougi" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 
-[node name="CheckBox19" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+[node name="Forgelance" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
 layout_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="Settings/Conditions"]
@@ -295,17 +310,17 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Label1" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Labels"]
+[node name="Budget" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Labels"]
 layout_mode = 2
 text = "Budget max"
 label_settings = SubResource("LabelSettings_my80s")
 
-[node name="Label2" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Labels"]
+[node name="Perso" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Labels"]
 layout_mode = 2
 text = "Nombre personnages"
 label_settings = SubResource("LabelSettings_my80s")
 
-[node name="Label3" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Labels"]
+[node name="MS" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Labels"]
 layout_mode = 2
 text = "Tours avant Mort Subite   "
 label_settings = SubResource("LabelSettings_my80s")
@@ -314,7 +329,7 @@ label_settings = SubResource("LabelSettings_my80s")
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="HSlider1" type="HSlider" parent="Settings/Conditions/ConditionsDiverses/Conditions/Widgets"]
+[node name="Budget" type="HSlider" parent="Settings/Conditions/ConditionsDiverses/Conditions/Widgets"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/grabber_offset = 0
@@ -324,7 +339,7 @@ step = 500.0
 value = 6000.0
 ticks_on_borders = true
 
-[node name="HSlider2" type="HSlider" parent="Settings/Conditions/ConditionsDiverses/Conditions/Widgets"]
+[node name="Perso" type="HSlider" parent="Settings/Conditions/ConditionsDiverses/Conditions/Widgets"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 min_value = 1.0
@@ -332,7 +347,7 @@ max_value = 6.0
 value = 6.0
 ticks_on_borders = true
 
-[node name="HSlider3" type="HSlider" parent="Settings/Conditions/ConditionsDiverses/Conditions/Widgets"]
+[node name="MS" type="HSlider" parent="Settings/Conditions/ConditionsDiverses/Conditions/Widgets"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 max_value = 30.0
@@ -342,17 +357,44 @@ ticks_on_borders = true
 [node name="Values" type="VBoxContainer" parent="Settings/Conditions/ConditionsDiverses/Conditions"]
 layout_mode = 2
 
-[node name="Label1" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
+[node name="Budget" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
 layout_mode = 2
 text = "    6000"
 horizontal_alignment = 2
 
-[node name="Label2" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
+[node name="Perso" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
 layout_mode = 2
 text = "    6"
 horizontal_alignment = 2
 
-[node name="Label3" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
+[node name="MS" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
 layout_mode = 2
 text = "    15"
 horizontal_alignment = 2
+
+[node name="BoutonsPrincipaux" type="GridContainer" parent="."]
+offset_left = 597.0
+offset_top = 845.0
+offset_right = 896.0
+offset_bottom = 885.0
+scale = Vector2(1.5, 1.5)
+columns = 2
+
+[node name="Retour" type="TextureButton" parent="BoutonsPrincipaux"]
+layout_mode = 2
+texture_normal = ExtResource("2_c4mo0")
+texture_pressed = ExtResource("3_3ckl8")
+texture_hover = ExtResource("4_wlj0v")
+
+[node name="Valider" type="TextureButton" parent="BoutonsPrincipaux"]
+layout_mode = 2
+texture_normal = ExtResource("5_5c1g2")
+texture_pressed = ExtResource("6_fq10m")
+texture_hover = ExtResource("7_6m71x")
+
+[connection signal="pressed" from="Settings/ModeJeu" to="." method="_on_mode_jeu_pressed"]
+[connection signal="drag_ended" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/Budget" to="." method="_on_budget_drag_ended"]
+[connection signal="drag_ended" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/Perso" to="." method="_on_perso_drag_ended"]
+[connection signal="drag_ended" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/MS" to="." method="_on_ms_drag_ended"]
+[connection signal="pressed" from="BoutonsPrincipaux/Retour" to="." method="_on_retour_pressed"]
+[connection signal="pressed" from="BoutonsPrincipaux/Valider" to="." method="_on_valider_pressed"]
