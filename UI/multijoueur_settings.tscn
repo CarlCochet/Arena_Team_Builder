@@ -1,0 +1,355 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt5lwbr78ayee"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cetag"]
+font_size = 18
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0mgqr"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_key27"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_my80s"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MultijoueurSettings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -80.0
+offset_top = -73.0
+offset_right = 1683.0
+offset_bottom = 965.0
+scale = Vector2(1, 20)
+color = Color(0.529412, 0.478431, 0.317647, 1)
+
+[node name="Background2" type="ColorRect" parent="."]
+offset_left = 265.0
+offset_top = 34.0
+offset_right = 1338.0
+offset_bottom = 75.0
+scale = Vector2(1, 20)
+color = Color(0, 0, 0, 0.0823529)
+
+[node name="Settings" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 60.0
+offset_right = 1095.0
+offset_bottom = 691.0
+scale = Vector2(1.2, 1.2)
+
+[node name="ModeJeu" type="MenuButton" parent="Settings"]
+layout_mode = 2
+theme_override_constants/h_separation = 300
+text = " "
+item_count = 8
+popup/item_0/text = "Classique"
+popup/item_0/id = 0
+popup/item_1/text = "Arena 2.0"
+popup/item_1/id = 1
+popup/item_2/text = "Tournoi 4k"
+popup/item_2/id = 2
+popup/item_3/text = "Tournoi 8k"
+popup/item_3/id = 3
+popup/item_4/text = "Tournoi MS"
+popup/item_4/id = 4
+popup/item_5/text = "Tournoi 1p"
+popup/item_5/id = 5
+popup/item_6/text = "Tournoi 2p"
+popup/item_6/id = 6
+popup/item_7/text = "Tournoi illimité"
+popup/item_7/id = 7
+
+[node name="Label" type="Label" parent="Settings/ModeJeu"]
+layout_mode = 0
+offset_left = 146.667
+offset_right = 319.667
+offset_bottom = 29.0
+text = "Choisir mode de jeu"
+label_settings = SubResource("LabelSettings_cetag")
+
+[node name="Background3" type="ColorRect" parent="Settings/ModeJeu/Label"]
+offset_left = -15.8333
+offset_top = -6.66666
+offset_right = 190.167
+offset_bottom = -4.66666
+scale = Vector2(1, 20)
+mouse_filter = 2
+color = Color(0, 0, 0, 0.176471)
+
+[node name="Conditions" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+
+[node name="ChoixClasses" type="VBoxContainer" parent="Settings/Conditions"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Conditions/ChoixClasses"]
+layout_mode = 2
+text = "Classes jouables"
+label_settings = SubResource("LabelSettings_0mgqr")
+horizontal_alignment = 1
+
+[node name="Classes" type="HBoxContainer" parent="Settings/Conditions/ChoixClasses"]
+layout_mode = 2
+
+[node name="Labels" type="VBoxContainer" parent="Settings/Conditions/ChoixClasses/Classes"]
+layout_mode = 2
+
+[node name="Label1" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Cra"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label2" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Ecaflip"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label3" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Eniripsa"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label4" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Enutrof"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label5" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Feca"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label6" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Iop"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label7" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Osamodas"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label8" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Pandawa"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label9" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Sacrieur"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label10" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Sadida"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label11" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Sram"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label12" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Xelor"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label13" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Roublard"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label14" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Zobal"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label15" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Steamer"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label16" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Eliotrope"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label17" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Huppermage"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label18" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Ouginak"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Label19" type="Label" parent="Settings/Conditions/ChoixClasses/Classes/Labels"]
+layout_mode = 2
+text = "Forgelance"
+label_settings = SubResource("LabelSettings_key27")
+
+[node name="Checkboxes" type="VBoxContainer" parent="Settings/Conditions/ChoixClasses/Classes"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CheckBox1" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox2" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox3" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox4" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox5" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox6" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox7" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox8" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox9" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox10" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox11" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox12" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox13" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckBox14" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+
+[node name="CheckBox15" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+
+[node name="CheckBox16" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+
+[node name="CheckBox17" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+
+[node name="CheckBox18" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+
+[node name="CheckBox19" type="CheckBox" parent="Settings/Conditions/ChoixClasses/Classes/Checkboxes"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Settings/Conditions"]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="ConditionsDiverses" type="VBoxContainer" parent="Settings/Conditions"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Conditions/ConditionsDiverses"]
+layout_mode = 2
+text = "Conditions diverses"
+label_settings = SubResource("LabelSettings_0mgqr")
+horizontal_alignment = 1
+
+[node name="Conditions" type="HBoxContainer" parent="Settings/Conditions/ConditionsDiverses"]
+layout_mode = 2
+
+[node name="Labels" type="VBoxContainer" parent="Settings/Conditions/ConditionsDiverses/Conditions"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label1" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Labels"]
+layout_mode = 2
+text = "Budget max"
+label_settings = SubResource("LabelSettings_my80s")
+
+[node name="Label2" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Labels"]
+layout_mode = 2
+text = "Nombre personnages"
+label_settings = SubResource("LabelSettings_my80s")
+
+[node name="Label3" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Labels"]
+layout_mode = 2
+text = "Tours avant Mort Subite   "
+label_settings = SubResource("LabelSettings_my80s")
+
+[node name="Widgets" type="VBoxContainer" parent="Settings/Conditions/ConditionsDiverses/Conditions"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HSlider1" type="HSlider" parent="Settings/Conditions/ConditionsDiverses/Conditions/Widgets"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/grabber_offset = 0
+min_value = 1000.0
+max_value = 20000.0
+step = 500.0
+value = 6000.0
+ticks_on_borders = true
+
+[node name="HSlider2" type="HSlider" parent="Settings/Conditions/ConditionsDiverses/Conditions/Widgets"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 6.0
+value = 6.0
+ticks_on_borders = true
+
+[node name="HSlider3" type="HSlider" parent="Settings/Conditions/ConditionsDiverses/Conditions/Widgets"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 30.0
+value = 15.0
+ticks_on_borders = true
+
+[node name="Values" type="VBoxContainer" parent="Settings/Conditions/ConditionsDiverses/Conditions"]
+layout_mode = 2
+
+[node name="Label1" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
+layout_mode = 2
+text = "    6000"
+
+[node name="Label2" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
+layout_mode = 2
+text = "    6"
+
+[node name="Label3" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
+layout_mode = 2
+text = "    15"
