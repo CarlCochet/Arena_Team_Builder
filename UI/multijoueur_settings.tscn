@@ -345,11 +345,14 @@ layout_mode = 2
 [node name="Label1" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
 layout_mode = 2
 text = "    6000"
+horizontal_alignment = 2
 
 [node name="Label2" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
 layout_mode = 2
 text = "    6"
+horizontal_alignment = 2
 
 [node name="Label3" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
 layout_mode = 2
 text = "    15"
+horizontal_alignment = 2
