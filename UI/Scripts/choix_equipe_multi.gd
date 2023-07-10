@@ -18,8 +18,6 @@ func _ready():
 	equipe_selectionnee = 0
 	adversaire_pret = false
 	GlobalData.is_multijoueur = true
-	discord_sdk.state = "Dans les menus"
-	discord_sdk.refresh()
 	generer_affichage()
 
 

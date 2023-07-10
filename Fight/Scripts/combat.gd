@@ -515,9 +515,6 @@ func affiche_quitter():
 
 @rpc("any_peer", "call_local")
 func retour_pressed():
-	discord_sdk.state = "Choix de carte"
-	discord_sdk.start_timestamp = -1
-	discord_sdk.refresh()
 	get_tree().change_scene_to_file("res://UI/choix_map.tscn")
 
 

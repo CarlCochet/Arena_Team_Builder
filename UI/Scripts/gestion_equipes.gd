@@ -15,8 +15,6 @@ func _ready():
 	equipes = []
 	equipe_selectionnee = 0
 	GlobalData.is_multijoueur = false
-	discord_sdk.state = "Dans les menus"
-	discord_sdk.refresh()
 	generer_affichage()
 
 
