@@ -45,10 +45,10 @@ color = Color(0.529412, 0.478431, 0.317647, 1)
 
 [node name="Background2" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 265.0
+offset_left = 279.0
 offset_top = 34.0
 offset_right = 1338.0
-offset_bottom = 75.0
+offset_bottom = 74.0
 scale = Vector2(1, 20)
 color = Color(0, 0, 0, 0.0823529)
 
@@ -57,7 +57,7 @@ layout_mode = 0
 offset_left = 355.0
 offset_top = 60.0
 offset_right = 1153.0
-offset_bottom = 691.0
+offset_bottom = 699.0
 scale = Vector2(1.2, 1.2)
 
 [node name="ModeJeu" type="MenuButton" parent="Settings"]
@@ -292,7 +292,7 @@ layout_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="Settings/Conditions"]
 layout_mode = 2
-theme_override_constants/separation = 200
+theme_override_constants/separation = 150
 
 [node name="ConditionsDiverses" type="VBoxContainer" parent="Settings/Conditions"]
 layout_mode = 2
@@ -358,21 +358,25 @@ ticks_on_borders = true
 layout_mode = 2
 
 [node name="Budget" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "    6000"
+text = "6000"
 horizontal_alignment = 2
 
 [node name="Perso" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "    6"
+text = "6000"
 horizontal_alignment = 2
 
 [node name="MS" type="Label" parent="Settings/Conditions/ConditionsDiverses/Conditions/Values"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "    15"
+text = "6000"
 horizontal_alignment = 2
 
 [node name="BoutonsPrincipaux" type="GridContainer" parent="."]
+layout_mode = 0
 offset_left = 597.0
 offset_top = 845.0
 offset_right = 896.0
@@ -394,7 +398,10 @@ texture_hover = ExtResource("7_6m71x")
 
 [connection signal="pressed" from="Settings/ModeJeu" to="." method="_on_mode_jeu_pressed"]
 [connection signal="drag_ended" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/Budget" to="." method="_on_budget_drag_ended"]
+[connection signal="value_changed" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/Budget" to="." method="_on_budget_value_changed"]
 [connection signal="drag_ended" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/Perso" to="." method="_on_perso_drag_ended"]
+[connection signal="value_changed" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/Perso" to="." method="_on_perso_value_changed"]
 [connection signal="drag_ended" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/MS" to="." method="_on_ms_drag_ended"]
+[connection signal="value_changed" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/MS" to="." method="_on_ms_value_changed"]
 [connection signal="pressed" from="BoutonsPrincipaux/Retour" to="." method="_on_retour_pressed"]
 [connection signal="pressed" from="BoutonsPrincipaux/Valider" to="." method="_on_valider_pressed"]
