@@ -112,6 +112,12 @@ var map_actuelle: String
 var mort_subite_active: bool
 var is_multijoueur: bool
 var rng: RandomNumberGenerator
+var regles_multi: Dictionary = {
+	"classes": [true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false],
+	"budget_max": 6000, 
+	"persos_max": 6, 
+	"debut_ms": 15
+}
 
 
 func _ready():

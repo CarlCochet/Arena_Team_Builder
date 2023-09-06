@@ -64,10 +64,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Classe" type="TextureRect" parent="Equipe/Personnage"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Coiffe" type="TextureRect" parent="Equipe/Personnage"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -80,10 +82,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Classe" type="TextureRect" parent="Equipe/Personnage2"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Coiffe" type="TextureRect" parent="Equipe/Personnage2"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -96,10 +100,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Classe" type="TextureRect" parent="Equipe/Personnage3"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Coiffe" type="TextureRect" parent="Equipe/Personnage3"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -112,10 +118,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Classe" type="TextureRect" parent="Equipe/Personnage4"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Coiffe" type="TextureRect" parent="Equipe/Personnage4"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -128,10 +136,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Classe" type="TextureRect" parent="Equipe/Personnage5"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Coiffe" type="TextureRect" parent="Equipe/Personnage5"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -144,9 +154,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Classe" type="TextureRect" parent="Equipe/Personnage6"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Coiffe" type="TextureRect" parent="Equipe/Personnage6"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

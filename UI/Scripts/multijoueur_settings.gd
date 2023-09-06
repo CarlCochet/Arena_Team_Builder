@@ -8,28 +8,35 @@ extends Control
 
 func _ready():
 	for i in range(len(classes)):
-		classes[i].connect("pressed", _on_class_pressed.bind(i))
+		classes[i].connect("pressed", _on_classe_pressed.bind(i))
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_classe_pressed(id: int):
+	rpc("classe_pressed", id)
 
 
-func _on_mode_jeu_pressed():
-	pass
-
-
-func _on_class_pressed(id: int):
-	pass
+@rpc("any_peer", "call_local")
+func classe_pressed(id: int):
+	GlobalData.regles_multi["classes"][id] = not GlobalData.regles_multi["classes"][id]
+	classes[id].pressed = GlobalData.regles_multi["classes"][id]
 
 
 func _on_retour_pressed():
-	pass # Replace with function body.
+	rpc("retour_pressed")
 
 
 func _on_valider_pressed():
-	pass # Replace with function body.
+	rpc("valider_pressed")
+
+
+@rpc("any_peer", "call_local")
+func retour_pressed():
+	get_tree().change_scene_to_file("res://UI/multijoueur_setup.tscn")
+
+
+@rpc("any_peer", "call_local")
+func valider_pressed():
+	get_tree().change_scene_to_file("res://UI/choix_equipe_multi.tscn")
 
 
 func _on_budget_drag_ended(value_changed: float):
@@ -44,19 +51,19 @@ func _on_ms_drag_ended(value_changed: float):
 	rpc("update_limite_budget", int(conditions_values[2].text))
 
 
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func update_limite_budget(budget: int):
-	pass
+	GlobalData.regles_multi["budget_max"] = budget
 
 
-@rpc("any_peer")
-func update_personnages_max(perso_max: int):
-	pass
+@rpc("any_peer", "call_local")
+func update_personnages_max(persos_max: int):
+	GlobalData.regles_multi["persos_max"] = persos_max
 
 
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func update_tours_avant_ms(tours: int):
-	pass
+	GlobalData.regles_multi["debut_ms"] = tours
 
 
 func _on_budget_value_changed(value: float):

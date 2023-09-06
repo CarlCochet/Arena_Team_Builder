@@ -23,6 +23,8 @@ func _ready():
 
 func generer_affichage():
 	for i in range(len(GlobalData.equipes)):
+		if not check_condition(i):
+			continue
 		var previsu_equipe = previsu.instantiate()
 		previsu_equipe.signal_id = i
 		previsu_equipe.connect("pressed", previsu_pressed.bind(i))
@@ -34,6 +36,15 @@ func generer_affichage():
 		affichage_personnages.update(GlobalData.equipe_actuelle)
 	else:
 		affichage_personnages.update(GlobalData.equipe_test)
+
+
+func check_condition(id: int) -> bool:
+	var equipe: Equipe = GlobalData.equipes[id]
+	if equipe.budget > GlobalData.regles_multi["budget_max"]:
+		return false
+	for personnage in equipe.personnages:
+		pass
+	return true
 
 
 func previsu_pressed(id):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bt5lwbr78ayee"]
+[gd_scene load_steps=11 format=3 uid="uid://bt5lwbr78ayee"]
 
 [ext_resource type="Script" path="res://UI/Scripts/multijoueur_settings.gd" id="1_t0o3m"]
 [ext_resource type="Texture2D" uid="uid://bknc5skjp7s4v" path="res://UI/Buttons/retour_base.png" id="2_c4mo0"]
@@ -7,11 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://b5sgblea4yfqw" path="res://UI/Buttons/valider_base.png" id="5_5c1g2"]
 [ext_resource type="Texture2D" uid="uid://dtc8mqmtx8ama" path="res://UI/Buttons/valider_clicked.png" id="6_fq10m"]
 [ext_resource type="Texture2D" uid="uid://bq7hc0e37pnda" path="res://UI/Buttons/valider_hovered.png" id="7_6m71x"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_cetag"]
-font_size = 18
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0mgqr"]
 outline_size = 4
@@ -48,7 +43,7 @@ layout_mode = 0
 offset_left = 279.0
 offset_top = 34.0
 offset_right = 1338.0
-offset_bottom = 74.0
+offset_bottom = 73.0
 scale = Vector2(1, 20)
 color = Color(0, 0, 0, 0.0823529)
 
@@ -59,49 +54,6 @@ offset_top = 60.0
 offset_right = 1153.0
 offset_bottom = 699.0
 scale = Vector2(1.2, 1.2)
-
-[node name="ModeJeu" type="MenuButton" parent="Settings"]
-layout_mode = 2
-theme_override_constants/h_separation = 300
-text = " "
-item_count = 8
-popup/item_0/text = "Classique"
-popup/item_0/id = 0
-popup/item_1/text = "Arena 2.0"
-popup/item_1/id = 1
-popup/item_2/text = "Tournoi 4k"
-popup/item_2/id = 2
-popup/item_3/text = "Tournoi 8k"
-popup/item_3/id = 3
-popup/item_4/text = "Tournoi MS"
-popup/item_4/id = 4
-popup/item_5/text = "Tournoi 1p"
-popup/item_5/id = 5
-popup/item_6/text = "Tournoi 2p"
-popup/item_6/id = 6
-popup/item_7/text = "Tournoi illimité"
-popup/item_7/id = 7
-
-[node name="Label" type="Label" parent="Settings/ModeJeu"]
-layout_mode = 0
-offset_left = 20.0
-offset_right = 193.0
-offset_bottom = 29.0
-text = "Choisir mode de jeu"
-label_settings = SubResource("LabelSettings_cetag")
-
-[node name="Background3" type="ColorRect" parent="Settings/ModeJeu/Label"]
-layout_mode = 0
-offset_left = -15.8333
-offset_top = -6.66666
-offset_right = 190.167
-offset_bottom = -4.66666
-scale = Vector2(1, 20)
-mouse_filter = 2
-color = Color(0, 0, 0, 0.176471)
-
-[node name="HSeparator" type="HSeparator" parent="Settings"]
-layout_mode = 2
 
 [node name="Conditions" type="HBoxContainer" parent="Settings"]
 layout_mode = 2
@@ -396,7 +348,6 @@ texture_normal = ExtResource("5_5c1g2")
 texture_pressed = ExtResource("6_fq10m")
 texture_hover = ExtResource("7_6m71x")
 
-[connection signal="pressed" from="Settings/ModeJeu" to="." method="_on_mode_jeu_pressed"]
 [connection signal="drag_ended" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/Budget" to="." method="_on_budget_drag_ended"]
 [connection signal="value_changed" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/Budget" to="." method="_on_budget_value_changed"]
 [connection signal="drag_ended" from="Settings/Conditions/ConditionsDiverses/Conditions/Widgets/Perso" to="." method="_on_perso_drag_ended"]
