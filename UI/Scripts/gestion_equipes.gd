@@ -20,6 +20,8 @@ func _ready():
 
 func generer_affichage():
 	for i in range(len(GlobalData.equipes)):
+		if not check_conditions(i):
+			continue
 		var previsu_equipe = previsu.instantiate()
 		previsu_equipe.signal_id = i
 		previsu_equipe.connect("pressed", previsu_pressed.bind(i))
@@ -28,6 +30,11 @@ func generer_affichage():
 		previsu_equipe.update(i)
 	equipes[equipe_selectionnee].button_pressed = true
 	affichage_personnages.update(GlobalData.equipe_actuelle)
+
+
+func check_conditions(id: int) -> bool:
+	
+	return true
 
 
 func previsu_pressed(id):

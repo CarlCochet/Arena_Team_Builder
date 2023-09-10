@@ -43,6 +43,9 @@ func _ready():
 	adversaire_pret = not GlobalData.is_multijoueur
 	indexeur_global = 0
 	offset = tilemap.offset
+	discord_sdk.state = "En combat"
+	discord_sdk.start_timestamp = int(Time.get_unix_time_from_system())
+	discord_sdk.refresh()
 	if not GlobalData.is_multijoueur:
 		fleche_carte_combat.visible = false
 	creer_personnages()
