@@ -1,8 +1,9 @@
 extends Control
+class_name MultijoueurSettings
 
 
-@onready var classes: Array = $Settings/Conditions/ChoixClasses/Classes/Checkboxes.get_children()
-@onready var conditions_values: Array = $Settings/Conditions/ConditionsDiverses/Conditions/Values.get_children()
+@onready var classes: Array[CheckBox] = $Settings/Conditions/ChoixClasses/Classes/Checkboxes.get_children()
+@onready var conditions_values: Array[Label] = $Settings/Conditions/ConditionsDiverses/Conditions/Values.get_children()
 @onready var mode_label: Label = $Settings/ModeJeu/Label
 
 

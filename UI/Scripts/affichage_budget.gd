@@ -1,4 +1,5 @@
 extends TextureRect
+class_name AffichageBudget
 
 
 @onready var cout_total: Label = $CoutTotal

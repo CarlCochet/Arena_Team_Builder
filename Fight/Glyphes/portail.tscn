@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcbuf00s3isk1"]
+
+[ext_resource type="Texture2D" uid="uid://djd5ll6llso0x" path="res://Fight/Glyphes/Images/portail.png" id="1_dllr0"]
+[ext_resource type="Script" path="res://Fight/Glyphes/Scripts/portail.gd" id="2_k8mlt"]
+
+[node name="Portail" type="Sprite2D"]
+texture = ExtResource("1_dllr0")
+script = ExtResource("2_k8mlt")

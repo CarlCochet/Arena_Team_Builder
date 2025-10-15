@@ -1,60 +1,7 @@
 extends Node2D
 
 
-enum TypeZone {
-	CERCLE = 0, 
-	LIGNE = 1, 
-	BATON = 2, 
-	CARRE = 3, 
-	CROIX = 4, 
-	MARTEAU = 5
-}
-
-enum Cible {
-	LIBRE = 0, 
-	MOI = 1, 
-	VIDE = 2, 
-	ALLIES = 3, 
-	ENNEMIS = 4, 
-	INVOCATIONS = 5, 
-	INVOCATIONS_ALLIEES = 6, 
-	INVOCATIONS_ENNEMIES = 7, 
-	TOUT = 8, 
-	CLASSE = 9, 
-	PERSONNAGES = 10, 
-	PERSONNAGES_ALLIES = 11, 
-	PERSONNAGES_ENNEMIS = 12,
-	MA_LANCE = 13
-}
-
-enum TypeLDV {
-	CERCLE = 0, 
-	LIGNE = 1, 
-	DIAGONAL = 2
-}
-
-enum Invocations {
-	BOUFTOU = 0,
-	CRAQUELEUR = 1,
-	PRESPIC = 2,
-	TOFU = 3,
-	ARBRE = 4,
-	BLOQUEUSE = 5,
-	FOLLE = 6,
-	SACRIFIEE = 7,
-	DOUBLE = 8,
-	CADRAN_DE_XELOR = 9,
-	BOMBE_A_EAU = 10,
-	BOMBE_INCENDIAIRE = 11,
-	HARPONNEUSE = 12,
-	GARDIENNE = 13,
-	TACTIRELLE = 14,
-	GARDIEN_ELEMENTAIRE = 15,
-	ROQUET = 16,
-	LANCE_DU_FORGELANCE = 17
-}
-
-var classes = [
+var classes: Array[String] = [
 	"Cra", 
 	"Eca", 
 	"Eni", 
@@ -75,7 +22,7 @@ var classes = [
 	"Ouginak", 
 	"Forgelance",
 ]
-var classes_mapping = {
+var classes_mapping: Dictionary[String, String] = {
 	"Cra": "Cra",
 	"Eca": "Ecaflip",
 	"Eni": "Eniripsa",
@@ -97,13 +44,13 @@ var classes_mapping = {
 	"Forgelance": "Forgelance",
 }
 
-var sorts: Dictionary
-var equipements: Dictionary
-var stats_classes: Dictionary
+var sorts: Dictionary[String, Variant]
+var equipements: Dictionary[String, Variant]
+var stats_classes: Dictionary[String, Variant]
 var equipes: Array[Equipe]
-var sorts_lookup: Dictionary
-var equipements_lookup: Dictionary
-var cartes_combat: Dictionary
+var sorts_lookup: Dictionary[String, Array]
+var equipements_lookup: Dictionary[String, Array]
+var cartes_combat: Dictionary[String, Variant]
 
 var equipe_actuelle: Equipe
 var equipe_test: Equipe
@@ -112,7 +59,7 @@ var map_actuelle: String
 var mort_subite_active: bool
 var is_multijoueur: bool
 var rng: RandomNumberGenerator
-var regles_multi: Dictionary = {
+var regles_multi: Dictionary[String, Variant] = {
 	"classes": [true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false],
 	"budget_max": 6000, 
 	"persos_max": 6, 
@@ -142,7 +89,7 @@ func charger_sorts():
 	var sort: Sort
 	
 	for classe in json_data.keys():
-		if classe not in sorts_lookup.keys():
+		if not classe in sorts_lookup.keys():
 			sorts_lookup[classe] = []
 		for nom_sort in json_data[classe].keys():
 			sort = Sort.new()
@@ -158,7 +105,7 @@ func charger_equipements():
 	var equipement: Equipement
 	
 	for categorie in json_data.keys():
-		if categorie not in equipements_lookup.keys():
+		if not categorie in equipements_lookup.keys():
 			equipements_lookup[categorie] = []
 		for nom_equipement in json_data[categorie].keys():
 			equipement = Equipement.new().from_json(json_data[categorie][nom_equipement], categorie)
@@ -191,11 +138,11 @@ func charger_equipes():
 
 
 func sauver_equipes():
-	var equipes_json = []
+	var equipes_json: Array[Variant] = []
 	for equipe in GlobalData.equipes:
 		equipes_json.append(equipe.to_json())
-	var json_string = JSON.stringify(equipes_json)
-	var file_access = FileAccess.open("user://save.json", FileAccess.WRITE)
+	var json_string: String = JSON.stringify(equipes_json)
+	var file_access: FileAccess = FileAccess.open("user://save.json", FileAccess.WRITE)
 	file_access.store_string(json_string)
 
 

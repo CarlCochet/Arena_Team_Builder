@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://byrls820tvsdn"]
+[gd_scene load_steps=49 format=3 uid="uid://byrls820tvsdn"]
 
 [ext_resource type="Script" path="res://UI/Scripts/choix_classe.gd" id="1_e1xo3"]
 [ext_resource type="Texture2D" uid="uid://cnfldddiljcbc" path="res://UI/Logos/Classes/cra_unselected.png" id="1_v4byf"]
@@ -46,10 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://ct3df8aqbyfh0" path="res://UI/Logos/Classes/ouginak_unselected.png" id="36_yd4j4"]
 [ext_resource type="Texture2D" uid="uid://by0hvmsc4rrm7" path="res://UI/Logos/Classes/ouginak_selected.png" id="37_gx2hi"]
 [ext_resource type="Texture2D" uid="uid://cgscoxcu4aavk" path="res://UI/Logos/Classes/hupper_soon.png" id="38_1a01m"]
-[ext_resource type="Texture2D" uid="uid://bgj5ax7pwcvcw" path="res://UI/Logos/Classes/forgelance_unselected.png" id="38_wxejx"]
-[ext_resource type="Texture2D" uid="uid://cqottv4w8nqo0" path="res://UI/Logos/Classes/forgelance_selected.png" id="39_1keeo"]
 [ext_resource type="Texture2D" uid="uid://gao28byl3fv" path="res://UI/Logos/Classes/ouginak_soon.png" id="41_8f3tj"]
-[ext_resource type="Texture2D" uid="uid://cwnojyf7ej1xw" path="res://UI/Logos/Classes/forgelance_soon.png" id="44_7m5xv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ehp7s"]
 font_size = 18
@@ -192,13 +189,6 @@ toggle_mode = true
 texture_normal = ExtResource("36_yd4j4")
 texture_pressed = ExtResource("37_gx2hi")
 texture_disabled = ExtResource("41_8f3tj")
-
-[node name="Forgelance" type="TextureButton" parent="Classes"]
-layout_mode = 2
-toggle_mode = true
-texture_normal = ExtResource("38_wxejx")
-texture_pressed = ExtResource("39_1keeo")
-texture_disabled = ExtResource("44_7m5xv")
 
 [node name="GridContainer2" type="GridContainer" parent="."]
 layout_mode = 0

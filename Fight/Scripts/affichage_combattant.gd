@@ -1,10 +1,11 @@
 extends Popup
+class_name AffichageCombattant
 
 
-@onready var affichage_personnage = $UI/AffichagePersonnage
-@onready var affichage_stats = $UI/AffichageStats
+@onready var affichage_personnage: AffichagePersonnage = $UI/AffichagePersonnage
+@onready var affichage_stats: AffichageStats = $UI/AffichageStats
 @onready var etats: RichTextLabel = $UI/Etats
-@onready var sorts = $UI/ContainerSorts/Sorts
+@onready var sorts: SortsSelection = $UI/ContainerSorts/Sorts
 
 
 func update(combattant_id: int):
@@ -19,10 +20,10 @@ func update(combattant_id: int):
 
 
 func update_etats(combattant: Combattant):
-	var text = ""
+	var text: String = ""
 	etats.text = ""
-	var nom_sort = ""
-	var id_lanceur = -1
+	var nom_sort: String = ""
+	var id_lanceur: int = -1
 	var stats = Stats.new().nom_stats
 	if GlobalData.is_multijoueur and combattant.combat.tour > 1:
 		text += "---------------------------------------------------------------------------------------------------------\n"

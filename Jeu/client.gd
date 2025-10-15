@@ -1,9 +1,6 @@
 extends Node
 
 
-signal data_received
-
-
 var multiplayer_peer: WebSocketMultiplayerPeer
 var other_id: int
 var peer_count: int

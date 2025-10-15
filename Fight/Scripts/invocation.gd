@@ -48,30 +48,30 @@ func _process(delta: float):
 
 
 func init(classe_int: int):
-	match classe_int as GlobalData.Invocations:
-		GlobalData.Invocations.BOUFTOU:
+	match classe_int as Enums.Invocations:
+		Enums.Invocations.BOUFTOU:
 			classe = "Bouftou"
-		GlobalData.Invocations.CRAQUELEUR:
+		Enums.Invocations.CRAQUELEUR:
 			classe = "Craqueleur"
-		GlobalData.Invocations.PRESPIC:
+		Enums.Invocations.PRESPIC:
 			classe = "Prespic"
-		GlobalData.Invocations.TOFU:
+		Enums.Invocations.TOFU:
 			classe = "Tofu"
-		GlobalData.Invocations.ARBRE:
+		Enums.Invocations.ARBRE:
 			classe = "Arbre"
-		GlobalData.Invocations.BLOQUEUSE:
+		Enums.Invocations.BLOQUEUSE:
 			classe = "La_Bloqueuse"
-		GlobalData.Invocations.FOLLE:
+		Enums.Invocations.FOLLE:
 			classe = "La_Folle"
-		GlobalData.Invocations.SACRIFIEE:
+		Enums.Invocations.SACRIFIEE:
 			classe = "La_Sacrifiee"
-		GlobalData.Invocations.DOUBLE:
+		Enums.Invocations.DOUBLE:
 			classe = "Double"
-		GlobalData.Invocations.CADRAN_DE_XELOR:
+		Enums.Invocations.CADRAN_DE_XELOR:
 			classe = "Cadran_De_Xelor"
-		GlobalData.Invocations.BOMBE_A_EAU:
+		Enums.Invocations.BOMBE_A_EAU:
 			classe = "Bombe_A_Eau"
-		GlobalData.Invocations.BOMBE_INCENDIAIRE:
+		Enums.Invocations.BOMBE_INCENDIAIRE:
 			classe = "Bombe_Incendiaire"
 		_:
 			print("Incorrect summon.")
@@ -285,7 +285,7 @@ func joue_ia():
 				combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 				retire_etats(["INVISIBLE"])
 				visible = true
-				is_visible = true
+				is_combattant_visible = true
 			if grid_pos != cible:
 				oriente_vers(cible)
 			joue_ia()

@@ -12,14 +12,13 @@ config_version=5
 
 config/name="Arena_Team_Builder"
 run/main_scene="res://UI/menu_principal.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GlobalData="*res://Jeu/global_data.gd"
 Client="*res://Jeu/client.gd"
-DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 
 [display]
 
@@ -34,4 +33,4 @@ project/assembly_name="Arena_Team_Builder"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/sprite_painter/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg")
+enabled=PackedStringArray("res://addons/sprite_painter/plugin.cfg")

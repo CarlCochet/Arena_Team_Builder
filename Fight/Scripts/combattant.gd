@@ -39,7 +39,7 @@ var porteur: Combattant
 var is_selected: bool
 var is_hovered: bool
 var is_mort: bool
-var is_visible: bool
+var is_combattant_visible: bool
 
 var cercle_bleu = preload("res://Fight/Images/cercle_personnage_bleu.png")
 var cercle_rouge = preload("res://Fight/Images/cercle_personnage_rouge.png")
@@ -68,7 +68,7 @@ func _ready():
 	is_selected = false
 	is_hovered = false
 	is_invocation = false
-	is_visible = true
+	is_combattant_visible = true
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	combat = get_parent()
 
@@ -369,7 +369,7 @@ func joue_action(action: int, tile_pos: Vector2i):
 			visible = true
 			personnage.modulate = Color(1, 1, 1, 1)
 			classe_sprite.material.set_shader_parameter("alpha", 1.0)
-			is_visible = true
+			is_combattant_visible = true
 		if grid_pos != tile_pos:
 			oriente_vers(tile_pos)
 		combat.change_action(10)
@@ -383,7 +383,7 @@ func affiche_stats_change(valeur: int, stat: String):
 
 
 func check_tacle_unit(case: Vector2i) -> bool:
-	if check_etats(["PORTE"]) or not is_visible:
+	if check_etats(["PORTE"]) or not is_combattant_visible:
 		return false
 	var voisins: Array[Vector2i] = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	var seul: bool = true
@@ -440,7 +440,7 @@ func deplace_perso(chemin: Array):
 				visible = true
 				personnage.modulate = Color(1, 1, 1, 1)
 				classe_sprite.material.set_shader_parameter("alpha", 1.0)
-				is_visible = true
+				is_combattant_visible = true
 			combat.tilemap.update_glyphes()
 			if stats.hp <= 0:
 				break
@@ -518,7 +518,7 @@ func update_stats_tour():
 	visible = true
 	personnage.modulate = Color(1, 1, 1, 1)
 	classe_sprite.material.set_shader_parameter("alpha", 1.0)
-	is_visible = true
+	is_combattant_visible = true
 	var old_pa: int = stats.pa
 	var old_pm: int = stats.pm
 	var delta_hp: int = max_stats.hp - stats.hp

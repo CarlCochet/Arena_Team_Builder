@@ -1,7 +1,8 @@
 extends HBoxContainer
+class_name SortsBonusSelection
 
 
-var carte_hovered = -1
+var carte_hovered: int = -1
 
 
 func update(combattant):
@@ -10,7 +11,7 @@ func update(combattant):
 	if GlobalData.is_multijoueur and get_parent().combattant_selection:
 		if get_parent().combattant_selection.equipe == 1 and Client.is_host or get_parent().combattant_selection.equipe == 0 and not Client.is_host:
 			return
-	var sort_id = 0
+	var sort_id: int = 0
 	for sort in combattant.sorts:
 		if sort_id >= combattant.compte_sorts:
 			var texture_rect = TextureRect.new()

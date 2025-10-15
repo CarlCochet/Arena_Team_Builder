@@ -1,4 +1,5 @@
 extends HBoxContainer
+class_name SortsSelection
 
 
 var carte_hovered = -1

@@ -1,4 +1,5 @@
 extends HBoxContainer
+class_name Timeline
 
 
 var fond_rouge = preload("res://Fight/Images/timeline_rouge.png")
@@ -10,7 +11,7 @@ var fond_bleu_selected = preload("res://Fight/Images/timeline_bleu_selected.png"
 func init(combattants: Array, select_id):
 	for combattant in get_children():
 		combattant.queue_free()
-	var combattant_id = 0
+	var combattant_id: int = 0
 	for combattant in combattants:
 		var texture_rect = TextureRect.new()
 		var cape_sprite = Sprite2D.new()

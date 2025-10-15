@@ -1,12 +1,13 @@
 extends Control
+class_name ChoixSorts
 
 
 @onready var personnage: Control = $Personnage
 @onready var grid_sorts: GridContainer = $GridSortsCartes
 @onready var grid_logos: GridContainer = $GridSortsLogos
-@onready var affichage_budget: TextureRect = $AffichageBudget
-@onready var stats_primaires: TextureRect = $StatsPrimaires
-@onready var stats_secondaires: TextureRect = $StatsSecondaires
+@onready var affichage_budget: AffichageBudget = $AffichageBudget
+@onready var stats_primaires: AffichageStatsPrimaires = $StatsPrimaires
+@onready var stats_secondaires: AffichageStatsSecondaires = $StatsSecondaires
 
 
 func _ready():
@@ -68,22 +69,22 @@ func update_logos():
 		grid_logos.add_child(bouton)
 
 
-func _on_card_clicked(nom_sort):
-	if len(GlobalData.get_perso_actuel().sorts) < 6 and nom_sort not in GlobalData.get_perso_actuel().sorts:
+func _on_card_clicked(nom_sort: String):
+	if len(GlobalData.get_perso_actuel().sorts) < 6 and not nom_sort in GlobalData.get_perso_actuel().sorts:
 		GlobalData.get_perso_actuel().sorts.append(nom_sort)
 	GlobalData.get_perso_actuel().calcul_stats()
 	update_affichage()
 	update_logos()
 
 
-func _on_logo_clicked(sort):
+func _on_logo_clicked(sort: String):
 	GlobalData.get_perso_actuel().sorts.erase(sort)
 	GlobalData.get_perso_actuel().calcul_stats()
 	update_affichage()
 	update_logos()
 
 
-func _input(event):
+func _input(event: InputEvent):
 	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		_on_retour_pressed()
 	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:

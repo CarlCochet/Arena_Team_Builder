@@ -7,11 +7,11 @@ var kamas: int = 0
 var pa: int
 var po: Vector2
 var po_modifiable: int
-var type_zone: GlobalData.TypeZone
+var type_zone: Enums.TypeZone
 var taille_zone: Vector2
-var cible: GlobalData.Cible
+var cible: Enums.Cible
 var ldv: int
-var type_ldv: GlobalData.TypeLDV
+var type_ldv: Enums.TypeLDV
 var cooldown: int
 var cooldown_global: int
 var lancer_par_tour: int
@@ -42,11 +42,11 @@ func _init():
 	pa = 0
 	po = Vector2(0, 0)
 	po_modifiable = 1
-	type_zone = GlobalData.TypeZone.CERCLE
+	type_zone = Enums.TypeZone.CERCLE
 	taille_zone = Vector2(0, 0)
-	cible = GlobalData.Cible.LIBRE
+	cible = Enums.Cible.LIBRE
 	ldv = 0
-	type_ldv = GlobalData.TypeLDV.CERCLE
+	type_ldv = Enums.TypeLDV.CERCLE
 	cooldown = 0
 	cooldown_global = 0
 	lancer_par_tour = -1
@@ -112,7 +112,7 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 				trouve = true
 				if aoe or not combattant.check_etats(["PORTE"]):
 					targets.append(combattant)
-	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.ALLIES:
+	elif effets["cible"] as Enums.Cible == Enums.Cible.ALLIES:
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules: Array[Vector2i] = []
@@ -126,7 +126,7 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
-	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.ENNEMIS:
+	elif effets["cible"] as Enums.Cible == Enums.Cible.ENNEMIS:
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules: Array[Vector2i] = []
@@ -140,7 +140,7 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
-	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.TOUT:
+	elif effets["cible"] as Enums.Cible == Enums.Cible.TOUT:
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules: Array[Vector2i] = []
@@ -153,7 +153,7 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
-	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.CLASSE:
+	elif effets["cible"] as Enums.Cible == Enums.Cible.CLASSE:
 		var cases_particules: Array[Vector2i] = []
 		for combattant in combattants:
 			if combattant.grid_pos in cases_cibles:
@@ -166,7 +166,7 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 							cases_particules.append(combattant_bis.grid_pos)
 							targets.append(combattant_bis)
 		lance_particules(lanceur, cases_particules)
-	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.PERSONNAGES:
+	elif effets["cible"] as Enums.Cible == Enums.Cible.PERSONNAGES:
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules: Array[Vector2i] = []
@@ -180,7 +180,7 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 				lance_particules(lanceur, cases_particules)
 		update_limite_lancers(lanceur)
 		return true
-	elif effets["cible"] as GlobalData.Cible == GlobalData.Cible.PERSONNAGES_ALLIES:
+	elif effets["cible"] as Enums.Cible == Enums.Cible.PERSONNAGES_ALLIES:
 		for effet in effets.keys():
 			if effet != "cible":
 				var cases_particules: Array[Vector2i] = []
@@ -198,7 +198,7 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 	if trouve:
 		for combattant in targets:
 			sort_valide = parse_effets(lanceur, combattant, effets, critique, centre, aoe) or sort_valide
-	if not trouve and cible == GlobalData.Cible.VIDE:
+	if not trouve and cible == Enums.Cible.VIDE:
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
 	if effets.has("MAUDIT_CASE"):
 		sort_valide = parse_effets(lanceur, cases_cibles, effets, critique, centre, true) or sort_valide
@@ -285,8 +285,8 @@ func parse_effets(lanceur: Combattant, p_cible, p_effets: Dictionary, critique: 
 func parse_effet(lanceur: Combattant, p_cible, p_categorie: String, p_effet: Dictionary, critique: bool, centre: Vector2i, aoe: bool, tag_cible: String, affiche_log: bool) -> bool:
 	if p_cible is Array:
 		for case in p_cible:
-			var new_effet: Effet = Effet.new(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe, self)
-			new_effet.execute()
+			var new_multi_effet: Effet = Effet.new(lanceur, p_cible, p_categorie, p_effet, critique, centre, aoe, self)
+			new_multi_effet.execute()
 		return true
 	
 	if p_cible.check_etats(etats_cible_interdits):
@@ -350,30 +350,30 @@ func check_cible(lanceur: Combattant, case_cible: Vector2i) -> bool:
 			target = combattant
 	if effets.has("LANCE") and lanceur.combat.check_perso(case_cible):
 		return false
-	if cible == GlobalData.Cible.VIDE and target != null:
+	if cible == Enums.Cible.VIDE and target != null:
 		return false
 	
 	if target != null:
-		if cible == GlobalData.Cible.MOI and target.id != lanceur.id:
+		if cible == Enums.Cible.MOI and target.id != lanceur.id:
 			return false
-		if cible == GlobalData.Cible.ALLIES and lanceur.equipe != target.equipe:
+		if cible == Enums.Cible.ALLIES and lanceur.equipe != target.equipe:
 			return false
-		if cible == GlobalData.Cible.ENNEMIS and lanceur.equipe == target.equipe:
+		if cible == Enums.Cible.ENNEMIS and lanceur.equipe == target.equipe:
 			return false
-		if cible == GlobalData.Cible.INVOCATIONS and not target.is_invocation: 
+		if cible == Enums.Cible.INVOCATIONS and not target.is_invocation: 
 			return false
-		if cible == GlobalData.Cible.INVOCATIONS_ALLIEES and (lanceur.equipe != target.equipe or not target.is_invocation): 
+		if cible == Enums.Cible.INVOCATIONS_ALLIEES and (lanceur.equipe != target.equipe or not target.is_invocation): 
 			return false
-		if cible == GlobalData.Cible.INVOCATIONS_ENNEMIES and (lanceur.equipe == target.equipe or not target.is_invocation): 
+		if cible == Enums.Cible.INVOCATIONS_ENNEMIES and (lanceur.equipe == target.equipe or not target.is_invocation): 
 			return false
-		if cible == GlobalData.Cible.PERSONNAGES and target.is_invocation: 
+		if cible == Enums.Cible.PERSONNAGES and target.is_invocation: 
 			return false
-		if cible == GlobalData.Cible.PERSONNAGES_ALLIES and (target.is_invocation or lanceur.equipe != target.equipe): 
+		if cible == Enums.Cible.PERSONNAGES_ALLIES and (target.is_invocation or lanceur.equipe != target.equipe): 
 			return false
-		if cible == GlobalData.Cible.PERSONNAGES_ENNEMIS and (target.is_invocation or lanceur.equipe == target.equipe): 
+		if cible == Enums.Cible.PERSONNAGES_ENNEMIS and (target.is_invocation or lanceur.equipe == target.equipe): 
 			return false
 	else:
-		if cible != GlobalData.Cible.LIBRE and cible != GlobalData.Cible.TOUT and cible != GlobalData.Cible.VIDE and cible != GlobalData.Cible.ENNEMIS:
+		if cible != Enums.Cible.LIBRE and cible != Enums.Cible.TOUT and cible != Enums.Cible.VIDE and cible != Enums.Cible.ENNEMIS:
 			return false
 	return true
 
@@ -430,7 +430,7 @@ func from_arme(combattant: Combattant, arme: String):
 		var data: Dictionary = GlobalData.equipements[arme].to_json()
 		pa = data["pa"]
 		po = data["po"]
-		type_zone = data["type_zone"] as GlobalData.TypeZone
+		type_zone = data["type_zone"] as Enums.TypeZone
 		taille_zone = data["taille_zone"]
 		po_modifiable = data["po_modifiable"]
 		particules_cible = data["particules_cible"]
@@ -442,7 +442,7 @@ func from_arme(combattant: Combattant, arme: String):
 	else:
 		pa = 5
 		po = Vector2(1, 1)
-		type_zone = GlobalData.TypeZone.CERCLE
+		type_zone = Enums.TypeZone.CERCLE
 		taille_zone = Vector2(0, 0)
 		po_modifiable = 0
 		particules_cible = "generic_" + element_principal.split("_")[1].to_lower()
@@ -489,11 +489,11 @@ func from_json(data: Dictionary):
 	pa = data["pa"]
 	po = Vector2(data["po"][0], data["po"][1])
 	po_modifiable = data["po_modifiable"]
-	type_zone = data["type_zone"] as GlobalData.TypeZone
+	type_zone = data["type_zone"] as Enums.TypeZone
 	taille_zone = Vector2(data["taille_zone"][0], data["taille_zone"][1])
-	cible = data["cible"] as GlobalData.Cible
+	cible = data["cible"] as Enums.Cible
 	ldv = data["ldv"]
-	type_ldv = data["type_ldv"] as GlobalData.TypeLDV
+	type_ldv = data["type_ldv"] as Enums.TypeLDV
 	cooldown = data["cooldown"]
 	cooldown_global = data["cooldown_global"]
 	lancer_par_tour = data["lancer_par_tour"]

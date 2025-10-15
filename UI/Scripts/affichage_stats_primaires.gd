@@ -1,4 +1,5 @@
 extends TextureRect
+class_name AffichageStatsPrimaires
 
 
 @onready var pm: Label = $PM

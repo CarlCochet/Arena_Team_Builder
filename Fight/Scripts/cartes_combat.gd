@@ -1,4 +1,5 @@
 extends HBoxContainer
+class_name CartesCombat
 
 
 func update(cartes_combat: Array):

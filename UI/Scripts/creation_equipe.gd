@@ -1,13 +1,14 @@
 extends Control
+class_name CreationEquipe
 
 
 var equipe: Equipe
 
-@onready var boutons_recruter: Array = $GridRecruter.get_children()
-@onready var affichage_equipe: Control = $AffichageEquipe
-@onready var stats_primaires: Array = $GridStatsPrimaires.get_children()
-@onready var stats_secondaires: Array = $GridStatsSecondaires.get_children()
-@onready var affichage_budget: TextureRect = $AffichageBudget
+@onready var boutons_recruter: Array[TextureButton] = $GridRecruter.get_children()
+@onready var affichage_equipe: AffichageEquipe = $AffichageEquipe
+@onready var stats_primaires: Array[AffichageStatsPrimaires] = $GridStatsPrimaires.get_children()
+@onready var stats_secondaires: Array[AffichageStatsSecondaires] = $GridStatsSecondaires.get_children()
+@onready var affichage_budget: AffichageBudget = $AffichageBudget
 
 
 func _ready():
@@ -27,18 +28,18 @@ func update_affichage():
 	affichage_budget.update()
 
 
-func _on_recruter_pressed(id):
+func _on_recruter_pressed(id: int):
 	GlobalData.perso_actuel = id
 	get_tree().change_scene_to_file("res://UI/choix_classe.tscn")
 
 
-func _on_supprimer_pressed(id):
+func _on_supprimer_pressed(id: int):
 	GlobalData.equipe_actuelle.personnages[id - 6] = Personnage.new()
 	GlobalData.equipe_actuelle.sort_ini()
 	update_affichage()
 
 
-func _input(event):
+func _input(event: InputEvent):
 	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		_on_fermer_pressed()
 	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:

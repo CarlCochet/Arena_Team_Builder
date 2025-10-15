@@ -17,7 +17,7 @@ var critique: bool
 var aoe: bool
 var combat: Combat
 var sort: Sort
-var type_cible: GlobalData.Cible
+var type_cible: Enums.Cible
 var boost_hp: int
 var indirect: bool
 var debuffable: bool
@@ -36,10 +36,10 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	categorie = p_categorie
 	contenu = p_contenu
 	if contenu is Dictionary and contenu.has("cible"):
-		type_cible = contenu["cible"] as GlobalData.Cible
+		type_cible = contenu["cible"] as Enums.Cible
 		contenu.erase("cible")
 	else:
-		type_cible = GlobalData.Cible.LIBRE
+		type_cible = Enums.Cible.LIBRE
 	duree = 0
 	boost_hp = 0
 	valeur_dommage = 0
@@ -77,9 +77,9 @@ func trouve_duree(data: Dictionary):
 
 
 func check_cible():
-	if type_cible == GlobalData.Cible.INVOCATIONS_ALLIEES and (cible.equipe != lanceur.equipe or not cible.is_invocation): 
+	if type_cible == Enums.Cible.INVOCATIONS_ALLIEES and (cible.equipe != lanceur.equipe or not cible.is_invocation): 
 		return false
-	if type_cible == GlobalData.Cible.INVOCATIONS_ENNEMIES and (cible.equipe == lanceur.equipe or not cible.is_invocation): 
+	if type_cible == Enums.Cible.INVOCATIONS_ENNEMIES and (cible.equipe == lanceur.equipe or not cible.is_invocation): 
 		return false
 	return true
 
@@ -1190,7 +1190,7 @@ func lance():
 	if sort != null:
 		new_sort = sort.copy()
 		new_sort.pa = 0
-		new_sort.cible = GlobalData.Cible.LIBRE
+		new_sort.cible = Enums.Cible.LIBRE
 		new_sort.effets.erase("LANCE")
 		if len(new_sort.effets.keys()) > 0:
 			new_sort.execute_effets(lanceur, [centre], centre)

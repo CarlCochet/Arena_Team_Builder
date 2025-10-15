@@ -1,4 +1,5 @@
 extends Label
+class_name StatsPerdu
 
 
 var queue: Array

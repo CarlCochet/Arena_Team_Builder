@@ -1,7 +1,8 @@
 extends Control
+class_name ChatLog
 
 
-var lignes: Array
+var lignes: Array[String]
 var VERT: String = "[color=#58B539]"
 var JAUNE: String = "[color=yellow]"
 var AIR: String = "[color=#53E050]"
@@ -75,7 +76,7 @@ func sort(lanceur: Combattant, nom_sort: String):
 	ajoute_text(VERT + "[b]" + lanceur.nom + "[/b]" + VERT + " lance [b]" + nom_sort.replace("_", " ") + "[/b].")
 
 
-func generic(cible: Combattant, text: String, tag_cible=""):
+func generic(cible: Combattant, text: String, tag_cible: String = ""):
 	if cible == null:
 		ajoute_text(VERT + text + ".")
 	else:

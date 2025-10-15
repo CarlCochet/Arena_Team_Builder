@@ -1,4 +1,5 @@
 extends TextureRect
+class_name ArmeSelection
 
 
 var carte_hovered: int = -1

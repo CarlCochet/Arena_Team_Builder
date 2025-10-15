@@ -1,18 +1,16 @@
 extends Control
+class_name ChoixMap
 
 
 var map_initiale: int
 var map_selected: int
 
-@onready var maps: Array = $MapScroll/Maps.get_children()
+@onready var maps: Array[TextureButton] = $MapScroll/Maps.get_children()
 @onready var mort_subite_check: CheckBox = $MortSubiteCheck
 
 
 func _ready():
 	GlobalData.rng.randomize()
-	discord_sdk.state = "Dans les menus"
-	discord_sdk.start_timestamp = 0
-	discord_sdk.refresh()
 	for i in range(len(maps)):
 		maps[i].connect("pressed", _on_map_pressed.bind(i))
 	map_initiale = 0

@@ -19,7 +19,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Eca": {
 		"kamas": 600,
@@ -41,7 +41,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Eni": {
 		"kamas": 600,
@@ -63,7 +63,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Enu": {
 		"kamas": 600,
@@ -85,7 +85,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Feca": {
 		"kamas": 600,
@@ -107,7 +107,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Iop": {
 		"kamas": 600,
@@ -129,7 +129,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Osa": {
 		"kamas": 600,
@@ -151,7 +151,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Panda": {
 		"kamas": 600,
@@ -173,7 +173,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Sacrieur": {
 		"kamas": 600,
@@ -189,13 +189,13 @@
 		"resistances_terre": 0,
 		"resistances_feu": 0,
 		"resistances_eau": 0,
-		"po": 0,
+		"po": 10,
 		"esquive": 100,
 		"blocage": 20,
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Sadida": {
 		"kamas": 600,
@@ -217,7 +217,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Sram": {
 		"kamas": 600,
@@ -239,7 +239,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Xelor": {
 		"kamas": 600,
@@ -261,52 +261,52 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
-    "Roublard": {
-        "kamas": 600,
-        "pa": 6,
-        "pm": 3,
-        "hp": 65,
-        "initiative": 15,
-        "dommages_air": 0,
-        "dommages_terre": 0,
-        "dommages_feu": 0,
-        "dommages_eau": 0,
-        "resistances_air": 0,
-        "resistances_terre": 0,
-        "resistances_feu": 0,
-        "resistances_eau": 0,
-        "po": 0,
-        "esquive": 100,
-        "blocage": 0,
-        "soins": 0,
-        "cc": 0,
-        "renvoi_dommage": 0,
-        "resistance_zone": 0
-    },
-    "Zobal": {
-        "kamas": 600,
-        "pa": 6,
-        "pm": 3,
-        "hp": 70,
-        "initiative": 15,
-        "dommages_air": 0,
-        "dommages_terre": 0,
-        "dommages_feu": 0,
-        "dommages_eau": 0,
-        "resistances_air": 0,
-        "resistances_terre": 0,
-        "resistances_feu": 0,
-        "resistances_eau": 0,
-        "po": 0,
-        "esquive": 100,
-        "blocage": 40,
-        "soins": 0,
-        "cc": 0,
-        "renvoi_dommage": 0,
-        "resistance_zone": 0
-    },
+	"Roublard": {
+		"kamas": 600,
+		"pa": 6,
+		"pm": 3,
+		"hp": 65,
+		"initiative": 15,
+		"dommages_air": 0,
+		"dommages_terre": 0,
+		"dommages_feu": 0,
+		"dommages_eau": 0,
+		"resistances_air": 0,
+		"resistances_terre": 0,
+		"resistances_feu": 0,
+		"resistances_eau": 0,
+		"po": 0,
+		"esquive": 100,
+		"blocage": 0,
+		"soins": 0,
+		"cc": 0,
+		"renvoi_dommage": 0,
+		"resistance_zone": 0
+	},
+	"Zobal": {
+		"kamas": 600,
+		"pa": 6,
+		"pm": 3,
+		"hp": 70,
+		"initiative": 15,
+		"dommages_air": 0,
+		"dommages_terre": 0,
+		"dommages_feu": 0,
+		"dommages_eau": 0,
+		"resistances_air": 0,
+		"resistances_terre": 0,
+		"resistances_feu": 0,
+		"resistances_eau": 0,
+		"po": 0,
+		"esquive": 100,
+		"blocage": 40,
+		"soins": 0,
+		"cc": 0,
+		"renvoi_dommage": 0,
+		"resistance_zone": 0
+	},
 	"Steamer": {
 		"kamas": 600,
 		"pa": 6,
@@ -395,28 +395,6 @@
 		"renvoi_dommage": 0,
 		"resistance_zone": 0
 	},
-	"Forgelance": {
-		"kamas": 600,
-		"pa": 6,
-		"pm": 3,
-		"hp": 80,
-		"initiative": 55,
-		"dommages_air": 0,
-		"dommages_terre": 0,
-		"dommages_feu": 0,
-		"dommages_eau": 0,
-		"resistances_air": 0,
-		"resistances_terre": 0,
-		"resistances_feu": 0,
-		"resistances_eau": 0,
-		"po": 0,
-		"esquive": 100,
-		"blocage": 20,
-		"soins": 0,
-		"cc": 0,
-		"renvoi_dommage": 0,
-		"resistance_zone": 0
-	},
 	"Tofu": {
 		"kamas": 0,
 		"pa": 6,
@@ -437,7 +415,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Bouftou": {
 		"kamas": 0,
@@ -459,7 +437,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Prespic": {
 		"kamas": 0,
@@ -481,7 +459,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Craqueleur": {
 		"kamas": 0,
@@ -503,7 +481,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"La_Bloqueuse": {
 		"kamas": 0,
@@ -525,7 +503,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"La_Folle": {
 		"kamas": 0,
@@ -547,7 +525,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"La_Sacrifiee": {
 		"kamas": 0,
@@ -569,7 +547,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Arbre": {
 		"kamas": 0,
@@ -591,7 +569,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Double": {
 		"kamas": 0,
@@ -613,7 +591,7 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
 	"Cadran_De_Xelor": {
 		"kamas": 0,
@@ -635,52 +613,52 @@
 		"soins": 0,
 		"cc": 0,
 		"renvoi_dommage": 0,
-        "resistance_zone": 0
+		"resistance_zone": 0
 	},
-    "Bombe_A_Eau": {
-        "kamas": 0,
-        "pa": 0,
-        "pm": 0,
-        "hp": 12,
-        "initiative": 50,
-        "dommages_air": 0,
-        "dommages_terre": 0,
-        "dommages_feu": 0,
-        "dommages_eau": 0,
-        "resistances_air": 0,
-        "resistances_terre": 0,
-        "resistances_feu": 0,
-        "resistances_eau": 0,
-        "po": 0,
-        "esquive": 100,
-        "blocage": 0,
-        "soins": 0,
-        "cc": 0,
-        "renvoi_dommage": 0,
-        "resistance_zone": 0
-    },
-    "Bombe_Incendiaire": {
-        "kamas": 0,
-        "pa": 0,
-        "pm": 0,
-        "hp": 12,
-        "initiative": 50,
-        "dommages_air": 0,
-        "dommages_terre": 0,
-        "dommages_feu": 0,
-        "dommages_eau": 0,
-        "resistances_air": 0,
-        "resistances_terre": 0,
-        "resistances_feu": 0,
-        "resistances_eau": 0,
-        "po": 0,
-        "esquive": 100,
-        "blocage": 0,
-        "soins": 0,
-        "cc": 0,
-        "renvoi_dommage": 0,
-        "resistance_zone": 0
-    },
+	"Bombe_A_Eau": {
+		"kamas": 0,
+		"pa": 0,
+		"pm": 0,
+		"hp": 12,
+		"initiative": 50,
+		"dommages_air": 0,
+		"dommages_terre": 0,
+		"dommages_feu": 0,
+		"dommages_eau": 0,
+		"resistances_air": 0,
+		"resistances_terre": 0,
+		"resistances_feu": 0,
+		"resistances_eau": 0,
+		"po": 0,
+		"esquive": 100,
+		"blocage": 0,
+		"soins": 0,
+		"cc": 0,
+		"renvoi_dommage": 0,
+		"resistance_zone": 0
+	},
+	"Bombe_Incendiaire": {
+		"kamas": 0,
+		"pa": 0,
+		"pm": 0,
+		"hp": 12,
+		"initiative": 50,
+		"dommages_air": 0,
+		"dommages_terre": 0,
+		"dommages_feu": 0,
+		"dommages_eau": 0,
+		"resistances_air": 0,
+		"resistances_terre": 0,
+		"resistances_feu": 0,
+		"resistances_eau": 0,
+		"po": 0,
+		"esquive": 100,
+		"blocage": 0,
+		"soins": 0,
+		"cc": 0,
+		"renvoi_dommage": 0,
+		"resistance_zone": 0
+	},
 	"Harponneuse": {
 		"kamas": 0,
 		"pa": 100,

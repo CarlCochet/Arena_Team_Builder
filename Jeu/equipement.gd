@@ -8,10 +8,10 @@ var categorie: Categorie
 var stats: Stats
 var pa: int
 var po: Vector2 
-var type_zone: GlobalData.TypeZone
+var type_zone: Enums.TypeZone
 var taille_zone: Vector2
 var po_modifiable: int
-var cible: GlobalData.Cible
+var cible: Enums.Cible
 var particules_cible: String
 var particules_retour: String
 var effets: Dictionary
@@ -22,10 +22,10 @@ func _init():
 	stats = Stats.new()
 	pa = 0
 	po = Vector2(0, 0)
-	type_zone = GlobalData.TypeZone.CERCLE
+	type_zone = Enums.TypeZone.CERCLE
 	taille_zone = Vector2(0, 0)
 	po_modifiable = 1
-	cible = GlobalData.Cible.LIBRE
+	cible = Enums.Cible.LIBRE
 	particules_cible = ""
 	particules_cible = ""
 	effets = {}
@@ -37,10 +37,10 @@ func from_json(data, json_categorie):
 	if categorie == Categorie.ARME:
 		pa = data["pa"]
 		po = Vector2(data["po"][0], data["po"][1])
-		type_zone = data["type_zone"] as GlobalData.TypeZone
+		type_zone = data["type_zone"] as Enums.TypeZone
 		taille_zone = Vector2(data["taille_zone"][0], data["taille_zone"][1])
 		po_modifiable = data["po_modifiable"]
-		cible = data["cible"] as GlobalData.Cible
+		cible = data["cible"] as Enums.Cible
 		particules_cible = data["particules_cible"]
 		particules_retour = data["particules_retour"]
 		effets = data["effets"]

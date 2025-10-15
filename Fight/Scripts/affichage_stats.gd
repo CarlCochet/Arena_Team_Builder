@@ -1,4 +1,6 @@
 extends TextureRect
+class_name AffichageStats
+
 
 @onready var hp: Label = $Stats/HP
 @onready var pa: Label = $Stats/PA

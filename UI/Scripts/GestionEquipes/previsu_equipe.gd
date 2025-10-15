@@ -1,4 +1,5 @@
 extends TextureButton
+class_name PrevisuEquipe
 
 
 var signal_id: int

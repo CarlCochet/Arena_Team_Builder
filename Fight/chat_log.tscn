@@ -16,7 +16,6 @@ offset_bottom = 740.0
 script = ExtResource("1_esfgk")
 
 [node name="Background" type="ColorRect" parent="."]
-visible = false
 layout_mode = 0
 offset_top = -100.0
 offset_right = 500.0
@@ -24,7 +23,6 @@ offset_bottom = 200.0
 color = Color(0.145098, 0.145098, 0.145098, 1)
 
 [node name="ChatText" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 2
 offset_left = 5.0
 offset_top = -95.0

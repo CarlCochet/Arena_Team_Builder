@@ -1,4 +1,5 @@
 extends Control
+class_name ChoixEquipements
 
 
 var categorie_lookup: Dictionary
@@ -6,9 +7,9 @@ var categorie_lookup: Dictionary
 @onready var personnage: Control = $Personnage
 @onready var grid_equipements: GridContainer = $ScrollContainer/Cartes
 @onready var grid_logos: GridContainer = $GridLogos
-@onready var affichage_budget: TextureRect = $AffichageBudget
-@onready var stats_primaires: TextureRect = $StatsPrimaires
-@onready var stats_secondaires: TextureRect = $StatsSecondaires
+@onready var affichage_budget: AffichageBudget = $AffichageBudget
+@onready var stats_primaires: AffichageStatsPrimaires = $StatsPrimaires
+@onready var stats_secondaires: AffichageStatsSecondaires = $StatsSecondaires
 
 
 func _ready():
@@ -55,7 +56,7 @@ func update_affichage():
 	stats_secondaires.update(GlobalData.perso_actuel)
 
 
-func update_cartes(categorie):
+func update_cartes(categorie: String):
 	for equipement in grid_equipements.get_children():
 		equipement.queue_free()
 	var base_path: String = "res://Equipements/" + categorie
@@ -69,13 +70,13 @@ func update_cartes(categorie):
 func update_logos():
 	for logo in grid_logos.get_children():
 		logo.texture = load("res://UI/Logos/Equipements/empty.png")
-	for equipement in GlobalData.get_perso_actuel().equipements:
+	for equipement in GlobalData.get_perso_actuel().equipements.keys():
 		if GlobalData.get_perso_actuel().equipements[equipement]:
-			var path = "res://UI/Logos/Equipements/" + equipement + "/" + GlobalData.get_perso_actuel().equipements[equipement] + ".png"
+			var path: String = "res://UI/Logos/Equipements/" + equipement + "/" + GlobalData.get_perso_actuel().equipements[equipement] + ".png"
 			grid_logos.get_node(equipement).texture = load(path)
 
 
-func _on_card_clicked(nom_equipement, categorie):
+func _on_card_clicked(nom_equipement: String, categorie: String):
 	if GlobalData.get_perso_actuel().equipements[categorie] == nom_equipement:
 		GlobalData.get_perso_actuel().equipements[categorie] = ""
 	else:
@@ -86,7 +87,7 @@ func _on_card_clicked(nom_equipement, categorie):
 	update_logos()
 
 
-func _input(event):
+func _input(event: InputEvent):
 	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		_on_retour_pressed()
 	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:

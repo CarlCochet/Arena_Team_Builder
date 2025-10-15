@@ -1,4 +1,5 @@
 extends TextureRect
+class_name AffichageStatsSecondaires
 
 
 @onready var dommages_air: Label = $GridContainer/Dommages/Air

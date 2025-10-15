@@ -2,37 +2,37 @@ extends Node2D
 class_name Combat
 
 
-var scene_combattant = preload("res://Fight/combattant.tscn")
-var stats_perdu = preload("res://Fight/stats_perdu.tscn")
-var combattants: Array
+var scene_combattant: PackedScene = preload("res://Fight/combattant.tscn")
+var stats_perdu: PackedScene = preload("res://Fight/stats_perdu.tscn")
+var combattants: Array[Combattant]
 var combattant_selection: Combattant
 var selection_id: int
 var indexeur_global: int
 var etat: int
 var action: int
 var offset: Vector2i
-var tilemap: TileMap
+var tilemap: Map
 var spell_pressed: bool
 var tour: int
 var noms_cartes_combat: Array[String]
 var cartes_queue: Array[String]
 var adversaire_pret: bool
 
-@onready var sorts: Control = $Sorts
-@onready var arme: TextureRect = $Arme
-@onready var sorts_bonus: Control = $SortsBonus
-@onready var cartes_combat: Control = $CartesCombat
+@onready var sorts: SortsSelection = $Sorts
+@onready var arme: ArmeSelection = $Arme
+@onready var sorts_bonus: SortsBonusSelection = $SortsBonus
+@onready var cartes_combat: CartesCombat = $CartesCombat
 @onready var fleche_carte_combat: Sprite2D = $FlecheCarteCombat
-@onready var timeline: Control = $Timeline
-@onready var stats_select: TextureRect = $AffichageStatsSelect
-@onready var stats_hover: TextureRect = $AffichageStatsHover
+@onready var timeline: Timeline = $Timeline
+@onready var stats_select: AffichageStatsSmall = $AffichageStatsSelect
+@onready var stats_hover: AffichageStats = $AffichageStatsHover
 @onready var affichage_fin: Control = $AffichageFin
 @onready var texte_fin: Label = $AffichageFin/TexteFin
 @onready var bouton_retour: TextureButton = $AffichageFin/BoutonRetour
 @onready var timer: Timer = $Timer
 @onready var timer_label: Label = $TimerLabel
 @onready var attente_adversaire: Label = $AttenteAdversaire
-@onready var chat_log: Control = $ChatLog
+@onready var chat_log: ChatLog = $ChatLog
 
 
 func _ready():
@@ -43,9 +43,6 @@ func _ready():
 	adversaire_pret = not GlobalData.is_multijoueur
 	indexeur_global = 0
 	offset = tilemap.offset
-	discord_sdk.state = "En combat"
-	discord_sdk.start_timestamp = int(Time.get_unix_time_from_system())
-	discord_sdk.refresh()
 	if not GlobalData.is_multijoueur:
 		fleche_carte_combat.visible = false
 	creer_personnages()
@@ -81,7 +78,7 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe: int):
 	var i = 0
 	for personnage in equipe.personnages:
 		if not personnage.classe.is_empty():
-			var nouveau_combattant = scene_combattant.instantiate()
+			var nouveau_combattant: Combattant = scene_combattant.instantiate()
 			nouveau_combattant.position = tilemap.map_to_local(tile_couleur[i])
 			nouveau_combattant.grid_pos = tile_couleur[i] + offset
 			tilemap.a_star_grid.set_point_solid(nouveau_combattant.grid_pos)
@@ -170,7 +167,7 @@ func ajoute_carte_combat():
 
 
 func applique_carte_combat():
-	var effets_carte: Dictionary = GlobalData.cartes_combat[noms_cartes_combat[0]]
+	var effets_carte: Dictionary[String, Variant] = GlobalData.cartes_combat[noms_cartes_combat[0]]
 	var classes_target: Array[String] = []
 	for combattant in combattants:
 		combattant.stat_cartes_combat = Stats.new()
@@ -203,7 +200,7 @@ func applique_carte_combat():
 							combattant, combattant, effet, 
 							{"base":{"valeur":effets_carte[cible][effet]}}, 
 							false, combattant.grid_pos, false, null)
-						var temp_soins = combattant.stats.soins
+						var temp_soins: int = combattant.stats.soins
 						combattant.stats.soins = 0
 						effet_exec.execute()
 						combattant.stats.soins = temp_soins
@@ -373,6 +370,7 @@ func _input(event):
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			affiche_quitter()
 		if event is InputEventMouseMotion:
+			print(combattant_selection)
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				if action == 10:
 					for combattant in combattants:

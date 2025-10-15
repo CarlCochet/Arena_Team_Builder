@@ -6,6 +6,7 @@ var personnages: Array = []
 var budget: int = 0
 
 
+
 func _init():
 	for i in range(6):
 		personnages.append(Personnage.new())

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb0rtviy6sie5"]
+
+[ext_resource type="Texture2D" uid="uid://c01bp3n8ph442" path="res://Fight/Glyphes/Images/Piege_Mortel.png" id="1_kqfc3"]
+[ext_resource type="Script" path="res://Fight/Glyphes/Scripts/piege_mortel.gd" id="2_vqs5s"]
+
+[node name="PiegeMortel" type="Sprite2D"]
+texture = ExtResource("1_kqfc3")
+script = ExtResource("2_vqs5s")

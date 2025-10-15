@@ -5,8 +5,8 @@ class_name Personnage
 var classe: String
 var nom: String
 var stats: Stats
-var equipements: Dictionary
-var sorts: Array
+var equipements: Dictionary[String, String]
+var sorts: Array[String]
 
 
 func _ready():
@@ -53,7 +53,7 @@ func calcul_stats():
 	return stats.kamas
 
 
-func ajoute_sort(nom_sort):
+func ajoute_sort(nom_sort: String):
 	sorts.append(nom_sort)
 
 

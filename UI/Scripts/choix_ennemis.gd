@@ -1,12 +1,13 @@
 extends Control
+class_name ChoixEnnemis
 
 
 var previsu: PackedScene = preload("res://UI/Displays/Scenes/previsu_equipe.tscn")
-var equipes: Array
+var equipes: Array[PrevisuEquipe]
 var equipe_selectionnee: int
 
 @onready var equipes_grid: GridContainer = $ScrollContainer/Equipes
-@onready var affichage_personnages: Control = $AffichageEquipe
+@onready var affichage_personnages: AffichageEquipe = $AffichageEquipe
 
 func _ready():
 	equipes = []
@@ -16,7 +17,7 @@ func _ready():
 
 func generer_affichage():
 	for i in range(len(GlobalData.equipes)):
-		var previsu_equipe = previsu.instantiate()
+		var previsu_equipe: PrevisuEquipe = previsu.instantiate()
 		previsu_equipe.signal_id = i
 		previsu_equipe.connect("pressed", previsu_pressed.bind(i))
 		equipes.append(previsu_equipe)
@@ -26,7 +27,7 @@ func generer_affichage():
 	affichage_personnages.update(GlobalData.equipe_test)
 
 
-func previsu_pressed(id):
+func previsu_pressed(id: int):
 	equipe_selectionnee = id
 	for i in range(len(equipes)):
 		if i != id:
@@ -37,7 +38,7 @@ func previsu_pressed(id):
 			affichage_personnages.update(GlobalData.equipe_test)
 
 
-func _input(event):
+func _input(event: InputEvent):
 	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		_on_retour_pressed()
 	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:

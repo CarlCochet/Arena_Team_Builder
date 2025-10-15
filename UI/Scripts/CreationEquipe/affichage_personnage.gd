@@ -1,4 +1,5 @@
 extends TextureRect
+class_name AffichagePersonnage
 
 
 @onready var personnage: Node2D = $Personnage
