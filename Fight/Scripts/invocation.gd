@@ -38,7 +38,7 @@ func _process(delta: float):
 				combat.etat = 1
 				emit_signal("movement_finished")
 		else:
-			var direction = position.direction_to(positions_chemin[0])
+			var direction: Vector2 = position.direction_to(positions_chemin[0])
 			position += direction * delta * 300.0
 		if porte != null:
 			porte.position = position + Vector2(0, -90)
@@ -164,7 +164,7 @@ func update_hitbox():
 	)
 
 
-func debut_tour():
+func debut_tour() -> void:
 	update_stats_tour()
 	
 	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
@@ -212,7 +212,7 @@ func chemin_vers_proche() -> Array[Vector2i]:
 	return min_chemin
 
 
-func choix_cible(p_all_ldv: Array[Vector2i]):
+func choix_cible(p_all_ldv: Array[Vector2i]) -> Vector2i:
 	var min_dist: int = 9999999
 	var min_hp: int = 9999999
 	var cible = null
@@ -222,7 +222,7 @@ func choix_cible(p_all_ldv: Array[Vector2i]):
 		if not combattant.is_visible:
 			continue
 		if combattant.grid_pos in p_all_ldv and combattant.equipe != equipe and not combattant.check_etats(["PORTE"]):
-			var delta = combattant.grid_pos - grid_pos
+			var delta: Vector2i = combattant.grid_pos - grid_pos
 			var dist = abs(delta.x) + abs(delta.y)
 			if dist < min_dist:
 				min_dist = dist
@@ -235,7 +235,7 @@ func choix_cible(p_all_ldv: Array[Vector2i]):
 	return cible
 
 
-func joue_ia():
+func joue_ia() -> void:
 	combat.check_morts()
 	if is_mort:
 		return
@@ -261,11 +261,11 @@ func joue_ia():
 			sort.type_ldv,
 			sort.ldv
 		)
-		var cible = choix_cible(all_ldv)
+		var cible: Vector2i = choix_cible(all_ldv)
 		if cible == null:
 			continue 
 		if sort.pa <= stats.pa:
-			var _valide = false
+			var _valide: bool = false
 			if check_etats(["RATE_SORT"]):
 				_valide = true
 				retire_etats(["RATE_SORT"])

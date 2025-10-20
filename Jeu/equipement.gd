@@ -31,7 +31,7 @@ func _init():
 	effets = {}
 
 
-func from_json(data, json_categorie):
+func from_json(data, json_categorie) -> Equipement:
 	categorie = Categorie.keys().find(json_categorie) as Categorie
 	stats.from_json(data["stats"])
 	if categorie == Categorie.ARME:
@@ -47,7 +47,7 @@ func from_json(data, json_categorie):
 	return self
 
 
-func to_json():
+func to_json() -> Dictionary[String, Variant]:
 	if categorie == Categorie.ARME:
 		return {
 			"categorie": Categorie.keys()[categorie],

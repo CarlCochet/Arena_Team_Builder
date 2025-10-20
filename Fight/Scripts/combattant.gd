@@ -16,7 +16,7 @@ var init_stats: Stats
 var stat_buffs: Stats
 var stat_ret: Stats
 var stat_cartes_combat: Stats
-var buffs_hp: Array
+var buffs_hp: Array[Dictionary]
 var initiative_random: float
 var equipements: Dictionary
 var sorts: Array[Sort]
@@ -52,7 +52,7 @@ var outline_shader = preload("res://Fight/Shaders/combattant_outline.gdshader")
 @onready var hp: Sprite2D = $HP
 @onready var hp_label: Label = $HP/Label
 @onready var nom_label: RichTextLabel = $HP/Nom
-@onready var stats_perdu: Label = $StatsPerdu
+@onready var stats_perdu: StatsPerdu = $StatsPerdu
 
 
 func _ready():
@@ -122,9 +122,10 @@ func unselect():
 	is_selected = false
 
 
-func from_personnage(p_personnage: Personnage, equipe_id: int):
+func from_personnage(p_personnage: Personnage, equipe_id: int) -> Combattant:
 	classe = p_personnage.classe
 	nom = p_personnage.nom
+	name = nom
 	personnage_ref = p_personnage
 	stats = p_personnage.stats.copy()
 	initiative_random = float(stats.initiative) + GlobalData.rng.randf()
@@ -215,14 +216,14 @@ func calcul_path_actuel(pos_event: Vector2i):
 		path_actuel = []
 
 
-func calcul_all_ldv(action: int):
+func calcul_all_ldv(action: int) -> void:
 	var sort: Sort
 	sort = sorts[action]
 	if not sort.precheck_cast(self):
 		combat.change_action(10)
 		return
 	var bonus_po: int = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
-	var po_max: int = int(sort.po[1]) + bonus_po if int(sort.po[1]) + bonus_po >= int(sort.po[0]) else int(sort.po[0])
+	var po_max: int = sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0]
 	po_max = 1 if sort.po[1] > 0 and po_max <= 0 else po_max
 	all_ldv = combat.tilemap.get_ldv(
 		grid_pos, 
@@ -252,12 +253,12 @@ func calcul_zone(action: int, pos_event: Vector2i):
 		)
 
 
-func check_case_bonus():
+func check_case_bonus() -> void:
 	if check_etats(["PORTE"]):
 		return
 	var case_id: int = combat.tilemap.get_cell_atlas_coords(1, grid_pos - combat.offset).x
 	var categorie: String = ""
-	var contenu = ""
+	var contenu: Variant = ""
 	var maudit: bool = false
 	if grid_pos in combat.tilemap.cases_maudites.values():
 		maudit = true
@@ -335,7 +336,7 @@ func active_cadran():
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 
 
-func joue_action(action: int, tile_pos: Vector2i):
+func joue_action(action: int, tile_pos: Vector2i) -> void:
 	if action == 10:
 		calcul_path_actuel(tile_pos)
 		if len(path_actuel) > 0:
@@ -402,7 +403,7 @@ func check_tacle_unit(case: Vector2i) -> bool:
 	return false
 
 
-func deplace_perso(chemin: Array):
+func deplace_perso(chemin: Array) -> void:
 	if stats.pm <= 0:
 		return
 	var tacled: bool = check_tacle_unit(grid_pos)
@@ -454,7 +455,7 @@ func deplace_perso(chemin: Array):
 
 
 func place_perso(tile_pos: Vector2i, swap: bool):
-	var tile_data = combat.tilemap.get_cell_atlas_coords(2, tile_pos)
+	var tile_data: Vector2i = combat.tilemap.get_cell_atlas_coords(2, tile_pos)
 	if (tile_data.x == 0 and equipe == 1) or (tile_data.x == 2 and equipe == 0):
 		var new_grid_pos: Vector2i = tile_pos + combat.offset
 		var place_libre: bool = true
@@ -645,7 +646,7 @@ func retrait_durees():
 				effet.duree -= 1
 			if effet.duree > 0:
 				new_effets.append(effet)
-		var new_buffs_hp: Array = []
+		var new_buffs_hp: Array[Dictionary] = []
 		for buff_hp in combattant.buffs_hp:
 			if buff_hp["lanceur"] == id:
 				buff_hp["duree"] -= 1
@@ -666,7 +667,7 @@ func retrait_durees():
 		combattant.stats.hp -= delta_hp
 		combattant.execute_buffs_hp()
 	
-	var new_map_glyphes: Array = []
+	var new_map_glyphes: Array[Glyphe] = []
 	for glyphe in combat.tilemap.glyphes:
 		if glyphe.lanceur.id == id:
 			glyphe.duree -= 1

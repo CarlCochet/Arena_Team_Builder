@@ -2,8 +2,8 @@ extends Control
 class_name AffichageEquipe
 
 
-@onready var equipe_nodes: Array[Control] = $Equipe.get_children()
-@onready var fond_equipes: Array[AffichagePersonnage] = $FondEquipe.get_children()
+@onready var equipe_nodes: Array = $Equipe.get_children()
+@onready var fond_equipes: Array = $FondEquipe.get_children()
 
 
 func update(equipe):

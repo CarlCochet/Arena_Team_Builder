@@ -4,10 +4,10 @@ class_name CreationEquipe
 
 var equipe: Equipe
 
-@onready var boutons_recruter: Array[TextureButton] = $GridRecruter.get_children()
+@onready var boutons_recruter: Array = $GridRecruter.get_children()
 @onready var affichage_equipe: AffichageEquipe = $AffichageEquipe
-@onready var stats_primaires: Array[AffichageStatsPrimaires] = $GridStatsPrimaires.get_children()
-@onready var stats_secondaires: Array[AffichageStatsSecondaires] = $GridStatsSecondaires.get_children()
+@onready var stats_primaires: Array = $GridStatsPrimaires.get_children()
+@onready var stats_secondaires: Array = $GridStatsSecondaires.get_children()
 @onready var affichage_budget: AffichageBudget = $AffichageBudget
 
 

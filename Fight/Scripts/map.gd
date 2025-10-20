@@ -3,7 +3,7 @@ class_name Map
 
 
 var a_star_grid: AStarGrid2D
-var grid: Array
+var grid: Array[Array]
 var start_bleu: Array[Vector2i]
 var start_rouge: Array[Vector2i]
 var x_max: int
@@ -11,9 +11,9 @@ var y_max: int
 var offset: Vector2i
 var mode: bool = false
 var zonetype = Enums.TypeZone.CARRE
-var glyphes: Array
+var glyphes: Array[Glyphe]
 var glyphes_indexeur: int
-var cases_maudites: Dictionary
+var cases_maudites: Dictionary[int, Vector2i]
 var combat: Combat
 var ms_data: Dictionary
 
@@ -57,7 +57,7 @@ func update_glyphes():
 	for combattant in combat.combattants:
 		if not combattant.check_etats(["INVISIBLE"]):
 			combattant.visible = true
-			combattant.is_visible = true
+			combattant.is_combattant_visible = true
 	for glyphe in glyphes:
 		glyphe.active_full()
 		if not glyphe.deleted:
@@ -91,6 +91,7 @@ func build_grids():
 	grid = []
 	a_star_grid = AStarGrid2D.new()
 	a_star_grid.size = Vector2i(x_max + 1, y_max + 1) + offset
+#	a_star_grid.region = Rect2i(offset, Vector2i(x_max + 1, y_max + 1))
 	a_star_grid.update()
 	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	
@@ -118,15 +119,15 @@ func load_map_data():
 	ms_data = json_data
 
 
-func update_mort_subite(tour: int):
+func update_mort_subite(tour: int) -> void:
 	if not GlobalData.mort_subite_active:
 		return
 	
 	var distance: int = ms_data[GlobalData.map_actuelle]["distance"] - (tour - 15)
-	var directions: Array[Vector2] = [Vector2(0, 1), Vector2(1, 0), Vector2(0, -1), Vector2(-1, 0)]
+	var directions: Array[Vector2i] = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
 	for i in range(4):
-		var centre_array: Array = ms_data[GlobalData.map_actuelle]["centres"][i]
-		var centre: Vector2 = Vector2(centre_array[0], centre_array[1])
+		var centre_array: Array[int] = ms_data[GlobalData.map_actuelle]["centres"][i]
+		var centre: Vector2i = Vector2i(centre_array[0], centre_array[1])
 		for k in range(-distance, distance+1):
 			var cell_pos = centre + directions[i] * distance + k * directions[(i + 1) % 4]
 			erase_cell(1, cell_pos)

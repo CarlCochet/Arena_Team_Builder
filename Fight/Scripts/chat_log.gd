@@ -21,11 +21,11 @@ func _ready():
 	lignes = []
 
 
-func stats(cible: Combattant, valeur: int, stat: String, duree: int, tag_cible: String):
+func stats(cible: Combattant, valeur: int, stat: String, duree: int, tag_cible: String) -> void:
 	if valeur == 0:
 		return
-	var nom = cible.nom if tag_cible.is_empty() else tag_cible
-	var text = VERT + "[b]" + nom + "[/b] " + VERT
+	var nom: String = cible.nom if tag_cible.is_empty() else tag_cible
+	var text: String = VERT + "[b]" + nom + "[/b] " + VERT
 	text += "perd " if valeur < 0 else "gagne "
 	if stat in ["dommages_air", "resistances_air"]:
 		text += AIR
@@ -51,10 +51,10 @@ func critique():
 	ajoute_text(JAUNE + "Coup critique!")
 
 
-func dommages(cible: Combattant, valeur: int, element: String):
+func dommages(cible: Combattant, valeur: int, element: String) -> void:
 	if valeur == 0:
 		return
-	var text = VERT + "[b]" + cible.nom + "[/b] " + VERT
+	var text: String = VERT + "[b]" + cible.nom + "[/b] " + VERT
 	text += "perd " if valeur < 0 else "gagne "
 	if element == "dommages_air":
 		text += AIR
@@ -80,7 +80,7 @@ func generic(cible: Combattant, text: String, tag_cible: String = ""):
 	if cible == null:
 		ajoute_text(VERT + text + ".")
 	else:
-		var nom = cible.nom if tag_cible.is_empty() else tag_cible
+		var nom: String = cible.nom if tag_cible.is_empty() else tag_cible
 		ajoute_text(VERT + "[b]" + nom + "[/b] " + VERT + text + ".")
 
 

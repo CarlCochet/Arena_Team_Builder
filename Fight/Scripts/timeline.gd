@@ -13,10 +13,10 @@ func init(combattants: Array, select_id):
 		combattant.queue_free()
 	var combattant_id: int = 0
 	for combattant in combattants:
-		var texture_rect = TextureRect.new()
-		var cape_sprite = Sprite2D.new()
-		var classe_sprite = Sprite2D.new()
-		var coiffe_sprite = Sprite2D.new()
+		var texture_rect := TextureRect.new()
+		var cape_sprite := Sprite2D.new()
+		var classe_sprite := Sprite2D.new()
+		var coiffe_sprite := Sprite2D.new()
 		texture_rect.name = "timeline_" + str(combattant_id)
 		if combattant_id != select_id:
 			texture_rect.texture = fond_rouge if combattant.equipe else fond_bleu
@@ -37,8 +37,8 @@ func init(combattants: Array, select_id):
 		texture_rect.add_child(classe_sprite)
 		texture_rect.add_child(coiffe_sprite)
 		combattant_id += 1
-	var affichage_tour = Label.new()
-	var label_settings = LabelSettings.new()
+	var affichage_tour := Label.new()
+	var label_settings := LabelSettings.new()
 	label_settings.font_size = 40
 	affichage_tour.text = str(get_parent().tour)
 	affichage_tour.label_settings = label_settings

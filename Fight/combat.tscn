@@ -1,10 +1,10 @@
 [gd_scene load_steps=33 format=3 uid="uid://egsxhipgew1"]
 
-[ext_resource type="Script" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
-[ext_resource type="Script" path="res://Fight/Scripts/sorts_bonus_selection.gd" id="3_e0j6u"]
+[ext_resource type="Script" uid="uid://c27cx13chftm1" path="res://Fight/Scripts/combat.gd" id="1_2kr3w"]
+[ext_resource type="Script" uid="uid://cp1qi5k2msmmo" path="res://Fight/Scripts/sorts_bonus_selection.gd" id="3_e0j6u"]
 [ext_resource type="Texture2D" uid="uid://c7kierg32v4ip" path="res://UI/Logos/Spells/arme.png" id="4_11pnh"]
 [ext_resource type="PackedScene" uid="uid://dm7uaxf12cq58" path="res://Fight/cartes_combat.tscn" id="4_u8rsj"]
-[ext_resource type="Script" path="res://Fight/Scripts/arme_selection.gd" id="5_7xdon"]
+[ext_resource type="Script" uid="uid://c8cv662nc8qd6" path="res://Fight/Scripts/arme_selection.gd" id="5_7xdon"]
 [ext_resource type="PackedScene" uid="uid://fchxarxrckwc" path="res://Fight/affichage_stats_small.tscn" id="5_jgg7a"]
 [ext_resource type="PackedScene" uid="uid://cyuev8xs7ffv8" path="res://Fight/sorts.tscn" id="7_0vhv3"]
 [ext_resource type="PackedScene" uid="uid://dkum5bskrgt8k" path="res://Fight/affichage_stats.tscn" id="8_mm5mb"]

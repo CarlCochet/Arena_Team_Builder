@@ -50,7 +50,7 @@ var stats_classes: Dictionary[String, Variant]
 var equipes: Array[Equipe]
 var sorts_lookup: Dictionary[String, Array]
 var equipements_lookup: Dictionary[String, Array]
-var cartes_combat: Dictionary[String, Variant]
+var cartes_combat: Dictionary
 
 var equipe_actuelle: Equipe
 var equipe_test: Equipe

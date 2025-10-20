@@ -2,7 +2,7 @@ extends Node2D
 class_name Equipe
 
 
-var personnages: Array = []
+var personnages: Array[Personnage] = []
 var budget: int = 0
 
 
@@ -13,14 +13,14 @@ func _init():
 	calcul_budget()
 
 
-func calcul_budget():
+func calcul_budget() -> int:
 	budget = 0
 	for personnage in personnages:
 		budget += personnage.calcul_stats()
 	return budget
 
 
-func sort_ini():
+func sort_ini() -> Equipe:
 	personnages.sort_custom(
 		func(a: Personnage, b: Personnage): 
 			return (a.stats.initiative >= b.stats.initiative) and not a.classe.is_empty()
@@ -28,7 +28,7 @@ func sort_ini():
 	return self
 
 
-func from_json(personnages_json):
+func from_json(personnages_json) -> Equipe:
 	personnages = []
 	for personnage in personnages_json:
 		personnages.append(Personnage.new().from_json(personnage))
@@ -36,8 +36,8 @@ func from_json(personnages_json):
 	return self
 
 
-func to_json():
-	var personnages_json = []
+func to_json() -> Array[Dictionary]:
+	var personnages_json: Array[Dictionary] = []
 	for personnage in personnages:
 		personnages_json.append(personnage.to_json())
 	return personnages_json

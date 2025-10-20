@@ -5,8 +5,8 @@ class_name Personnage
 var classe: String
 var nom: String
 var stats: Stats
-var equipements: Dictionary[String, String]
-var sorts: Array[String]
+var equipements: Dictionary
+var sorts: Array
 
 
 func _ready():
@@ -39,7 +39,7 @@ func _init():
 	calcul_stats()
 
 
-func calcul_stats():
+func calcul_stats() -> int:
 	if classe:
 		stats = Stats.new().add(GlobalData.stats_classes[classe])
 		stats.invocations = 1
@@ -57,7 +57,7 @@ func ajoute_sort(nom_sort: String):
 	sorts.append(nom_sort)
 
 
-func copy(personnage: Personnage):
+func copy(personnage: Personnage) -> Personnage:
 	classe = personnage.classe
 	nom = personnage.nom
 	stats =  personnage.stats.copy()
@@ -72,7 +72,7 @@ func copy(personnage: Personnage):
 	return self
 
 
-func from_json(personnage_json):
+func from_json(personnage_json: Dictionary) -> Personnage:
 	equipements = {
 		"Armes": "",
 		"Familiers": "",
@@ -92,7 +92,7 @@ func from_json(personnage_json):
 	return self
 
 
-func to_json():
+func to_json() -> Dictionary:
 	return {
 		"classe": classe,
 		"nom": nom,

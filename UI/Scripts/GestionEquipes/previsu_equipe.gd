@@ -10,7 +10,7 @@ var signal_id: int
 func update(id):
 	if GlobalData.equipes[id].personnages:
 		for i in range(len(GlobalData.equipes[id].personnages)):
-			var personnage = GlobalData.equipes[id].personnages[i]
+			var personnage: Personnage = GlobalData.equipes[id].personnages[i]
 			if personnage.classe:
 				equipe_nodes[i].texture = load("res://Classes/" + personnage.classe + "/" + personnage.classe.to_lower() + ".png")
 			else:

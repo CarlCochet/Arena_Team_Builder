@@ -5,7 +5,7 @@ class_name SortsBonusSelection
 var carte_hovered: int = -1
 
 
-func update(combattant):
+func update(combattant) -> void:
 	for sort in get_children():
 		sort.queue_free()
 	if GlobalData.is_multijoueur and get_parent().combattant_selection:
@@ -14,10 +14,10 @@ func update(combattant):
 	var sort_id: int = 0
 	for sort in combattant.sorts:
 		if sort_id >= combattant.compte_sorts:
-			var texture_rect = TextureRect.new()
-			var sprite = Sprite2D.new()
-			var carte = Sprite2D.new()
-			var label = Label.new()
+			var texture_rect := TextureRect.new()
+			var sprite := Sprite2D.new()
+			var carte := Sprite2D.new()
+			var label := Label.new()
 			
 			texture_rect.texture = load("res://UI/Logos/Spells/Bonus/" + sort.nom + ".png")
 			

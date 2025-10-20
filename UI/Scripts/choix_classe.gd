@@ -6,7 +6,7 @@ var classe_initiale: int
 var classe_selected: int
 
 @onready var personnage: TextureRect = $Personnage
-@onready var classes: Array[TextureButton] = $Classes.get_children()
+@onready var classes: Array = $Classes.get_children()
 @onready var nom: TextEdit = $ChoixNom/TextEdit
 
 

@@ -75,7 +75,7 @@ func creer_personnages():
 
 
 func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe: int):
-	var i = 0
+	var i: int = 0
 	for personnage in equipe.personnages:
 		if not personnage.classe.is_empty():
 			var nouveau_combattant: Combattant = scene_combattant.instantiate()
@@ -90,11 +90,11 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe: int):
 
 
 func init_cartes():
-	var nombre_sort_bonus = GlobalData.rng.randi_range(1, 3)
-	var noms_sorts_bonus = GlobalData.sorts_lookup["Bonus"].duplicate(true)
+	var nombre_sort_bonus: int = GlobalData.rng.randi_range(1, 3)
+	var noms_sorts_bonus: Array = GlobalData.sorts_lookup["Bonus"].duplicate(true)
 	var sorts_bonus_select: Array[String] = []
 	while len(sorts_bonus_select) < nombre_sort_bonus:
-		var rnd_index = GlobalData.rng.randi_range(0, len(noms_sorts_bonus) - 1)
+		var rnd_index: int = GlobalData.rng.randi_range(0, len(noms_sorts_bonus) - 1)
 		if not noms_sorts_bonus[rnd_index] in sorts_bonus_select:
 			sorts_bonus_select.append(noms_sorts_bonus[rnd_index])
 	ajoute_sorts_bonus(sorts_bonus_select)
@@ -304,12 +304,12 @@ func check_perso(grid_pos: Vector2i) -> bool:
 
 
 func check_morts():
-	var new_combattants = []
-	var delete_glyphes = []
-	var new_selection_id = 0
-	var compte_init = len(combattants)
-	var comptes_equipes = [0, 0]
-	var old_id = combattant_selection.id
+	var new_combattants: Array[Combattant] = []
+	var delete_glyphes: Array[Variant] = []
+	var new_selection_id: int = 0
+	var compte_init: int = len(combattants)
+	var comptes_equipes: Array[int] = [0, 0]
+	var old_id: int = combattant_selection.id
 	combattants[selection_id].unselect()
 	for combattant in combattants:
 		if combattant.id == combattants[selection_id].id:
@@ -362,7 +362,7 @@ func _on_perso_clicked(id: int):
 		combattant_selection = combattants[selection_id]
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if etat == 1:
 		if Input.is_key_pressed(KEY_F1) and event is InputEventKey and not event.echo:
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
@@ -370,7 +370,6 @@ func _input(event):
 		if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 			affiche_quitter()
 		if event is InputEventMouseMotion:
-			print(combattant_selection)
 			if combattant_selection.equipe != int(Client.is_host) or not GlobalData.is_multijoueur:
 				if action == 10:
 					for combattant in combattants:

@@ -83,7 +83,7 @@ func add(stats: Stats) -> Stats:
 
 
 func copy() -> Stats:
-	var stats_copy = Stats.new()
+	var stats_copy := Stats.new()
 	stats_copy.kamas = kamas
 	stats_copy.pa = pa
 	stats_copy.pm = pm
@@ -108,7 +108,7 @@ func copy() -> Stats:
 	return stats_copy
 
 
-func from_json(data: Dictionary[String, int]) -> Stats:
+func from_json(data: Dictionary) -> Stats:
 	kamas = data["kamas"]
 	pa = data["pa"]
 	pm = data["pm"]
@@ -132,7 +132,7 @@ func from_json(data: Dictionary[String, int]) -> Stats:
 	return self
 
 
-func to_json() -> Dictionary[String, int]:
+func to_json() -> Dictionary:
 	return {
 		"kamas": kamas,
 		"pa": pa,

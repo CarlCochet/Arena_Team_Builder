@@ -2,20 +2,20 @@ extends HBoxContainer
 class_name SortsSelection
 
 
-var carte_hovered = -1
+var carte_hovered: int = -1
 @export var is_popup: bool
 
 
 func update(combattant):
 	for sort in get_children():
 		sort.queue_free()
-	var sort_id = 1
+	var sort_id: int = 1
 	for sort in combattant.sorts:
 		if sort.nom != "arme" and sort_id < combattant.compte_sorts:
-			var texture_rect = TextureRect.new()
-			var sprite = Sprite2D.new()
-			var carte = Sprite2D.new()
-			var label = Label.new()
+			var texture_rect := TextureRect.new()
+			var sprite := Sprite2D.new()
+			var carte := Sprite2D.new()
+			var label := Label.new()
 			
 			texture_rect.texture = load("res://UI/Logos/Spells/" + combattant.classe + "/" + sort.nom + ".png")
 			
