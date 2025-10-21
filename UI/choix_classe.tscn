@@ -1,6 +1,6 @@
 [gd_scene load_steps=49 format=3 uid="uid://byrls820tvsdn"]
 
-[ext_resource type="Script" path="res://UI/Scripts/choix_classe.gd" id="1_e1xo3"]
+[ext_resource type="Script" uid="uid://b4x2ntpx77oyq" path="res://UI/Scripts/choix_classe.gd" id="1_e1xo3"]
 [ext_resource type="Texture2D" uid="uid://cnfldddiljcbc" path="res://UI/Logos/Classes/cra_unselected.png" id="1_v4byf"]
 [ext_resource type="Texture2D" uid="uid://yts32t0q363s" path="res://UI/Logos/Classes/cra_selected.png" id="2_fkwka"]
 [ext_resource type="Texture2D" uid="uid://bqocdxlde3jsd" path="res://UI/Logos/Classes/eca_unselected.png" id="3_ocyii"]
@@ -212,12 +212,14 @@ texture_pressed = ExtResource("29_0max7")
 texture_hover = ExtResource("30_f8pnp")
 
 [node name="Personnage" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(70, 128)
 layout_mode = 0
 offset_left = 746.0
 offset_top = 3.0
 offset_right = 816.0
 offset_bottom = 131.0
 scale = Vector2(2, 2)
+expand_mode = 1
 
 [node name="ChoixNom" type="Control" parent="."]
 anchors_preset = 0

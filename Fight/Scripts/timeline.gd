@@ -12,7 +12,7 @@ func init(combattants: Array, select_id):
 	for combattant in get_children():
 		combattant.queue_free()
 	var combattant_id: int = 0
-	for combattant in combattants:
+	for combattant: Combattant in combattants:
 		var texture_rect := TextureRect.new()
 		var cape_sprite := Sprite2D.new()
 		var classe_sprite := Sprite2D.new()
@@ -23,11 +23,11 @@ func init(combattants: Array, select_id):
 		else:
 			texture_rect.texture = fond_rouge_selected if combattant.equipe else fond_bleu_selected
 		
-		cape_sprite.texture = combattant.personnage.get_node("Cape").texture
+		cape_sprite.texture = combattant.previsu_personnage.cape.texture
 		cape_sprite.position = Vector2(38, 60)
-		classe_sprite.texture = combattant.classe_sprite.texture
+		classe_sprite.texture = combattant.previsu_personnage.classe_texture
 		classe_sprite.position = Vector2(38, 60)
-		coiffe_sprite.texture = combattant.personnage.get_node("Coiffe").texture
+		coiffe_sprite.texture = combattant.previsu_personnage.coiffe.texture
 		coiffe_sprite.position = Vector2(38, 60)
 		
 		add_child(texture_rect)

@@ -15,6 +15,10 @@ var cible: Enums.Cible
 var particules_cible: String
 var particules_retour: String
 var effets: Dictionary
+var icone: Texture2D
+var carte: Texture2D
+var visuel1: Texture2D
+var visuel2: Texture2D
 
 
 func _init():
@@ -31,7 +35,7 @@ func _init():
 	effets = {}
 
 
-func from_json(data, json_categorie) -> Equipement:
+func from_json(data: Dictionary, json_categorie: String, nom: String) -> Equipement:
 	categorie = Categorie.keys().find(json_categorie) as Categorie
 	stats.from_json(data["stats"])
 	if categorie == Categorie.ARME:
@@ -44,6 +48,27 @@ func from_json(data, json_categorie) -> Equipement:
 		particules_cible = data["particules_cible"]
 		particules_retour = data["particules_retour"]
 		effets = data["effets"]
+
+	if categorie == Categorie.CAPE:
+		carte = load("res://Equipements/Capes/" + nom + ".png")
+		icone = load("res://UI/Logos/Equipements/Capes/" + nom + ".png")
+		visuel1 = load("res://Equipements/Capes/Sprites/" + nom + ".png")
+		visuel2 = load("res://Equipements/Capes/Sprites/" + nom + "2.png")
+	if categorie == Categorie.COIFFE:
+		carte = load("res://Equipements/Coiffes/" + nom + ".png")
+		icone = load("res://UI/Logos/Equipements/Coiffes/" + nom + ".png")
+		visuel1 = load("res://Equipements/Coiffes/Sprites/" + nom + ".png")
+		visuel2 = load("res://Equipements/Coiffes/Sprites/" + nom + "2.png")
+	if categorie == Categorie.DOFUS:
+		carte = load("res://Equipements/Dofus/" + nom + ".png")
+		icone = load("res://UI/Logos/Equipements/Dofus/" + nom + ".png")
+	if categorie == Categorie.ARME:
+		carte = load("res://Equipements/Armes/" + nom + ".png")
+		icone = load("res://UI/Logos/Equipements/Armes/" + nom + ".png")
+	if categorie == Categorie.FAMILIER:
+		carte = load("res://Equipements/Familiers/" + nom + ".png")
+		icone = load("res://UI/Logos/Equipements/Familiers/" + nom + ".png")
+	
 	return self
 
 

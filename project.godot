@@ -33,4 +33,4 @@ project/assembly_name="Arena_Team_Builder"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/sprite_painter/plugin.cfg")
+enabled=PackedStringArray()

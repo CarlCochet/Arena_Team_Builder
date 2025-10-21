@@ -66,6 +66,10 @@ var regles_multi: Dictionary[String, Variant] = {
 	"debut_ms": 15
 }
 
+var empty_equipement_icone: Texture2D = preload("res://UI/Logos/Equipements/empty.png")
+var empty_classe: Texture2D = preload("res://Classes/empty.png")
+var sort_cover: Texture2D = preload("res://Fight/Images/logo_cover.png")
+
 
 func _ready():
 	map_actuelle = "map_2"
@@ -93,7 +97,7 @@ func charger_sorts():
 			sorts_lookup[classe] = []
 		for nom_sort in json_data[classe].keys():
 			sort = Sort.new()
-			sort.from_json(json_data[classe][nom_sort])
+			sort.from_json(json_data[classe][nom_sort], classe, nom_sort)
 			sort.nom = nom_sort
 			sorts[nom_sort] = sort
 			sorts_lookup[classe].append(nom_sort)
@@ -108,7 +112,7 @@ func charger_equipements():
 		if not categorie in equipements_lookup.keys():
 			equipements_lookup[categorie] = []
 		for nom_equipement in json_data[categorie].keys():
-			equipement = Equipement.new().from_json(json_data[categorie][nom_equipement], categorie)
+			equipement = Equipement.new().from_json(json_data[categorie][nom_equipement], categorie, nom_equipement)
 			equipements[nom_equipement] = equipement
 			equipements_lookup[categorie].append(nom_equipement)
 

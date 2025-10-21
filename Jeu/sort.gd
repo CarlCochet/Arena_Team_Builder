@@ -27,6 +27,8 @@ var particules_retour: String
 var particules_cible_scene: PackedScene
 var particules_retour_scene: PackedScene
 var effets: Dictionary
+var icone: Texture2D
+var carte: Texture2D
 
 var compte_lancers: int
 var compte_lancers_tour: int
@@ -481,10 +483,13 @@ func copy() -> Sort:
 	if not new_sort.particules_retour.is_empty():
 		new_sort.particules_retour_scene = load("res://Fight/Particules/" + new_sort.particules_retour + ".tscn")
 	new_sort.effets = effets.duplicate(true)
+	new_sort.icone = icone
+	new_sort.carte = carte
 	return new_sort
 
 
-func from_json(data: Dictionary) -> Sort:
+func from_json(data: Dictionary, classe: String, nom_sort: String) -> Sort:
+	nom = nom_sort
 	kamas = data["kamas"]
 	pa = data["pa"]
 	po = Vector2i(data["po"][0], data["po"][1])
@@ -510,6 +515,10 @@ func from_json(data: Dictionary) -> Sort:
 	if not particules_retour.is_empty():
 		particules_retour_scene = load("res://Fight/Particules/" + particules_retour + ".tscn")
 	effets = data["effets"]
+
+	if ResourceLoader.exists("res://UI/Logos/Spells/" + classe + "/" + nom_sort + ".png"):
+		icone = load("res://UI/Logos/Spells/" + classe + "/" + nom_sort + ".png")
+		carte = load("res://Classes/" + classe + "/Sorts/" + nom_sort + ".png")
 	return self
 
 

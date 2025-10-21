@@ -33,7 +33,7 @@ func generer_affichage():
 	affichage_personnages.update(GlobalData.equipe_actuelle)
 
 
-func check_conditions(id: int) -> bool:
+func check_conditions(_id: int) -> bool:
 	return true
 
 

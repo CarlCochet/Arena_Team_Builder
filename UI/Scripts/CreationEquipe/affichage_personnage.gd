@@ -2,31 +2,31 @@ extends TextureRect
 class_name AffichagePersonnage
 
 
-@onready var personnage: Node2D = $Personnage
 @onready var grid_sorts: GridContainer = $GridSorts
 @onready var grid_equipements: GridContainer = $GridEquipements
 @onready var nom: RichTextLabel = $Nom
+@onready var previsu_personnage: PrevisuPersonnage = $PrevisuPersonnage
 
 
-func update(id, equipe):
+func update(id: int, equipe: Equipe):
 	for sort in grid_sorts.get_children():
 		sort.queue_free()
 	for equipement in grid_equipements.get_children():
 		equipement.queue_free()
-	for sort in equipe.personnages[id].sorts:
+
+	var personnage: Personnage = equipe.personnages[id]
+	previsu_personnage.update(personnage, 0)
+	
+	for sort in personnage.sorts:
 		var texture_rect = TextureRect.new()
-		texture_rect.texture = load(
-			"res://UI/Logos/Spells/" + equipe.personnages[id].classe + 
-			"/" + sort + ".png"
-		)
+		texture_rect.texture = GlobalData.sorts[sort].icone
 		grid_sorts.add_child(texture_rect)
-	for equipement in equipe.personnages[id].equipements:
-		if equipe.personnages[id].equipements[equipement]:
-			var path = "res://UI/Logos/Equipements/" + equipement + "/" + equipe.personnages[id].equipements[equipement] + ".png"
+	for equipement in personnage.equipements:
+		if personnage.equipements[equipement]:
 			var texture_rect = TextureRect.new()
-			texture_rect.texture = load(path)
+			texture_rect.texture = GlobalData.equipements[personnage.equipements[equipement]].icone
 			grid_equipements.add_child(texture_rect)
-	nom.text = "[center]" + equipe.personnages[id].nom
+	nom.text = "[center]" + personnage.nom
 
 
 func from_combattant(combattant: Combattant):
@@ -34,9 +34,9 @@ func from_combattant(combattant: Combattant):
 		sort.queue_free()
 	for equipement in grid_equipements.get_children():
 		equipement.queue_free()
-	personnage.get_node("Cape").texture = combattant.personnage.get_node("Cape").texture
-	personnage.get_node("Classe").texture = combattant.classe_sprite.texture
-	personnage.get_node("Coiffe").texture = combattant.personnage.get_node("Coiffe").texture
+		
+	previsu_personnage.from_previsu(combattant.previsu_personnage)
+	
 	nom.text = "[center]" + combattant.nom
 	for equipement in combattant.equipements:
 		if combattant.equipements[equipement]:

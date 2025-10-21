@@ -43,12 +43,10 @@ var is_combattant_visible: bool
 
 var cercle_bleu = preload("res://Fight/Images/cercle_personnage_bleu.png")
 var cercle_rouge = preload("res://Fight/Images/cercle_personnage_rouge.png")
-var outline_shader = preload("res://Fight/Shaders/combattant_outline.gdshader")
 
 @onready var cercle: Sprite2D = $Cercle
 @onready var fleche: Sprite2D = $Fleche
-@onready var classe_sprite: Sprite2D = $Personnage/Classe
-@onready var personnage: Sprite2D = $Personnage
+@onready var previsu_personnage: PrevisuPersonnage = $PrevisuPersonnage
 @onready var hp: Sprite2D = $HP
 @onready var hp_label: Label = $HP/Label
 @onready var nom_label: RichTextLabel = $HP/Nom
@@ -58,9 +56,6 @@ var outline_shader = preload("res://Fight/Shaders/combattant_outline.gdshader")
 func _ready():
 	effets = []
 	positions_chemin = []
-	classe_sprite.material = ShaderMaterial.new()
-	classe_sprite.material.shader = outline_shader
-	classe_sprite.material.set_shader_parameter("width", 0.0)
 	orientation = 1
 	stat_buffs = Stats.new()
 	stat_ret = Stats.new()
@@ -94,21 +89,11 @@ func update_visuel():
 		cercle.texture = cercle_bleu
 	else:
 		cercle.texture = cercle_rouge
-	classe_sprite.texture = load(
-		"res://Classes/" + classe + "/" + classe.to_lower() + ".png"
-	)
-	if equipements["Capes"]:
-		personnage.get_node("Cape").texture = load(
-			"res://Equipements/Capes/Sprites/" + equipements["Capes"].to_lower() + ".png"
-		)
-	if equipements["Coiffes"]:
-		personnage.get_node("Coiffe").texture = load(
-			"res://Equipements/Coiffes/Sprites/" + equipements["Coiffes"].to_lower() + ".png"
-		)
+	previsu_personnage.update(personnage_ref, 0)
 
 
 func select():
-	classe_sprite.material.set_shader_parameter("width", 2.0)
+	cercle.modulate = Color(3.294, 3.294, 3.294)
 	combat.stats_select.update(stats)
 	is_selected = true
 	if not is_invocation:
@@ -118,7 +103,7 @@ func select():
 
 
 func unselect():
-	classe_sprite.material.set_shader_parameter("width", 0.0)
+	cercle.modulate = Color(1, 1, 1)
 	is_selected = false
 
 
@@ -144,6 +129,7 @@ func from_personnage(p_personnage: Personnage, equipe_id: int) -> Combattant:
 
 func change_orientation(new_orientation: int):
 	fleche.texture = load("res://Fight/Images/fleche_" + str(new_orientation) + "_filled.png")
+	print(new_orientation)
 	orientation = new_orientation
 
 
@@ -368,8 +354,7 @@ func joue_action(action: int, tile_pos: Vector2i) -> void:
 			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 			retire_etats(["INVISIBLE"])
 			visible = true
-			personnage.modulate = Color(1, 1, 1, 1)
-			classe_sprite.material.set_shader_parameter("alpha", 1.0)
+			previsu_personnage.visible()
 			is_combattant_visible = true
 		if grid_pos != tile_pos:
 			oriente_vers(tile_pos)
@@ -439,8 +424,7 @@ func deplace_perso(chemin: Array) -> void:
 				porteur = null
 			if not check_etats(["INVISIBLE"]):
 				visible = true
-				personnage.modulate = Color(1, 1, 1, 1)
-				classe_sprite.material.set_shader_parameter("alpha", 1.0)
+				previsu_personnage.visible()
 				is_combattant_visible = true
 			combat.tilemap.update_glyphes()
 			if stats.hp <= 0:
@@ -517,8 +501,7 @@ func oriente_vers(pos: Vector2i):
 
 func update_stats_tour():
 	visible = true
-	personnage.modulate = Color(1, 1, 1, 1)
-	classe_sprite.material.set_shader_parameter("alpha", 1.0)
+	previsu_personnage.visible()
 	is_combattant_visible = true
 	var old_pa: int = stats.pa
 	var old_pm: int = stats.pm
@@ -705,7 +688,7 @@ func _on_area_2d_mouse_entered():
 	for combattant in combat.combattants:
 		if combattant.is_hovered:
 			combattant._on_area_2d_mouse_exited()
-	classe_sprite.material.set_shader_parameter("width", 3.0)
+	cercle.modulate = Color(7.294, 7.294, 7.294)
 	is_hovered = true
 	combat.stats_hover.update(stats, max_stats)
 	combat.stats_hover.visible = true
@@ -718,9 +701,9 @@ func _on_area_2d_mouse_entered():
 
 func _on_area_2d_mouse_exited():
 	if is_hovered:
-		classe_sprite.material.set_shader_parameter("width", 0.0)
+		cercle.modulate = Color(1, 1, 1)
 		is_hovered = false
 		if is_selected:
-			classe_sprite.material.set_shader_parameter("width", 2.0)
+			cercle.modulate = Color(3.294, 3.294, 3.294)
 		combat.stats_hover.visible = false
 		hp.visible = false

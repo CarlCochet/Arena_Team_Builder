@@ -2,7 +2,7 @@ extends Control
 class_name ChoixSorts
 
 
-@onready var personnage: Control = $Personnage
+@onready var previsu_personnage: PrevisuPersonnage = $PrevisuPersonnage
 @onready var grid_sorts: GridContainer = $GridSortsCartes
 @onready var grid_logos: GridContainer = $GridSortsLogos
 @onready var affichage_budget: AffichageBudget = $AffichageBudget
@@ -18,27 +18,7 @@ func _ready():
 
 
 func update_personnage():
-	if GlobalData.get_perso_actuel().classe:
-		personnage.get_node("Classe").texture = load(
-			"res://Classes/" + GlobalData.get_perso_actuel().classe + 
-			"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
-		)
-	else:
-		personnage.get_node("Classe").texture = load("res://Classes/empty.png")
-	if GlobalData.get_perso_actuel().equipements["Capes"]:
-		personnage.get_node("Cape").texture = load(
-			"res://Equipements/Capes/Sprites/" + 
-			GlobalData.get_perso_actuel().equipements["Capes"].to_lower() + ".png"
-		)
-	else:
-		personnage.get_node("Cape").texture = load("res://Classes/empty.png")
-	if GlobalData.get_perso_actuel().equipements["Coiffes"]:
-		personnage.get_node("Coiffe").texture = load(
-			"res://Equipements/Coiffes/Sprites/" + 
-			GlobalData.get_perso_actuel().equipements["Coiffes"].to_lower() + ".png"
-		)
-	else:
-		personnage.get_node("Coiffe").texture = load("res://Classes/empty.png")
+	previsu_personnage.update(GlobalData.get_perso_actuel(), 0)
 
 
 func update_affichage():
@@ -48,10 +28,9 @@ func update_affichage():
 
 
 func update_cartes():
-	var base_path: String = "res://Classes/" + GlobalData.get_perso_actuel().classe + "/Sorts/"
 	for nom_sort in GlobalData.sorts_lookup[GlobalData.get_perso_actuel().classe]:
 		var bouton = TextureButton.new()
-		bouton.texture_normal = load(base_path + nom_sort + ".png")
+		bouton.texture_normal = GlobalData.sorts[nom_sort].carte
 		bouton.connect("pressed", _on_card_clicked.bind(nom_sort))
 		grid_sorts.add_child(bouton)
 
@@ -61,10 +40,7 @@ func update_logos():
 		logo.queue_free()
 	for sort in GlobalData.get_perso_actuel().sorts:
 		var bouton = TextureButton.new()
-		bouton.texture_normal = load(
-			"res://UI/Logos/Spells/" + GlobalData.get_perso_actuel().classe + 
-			"/" + sort + ".png"
-		)
+		bouton.texture_normal = GlobalData.sorts[sort].icone
 		bouton.connect("pressed", _on_logo_clicked.bind(sort))
 		grid_logos.add_child(bouton)
 

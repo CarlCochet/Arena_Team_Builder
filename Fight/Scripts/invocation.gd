@@ -12,9 +12,6 @@ var trigger_finish: bool
 
 func _ready():
 	effets = []
-	classe_sprite.material = ShaderMaterial.new()
-	classe_sprite.material.shader = outline_shader
-	classe_sprite.material.set_shader_parameter("width", 0.0)
 	orientation = 1
 	stat_buffs = Stats.new()
 	stat_ret = Stats.new()
@@ -95,73 +92,71 @@ func update_hitbox():
 		cercle.texture = cercle_rouge
 	match classe:
 		"Tofu":
-			classe_sprite.position = Vector2(0, -10)
+			previsu_personnage.classe.position = Vector2(0, -10)
 			hitbox.position = Vector2(0, -10)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -60)
 		"Bouftou":
-			classe_sprite.position = Vector2(0, -13)
+			previsu_personnage.classe.position = Vector2(0, -13)
 			hitbox.position = Vector2(0, -13)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"Craqueleur":
-			classe_sprite.position = Vector2(0, -40)
+			previsu_personnage.classe.position = Vector2(0, -40)
 			hitbox.position = Vector2(0, -40)
 			hitbox.scale = Vector2(3, 5)
 			hp.position = Vector2(0, -120)
 		"Prespic":
-			classe_sprite.position = Vector2(0, -17)
+			previsu_personnage.classe.position = Vector2(0, -17)
 			hitbox.position = Vector2(0, -15)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"La_Bloqueuse":
-			classe_sprite.position = Vector2(0, -25)
+			previsu_personnage.classe.position = Vector2(0, -25)
 			hitbox.position = Vector2(0, -20)
 			hitbox.scale = Vector2(2, 2.5)
 			hp.position = Vector2(0, -80)
 		"La_Folle":
-			classe_sprite.position = Vector2(0, -17)
+			previsu_personnage.classe.position = Vector2(0, -17)
 			hitbox.position = Vector2(0, -20)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"La_Sacrifiee":
-			classe_sprite.position = Vector2(0, -20)
+			previsu_personnage.classe.position = Vector2(0, -20)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"Arbre":
-			classe_sprite.position = Vector2(0, -60)
-			classe_sprite.scale = Vector2(1, 1)
+			previsu_personnage.classe.position = Vector2(0, -60)
+			previsu_personnage.classe.scale = Vector2(1, 1)
 			hitbox.position = Vector2(0, -50)
 			hitbox.scale = Vector2(2, 5)
 			hp.position = Vector2(0, -120)
 			fleche.visible = false
 		"Double":
-			classe_sprite.position = Vector2(0, -48)
+			previsu_personnage.classe.position = Vector2(0, -48)
 			hitbox.position = Vector2(0, -38)
 			hitbox.scale = Vector2(2, 4)
 			hp.position = Vector2(0, -110)
 		"Cadran_De_Xelor":
-			classe_sprite.position = Vector2(0, -35)
+			previsu_personnage.classe.position = Vector2(0, -35)
 			hitbox.position = Vector2(0, -30)
 			hitbox.scale = Vector2(2, 3)
 			hp.position = Vector2(0, -80)
 			fleche.visible = false
 		"Bombe_A_Eau":
-			classe_sprite.position = Vector2(0, -20)
+			previsu_personnage.classe.position = Vector2(0, -20)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -80)
 			fleche.visible = false
 		"Bombe_Incendiaire":
-			classe_sprite.position = Vector2(0, -20)
+			previsu_personnage.classe.position = Vector2(0, -20)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -80)
 			fleche.visible = false
-	classe_sprite.texture = load(
-		"res://Classes/Invocations/" + classe.to_lower() + ".png"
-	)
+	previsu_personnage.setup_classe(classe)
 
 
 func debut_tour() -> void:

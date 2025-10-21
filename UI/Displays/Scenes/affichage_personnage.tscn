@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://b16xwr8mihgir"]
 
 [ext_resource type="Texture2D" uid="uid://bufybxh5vc1yj" path="res://UI/Displays/character_background.png" id="1_slo84"]
-[ext_resource type="Script" path="res://UI/Scripts/CreationEquipe/affichage_personnage.gd" id="2_656t2"]
+[ext_resource type="Script" uid="uid://ntf6sb4owl5p" path="res://UI/Scripts/CreationEquipe/affichage_personnage.gd" id="2_656t2"]
 [ext_resource type="Texture2D" uid="uid://c30n742saitdp" path="res://UI/Displays/spell_small.png" id="2_cin8d"]
 [ext_resource type="Texture2D" uid="uid://iqucq85kucvm" path="res://UI/Displays/item_small.png" id="3_5plpj"]
-[ext_resource type="Texture2D" uid="uid://bx5n3oshvmiay" path="res://Classes/empty.png" id="5_f737c"]
+[ext_resource type="PackedScene" uid="uid://mf4swpfckfq1" path="res://UI/Displays/Scenes/previsu_personnage.tscn" id="5_j348a"]
 
 [node name="AffichagePersonnage" type="TextureRect"]
 offset_top = 37.0
@@ -102,20 +102,6 @@ scale = Vector2(0.093, 0.093)
 theme_override_constants/h_separation = 68
 columns = 5
 
-[node name="Personnage" type="Node2D" parent="."]
-
-[node name="Cape" type="Sprite2D" parent="Personnage"]
-position = Vector2(70, 55)
-texture = ExtResource("5_f737c")
-
-[node name="Classe" type="Sprite2D" parent="Personnage"]
-position = Vector2(70, 55)
-texture = ExtResource("5_f737c")
-
-[node name="Coiffe" type="Sprite2D" parent="Personnage"]
-position = Vector2(70, 55)
-texture = ExtResource("5_f737c")
-
 [node name="Nom" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 8.0
@@ -127,3 +113,6 @@ bbcode_enabled = true
 text = "[center]"
 scroll_active = false
 autowrap_mode = 1
+
+[node name="PrevisuPersonnage" parent="." instance=ExtResource("5_j348a")]
+position = Vector2(68, 103)
