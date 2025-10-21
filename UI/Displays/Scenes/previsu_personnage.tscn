@@ -7,6 +7,7 @@ script = ExtResource("1_deea6")
 
 [node name="Cape" type="Sprite2D" parent="."]
 position = Vector2(0, -43)
+scale = Vector2(0.99690896, 0.9878048)
 
 [node name="Classe" type="Sprite2D" parent="."]
 position = Vector2(0, -48)

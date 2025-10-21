@@ -15,7 +15,7 @@ func update(id: int, equipe: Equipe):
 		equipement.queue_free()
 
 	var personnage: Personnage = equipe.personnages[id]
-	previsu_personnage.update(personnage, 0)
+	previsu_personnage.update(personnage, 1)
 	
 	for sort in personnage.sorts:
 		var texture_rect = TextureRect.new()

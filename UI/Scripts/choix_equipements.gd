@@ -27,7 +27,7 @@ func _ready():
 
 
 func update_personnage():
-	previsu_personnage.update(GlobalData.get_perso_actuel(), 0)
+	previsu_personnage.update(GlobalData.get_perso_actuel(), 1)
 
 
 func update_affichage():

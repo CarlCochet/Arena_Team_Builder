@@ -12,7 +12,7 @@ var classe_texture: Texture2D
 var classe_texture2: Texture2D
 
 
-func update(personnage: Personnage, _orientation: int):
+func update(personnage: Personnage, orientation: int):
 	if personnage.classe and personnage.classe != nom_classe:
 		nom_classe = personnage.classe
 		classe_texture = load("res://Classes/" + nom_classe + "/" + nom_classe.to_lower() + ".png")
@@ -38,6 +38,29 @@ func update(personnage: Personnage, _orientation: int):
 		coiffe2.texture = GlobalData.equipements[personnage.equipements["Coiffes"]].visuel2
 	else:
 		coiffe2.texture = GlobalData.empty_classe
+	
+	update_orientation(orientation)
+
+
+func update_orientation(orientation: int):
+	if orientation == 0 or orientation == 3:
+		coiffe2.visible = true
+		cape2.visible = true
+		coiffe.visible = false
+		cape.visible = false
+		classe.texture = classe_texture2
+	else:
+		coiffe2.visible = false
+		cape2.visible = false
+		coiffe.visible = true
+		cape.visible = true
+		classe.texture = classe_texture
+	
+	if orientation == 0 or orientation == 2:
+		scale = Vector2(-1, 1)
+	else:
+		scale = Vector2(1, 1)
+		
 
 
 func from_previsu(previsu: PrevisuPersonnage):
@@ -47,9 +70,11 @@ func from_previsu(previsu: PrevisuPersonnage):
 
 
 func setup_classe(invocation: String):
-	classe.texture = load(
+	classe_texture = load(
 		"res://Classes/Invocations/" + invocation.to_lower() + ".png"
 	)
+	classe_texture2 = classe_texture
+	classe.texture = classe_texture
 
 
 func invisible():

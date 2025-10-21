@@ -89,7 +89,7 @@ func update_visuel():
 		cercle.texture = cercle_bleu
 	else:
 		cercle.texture = cercle_rouge
-	previsu_personnage.update(personnage_ref, 0)
+	previsu_personnage.update(personnage_ref, orientation)
 
 
 func select():
@@ -131,6 +131,7 @@ func change_orientation(new_orientation: int):
 	fleche.texture = load("res://Fight/Images/fleche_" + str(new_orientation) + "_filled.png")
 	print(new_orientation)
 	orientation = new_orientation
+	previsu_personnage.update_orientation(orientation)
 
 
 func affiche_path(pos_event: Vector2i):
