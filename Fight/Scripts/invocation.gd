@@ -284,6 +284,7 @@ func joue_ia() -> void:
 			if grid_pos != cible:
 				oriente_vers(cible)
 			joue_ia()
+	combat.chat_log.flush()
 	emit_signal("tour_fini")
 
 
@@ -336,6 +337,7 @@ func meurt():
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	is_mort = true
 	combat.chat_log.generic(self, "est mort")
+	combat.chat_log.flush()
 	queue_free()
 
 

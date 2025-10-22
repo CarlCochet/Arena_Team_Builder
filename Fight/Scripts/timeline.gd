@@ -27,6 +27,7 @@ func init(combattants: Array, select_id):
 		cape_sprite.position = Vector2(38, 60)
 		classe_sprite.texture = combattant.previsu_personnage.classe_texture
 		classe_sprite.position = Vector2(38, 60)
+		classe_sprite.scale = Vector2(0.23, 0.23)
 		coiffe_sprite.texture = combattant.previsu_personnage.coiffe.texture
 		coiffe_sprite.position = Vector2(38, 60)
 		

@@ -93,7 +93,7 @@ func update_visuel():
 
 
 func select():
-	cercle.modulate = Color(3.294, 3.294, 3.294)
+	cercle.modulate = Color(10.5, 10.5, 10.5)
 	combat.stats_select.update(stats)
 	is_selected = true
 	if not is_invocation:
@@ -129,7 +129,6 @@ func from_personnage(p_personnage: Personnage, equipe_id: int) -> Combattant:
 
 func change_orientation(new_orientation: int):
 	fleche.texture = load("res://Fight/Images/fleche_" + str(new_orientation) + "_filled.png")
-	print(new_orientation)
 	orientation = new_orientation
 	previsu_personnage.update_orientation(orientation)
 
@@ -362,6 +361,7 @@ func joue_action(action: int, tile_pos: Vector2i) -> void:
 		combat.change_action(10)
 		combat.stats_select.update(stats)
 		combat.check_morts()
+		combat.chat_log.flush()
 #	combat.tilemap.affiche_ldv_obstacles()
 
 
@@ -689,7 +689,7 @@ func _on_area_2d_mouse_entered():
 	for combattant in combat.combattants:
 		if combattant.is_hovered:
 			combattant._on_area_2d_mouse_exited()
-	cercle.modulate = Color(7.294, 7.294, 7.294)
+	cercle.modulate = Color(5.5, 5.5, 5.5)
 	is_hovered = true
 	combat.stats_hover.update(stats, max_stats)
 	combat.stats_hover.visible = true
@@ -705,6 +705,6 @@ func _on_area_2d_mouse_exited():
 		cercle.modulate = Color(1, 1, 1)
 		is_hovered = false
 		if is_selected:
-			cercle.modulate = Color(3.294, 3.294, 3.294)
+			cercle.modulate = Color(10.5, 10.5, 10.5)
 		combat.stats_hover.visible = false
 		hp.visible = false

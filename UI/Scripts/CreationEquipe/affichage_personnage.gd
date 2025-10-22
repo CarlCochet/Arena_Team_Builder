@@ -14,7 +14,11 @@ func update(id: int, equipe: Equipe):
 	for equipement in grid_equipements.get_children():
 		equipement.queue_free()
 
-	var personnage: Personnage = equipe.personnages[id]
+	var personnage: Personnage
+	if id >= len(equipe.personnages):
+		personnage = Personnage.new()
+	else:
+		personnage = equipe.personnages[id]
 	previsu_personnage.update(personnage, 1)
 	
 	for sort in personnage.sorts:

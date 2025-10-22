@@ -17,6 +17,10 @@ func update(personnage: Personnage, orientation: int):
 		nom_classe = personnage.classe
 		classe_texture = load("res://Classes/" + nom_classe + "/" + nom_classe.to_lower() + ".png")
 		classe_texture2 = load("res://Classes/" + nom_classe + "/" + nom_classe.to_lower() + "2.png")
+	if not personnage.classe:
+		nom_classe = personnage.classe
+		classe_texture = GlobalData.empty_classe
+		classe_texture2 = GlobalData.empty_classe
 
 	if personnage.equipements["Capes"]:
 		cape.texture = GlobalData.equipements[personnage.equipements["Capes"]].visuel1

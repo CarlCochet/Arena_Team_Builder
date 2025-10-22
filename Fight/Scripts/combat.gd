@@ -222,6 +222,7 @@ func applique_carte_combat():
 						if affiche_log:
 							chat_log.stats(combattant, effets_carte[cible][effet], effet, 1, tag_cible)
 			affiche_log = false
+	chat_log.flush()
 
 
 @rpc("any_peer")
