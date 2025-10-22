@@ -90,8 +90,7 @@ func delete_glyphes(glyphes_ids: Array):
 func build_grids():
 	grid = []
 	a_star_grid = AStarGrid2D.new()
-	a_star_grid.size = Vector2i(x_max + 1, y_max + 1) + offset
-#	a_star_grid.region = Rect2i(offset, Vector2i(x_max + 1, y_max + 1))
+	a_star_grid.region = Rect2i(Vector2i.ZERO, Vector2i(x_max + 1, y_max + 1) + offset)
 	a_star_grid.update()
 	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	
