@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cvjli8n5mkrg5"]
+[gd_scene load_steps=8 format=3 uid="uid://cvjli8n5mkrg5"]
 
-[ext_resource type="Script" path="res://Fight/Scripts/invocation.gd" id="1_rnnus"]
+[ext_resource type="Script" uid="uid://bij71xkbk8kqg" path="res://Fight/Scripts/invocation.gd" id="1_rnnus"]
 [ext_resource type="Texture2D" uid="uid://cjolxj4e25lwg" path="res://Fight/Images/cercle_personnage_bleu.png" id="2_fjxoj"]
-[ext_resource type="Texture2D" uid="uid://co3j3d85r6s8t" path="res://Fight/Images/fleche_1_filled.png" id="3_db61f"]
-[ext_resource type="Texture2D" uid="uid://bx5n3oshvmiay" path="res://Classes/empty.png" id="4_1uher"]
+[ext_resource type="PackedScene" uid="uid://mf4swpfckfq1" path="res://UI/Displays/Scenes/previsu_personnage.tscn" id="4_txwfk"]
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_eb3vf"]
 [ext_resource type="PackedScene" uid="uid://wjqjfqvfle7s" path="res://Fight/stats_perdu.tscn" id="6_aopma"]
 
@@ -13,28 +12,13 @@
 font_size = 25
 
 [node name="Invocation" type="Node2D"]
-z_index = 2
+z_index = 1
 script = ExtResource("1_rnnus")
 
 [node name="Cercle" type="Sprite2D" parent="."]
 texture = ExtResource("2_fjxoj")
 
-[node name="Fleche" type="Sprite2D" parent="."]
-texture = ExtResource("3_db61f")
-
-[node name="Personnage" type="Sprite2D" parent="."]
-
-[node name="Cape" type="Sprite2D" parent="Personnage"]
-position = Vector2(0, -20)
-texture = ExtResource("4_1uher")
-
-[node name="Classe" type="Sprite2D" parent="Personnage"]
-position = Vector2(0, -20)
-texture = ExtResource("4_1uher")
-
-[node name="Coiffe" type="Sprite2D" parent="Personnage"]
-position = Vector2(0, -20)
-texture = ExtResource("4_1uher")
+[node name="PrevisuPersonnage" parent="." instance=ExtResource("4_txwfk")]
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -10)
@@ -46,7 +30,7 @@ shape = SubResource("RectangleShape2D_tk0v0")
 [node name="HP" type="Sprite2D" parent="."]
 visible = false
 z_index = 2
-position = Vector2(0, -111.5)
+position = Vector2(0, -60)
 scale = Vector2(0.5, 0.66)
 texture = ExtResource("5_eb3vf")
 

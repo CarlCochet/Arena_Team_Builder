@@ -4,14 +4,13 @@ class_name PrevisuEquipe
 
 var signal_id: int
 
-@onready var equipe_nodes: Array = get_node("Equipe").get_children()
+@onready var equipe_nodes: Array = get_children()
 
 
 func update(id):
 	if GlobalData.equipes[id].personnages:
 		for i in range(len(GlobalData.equipes[id].personnages)):
 			var personnage: Personnage = GlobalData.equipes[id].personnages[i]
-			if personnage.classe:
-				equipe_nodes[i].texture = load("res://Classes/" + personnage.classe + "/" + personnage.classe.to_lower() + ".png")
-			else:
-				equipe_nodes[i].texture = load("res://Classes/empty.png")
+			var previsu: PrevisuPersonnage = equipe_nodes[i]
+			previsu.update(personnage, 1)
+			previsu.scale = Vector2(0.8, 0.8)

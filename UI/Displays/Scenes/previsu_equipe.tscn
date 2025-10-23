@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c81ufkbrjs34p"]
+[gd_scene load_steps=6 format=3 uid="uid://c81ufkbrjs34p"]
 
 [ext_resource type="Texture2D" uid="uid://f4yec7dnhwbf" path="res://UI/Displays/team_background.png" id="1_k7rlf"]
 [ext_resource type="Texture2D" uid="uid://b1kdoxs2nggij" path="res://UI/Displays/team_selected.png" id="2_v3jbj"]
 [ext_resource type="Texture2D" uid="uid://dspbp2pn73ali" path="res://UI/Displays/team_hovered.png" id="3_ypwyv"]
 [ext_resource type="Script" uid="uid://cg23c2mxuv42n" path="res://UI/Scripts/GestionEquipes/previsu_equipe.gd" id="4_reduk"]
+[ext_resource type="PackedScene" uid="uid://mf4swpfckfq1" path="res://UI/Displays/Scenes/previsu_personnage.tscn" id="5_3lx1g"]
 
 [node name="PrevisuEquipe" type="TextureButton"]
 offset_right = 40.0
@@ -14,40 +15,26 @@ texture_pressed = ExtResource("2_v3jbj")
 texture_hover = ExtResource("3_ypwyv")
 script = ExtResource("4_reduk")
 
-[node name="Equipe" type="GridContainer" parent="."]
-layout_mode = 0
-offset_top = 8.0
-offset_right = 144.0
-offset_bottom = 400.0
-scale = Vector2(0.801, 0.801)
-columns = 2
+[node name="PrevisuPersonnage" parent="." instance=ExtResource("5_3lx1g")]
+position = Vector2(30, 89.99999)
+scale = Vector2(0.7, 0.7)
 
-[node name="Personnage" type="TextureRect" parent="Equipe"]
-custom_minimum_size = Vector2(70, 128)
-layout_mode = 2
-expand_mode = 1
+[node name="PrevisuPersonnage4" parent="." instance=ExtResource("5_3lx1g")]
+position = Vector2(85, 90)
+scale = Vector2(0.7, 0.7)
 
-[node name="Personnage2" type="TextureRect" parent="Equipe"]
-custom_minimum_size = Vector2(70, 128)
-layout_mode = 2
-expand_mode = 1
+[node name="PrevisuPersonnage2" parent="." instance=ExtResource("5_3lx1g")]
+position = Vector2(30, 200)
+scale = Vector2(0.7, 0.7)
 
-[node name="Personnage3" type="TextureRect" parent="Equipe"]
-custom_minimum_size = Vector2(70, 128)
-layout_mode = 2
-expand_mode = 1
+[node name="PrevisuPersonnage5" parent="." instance=ExtResource("5_3lx1g")]
+position = Vector2(85, 200)
+scale = Vector2(0.7, 0.7)
 
-[node name="Personnage4" type="TextureRect" parent="Equipe"]
-custom_minimum_size = Vector2(70, 128)
-layout_mode = 2
-expand_mode = 1
+[node name="PrevisuPersonnage3" parent="." instance=ExtResource("5_3lx1g")]
+position = Vector2(30, 310)
+scale = Vector2(0.7, 0.7)
 
-[node name="Personnage5" type="TextureRect" parent="Equipe"]
-custom_minimum_size = Vector2(70, 128)
-layout_mode = 2
-expand_mode = 1
-
-[node name="Personnage6" type="TextureRect" parent="Equipe"]
-custom_minimum_size = Vector2(70, 128)
-layout_mode = 2
-expand_mode = 1
+[node name="PrevisuPersonnage6" parent="." instance=ExtResource("5_3lx1g")]
+position = Vector2(85, 310)
+scale = Vector2(0.7, 0.7)

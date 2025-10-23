@@ -16,7 +16,7 @@ var init_stats: Stats
 var stat_buffs: Stats
 var stat_ret: Stats
 var stat_cartes_combat: Stats
-var buffs_hp: Array[Dictionary]
+var buffs_hp: Array
 var initiative_random: float
 var equipements: Dictionary
 var sorts: Array[Sort]
@@ -45,7 +45,6 @@ var cercle_bleu = preload("res://Fight/Images/cercle_personnage_bleu.png")
 var cercle_rouge = preload("res://Fight/Images/cercle_personnage_rouge.png")
 
 @onready var cercle: Sprite2D = $Cercle
-@onready var fleche: Sprite2D = $Fleche
 @onready var previsu_personnage: PrevisuPersonnage = $PrevisuPersonnage
 @onready var hp: Sprite2D = $HP
 @onready var hp_label: Label = $HP/Label
@@ -128,7 +127,6 @@ func from_personnage(p_personnage: Personnage, equipe_id: int) -> Combattant:
 
 
 func change_orientation(new_orientation: int):
-	fleche.texture = load("res://Fight/Images/fleche_" + str(new_orientation) + "_filled.png")
 	orientation = new_orientation
 	previsu_personnage.update_orientation(orientation)
 
@@ -308,6 +306,7 @@ func check_case_bonus() -> void:
 	stats.soins = temp_soins
 	if effet.duree > 0:
 		effets.append(effet)
+	combat.chat_log.flush()
 
 
 func desactive_cadran():

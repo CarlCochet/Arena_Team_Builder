@@ -9,7 +9,9 @@ class_name MultijoueurSettings
 
 func _ready():
 	for i in range(len(classes)):
-		classes[i].connect("pressed", _on_classe_pressed.bind(i))
+		var classe: CheckBox = classes[i]
+		classe.connect("pressed", _on_classe_pressed.bind(i))
+		classe.button_pressed = GlobalData.regles_multi["classes"][i]
 
 
 func _on_classe_pressed(id: int):
@@ -22,17 +24,8 @@ func classe_pressed(id: int):
 	classes[id].pressed = GlobalData.regles_multi["classes"][id]
 
 
-func _on_retour_pressed():
-	rpc("retour_pressed")
-
-
 func _on_valider_pressed():
 	rpc("valider_pressed")
-
-
-@rpc("any_peer", "call_local")
-func retour_pressed():
-	get_tree().change_scene_to_file("res://UI/multijoueur_setup.tscn")
 
 
 @rpc("any_peer", "call_local")
