@@ -1,6 +1,6 @@
 [gd_scene load_steps=68 format=3 uid="uid://c7ng2upg83k4x"]
 
-[ext_resource type="Script" path="res://UI/Scripts/choix_map.gd" id="1_n1jan"]
+[ext_resource type="Script" uid="uid://xvoamrqwx4ou" path="res://UI/Scripts/choix_map.gd" id="1_n1jan"]
 [ext_resource type="Texture2D" uid="uid://dkxkir2jodnt3" path="res://Fight/Map/Images/tactic_2.png" id="2_1jwkw"]
 [ext_resource type="Texture2D" uid="uid://vkeq5iki03qr" path="res://Fight/Map/Images/tactic_2_selected.png" id="3_3apv8"]
 [ext_resource type="Texture2D" uid="uid://bir07tdb66dne" path="res://Fight/Map/Images/tactic_15.png" id="4_0k4jr"]
@@ -313,7 +313,7 @@ offset_bottom = 761.0
 text = "Activer la mort subite"
 label_settings = SubResource("LabelSettings_2chev")
 
-[connection signal="pressed" from="GridContainer2/Fermer" to="." method="_on_fermer_pressed" flags=18]
+[connection signal="pressed" from="GridContainer2/Fermer" to="." method="_on_fermer_pressed"]
 [connection signal="pressed" from="GridContainer2/Aleatoire" to="." method="_on_aleatoire_pressed"]
-[connection signal="pressed" from="GridContainer2/Valider" to="." method="_on_valider_pressed" flags=18]
+[connection signal="pressed" from="GridContainer2/Valider" to="." method="_on_valider_pressed"]
 [connection signal="pressed" from="MortSubiteCheck" to="." method="_on_mort_subite_check_pressed"]

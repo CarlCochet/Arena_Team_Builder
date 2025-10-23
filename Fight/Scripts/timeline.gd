@@ -1,4 +1,5 @@
 extends HBoxContainer
+class_name Timeline
 
 
 var fond_rouge = preload("res://Fight/Images/timeline_rouge.png")
@@ -10,23 +11,24 @@ var fond_bleu_selected = preload("res://Fight/Images/timeline_bleu_selected.png"
 func init(combattants: Array, select_id):
 	for combattant in get_children():
 		combattant.queue_free()
-	var combattant_id = 0
-	for combattant in combattants:
-		var texture_rect = TextureRect.new()
-		var cape_sprite = Sprite2D.new()
-		var classe_sprite = Sprite2D.new()
-		var coiffe_sprite = Sprite2D.new()
+	var combattant_id: int = 0
+	for combattant: Combattant in combattants:
+		var texture_rect := TextureRect.new()
+		var cape_sprite := Sprite2D.new()
+		var classe_sprite := Sprite2D.new()
+		var coiffe_sprite := Sprite2D.new()
 		texture_rect.name = "timeline_" + str(combattant_id)
 		if combattant_id != select_id:
 			texture_rect.texture = fond_rouge if combattant.equipe else fond_bleu
 		else:
 			texture_rect.texture = fond_rouge_selected if combattant.equipe else fond_bleu_selected
 		
-		cape_sprite.texture = combattant.personnage.get_node("Cape").texture
+		cape_sprite.texture = combattant.previsu_personnage.cape.texture
 		cape_sprite.position = Vector2(38, 60)
-		classe_sprite.texture = combattant.classe_sprite.texture
+		classe_sprite.texture = combattant.previsu_personnage.classe_texture
 		classe_sprite.position = Vector2(38, 60)
-		coiffe_sprite.texture = combattant.personnage.get_node("Coiffe").texture
+		classe_sprite.scale = Vector2(0.23, 0.23)
+		coiffe_sprite.texture = combattant.previsu_personnage.coiffe.texture
 		coiffe_sprite.position = Vector2(38, 60)
 		
 		add_child(texture_rect)
@@ -36,8 +38,8 @@ func init(combattants: Array, select_id):
 		texture_rect.add_child(classe_sprite)
 		texture_rect.add_child(coiffe_sprite)
 		combattant_id += 1
-	var affichage_tour = Label.new()
-	var label_settings = LabelSettings.new()
+	var affichage_tour := Label.new()
+	var label_settings := LabelSettings.new()
 	label_settings.font_size = 40
 	affichage_tour.text = str(get_parent().tour)
 	affichage_tour.label_settings = label_settings

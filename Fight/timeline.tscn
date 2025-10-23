@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cr4dhfep7jkje"]
 
-[ext_resource type="Script" path="res://Fight/Scripts/timeline.gd" id="1_ofe6g"]
+[ext_resource type="Script" uid="uid://dspvodh0ccqgw" path="res://Fight/Scripts/timeline.gd" id="1_ofe6g"]
 
 [node name="Personnages" type="HBoxContainer"]
 offset_right = 40.0

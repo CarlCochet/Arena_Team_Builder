@@ -25,7 +25,7 @@ var resistance_zone: int
 var invocations: int
 
 
-var nom_stats = [
+var nom_stats: Array[String] = [
 	"hp", "pa", "pm", "initiative", "po", "cc", "invocations",
 	"dommages_air", "dommages_terre", "dommages_feu", "dommages_eau", "blocage", "soins",
 	"resistances_air", "resistances_terre", "resistances_feu", "resistances_eau", 
@@ -57,7 +57,7 @@ func _init():
 	invocations = 0
 
 
-func add(stats):
+func add(stats: Stats) -> Stats:
 	kamas += stats.kamas
 	pa += stats.pa
 	pm += stats.pm
@@ -82,8 +82,8 @@ func add(stats):
 	return self
 
 
-func copy():
-	var stats_copy = Stats.new()
+func copy() -> Stats:
+	var stats_copy := Stats.new()
 	stats_copy.kamas = kamas
 	stats_copy.pa = pa
 	stats_copy.pm = pm
@@ -108,7 +108,7 @@ func copy():
 	return stats_copy
 
 
-func from_json(data):
+func from_json(data: Dictionary) -> Stats:
 	kamas = data["kamas"]
 	pa = data["pa"]
 	pm = data["pm"]
@@ -132,7 +132,7 @@ func from_json(data):
 	return self
 
 
-func to_json():
+func to_json() -> Dictionary:
 	return {
 		"kamas": kamas,
 		"pa": pa,

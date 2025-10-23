@@ -16,7 +16,7 @@ var init_stats: Stats
 var stat_buffs: Stats
 var stat_ret: Stats
 var stat_cartes_combat: Stats
-var buffs_hp: Array
+var buffs_hp: Array[Dictionary]
 var initiative_random: float
 var equipements: Dictionary
 var sorts: Array[Sort]
@@ -39,28 +39,23 @@ var porteur: Combattant
 var is_selected: bool
 var is_hovered: bool
 var is_mort: bool
-var is_visible: bool
+var is_combattant_visible: bool
 
 var cercle_bleu = preload("res://Fight/Images/cercle_personnage_bleu.png")
 var cercle_rouge = preload("res://Fight/Images/cercle_personnage_rouge.png")
-var outline_shader = preload("res://Fight/Shaders/combattant_outline.gdshader")
 
 @onready var cercle: Sprite2D = $Cercle
 @onready var fleche: Sprite2D = $Fleche
-@onready var classe_sprite: Sprite2D = $Personnage/Classe
-@onready var personnage: Sprite2D = $Personnage
+@onready var previsu_personnage: PrevisuPersonnage = $PrevisuPersonnage
 @onready var hp: Sprite2D = $HP
 @onready var hp_label: Label = $HP/Label
 @onready var nom_label: RichTextLabel = $HP/Nom
-@onready var stats_perdu: Label = $StatsPerdu
+@onready var stats_perdu: StatsPerdu = $StatsPerdu
 
 
 func _ready():
 	effets = []
 	positions_chemin = []
-	classe_sprite.material = ShaderMaterial.new()
-	classe_sprite.material.shader = outline_shader
-	classe_sprite.material.set_shader_parameter("width", 0.0)
 	orientation = 1
 	stat_buffs = Stats.new()
 	stat_ret = Stats.new()
@@ -68,7 +63,7 @@ func _ready():
 	is_selected = false
 	is_hovered = false
 	is_invocation = false
-	is_visible = true
+	is_combattant_visible = true
 	hp_label.text = str(stats.hp) + "/" + str(max_stats.hp)
 	combat = get_parent()
 
@@ -94,21 +89,11 @@ func update_visuel():
 		cercle.texture = cercle_bleu
 	else:
 		cercle.texture = cercle_rouge
-	classe_sprite.texture = load(
-		"res://Classes/" + classe + "/" + classe.to_lower() + ".png"
-	)
-	if equipements["Capes"]:
-		personnage.get_node("Cape").texture = load(
-			"res://Equipements/Capes/Sprites/" + equipements["Capes"].to_lower() + ".png"
-		)
-	if equipements["Coiffes"]:
-		personnage.get_node("Coiffe").texture = load(
-			"res://Equipements/Coiffes/Sprites/" + equipements["Coiffes"].to_lower() + ".png"
-		)
+	previsu_personnage.update(personnage_ref, orientation)
 
 
 func select():
-	classe_sprite.material.set_shader_parameter("width", 2.0)
+	cercle.modulate = Color(10.5, 10.5, 10.5)
 	combat.stats_select.update(stats)
 	is_selected = true
 	if not is_invocation:
@@ -118,13 +103,14 @@ func select():
 
 
 func unselect():
-	classe_sprite.material.set_shader_parameter("width", 0.0)
+	cercle.modulate = Color(1, 1, 1)
 	is_selected = false
 
 
-func from_personnage(p_personnage: Personnage, equipe_id: int):
+func from_personnage(p_personnage: Personnage, equipe_id: int) -> Combattant:
 	classe = p_personnage.classe
 	nom = p_personnage.nom
+	name = nom
 	personnage_ref = p_personnage
 	stats = p_personnage.stats.copy()
 	initiative_random = float(stats.initiative) + GlobalData.rng.randf()
@@ -144,6 +130,7 @@ func from_personnage(p_personnage: Personnage, equipe_id: int):
 func change_orientation(new_orientation: int):
 	fleche.texture = load("res://Fight/Images/fleche_" + str(new_orientation) + "_filled.png")
 	orientation = new_orientation
+	previsu_personnage.update_orientation(orientation)
 
 
 func affiche_path(pos_event: Vector2i):
@@ -215,14 +202,14 @@ func calcul_path_actuel(pos_event: Vector2i):
 		path_actuel = []
 
 
-func calcul_all_ldv(action: int):
+func calcul_all_ldv(action: int) -> void:
 	var sort: Sort
 	sort = sorts[action]
 	if not sort.precheck_cast(self):
 		combat.change_action(10)
 		return
 	var bonus_po: int = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
-	var po_max: int = int(sort.po[1]) + bonus_po if int(sort.po[1]) + bonus_po >= int(sort.po[0]) else int(sort.po[0])
+	var po_max: int = sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0]
 	po_max = 1 if sort.po[1] > 0 and po_max <= 0 else po_max
 	all_ldv = combat.tilemap.get_ldv(
 		grid_pos, 
@@ -252,12 +239,12 @@ func calcul_zone(action: int, pos_event: Vector2i):
 		)
 
 
-func check_case_bonus():
+func check_case_bonus() -> void:
 	if check_etats(["PORTE"]):
 		return
 	var case_id: int = combat.tilemap.get_cell_atlas_coords(1, grid_pos - combat.offset).x
 	var categorie: String = ""
-	var contenu = ""
+	var contenu: Variant = ""
 	var maudit: bool = false
 	if grid_pos in combat.tilemap.cases_maudites.values():
 		maudit = true
@@ -335,7 +322,7 @@ func active_cadran():
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 
 
-func joue_action(action: int, tile_pos: Vector2i):
+func joue_action(action: int, tile_pos: Vector2i) -> void:
 	if action == 10:
 		calcul_path_actuel(tile_pos)
 		if len(path_actuel) > 0:
@@ -367,14 +354,14 @@ func joue_action(action: int, tile_pos: Vector2i):
 			combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 			retire_etats(["INVISIBLE"])
 			visible = true
-			personnage.modulate = Color(1, 1, 1, 1)
-			classe_sprite.material.set_shader_parameter("alpha", 1.0)
-			is_visible = true
+			previsu_personnage.visible()
+			is_combattant_visible = true
 		if grid_pos != tile_pos:
 			oriente_vers(tile_pos)
 		combat.change_action(10)
 		combat.stats_select.update(stats)
 		combat.check_morts()
+		combat.chat_log.flush()
 #	combat.tilemap.affiche_ldv_obstacles()
 
 
@@ -383,7 +370,7 @@ func affiche_stats_change(valeur: int, stat: String):
 
 
 func check_tacle_unit(case: Vector2i) -> bool:
-	if check_etats(["PORTE"]) or not is_visible:
+	if check_etats(["PORTE"]) or not is_combattant_visible:
 		return false
 	var voisins: Array[Vector2i] = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	var seul: bool = true
@@ -402,7 +389,7 @@ func check_tacle_unit(case: Vector2i) -> bool:
 	return false
 
 
-func deplace_perso(chemin: Array):
+func deplace_perso(chemin: Array) -> void:
 	if stats.pm <= 0:
 		return
 	var tacled: bool = check_tacle_unit(grid_pos)
@@ -438,9 +425,8 @@ func deplace_perso(chemin: Array):
 				porteur = null
 			if not check_etats(["INVISIBLE"]):
 				visible = true
-				personnage.modulate = Color(1, 1, 1, 1)
-				classe_sprite.material.set_shader_parameter("alpha", 1.0)
-				is_visible = true
+				previsu_personnage.visible()
+				is_combattant_visible = true
 			combat.tilemap.update_glyphes()
 			if stats.hp <= 0:
 				break
@@ -454,7 +440,7 @@ func deplace_perso(chemin: Array):
 
 
 func place_perso(tile_pos: Vector2i, swap: bool):
-	var tile_data = combat.tilemap.get_cell_atlas_coords(2, tile_pos)
+	var tile_data: Vector2i = combat.tilemap.get_cell_atlas_coords(2, tile_pos)
 	if (tile_data.x == 0 and equipe == 1) or (tile_data.x == 2 and equipe == 0):
 		var new_grid_pos: Vector2i = tile_pos + combat.offset
 		var place_libre: bool = true
@@ -516,9 +502,8 @@ func oriente_vers(pos: Vector2i):
 
 func update_stats_tour():
 	visible = true
-	personnage.modulate = Color(1, 1, 1, 1)
-	classe_sprite.material.set_shader_parameter("alpha", 1.0)
-	is_visible = true
+	previsu_personnage.visible()
+	is_combattant_visible = true
 	var old_pa: int = stats.pa
 	var old_pm: int = stats.pm
 	var delta_hp: int = max_stats.hp - stats.hp
@@ -645,7 +630,7 @@ func retrait_durees():
 				effet.duree -= 1
 			if effet.duree > 0:
 				new_effets.append(effet)
-		var new_buffs_hp: Array = []
+		var new_buffs_hp: Array[Dictionary] = []
 		for buff_hp in combattant.buffs_hp:
 			if buff_hp["lanceur"] == id:
 				buff_hp["duree"] -= 1
@@ -666,7 +651,7 @@ func retrait_durees():
 		combattant.stats.hp -= delta_hp
 		combattant.execute_buffs_hp()
 	
-	var new_map_glyphes: Array = []
+	var new_map_glyphes: Array[Glyphe] = []
 	for glyphe in combat.tilemap.glyphes:
 		if glyphe.lanceur.id == id:
 			glyphe.duree -= 1
@@ -704,7 +689,7 @@ func _on_area_2d_mouse_entered():
 	for combattant in combat.combattants:
 		if combattant.is_hovered:
 			combattant._on_area_2d_mouse_exited()
-	classe_sprite.material.set_shader_parameter("width", 3.0)
+	cercle.modulate = Color(5.5, 5.5, 5.5)
 	is_hovered = true
 	combat.stats_hover.update(stats, max_stats)
 	combat.stats_hover.visible = true
@@ -717,9 +702,9 @@ func _on_area_2d_mouse_entered():
 
 func _on_area_2d_mouse_exited():
 	if is_hovered:
-		classe_sprite.material.set_shader_parameter("width", 0.0)
+		cercle.modulate = Color(1, 1, 1)
 		is_hovered = false
 		if is_selected:
-			classe_sprite.material.set_shader_parameter("width", 2.0)
+			cercle.modulate = Color(10.5, 10.5, 10.5)
 		combat.stats_hover.visible = false
 		hp.visible = false

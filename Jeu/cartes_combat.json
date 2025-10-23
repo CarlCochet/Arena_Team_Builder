@@ -1,197 +1,197 @@
 {
-    "cloue_au_lit": {
-        "tous": {
-            "STABILISE": 1,
-            "NON_PORTABLE": 1,
-            "INTRANSPOSABLE": 1
-        }
-    },
-    "bifidous_activous": {
-        "tous": {
-            "resistances_air": 30,
-            "resistances_terre": 30,
-            "resistances_feu": 30,
-            "resistances_eau": 30
-        }
-    },
-    "coeur_de_flamme": {
-        "tous": {
-            "dommages_feu": 10
-        }
-    },
-    "coeur_de_pierre": {
-        "tous": {
-            "dommages_terre": 10
-        }
-    },
-    "coeur_des_vagues": {
-        "tous": {
-            "dommages_eau": 10
-        }
-    },
-    "coeur_des_vents": {
-        "tous": {
-            "dommages_air": 10
-        }
-    },
-    "couverture": {
-        "tous": {
-            "po": -1
-        }
-    },
-    "creux_de_la_vague": {
-        "tous": {
-            "dommages_eau": -15
-        }
-    },
-    "creux_des_flammes": {
-        "tous": {
-            "dommages_feu": -15
-        }
-    },
-    "creux_des_pierres": {
-        "tous": {
-            "dommages_terre": -15
-        }
-    },
-    "creux_des_vents": {
-        "tous": {
-            "dommages_air": -15
-        }
-    },
-    "deesse_cra": {
-        "Cra": {
-            "po": 1,
-            "cc": 25
-        }
-    },
-    "deesse_eniripsa": {
-        "Eni": {
-            "soins": 50
-        }
-    },
-    "deesse_feca": {
-        "Feca": {
-            "resistances_air": 40,
-            "resistances_terre": 40,
-            "resistances_feu": 40,
-            "resistances_eau": 40,
-            "blocage": 40
-        },
-        "Hupper": {
+	"cloue_au_lit": {
+		"tous": {
+			"STABILISE": 1,
+			"NON_PORTABLE": 1,
+			"INTRANSPOSABLE": 1
+		}
+	},
+	"bifidous_activous": {
+		"tous": {
+			"resistances_air": 30,
+			"resistances_terre": 30,
+			"resistances_feu": 30,
+			"resistances_eau": 30
+		}
+	},
+	"coeur_de_flamme": {
+		"tous": {
+			"dommages_feu": 10
+		}
+	},
+	"coeur_de_pierre": {
+		"tous": {
+			"dommages_terre": 10
+		}
+	},
+	"coeur_des_vagues": {
+		"tous": {
+			"dommages_eau": 10
+		}
+	},
+	"coeur_des_vents": {
+		"tous": {
+			"dommages_air": 10
+		}
+	},
+	"couverture": {
+		"tous": {
+			"po": -1
+		}
+	},
+	"creux_de_la_vague": {
+		"tous": {
+			"dommages_eau": -15
+		}
+	},
+	"creux_des_flammes": {
+		"tous": {
+			"dommages_feu": -15
+		}
+	},
+	"creux_des_pierres": {
+		"tous": {
+			"dommages_terre": -15
+		}
+	},
+	"creux_des_vents": {
+		"tous": {
+			"dommages_air": -15
+		}
+	},
+	"deesse_cra": {
+		"Cra": {
+			"po": 1,
+			"cc": 25
+		}
+	},
+	"deesse_eniripsa": {
+		"Eni": {
+			"soins": 50
+		}
+	},
+	"deesse_feca": {
+		"Feca": {
+			"resistances_air": 40,
+			"resistances_terre": 40,
+			"resistances_feu": 40,
+			"resistances_eau": 40,
+			"blocage": 40
+		},
+		"Hupper": {
 
-        }
-    },
-    "deesse_pandawa": {
-        "Panda": {
-            "SOIN": 10,
-            "pa": 1,
-            "esquive": 20
-        },
-        "autres": {
-            "esquive": -20
-        }
-    },
-    "deesse_sacrieur": {
-        "Sacrieur": {
-            "dommages_air": 10,
-            "dommages_terre": 10,
-            "dommages_feu": 10,
-            "dommages_eau": 10,
-            "pm": 2
-        }
-    },
-    "dieu_ecaflip": {
-        "Eca": {
-            "cc": 50,
-            "esquive": 20
-        },
-        "Ouginak": {
+		}
+	},
+	"deesse_pandawa": {
+		"Panda": {
+			"SOIN": 10,
+			"pa": 1,
+			"esquive": 20
+		},
+		"autres": {
+			"esquive": -20
+		}
+	},
+	"deesse_sacrieur": {
+		"Sacrieur": {
+			"dommages_air": 10,
+			"dommages_terre": 10,
+			"dommages_feu": 10,
+			"dommages_eau": 10,
+			"pm": 2
+		}
+	},
+	"dieu_ecaflip": {
+		"Eca": {
+			"cc": 50,
+			"esquive": 20
+		},
+		"Ouginak": {
 
-        }
-    },
-    "dieu_enutrof": {
-        "Enu": {
-            "pm": 2
-        },
-        "autres": {
-            "pm": -1
-        }
-    },
-    "dieu_iop": {
-        "Iop": {
-            "dommages_air": 30,
-            "dommages_terre": 30,
-            "dommages_feu": 30,
-            "dommages_eau": 30
-        },
-        "Forgelance": {
+		}
+	},
+	"dieu_enutrof": {
+		"Enu": {
+			"pm": 2
+		},
+		"autres": {
+			"pm": -1
+		}
+	},
+	"dieu_iop": {
+		"Iop": {
+			"dommages_air": 30,
+			"dommages_terre": 30,
+			"dommages_feu": 30,
+			"dommages_eau": 30
+		},
+		"Forgelance": {
 
-        },
-        "tous": {
-            "soins": -30
-        }
-    },
-    "dieu_osamodas": {
-        "Osa": {
-            "invocations": 1,
-            "pa": 2
-        },
-        "Steamer": {
+		},
+		"tous": {
+			"soins": -30
+		}
+	},
+	"dieu_osamodas": {
+		"Osa": {
+			"invocations": 1,
+			"pa": 2
+		},
+		"Steamer": {
 
-        }
-    },
-    "dieu_sadida": {
-        "Sadida": {
-            "invocations": 1,
-            "pa": 2,
-        }
-    },
-    "dieu_sram": {
-        "Roublard": {
-            "dommages_air": 10,
-            "dommages_terre": 10,
-            "dommages_feu": 10,
-            "dommages_eau": 10,
-            "pm": 1,
-            "esquive": 100
-        },
-        "Sram": {
-            "esquive": 100
-        }
-    },
-    "dieu_xelor": {
-        "Xelor": {
-            "pa": 2
-        },
-        "Elio": {
+		}
+	},
+	"dieu_sadida": {
+		"Sadida": {
+			"invocations": 1,
+			"pa": 2,
+		}
+	},
+	"dieu_sram": {
+		"Roublard": {
+			"dommages_air": 10,
+			"dommages_terre": 10,
+			"dommages_feu": 10,
+			"dommages_eau": 10,
+			"pm": 1,
+			"esquive": 100
+		},
+		"Sram": {
+			"esquive": 100
+		}
+	},
+	"dieu_xelor": {
+		"Xelor": {
+			"pa": 2
+		},
+		"Elio": {
 
-        },
-        "autres": {
-            "pa": -1
-        }
-    },
-    "mauvaise_passe": {
-        "tous": {
-            "soins": -25
-        }
-    },
-    "place_a_laction": {
-        "tous": {
-            "pa": 1
-        }
-    },
-    "precision": {
-        "tous": {
-            "cc": 25
-        }
-    },
-    "rage_guerriere": {
-        "tous": {
-            "dommages_air": 15,
-            "dommages_terre": 15,
-            "dommages_feu": 15,
-            "dommages_eau": 15,
-        }
-    }
+		},
+		"autres": {
+			"pa": -1
+		}
+	},
+	"mauvaise_passe": {
+		"tous": {
+			"soins": -25
+		}
+	},
+	"place_a_laction": {
+		"tous": {
+			"pa": 1
+		}
+	},
+	"precision": {
+		"tous": {
+			"cc": 25
+		}
+	},
+	"rage_guerriere": {
+		"tous": {
+			"dommages_air": 15,
+			"dommages_terre": 15,
+			"dommages_feu": 15,
+			"dommages_eau": 15,
+		}
+	}
 }

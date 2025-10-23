@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Arena_Team_Builder"
 run/main_scene="res://UI/menu_principal.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -30,3 +30,7 @@ window/stretch/aspect="keep_width"
 [dotnet]
 
 project/assembly_name="Arena_Team_Builder"
+
+[editor_plugins]
+
+enabled=PackedStringArray()

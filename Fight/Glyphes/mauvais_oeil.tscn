@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c76qpf3yxocuu"]
+
+[ext_resource type="Texture2D" uid="uid://dftl458xna6rj" path="res://Fight/Glyphes/Images/mauvais_oeil.png" id="1_i3dlj"]
+[ext_resource type="Script" path="res://Fight/Glyphes/Scripts/mauvais_oeil.gd" id="2_d6dti"]
+
+[node name="MauvaisOeil" type="Sprite2D"]
+texture = ExtResource("1_i3dlj")
+script = ExtResource("2_d6dti")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://chugxs2aw8qmt"]
+
+[ext_resource type="Texture2D" uid="uid://bcy0nvjk6gnyn" path="res://Fight/Glyphes/Images/brume.png" id="1_88lqr"]
+[ext_resource type="Script" path="res://Fight/Glyphes/Scripts/brume.gd" id="2_aoegc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hxvhk"]
+texture = ExtResource("1_88lqr")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_htyw8"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(128, 64)
+sources/0 = SubResource("TileSetAtlasSource_hxvhk")
+
+[node name="Brume" type="TileMap"]
+z_index = 2
+y_sort_enabled = true
+tile_set = SubResource("TileSet_htyw8")
+format = 2
+layer_0/name = "brume"
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(65535, 0, 0, 131071, 0, 0, 65536, 0, 0, 0, 0, 0, -1, 0, 0, -2, 0, 0, 65534, 0, 0, 131070, 0, 0, -65536, 0, 0, 65533, 0, 0, 1, 0, 0, 196607, 0, 0, -65537, 0, 0)
+script = ExtResource("2_aoegc")

@@ -1,14 +1,15 @@
 extends Control
+class_name ChoixEquipements
 
 
 var categorie_lookup: Dictionary
 
-@onready var personnage: Control = $Personnage
+@onready var previsu_personnage: PrevisuPersonnage = $PrevisuPersonnage
 @onready var grid_equipements: GridContainer = $ScrollContainer/Cartes
 @onready var grid_logos: GridContainer = $GridLogos
-@onready var affichage_budget: TextureRect = $AffichageBudget
-@onready var stats_primaires: TextureRect = $StatsPrimaires
-@onready var stats_secondaires: TextureRect = $StatsSecondaires
+@onready var affichage_budget: AffichageBudget = $AffichageBudget
+@onready var stats_primaires: AffichageStatsPrimaires = $StatsPrimaires
+@onready var stats_secondaires: AffichageStatsSecondaires = $StatsSecondaires
 
 
 func _ready():
@@ -26,27 +27,7 @@ func _ready():
 
 
 func update_personnage():
-	if GlobalData.get_perso_actuel().classe:
-		personnage.get_node("Classe").texture = load(
-			"res://Classes/" + GlobalData.get_perso_actuel().classe + 
-			"/" + GlobalData.get_perso_actuel().classe.to_lower() + ".png"
-		)
-	else:
-		personnage.get_node("Classe").texture = load("res://Classes/empty.png")
-	if GlobalData.get_perso_actuel().equipements["Capes"]:
-		personnage.get_node("Cape").texture = load(
-			"res://Equipements/Capes/Sprites/" + 
-			GlobalData.get_perso_actuel().equipements["Capes"].to_lower() + ".png"
-		)
-	else:
-		personnage.get_node("Cape").texture = load("res://Classes/empty.png")
-	if GlobalData.get_perso_actuel().equipements["Coiffes"]:
-		personnage.get_node("Coiffe").texture = load(
-			"res://Equipements/Coiffes/Sprites/" + 
-			GlobalData.get_perso_actuel().equipements["Coiffes"].to_lower() + ".png"
-		)
-	else:
-		personnage.get_node("Coiffe").texture = load("res://Classes/empty.png")
+	previsu_personnage.update(GlobalData.get_perso_actuel(), 1)
 
 
 func update_affichage():
@@ -55,27 +36,27 @@ func update_affichage():
 	stats_secondaires.update(GlobalData.perso_actuel)
 
 
-func update_cartes(categorie):
+func update_cartes(categorie: String):
 	for equipement in grid_equipements.get_children():
 		equipement.queue_free()
-	var base_path: String = "res://Equipements/" + categorie
 	for nom_equipement in GlobalData.equipements_lookup[categorie_lookup[categorie]]:
 		var bouton = TextureButton.new()
-		bouton.texture_normal = load(base_path + "/" + nom_equipement + ".png")
+		bouton.texture_normal = GlobalData.equipements[nom_equipement].carte
 		bouton.connect("pressed", _on_card_clicked.bind(nom_equipement, categorie))
 		grid_equipements.add_child(bouton)
 
 
 func update_logos():
 	for logo in grid_logos.get_children():
-		logo.texture = load("res://UI/Logos/Equipements/empty.png")
-	for equipement in GlobalData.get_perso_actuel().equipements:
-		if GlobalData.get_perso_actuel().equipements[equipement]:
-			var path = "res://UI/Logos/Equipements/" + equipement + "/" + GlobalData.get_perso_actuel().equipements[equipement] + ".png"
-			grid_logos.get_node(equipement).texture = load(path)
+		logo.texture = GlobalData.empty_equipement_icone
+	
+	var equipement_perso: Dictionary = GlobalData.get_perso_actuel().equipements
+	for equipement in equipement_perso.keys():
+		if equipement_perso[equipement]:
+			grid_logos.get_node(equipement).texture = GlobalData.equipements[equipement_perso[equipement]].icone
 
 
-func _on_card_clicked(nom_equipement, categorie):
+func _on_card_clicked(nom_equipement: String, categorie: String):
 	if GlobalData.get_perso_actuel().equipements[categorie] == nom_equipement:
 		GlobalData.get_perso_actuel().equipements[categorie] = ""
 	else:
@@ -86,7 +67,7 @@ func _on_card_clicked(nom_equipement, categorie):
 	update_logos()
 
 
-func _input(event):
+func _input(event: InputEvent):
 	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		_on_retour_pressed()
 	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:

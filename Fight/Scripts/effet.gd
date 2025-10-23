@@ -17,7 +17,7 @@ var critique: bool
 var aoe: bool
 var combat: Combat
 var sort: Sort
-var type_cible: GlobalData.Cible
+var type_cible: Enums.Cible
 var boost_hp: int
 var indirect: bool
 var debuffable: bool
@@ -26,7 +26,7 @@ var affiche_log: bool
 var is_redirection: bool
 var tag_cible: String
 
-var scene_invocation = preload("res://Fight/invocation.tscn")
+var scene_invocation: PackedScene = preload("res://Fight/invocation.tscn")
 
 
 func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_aoe, p_sort):
@@ -36,10 +36,10 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 	categorie = p_categorie
 	contenu = p_contenu
 	if contenu is Dictionary and contenu.has("cible"):
-		type_cible = contenu["cible"] as GlobalData.Cible
+		type_cible = contenu["cible"] as Enums.Cible
 		contenu.erase("cible")
 	else:
-		type_cible = GlobalData.Cible.LIBRE
+		type_cible = Enums.Cible.LIBRE
 	duree = 0
 	boost_hp = 0
 	valeur_dommage = 0
@@ -62,7 +62,7 @@ func _init(p_lanceur, p_cible, p_categorie, p_contenu, p_critique, p_centre, p_a
 		valeur_dommage = contenu[trouve_crit()]["valeur"]
 
 
-func trouve_duree(data: Dictionary):
+func trouve_duree(data: Dictionary) -> int:
 	for key in data.keys():
 		if data[key] is Dictionary:
 			if data[key].has("duree"):
@@ -76,15 +76,15 @@ func trouve_duree(data: Dictionary):
 	return 0
 
 
-func check_cible():
-	if type_cible == GlobalData.Cible.INVOCATIONS_ALLIEES and (cible.equipe != lanceur.equipe or not cible.is_invocation): 
+func check_cible() -> bool:
+	if type_cible == Enums.Cible.INVOCATIONS_ALLIEES and (cible.equipe != lanceur.equipe or not cible.is_invocation): 
 		return false
-	if type_cible == GlobalData.Cible.INVOCATIONS_ENNEMIES and (cible.equipe == lanceur.equipe or not cible.is_invocation): 
+	if type_cible == Enums.Cible.INVOCATIONS_ENNEMIES and (cible.equipe == lanceur.equipe or not cible.is_invocation): 
 		return false
 	return true
 
 
-func trouve_crit():
+func trouve_crit() -> String:
 	var base_crit: String = ""
 	if critique:
 		if contenu.has("critique"):
@@ -111,9 +111,9 @@ func trouve_crit():
 	return base_crit
 
 
-func execute():
+func execute() -> bool:
 	if not check_cible():
-		return
+		return false
 	
 	match categorie:
 		"DOMMAGE_FIXE": 
@@ -236,7 +236,7 @@ func check_immu(dommages: int, type: String) -> bool:
 			for effet_lanceur in lanceur.effets:
 				if "IMMUNISE" == effet_lanceur.etat or "RENVOIE_SORT" == effet_lanceur.etat:
 					return true
-			var cible_rebond = lanceur
+			var cible_rebond: Combattant = lanceur
 			if lanceur.check_etats(["SACRIFICE"]) and not type in ["soin", "retour", "pourcent_retour"]:
 				cible_rebond = update_sacrifice(lanceur, type)
 			cible_rebond.stats.hp -= dommages
@@ -298,7 +298,7 @@ func calcul_dommage(base, stat: float, resistance: float, orientation_bonus: boo
 	return int_result
 
 
-func update_sacrifice(p_cible: Combattant, type: String):
+func update_sacrifice(p_cible: Combattant, type: String) -> Combattant:
 	for effet in p_cible.effets:
 		if effet.etat == "SACRIFICE" and effet.lanceur.id == p_cible.id:
 			if (not effet.lanceur.check_etats(["INTRANSPOSABLE", "PORTE"])) and (not p_cible.check_etats(["INTRANSPOSABLE", "PORTE"])) and cible.classe != "Arbre":
@@ -314,7 +314,7 @@ func update_sacrifice(p_cible: Combattant, type: String):
 	return p_cible
 
 
-func applique_dommage(base, stat_element: String, resistance_element: String, orientation_bonus: bool, type: String):
+func applique_dommage(base, stat_element: String, resistance_element: String, orientation_bonus: bool, type: String) -> void:
 	if cible.check_etats(["SACRIFICE"]) and duree < 1 and not type in ["soin", "retour", "pourcent_retour"]:
 		cible = update_sacrifice(cible, type)
 	
@@ -354,7 +354,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 			return
 		if lanceur.check_etats(["IMMUNISE"]) and base > 0:
 			return
-		var cible_retour = lanceur
+		var cible_retour: Combattant = lanceur
 		if cible_retour.check_etats(["SACRIFICE"]) and type != "soin":
 			cible_retour = update_sacrifice(cible_retour, type)
 		cible_retour.stats.hp -= dommages
@@ -372,7 +372,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 	combat.chat_log.dommages(cible, -dommages, stat_element)
 	
 	if cible.stats.renvoi_dommage > 0 and lanceur.id != cible.id and duree <= 0 and (not sort.effets.has("GLYPHE")) and (not indirect) and not type in ["soin", "pourcent", "neutre"]:
-		var cible_renvoi = lanceur
+		var cible_renvoi: Combattant = lanceur
 		if cible_renvoi.check_etats(["SACRIFICE"]):
 			cible_renvoi = update_sacrifice(cible_renvoi, "renvoi")
 		var renvoi: int = dommages * (cible.stats.renvoi_dommage / 100.0)
@@ -387,7 +387,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 		combat.chat_log.dommages(lanceur, soin_vol, stat_element)
 
 
-func dommage_fixe():
+func dommage_fixe() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -403,7 +403,7 @@ func dommage_fixe():
 		applique_dommage(contenu[base_crit]["retour"], "", "", false, "retour")
 
 
-func dommage_pourcent():
+func dommage_pourcent() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -419,7 +419,7 @@ func dommage_pourcent():
 		cible.stats.hp = 1
 
 
-func dommage_par_pa():
+func dommage_par_pa() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var pa_restants: int = lanceur.stats.pa
@@ -430,7 +430,7 @@ func dommage_par_pa():
 	lanceur.stats_perdu.ajoute(-pa_restants, "pa")
 
 
-func dommage_par_pm():
+func dommage_par_pm() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var pm_restants: int = lanceur.stats.pm
@@ -445,7 +445,7 @@ func dommage_par_pa_utilise():
 	pass
 
 
-func dommage_si_bouge():
+func dommage_si_bouge() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	etat = "DOMMAGE_SI_BOUGE"
@@ -460,7 +460,7 @@ func dommage_si_bouge():
 		instant = false
 
 
-func dommage_si_utilise_pa():
+func dommage_si_utilise_pa() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	etat = "DOMMAGE_SI_UTILISE_PA"
@@ -474,7 +474,7 @@ func dommage_si_utilise_pa():
 		instant = false
 
 
-func dommage_air():
+func dommage_air() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -488,7 +488,7 @@ func dommage_air():
 		applique_dommage(contenu[base_crit]["retour"], "dommages_air", "resistances_air", false, "retour") 
 
 
-func dommage_terre():
+func dommage_terre() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -502,7 +502,7 @@ func dommage_terre():
 		applique_dommage(contenu[base_crit]["retour"], "dommages_terre", "resistances_terre", false, "retour") 
 
 
-func dommage_feu():
+func dommage_feu() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -516,7 +516,7 @@ func dommage_feu():
 		applique_dommage(contenu[base_crit]["retour"], "dommages_feu", "resistances_feu", false, "retour") 
 
 
-func dommage_eau():
+func dommage_eau() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -530,7 +530,7 @@ func dommage_eau():
 		applique_dommage(contenu[base_crit]["retour"], "dommages_eau", "resistances_eau", false, "retour") 
 
 
-func vole_air():
+func vole_air() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -544,7 +544,7 @@ func vole_air():
 		lanceur.stats.hp = lanceur.max_stats.hp
 
 
-func vole_terre():
+func vole_terre() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -558,7 +558,7 @@ func vole_terre():
 		lanceur.stats.hp = lanceur.max_stats.hp
 
 
-func vole_feu():
+func vole_feu() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -572,7 +572,7 @@ func vole_feu():
 		lanceur.stats.hp = lanceur.max_stats.hp
 
 
-func vole_eau():
+func vole_eau() -> void:
 	if cible is Array or cible is Vector2i:
 		return
 	var base_crit: String = trouve_crit()
@@ -586,7 +586,7 @@ func vole_eau():
 		lanceur.stats.hp = lanceur.max_stats.hp
 
 
-func soin():
+func soin() -> void:
 	if cible.stats.hp <= 0:
 		return
 	if cible is Array or cible is Vector2i:
@@ -602,7 +602,7 @@ func soin():
 		lanceur.stats.hp = lanceur.max_stats.hp
 
 
-func check_retrait_immunite(combattant, stat, valeur):
+func check_retrait_immunite(combattant, stat, valeur) -> bool:
 	if combattant.check_etats(["IMMUNISE_RETRAIT_PA"]) and stat == "pa" and valeur < 0:
 		return true
 	if combattant.check_etats(["IMMUNISE_RETRAIT_PM"]) and stat == "pm" and valeur < 0:
@@ -610,7 +610,7 @@ func check_retrait_immunite(combattant, stat, valeur):
 	return false
 
 
-func boost_vie():
+func boost_vie() -> void:
 	if not instant:
 		return
 	var base_crit: String = trouve_crit()
@@ -702,9 +702,9 @@ func change_stats():
 		cible.stats.pm = 0 if cible.stats.pm < 0 else cible.stats.pm
 
 
-func vol_pa():
+func vol_pa() -> void:
 	var base_crit: String = trouve_crit()
-	var stat = "pa"
+	var stat: String = "pa"
 	var compense_negatif = min(0, cible.stats[stat] - contenu[base_crit]["valeur"])
 	var valeur = contenu[base_crit]["valeur"] + compense_negatif
 	if valeur <= 0:
@@ -738,9 +738,9 @@ func vol_pa():
 		cible.stats[stat] = 0 if cible.stats[stat] < 0 else cible.stats[stat]
 
 
-func vol_pm():
+func vol_pm() -> void:
 	var base_crit: String = trouve_crit()
-	var stat = "pm"
+	var stat: String = "pm"
 	var compense_negatif = min(0, cible.stats[stat] - contenu[base_crit]["valeur"])
 	var valeur = contenu[base_crit]["valeur"] + compense_negatif
 	if valeur <= 0:
@@ -774,7 +774,7 @@ func vol_pm():
 		cible.stats[stat] = 0 if cible.stats[stat] < 0 else cible.stats[stat]
 
 
-func pousse():
+func pousse() -> void:
 	if cible.classe == "Arbre":
 		return
 	if cible.check_etats(["STABILISE"]):
@@ -839,7 +839,7 @@ func pousse():
 	combat.tilemap.update_glyphes()
 
 
-func attire():
+func attire() -> void:
 	if cible.classe == "Arbre":
 		return
 	if cible.check_etats(["STABILISE"]):
@@ -905,7 +905,7 @@ func attire():
 	combat.tilemap.update_glyphes()
 
 
-func recul():
+func recul() -> void:
 	if lanceur.classe == "Arbre":
 		return
 	if lanceur.check_etats(["STABILISE"]):
@@ -964,7 +964,7 @@ func recul():
 	combat.tilemap.update_glyphes()
 
 
-func avance():
+func avance() -> void:
 	if lanceur.classe == "Arbre":
 		return
 	if lanceur.check_etats(["STABILISE"]):
@@ -1017,7 +1017,7 @@ func teleporte():
 	lanceur.bouge_perso(centre)
 
 
-func transpose():
+func transpose() -> void:
 	if cible.stats.hp <= 0:
 		return
 	if cible.classe == "Arbre":
@@ -1039,7 +1039,7 @@ func rate_sort():
 	combat.chat_log.generic(cible, "ratera son prochain sort")
 
 
-func revele_invisible():
+func revele_invisible() -> void:
 	if aoe:
 		combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = -2
 		cible.retire_etats(["INVISIBLE"])
@@ -1053,7 +1053,7 @@ func revele_invisible():
 			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = -2
 			combattant.retire_etats(["INVISIBLE"])
 			combattant.visible = true
-			combattant.is_visible = true
+			combattant.is_combattant_visible = true
 			if affiche_log:
 				combat.chat_log.generic(cible, "est révélé", "Tout le monde")
 			affiche_log = false
@@ -1064,8 +1064,7 @@ func devient_invisible():
 	if GlobalData.is_multijoueur and (Client.is_host and cible.equipe == 1 or not Client.is_host and cible.equipe == 0):
 		cible.visible = false
 	else:
-		cible.personnage.modulate = Color(1, 1, 1, 0.5)
-		cible.classe_sprite.material.set_shader_parameter("alpha", 0.5)
+		cible.previsu_personnage.invisible()
 	cible.is_visible = false
 	combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, cible.grid_pos - combat.offset).x
 	if affiche_log:
@@ -1128,7 +1127,7 @@ func renvoie_sort():
 
 
 func invocation():
-	var invoc = scene_invocation.instantiate()
+	var invoc: Invocation = scene_invocation.instantiate()
 	invoc.init(int(contenu))
 	invoc.position = combat.tilemap.map_to_local(centre - combat.offset)
 	invoc.grid_pos = centre
@@ -1151,7 +1150,7 @@ func invocation():
 	combat.chat_log.generic(lanceur, "invoque un " + sort.nom.replace("_", " "))
 
 
-func porte():
+func porte() -> void:
 	if cible.classe == "Arbre":
 		return
 	if etat != "PORTE":
@@ -1172,12 +1171,12 @@ func porte():
 		lanceur.porte = cible
 
 
-func lance():
+func lance() -> bool:
 	for combattant in combat.combattants:
 		if combattant.grid_pos == centre and combattant.id != lanceur.id and combattant.id != lanceur.porte.id:
 			combat.chat_log.generic(null, "Cette case n'est pas libre..")
 			return false
-	var combattant = lanceur.porte
+	var combattant: Combattant = lanceur.porte
 	combattant.oriente_vers(centre)
 	combattant.position = combat.tilemap.map_to_local(centre - combat.offset)
 	combattant.grid_pos = centre
@@ -1190,13 +1189,14 @@ func lance():
 	if sort != null:
 		new_sort = sort.copy()
 		new_sort.pa = 0
-		new_sort.cible = GlobalData.Cible.LIBRE
+		new_sort.cible = Enums.Cible.LIBRE
 		new_sort.effets.erase("LANCE")
 		if len(new_sort.effets.keys()) > 0:
 			new_sort.execute_effets(lanceur, [centre], centre)
 	combat.tilemap.update_glyphes()
 	lanceur.porte.porteur = null
 	lanceur.porte = null
+	return true
 
 
 func picole():
@@ -1254,7 +1254,7 @@ func suicide():
 	combat.check_morts()
 
 
-func choix():
+func choix() -> void:
 	if lanceur.equipe == 0 and Client.is_host or lanceur.equipe == 1 and (not Client.is_host) or not GlobalData.is_multijoueur:
 		if not instant:
 			return
@@ -1272,13 +1272,13 @@ func choix():
 		instant = false
 
 
-func condition_etat():
+func condition_etat() -> void:
 	if not instant:
 		return
 	var conditions = contenu.keys()
 	for condition in conditions:
 		if lanceur.check_etats([condition]):
-			var new_sort = sort.copy()
+			var new_sort: Sort = sort.copy()
 			var choix_effet = contenu[condition]
 			for effet in choix_effet:
 				var new_categorie = effet

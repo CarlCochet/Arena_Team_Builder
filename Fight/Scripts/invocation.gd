@@ -12,9 +12,6 @@ var trigger_finish: bool
 
 func _ready():
 	effets = []
-	classe_sprite.material = ShaderMaterial.new()
-	classe_sprite.material.shader = outline_shader
-	classe_sprite.material.set_shader_parameter("width", 0.0)
 	orientation = 1
 	stat_buffs = Stats.new()
 	stat_ret = Stats.new()
@@ -38,7 +35,7 @@ func _process(delta: float):
 				combat.etat = 1
 				emit_signal("movement_finished")
 		else:
-			var direction = position.direction_to(positions_chemin[0])
+			var direction: Vector2 = position.direction_to(positions_chemin[0])
 			position += direction * delta * 300.0
 		if porte != null:
 			porte.position = position + Vector2(0, -90)
@@ -48,30 +45,30 @@ func _process(delta: float):
 
 
 func init(classe_int: int):
-	match classe_int as GlobalData.Invocations:
-		GlobalData.Invocations.BOUFTOU:
+	match classe_int as Enums.Invocations:
+		Enums.Invocations.BOUFTOU:
 			classe = "Bouftou"
-		GlobalData.Invocations.CRAQUELEUR:
+		Enums.Invocations.CRAQUELEUR:
 			classe = "Craqueleur"
-		GlobalData.Invocations.PRESPIC:
+		Enums.Invocations.PRESPIC:
 			classe = "Prespic"
-		GlobalData.Invocations.TOFU:
+		Enums.Invocations.TOFU:
 			classe = "Tofu"
-		GlobalData.Invocations.ARBRE:
+		Enums.Invocations.ARBRE:
 			classe = "Arbre"
-		GlobalData.Invocations.BLOQUEUSE:
+		Enums.Invocations.BLOQUEUSE:
 			classe = "La_Bloqueuse"
-		GlobalData.Invocations.FOLLE:
+		Enums.Invocations.FOLLE:
 			classe = "La_Folle"
-		GlobalData.Invocations.SACRIFIEE:
+		Enums.Invocations.SACRIFIEE:
 			classe = "La_Sacrifiee"
-		GlobalData.Invocations.DOUBLE:
+		Enums.Invocations.DOUBLE:
 			classe = "Double"
-		GlobalData.Invocations.CADRAN_DE_XELOR:
+		Enums.Invocations.CADRAN_DE_XELOR:
 			classe = "Cadran_De_Xelor"
-		GlobalData.Invocations.BOMBE_A_EAU:
+		Enums.Invocations.BOMBE_A_EAU:
 			classe = "Bombe_A_Eau"
-		GlobalData.Invocations.BOMBE_INCENDIAIRE:
+		Enums.Invocations.BOMBE_INCENDIAIRE:
 			classe = "Bombe_Incendiaire"
 		_:
 			print("Incorrect summon.")
@@ -95,76 +92,74 @@ func update_hitbox():
 		cercle.texture = cercle_rouge
 	match classe:
 		"Tofu":
-			classe_sprite.position = Vector2(0, -10)
+			previsu_personnage.classe.position = Vector2(0, -10)
 			hitbox.position = Vector2(0, -10)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -60)
 		"Bouftou":
-			classe_sprite.position = Vector2(0, -13)
+			previsu_personnage.classe.position = Vector2(0, -13)
 			hitbox.position = Vector2(0, -13)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"Craqueleur":
-			classe_sprite.position = Vector2(0, -40)
+			previsu_personnage.classe.position = Vector2(0, -40)
 			hitbox.position = Vector2(0, -40)
 			hitbox.scale = Vector2(3, 5)
 			hp.position = Vector2(0, -120)
 		"Prespic":
-			classe_sprite.position = Vector2(0, -17)
+			previsu_personnage.classe.position = Vector2(0, -17)
 			hitbox.position = Vector2(0, -15)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"La_Bloqueuse":
-			classe_sprite.position = Vector2(0, -25)
+			previsu_personnage.classe.position = Vector2(0, -25)
 			hitbox.position = Vector2(0, -20)
 			hitbox.scale = Vector2(2, 2.5)
 			hp.position = Vector2(0, -80)
 		"La_Folle":
-			classe_sprite.position = Vector2(0, -17)
+			previsu_personnage.classe.position = Vector2(0, -17)
 			hitbox.position = Vector2(0, -20)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"La_Sacrifiee":
-			classe_sprite.position = Vector2(0, -20)
+			previsu_personnage.classe.position = Vector2(0, -20)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"Arbre":
-			classe_sprite.position = Vector2(0, -60)
-			classe_sprite.scale = Vector2(1, 1)
+			previsu_personnage.classe.position = Vector2(0, -60)
+			previsu_personnage.classe.scale = Vector2(1, 1)
 			hitbox.position = Vector2(0, -50)
 			hitbox.scale = Vector2(2, 5)
 			hp.position = Vector2(0, -120)
 			fleche.visible = false
 		"Double":
-			classe_sprite.position = Vector2(0, -48)
+			previsu_personnage.classe.position = Vector2(0, -48)
 			hitbox.position = Vector2(0, -38)
 			hitbox.scale = Vector2(2, 4)
 			hp.position = Vector2(0, -110)
 		"Cadran_De_Xelor":
-			classe_sprite.position = Vector2(0, -35)
+			previsu_personnage.classe.position = Vector2(0, -35)
 			hitbox.position = Vector2(0, -30)
 			hitbox.scale = Vector2(2, 3)
 			hp.position = Vector2(0, -80)
 			fleche.visible = false
 		"Bombe_A_Eau":
-			classe_sprite.position = Vector2(0, -20)
+			previsu_personnage.classe.position = Vector2(0, -20)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -80)
 			fleche.visible = false
 		"Bombe_Incendiaire":
-			classe_sprite.position = Vector2(0, -20)
+			previsu_personnage.classe.position = Vector2(0, -20)
 			hitbox.position = Vector2(0, -12)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -80)
 			fleche.visible = false
-	classe_sprite.texture = load(
-		"res://Classes/Invocations/" + classe.to_lower() + ".png"
-	)
+	previsu_personnage.setup_classe(classe)
 
 
-func debut_tour():
+func debut_tour() -> void:
 	update_stats_tour()
 	
 	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"]:
@@ -212,7 +207,7 @@ func chemin_vers_proche() -> Array[Vector2i]:
 	return min_chemin
 
 
-func choix_cible(p_all_ldv: Array[Vector2i]):
+func choix_cible(p_all_ldv: Array[Vector2i]) -> Vector2i:
 	var min_dist: int = 9999999
 	var min_hp: int = 9999999
 	var cible = null
@@ -222,7 +217,7 @@ func choix_cible(p_all_ldv: Array[Vector2i]):
 		if not combattant.is_visible:
 			continue
 		if combattant.grid_pos in p_all_ldv and combattant.equipe != equipe and not combattant.check_etats(["PORTE"]):
-			var delta = combattant.grid_pos - grid_pos
+			var delta: Vector2i = combattant.grid_pos - grid_pos
 			var dist = abs(delta.x) + abs(delta.y)
 			if dist < min_dist:
 				min_dist = dist
@@ -235,7 +230,7 @@ func choix_cible(p_all_ldv: Array[Vector2i]):
 	return cible
 
 
-func joue_ia():
+func joue_ia() -> void:
 	combat.check_morts()
 	if is_mort:
 		return
@@ -261,11 +256,11 @@ func joue_ia():
 			sort.type_ldv,
 			sort.ldv
 		)
-		var cible = choix_cible(all_ldv)
+		var cible: Vector2i = choix_cible(all_ldv)
 		if cible == null:
 			continue 
 		if sort.pa <= stats.pa:
-			var _valide = false
+			var _valide: bool = false
 			if check_etats(["RATE_SORT"]):
 				_valide = true
 				retire_etats(["RATE_SORT"])
@@ -285,10 +280,11 @@ func joue_ia():
 				combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 				retire_etats(["INVISIBLE"])
 				visible = true
-				is_visible = true
+				is_combattant_visible = true
 			if grid_pos != cible:
 				oriente_vers(cible)
 			joue_ia()
+	combat.chat_log.flush()
 	emit_signal("tour_fini")
 
 
@@ -341,6 +337,7 @@ func meurt():
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2
 	is_mort = true
 	combat.chat_log.generic(self, "est mort")
+	combat.chat_log.flush()
 	queue_free()
 
 

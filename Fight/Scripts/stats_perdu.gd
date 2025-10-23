@@ -1,7 +1,8 @@
 extends Label
+class_name StatsPerdu
 
 
-var queue: Array
+var queue: Array[Array]
 var init_position: Vector2
 
 
@@ -23,7 +24,7 @@ func _process(_delta):
 			text = ""
 
 
-func ajoute(valeur: int, stat: String):
+func ajoute(valeur: int, stat: String) -> void:
 	if valeur == 0:
 		return
 	queue.append([valeur, stat])

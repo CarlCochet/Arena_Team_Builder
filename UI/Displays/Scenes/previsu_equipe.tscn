@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://f4yec7dnhwbf" path="res://UI/Displays/team_background.png" id="1_k7rlf"]
 [ext_resource type="Texture2D" uid="uid://b1kdoxs2nggij" path="res://UI/Displays/team_selected.png" id="2_v3jbj"]
 [ext_resource type="Texture2D" uid="uid://dspbp2pn73ali" path="res://UI/Displays/team_hovered.png" id="3_ypwyv"]
-[ext_resource type="Script" path="res://UI/Scripts/GestionEquipes/previsu_equipe.gd" id="4_reduk"]
+[ext_resource type="Script" uid="uid://cg23c2mxuv42n" path="res://UI/Scripts/GestionEquipes/previsu_equipe.gd" id="4_reduk"]
 
 [node name="PrevisuEquipe" type="TextureButton"]
 offset_right = 40.0
@@ -15,6 +15,7 @@ texture_hover = ExtResource("3_ypwyv")
 script = ExtResource("4_reduk")
 
 [node name="Equipe" type="GridContainer" parent="."]
+layout_mode = 0
 offset_top = 8.0
 offset_right = 144.0
 offset_bottom = 400.0
@@ -22,27 +23,31 @@ scale = Vector2(0.801, 0.801)
 columns = 2
 
 [node name="Personnage" type="TextureRect" parent="Equipe"]
+custom_minimum_size = Vector2(70, 128)
+layout_mode = 2
+expand_mode = 1
 
 [node name="Personnage2" type="TextureRect" parent="Equipe"]
-offset_left = 4.0
-offset_right = 4.0
+custom_minimum_size = Vector2(70, 128)
+layout_mode = 2
+expand_mode = 1
 
 [node name="Personnage3" type="TextureRect" parent="Equipe"]
-offset_top = 4.0
-offset_bottom = 4.0
+custom_minimum_size = Vector2(70, 128)
+layout_mode = 2
+expand_mode = 1
 
 [node name="Personnage4" type="TextureRect" parent="Equipe"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 4.0
-offset_bottom = 4.0
+custom_minimum_size = Vector2(70, 128)
+layout_mode = 2
+expand_mode = 1
 
 [node name="Personnage5" type="TextureRect" parent="Equipe"]
-offset_top = 8.0
-offset_bottom = 8.0
+custom_minimum_size = Vector2(70, 128)
+layout_mode = 2
+expand_mode = 1
 
 [node name="Personnage6" type="TextureRect" parent="Equipe"]
-offset_left = 4.0
-offset_top = 8.0
-offset_right = 4.0
-offset_bottom = 8.0
+custom_minimum_size = Vector2(70, 128)
+layout_mode = 2
+expand_mode = 1

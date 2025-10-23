@@ -2,10 +2,9 @@
 
 This is a simple application to theorycraft team compositions for the game Dofus Arena.
 
-If you do not wish to modify the project, you can just run a release build (recommended): https://github.com/CarlCochet/Arena_Team_Builder/releases
+## Simple usage
 
-This tool is built using the Godot 4 game engine. 
-If you want to run the tool in the engine, you will need to download the Godot 4 release, which you can find here: https://godotengine.org/download/
+If you only want to use this application and not modify it, you should run a release build (recommended): https://github.com/CarlCochet/Arena_Team_Builder/releases
 
 ### Manage many teams
 ![gestion_equipes](https://user-images.githubusercontent.com/25507252/216190474-d04b024b-f87d-4391-86b7-c56cc93cdc6d.PNG)
@@ -32,6 +31,10 @@ If you want to run the tool in the engine, you will need to download the Godot 4
 ![multijoueur](https://user-images.githubusercontent.com/25507252/216190739-d19215ac-e73a-4103-a3e1-36414c5cf5c6.png)
 
 ## Run the project in Godot
+
+This tool is built using the Godot 4 game engine.
+If you want to run the tool in the engine, you will need to download a compatible Godot 4 release, which you can find here: https://godotengine.org/download/
+
 - Launch the godot engine
 - Click on Import
 - Navigate to where you downloaded this repository and click on the project.godot file

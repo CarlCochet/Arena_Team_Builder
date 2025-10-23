@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://rcby27lpo007"]
 
 [ext_resource type="PackedScene" uid="uid://b16xwr8mihgir" path="res://UI/Displays/Scenes/affichage_personnage.tscn" id="1_443q0"]
-[ext_resource type="Script" path="res://UI/Scripts/affichage_equipe.gd" id="1_gluve"]
+[ext_resource type="Script" uid="uid://cnynaibt73qfe" path="res://UI/Scripts/affichage_equipe.gd" id="1_gluve"]
 
 [node name="AffichageEquipe" type="Control"]
 layout_mode = 3
@@ -44,109 +44,3 @@ layout_mode = 2
 
 [node name="FondPersonnage6" parent="FondEquipe" instance=ExtResource("1_443q0")]
 layout_mode = 2
-
-[node name="Equipe" type="GridContainer" parent="."]
-layout_mode = 0
-offset_left = 66.0
-offset_top = 48.0
-offset_right = 806.0
-offset_bottom = 176.0
-scale = Vector2(2, 2)
-theme_override_constants/h_separation = 134
-columns = 6
-
-[node name="Personnage" type="Control" parent="Equipe"]
-layout_mode = 2
-
-[node name="Cape" type="TextureRect" parent="Equipe/Personnage"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Classe" type="TextureRect" parent="Equipe/Personnage"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Coiffe" type="TextureRect" parent="Equipe/Personnage"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Personnage2" type="Control" parent="Equipe"]
-layout_mode = 2
-
-[node name="Cape" type="TextureRect" parent="Equipe/Personnage2"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Classe" type="TextureRect" parent="Equipe/Personnage2"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Coiffe" type="TextureRect" parent="Equipe/Personnage2"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Personnage3" type="Control" parent="Equipe"]
-layout_mode = 2
-
-[node name="Cape" type="TextureRect" parent="Equipe/Personnage3"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Classe" type="TextureRect" parent="Equipe/Personnage3"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Coiffe" type="TextureRect" parent="Equipe/Personnage3"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Personnage4" type="Control" parent="Equipe"]
-layout_mode = 2
-
-[node name="Cape" type="TextureRect" parent="Equipe/Personnage4"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Classe" type="TextureRect" parent="Equipe/Personnage4"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Coiffe" type="TextureRect" parent="Equipe/Personnage4"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Personnage5" type="Control" parent="Equipe"]
-layout_mode = 2
-
-[node name="Cape" type="TextureRect" parent="Equipe/Personnage5"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Classe" type="TextureRect" parent="Equipe/Personnage5"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Coiffe" type="TextureRect" parent="Equipe/Personnage5"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Personnage6" type="Control" parent="Equipe"]
-layout_mode = 2
-
-[node name="Cape" type="TextureRect" parent="Equipe/Personnage6"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Classe" type="TextureRect" parent="Equipe/Personnage6"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Coiffe" type="TextureRect" parent="Equipe/Personnage6"]
-offset_right = 40.0
-offset_bottom = 40.0

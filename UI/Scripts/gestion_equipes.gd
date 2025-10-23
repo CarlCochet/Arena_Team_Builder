@@ -1,12 +1,13 @@
 extends Control
+class_name GestionEquipes
 
 
-var previsu = preload("res://UI/Displays/Scenes/previsu_equipe.tscn")
+var previsu: PackedScene = preload("res://UI/Displays/Scenes/previsu_equipe.tscn")
 var equipes: Array
 var equipe_selectionnee: int
 
 @onready var equipes_grid: GridContainer = $ScrollContainer/Equipes
-@onready var affichage_personnages: Control = $AffichageEquipe
+@onready var affichage_personnages: AffichageEquipe = $AffichageEquipe
 @onready var export_dialog: FileDialog = $ExportDialog
 @onready var import_dialog: FileDialog = $ImportDialog
 
@@ -20,7 +21,9 @@ func _ready():
 
 func generer_affichage():
 	for i in range(len(GlobalData.equipes)):
-		var previsu_equipe = previsu.instantiate()
+		if not check_conditions(i):
+			continue
+		var previsu_equipe: PrevisuEquipe = previsu.instantiate()
 		previsu_equipe.signal_id = i
 		previsu_equipe.connect("pressed", previsu_pressed.bind(i))
 		equipes.append(previsu_equipe)
@@ -30,7 +33,11 @@ func generer_affichage():
 	affichage_personnages.update(GlobalData.equipe_actuelle)
 
 
-func previsu_pressed(id):
+func check_conditions(_id: int) -> bool:
+	return true
+
+
+func previsu_pressed(id: int):
 	equipe_selectionnee = id
 	for i in range(len(equipes)):
 		if i != id:
@@ -64,7 +71,7 @@ func _on_supprimer_pressed():
 		GlobalData.sauver_equipes()
 
 
-func _input(event):
+func _input(event: InputEvent):
 	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		GlobalData.sauver_equipes()
 		get_tree().change_scene_to_file("res://UI/menu_principal.tscn")
@@ -94,13 +101,13 @@ func _on_importer_pressed():
 	import_dialog.popup()
 
 
-func _on_export_dialog_file_selected(path):
-	var file = FileAccess.open(path, FileAccess.WRITE)
+func _on_export_dialog_file_selected(path: String):
+	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
 	file.store_string(JSON.stringify(GlobalData.equipe_actuelle.to_json()))
 
 
-func _on_import_dialog_file_selected(path):
-	var file = FileAccess.open(path, FileAccess.READ)
+func _on_import_dialog_file_selected(path: String):
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
 	var equipe_json = JSON.parse_string(file.get_as_text())
 	GlobalData.equipes.append(Equipe.new().from_json(equipe_json).sort_ini())
 	

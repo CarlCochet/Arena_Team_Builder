@@ -1,18 +1,19 @@
 extends TileMap
+class_name Map
 
 
 var a_star_grid: AStarGrid2D
-var grid: Array
+var grid: Array[Array]
 var start_bleu: Array[Vector2i]
 var start_rouge: Array[Vector2i]
 var x_max: int
 var y_max: int
 var offset: Vector2i
-var mode = false
-var zonetype = GlobalData.TypeZone.CARRE
-var glyphes: Array
+var mode: bool = false
+var zonetype = Enums.TypeZone.CARRE
+var glyphes: Array[Glyphe]
 var glyphes_indexeur: int
-var cases_maudites: Dictionary
+var cases_maudites: Dictionary[int, Vector2i]
 var combat: Combat
 var ms_data: Dictionary
 
@@ -56,7 +57,7 @@ func update_glyphes():
 	for combattant in combat.combattants:
 		if not combattant.check_etats(["INVISIBLE"]):
 			combattant.visible = true
-			combattant.is_visible = true
+			combattant.is_combattant_visible = true
 	for glyphe in glyphes:
 		glyphe.active_full()
 		if not glyphe.deleted:
@@ -89,7 +90,7 @@ func delete_glyphes(glyphes_ids: Array):
 func build_grids():
 	grid = []
 	a_star_grid = AStarGrid2D.new()
-	a_star_grid.size = Vector2i(x_max + 1, y_max + 1) + offset
+	a_star_grid.region = Rect2i(Vector2i.ZERO, Vector2i(x_max + 1, y_max + 1) + offset)
 	a_star_grid.update()
 	a_star_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	
@@ -117,15 +118,15 @@ func load_map_data():
 	ms_data = json_data
 
 
-func update_mort_subite(tour: int):
+func update_mort_subite(tour: int) -> void:
 	if not GlobalData.mort_subite_active:
 		return
 	
 	var distance: int = ms_data[GlobalData.map_actuelle]["distance"] - (tour - 15)
-	var directions: Array[Vector2] = [Vector2(0, 1), Vector2(1, 0), Vector2(0, -1), Vector2(-1, 0)]
+	var directions: Array[Vector2i] = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
 	for i in range(4):
-		var centre_array: Array = ms_data[GlobalData.map_actuelle]["centres"][i]
-		var centre: Vector2 = Vector2(centre_array[0], centre_array[1])
+		var centre_array: Array[int] = ms_data[GlobalData.map_actuelle]["centres"][i]
+		var centre: Vector2i = Vector2i(centre_array[0], centre_array[1])
 		for k in range(-distance, distance+1):
 			var cell_pos = centre + directions[i] * distance + k * directions[(i + 1) % 4]
 			erase_cell(1, cell_pos)
@@ -163,7 +164,7 @@ func get_chemin(debut: Vector2i, fin: Vector2i) -> Array[Vector2i]:
 	return path
 
 
-func get_ldv(pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, doit_check_ldv: int) -> Array[Vector2i]:
+func get_ldv(pos: Vector2i, po_min: int, po_max: int, type_ldv: Enums.TypeLDV, doit_check_ldv: int) -> Array[Vector2i]:
 	var atteignables: Array[Vector2i] = []
 	for x in range(pos.x - po_max, pos.x + po_max + 1):
 		for y in range(pos.y - po_max, pos.y + po_max + 1):
@@ -172,7 +173,7 @@ func get_ldv(pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeL
 	return atteignables
 
 
-func check_ldv(x: int, y: int, pos: Vector2i, po_min: int, po_max: int, type_ldv: GlobalData.TypeLDV, doit_check_ldv: int) -> bool:
+func check_ldv(x: int, y: int, pos: Vector2i, po_min: int, po_max: int, type_ldv: Enums.TypeLDV, doit_check_ldv: int) -> bool:
 	if x < 0 or x >= len(grid) or y < 0 or y >= len(grid[0]):
 		return false
 	if abs(pos.x - x) + abs(pos.y - y) > po_max:
@@ -181,9 +182,9 @@ func check_ldv(x: int, y: int, pos: Vector2i, po_min: int, po_max: int, type_ldv
 		return false
 	if grid[x][y] == 0 or grid[x][y] == -1:
 		return false
-	if type_ldv == GlobalData.TypeLDV.LIGNE and (x != pos.x and y != pos.y):
+	if type_ldv == Enums.TypeLDV.LIGNE and (x != pos.x and y != pos.y):
 		return false
-	if type_ldv == GlobalData.TypeLDV.DIAGONAL and (abs(x - pos.x) != abs(y - pos.y)):
+	if type_ldv == Enums.TypeLDV.DIAGONAL and (abs(x - pos.x) != abs(y - pos.y)):
 		return false
 	if doit_check_ldv == 1 and not calcul_ldv(pos, Vector2i(x,y)):
 		return false
@@ -222,7 +223,7 @@ func calcul_ldv(debut: Vector2i, fin: Vector2i) -> bool:
 	return pos.x == fin.x and pos.y == fin.y
 
 
-func get_zone(source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone, taille_min: int, taille_max: int) -> Array[Vector2i]:
+func get_zone(source: Vector2i, target: Vector2i, type_zone: Enums.TypeZone, taille_min: int, taille_max: int) -> Array[Vector2i]:
 	var zone: Array[Vector2i] = []
 	var orientation: Vector2i = source - target
 	for x in range(target.x - taille_max, target.x + taille_max + 1):
@@ -232,30 +233,30 @@ func get_zone(source: Vector2i, target: Vector2i, type_zone: GlobalData.TypeZone
 	return zone
 
 
-func check_zone(x: int, y: int, target: Vector2i, type_zone: GlobalData.TypeZone, taille_min: int, taille_max: int, orientation: Vector2i) -> bool:
+func check_zone(x: int, y: int, target: Vector2i, type_zone: Enums.TypeZone, taille_min: int, taille_max: int, orientation: Vector2i) -> bool:
 	if x < 0 or x >= len(grid) or y < 0 or y >= len(grid[0]):
 		return false
-	if abs(target.x - x) + abs(target.y - y) > taille_max and type_zone != GlobalData.TypeZone.CARRE:
+	if abs(target.x - x) + abs(target.y - y) > taille_max and type_zone != Enums.TypeZone.CARRE:
 		return false
 	if abs(target.x - x) + abs(target.y - y) < taille_min:
 		return false
 	if grid[x][y] == 0 or grid[x][y] == -1:
 		return false
-	if type_zone == GlobalData.TypeZone.CROIX and (x != target.x and y != target.y):
+	if type_zone == Enums.TypeZone.CROIX and (x != target.x and y != target.y):
 		return false
-	if type_zone == GlobalData.TypeZone.BATON and (
+	if type_zone == Enums.TypeZone.BATON and (
 		orientation.x != 0 and x != target.x or 
 		orientation.y != 0 and y != target.y
 		):
 		return false
-	if type_zone == GlobalData.TypeZone.LIGNE and (
+	if type_zone == Enums.TypeZone.LIGNE and (
 		orientation.x > 0 and (x > target.x or y != target.y) or
 		orientation.x < 0 and (x < target.x or y != target.y) or
 		orientation.y > 0 and (y > target.y or x != target.x) or
 		orientation.y < 0 and (y < target.y or x != target.x)
 		):
 		return false
-	if type_zone == GlobalData.TypeZone.MARTEAU and (
+	if type_zone == Enums.TypeZone.MARTEAU and (
 		orientation.x > 0 and x > target.x or
 		orientation.x < 0 and x < target.x or
 		orientation.y > 0 and y > target.y or
@@ -286,14 +287,14 @@ func _input(event):
 	if Input.is_key_pressed(KEY_F2) and event is InputEventKey and not event.echo:
 		mode = not mode
 	if Input.is_key_pressed(KEY_1) and event is InputEventKey and not event.echo:
-		zonetype = GlobalData.TypeZone.CARRE
+		zonetype = Enums.TypeZone.CARRE
 	if Input.is_key_pressed(KEY_2) and event is InputEventKey and not event.echo:
-		zonetype = GlobalData.TypeZone.CERCLE
+		zonetype = Enums.TypeZone.CERCLE
 	if Input.is_key_pressed(KEY_3) and event is InputEventKey and not event.echo:
-		zonetype = GlobalData.TypeZone.BATON
+		zonetype = Enums.TypeZone.BATON
 	if Input.is_key_pressed(KEY_4) and event is InputEventKey and not event.echo:
-		zonetype = GlobalData.TypeZone.LIGNE
+		zonetype = Enums.TypeZone.LIGNE
 	if Input.is_key_pressed(KEY_5) and event is InputEventKey and not event.echo:
-		zonetype = GlobalData.TypeZone.CROIX
+		zonetype = Enums.TypeZone.CROIX
 	if Input.is_key_pressed(KEY_6) and event is InputEventKey and not event.echo:
-		zonetype = GlobalData.TypeZone.MARTEAU
+		zonetype = Enums.TypeZone.MARTEAU

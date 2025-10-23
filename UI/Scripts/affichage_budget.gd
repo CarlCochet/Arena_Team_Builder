@@ -1,11 +1,12 @@
 extends TextureRect
+class_name AffichageBudget
 
 
 @onready var cout_total: Label = $CoutTotal
 
 
 func update():
-	var budget = GlobalData.equipe_actuelle.calcul_budget()
+	var budget: int = GlobalData.equipe_actuelle.calcul_budget()
 	cout_total.text = str(budget)
 	
 	if budget <= 6000:

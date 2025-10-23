@@ -1,14 +1,15 @@
 extends Control
+class_name ChoixEquipeMulti
 
 
-var previsu = preload("res://UI/Displays/Scenes/previsu_equipe.tscn")
-var equipes: Array
+var previsu: PackedScene = preload("res://UI/Displays/Scenes/previsu_equipe.tscn")
+var equipes: Array[PrevisuEquipe]
 var equipe_selectionnee: int
 var adversaire_pret: bool
 
 @onready var menu: Control = $Menu
 @onready var equipes_grid: GridContainer = $Menu/ScrollContainer/Equipes
-@onready var affichage_personnages: Control = $Menu/AffichageEquipe
+@onready var affichage_personnages: AffichageEquipe = $Menu/AffichageEquipe
 @onready var attente_hote: Label = $AttenteHote
 @onready var attente_adversaire: Label = $AttenteAdversaire
 
@@ -23,7 +24,9 @@ func _ready():
 
 func generer_affichage():
 	for i in range(len(GlobalData.equipes)):
-		var previsu_equipe = previsu.instantiate()
+		if not check_condition(i):
+			continue
+		var previsu_equipe: PrevisuEquipe = previsu.instantiate()
 		previsu_equipe.signal_id = i
 		previsu_equipe.connect("pressed", previsu_pressed.bind(i))
 		equipes.append(previsu_equipe)
@@ -36,7 +39,16 @@ func generer_affichage():
 		affichage_personnages.update(GlobalData.equipe_test)
 
 
-func previsu_pressed(id):
+func check_condition(id: int) -> bool:
+	var equipe: Equipe = GlobalData.equipes[id]
+	if equipe.budget > GlobalData.regles_multi["budget_max"]:
+		return false
+	for personnage in equipe.personnages:
+		pass
+	return true
+
+
+func previsu_pressed(id: int):
 	equipe_selectionnee = id
 	for i in range(len(equipes)):
 		if i != id:
@@ -57,8 +69,8 @@ func _on_retour_pressed():
 	rpc("retour_pressed")
 
 
-func _on_valider_pressed():
-	var change_scene_check = adversaire_pret
+func _on_valider_pressed() -> void:
+	var change_scene_check: bool = adversaire_pret
 	if Client.is_host:
 		if GlobalData.equipe_actuelle.calcul_budget() > 6000:
 			return
@@ -82,10 +94,11 @@ func retour_pressed():
 
 @rpc("any_peer")
 func transfert_equipe(equipe: Array):
+	var equipe_transfert: Equipe = Equipe.new()
 	if multiplayer.get_remote_sender_id() == 1:
-		GlobalData.equipe_actuelle = Equipe.new().from_json(equipe)
+		GlobalData.equipe_actuelle = equipe_transfert.from_json(equipe)
 	else:
-		GlobalData.equipe_test = Equipe.new().from_json(equipe)
+		GlobalData.equipe_test = equipe_transfert.from_json(equipe)
 	adversaire_pret = true
 
 

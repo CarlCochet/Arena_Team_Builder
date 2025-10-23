@@ -1,4 +1,5 @@
 extends TextureRect
+class_name AffichageStatsSecondaires
 
 
 @onready var dommages_air: Label = $GridContainer/Dommages/Air
@@ -18,7 +19,7 @@ extends TextureRect
 
 
 func update(id):
-	var personnage = GlobalData.equipe_actuelle.personnages[id]
+	var personnage: Personnage = GlobalData.equipe_actuelle.personnages[id]
 	dommages_air.text = str(personnage.stats.dommages_air) + "%"
 	dommages_terre.text = str(personnage.stats.dommages_terre) + "%"
 	dommages_feu.text = str(personnage.stats.dommages_feu) + "%"

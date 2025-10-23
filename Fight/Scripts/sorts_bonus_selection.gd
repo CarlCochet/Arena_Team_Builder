@@ -1,30 +1,32 @@
 extends HBoxContainer
+class_name SortsBonusSelection
 
 
-var carte_hovered = -1
+var carte_hovered: int = -1
 
 
-func update(combattant):
+func update(combattant) -> void:
 	for sort in get_children():
 		sort.queue_free()
+	
 	if GlobalData.is_multijoueur and get_parent().combattant_selection:
 		if get_parent().combattant_selection.equipe == 1 and Client.is_host or get_parent().combattant_selection.equipe == 0 and not Client.is_host:
 			return
-	var sort_id = 0
-	for sort in combattant.sorts:
+	
+	var sort_id: int = 0
+	for sort: Sort in combattant.sorts:
 		if sort_id >= combattant.compte_sorts:
-			var texture_rect = TextureRect.new()
-			var sprite = Sprite2D.new()
-			var carte = Sprite2D.new()
-			var label = Label.new()
+			var texture_rect := TextureRect.new()
+			var sprite := Sprite2D.new()
+			var carte := Sprite2D.new()
+			var label := Label.new()
 			
-			texture_rect.texture = load("res://UI/Logos/Spells/Bonus/" + sort.nom + ".png")
-			
-			sprite.texture = load("res://Fight/Images/logo_cover.png")
+			texture_rect.texture = sort.icone
+			sprite.texture = GlobalData.sort_cover
 			sprite.position = Vector2(19, 20)
 			sprite.scale = Vector2(1.05, 1.05)
 			
-			carte.texture = load("res://Classes/Bonus/Sorts/" + sort.nom + ".png")
+			carte.texture = sort.carte
 			carte.position = Vector2(90, -200)
 			carte.scale = Vector2(1, 1)
 			carte.name = "carte"

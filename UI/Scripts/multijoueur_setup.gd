@@ -1,4 +1,5 @@
 extends Control
+class_name MultijoueurSetup
 
 
 var PORT: int = 55001
@@ -25,7 +26,7 @@ func _on_heberger_pressed():
 
 func _on_rejoindre_pressed():
 	Client.reset()
-	var error = Client.multiplayer_peer.create_client("ws://" + adresse.text + ":" + str(PORT))
+	var error: int = Client.multiplayer_peer.create_client("ws://" + adresse.text + ":" + str(PORT))
 	if error == OK:
 		Client.multiplayer.multiplayer_peer = Client.multiplayer_peer
 		get_tree().change_scene_to_file("res://UI/choix_equipe_multi.tscn")

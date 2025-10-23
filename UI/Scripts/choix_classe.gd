@@ -1,4 +1,5 @@
 extends Control
+class_name ChoixClasse
 
 
 var classe_initiale: int
@@ -25,7 +26,7 @@ func _ready():
 	classes[classe_initiale].button_pressed = true
 
 
-func _on_class_pressed(id):
+func _on_class_pressed(id: int):
 	classe_selected = id
 	for i in range(len(classes)):
 		if i != id:
@@ -38,7 +39,7 @@ func _on_class_pressed(id):
 			)
 
 
-func _input(event):
+func _input(event: InputEvent):
 	if Input.is_key_pressed(KEY_ESCAPE) and event is InputEventKey and not event.echo:
 		_on_fermer_pressed()
 	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:
@@ -51,7 +52,7 @@ func _on_fermer_pressed():
 	get_tree().change_scene_to_file("res://UI/creation_equipe.tscn")
 
 
-func _on_valider_pressed():
+func _on_valider_pressed() -> void:
 	if nom.text.is_empty():
 		return
 	if classe_selected != classe_initiale:

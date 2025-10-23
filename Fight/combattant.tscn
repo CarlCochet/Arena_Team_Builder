@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://vpghqnd2tb2v"]
+[gd_scene load_steps=9 format=3 uid="uid://vpghqnd2tb2v"]
 
-[ext_resource type="Script" path="res://Fight/Scripts/combattant.gd" id="1_8jfsj"]
+[ext_resource type="Script" uid="uid://d1kgdfwrdo4m" path="res://Fight/Scripts/combattant.gd" id="1_8jfsj"]
 [ext_resource type="Texture2D" uid="uid://cjolxj4e25lwg" path="res://Fight/Images/cercle_personnage_bleu.png" id="2_rlfn0"]
 [ext_resource type="Texture2D" uid="uid://co3j3d85r6s8t" path="res://Fight/Images/fleche_1_filled.png" id="3_jjh8n"]
-[ext_resource type="Texture2D" uid="uid://bx5n3oshvmiay" path="res://Classes/empty.png" id="4_88edx"]
-[ext_resource type="Texture2D" uid="uid://b02mrbqksygw4" path="res://Classes/Cra/cra.png" id="5_4klyf"]
+[ext_resource type="PackedScene" uid="uid://mf4swpfckfq1" path="res://UI/Displays/Scenes/previsu_personnage.tscn" id="4_g7mpi"]
 [ext_resource type="Texture2D" uid="uid://di4dh5dwn3exu" path="res://Fight/Images/hp_display.png" id="5_o5476"]
 [ext_resource type="PackedScene" uid="uid://wjqjfqvfle7s" path="res://Fight/stats_perdu.tscn" id="6_xhp4k"]
 
@@ -14,7 +13,7 @@
 font_size = 25
 
 [node name="Combattant" type="Node2D"]
-z_index = 1
+z_index = 2
 script = ExtResource("1_8jfsj")
 
 [node name="Cercle" type="Sprite2D" parent="."]
@@ -25,19 +24,7 @@ texture = ExtResource("2_rlfn0")
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_jjh8n")
 
-[node name="Personnage" type="Sprite2D" parent="."]
-
-[node name="Cape" type="Sprite2D" parent="Personnage"]
-position = Vector2(0, -48)
-texture = ExtResource("4_88edx")
-
-[node name="Classe" type="Sprite2D" parent="Personnage"]
-position = Vector2(0, -48)
-texture = ExtResource("5_4klyf")
-
-[node name="Coiffe" type="Sprite2D" parent="Personnage"]
-position = Vector2(0, -48)
-texture = ExtResource("4_88edx")
+[node name="PrevisuPersonnage" parent="." instance=ExtResource("4_g7mpi")]
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -38)
@@ -75,7 +62,8 @@ text = "[center]"
 scroll_active = false
 
 [node name="StatsPerdu" parent="." instance=ExtResource("6_xhp4k")]
-z_index = 3
+z_index = 4
+metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

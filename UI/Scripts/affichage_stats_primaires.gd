@@ -1,4 +1,5 @@
 extends TextureRect
+class_name AffichageStatsPrimaires
 
 
 @onready var pm: Label = $PM
@@ -9,7 +10,7 @@ extends TextureRect
 
 
 func update(id):
-	var personnage = GlobalData.equipe_actuelle.personnages[id]
+	var personnage: Personnage = GlobalData.equipe_actuelle.personnages[id]
 	pm.text = str(personnage.stats.pm)
 	hp.text = str(personnage.stats.hp)
 	ini.text = str(personnage.stats.initiative)
