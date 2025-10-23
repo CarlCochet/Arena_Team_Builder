@@ -164,6 +164,7 @@ texture_pressed = ExtResource("29_0tcq4")
 
 [node name="Steamer" type="TextureButton" parent="Classes"]
 layout_mode = 2
+disabled = true
 toggle_mode = true
 texture_normal = ExtResource("30_x71bi")
 texture_pressed = ExtResource("31_loahw")
@@ -171,6 +172,7 @@ texture_disabled = ExtResource("32_h8u2o")
 
 [node name="Elio" type="TextureButton" parent="Classes"]
 layout_mode = 2
+disabled = true
 toggle_mode = true
 texture_normal = ExtResource("32_g05jt")
 texture_pressed = ExtResource("33_kvowp")
@@ -178,6 +180,7 @@ texture_disabled = ExtResource("35_oe2xe")
 
 [node name="Hupper" type="TextureButton" parent="Classes"]
 layout_mode = 2
+disabled = true
 toggle_mode = true
 texture_normal = ExtResource("34_7ux64")
 texture_pressed = ExtResource("35_ljtf6")
@@ -185,6 +188,7 @@ texture_disabled = ExtResource("38_1a01m")
 
 [node name="Ouginak" type="TextureButton" parent="Classes"]
 layout_mode = 2
+disabled = true
 toggle_mode = true
 texture_normal = ExtResource("36_yd4j4")
 texture_pressed = ExtResource("37_gx2hi")

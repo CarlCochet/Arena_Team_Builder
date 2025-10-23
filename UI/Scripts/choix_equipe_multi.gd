@@ -24,7 +24,7 @@ func _ready():
 
 func generer_affichage():
 	for i in range(len(GlobalData.equipes)):
-		if not check_condition(i):
+		if not check_conditions(i):
 			continue
 		var previsu_equipe: PrevisuEquipe = previsu.instantiate()
 		previsu_equipe.signal_id = i
@@ -39,12 +39,13 @@ func generer_affichage():
 		affichage_personnages.update(GlobalData.equipe_test)
 
 
-func check_condition(id: int) -> bool:
-	var equipe: Equipe = GlobalData.equipes[id]
-	if equipe.budget > GlobalData.regles_multi["budget_max"]:
-		return false
-	for personnage in equipe.personnages:
-		pass
+func check_conditions(_id: int) -> bool:
+#	var equipe: Equipe = GlobalData.equipes[id]
+#	if equipe.budget > GlobalData.regles_multi["budget_max"]:
+#		return false
+#	for personnage in equipe.personnages:
+#		if not GlobalData.regles_multi["classes"][GlobalData.classes.find(personnage.classe)]:
+#			return false
 	return true
 
 
@@ -64,21 +65,15 @@ func previsu_pressed(id: int):
 
 
 func _on_retour_pressed():
-	Client.reset()
-	get_tree().change_scene_to_file("res://UI/multijoueur_setup.tscn")
 	rpc("retour_pressed")
 
 
 func _on_valider_pressed() -> void:
 	var change_scene_check: bool = adversaire_pret
 	if Client.is_host:
-		if GlobalData.equipe_actuelle.calcul_budget() > 6000:
-			return
 		rpc("transfert_equipe", GlobalData.equipe_actuelle.to_json())
 		attente_adversaire.visible = true
 	else:
-		if GlobalData.equipe_test.calcul_budget() > 6000:
-			return
 		rpc("transfert_equipe", GlobalData.equipe_test.to_json())
 		attente_hote.visible = true
 	menu.visible = false
@@ -86,7 +81,7 @@ func _on_valider_pressed() -> void:
 		rpc("change_scene")
 
 
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func retour_pressed():
 	Client.reset()
 	get_tree().change_scene_to_file("res://UI/multijoueur_setup.tscn")
@@ -112,3 +107,7 @@ func _input(event):
 		_on_retour_pressed()
 	if Input.is_key_pressed(KEY_ENTER) and event is InputEventKey and not event.echo:
 		_on_valider_pressed()
+
+
+func _on_options_pressed() -> void:
+	pass # Replace with function body.

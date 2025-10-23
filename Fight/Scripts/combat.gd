@@ -167,7 +167,7 @@ func ajoute_carte_combat():
 
 
 func applique_carte_combat():
-	var effets_carte: Dictionary[String, Variant] = GlobalData.cartes_combat[noms_cartes_combat[0]]
+	var effets_carte: Dictionary = GlobalData.cartes_combat[noms_cartes_combat[0]]
 	var classes_target: Array[String] = []
 	for combattant in combattants:
 		combattant.stat_cartes_combat = Stats.new()

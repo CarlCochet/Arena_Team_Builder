@@ -74,11 +74,13 @@ func from_previsu(previsu: PrevisuPersonnage):
 
 
 func setup_classe(invocation: String):
-	classe_texture = load(
-		"res://Classes/Invocations/" + invocation.to_lower() + ".png"
-	)
-	classe_texture2 = classe_texture
+	var path1: String = "res://Classes/Invocations/" + invocation.to_lower() + ".png"
+	var path2: String = "res://Classes/Invocations/" + invocation.to_lower() + "2.png"
+	classe_texture = load(path1)
+	classe_texture2 = load(path2) if ResourceLoader.exists(path2) else classe_texture
+	
 	classe.texture = classe_texture
+	classe_texture2 = classe_texture2
 
 
 func invisible():

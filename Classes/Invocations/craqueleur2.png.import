@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dswxb28g563pg"
-path="res://.godot/imported/craqueleur.png-29965161d8cebde79aab94890b6f55da.ctex"
+uid="uid://dueyvna3yd47e"
+path="res://.godot/imported/craqueleur2.png-ef6e6ff2f32ee84a342434c551ac5160.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Classes/Invocations/craqueleur.png"
-dest_files=["res://.godot/imported/craqueleur.png-29965161d8cebde79aab94890b6f55da.ctex"]
+source_file="res://Classes/Invocations/craqueleur2.png"
+dest_files=["res://.godot/imported/craqueleur2.png-ef6e6ff2f32ee84a342434c551ac5160.ctex"]
 
 [params]
 

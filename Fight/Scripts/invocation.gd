@@ -76,6 +76,7 @@ func init(classe_int: int):
 	max_stats = GlobalData.stats_classes[classe].copy()
 	init_stats = GlobalData.stats_classes[classe].copy()
 	nom = classe.replace("_", " ") + str(id)
+	name = nom
 	sorts = []
 	if GlobalData.sorts_lookup.has(classe):
 		var nom_sorts: Array = GlobalData.sorts_lookup[classe]
@@ -86,76 +87,71 @@ func init(classe_int: int):
 
 
 func update_hitbox():
-	if equipe == 0:
-		cercle.texture = cercle_bleu
-	else:
-		cercle.texture = cercle_rouge
+	cercle.texture = cercle_bleu if equipe == 0 else cercle_rouge
+	previsu_personnage.classe.scale = Vector2(0.5, 0.5)
 	match classe:
 		"Tofu":
-			previsu_personnage.classe.position = Vector2(0, -10)
-			hitbox.position = Vector2(0, -10)
+			previsu_personnage.classe.position = Vector2(0, -15)
+			hitbox.position = Vector2(0, -15)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -60)
 		"Bouftou":
-			previsu_personnage.classe.position = Vector2(0, -13)
-			hitbox.position = Vector2(0, -13)
-			hitbox.scale = Vector2(2, 2)
-			hp.position = Vector2(0, -70)
+			previsu_personnage.classe.position = Vector2(0, -25)
+			hitbox.position = Vector2(0, -25)
+			hitbox.scale = Vector2(3, 3)
+			hp.position = Vector2(0, -90)
 		"Craqueleur":
-			previsu_personnage.classe.position = Vector2(0, -40)
-			hitbox.position = Vector2(0, -40)
-			hitbox.scale = Vector2(3, 5)
-			hp.position = Vector2(0, -120)
+			previsu_personnage.classe.position = Vector2(0, -35)
+			hitbox.position = Vector2(0, -35)
+			hitbox.scale = Vector2(3, 4.5)
+			hp.position = Vector2(0, -110)
 		"Prespic":
-			previsu_personnage.classe.position = Vector2(0, -17)
-			hitbox.position = Vector2(0, -15)
+			previsu_personnage.classe.position = Vector2(0, -20)
+			hitbox.position = Vector2(0, -20)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"La_Bloqueuse":
-			previsu_personnage.classe.position = Vector2(0, -25)
-			hitbox.position = Vector2(0, -20)
-			hitbox.scale = Vector2(2, 2.5)
-			hp.position = Vector2(0, -80)
+			previsu_personnage.classe.position = Vector2(0, -30)
+			hitbox.position = Vector2(0, -30)
+			hitbox.scale = Vector2(2, 3)
+			hp.position = Vector2(0, -90)
 		"La_Folle":
-			previsu_personnage.classe.position = Vector2(0, -17)
+			previsu_personnage.classe.position = Vector2(0, -20)
 			hitbox.position = Vector2(0, -20)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"La_Sacrifiee":
 			previsu_personnage.classe.position = Vector2(0, -20)
-			hitbox.position = Vector2(0, -12)
+			hitbox.position = Vector2(0, -20)
 			hitbox.scale = Vector2(2, 2)
 			hp.position = Vector2(0, -70)
 		"Arbre":
-			previsu_personnage.classe.position = Vector2(0, -60)
-			previsu_personnage.classe.scale = Vector2(1, 1)
-			hitbox.position = Vector2(0, -50)
-			hitbox.scale = Vector2(2, 5)
+			previsu_personnage.classe.position = Vector2(0, -55)
+			hitbox.position = Vector2(0, -35)
+			hitbox.scale = Vector2(2, 4)
 			hp.position = Vector2(0, -120)
-			fleche.visible = false
 		"Double":
 			previsu_personnage.classe.position = Vector2(0, -48)
+			previsu_personnage.classe.scale = Vector2(0.23, 0.23)
 			hitbox.position = Vector2(0, -38)
 			hitbox.scale = Vector2(2, 4)
 			hp.position = Vector2(0, -110)
 		"Cadran_De_Xelor":
-			previsu_personnage.classe.position = Vector2(0, -35)
-			hitbox.position = Vector2(0, -30)
+			previsu_personnage.classe.position = Vector2(0, -38)
+			previsu_personnage.classe.scale = Vector2(1, 1)
+			hitbox.position = Vector2(0, -38)
 			hitbox.scale = Vector2(2, 3)
-			hp.position = Vector2(0, -80)
-			fleche.visible = false
+			hp.position = Vector2(0, -100)
 		"Bombe_A_Eau":
-			previsu_personnage.classe.position = Vector2(0, -20)
-			hitbox.position = Vector2(0, -12)
+			previsu_personnage.classe.position = Vector2(0, -10)
+			hitbox.position = Vector2(0, -10)
 			hitbox.scale = Vector2(2, 2)
-			hp.position = Vector2(0, -80)
-			fleche.visible = false
+			hp.position = Vector2(0, -60)
 		"Bombe_Incendiaire":
-			previsu_personnage.classe.position = Vector2(0, -20)
-			hitbox.position = Vector2(0, -12)
+			previsu_personnage.classe.position = Vector2(0, -10)
+			hitbox.position = Vector2(0, -10)
 			hitbox.scale = Vector2(2, 2)
-			hp.position = Vector2(0, -80)
-			fleche.visible = false
+			hp.position = Vector2(0, -60)
 	previsu_personnage.setup_classe(classe)
 
 
@@ -207,7 +203,7 @@ func chemin_vers_proche() -> Array[Vector2i]:
 	return min_chemin
 
 
-func choix_cible(p_all_ldv: Array[Vector2i]) -> Vector2i:
+func choix_cible(p_all_ldv: Array[Vector2i]):
 	var min_dist: int = 9999999
 	var min_hp: int = 9999999
 	var cible = null
@@ -256,7 +252,7 @@ func joue_ia() -> void:
 			sort.type_ldv,
 			sort.ldv
 		)
-		var cible: Vector2i = choix_cible(all_ldv)
+		var cible = choix_cible(all_ldv)
 		if cible == null:
 			continue 
 		if sort.pa <= stats.pa:

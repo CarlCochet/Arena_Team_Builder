@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dswxb28g563pg"
-path="res://.godot/imported/craqueleur.png-29965161d8cebde79aab94890b6f55da.ctex"
+uid="uid://c7pnvndjcu5u2"
+path="res://.godot/imported/la_folle2.png-905453bf3decf8266e3a1034d83c6062.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Classes/Invocations/craqueleur.png"
-dest_files=["res://.godot/imported/craqueleur.png-29965161d8cebde79aab94890b6f55da.ctex"]
+source_file="res://Classes/Invocations/la_folle2.png"
+dest_files=["res://.godot/imported/la_folle2.png-905453bf3decf8266e3a1034d83c6062.ctex"]
 
 [params]
 
