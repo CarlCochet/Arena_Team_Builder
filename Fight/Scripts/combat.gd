@@ -525,3 +525,13 @@ func _on_timer_timeout():
 
 func _on_quitter_pressed():
 	rpc("retour_pressed")
+
+
+func _on_arme_mouse_entered() -> void:
+	arme.get_node("carte").visible = true
+	arme.carte_hovered = 0
+
+
+func _on_arme_mouse_exited() -> void:
+	arme.get_node("carte").visible = false
+	arme.carte_hovered = -1

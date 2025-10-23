@@ -16,16 +16,6 @@ func update(combattant: Combattant):
 	carte.visible = false
 
 
-func _on_mouse_entered():
-	get_node("carte").visible = true
-	carte_hovered = 0
-
-
-func _on_mouse_exited():
-	get_node("carte").visible = false
-	carte_hovered = -1
-
-
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		if (not is_popup) and carte_hovered == 0 and get_parent().etat == 1:

@@ -266,8 +266,8 @@ texture_hover = ExtResource("26_f4qhe")
 z_index = 4
 metadata/_edit_use_anchors_ = true
 
-[connection signal="mouse_entered" from="Arme" to="Arme" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Arme" to="Arme" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Arme" to="." method="_on_arme_mouse_entered"]
+[connection signal="mouse_exited" from="Arme" to="." method="_on_arme_mouse_exited"]
 [connection signal="pressed" from="OrientationControls/Fleche0" to="." method="_on_fleche_0_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche1" to="." method="_on_fleche_1_pressed"]
 [connection signal="pressed" from="OrientationControls/Fleche2" to="." method="_on_fleche_2_pressed"]

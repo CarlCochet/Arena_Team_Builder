@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://d0yf3t1yf1ccp"]
 
-[ext_resource type="Script" path="res://UI/Scripts/creation_equipe.gd" id="1_jyadu"]
+[ext_resource type="Script" uid="uid://c3p2tqs4tcew1" path="res://UI/Scripts/creation_equipe.gd" id="1_jyadu"]
 [ext_resource type="PackedScene" uid="uid://rcby27lpo007" path="res://UI/Displays/Scenes/affichage_equipe.tscn" id="1_krrmm"]
 [ext_resource type="PackedScene" uid="uid://drgospxokfdgn" path="res://UI/Buttons/Scenes/recruter.tscn" id="2_idwrw"]
 [ext_resource type="PackedScene" uid="uid://bwfn3lux5l4lx" path="res://UI/Buttons/Scenes/fermer.tscn" id="4_fi4k2"]
