@@ -245,13 +245,9 @@ func joue_ia() -> void:
 	for sort in sorts:
 		if not sort.precheck_cast(self):
 			continue
-		all_ldv = combat.tilemap.get_ldv(
-			grid_pos, 
-			sort.po[0],
-			sort.po[1] + (stats.po if sort.po_modifiable else 0),
-			sort.type_ldv,
-			sort.ldv
-		)
+		
+		var po_max: int = sort.po[1] + (stats.po if sort.po_modifiable else 0)
+		all_ldv = combat.tilemap.get_ldv(grid_pos, sort.po[0], po_max, sort.type_ldv, sort.ldv)
 		var cible = choix_cible(all_ldv)
 		if cible == null:
 			continue 
@@ -315,19 +311,13 @@ func meurt():
 	
 	if classe in ["Bombe_Incendiaire", "Bombe_A_Eau"] and stats.hp <= 0:
 		var sort: Sort = sorts[0]
-		zone = combat.tilemap.get_zone(
-			grid_pos,
-			grid_pos,
-			sort.type_zone,
-			sort.taille_zone[0],
-			sort.taille_zone[1]
-		)
+		zone = combat.tilemap.get_zone(grid_pos, grid_pos, sort.type_zone, sort.taille_zone[0],sort.taille_zone[1])
 		sort.execute_effets(self, zone, grid_pos)
 	
 	if (not is_porteur) and (not is_porte):
 		var map_pos: Vector2i = combat.tilemap.local_to_map(position)
 		combat.tilemap.a_star_grid.set_point_solid(grid_pos, false)
-		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = combat.tilemap.arena_layer.get_cell_atlas_coords(map_pos).x
 	else:
 		combat.tilemap.a_star_grid.set_point_solid(grid_pos, true)
 		combat.tilemap.grid[grid_pos[0]][grid_pos[1]] = -2

@@ -69,6 +69,6 @@ func active_mono(combattant: Combattant):
 func affiche():
 	for tile in tiles:
 		if effets.has("DOMMAGE_FIXE"):
-			lanceur.combat.tilemap.set_cell(3, tile - lanceur.combat.offset, 1, Vector2i(0, 0))
+			lanceur.combat.tilemap.piege_layer.set_cell(tile - lanceur.combat.offset, 1, Vector2i(0, 0))
 		if effets.has("DEVIENT_INVISIBLE"):
-			lanceur.combat.tilemap.set_cell(4, tile - lanceur.combat.offset, 1, Vector2i(1, 0))
+			lanceur.combat.tilemap.brume_layer.set_cell(tile - lanceur.combat.offset, 1, Vector2i(1, 0))

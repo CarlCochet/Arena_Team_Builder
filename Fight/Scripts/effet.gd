@@ -1066,7 +1066,7 @@ func devient_invisible():
 	else:
 		cible.previsu_personnage.invisible()
 	cible.is_visible = false
-	combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, cible.grid_pos - combat.offset).x
+	combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = combat.tilemap.arena_layer.get_cell_atlas_coords(cible.grid_pos - combat.offset).x
 	if affiche_log:
 		combat.chat_log.generic(cible, "devient invisible (" + str(duree) + " tours)")
 
@@ -1163,7 +1163,7 @@ func porte() -> void:
 		debuffable = false
 		var map_pos: Vector2i = cible.grid_pos - combat.offset
 		cible.combat.tilemap.a_star_grid.set_point_solid(cible.grid_pos, false)
-		cible.combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = cible.combat.tilemap.get_cell_atlas_coords(1, map_pos).x
+		cible.combat.tilemap.grid[cible.grid_pos[0]][cible.grid_pos[1]] = cible.combat.tilemap.arena_layer.get_cell_atlas_coords(map_pos).x
 		cible.position = lanceur.position + Vector2(0, -90)
 		cible.grid_pos = lanceur.grid_pos
 		cible.z_index = 2

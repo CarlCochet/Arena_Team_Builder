@@ -87,7 +87,7 @@ func execute_effets(lanceur: Combattant, cases_cibles: Array, centre: Vector2i) 
 	var targets: Array = []
 	if effets.has("GLYPHE"):
 		lance_particules(lanceur, cases_cibles)
-		var new_glyphe = Glyphe.new(
+		var new_glyphe: Glyphe = Glyphe.new(
 			lanceur.combat.tilemap.glyphes_indexeur, 
 			lanceur, 
 			cases_cibles, 
