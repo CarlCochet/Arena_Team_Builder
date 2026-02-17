@@ -1,10 +1,10 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://dnqao0xjnwyy3"]
+[gd_resource type="TileSet" format=3 uid="uid://dnqao0xjnwyy3"]
 
-[ext_resource type="Texture2D" uid="uid://boh0lln05lg8d" path="res://Fight/Map/Images/tactic_mode.png" id="1_nkmmg"]
-[ext_resource type="Texture2D" uid="uid://dg5ee1o8b7axb" path="res://Fight/Map/Images/glyphes.png" id="2_0382h"]
-[ext_resource type="Texture2D" uid="uid://cum0y05o3hdkp" path="res://Fight/Map/Images/hole.png" id="3_cichh"]
-[ext_resource type="Texture2D" uid="uid://cf3o16qoc4tag" path="res://Fight/Map/Images/tiles_overlay.png" id="4_445yw"]
-[ext_resource type="Texture2D" uid="uid://tv5wrgemqnih" path="res://Fight/Map/Images/effet_map.png" id="5_52f56"]
+[ext_resource type="Texture2D" uid="uid://dltdsbdovfyis" path="res://Fight/Map/Images/tactic_mode.png" id="1_nkmmg"]
+[ext_resource type="Texture2D" uid="uid://bpsewu2kbmh11" path="res://Fight/Map/Images/glyphes.png" id="2_0382h"]
+[ext_resource type="Texture2D" uid="uid://dkp5qbxtdcfiq" path="res://Fight/Map/Images/hole.png" id="3_cichh"]
+[ext_resource type="Texture2D" uid="uid://dyk4ebaecppmf" path="res://Fight/Map/Images/tiles_overlay.png" id="4_445yw"]
+[ext_resource type="Texture2D" uid="uid://c7ew2wiivwwf1" path="res://Fight/Map/Images/effet_map.png" id="5_52f56"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2qk0m"]
 texture = ExtResource("1_nkmmg")

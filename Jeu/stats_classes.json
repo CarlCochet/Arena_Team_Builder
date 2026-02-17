@@ -189,7 +189,7 @@
 		"resistances_terre": 0.0,
 		"resistances_feu": 0.0,
 		"resistances_eau": 0.0,
-		"po": 10.0,
+		"po": 0.0,
 		"esquive": 100.0,
 		"blocage": 20.0,
 		"soins": 0.0,

@@ -106,10 +106,10 @@ func unselect():
 	is_selected = false
 
 
-func from_personnage(p_personnage: Personnage, equipe_id: int) -> Combattant:
+func from_personnage(p_personnage: Personnage, equipe_id: int, equipe_offset: int) -> Combattant:
 	classe = p_personnage.classe
 	nom = p_personnage.nom
-	name = nom
+	name = nom + "-" + str(equipe_id) + "-" + str(equipe_offset)
 	personnage_ref = p_personnage
 	stats = p_personnage.stats.copy()
 	initiative_random = float(stats.initiative) + GlobalData.rng.randf()
@@ -148,23 +148,23 @@ func affiche_path(pos_event: Vector2i):
 	if len(path) > 0 and len(path) <= stats.pm + 1:
 		path.pop_front()
 		path_actuel = path
-		combat.tilemap.clear_layer(2)
+		combat.tilemap.overlay_layer.clear()
 		for cell in path:
-			combat.tilemap.set_cell(2, cell - combat.offset, 3, Vector2i(1, 0))
+			combat.tilemap.overlay_layer.set_cell(cell - combat.offset, 3, Vector2i(1, 0))
 	else:
 		path_actuel = []
-		combat.tilemap.clear_layer(2)
+		combat.tilemap.overlay_layer.clear()
 		for cell in all_path:
-			combat.tilemap.set_cell(2, cell - combat.offset, 3, Vector2i(1, 0))
+			combat.tilemap.overlay_layer.set_cell(cell - combat.offset, 3, Vector2i(1, 0))
 
 
 func affiche_ldv(action: int):
 	all_path = []
 	path_actuel = []
 	calcul_all_ldv(action)
-	combat.tilemap.clear_layer(2)
+	combat.tilemap.overlay_layer.clear()
 	for cell in all_ldv:
-		combat.tilemap.set_cell(2, cell - combat.offset, 3, Vector2i(2, 0))
+		combat.tilemap.overlay_layer.set_cell(cell - combat.offset, 3, Vector2i(2, 0))
 
 
 func affiche_zone(action: int, pos_event: Vector2i):
@@ -173,19 +173,13 @@ func affiche_zone(action: int, pos_event: Vector2i):
 	var sort: Sort
 	if action < len(sorts):
 		sort = sorts[action]
-	combat.tilemap.clear_layer(2)
+	combat.tilemap.overlay_layer.clear()
 	for cell in all_ldv:
-		combat.tilemap.set_cell(2, cell - combat.offset, 3, Vector2i(2, 0))
+		combat.tilemap.overlay_layer.set_cell(cell - combat.offset, 3, Vector2i(2, 0))
 	if pos_event in all_ldv:
-		zone = combat.tilemap.get_zone(
-			grid_pos,
-			pos_event,
-			sort.type_zone,
-			sort.taille_zone[0],
-			sort.taille_zone[1]
-		)
+		zone = combat.tilemap.get_zone(grid_pos, pos_event, sort.type_zone, sort.taille_zone[0], sort.taille_zone[1])
 		for cell in zone:
-			combat.tilemap.set_cell(2, cell - combat.offset, 3, Vector2i(0, 0))
+			combat.tilemap.overlay_layer.set_cell(cell - combat.offset, 3, Vector2i(0, 0))
 
 
 func calcul_path_actuel(pos_event: Vector2i):
@@ -209,13 +203,7 @@ func calcul_all_ldv(action: int) -> void:
 	var bonus_po: int = stats.po if sort.po_modifiable else (stats.po if stats.po < 0 else 0)
 	var po_max: int = sort.po[1] + bonus_po if sort.po[1] + bonus_po >= sort.po[0] else sort.po[0]
 	po_max = 1 if sort.po[1] > 0 and po_max <= 0 else po_max
-	all_ldv = combat.tilemap.get_ldv(
-		grid_pos, 
-		sort.po[0],
-		po_max,
-		sort.type_ldv,
-		sort.ldv
-	)
+	all_ldv = combat.tilemap.get_ldv(grid_pos, sort.po[0], po_max, sort.type_ldv, sort.ldv)
 	var valides: Array[Vector2i] = []
 	for tile in all_ldv:
 		if sort.check_cible(self, tile):
@@ -228,19 +216,13 @@ func calcul_zone(action: int, pos_event: Vector2i):
 	if action < len(sorts):
 		sort = sorts[action]
 	if pos_event in all_ldv:
-		zone = combat.tilemap.get_zone(
-			grid_pos,
-			pos_event,
-			sort.type_zone,
-			sort.taille_zone[0],
-			sort.taille_zone[1]
-		)
+		zone = combat.tilemap.get_zone(grid_pos, pos_event, sort.type_zone, sort.taille_zone[0], sort.taille_zone[1])
 
 
 func check_case_bonus() -> void:
 	if check_etats(["PORTE"]):
 		return
-	var case_id: int = combat.tilemap.get_cell_atlas_coords(1, grid_pos - combat.offset).x
+	var case_id: int = combat.tilemap.arena_layer.get_cell_atlas_coords(grid_pos - combat.offset).x
 	var categorie: String = ""
 	var contenu: Variant = ""
 	var maudit: bool = false
@@ -312,7 +294,7 @@ func check_case_bonus() -> void:
 func desactive_cadran():
 	for combattant in combat.combattants:
 		if combattant.is_invocation and combattant.invocateur.id == id and combattant.classe == "Cadran_De_Xelor":
-			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, combattant.grid_pos - combat.offset).x
+			combat.tilemap.grid[combattant.grid_pos[0]][combattant.grid_pos[1]] = combat.tilemap.arena_layer.get_cell_atlas_coords(combattant.grid_pos - combat.offset).x
 
 
 func active_cadran():
@@ -405,7 +387,7 @@ func deplace_perso(chemin: Array) -> void:
 			var old_grid_pos: Vector2i = grid_pos
 			var old_map_pos: Vector2i = grid_pos - combat.offset
 			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
+			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.arena_layer.get_cell_atlas_coords(old_map_pos).x
 			positions_chemin.append(combat.tilemap.map_to_local(tile_pos))
 			grid_pos = case
 			combat.tilemap.a_star_grid.set_point_solid(case)
@@ -433,13 +415,13 @@ func deplace_perso(chemin: Array) -> void:
 				break
 	stats.pm -= pm_utilise
 	stats_perdu.ajoute(-pm_utilise, "pm")
-	combat.tilemap.clear_layer(2)
+	combat.tilemap.overlay_layer.clear()
 	if grid_pos != chemin[-1]:
 		combat.passe_tour()
 
 
 func place_perso(tile_pos: Vector2i, swap: bool):
-	var tile_data: Vector2i = combat.tilemap.get_cell_atlas_coords(2, tile_pos)
+	var tile_data: Vector2i = combat.tilemap.overlay_layer.get_cell_atlas_coords(tile_pos)
 	if (tile_data.x == 0 and equipe == 1) or (tile_data.x == 2 and equipe == 0):
 		var new_grid_pos: Vector2i = tile_pos + combat.offset
 		var place_libre: bool = true
@@ -452,7 +434,7 @@ func place_perso(tile_pos: Vector2i, swap: bool):
 			var old_grid_pos: Vector2i = grid_pos
 			var old_map_pos: Vector2i = grid_pos - combat.offset
 			combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
+			combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.arena_layer.get_cell_atlas_coords(old_map_pos).x
 			position = combat.tilemap.map_to_local(tile_pos)
 			grid_pos = new_grid_pos
 			combat.tilemap.a_star_grid.set_point_solid(grid_pos)
@@ -470,7 +452,7 @@ func bouge_perso(new_pos: Vector2i):
 	var old_grid_pos: Vector2i = grid_pos
 	var old_map_pos: Vector2i = grid_pos - combat.offset
 	combat.tilemap.a_star_grid.set_point_solid(old_grid_pos, false)
-	combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.get_cell_atlas_coords(1, old_map_pos).x
+	combat.tilemap.grid[old_grid_pos[0]][old_grid_pos[1]] = combat.tilemap.arena_layer.get_cell_atlas_coords(old_map_pos).x
 	position = combat.tilemap.map_to_local(new_pos - combat.offset)
 	grid_pos = new_pos
 	combat.tilemap.a_star_grid.set_point_solid(grid_pos)

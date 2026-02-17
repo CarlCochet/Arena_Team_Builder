@@ -84,7 +84,7 @@ func ajoute_equipe(equipe: Equipe, tile_couleur: Array, id_equipe: int):
 			tilemap.a_star_grid.set_point_solid(nouveau_combattant.grid_pos)
 			tilemap.grid[nouveau_combattant.grid_pos[0]][nouveau_combattant.grid_pos[1]] = -2
 			i += 1
-			combattants.append(nouveau_combattant.from_personnage(personnage, id_equipe))
+			combattants.append(nouveau_combattant.from_personnage(personnage, id_equipe, i))
 			add_child(nouveau_combattant)
 			nouveau_combattant.update_visuel()
 
@@ -126,7 +126,7 @@ func ajoute_sorts_bonus(noms_sorts_bonus: Array[String]):
 @rpc("any_peer", "call_local")
 func passe_tour():
 	combattant_selection.fin_tour()
-	tilemap.clear_layer(2)
+	tilemap.overlay_layer.clear()
 	combattants[selection_id].unselect()
 	selection_id += 1
 	if selection_id >= len(combattants):
@@ -143,6 +143,8 @@ func passe_tour():
 
 func clean_particules():
 	for child in get_children():
+		if child is Combattant:
+			continue
 		if "Node2D" in child.name:
 			child.queue_free()
 
@@ -240,7 +242,7 @@ func lance_game():
 	combattants[selection_id].select()
 	combattant_selection = combattants[selection_id]
 	etat = 1
-	tilemap.clear_layer(2)
+	tilemap.overlay_layer.clear()
 	if GlobalData.is_multijoueur:
 		cartes_combat.update(noms_cartes_combat)
 		applique_carte_combat()
@@ -263,7 +265,7 @@ func change_action(new_action: int):
 	else:
 		combattant_selection.affiche_path(tilemap.local_to_map(get_viewport().get_mouse_position()) + offset)
 	if combattant_selection.equipe == int(Client.is_host) and GlobalData.is_multijoueur:
-		tilemap.clear_layer(2)
+		tilemap.overlay_layer.clear()
 
 
 @rpc("any_peer", "call_local")
@@ -332,7 +334,7 @@ func check_morts():
 		trigger_victoire(0)
 	if len(delete_glyphes) > 0:
 		tilemap.delete_glyphes(delete_glyphes)
-	tilemap.clear_layer(2)
+	tilemap.overlay_layer.clear()
 	if new_selection_id >= len(combattants):
 		new_selection_id = 0
 		tour += 1

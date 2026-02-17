@@ -1,4 +1,4 @@
-extends TileMap
+extends Node2D
 class_name Map
 
 
@@ -17,12 +17,32 @@ var cases_maudites: Dictionary[int, Vector2i]
 var combat: Combat
 var ms_data: Dictionary
 
-@onready var overlay: Array[Vector2i] = get_used_cells(2)
-@onready var arena: Array[Vector2i] = get_used_cells(1)
-@onready var obstacles: Array[Vector2i] = get_used_cells(7)
+var arena_layer: TileMapLayer
+var overlay_layer: TileMapLayer
+var obstacles_layer: TileMapLayer
+var effets_layer: TileMapLayer
+var piege_layer: TileMapLayer
+var brume_layer: TileMapLayer
+var debug_layer: TileMapLayer
+
+var overlay: Array[Vector2i]
+var arena: Array[Vector2i]
+var obstacles: Array[Vector2i]
 
 
 func _ready():
+	arena_layer = get_node("arena")
+	overlay_layer = get_node("overlay")
+	obstacles_layer = get_node("obstacles")
+	effets_layer = get_node("effet_map")
+	piege_layer = get_node("piege")
+	brume_layer = get_node("brume")
+	debug_layer = get_node("debug")
+	
+	overlay = overlay_layer.get_used_cells()
+	arena = arena_layer.get_used_cells()
+	obstacles = obstacles_layer.get_used_cells()
+
 	x_max = 0
 	y_max = 0
 	offset = Vector2i(0, 8)
@@ -44,7 +64,7 @@ func _ready():
 
 func get_start():
 	for pos in overlay:
-		var tile_data: Vector2i = get_cell_atlas_coords(2, pos)
+		var tile_data: Vector2i = overlay_layer.get_cell_atlas_coords(pos)
 		if tile_data.x == 0:
 			start_rouge.append(pos)
 		if tile_data.x == 2:
@@ -52,8 +72,8 @@ func get_start():
 
 
 func update_glyphes():
-	clear_layer(3)
-	clear_layer(4)
+	piege_layer.clear()
+	brume_layer.clear()
 	for combattant in combat.combattants:
 		if not combattant.check_etats(["INVISIBLE"]):
 			combattant.visible = true
@@ -66,9 +86,9 @@ func update_glyphes():
 
 
 func update_effets_map():
-	clear_layer(6)
+	effets_layer.clear()
 	for case in cases_maudites:
-		set_cell(6, cases_maudites[case] - offset, 5, Vector2i(0, 0))
+		effets_layer.set_cell(cases_maudites[case] - offset, 5, Vector2i(0, 0))
 
 
 func check_glyphe_effet(pos: Vector2i, effet: String) -> bool:
@@ -103,7 +123,7 @@ func build_grids():
 			a_star_grid.set_point_solid(Vector2i(x, y), true)
 	
 	for pos in arena:
-		var tile_data: Vector2i = get_cell_atlas_coords(1, pos)
+		var tile_data: Vector2i = arena_layer.get_cell_atlas_coords(pos)
 		grid[pos.x][pos.y + offset.y] = tile_data.x
 		if tile_data.x > 0:
 			a_star_grid.set_point_solid(pos + offset, false)
@@ -129,7 +149,7 @@ func update_mort_subite(tour: int) -> void:
 		var centre: Vector2i = Vector2i(centre_array[0], centre_array[1])
 		for k in range(-distance, distance+1):
 			var cell_pos = centre + directions[i] * distance + k * directions[(i + 1) % 4]
-			erase_cell(1, cell_pos)
+			arena_layer.erase_cell(cell_pos)
 			for combattant in combat.combattants:
 				if combattant.grid_pos == Vector2i(cell_pos) + offset:
 					combattant.stats.hp = 0
@@ -145,22 +165,34 @@ func update_mort_subite(tour: int) -> void:
 
 func get_atteignables(pos: Vector2i, pm: int) -> Array[Vector2i]:
 	var atteignables: Array[Vector2i] = []
+	var is_solid: bool = a_star_grid.is_point_solid(pos)
+	a_star_grid.set_point_solid(pos, false)
 	for x in range(pos.x - pm, pos.x + pm + 1):
 		for y in range(pos.y - pm, pos.y + pm + 1):
-			if a_star_grid.is_in_bounds(pos.x, pos.y) and a_star_grid.is_in_bounds(x, y) and (x != pos.x or y != pos.y):
-				var path: Array[Vector2i] = a_star_grid.get_id_path(pos, Vector2i(x,y))
-				if len(path) <= pm + 1:
-					for cell in path:
-						if cell not in atteignables:
-							atteignables.append(cell)
+			if not a_star_grid.is_in_bounds(pos.x, pos.y):
+				continue
+			if not a_star_grid.is_in_bounds(x, y):
+				continue
+			if x == pos.x and y == pos.y:
+				continue
+			var path: Array[Vector2i] = a_star_grid.get_id_path(pos, Vector2i(x,y))
+			if len(path) > pm + 1:
+				continue
+			for cell in path:
+				if cell not in atteignables:
+					atteignables.append(cell)
 	atteignables.erase(pos)
+	a_star_grid.set_point_solid(pos, is_solid)
 	return atteignables
 
 
 func get_chemin(debut: Vector2i, fin: Vector2i) -> Array[Vector2i]:
 	var path: Array[Vector2i] = []
+	var is_solid: bool = a_star_grid.is_point_solid(debut)
+	a_star_grid.set_point_solid(debut, false)
 	if a_star_grid.is_in_bounds(debut.x, debut.y) and a_star_grid.is_in_bounds(fin.x, fin.y) and (debut.x != fin.x or debut.y != fin.y):
 		path = a_star_grid.get_id_path(debut, fin)
+	a_star_grid.set_point_solid(debut, is_solid)
 	return path
 
 
@@ -266,21 +298,29 @@ func check_zone(x: int, y: int, target: Vector2i, type_zone: Enums.TypeZone, tai
 	return true
 
 
+func map_to_local(pos: Vector2i) -> Vector2:
+	return overlay_layer.map_to_local(pos)
+
+
+func local_to_map(pos: Vector2) -> Vector2i:
+	return overlay_layer.local_to_map(pos)
+
+
 func affiche_astar_obstacles():
-	clear_layer(5)
+	debug_layer.clear()
 	for x in range(0, 40):
 		for y in range(0, 40):
 			if a_star_grid.is_in_bounds(x, y) and a_star_grid.is_point_solid(Vector2i(x, y)):
-				set_cell(5, Vector2i(x, y) - offset, 3, Vector2i(0, 0))
+				debug_layer.set_cell(Vector2i(x, y) - offset, 3, Vector2i(0, 0))
 
 
 func affiche_ldv_obstacles():
-	clear_layer(5)
+	debug_layer.clear()
 	for x in range(0, 40):
 		for y in range(0, 40):
 			if x < len(grid) and y < len(grid[0]):
 				if grid[x][y] == 0 or grid[x][y] == -2:
-					set_cell(5, Vector2i(x, y) - offset, 3, Vector2i(0, 0))
+					debug_layer.set_cell(Vector2i(x, y) - offset, 3, Vector2i(0, 0))
 
 
 func _input(event):
