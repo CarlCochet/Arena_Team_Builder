@@ -29,7 +29,7 @@ func update_affichage():
 
 func update_cartes():
 	for nom_sort in GlobalData.sorts_lookup[GlobalData.get_perso_actuel().classe]:
-		var bouton = TextureButton.new()
+		var bouton: TextureButton = TextureButton.new()
 		bouton.texture_normal = GlobalData.sorts[nom_sort].carte
 		bouton.connect("pressed", _on_card_clicked.bind(nom_sort))
 		grid_sorts.add_child(bouton)
@@ -39,7 +39,7 @@ func update_logos():
 	for logo in grid_logos.get_children():
 		logo.queue_free()
 	for sort in GlobalData.get_perso_actuel().sorts:
-		var bouton = TextureButton.new()
+		var bouton: TextureButton = TextureButton.new()
 		bouton.texture_normal = GlobalData.sorts[sort].icone
 		bouton.connect("pressed", _on_logo_clicked.bind(sort))
 		grid_logos.add_child(bouton)

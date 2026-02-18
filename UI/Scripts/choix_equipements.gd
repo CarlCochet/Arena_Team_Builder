@@ -40,7 +40,7 @@ func update_cartes(categorie: String):
 	for equipement in grid_equipements.get_children():
 		equipement.queue_free()
 	for nom_equipement in GlobalData.equipements_lookup[categorie_lookup[categorie]]:
-		var bouton = TextureButton.new()
+		var bouton: TextureButton = TextureButton.new()
 		bouton.texture_normal = GlobalData.equipements[nom_equipement].carte
 		bouton.connect("pressed", _on_card_clicked.bind(nom_equipement, categorie))
 		grid_equipements.add_child(bouton)

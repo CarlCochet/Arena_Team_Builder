@@ -22,12 +22,12 @@ func update(id: int, equipe: Equipe):
 	previsu_personnage.update(personnage, 1)
 	
 	for sort in personnage.sorts:
-		var texture_rect = TextureRect.new()
+		var texture_rect: TextureRect = TextureRect.new()
 		texture_rect.texture = GlobalData.sorts[sort].icone
 		grid_sorts.add_child(texture_rect)
 	for equipement in personnage.equipements:
 		if personnage.equipements[equipement]:
-			var texture_rect = TextureRect.new()
+			var texture_rect: TextureRect = TextureRect.new()
 			texture_rect.texture = GlobalData.equipements[personnage.equipements[equipement]].icone
 			grid_equipements.add_child(texture_rect)
 	nom.text = "[center]" + personnage.nom
@@ -45,8 +45,8 @@ func from_combattant(combattant: Combattant):
 	for equipement in combattant.equipements:
 		if combattant.equipements[equipement]:
 			var path = "res://UI/Logos/Equipements/" + equipement + "/" + combattant.equipements[equipement] + ".png"
-			var texture_rect = TextureRect.new()
-			var carte = Sprite2D.new()
+			var texture_rect: TextureRect = TextureRect.new()
+			var carte: Sprite2D = Sprite2D.new()
 			texture_rect.texture = load(path)
 			carte.texture = load("res://Equipements/" + equipement + "/" + combattant.equipements[equipement] + ".png")
 			carte.position = Vector2(800, 1550)

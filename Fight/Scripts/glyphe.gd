@@ -63,7 +63,7 @@ func active_mono(combattant: Combattant):
 	for tile in tiles:
 		if combattant.grid_pos == tile:
 			for effet in effets:
-				var new_effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, true, sort)
+				var new_effet: Effet = Effet.new(lanceur, combattant, effet, effets[effet], critique, centre, true, sort)
 				new_effet.execute()
 
 func affiche():

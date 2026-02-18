@@ -6,8 +6,8 @@ func update(cartes_combat: Array):
 	for carte in get_children():
 		carte.queue_free()
 	for carte_combat in cartes_combat:
-		var texture_rect = TextureRect.new()
-		var carte = Sprite2D.new()
+		var texture_rect: TextureRect = TextureRect.new()
+		var carte: Sprite2D = Sprite2D.new()
 		
 		texture_rect.texture = load("res://Fight/CartesCombat/" + carte_combat + ".png")
 		carte.texture = load("res://Fight/CartesCombat/" + carte_combat + ".png")

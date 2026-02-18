@@ -203,7 +203,7 @@ func chemin_vers_proche() -> Array[Vector2i]:
 	return min_chemin
 
 
-func choix_cible(p_all_ldv: Array[Vector2i]):
+func choix_cible(p_all_ldv: Array[Vector2i]) -> Vector2i:
 	var min_dist: int = 9999999
 	var min_hp: int = 9999999
 	var cible = null
@@ -248,7 +248,7 @@ func joue_ia() -> void:
 		
 		var po_max: int = sort.po[1] + (stats.po if sort.po_modifiable else 0)
 		all_ldv = combat.tilemap.get_ldv(grid_pos, sort.po[0], po_max, sort.type_ldv, sort.ldv)
-		var cible = choix_cible(all_ldv)
+		var cible: Vector2i = choix_cible(all_ldv)
 		if cible == null:
 			continue 
 		if sort.pa <= stats.pa:

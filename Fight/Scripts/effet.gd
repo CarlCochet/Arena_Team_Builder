@@ -326,7 +326,7 @@ func applique_dommage(base, stat_element: String, resistance_element: String, or
 				maudit = combattant
 				break
 		if maudit.id != reference.id:
-			var effet_maudit = Effet.new(lanceur, maudit, categorie, contenu, critique, centre, aoe, sort)
+			var effet_maudit: Effet = Effet.new(lanceur, maudit, categorie, contenu, critique, centre, aoe, sort)
 			effet_maudit.is_redirection = true
 			effet_maudit.execute()
 	

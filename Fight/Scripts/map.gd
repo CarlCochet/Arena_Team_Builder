@@ -10,7 +10,7 @@ var x_max: int
 var y_max: int
 var offset: Vector2i
 var mode: bool = false
-var zonetype = Enums.TypeZone.CARRE
+var zonetype: int = Enums.TypeZone.CARRE
 var glyphes: Array[Glyphe]
 var glyphes_indexeur: int
 var cases_maudites: Dictionary[int, Vector2i]

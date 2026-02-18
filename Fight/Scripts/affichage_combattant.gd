@@ -8,7 +8,7 @@ class_name AffichageCombattant
 @onready var sorts: SortsSelection = $UI/ContainerSorts/Sorts
 
 
-func update(combattant_id: int):
+func update(combattant_id: int) -> void:
 	var combattant = get_parent().combattants[combattant_id]
 	if GlobalData.is_multijoueur and int(Client.is_host) == combattant.equipe and not combattant.is_visible:
 		visible = false
@@ -24,7 +24,7 @@ func update_etats(combattant: Combattant):
 	etats.text = ""
 	var nom_sort: String = ""
 	var id_lanceur: int = -1
-	var stats = Stats.new().nom_stats
+	var stats: Array[String] = Stats.new().nom_stats
 	if GlobalData.is_multijoueur and combattant.combat.tour > 1:
 		text += "---------------------------------------------------------------------------------------------------------\n"
 		text += "Carte du tour : " + combattant.combat.noms_cartes_combat[0] + "\n"

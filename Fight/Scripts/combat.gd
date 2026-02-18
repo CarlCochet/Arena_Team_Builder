@@ -198,7 +198,7 @@ func applique_carte_combat():
 			if cible == "tous" or cible == combattant.classe or (cible == "autres" and not combattant.classe in classes_target):
 				for effet in effets_carte[cible].keys():
 					if effet == "SOIN":
-						var effet_exec = Effet.new(
+						var effet_exec: Effet = Effet.new(
 							combattant, combattant, effet, 
 							{"base":{"valeur":effets_carte[cible][effet]}}, 
 							false, combattant.grid_pos, false, null)
@@ -207,9 +207,9 @@ func applique_carte_combat():
 						effet_exec.execute()
 						combattant.stats.soins = temp_soins
 					elif effet in ["STABILISE", "NON_PORTABLE", "INTRANSPOSABLE"]:
-						var sort_temp = Sort.new()
+						var sort_temp: Sort = Sort.new()
 						sort_temp.nom = noms_cartes_combat[0]
-						var effet_exec = Effet.new(
+						var effet_exec: Effet = Effet.new(
 							combattant, combattant, effet, 
 							{"base":{"duree":1}}, 
 							false, combattant.grid_pos, false, sort_temp)
@@ -498,7 +498,7 @@ func choix_clicked(i, contenu, lanceur_id, cible_id, critique, nom_sort):
 	for effet in choix.keys():
 		var new_categorie = effet
 		var new_contenu = choix[effet]
-		var new_effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, sort)
+		var new_effet: Effet = Effet.new(lanceur, cible, new_categorie, new_contenu, critique, cible.grid_pos, false, sort)
 		new_effet.execute()
 		if new_effet.duree > 0:
 			cible.effets.append(new_effet)
